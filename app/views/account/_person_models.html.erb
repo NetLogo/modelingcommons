@@ -1,0 +1,9 @@
+<% if person_models.empty? %>
+    <p><i>No models to display.</i></p>
+<% else %>
+    <ul>
+    <% person_models.sort_by {|model| model.name}.each do |model| %>
+        <li><%= link_to model.name, :controller => "browse", :action => "one_model", :id => model.id %> (<i>Last modified: <%= model.updated_at %></i>)</li>
+    <% end %>
+    </ul>
+<% end %>

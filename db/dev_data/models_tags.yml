@@ -1,0 +1,15 @@
+mousetraps_s-curve:
+  model_id: <%= Model.find(:all, :conditions => "name = 'Mousetraps'")[0].id %>
+  tag_id: <%= Tag.find(:all, :conditions => "name = 's-curve'")[0].id %>
+
+mousetraps_turtles-and-patches:
+  model_id: <%= Model.find(:all, :conditions => "name = 'Mousetraps'")[0].id %>
+  tag_id: <%= Tag.find(:all, :conditions => "name = 'turtles and patches'")[0].id %>
+
+voronoi_patches-only:
+  model_id: <%= Model.find(:all, :conditions => "name = 'Voronoi'")[0].id %>
+  tag_id: <%= Tag.find(:all, :conditions => "name = 'patches only'")[0].id %>
+
+continental-divide_patches-only:
+  model_id: <%= Model.find(:all, :conditions => "name = 'Continental Divide'")[0].id %>
+  tag_id: <%= Tag.find(:all, :conditions => "name = 'patches only'")[0].id %>

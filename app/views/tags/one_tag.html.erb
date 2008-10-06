@@ -1,0 +1,28 @@
+<% @title = "One tag: #{@tag.name}" %>
+
+<h2>Tag creation:</h2>
+<ul>
+    <li>Tag created by <%= link_to @tag.person.fullname, :controller => "account", :action => "mypage", :id => @tag.person.id %></li>
+    <li>First used <%= distance_of_time_in_words(Time.now, @tag.tagged_nodes.sort_by {|tm| tm.updated_at}[0].updated_at) -%> ago.</li>
+</ul>
+
+<h2>Models using this tag:</h2>
+<ul>
+<% @tag.nodes.uniq.each do |model| %>
+    <li><%= link_to model.name, :controller => "browse", :action => "one_model", :id => model.id %></li>
+<% end %>
+</ul>
+
+<h2>Uses of this tag:</h2>
+<ul>
+<% @tag.tagged_nodes.sort_by {|t| t.updated_at}.each do |tm| %>
+    <li><%= link_to tm.node.name, :controller => "browse", :action => "one_model", :id => tm.node_id %> (<%= tm.comment %>), by <%= tm.person.fullname %> <%= distance_of_time_in_words(Time.now, tm.updated_at) -%> ago </li>
+<% end %>
+</ul>
+
+<h2>People who have used this tag:</h2>
+<ul>
+<% @tag.tagged_nodes.map {|tm| tm.person}.uniq.sort_by {|p| "#{p.last_name} #{p.first_name}" }.each do |person| %>
+    <li><%= link_to person.fullname, :controller => "account", :action => "mypage", :id => person.id %></li>
+<% end %>
+</ul>

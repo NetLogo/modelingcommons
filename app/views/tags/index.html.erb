@@ -1,0 +1,9 @@
+<% @title = 'Tags' %>
+
+<ul>
+<% @tags.sort_by {|t| t.name}.each do |tag| %>
+    <li><%= link_to tag.name, :action => "one_tag", :id => tag.id %>
+    (<%= pluralize(tag.nodes.length, "model") %>, by
+    <%= pluralize(tag.people.length, "person") %>)</li>
+<% end %>
+</ul>

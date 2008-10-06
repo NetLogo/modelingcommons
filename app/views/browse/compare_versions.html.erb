@@ -1,0 +1,28 @@
+<% @title = 'Comparison of versions' -%>
+
+<h2>Info tab</h2>
+<% if @comparison_results['info_tab'].blank? %>
+<p>No differences</p>
+<% else %>
+<pre>
+  <%= @comparison_results['info_tab'] -%>
+</pre>
+<% end %>
+
+<h2>Procedures tab</h2>
+<% if @comparison_results['procedures_tab'].blank? %>
+<p>No differences</p>
+<% else %>
+<pre>
+  <%= @comparison_results['procedures_tab'] -%>
+</pre>
+<% end %>
+
+<h2>GUI tab</h2>
+<% if @comparison_results['gui_tab'].blank? %>
+<p>No differences</p>
+<% else %>
+<pre>
+  <%= @comparison_results['gui_tab'] -%>
+</pre>
+<% end %>

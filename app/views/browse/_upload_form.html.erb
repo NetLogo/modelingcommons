@@ -1,0 +1,61 @@
+<div id="upload-model">
+  <h2>Upload a new version</h2>
+  <table>
+    <% form_for(:new_version, :url => { :controller => "upload", :action => :update_model }, :html => {:multipart => true}) do |form| %>
+    <tr>
+      <td>Model file</td>
+      <td><%= form.file_field :uploaded_body %>
+        <%= form.hidden_field :node_id, {:value => node.id} %></td>
+    </tr>
+    <tr>
+      <td>Short comment</td>
+      <td><%= form.text_field :description %></td>
+    </tr>
+
+    <tr>
+      <td colspan="2">
+        <p><%= radio_button_tag :fork, 'overwrite', {:checked => true} %><label for="fork_overwrite">Replace the existing model</label></p>
+        <p><%= radio_button_tag :fork, 'child' %><label for="fork_child">Upload a new child</label></p>
+        <p><%= radio_button_tag :fork, 'newmodel' %><label for="fork_newmodel">Upload a new model, unrelated to this one</label></p>
+        <p><%= radio_button_tag :fork, 'clone' %><label for="fork_clone">Don't upload anything -- just clone this model</label></p>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="2"><%= submit_tag "Upload model", :class => "submit" %></td>
+    </tr>
+
+    <% end %>
+  </table>
+</div>
+
+<hr />
+
+<div id="upload-document"  >
+  <h2>Upload a new related document</h2>
+  <table>
+    <% form_for(:new_document,
+       :url => { :controller => "upload",
+    :action => :add_document },
+    :html => {:multipart => true}) do |form| %>
+    <tr>
+      <td>Document file</td>
+      <td><%= form.file_field :uploaded_document %>
+        <%= form.hidden_field :parent_node_id, {:value => node.id} %></td>
+    </tr>
+    <tr>
+      <td>Description</td>
+      <td><%= form.text_field :description %></td>
+    </tr>
+    <tr>
+      <td>Document type</td>
+      <td><%= form.select :node_type, @node_types.map {|nt| [nt.short_name, nt.id]} %></td>
+    </tr>
+
+    <tr>
+      <td colspan="2"><%= submit_tag "Upload document", :class => "submit" %></td>
+    </tr>
+
+    <% end %>
+  </table>
+</div>

@@ -1,0 +1,18 @@
+<% @title = "Search through models" %>
+
+<table>
+    <% form_for (:search_term,
+                :url => { :controller => "browse",
+                          :action => :search_action }) do |form| %>
+    <tr>
+        <td>Enter search term:</td>
+        <td><%= form.text_field :search_term %></td>
+    </tr>
+
+    <tr>
+        <td colspan="2"><%= submit_tag "Search!", :class => "submit" %></td>
+    </tr>
+
+    <% end %>
+</table>
+

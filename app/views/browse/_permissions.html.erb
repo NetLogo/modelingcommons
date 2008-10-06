@@ -1,0 +1,39 @@
+<h3>Read permission</h3>
+
+<form method="POST" action="set_permissions" />
+
+<table>
+  <tr>
+    <td><input type="radio" name="read_permission" value="a" id="read_permission_a" /></td>
+    <td><label for="read_permission_a">Everyone can see this model</a></td>
+</tr>
+<tr>
+  <td><input type="radio" name="read_permission" value="g" id="read_permission_g" /></td>
+  <td><label for="read_permission_g">Your group can see this model</a></td>
+</tr>
+<tr>
+  <td><input type="radio" name="read_permission" value="u" id="read_permission_u" /></td>
+  <td><label for="read_permission_u">Only you see this
+      model</a></td>
+</tr>
+</table>
+
+<h3>Write permission</h3>
+
+<table>
+  <tr>
+    <td><input type="radio" name="write_permission" value="a" /></td>
+    <td><label for="write_permission_a">Everyone can modify this model</a></td>
+</tr>
+<tr>
+  <td><input type="radio" name="write_permission" value="g" /></td>
+  <td><label for="write_permission_g">Your group can modify this model</a></td>
+</tr>
+<tr>
+  <td><input type="radio" name="write_permission" value="a" /></td>
+  <td><label for="write_permission_u">Only you can modify this model</a></td>
+</tr>
+</table>
+
+<p><input type="submit" value="Set permissions" /></p>
+</form>

@@ -1,0 +1,125 @@
+<% @title = @model.name %>
+
+<div id="preview-image-div"> <img id="preview-image" align="right" src="<%= url_for :controller => "browse", :action => "display_preview", :id => @model.id %>"></div>
+
+<div id="navigation_tabs">
+  <ul class="subsection_tabs">
+    <li class="tab"><a id="model-tab" href="#model-div">Model</a></li>
+    <li class="tab"><a id="download-tab" href="#download-div">Download</a></li>
+    <li class="tab"><a id="applet-tab" href="#applet-div">Applet</a></li>
+    <li class="tab"><a id="upload-tab" href="#upload-div">Upload</a></li>
+    <li class="tab"><a id="permissions-tab" href="#permissions-div">Permissions</a></li>
+    <li class="tab"><a id="history-tab" href="#history-div">History</a></li>
+    <li class="tab"><a id="discuss-tab" href="#discuss-div">Discuss</a></li>
+    <li class="tab"><a id="tags-tab" href="#tags-div">Tags</a></li>
+  </ul>
+</div>
+
+<div id="model-div" class="main-div" style="display:none;">
+
+  <div id="model_tabs">
+    <ul class="subsection_tabs">
+      <li class="tab"><a id="info-tab" href="#info-div">Info</a></li>
+      <li class="tab"><a id="related-tab" href="#related-div">Related</a></li>
+      <li class="tab"><a id="associated-files-tab" href="#associated-files-div">Files</a></li>
+      <li class="tab"><a id="procedures-tab" href="#procedures-div">Procedures</a></li>
+      <li class="tab"><a id="gui-tab" href="#gui-div">GUI (textual)</a></li>
+    </ul>
+  </div>
+
+  <div id="related-div" class="model-file" style="display:none;">
+    <% if @model.parent.nil? %>
+    <p>No parent node</p>
+    <% else %>
+    <p><b>Parent:</b> <%= link_to @model.parent.name, :controller => 'browse', :action => 'one_model', :id => @model.parent.id  %></p>
+    <% end %>
+
+    <% if @model.models.empty? %>
+    <p>No child nodes</p>
+    <% else %>
+    <h3>Children:</h3>
+    <ul>
+      <% @model.models.each do |child| %>
+      <li><%= link_to child.name, :controller => 'browse', :action => 'one_model', :id => child.id  %></li>
+      <% end %>
+    </ul>
+    <% end %>
+
+  </div>
+
+  <div id="associated-files-div" class="model-file" style="display:none;">
+    <% if @model.files.empty? %>
+    <p>No files</p>
+    <% else %>
+    <ul>
+      <% @model.files.sort_by {|f| f.name}.each do |f| %>
+      <li><%= link_to f.filename, :controller => :browse, :action => :one_node, :id => f.id %> (<%= f.node_type.short_name %>)</li>
+      <% end %>
+    </ul>
+    <% end %>
+
+  </div>
+
+  <div id="info-div" class="model-file" style="display:none;">
+    <%= render :partial => "info_div", :locals => {:node => @model} -%>
+  </div>
+
+  <div id="procedures-div" class="model-file"  style="display:none;">
+    <p><%= @model.procedures_tab(with_html=true) %></p>
+  </div>
+
+  <div id="gui-div" class="model-file" style="display:none;">
+    <p><%= @model.gui_tab(with_html=true) %></p>
+  </div>
+
+</div>
+
+<div id="download-div" class="main-div" style="display:none;">
+  <%= link_to "Download model (as a zip file)", :controller => "browse", :action => "download_model", :id => @model.id %>
+</div>
+
+<div id="applet-div" class="model-file" style="display:none;">
+    <p><%= link_to "Launch applet", {:controller => :browse, :action => :one_applet, :id => @model.id}, {:popup => ["width=#{@model.dimensions[:width]}", "height=#{@model.dimensions[:height] + 150}"] }  %></p>
+</div>
+
+<div id="upload-div" class="main-div" style="display:none;">
+  <%= render :partial => "upload_form", :locals => {:node => @model} -%>
+</div>
+
+<div id="discuss-div" class="main-div" style="display:none;">
+  <%= render :partial => "discussion", :locals => {:node => @model} -%>
+</div>
+
+<div id="permissions-div" class="main-div" style="display:none;">
+  <%= render :partial => "permissions" -%>
+</div>
+
+<div id="history-div" class="main-div" style="display:none;">
+  <%= render :partial => "history", :locals => {:node => @model} -%>
+</div>
+
+<div id="tags-div" class="main-div" style="display:none;">
+  <h2>Tags</h2>
+
+  <% if @model.tagged_nodes.empty? %>
+  <p><i>No tags</i></p>
+  <% else %>
+  <p>Existing tags:</p>
+  <ul>
+    <% @model.tagged_nodes.sort_by {|t| t.updated_at}.each do |tm| %>
+    <li><%= link_to tm.tag.name, :controller => "tags", :action => "one_tag", :id => tm.tag_id %> (<%= tm.comment %>), by <%= tm.person.fullname %> <%= distance_of_time_in_words(Time.now, tm.updated_at) -%> ago </li>
+    <% end %>
+  </ul>
+  <% end %>
+
+  <div id="add-tags">
+    <% form_tag :controller => "tags", :action => :new do |form| %>
+    <%= hidden_field_tag :node_id, @model.id %>
+    <div id="tags">
+      <%= render :partial => "add_tag", :locals => {:form => form} -%>
+    </div>
+    <p><%= add_tag_link "More tag fields" %></p>
+    <p><%= submit_tag "Submit tags" %></p>
+    <% end %>
+  </div>
+</div>

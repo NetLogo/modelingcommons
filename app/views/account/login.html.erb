@@ -1,0 +1,21 @@
+<% @title = "Log into the NetLogo Commons" %>
+
+<table>
+
+<% form_tag :action => :login_action do %>
+<tr>
+    <td>E-mail address</td>
+    <td><%= text_field_tag :email_address %></td>
+</tr>
+<tr>
+    <td>Password</td>
+    <td><%= password_field_tag :password %></td>
+</tr>
+
+<tr>
+    <td colspan="2"><%= submit_tag "Login", :class => "submit" %></td>
+</tr>
+
+<% end %>
+
+</table>

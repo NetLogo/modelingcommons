@@ -1,0 +1,19 @@
+xml.instruct! :xml, :version=>"1.0"
+xml.rss(:version=>"2.0"){
+  xml.channel{
+    xml.title("Modeling Commons updates")
+    xml.link("http://monk.ccl.northwestern.edu:3001/")
+    xml.description("NetLogo Modeling Commons")
+    xml.language('en-us')
+      for update in @updates
+        xml.item do
+          xml.title(post.title)
+          xml.description(post.html_content)
+          xml.author("Your Name Here")
+          xml.pubDate(post.created_on.strftime("%a, %d %b %Y %H:%M:%S %z"))
+          xml.link(post.link)
+          xml.guid(post.link)
+        end
+      end
+  }
+}

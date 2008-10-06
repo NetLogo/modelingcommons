@@ -1,0 +1,9 @@
+<% @title = @model.name %>
+
+<applet
+  code="org.nlogo.window.Applet"
+  align="baseline"
+  width="674" height="800"
+  archive="/NetLogoLite.jar">
+<param name="DefaultModel" value="<%= @nlogo_file -%>">
+</applet>

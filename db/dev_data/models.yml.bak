@@ -1,0 +1,14 @@
+mousetraps:
+  name: Mousetraps
+  information: "I like Mousetraps a lot for some reason."
+  image_url: "/models/Sample Models/Mathematics/Mousetraps.png"
+
+voronoi:
+  name: Voronoi
+  information: "The update technique in this model is nifty."
+  image_url: "/models/Sample Models/Mathematics/Voronoi.png"
+
+continental-divide:
+  name: Continental Divide
+  information: "GIS data is used to initialize the world."
+  image_url: "/models/Sample Models/Earth Science/Continental Divide.png"

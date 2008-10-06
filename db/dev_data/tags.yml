@@ -1,0 +1,17 @@
+oscillation:
+  name: oscillation
+
+s-curve:
+  name: s-curve
+
+equilibrium:
+  name: equilibrium
+
+turtles-and-patches:
+  name: turtles and patches
+
+patches-only:
+  name: patches only
+
+links:
+  name: links

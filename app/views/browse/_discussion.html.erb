@@ -1,0 +1,42 @@
+<div>
+  <% if node.postings.empty? %>
+  <b>Please start the conversation about this model.</b>
+  <% else %>
+  <b>Please add to the conversation about this model.</b>
+  <% end %>
+
+  <hr />
+
+  <% node.postings.sort_by {|posting| posting.created_at}.each do |posting| %>
+  <h3><%= h(posting.title) %></h3>
+  <span>by <%= link_to h(posting.person.fullname), :controller => "account", :action => "mypage", :id => posting.person.id %>, at <%= distance_of_time_in_words(Time.now, posting.created_at) -%> ago (<%= link_to "reply", :controller => "discussion", :action => 'new', :parent_id => 5 -%>)</span><br />
+  <span><%= h(posting.body) %></span><br />
+  <br />
+  <% end %>
+
+  <table>
+    <% form_for(:new_posting,
+       :url => { :controller => "discussion",
+    :action => :new }) do |form| %>
+    <tr>
+      <td>Title</td>
+      <td><%= form.text_field :title %>
+    </tr>
+    <tr>
+      <td>Body</td>
+      <td><%= form.text_area :body, {:cols => 40, :rows => 10} %>
+        <%= form.hidden_field :node_id, {:value => node.id} %></td>
+    </tr>
+    <tr>
+      <td>Question?</td>
+      <td><%= form.check_box :is_question %></td>
+    </tr>
+
+    <tr>
+      <td colspan="2"><%= submit_tag "Submit comment" %></td>
+    </tr>
+
+    <% end %>
+  </table>
+</div>
+

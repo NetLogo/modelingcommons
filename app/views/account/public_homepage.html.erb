@@ -1,0 +1,9 @@
+<% @title = "Public homepage for #{@display_person.fullname}" %>
+
+<p>Name: <%= @display_person.fullname %> (<%= mail_to @display_person.email_address, @display_person.email_address %>)</p>
+
+<h2>Models:</h2>
+<%= render :partial => "person_models", :object => @display_person.nodes %>
+
+<h2>Discussion postings:</h2>
+<%= render :partial => "person_postings", :object => @display_person.postings %>

@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+    <title>NetLogo Modeling Commons -- <%= @title %></title>
+
+    <%= stylesheet_link_tag 'nlcommons' %>
+    <%= stylesheet_link_tag 'browse' %>
+
+    <%= javascript_include_tag 'prototype' %>
+    <%= javascript_include_tag 'effects' %>
+    <%= javascript_include_tag 'lowpro' %>
+    <%= javascript_include_tag 'livepipe' %>
+    <%= javascript_include_tag 'tabs' %>
+    <%= javascript_include_tag 'nlcommons' %>
+
+</head>
+
+<body>
+
+<div id="login-bar">
+<b><%= link_to_unless_current "Modeling Commons Home", :controller => "browse", :action => "index" %></b> &bull;
+<%= link_to_unless_current "News", :controller => "browse", :action => "news" %> &bull;
+<% if @person %>
+    Logged in as <%= link_to_unless_current @person.fullname, :controller => "account", :action => "mypage" %>
+    <% if @person.administrator %>
+    &bull; <%= link_to_unless_current "Admin", :controller => "admin", :action => "index" %>
+    <% end %>
+
+    &bull; <%= link_to_unless_current "Logout", :controller => "account", :action => "logout" %>
+    &bull; <%= link_to_unless_current "Upload a model", :controller => "upload", :action => "new_model" %>
+    &bull; <%= mail_to "reuven@lerner.co.il", "Report a bug" %>
+
+<% else %>
+    <b>Welcome!</b>  New users may <%= link_to_unless_current "register", :controller => "account", :action => "new" %>, while returning users may <%= link_to_unless_current "login", :controller => "account", :action => "login" %>.
+<% end %>
+
+&bull;
+    <% form_for(:search_term,
+                :url => { :controller => "browse",
+                          :action => :search_action },
+                :html => { :id => "navbar-search-form"}) do |form| %>
+        <%= form.text_field :search_term %> <%= submit_tag "Search!", :class => "submit" %>
+
+    <% end %>
+</div>
+
+<h1><%= @title %></h1>
+
+<% if flash[:notice] %>
+    <div id="flash-notice"><%= flash[:notice] %></div>
+
+    <script type="text/javascript">
+        new Effect.Fade('flash-notice', {duration: 5});
+    </script>
+<% end %>
+
+    <%= yield :layout %>
+</body>
+
+</html>

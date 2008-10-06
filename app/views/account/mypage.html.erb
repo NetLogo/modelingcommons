@@ -1,0 +1,16 @@
+<% @title = "Personal page for #{@the_person.first_name} #{@the_person.last_name}" %>
+
+<p><%= link_to "Upload a new model", :controller => "upload", :action => "new_model" %></p>
+
+<h2>Models:</h2>
+<%= render :partial => "person_models", :object => @the_person.models %>
+
+<h2>Postings:</h2>
+<%= render :partial => "person_postings", :object => @the_person.postings %>
+
+<h2>Tags:</h2>
+<ul>
+<% @the_person.tagged_nodes.map {|tm| tm.tag}.uniq.sort_by {|t| t.name}.each do |tag| %>
+    <li><%= link_to tag.name, :controller => "tags", :action => "one_tag", :id => tag.id %></li>
+<% end %>
+</ul>

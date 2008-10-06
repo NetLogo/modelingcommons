@@ -1,0 +1,8 @@
+<% @title = "List of models" %>
+
+<%= render :partial => "model_list", :object => @models %>
+
+<% if not params[:search_term].blank? %>
+    <p><%= link_to "See a complete list of models", :controller => "browse", :action => "list_models" %></p>
+<% end %>
+

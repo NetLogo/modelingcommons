@@ -1,0 +1,7 @@
+<% @title = "Successful upload." %>
+
+<p>The <b><%= @model.name %></b> model was successfully uploaded.</p>
+
+<p>You may visit the <%= link_to "#{@model.name} model's page", :controller => "browse", :action => "one_model", :name => @model.name %>.</p>
+
+<p>You may also <%= link_to "upload another model", :action => "new_model" %>.</p>

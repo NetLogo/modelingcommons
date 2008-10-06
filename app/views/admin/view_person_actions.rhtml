@@ -1,0 +1,28 @@
+<table border="1">
+
+        <tr>
+            <th>id</th>
+            <th>Timestamp</th>
+            <th>Person</th>
+            <th>URL</th>
+            <th>IP address</th>
+            <th>Browser info</th>
+            <th>Parameters</th>
+            <th>Flash</th>
+        </tr>
+
+<% @actions.each do |action| %>
+
+        <tr>
+            <td><%= action.id %></td>
+            <td><%= action.logged_at %></td>
+            <td><%= action.person.fullname %></td>
+            <td><%= action.url %></td>
+            <td><%= action.ip_address %></td>
+            <td><%= action.browser_info %></td>
+            <td><pre><%= action.params %></pre></td>
+            <td><pre><%= action.flash %></pre></td>
+        </tr>
+
+<% end %>
+</table>

@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+    <title><%= @title %></title>
+
+    <%= stylesheet_link_tag 'nlcommons' %>
+
+    <%= javascript_include_tag 'prototype' %>
+    <%= javascript_include_tag 'effects' %>
+
+</head>
+
+<body>
+
+<div id="login-bar">
+<%= link_to "NetLogo Modeling Commons", :controller => "browse", :action => "index" %> &bull;
+<b><%= link_to "Commons news", :controller => "browse", :action => "news" %></b> &bull;
+<% if @person %>
+    Logged in as <%= link_to @person.fullname, :controller => "account", :action => "mypage" %>
+    &bull; <%= link_to "Logout", :controller => "account", :action => "logout" %>
+    &bull; <%= link_to "Upload a model", :controller => "upload", :action => "new_model" %>
+<% else %>
+    <b>Welcome!</b>  New users may <%= link_to "register", :controller => "account", :action => "new" %>, while returning users may <%= link_to "login", :controller => "account", :action => "login" %>.
+<% end %>
+&bull; <%= link_to "NetLogo home", "http://ccl.northwestern.edu/", {:target => "_blank"} %>
+</div>
+<hr />
+
+<h1><%= @title %></h1>
+
+<% if flash[:notice] %>
+    <div id="flash-notice"><%= flash[:notice] %></div>
+<% end %>
+
+    <%= yield :layout %>
+</body>
+
+</html>
+<script type="text/javascript">
+    new Effect.Highlight('flash-notice', {duration: 2});
+</script>

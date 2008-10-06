@@ -1,0 +1,27 @@
+<% @title = "Upload a NetLogo model" %>
+
+<table>
+
+<% form_for (:new_model,
+            :url => { :action => :create_model },
+            :html => {:multipart => true}) do |form| %>
+<tr>
+    <td>Model name</td>
+    <td><%= form.text_field :name, :size => 30 %></td>
+</tr>
+<tr>
+    <td>Model file</td>
+    <td><%= form.file_field :uploaded_body %></td>
+</tr>
+<tr>
+    <td>Preview image, in PNG format</td>
+    <td><%= form.file_field :uploaded_preview %></td>
+</tr>
+
+<tr>
+    <td colspan="2"><%= submit_tag "Upload model", :class => "submit" %></td>
+</tr>
+
+<% end %>
+
+</table>

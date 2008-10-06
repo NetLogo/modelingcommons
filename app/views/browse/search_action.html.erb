@@ -1,0 +1,44 @@
+<% @title = "List of models" %>
+
+<h2>Models whose names contain '<%= @original_search_term %>'</h2>
+
+<% if @models and (not @models.empty?) %>
+    <%= render :partial => "model_list", :object => @models %>
+<% else %>
+    <p>No matches.</p>
+<% end %>
+
+<h2>Models with '<%= @original_search_term %>' in their info tab</h2>
+
+<% if @info_match_models and (not @info_match_models.empty?) %>
+    <%= render :partial => "model_list", :object => @info_match_models %>
+<% else %>
+    <p>No matches.</p>
+<% end %>
+
+<h2>Models with '<%= @original_search_term %>' in their procedures tab</h2>
+
+<% if @procedures_match_models and (not @procedures_match_models.empty?) %>
+    <%= render :partial => "model_list", :object => @procedures_match_models %>
+<% else %>
+    <p>No matches.</p>
+<% end %>
+
+<h2>Models with '<%= @original_search_term %>' in author name(s)</h2>
+
+<% if @author_match_models and (not @author_match_models.empty?) %>
+    <%= render :partial => "model_list", :object => @author_match_models %>
+<% else %>
+    <p>No matches.</p>
+<% end %>
+
+<h2>Models with '<%= @original_search_term %>' in one or more tags</h2>
+
+<% if @tag_match_models and (not @tag_match_models.empty?) %>
+    <%= render :partial => "model_list", :object => @tag_match_models %>
+<% else %>
+    <p>No matches.</p>
+<% end %>
+
+<p><%= link_to "Search through models", :controller => "browse", :action => "search" %></p>
+
