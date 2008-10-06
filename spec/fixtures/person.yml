@@ -1,0 +1,14 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+reuven:
+  id: 1
+  first_name: Reuven
+  last_name: Lerner
+  password: password
+  email_address: reuven@lerner.co.il
+  email_address: reuven@lerner.co.il
+joe:
+  id: 2
+  first_name: Joe
+  last_name: Shmoe
+  password: password
+  email_address: reuven@lerner.co.il
