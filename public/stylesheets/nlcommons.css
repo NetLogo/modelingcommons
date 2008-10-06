@@ -1,0 +1,111 @@
+body {
+    background: #abcdef;
+}
+
+#login-bar {
+    background: #abcccc;
+    border-bottom: medium solid #000;
+    padding-bottom: 3px;
+}
+
+#login-bar a:hover {
+    background: #000;
+    color: #abcccc;
+}
+
+#flash-notice {
+    margin: 10px;
+    background: #000;
+    color: #FFF;
+    border: 1px solid #F00;
+    font-style: bold;
+}
+
+#navbar-search-form {
+    display: inline;
+}
+
+h1, h2, h3 {
+    font-family: Optima, sans-serif;
+}
+
+
+/* one_model page tabs
+   --------------------*/
+#navigation_tabs ul.subsection_tabs {
+    list-style:none;
+    margin:0 0 5px 0;
+    padding:0;
+    clear:both;
+    border-bottom:1px solid #ccc;
+    height:20px;
+    clear:both;
+}
+
+#navigation_tabs ul.subsection_tabs li.tab {
+    float:left;
+    margin-right:7px;
+    text-align:center;
+}
+
+#navigation_tabs ul.subsection_tabs li.tab a {
+    display:block;
+    height:20px;
+    padding:0 6px 0 6px;
+    background-color:#fff;
+    color:#666;
+    width:80px;
+}
+
+#navigation_tabs ul.subsection_tabs li.tab a:hover {
+    color:#666;
+}
+
+#navigation_tabs ul.subsection_tabs li.tab a.active {
+    background-color:#ddd;
+}
+
+#navigation_tabs ul.subsection_tabs li.source_code {
+    float:right;
+}
+
+/* View-model (subsection on one_model page) tabs
+   --------------------*/
+#model_tabs ul.subsection_tabs {
+    list-style:none;
+    margin:0 0 5px 0;
+    padding:0;
+    clear:both;
+    border-bottom:1px solid #ccc;
+    height:20px;
+    clear:both;
+    position: relative;
+    left: 20px;
+}
+
+#model_tabs ul.subsection_tabs li.tab {
+    float:left;
+    margin-right:7px;
+    text-align:center;
+}
+
+#model_tabs ul.subsection_tabs li.tab a {
+    display:block;
+    height:20px;
+    padding:0 6px 0 6px;
+    background-color:#fff;
+    color:#666;
+    width:80px;
+}
+
+#model_tabs ul.subsection_tabs li.tab a:hover {
+    color:#666;
+}
+
+#model_tabs ul.subsection_tabs li.tab a.active {
+    background-color:#ddd;
+}
+
+#model_tabs ul.subsection_tabs li.source_code {
+    float:right;
+}
