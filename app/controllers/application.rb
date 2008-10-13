@@ -65,7 +65,7 @@ class ApplicationController < ActionController::Base
     logger.warn "Checking visibility permissions for model '#{@model.id}' and person '#{@person.id}'"
 
     # This only applies if the node is a model
-    return true unless @node.is_model?
+    return true unless @model.is_model?
 
     # If there's no model, then allow everything
     return true unless @model
@@ -100,7 +100,7 @@ class ApplicationController < ActionController::Base
     logger.warn "Checking changeability permissions for model '#{@model.to_yaml}' and person '#{@person.to_yaml}'"
 
     # This only applies if the node is a model
-    return true unless @node.is_model?
+    return true unless @model.is_model?
 
     # If there's no model, then allow everything
     return true unless @model
