@@ -99,7 +99,7 @@ class ApplicationController < ActionController::Base
   def check_changeability_permissions
     if @model.nil?
       if params[:new_document] and params[:new_document][:parent_node_id]
-        @model = Node.find(params[:parent_node_id])
+        @model = Node.find(params[:new_document][:parent_node_id])
       end
     end
 
