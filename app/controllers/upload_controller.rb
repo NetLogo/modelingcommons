@@ -6,83 +6,42 @@ class UploadController < ApplicationController
   end
 
   def create_model
-    # This method creates a new nlmodel, and its initial
-    # nlmodel_version.  Each nlmodel has one or more nlmodel_versions
-    # associated with it.  This allows us to keep track of versions on
-    # a per-model basis, even though it's (unfortunately) more
-    # complicated than I would like.
-
-    # Integrity checks to add at some point:
-    # (1) Does the filename match the model name?
-    # (2) Is the model file seemingly intact?
-    # (3) Did we get a preview PNG?
-    # (4) Put the preview PNG in the filesystem, as ID.png, where ID is the
-    #     model's ID
-
     model_name = params[:new_model][:name]
 
-    # Make sure that a model doesn't already exist with this name.  If
-    # it does, give an error message.
-    if Nlmodel.find_by_name(model_name)
-      flash[:notice] = "Sorry, but this model name ('#{model_name}') is already taken.  Please try a new one.  Alternatively, you may upload a new version of this model."
-      redirect_to :back
-      return
+    # Create a new node, without a parent
+    Node.transaction do
+      new_model_node = Node.create(:node_type_id => 1,
+                                   :parent_id => nil,
+                                   :name => model_name)
+      new_model_node.reload
+
+      @model = new_model_node
+
+      # Create a new version for that node, and stick the contents in there
+      new_version =
+        NodeVersion.create(:node_id => new_model_node.id,
+                           :person_id => @person.id,
+                           :contents => params[:new_model][:uploaded_body].read,
+                           :description => 'Initial upload')
+      new_version.reload
+
+      # Create a new preview node, whose parent is the new model node
+      preview_node = Node.create(:node_type_id => 2,
+                                 :parent_id => new_model_node.id,
+                                 :name => "Preview image for #{model_name}")
+
+      preview_node.reload
+
+      # Create a new version for the preview, and stick the contents in there
+      preview_version =
+        NodeVersion.create(:node_id => preview_node.id,
+                           :person_id => @person.id,
+                           :contents => params[:new_model][:uploaded_preview].read,
+                           :description => 'Initial preview version')
+      new_version.reload
     end
 
-    # Now do some sanity checking on the uploaded filenames
-    new_model_filename =
-      params[:new_model][:uploaded_body].original_filename
-    if new_model_filename !~ /.nlogo$/
-      flash[:notice] = "Sorry, but uploaded models must have a '.nlogo' suffix.  Please make sure that the model filename ends in '.nlogo'."
-      redirect_to :back
-      return
-    end
-
-    if not params[:new_model][:uploaded_preview].blank?
-      preview_image_filename =
-        params[:new_model][:uploaded_preview].original_filename
-      if preview_image_filename !~ /.png$/
-        flash[:notice] = "Sorry, but preview images must be in 'PNG' format.  Please make sure that the preview image filename ends in '.png'."
-        redirect_to :back
-        return
-      end
-    end
-
-    # ------------------------------------------------------------
-    # Create a new model, using the name and owner.
-    # ------------------------------------------------------------
-    @model = Nlmodel.new(:name => model_name,
-                         :person_id => @person.id)
-    if @model.save
-      flash.now[:notice] = "Congratulations!  The model '#{@model.name}' was successfully uploaded.  "
-    else
-      flash.now[:notice] = "Error uploading the '#{@model.name}' model; please try again."
-      redirect_to :back
-      return
-    end
-
-    # Create a new model version, using the model and owner, as well
-    # as the uploaded contents.
-    @version =
-      NlmodelVersion.create(:nlmodel_id => @model.id,
-                            :person_id => @person.id,
-                            :contents => params[:new_model][:uploaded_body].read,
-                            :note => "Initial upload of model")
-    @version.save!
-
-    # ------------------------------------------------------------
-    # Create preview file
-    # ------------------------------------------------------------
-    if not params[:new_model][:uploaded_preview].blank?
-      preview_image = params[:new_model][:uploaded_preview].read
-      params[:new_model].delete(:uploaded_preview)
-
-      # Write the model preview file
-      File.open(@model.preview_filename, 'w') do |file|
-        file.puts preview_image
-      end
-    end
-
+    flash[:notice] = "Thanks for uploading the new model called '#{model_name}'."
   end
 
   def update_model

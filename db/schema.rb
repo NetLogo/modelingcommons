@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20081006153420) do
+ActiveRecord::Schema.define(:version => 20081013052347) do
 
   create_table "groups", :force => true do |t|
     t.string   "name"
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(:version => 20081006153420) do
     t.boolean  "is_administrator", :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "status",           :default => "pending", :null => false
   end
 
   add_index "memberships", ["group_id"], :name => "index_memberships_on_group_id"
@@ -112,6 +113,7 @@ ActiveRecord::Schema.define(:version => 20081006153420) do
     t.string   "name",       :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "short_form"
   end
 
   add_index "permission_settings", ["name"], :name => "index_permission_settings_on_name"
