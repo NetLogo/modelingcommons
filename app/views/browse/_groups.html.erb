@@ -2,7 +2,7 @@
   <div id="group_tabs">
     <ul class="subsection_tabs">
       <li class="tab"><a id="your-groups-tab" href="#your-groups-div">Your groups</a></li>
-<!--      <li class="tab"><a id="join-group-tab" href="#join-group-div">Join a group</a></li> ->
+      <!-- <li class="tab"><a id="join-group-tab" href="#join-group-div">Join a group</a></li> -->
       <li class="tab"><a id="create-group-tab" href="#create-group-div">Create</a></li>
       <li class="tab"><a id="manage-groups-tab" href="#manage-groups-div">Manage</a></li>
     </ul>
@@ -12,8 +12,8 @@
     <ul>
       <% @person.memberships.each do |membership| %>
       <li><%= membership.group.name %>
-             (<%= link_to "leave", :controller => :membership, :action => :leave, :id => membership.id %>)
-        </li>
+        (<%= link_to "leave", :controller => :membership, :action => :leave, :id => membership.id %>)
+      </li>
       <% end %>
     </ul>
   </div>
@@ -36,16 +36,16 @@
         <% group.memberships.each do |membership| %>
         <li><%= membership.person.fullname -%>
           <% if membership.status == 'pending' %>
-             (<%= link_to "approve", :controller => :membership, :action => :approve_membership, :id => membership.id %>)
+          (<%= link_to "approve", :controller => :membership, :action => :approve_membership, :id => membership.id %>)
           <% end %>
 
           <% if membership.person != @person %>
-             (<%= link_to "remove", :controller => :membership, :action => :leave, :id => membership.id %>)
-              <% if membership.is_administrator? %>
-             (<%= link_to "remove administrator", :controller => :membership, :action => :remove_administrator, :id => membership.id %>)
-              <% else %>
-             (<%= link_to "make administrator", :controller => :membership, :action => :make_administrator, :id => membership.id %>)
-              <% end %>
+          (<%= link_to "remove", :controller => :membership, :action => :leave, :id => membership.id %>)
+          <% if membership.is_administrator? %>
+          (<%= link_to "remove administrator", :controller => :membership, :action => :remove_administrator, :id => membership.id %>)
+          <% else %>
+          (<%= link_to "make administrator", :controller => :membership, :action => :make_administrator, :id => membership.id %>)
+          <% end %>
           <% end %>
         </li>
         <% end %>
@@ -55,8 +55,14 @@
 
     <h3>Invite people to join one of your groups:</h3>
 
+    <% if @model.group %>
+        <% model_group_id = @model.group.id %>
+    <% else %>
+        <% model_group_id = -1 %>
+    <% end %>
+
     <% form_tag :controller => "membership", :action => :invite_people do |form| %>
-     <%= select("group", "id", @person.groups.to_hash, :selected => @model.group.id) %>
+    <%= select("group", "id", @person.groups.to_hash, :selected => model_group_id) %>
     <p>E-mail addresses, separated by commas:</p>
     <p><%= text_area_tag "invitees" %></p>
     <p><%= submit_tag "Invite users" %></p>
