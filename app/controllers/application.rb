@@ -86,13 +86,13 @@ class ApplicationController < ActionController::Base
 
     # If only the group can see this model, then get the model's group, and
     # determine if @person is a member of the group.
-    if @model.visibility.short_form == 'g' and @model.group.members.member?(@person)
+    if @model.visibility.short_form == 'g' and @model.group.approved_members.member?(@person)
       logger.warn "Visiblity permission is 'g' and person '#{@person}' is a member of group '#{@model.group.name}'.  Allowing."
       return true
     end
 
     flash[:notice] = "You do not have permission to view this model."
-    redirect_to :controller => "account", :action => "login"
+    redirect_to :controller => "account", :action => "mypage"
     return false
   end
 
@@ -120,8 +120,10 @@ class ApplicationController < ActionController::Base
     # If only the group can see this model, then get the model's group, and
     # determine if @person is a member of the group.
     return true if @model.changeability.short_form == 'g' and
-      @model.group.members.member?(@person)
+      @model.group.approved_members.member?(@person)
 
+    flash[:notice] = "You do not have permission to modify this model."
+    redirect_to :controller => "account", :action => "mypage"
     return false
   end
 

@@ -25,4 +25,8 @@ class Person < ActiveRecord::Base
     "#{self.first_name} #{self.last_name}"
   end
 
+  def administrated_groups
+    self.groups.select {|g| g.is_administrator?(self) }
+  end
+
 end

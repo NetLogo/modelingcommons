@@ -55,4 +55,13 @@ class Notifications < ActionMailer::Base
     @content_type = 'text/html'
   end
 
+  def invited_to_group(person, membership)
+    @recipients = person.email_address
+    @from = "nlcommons@monk.ccl.northwestern.edu"
+    @subject    = 'Group invitation from the NetLogo Modeling Commons'
+    @body[:membership] = membership
+    @sent_on    = Time.now()
+    @content_type = 'text/html'
+  end
+
 end
