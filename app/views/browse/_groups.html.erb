@@ -9,6 +9,9 @@
   </div>
 
   <div id="your-groups-div" class="group-tab" style="display:none;">
+    <% if @person.memberships.length == 0 %>
+    <p>You are not a member of any groups.</p>
+    <% else %>
     <ul>
       <% @person.memberships.each do |membership| %>
       <li><%= membership.group.name %>
@@ -16,6 +19,7 @@
       </li>
       <% end %>
     </ul>
+    <% end %>
   </div>
 
   <div id="create-group-div" class="group-tab" style="display:none;">
@@ -29,6 +33,9 @@
 
   <div id="manage-groups-div" class="group-tab" style="display:none;">
     <h3>Groups you manage</h3>
+    <% if @person.memberships.length == 0 %>
+    <p>You are not a member of any groups.</p>
+    <% else %>
     <ul>
       <% @person.administrated_groups.each do |group| %>
       <li><%= group.name %></li>
@@ -52,6 +59,7 @@
       </ul>
       <% end %>
     </ul>
+    <% end %>
 
     <h3>Invite people to join one of your groups:</h3>
 
@@ -61,6 +69,10 @@
         <% model_group_id = -1 %>
     <% end %>
 
+    <% if @person.memberships.length == 0 %>
+    <p>You are not a member of any groups.</p>
+    <% else %>
+
     <% form_tag :controller => "membership", :action => :invite_people do |form| %>
     <%= select("group", "id", @person.groups.to_hash, :selected => model_group_id) %>
     <p>E-mail addresses, separated by commas:</p>
@@ -68,6 +80,7 @@
     <p><%= submit_tag "Invite users" %></p>
     <% end %>
 
+    <% end %>
   </div>
 
   <div id="join-group-div" class="group-tab" style="display:none;">
