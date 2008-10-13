@@ -2,30 +2,33 @@
 
 <p>The Modeling Commons is a public space for online modeling in
   <%= link_to "NetLogo", "http://ccl.northwestern.edu/netlogo" -%>
-  (Wilensky, 1999).  The goal is to make it easy for people to share
-  models with one another, to collaborate on modeling projects, and to
+  (Wilensky, 1999), developed by
+  the <a href="http://ccl.northwestern.edu">Center for Connected
+    Learning and Computer-Based Modeling ("CCL")</a> at Northwestern
+  University.  The goal is to make it easy for people to share models
+  with one another, to collaborate on modeling projects, and to
   discuss models.</p>
 
 <p>Among other things, this is a research project, as well as a work
-in progress.  So you should expect to see things change and (I hope)
-improve over time.  The research itself has to do with the creation of
-an online learning community for modelers -- trying to find the best
-ways to facilitate improved modeling and learning.</p>
+  in progress.  So you should expect to see things change and (I hope)
+  improve over time.  The research itself has to do with the creation of
+  an online learning community for modelers -- trying to find the best
+  ways to facilitate improved modeling and learning.</p>
 
 <h2>Some common tasks:</h2>
 
 <ul>
-    <li><%= link_to "List models already in the Commons", :controller => "browse", :action => "list_models" -%></li>
-    <li><%= link_to "Upload a new model", :controller => "upload", :action => "new_model" -%></li>
-    <li><%= link_to "Search through models", :controller => "browse", :action => "search" -%></li>
-    <li><%= link_to "Go to your home page", :controller => "account", :action => "mypage" -%></li>
+  <li><%= link_to "List models already in the Commons", :controller => "browse", :action => "list_models" -%></li>
+  <li><%= link_to "Upload a new model", :controller => "upload", :action => "new_model" -%></li>
+  <li><%= link_to "Search through models", :controller => "browse", :action => "search" -%></li>
+  <li><%= link_to "Go to your home page", :controller => "account", :action => "mypage" -%></li>
 </ul>
 
 <h2>Other people's questions</h2>
 <ul>
-<% @postings.each do |posting| %>
-    <li><%= link_to posting.title, :controller => "browse", :action => "view_one_model", :id => posting.node.id %></li>
-<% end %>
+  <% @postings.each do |posting| %>
+  <li><%= link_to posting.title, :controller => "browse", :action => "view_one_model", :id => posting.node.id %></li>
+  <% end %>
 </ul>
 
 <h2>Questions?  Comments?</h2>
