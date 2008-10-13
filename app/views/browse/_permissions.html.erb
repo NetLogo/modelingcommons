@@ -51,7 +51,7 @@
         <% else %>
         <% model_group_id = -1 %>
     <% end %>
-<p id="permission-group-selector">Model group: <%= select("group", "id", @person.groups.to_hash, :selected => @model.group.id) %>&nbsp;&nbsp;<%= submit_tag "Set permissions and group" %></p>
+<p id="permission-group-selector">Model group: <%= select("group", "id", @person.groups.to_hash, :selected => model_group_id) %>&nbsp;&nbsp;<%= submit_tag "Set permissions and group" %></p>
 <% end %>
 
 <% end %>
