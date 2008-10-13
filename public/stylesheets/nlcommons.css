@@ -14,6 +14,7 @@ body {
 }
 
 #flash-notice {
+    position: absolute;
     margin: 10px;
     background: #000;
     color: #FFF;
@@ -109,3 +110,46 @@ h1, h2, h3 {
 #model_tabs ul.subsection_tabs li.source_code {
     float:right;
 }
+
+
+/* View-model (subsection on one_model page) tabs
+   --------------------*/
+#group_tabs ul.subsection_tabs {
+    list-style:none;
+    margin:0 0 5px 0;
+    padding:0;
+    clear:both;
+    border-bottom:1px solid #ccc;
+    height:20px;
+    clear:both;
+    position: relative;
+    left: 20px;
+}
+
+#group_tabs ul.subsection_tabs li.tab {
+    float:left;
+    margin-right:7px;
+    text-align:center;
+}
+
+#group_tabs ul.subsection_tabs li.tab a {
+    display:block;
+    height:20px;
+    padding:0 6px 0 6px;
+    background-color:#fff;
+    color:#666;
+    width:80px;
+}
+
+#group_tabs ul.subsection_tabs li.tab a:hover {
+    color:#666;
+}
+
+#group_tabs ul.subsection_tabs li.tab a.active {
+    background-color:#ddd;
+}
+
+#group_tabs ul.subsection_tabs li.source_code {
+    float:right;
+}
+

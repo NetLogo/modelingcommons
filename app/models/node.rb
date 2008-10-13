@@ -1,10 +1,17 @@
 class Node < ActiveRecord::Base
+  MODEL_NODE_TYPE = 1
+  PREVIEW_NODE_TYPE = 2
+  DOCUMENT_NODE_TYPE = 3
+  IMAGE_NODE_TYPE = 4
+  DATA_NODE_TYPE = 5
+
   acts_as_tree :order => "name"
 
   belongs_to :node_type
+  belongs_to :group
 
-  belongs_to :permission_setting, :foreign_key => :visibility
-  belongs_to :permission_setting, :foreign_key => :changeability
+  belongs_to :visibility, :class_name => "PermissionSetting", :foreign_key => :visibility_id
+  belongs_to :changeability, :class_name => "PermissionSetting", :foreign_key => :changeability_id
 
   has_many :node_versions, :order => 'updated_at DESC'
   has_many :postings, :order => 'updated_at'
@@ -16,12 +23,12 @@ class Node < ActiveRecord::Base
   validates_numericality_of :node_type_id, :visibility_id, :changeability_id
 
   # Convenience named scopes for grabbing certain types of children
-  named_scope :models, :conditions => ['node_type_id = ? ', 1]
-  named_scope :non_models, :conditions => ['node_type_id <> ? ', 1]
-  named_scope :previews, :conditions => ['node_type_id = ? ', 2]
-  named_scope :documents, :conditions => ['node_type_id = ? ', 3]
-  named_scope :images, :conditions => ['node_type_id = ? ', 4]
-  named_scope :data, :conditions => ['node_type_id = ? ', 5]
+  named_scope :models, :conditions => ['node_type_id = ? ', MODEL_NODE_TYPE]
+  named_scope :non_models, :conditions => ['node_type_id <> ? ', MODEL_NODE_TYPE]
+  named_scope :previews, :conditions => ['node_type_id = ? ', PREVIEW_NODE_TYPE]
+  named_scope :documents, :conditions => ['node_type_id = ? ', DOCUMENT_NODE_TYPE]
+  named_scope :images, :conditions => ['node_type_id = ? ', IMAGE_NODE_TYPE]
+  named_scope :data, :conditions => ['node_type_id = ? ', DATA_NODE_TYPE]
 
   # ------------------------------------------------------------
   # Grab children of various sorts
@@ -32,15 +39,15 @@ class Node < ActiveRecord::Base
   end
 
   def models
-    self.children_of_id(1)
+    self.children_of_id(MODEL_NODE_TYPE)
   end
 
   def non_models
-    self.children.select { |v| v.node_type_id != 1}
+    self.children.select { |v| v.node_type_id != MODEL_NODE_TYPE}
   end
 
   def previews
-    self.children_of_id(2)
+    self.children_of_id(PREVIEW_NODE_TYPE)
   end
 
   def latest_preview
@@ -48,15 +55,15 @@ class Node < ActiveRecord::Base
   end
 
   def documents
-    self.children_of_id(3)
+    self.children_of_id(DOCUMENT_NODE_TYPE)
   end
 
   def images
-    self.children_of_id(4)
+    self.children_of_id(IMAGE_NODE_TYPE)
   end
 
   def data
-    self.children_of_id(5)
+    self.children_of_id(DATA_NODE_TYPE)
   end
 
   def files
@@ -66,6 +73,10 @@ class Node < ActiveRecord::Base
   # ------------------------------------------------------------
   # Get the contents of a model file
   # ------------------------------------------------------------
+
+  def is_model?
+    return self.node_type_id == MODEL_NODE_TYPE
+  end
 
   def people
     self.node_versions.map {|m| m.person}.uniq
@@ -142,9 +153,10 @@ class Node < ActiveRecord::Base
   def dimensions
 
     # This algorithm is really horrible and nasty.  It was taken
-    # almost precisely from model.cgi, on ccl.northwestern.edu.  I
-    # have a feeling that I could clean it up a lot, but that'll take
-    # a bit of time, so I'll just keep it this way for now.
+    # almost precisely from the Perl code in model.cgi, on
+    # ccl.northwestern.edu.  I have a feeling that I could clean it up
+    # a lot, but that'll take a bit of time, so I'll just keep it this
+    # way for now.
 
     dividers = 0
     getdimens = -1

@@ -9,7 +9,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20080915084421) do
+ActiveRecord::Schema.define(:version => 20081006153420) do
+
+  create_table "groups", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "logged_actions", :force => true do |t|
     t.integer  "person_id"
@@ -27,6 +33,17 @@ ActiveRecord::Schema.define(:version => 20080915084421) do
   add_index "logged_actions", ["ip_address"], :name => "index_logged_actions_on_ip_address"
   add_index "logged_actions", ["person_id"], :name => "index_logged_actions_on_person_id"
   add_index "logged_actions", ["url"], :name => "index_logged_actions_on_url"
+
+  create_table "memberships", :force => true do |t|
+    t.integer  "person_id"
+    t.integer  "group_id"
+    t.boolean  "is_administrator", :default => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "memberships", ["group_id"], :name => "index_memberships_on_group_id"
+  add_index "memberships", ["group_id", "person_id"], :name => "index_memberships_on_person_id_and_group_id", :unique => true
 
   create_table "news_items", :force => true do |t|
     t.string   "title"
@@ -68,10 +85,12 @@ ActiveRecord::Schema.define(:version => 20080915084421) do
     t.datetime "updated_at"
     t.integer  "visibility_id",    :default => 1, :null => false
     t.integer  "changeability_id", :default => 1, :null => false
+    t.integer  "group_id"
   end
 
   add_index "nodes", ["changeability_id"], :name => "index_nodes_on_changeability_id"
   add_index "nodes", ["created_at"], :name => "index_nodes_on_created_at"
+  add_index "nodes", ["group_id"], :name => "index_nodes_on_group_id"
   add_index "nodes", ["name"], :name => "index_nodes_on_name"
   add_index "nodes", ["node_type_id"], :name => "index_nodes_on_node_type_id"
   add_index "nodes", ["parent_id"], :name => "index_nodes_on_parent_id"

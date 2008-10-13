@@ -6,8 +6,9 @@ require 'diff/lcs/hunk'
 class BrowseController < ApplicationController
 
   before_filter :require_login, :except => [:model_contents, :one_applet]
-  before_filter :get_model_from_id_param, :except => [:index, :list_models, :search, :search_action, :news, :one_node]
-  # before_filter :check_visibility_permissions
+  before_filter :get_model_from_id_param, :except => [:index, :list_models, :search, :search_action, :news, :one_node, :create_group]
+  before_filter :check_visibility_permissions, :only => [:one_model, :model_contents, :one_applet ]
+  before_filter :check_changeability_permissions, :only => [:revert_model]
 
   def index
     @postings = Posting.find(:all,
@@ -181,16 +182,51 @@ class BrowseController < ApplicationController
       diff_as_string(@version_1.info_tab, @version_2.info_tab)
 
     # @comparison_results['gui_tab'] =
-      #diff_as_string(@version_1.gui_tab, @version_2.gui_tab)
+    #diff_as_string(@version_1.gui_tab, @version_2.gui_tab)
 
     # @comparison_results['procedures_tab'] =
-      # diff_as_string(@version_1.procedures_tab, @version_2.procedures_tab)
+    # diff_as_string(@version_1.procedures_tab, @version_2.procedures_tab)
   end
 
   def one_applet
   end
 
+  def set_permissions
+    if params[:read_permission].empty? or params[:write_permission].empty?
+      flash[:notice] = 'Both read and write permissions must be specified. '
+    else
+
+      read_permission = PermissionSetting.find_by_short_form(params[:read_permission])
+      write_permission = PermissionSetting.find_by_short_form(params[:write_permission])
+
+      Model.transaction do
+
+        # Set the read permissions
+        @model.visibility_id = read_permission.id
+        @model.changeability_id = write_permission.id
+
+        if params[:group] and params[:group][:id]
+          @model.group = Group.find(params[:group][:id])
+        end
+
+        if @model.save
+          flash[:notice] = "Successfully set permissions for '#{@model.name}'. "
+        else
+          flash[:notice] = "Error setting permissions for '#{@model.name}': "
+          @model.errors.each do |error|
+            flash[:notice] << error
+          end
+        end
+      end
+    end
+
+    redirect_to :back
+  end
+
+  # ------------------------------------------------------------
   # Below here is PRIVATE!
+  # ------------------------------------------------------------
+
   private
   def get_model_from_id_param
     if params[:id].blank?
@@ -200,28 +236,10 @@ class BrowseController < ApplicationController
     end
 
     @model = Node.models.find(params[:id])
+    @node = @model
   rescue
     render :text => "No model with ID '#{params[:id]}'"
     return
-  end
-
-  def check_visibility_permissions
-    # If there's no model, then permissions don't really apply, do they?
-    return true unless @model
-    return false unless @person
-
-    # If everyone can see this model, then deal with the simple case
-    return true if @model.visibility == 1
-
-    # If the visibilty is only for an author, then only include
-    # those people who have contributed
-    if @model.visibility == 3 and @node.people.member?(@person)
-      return true
-    end
-
-    # What does it mean to be part of a group?  Hmmm...
-
-    return false
   end
 
   def diff_as_string(data_old, data_new, format=:unified, context_lines=1)
@@ -244,7 +262,7 @@ class BrowseController < ApplicationController
 
         if (context_lines > 0) and hunk.overlaps?(oldhunk)
           hunk.unshift(oldhunk)
-          else
+        else
           output << oldhunk.diff(format)
         end
       ensure

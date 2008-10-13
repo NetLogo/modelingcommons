@@ -8,6 +8,9 @@ class Person < ActiveRecord::Base
   has_many :tags
   has_many :tagged_nodes
 
+  has_many :memberships
+  has_many :groups, :through => :memberships, :order => :name
+
   attr_accessor :password_confirmation
 
   validates_presence_of :first_name, :last_name, :email_address, :password

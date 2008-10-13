@@ -1,5 +1,7 @@
 class UploadController < ApplicationController
 
+  before_filter :check_changeability_permissions, :only => [:update_model, :add_document]
+
   def new_model
   end
 

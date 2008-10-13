@@ -1,39 +1,50 @@
-<h3>Read permission</h3>
 
-<form method="POST" action="set_permissions" />
+<% form_tag(:action => 'set_permissions') do %>
 
-<table>
-  <tr>
-    <td><input type="radio" name="read_permission" value="a" id="read_permission_a" /></td>
-    <td><label for="read_permission_a">Everyone can see this model</a></td>
-</tr>
-<tr>
-  <td><input type="radio" name="read_permission" value="g" id="read_permission_g" /></td>
-  <td><label for="read_permission_g">Your group can see this model</a></td>
-</tr>
-<tr>
-  <td><input type="radio" name="read_permission" value="u" id="read_permission_u" /></td>
-  <td><label for="read_permission_u">Only you see this
-      model</a></td>
-</tr>
-</table>
-
-<h3>Write permission</h3>
+<%= hidden_field_tag 'id', @model.id %>
 
 <table>
   <tr>
-    <td><input type="radio" name="write_permission" value="a" /></td>
-    <td><label for="write_permission_a">Everyone can modify this model</a></td>
-</tr>
-<tr>
-  <td><input type="radio" name="write_permission" value="g" /></td>
-  <td><label for="write_permission_g">Your group can modify this model</a></td>
-</tr>
-<tr>
-  <td><input type="radio" name="write_permission" value="a" /></td>
-  <td><label for="write_permission_u">Only you can modify this model</a></td>
-</tr>
+    <td><h3>Read permission</h3></td>
+    <td><h3>Write permission</h3></td>
+  </tr>
+
+  <tr>
+    <td>
+      <table>
+        <tr>
+          <td><%= radio_button_tag 'read_permission', 'a', @model.visibility.short_form == 'a' %></td>
+          <td><label for="read_permission_a">Everyone can see this model.</label></td>
+        </tr>
+        <tr>
+          <td><%= radio_button_tag 'read_permission', 'g', @model.visibility.short_form == 'g' %></td>
+          <td><label for="read_permission_g">The model is only visible to group members. </label></td>
+        </tr>
+        <tr>
+          <td><%= radio_button_tag 'read_permission', 'u', @model.visibility.short_form == 'u'  %></td>
+          <td><label for="read_permission_u">Only you may see this model.</label></td>
+        </tr>
+      </table>
+    </td>
+
+    <td>
+      <table>
+        <tr>
+          <td><%= radio_button_tag 'write_permission', 'a', @model.changeability.short_form == 'a' -%></td>
+          <td><label for="write_permission_a">Everyone can modify this model.</label></td>
+        </tr>
+        <tr>
+          <td><%= radio_button_tag 'write_permission', 'g', @model.changeability.short_form == 'g' %></td>
+          <td><label for="write_permission_g">The model can only be modified by group members. </label></td>
+        </tr>
+        <tr>
+          <td><%= radio_button_tag 'write_permission', 'u', @model.changeability.short_form == 'u' %></td>
+          <td><label for="write_permission_u">Only you can modify this model.</label></td>
+        </tr>
+      </table>
+    </td>
 </table>
 
-<p><input type="submit" value="Set permissions" /></p>
-</form>
+<p id="permission-group-selector">Model group: <%= select("group", "id", @person.groups.to_hash, :selected => @model.group.id) %>&nbsp;&nbsp;<%= submit_tag "Set permissions and group" %></p>
+
+<% end %>

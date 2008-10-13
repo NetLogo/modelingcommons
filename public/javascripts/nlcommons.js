@@ -44,4 +44,5 @@ function hide_all_sections_except(divs_array, to_show) {
 document.observe('dom:loaded', function() {
                    new Control.Tabs('navigation_tabs');
                    new Control.Tabs('model_tabs');
+                   new Control.Tabs('group_tabs');
                  });

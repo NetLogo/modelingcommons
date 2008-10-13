@@ -61,4 +61,69 @@ class ApplicationController < ActionController::Base
     @node_types = NodeType.find(:all)
   end
 
+  def check_visibility_permissions
+    logger.warn "Checking visibility permissions for model '#{@model.id}' and person '#{@person.id}'"
+
+    # This only applies if the node is a model
+    return true unless @node.is_model?
+
+    # If there's no model, then allow everything
+    return true unless @model
+
+    # If there's no person, then allow nothing
+    return false unless @person
+
+    # If everyone can see this model, then deal with the simple case
+    return true if @model.visibility.short_form == 'a'
+
+    # If only the author can see this model, then deal with the simple case
+    # Note that the "user" permission works for anyone who has already submitted
+    # a version to this model.  Otherwise, things get a bit sticky.  I think.
+    if @model.visibility.short_form == 'u' and @model.people.member?(@person)
+      logger.warn "Visiblity permission is 'u' and person '#{@person}' is in the member list.  Allowing."
+      return true
+    end
+
+    # If only the group can see this model, then get the model's group, and
+    # determine if @person is a member of the group.
+    if @model.visibility.short_form == 'g' and @model.group.members.member?(@person)
+      logger.warn "Visiblity permission is 'g' and person '#{@person}' is a member of group '#{@model.group.name}'.  Allowing."
+      return true
+    end
+
+    flash[:notice] = "You do not have permission to view this model."
+    redirect_to :controller => "account", :action => "login"
+    return false
+  end
+
+  def check_changeability_permissions
+    logger.warn "Checking changeability permissions for model '#{@model.to_yaml}' and person '#{@person.to_yaml}'"
+
+    # This only applies if the node is a model
+    return true unless @node.is_model?
+
+    # If there's no model, then allow everything
+    return true unless @model
+
+    # If there's no person, then allow nothing
+    return false unless @person
+
+    # If everyone can see this model, then deal with the simple case
+    return true if @model.changeability.short_form == 'a'
+
+    # If only the author can see this model, then deal with the simple case
+    # Note that the "user" permission works for anyone who has already submitted
+    # a version to this model.  Otherwise, things get a bit sticky.  I think.
+    return true if @model.changeability.short_form == 'u' and
+      @model.people.member?(@person)
+
+    # If only the group can see this model, then get the model's group, and
+    # determine if @person is a member of the group.
+    return true if @model.changeability.short_form == 'g' and
+      @model.group.members.member?(@person)
+
+    return false
+  end
+
+
 end
