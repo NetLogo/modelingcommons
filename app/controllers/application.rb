@@ -97,6 +97,12 @@ class ApplicationController < ActionController::Base
   end
 
   def check_changeability_permissions
+    if @model.nil?
+      if params[:parent_node_id]
+        @model = Node.find(params[:parent_node_id])
+      end
+    end
+
     logger.warn "Checking changeability permissions for model '#{@model.to_yaml}' and person '#{@person.to_yaml}'"
 
     # This only applies if the node is a model

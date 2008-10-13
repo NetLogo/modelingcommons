@@ -221,6 +221,7 @@ class UploadController < ApplicationController
     node_type_id = params[:new_document][:node_type]
     filename = params[:new_document][:uploaded_document].original_filename
 
+
     Node.transaction do
 
       # Grab this node if it exists, or create it if it doesn't
