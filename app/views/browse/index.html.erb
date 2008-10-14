@@ -27,7 +27,7 @@
 <h2>Other people's questions</h2>
 <ul>
   <% @postings.each do |posting| %>
-  <li><%= link_to posting.title, :controller => "browse", :action => "view_one_model", :id => posting.node.id %></li>
+  <li><%= link_to posting.title, :controller => "browse", :action => "one_model", :id => posting.node.id %></li>
   <% end %>
 </ul>
 
