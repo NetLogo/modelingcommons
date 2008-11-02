@@ -17,17 +17,16 @@
 </head>
 
 <body>
-
 <div id="login-bar">
 <b><%= link_to_unless_current "Modeling Commons Home", :controller => "browse", :action => "index" %></b> &bull;
 <%= link_to_unless_current "News", :controller => "browse", :action => "news" %> &bull;
 <% if @person %>
-    Logged in as <%= link_to_unless_current @person.fullname, :controller => "account", :action => "mypage" %>
+    Logged in as <%= link_to_unless_current @person.fullname, :controller => "account", :action => "mypage" %> (<%= link_to_unless_current "Logout", :controller => "account", :action => "logout" %>)
+
     <% if @person.administrator %>
-    &bull; <%= link_to_unless_current "Admin", :controller => "admin", :action => "index" %>
+    (<%= link_to_unless_current "Admin", :controller => "admin", :action => "index" %>)
     <% end %>
 
-    &bull; <%= link_to_unless_current "Logout", :controller => "account", :action => "logout" %>
     &bull; <%= link_to_unless_current "Upload a model", :controller => "upload", :action => "new_model" %>
     &bull; <%= mail_to "reuven@lerner.co.il", "Report a bug" %>
 
@@ -46,13 +45,14 @@
 </div>
 
 <h1><%= @title -%></h1>
+    <%= yield :layout %>
+
 <% if flash[:notice] -%>
     <div id="flash-notice"><%= flash[:notice] -%></div>
     <script type="text/javascript">
-        new Effect.Highlight('flash-notice', {duration: 5});
+        new Effect.Fade('flash-notice', {duration: 5});
     </script>
 <% end -%>
-    <%= yield :layout %>
 </body>
 
 </html>

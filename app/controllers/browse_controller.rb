@@ -152,16 +152,16 @@ class BrowseController < ApplicationController
                                :order => 'name')
 
     # Get all of the versions
-    @tsearch_results =
-      NodeVersion.find_by_tsearch(@original_search_term,
-                                  :order => 'tsearch_rank DESC').map{|nv| nv.parent}.uniq
+#     @tsearch_results =
+#       NodeVersion.find_by_tsearch(@original_search_term,
+#                                   :order => 'tsearch_rank DESC').map{|nv| nv.parent}.uniq
 
-    @info_match_models = @tsearch_results.map{|n| n.info_tab}
+    # @info_match_models = @tsearch_results.map{|n| n.info_tab}
 
     @author_match_models =
       Node.models.find_all {|m| m.people.map {|pid| Person.find(pid).fullname}.join(" ").downcase.index(@original_search_term.downcase)}
 
-    @procedures_match_models = @tsearch_results.map{|n| n.info_tab}
+    # @procedures_match_models = @tsearch_results.map{|n| n.info_tab}
 
     @tag_match_models =
       Node.models.find_all {|m| m.tags.map { |t| t.name}.join(' ').downcase.index(@original_search_term.downcase)}

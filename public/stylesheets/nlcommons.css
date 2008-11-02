@@ -16,33 +16,32 @@ body {
 }
 
 #flash-notice {
-    position: relative;
-    width: 700px;
+    position: absolute;
+    top: 200px;
     margin: 10px;
     background: #000;
     color: #FFF;
-    border: 1px solid #F00;
-    font-style: bold;
+    border: 2px solid #F00;
 }
 
 #navbar-search-form {
     display: inline;
 }
 
-h1, h2, h3 {
+#login-bar, h1, h2, h3, #flash-notice {
     font-family: Optima, sans-serif;
 }
 
-h1 {
-    font-size: 15px;
+h1, #flash-notice {
+    font-size: 21px;
 }
 
 h2 {
     font-size: 17px;
 }
 
-h3 {
-    font-size: 19px;
+h3, #login-bar {
+    font-size: 15px;
 }
 
 /* ------------------------------------------------------------ */
@@ -64,6 +63,7 @@ div ul.subsection_tabs li.tab {
     float: left;
     margin-right: 7px;
     text-align: center;
+    border: 2px solid 000;
 }
 
 div ul.subsection_tabs li.tab a {
