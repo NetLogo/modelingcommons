@@ -6,7 +6,7 @@ require 'diff/lcs/hunk'
 class BrowseController < ApplicationController
 
   before_filter :require_login, :except => [:model_contents, :one_applet]
-  before_filter :get_model_from_id_param, :except => [:index, :list_models, :search, :search_action, :news, :one_node, :create_group]
+  before_filter :get_model_from_id_param, :except => [:index, :list_models, :search, :search_action, :news, :one_node, :create_group, :whats_new]
   before_filter :check_visibility_permissions, :only => [:one_model, :model_contents, :one_applet ]
   before_filter :check_changeability_permissions, :only => [:revert_model]
 
@@ -151,12 +151,17 @@ class BrowseController < ApplicationController
                                :conditions => ["name ilike ? ", search_term],
                                :order => 'name')
 
-    # @info_match_models = Node.models.find_all {|m| m.info_tab and m.info_tab.downcase.index(@original_search_term.downcase)}
+    # Get all of the versions
+    @tsearch_results =
+      NodeVersion.find_by_tsearch(@original_search_term,
+                                  :order => 'tsearch_rank DESC').map{|nv| nv.parent}.uniq
+
+    @info_match_models = @tsearch_results.map{|n| n.info_tab}
 
     @author_match_models =
       Node.models.find_all {|m| m.people.map {|pid| Person.find(pid).fullname}.join(" ").downcase.index(@original_search_term.downcase)}
 
-    #    @procedures_match_models = Node.models.find_all {|m| m.procedures_tab and m.procedures_tab.downcase.index(@original_search_term.downcase)}
+    @procedures_match_models = @tsearch_results.map{|n| n.info_tab}
 
     @tag_match_models =
       Node.models.find_all {|m| m.tags.map { |t| t.name}.join(' ').downcase.index(@original_search_term.downcase)}
@@ -222,6 +227,29 @@ class BrowseController < ApplicationController
 
     redirect_to :back
   end
+
+  def whats_new
+    @recent_members = Person.find(:all,
+                                  :order => 'created_at DESC',
+                                  :limit => 10)
+
+    @recent_models = Node.models.find(:all,
+                                      :order => 'created_at DESC',
+                                      :limit => 10)
+
+    @updated_models = Node.models.find(:all,
+                                       :order => 'updated_at DESC',
+                                       :limit => 10)
+
+    @recent_postings = Posting.find(:all,
+                                    :order => 'created_at DESC',
+                                    :limit => 10)
+
+    @recent_tags = Tag.find(:all, :order => 'created_at DESC', :limit => 10)
+    @recent_tagged_models = TaggedNode.find(:all, :order => 'created_at DESC', :limit => 10)
+  end
+
+
 
   # ------------------------------------------------------------
   # Below here is PRIVATE!

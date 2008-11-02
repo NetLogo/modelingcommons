@@ -1,5 +1,7 @@
 body {
     background: #abcdef;
+    font-family: Times, serif;
+    font-size: 13px;
 }
 
 #login-bar {
@@ -30,126 +32,55 @@ h1, h2, h3 {
     font-family: Optima, sans-serif;
 }
 
-
-/* one_model page tabs
-   --------------------*/
-#navigation_tabs ul.subsection_tabs {
-    list-style:none;
-    margin:0 0 5px 0;
-    padding:0;
-    clear:both;
-    border-bottom:1px solid #ccc;
-    height:20px;
-    clear:both;
+h1 {
+    font-size: 15px;
 }
 
-#navigation_tabs ul.subsection_tabs li.tab {
-    float:left;
-    margin-right:7px;
-    text-align:center;
+h2 {
+    font-size: 17px;
 }
 
-#navigation_tabs ul.subsection_tabs li.tab a {
-    display:block;
-    height:20px;
-    padding:0 6px 0 6px;
-    background-color:#fff;
-    color:#666;
-    width:80px;
+h3 {
+    font-size: 19px;
 }
 
-#navigation_tabs ul.subsection_tabs li.tab a:hover {
-    color:#666;
+/* ------------------------------------------------------------ */
+/* Tabs */
+/* ------------------------------------------------------------ */
+
+div ul.subsection_tabs {
+    clear: both;
+    height: 10px;
+    list-style: none;
+    margin-left: -3em;
 }
 
-#navigation_tabs ul.subsection_tabs li.tab a.active {
-    background-color:#ddd;
+#model_tabs ul.subsection_tabs, #group_tabs ul.subsection_tabs {
+    margin-left: 10px;
 }
 
-#navigation_tabs ul.subsection_tabs li.source_code {
-    float:right;
+div ul.subsection_tabs li.tab {
+    float: left;
+    margin-right: 7px;
+    text-align: center;
 }
 
-/* View-model (subsection on one_model page) tabs
-   --------------------*/
-#model_tabs ul.subsection_tabs {
-    list-style:none;
-    margin:0 0 5px 0;
-    padding:0;
-    clear:both;
-    border-bottom:1px solid #ccc;
-    height:20px;
-    clear:both;
-    position: relative;
-    left: 20px;
+div ul.subsection_tabs li.tab a {
+    background-color: #fff;
+    color: #666;
+    display: block;
+    font-family: Optima, sans-serif;
+    height: 20px;
+    text-decoration: none;
+    width: 80px;
 }
 
-#model_tabs ul.subsection_tabs li.tab {
-    float:left;
-    margin-right:7px;
-    text-align:center;
+div ul.subsection_tabs li.tab a.active {
+    color: #f00;
+    background-color: #ddd;
 }
 
-#model_tabs ul.subsection_tabs li.tab a {
-    display:block;
-    height:20px;
-    padding:0 6px 0 6px;
-    background-color:#fff;
-    color:#666;
-    width:80px;
+div ul.subsection_tabs li.tab a:hover {
+    color: #fff;
+    background-color: #666;
 }
-
-#model_tabs ul.subsection_tabs li.tab a:hover {
-    color:#666;
-}
-
-#model_tabs ul.subsection_tabs li.tab a.active {
-    background-color:#ddd;
-}
-
-#model_tabs ul.subsection_tabs li.source_code {
-    float:right;
-}
-
-
-/* View-model (subsection on one_model page) tabs
-   --------------------*/
-#group_tabs ul.subsection_tabs {
-    list-style:none;
-    margin:0 0 5px 0;
-    padding:0;
-    clear:both;
-    border-bottom:1px solid #ccc;
-    height:20px;
-    clear:both;
-    position: relative;
-    left: 20px;
-}
-
-#group_tabs ul.subsection_tabs li.tab {
-    float:left;
-    margin-right:7px;
-    text-align:center;
-}
-
-#group_tabs ul.subsection_tabs li.tab a {
-    display:block;
-    height:20px;
-    padding:0 6px 0 6px;
-    background-color:#fff;
-    color:#666;
-    width:80px;
-}
-
-#group_tabs ul.subsection_tabs li.tab a:hover {
-    color:#666;
-}
-
-#group_tabs ul.subsection_tabs li.tab a.active {
-    background-color:#ddd;
-}
-
-#group_tabs ul.subsection_tabs li.source_code {
-    float:right;
-}
-

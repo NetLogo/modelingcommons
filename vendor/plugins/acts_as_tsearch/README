@@ -1,0 +1,40 @@
+ActsAsTsearch
+=============
+
+Acts_as_tsearch is a plugin for Ruby on Rails which makes it simple to implement scalable, full text search for Rails using PostgreSQL as your database. It uses the included Full Text Search engine of PostgreSQL but wraps it with a familiar 'acts_as' implementation for easy use.
+
+
+Lots of documentation on the sites Google code page:  http://code.google.com/p/acts-as-tsearch/
+
+Preparing your DB for TSearch: http://code.google.com/p/acts-as-tsearch/wiki/PreparingYourPostgreSQLDatabase
+
+Quick Start:  http://code.google.com/p/acts-as-tsearch/wiki/QuickStart
+
+acts_as_tsearch:  http://code.google.com/p/acts-as-tsearch/wiki/ActsAsTsearchMethod
+
+find_by_tsearch: http://code.google.com/p/acts-as-tsearch/wiki/FindByTsearchMethod
+
+Migrations: http://code.google.com/p/acts-as-tsearch/wiki/Migrations
+
+New Group: http://groups.google.com/group/acts_as_tsearch
+
+Integrated Full Text Search in PostgreSQL 8.3: http://www.postgresql.org/docs/8.3/static/textsearch.html
+TSearch V2 Documentation for PostgreSQL < 8.2: http://www.sai.msu.su/~megera/postgres/gist/tsearch/V2/
+
+Agile Web Dev page: http://www.agilewebdevelopment.com/plugins/acts_as_tsearch
+
+Testing: http://code.google.com/p/acts-as-tsearch/wiki/Testing
+
+
+Usage of git repository with Postgres 8.3
+=========================================
+
+Instead of the original step "Preparing your DB for TSearch" you only have to add a text search configuration 'default':
+
+  CREATE TEXT SEARCH CONFIGURATION public.default ( COPY = pg_catalog.english )
+
+Adding the plugin:
+
+  ./script/plugin install git://github.com/pka/acts_as_tsearch.git
+
+And then follow the quick start tutorial.

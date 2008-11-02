@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20081013052347) do
+ActiveRecord::Schema.define(:version => 20081102075512) do
 
   create_table "groups", :force => true do |t|
     t.string   "name"
@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(:version => 20081013052347) do
   end
 
   add_index "memberships", ["group_id"], :name => "index_memberships_on_group_id"
-  add_index "memberships", ["group_id", "person_id"], :name => "index_memberships_on_person_id_and_group_id", :unique => true
+  add_index "memberships", ["person_id", "group_id"], :name => "index_memberships_on_person_id_and_group_id", :unique => true
 
   create_table "news_items", :force => true do |t|
     t.string   "title"
@@ -69,13 +69,14 @@ ActiveRecord::Schema.define(:version => 20081013052347) do
   add_index "node_types", ["name"], :name => "index_node_types_on_name", :unique => true
 
   create_table "node_versions", :force => true do |t|
-    t.integer  "node_id",      :null => false
+    t.integer  "node_id",                     :null => false
     t.integer  "person_id"
     t.text     "old_contents"
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.binary   "contents"
+    t.string   "vectors",      :limit => nil
   end
 
   create_table "nodes", :force => true do |t|
@@ -98,11 +99,13 @@ ActiveRecord::Schema.define(:version => 20081013052347) do
   add_index "nodes", ["visibility_id"], :name => "index_nodes_on_visibility_id"
 
   create_table "people", :force => true do |t|
-    t.string  "email_address"
-    t.string  "first_name"
-    t.string  "last_name"
-    t.string  "password"
-    t.boolean "administrator"
+    t.string   "email_address"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "password"
+    t.boolean  "administrator"
+    t.datetime "created_at"
+    t.datetime "modified_at"
   end
 
   add_index "people", ["email_address"], :name => "index_people_on_email_address"

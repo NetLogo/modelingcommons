@@ -5,41 +5,41 @@
       <li class="tab"><a id="related-tab" href="#related-div">Related</a></li>
       <li class="tab"><a id="associated-files-tab" href="#associated-files-div">Files</a></li>
       <li class="tab"><a id="procedures-tab" href="#procedures-div">Procedures</a></li>
-      <li class="tab"><a id="gui-tab" href="#gui-div">GUI (textual)</a></li>
+      <li class="tab"><a id="gui-tab" href="#gui-div">GUI</a></li>
       <li class="tab"><a id="applet-tab" href="#applet-div">Applet</a></li>
     </ul>
   </div>
 
   <div id="related-div" class="model-tab" style="display:none;">
-    <% if @model.parent.nil? %>
+    <% if @model.parent.nil? -%>
     <p>No parent node</p>
-    <% else %>
-    <p><b>Parent:</b> <%= link_to @model.parent.name, :controller => 'browse', :action => 'one_model', :id => @model.parent.id  %></p>
-    <% end %>
+    <% else -%>
+    <p><b>Parent:</b> <%= link_to @model.parent.name, :controller => 'browse', :action => 'one_model', :id => @model.parent.id  -%></p>
+    <% end -%>
 
-    <% if @model.models.empty? %>
+    <% if @model.models.empty? -%>
     <p>No child nodes</p>
-    <% else %>
+    <% else -%>
     <h3>Children:</h3>
     <ul>
-      <% @model.models.each do |child| %>
-      <li><%= link_to child.name, :controller => 'browse', :action => 'one_model', :id => child.id  %></li>
-      <% end %>
+      <% @model.models.each do |child| -%>
+      <li><%= link_to child.name, :controller => 'browse', :action => 'one_model', :id => child.id  -%></li>
+      <% end -%>
     </ul>
-    <% end %>
+    <% end -%>
 
   </div>
 
   <div id="associated-files-div" class="model-tab" style="display:none;">
-    <% if @model.files.empty? %>
+    <% if @model.files.empty? -%>
     <p>No files</p>
-    <% else %>
+    <% else -%>
     <ul>
-      <% @model.files.sort_by {|f| f.name}.each do |f| %>
-      <li><%= link_to f.filename, :controller => :browse, :action => :one_node, :id => f.id %> (<%= f.node_type.short_name %>)</li>
-      <% end %>
+      <% @model.files.sort_by {|f| f.name}.each do |f| -%>
+      <li><%= link_to f.filename, :controller => :browse, :action => :one_node, :id => f.id -%> (<%= f.node_type.short_name -%>)</li>
+      <% end -%>
     </ul>
-    <% end %>
+    <% end -%>
 
   </div>
 
@@ -48,15 +48,15 @@
   </div>
 
   <div id="procedures-div" class="model-tab"  style="display:none;">
-    <p><%= @model.procedures_tab(with_html=true) %></p>
+    <p><%= @model.procedures_tab(with_html=true) -%></p>
   </div>
 
   <div id="gui-div" class="model-tab" style="display:none;">
-    <p><%= @model.gui_tab(with_html=true) %></p>
+    <p><%= @model.gui_tab(with_html=true) -%></p>
   </div>
 
   <div id="applet-div" class="model-tab" style="display:none;">
-    <p><%= link_to "Launch applet", {:controller => :browse, :action => :one_applet, :id => @model.id}, {:popup => ["width=#{@model.dimensions[:width]}", "height=#{@model.dimensions[:height] + 150}"] }  %></p>
+    <p><%= link_to "Launch applet", {:controller => :browse, :action => :one_applet, :id => @model.id}, {:popup => ["width=#{@model.dimensions[:width]}", "height=#{@model.dimensions[:height] + 150}"] }  -%></p>
   </div>
 
 </div>
