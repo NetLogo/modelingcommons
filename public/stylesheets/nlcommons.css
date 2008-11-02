@@ -16,7 +16,8 @@ body {
 }
 
 #flash-notice {
-    position: absolute;
+    position: relative;
+    width: 700px;
     margin: 10px;
     background: #000;
     color: #FFF;

@@ -45,16 +45,13 @@
     <% end %>
 </div>
 
-<h1><%= @title %></h1>
-
-<% if flash[:notice] %>
-    <div id="flash-notice"><%= flash[:notice] %></div>
-
+<h1><%= @title -%></h1>
+<% if flash[:notice] -%>
+    <div id="flash-notice"><%= flash[:notice] -%></div>
     <script type="text/javascript">
-        new Effect.Fade('flash-notice', {duration: 5});
+        new Effect.Highlight('flash-notice', {duration: 5});
     </script>
-<% end %>
-
+<% end -%>
     <%= yield :layout %>
 </body>
 
