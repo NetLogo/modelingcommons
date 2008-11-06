@@ -25,20 +25,24 @@ class UploadController < ApplicationController
                            :description => 'Initial upload')
       new_version.reload
 
-      # Create a new preview node, whose parent is the new model node
-      preview_node = Node.create(:node_type_id => 2,
-                                 :parent_id => new_model_node.id,
-                                 :name => "Preview image for #{model_name}")
+      # If we got a preview, then create a node and version for it
+      if not params[:new_model][:uploaded_preview].blank?
 
-      preview_node.reload
+        # Create a new preview node, whose parent is the new model node
+        preview_node = Node.create(:node_type_id => 2,
+                                   :parent_id => new_model_node.id,
+                                   :name => "Preview image for #{model_name}")
 
-      # Create a new version for the preview, and stick the contents in there
-      preview_version =
-        NodeVersion.create(:node_id => preview_node.id,
-                           :person_id => @person.id,
-                           :contents => params[:new_model][:uploaded_preview].read,
-                           :description => 'Initial preview version')
-      new_version.reload
+        preview_node.reload
+
+        # Create a new version for the preview, and stick the contents in there
+        preview_version =
+          NodeVersion.create(:node_id => preview_node.id,
+                             :person_id => @person.id,
+                             :contents => params[:new_model][:uploaded_preview].read,
+                             :description => 'Initial preview version')
+        new_version.reload
+      end
     end
 
     flash[:notice] = "Thanks for uploading the new model called '#{model_name}'."

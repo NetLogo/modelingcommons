@@ -21,7 +21,7 @@ class DiscussionController < ApplicationController
       # Notifications.deliver_updated_discussion(discussion_people, @posting.nlmodel)
     # end
 
-    redirect_to :back
+    redirect_to :back, :anchor => "discuss-div"
   end
 
   def create
