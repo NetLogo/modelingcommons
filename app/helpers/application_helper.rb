@@ -14,4 +14,8 @@ module ApplicationHelper
     link_to(node.name, :controller => :browse, :action => :one_model, :id => node.id)
   end
 
+  def discuss_link(node, text)
+    link_to(text, :controller => :browse, :action => :one_model, :id => node.id, :anchor => 'discuss-div')
+  end
+
 end
