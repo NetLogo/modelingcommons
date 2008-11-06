@@ -16,7 +16,7 @@ module BrowseHelper
       "#{person_link(item.person)} posted a #{question_type} about #{link_to(item.node.name, :controller => :browse, :action => :one_model, :id => item.node.id)} #{distance_of_time_in_words(Time.now, item.created_at)} ago."
 
     elsif item.is_a?(Person)
-      "#{person_link(item)} registered on the Modeling Commons #{distance_of_time_in_words(Time.now, person.created_at)}.  Welcome, #{item.first_name}!"
+      "#{person_link(item)} registered on the Modeling Commons #{distance_of_time_in_words(Time.now, item.created_at)}.  Welcome, #{item.first_name}!"
 
     else
       "#{item.class.to_s}, #{distance_of_time_in_words(Time.now, item.created_at)} ago"
