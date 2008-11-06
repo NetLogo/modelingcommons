@@ -108,6 +108,9 @@ class UploadController < ApplicationController
           end
         end
 
+        existing_node.updated_at = Time.now
+        existing_node.save!
+
         flash[:notice] << "Added new node ID '#{clone_child.id}', a cloned child to node #{existing_node.id}. "
         redirect_to :back
         return

@@ -1,45 +1,8 @@
 <% @title = "What's new?" %>
 
-<h2>Newly joined members</h2>
 <ul>
-    <% @recent_members.each do |person| %>
-        <li><%= link_to person.fullname, :controller => :account, :action => :mypage, :id => person.id %> (joined <%= distance_of_time_in_words(Time.now, person.created_at) -%> ago)</li>
+    <% @all_whats_new.each do |item| %>
+        <li><%= whats_new_text(item) %></li>
     <% end %>
 </ul>
 
-<h2>New models</h2>
-<ul>
-    <% @recent_models.each do |model| %>
-        <li><%= link_to model.name, :controller => :browse, :action => :one_model, :id => model.id %> (created <%= distance_of_time_in_words(Time.now, model.created_at) -%> ago) </li>
-    <% end %>
-</ul>
-
-<h2>Model updates</h2>
-<ul>
-    <% @updated_models.each do |model| %>
-        <li><%= link_to model.name, :controller => :browse, :action => :one_model, :id => model.id %> (updated <%= distance_of_time_in_words(Time.now, model.updated_at) -%> ago) </li>
-
-    <% end %>
-</ul>
-
-<h2>New postings</h2>
-<ul>
-    <% @recent_postings.each do |posting| %>
-        <li><%= link_to posting.title, :controller => :browse, :action => :one_model, :id => posting.node.id %> by <%= link_to posting.person.fullname, :controller => :account, :action => :mypage, :id => posting.person.id %>, <%= distance_of_time_in_words(Time.now, posting.created_at) -%> ago</li>
-</li>
-    <% end %>
-</ul>
-
-<h2>New tags</h2>
-<ul>
-    <% @recent_tags.each do |tag| %>
-        <li><%= link_to tag.name, :controller => :tags, :action => :one_tag, :id => tag.id %> by <%= link_to tag.person.fullname, :controller => :account, :action => :mypage, :id => tag.person.id %>, <%= distance_of_time_in_words(Time.now, tag.created_at) -%> ago</li>
-    <% end %>
-</ul>
-
-<h2>New tag applications</h2>
-<ul>
-    <% @recent_tagged_models.each do |tn| %>
-        <li><%= link_to tn.tag.name, :controller => :tags, :action => :one_tag, :id => tn.tag.id %> by <%= link_to tn.person.fullname, :controller => :account, :action => :mypage, :id => tn.person.id %>, <%= distance_of_time_in_words(Time.now, tn.created_at) -%> ago</li>
-    <% end %>
-</ul>

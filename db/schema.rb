@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20081102075512) do
+ActiveRecord::Schema.define(:version => 20081106131322) do
 
   create_table "groups", :force => true do |t|
     t.string   "name"
@@ -69,15 +69,17 @@ ActiveRecord::Schema.define(:version => 20081102075512) do
   add_index "node_types", ["name"], :name => "index_node_types_on_name", :unique => true
 
   create_table "node_versions", :force => true do |t|
-    t.integer  "node_id",                     :null => false
+    t.integer  "node_id",      :null => false
     t.integer  "person_id"
     t.text     "old_contents"
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.binary   "contents"
-    t.string   "vectors",      :limit => nil
+    t.text     "vectors"
   end
+
+  add_index "node_versions", ["vectors"], :name => "node_versions_fts_vectors_index"
 
   create_table "nodes", :force => true do |t|
     t.integer  "node_type_id",                    :null => false
@@ -105,7 +107,7 @@ ActiveRecord::Schema.define(:version => 20081102075512) do
     t.string   "password"
     t.boolean  "administrator"
     t.datetime "created_at"
-    t.datetime "modified_at"
+    t.datetime "updated_at"
   end
 
   add_index "people", ["email_address"], :name => "index_people_on_email_address"

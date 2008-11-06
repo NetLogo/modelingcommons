@@ -152,9 +152,9 @@ class BrowseController < ApplicationController
                                :order => 'name')
 
     # Get all of the versions
-#     @tsearch_results =
-#       NodeVersion.find_by_tsearch(@original_search_term,
-#                                   :order => 'tsearch_rank DESC').map{|nv| nv.parent}.uniq
+    #     @tsearch_results =
+    #       NodeVersion.find_by_tsearch(@original_search_term,
+    #                                   :order => 'tsearch_rank DESC').map{|nv| nv.parent}.uniq
 
     # @info_match_models = @tsearch_results.map{|n| n.info_tab}
 
@@ -231,22 +231,29 @@ class BrowseController < ApplicationController
   def whats_new
     @recent_members = Person.find(:all,
                                   :order => 'created_at DESC',
-                                  :limit => 10)
+                                  :conditions => ["created_at >= ?", 1.week.ago ])
 
     @recent_models = Node.models.find(:all,
                                       :order => 'created_at DESC',
-                                      :limit => 10)
+                                      :conditions => ["created_at >= ?", 1.week.ago ])
 
     @updated_models = Node.models.find(:all,
                                        :order => 'updated_at DESC',
-                                       :limit => 10)
+                                       :conditions => ["created_at >= ?", 1.week.ago ])
 
     @recent_postings = Posting.find(:all,
                                     :order => 'created_at DESC',
-                                    :limit => 10)
+                                    :conditions => ["created_at >= ?", 1.week.ago ])
 
-    @recent_tags = Tag.find(:all, :order => 'created_at DESC', :limit => 10)
-    @recent_tagged_models = TaggedNode.find(:all, :order => 'created_at DESC', :limit => 10)
+    @recent_tags = Tag.find(:all, :order => 'created_at DESC',
+                            :conditions => ["created_at >= ?", 1.week.ago ])
+
+    @recent_tagged_models = TaggedNode.find(:all, :order => 'created_at DESC',
+                                            :conditions => ["created_at >= ?", 1.week.ago ])
+
+    @all_whats_new = [@recent_members, @recent_models, @updated_models, @recent_postings,
+                      @recent_tags, @recent_tagged_models].flatten.sort_by {|n| n.updated_at}.reverse
+
   end
 
 
