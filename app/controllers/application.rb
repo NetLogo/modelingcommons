@@ -100,9 +100,20 @@ class ApplicationController < ActionController::Base
 
   def check_changeability_permissions
     if @model.nil?
-      if params[:new_document] and params[:new_document][:node_id]
-        @model = Node.find(params[:new_document][:node_id])
+
+      if params[:new_document] and params[:new_document][:parent_node_id]
+        @model = Node.find(params[:new_document][:parent_node_id])
+
+      elsif params[:new_version] and params[:new_version][:node_id]
+        @model = Node.find(params[:new_version][:node_id])
       end
+
+    end
+
+    if @model.nil?
+      logger.warn "Error -- model is nil.  Cannot upload."
+      flash[:notice] = "Error detected; cannot upload.  Please notify the site administrator."
+      return nil
     end
 
     logger.warn "Checking changeability permissions for model '#{@model.to_yaml}' and person '#{@person.to_yaml}'"

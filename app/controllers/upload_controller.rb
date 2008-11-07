@@ -181,12 +181,10 @@ class UploadController < ApplicationController
 
   # Add a document
   def add_document
-
     parent_node_id = params[:new_document][:parent_node_id]
     description = params[:new_document][:description]
     node_type_id = params[:new_document][:node_type]
     filename = params[:new_document][:uploaded_document].original_filename
-
 
     Node.transaction do
 
