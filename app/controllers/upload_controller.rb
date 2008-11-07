@@ -169,7 +169,7 @@ class UploadController < ApplicationController
     model_people.delete_if {|p| p == @person}
 
     if not model_people.empty?
-      Notifications.deliver_modified_model(model_people, @version.node)
+      Notifications.deliver_modified_model(model_people, new_version.node)
     end
 
     flash[:notice] << "Successfully saved a new version, overwriting the previous one."
