@@ -28,11 +28,11 @@ class Notifications < ActionMailer::Base
     @content_type = 'text/html'
   end
 
-  def modified_model(people, nlmodel)
-    @recipients = people.map{|p| p.email_address}
+  def modified_model(people, node)
+    @recipients = node.people
     @from = "nlcommons@monk.ccl.northwestern.edu"
     @subject    = 'Model update'
-    @body[:nlmodel] = nlmodel
+    @body[:nlmodel] = node
     @sent_on    = Time.now()
     @content_type = 'text/html'
   end
