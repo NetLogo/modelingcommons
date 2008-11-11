@@ -57,10 +57,6 @@ class BrowseController < ApplicationController
       return
     end
 
-    #xyz = Node.find(params[:id])
-    #render :text => xyz.children.last.node_versions.sort { |n| n.created_at}.last.contents
-    #return
-
     if @model.latest_preview.empty?
       redirect_to "/images/no-preview.png"
       return
