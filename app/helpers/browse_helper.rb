@@ -28,7 +28,7 @@ module BrowseHelper
       output << "#{person_link(item.person)} posted a #{discuss_link(item.node, question_type)} about #{link_to(item.node.name, :controller => :browse, :action => :one_model, :id => item.node.id)} #{distance_of_time_in_words(Time.now, item.created_at)} ago."
 
     elsif item.is_a?(Person)
-      this_user_did_it = true if item.person == @person
+      this_user_did_it = true if item == @person
 
       output << "#{person_link(item)} joined the Modeling Commons #{distance_of_time_in_words(Time.now, item.created_at)} ago.  Welcome, #{item.first_name}!"
 
