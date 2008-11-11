@@ -28,7 +28,7 @@
 <h2>Other people's questions</h2>
 <ul>
   <% @postings.each do |posting| %>
-  <li><%= link_to posting.title, :controller => "browse", :action => "one_model", :id => posting.node.id %> by <%= posting.person.fullname %> on <%= distance_of_time_in_words(Time.now, posting.created_at) %></li>
+  <li><%= link_to posting.title, :controller => "browse", :action => "one_model", :id => posting.node.id %> by <%= person_link(posting.person) %>, <%= distance_of_time_in_words(Time.now, posting.created_at) %> ago</li>
   <% end %>
 </ul>
 
