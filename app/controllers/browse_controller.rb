@@ -62,7 +62,8 @@ class BrowseController < ApplicationController
     #return
 
     if @model.latest_preview.empty?
-      render :text => "This model has no preview image"
+      redirect_to "/images/no-preview.png"
+      return
     else
       send_data(@model.latest_preview, :type => 'image/png', :disposition => 'inline')
     end
