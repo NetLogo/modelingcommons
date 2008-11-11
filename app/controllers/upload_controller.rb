@@ -52,7 +52,7 @@ class UploadController < ApplicationController
     # Make sure that the user chose a fork method
     if params[:fork].blank?
       flash[:notice] = "Please select an action."
-      redirect_to :back
+      redirect_to :back, :anchor => "upload-div"
       return
     end
 
@@ -116,7 +116,7 @@ class UploadController < ApplicationController
         existing_node.save!
 
         flash[:notice] << "Added new node ID '#{clone_child.id}', a cloned child to node #{existing_node.id}. "
-        redirect_to :back
+        redirect_to :back, :anchor => "upload-div"
         return
       end
     end
@@ -125,7 +125,7 @@ class UploadController < ApplicationController
     if params[:new_version].blank?
       logger.warn "Blank new_version -- returning"
       flash[:notice] = "new_version was not set in form -- try again?"
-      redirect_to :back
+      redirect_to :back, :anchor => "upload-div"
     end
 
     # There are four possibilities:
@@ -173,7 +173,7 @@ class UploadController < ApplicationController
     end
 
     flash[:notice] << "Successfully saved a new version, overwriting the previous one."
-    redirect_to :back
+    redirect_to :back, :anchor => "upload-div"
 
   end
 
@@ -206,7 +206,7 @@ class UploadController < ApplicationController
                          :description => description)
 
       flash[:notice] = "Successfully added file!"
-      redirect_to :back
+      redirect_to :back, :anchor => "upload-div"
     end
   end
 

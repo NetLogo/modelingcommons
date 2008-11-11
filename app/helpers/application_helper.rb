@@ -7,7 +7,12 @@ module ApplicationHelper
   end
 
   def person_link(person)
-    link_to(person.fullname, :controller => :account, :action => :mypage, :id => person.id)
+    if person == @person
+      link_to('You', :controller => :account, :action => :mypage, :id => person.id)
+    else
+      link_to(person.fullname, :controller => :account, :action => :mypage, :id => person.id)
+    end
+
   end
 
   def model_link(node)

@@ -28,3 +28,7 @@ img#preview-image  {
     color: #282;
     font-style: italic;
 }
+
+.highlight {
+    background-color: #ff0;
+}

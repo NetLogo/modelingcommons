@@ -117,7 +117,7 @@ class BrowseController < ApplicationController
     version_id = params[:version]
     if version_id.blank?
       flash[:notice] = "Sorry, but you must specify a version to which you want to revert."
-      redirect_to :back
+      redirect_to :back, :anchor => "history-div"
       return
     end
 
@@ -125,7 +125,7 @@ class BrowseController < ApplicationController
     version = NodeVersion.find(version_id)
     if version == @model.current_version
       flash[:notice] = "That is already the current version!"
-      redirect_to :back
+      redirect_to :back, :anchor => "history-div"
       return
     end
 
@@ -140,7 +140,7 @@ class BrowseController < ApplicationController
       flash[:notice] = "Error reverting the model; nothing was changed."
     end
 
-    redirect_to :back
+    redirect_to :back, :anchor => "history-div"
   end
 
   def search_action
@@ -225,7 +225,7 @@ class BrowseController < ApplicationController
       end
     end
 
-    redirect_to :back
+    redirect_to :back, :anchor => "permissions-div"
   end
 
   def whats_new
