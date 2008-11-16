@@ -11,10 +11,12 @@
 
   <% node.postings.sort_by {|posting| posting.created_at}.each do |posting| %>
   <h3><%= h(posting.title) %></h3>
-  <span>by <%= link_to h(posting.person.fullname), :controller => "account", :action => "mypage", :id => posting.person.id %>, at <%= distance_of_time_in_words(Time.now, posting.created_at) -%> ago </span><br />
+  <span>by <%= link_to h(posting.person.fullname), :controller => "account", :action => "mypage", :id => posting.person.id, :anchor => 'discuss-div' %>, <%= distance_of_time_in_words(Time.now, posting.created_at) -%> ago </span><br />
   <span><%= h(posting.body) %></span><br />
   <br />
   <% end %>
+
+<hr />
 
   <table>
     <% form_for(:new_posting,
