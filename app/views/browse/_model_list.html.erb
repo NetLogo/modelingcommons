@@ -10,7 +10,7 @@
     <% model_list.each do |model| %>
 
         <tr>
-            <td><%= link_to model.name, :controller => "browse", :action => "one_model", :id => model.id %> (ID <%= model.id %>)</td>
+            <td><%= link_to model.name, :controller => "browse", :action => "one_model", :id => model.id %></td>
             <td><%= model.tags.sort_by {|t| t.name}.map {|t| link_to t.name, :controller => :tags, :action => :one_tag, :id => t.id}.uniq.join(', ') %></td>
             <td><%= model.node_versions.first.updated_at %></td>
             <td>
