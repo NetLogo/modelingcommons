@@ -34,6 +34,7 @@ img#preview-image  {
 }
 
 .one-model-div {
+    background-color: #fff;
     display: none;
     clear: left;
 }

@@ -56,7 +56,8 @@ class ApplicationController < ActionController::Base
                         :params => params.to_yaml,
                         :session => session.to_yaml,
                         :cookies => cookies.to_yaml,
-                        :flash => flash.to_yaml)
+                        :flash => flash.to_yaml,
+                        :referrer => request.env['HTTP_REFERER'])
   end
 
   def get_node_types
