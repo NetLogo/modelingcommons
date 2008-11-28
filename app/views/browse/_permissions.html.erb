@@ -13,6 +13,10 @@
     <td>
       <table>
         <tr>
+          <td><%= radio_button_tag 'read_permission', 's', @model.visibility.short_form == 's' %></td>
+          <td><label for="search_permission_a">This model shows up in search, but is otherwise hidden.</label></td>
+        </tr>
+        <tr>
           <td><%= radio_button_tag 'read_permission', 'a', @model.visibility.short_form == 'a' %></td>
           <td><label for="read_permission_a">Everyone can see this model.</label></td>
         </tr>

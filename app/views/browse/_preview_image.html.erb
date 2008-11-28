@@ -1,0 +1,5 @@
+<% if @model.previews.empty? %>
+No preview image
+<% else %>
+<img id="preview-image" align="right" src="<%= url_for :controller => "browse", :action => "display_preview", :id => @model.id %>">
+<% end %>

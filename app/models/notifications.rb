@@ -19,6 +19,15 @@ class Notifications < ActionMailer::Base
     @content_type = 'text/html'
   end
 
+  def password_reminder(person)
+    @recipients = person.email_address
+    @from = "nlcommons@monk.ccl.northwestern.edu"
+    @body[:person] = person
+    @subject    = 'Your password'
+    @sent_on    = Time.now()
+    @content_type = 'text/html'
+  end
+
   def changed_password(person)
     @recipients = person.email_address
     @from = "nlcommons@monk.ccl.northwestern.edu"

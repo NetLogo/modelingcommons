@@ -1,16 +1,70 @@
-<% @title = "Personal page for #{@the_person.first_name} #{@the_person.last_name}" %>
+<% @title = "Welcome back, #{@person.first_name}!" %>
 
-<p><%= link_to "Upload a new model", :controller => "upload", :action => "new_model" %></p>
 
-<h2>Models:</h2>
-<%= render :partial => "person_models", :object => @the_person.models %>
+<div class="news-box">
+  <h2>Your most recent activity</h2>
+</div>
 
-<h2>Postings:</h2>
-<%= render :partial => "person_postings", :object => @the_person.postings %>
+<div class="news-box">
+  <h2>People</h2>
+  <h3>New people</h3>
+  <h3>Activity from others in my groups</h3>
+</div>
 
-<h2>Tags:</h2>
-<ul>
-<% @the_person.tagged_nodes.map {|tm| tm.tag}.uniq.sort_by {|t| t.name}.each do |tag| %>
+<div class="news-box">
+  <h2>Models</h2>
+  <h3>My models</h3>
+  <h3>Activity in my models</h3>
+</div>
+
+<div class="news-box">
+  <h2>Conversations</h2>
+  <h3>Activity in my conversations</h3>
+</div>
+
+<div class="news-box">
+  <h2>Groups</h2>
+  <h3>Manage my groups</h3>
+  <h3>Activity in my groups</h3>
+</div>
+
+<div class="news-box">
+  <h2>Most-viewed models</h2>
+  <ul>
+    <li>One</li>
+    <li>Two</li>
+    <li>Three</li>
+    <li>Four</li>
+    <li>Five</li>
+  </ul>
+</div>
+
+<div class="news-box">
+  <h2>Most-downloaded models</h2>
+  <ul>
+    <li>One</li>
+    <li>Two</li>
+    <li>Three</li>
+    <li>Four</li>
+    <li>Five</li>
+  </ul>
+</div>
+
+<div class="news-box">
+  <h2>All of my models</h2>
+  <%= render :partial => "person_models", :object => @the_person.models %>
+</div>
+
+<div class="news-box">
+  <h2>Postings:</h2>
+  <%= render :partial => "person_postings", :object => @the_person.postings %>
+</div>
+
+<div class="news-box">
+  <h2>Tags:</h2>
+  <ul>
+    <% @the_person.tagged_nodes.map {|tm| tm.tag}.uniq.sort_by {|t| t.name}.each do |tag| %>
     <li><%= link_to tag.name, :controller => "tags", :action => "one_tag", :id => tag.id %></li>
-<% end %>
-</ul>
+    <% end %>
+  </ul>
+</div>

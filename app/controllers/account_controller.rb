@@ -1,6 +1,6 @@
 class AccountController < ApplicationController
 
-  before_filter :require_login, :except => [:new, :create, :login, :login_action]
+  before_filter :require_login, :except => [:new, :create, :login, :login_action, :send_password, :send_password_action]
 
   def new
     @new_person = Person.new
@@ -59,19 +59,19 @@ class AccountController < ApplicationController
   end
 
   def reset_password
-      dictionary_file = File.new('/etc/dictionaries-common/words', 'r')
-      dictionary_file_contents = dictionary_file.read
-      dictionary_words  = dictionary_file_contents.split("\n")
+    dictionary_file = File.new('/etc/dictionaries-common/words', 'r')
+    dictionary_file_contents = dictionary_file.read
+    dictionary_words  = dictionary_file_contents.split("\n")
     dictionary_words.delete_if { |word| word.length > 5 }
 
-      # Create our password
-      word1 = dictionary_words[rand(dictionary_words.length)].strip.downcase
-      number = rand 10000
-      word2 = dictionary_words[rand(dictionary_words.length)].strip.downcase
+    # Create our password
+    word1 = dictionary_words[rand(dictionary_words.length)].strip.downcase
+    number = rand 10000
+    word2 = dictionary_words[rand(dictionary_words.length)].strip.downcase
 
-      new_password = word1 + number.to_s + word2
+    new_password = word1 + number.to_s + word2
 
-      new_password.gsub!(/[^a-z0-9]/, '')
+    new_password.gsub!(/[^a-z0-9]/, '')
 
     @person.password = new_password
     @person.save!
@@ -101,6 +101,31 @@ class AccountController < ApplicationController
         redirect_to :back
       end
     end
+  end
+
+  def send_password_action
+    email_address = params[:email_address]
+
+    if email_address.blank?
+      flash[:notice] = "You must enter an e-mail address to receive a reminder."
+      redirect_to :back
+      return
+    end
+
+    @person = Person.find_by_email_address(email_address)
+
+    if email_address.index('@').nil?
+      flash[:notice] = "Sorry, but '#{email_address}' is not a valid e-mail address.  Please try again."
+      redirect_to :back
+    elsif @person
+      Notifications.deliver_password_reminder(@person)
+      flash[:notice] = "A password reminder was sent to your e-mail address."
+      redirect_to :controller => :account, :action => :login
+    else
+      flash[:notice] = "Sorry, but '#{email_address}' is not listed in our system.  Please register."
+      redirect_to :back
+    end
+
   end
 
 end
