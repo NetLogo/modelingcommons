@@ -34,6 +34,7 @@
 </div>
 
 <div class="left-news-box">
+  <% if @person == @the_person %>
   <h2>Activity in your tags</h2>
   <% else %>
   <h2>Activity in <%= person.first_name %>'s tags</h2>
@@ -52,6 +53,7 @@
     <% @postings.each do |posting| %>
     <% if posting.person != @person %>
     <li><%= link_to posting.title, :controller => "browse", :action => "one_model", :id => posting.node.id %> by <%= person_link(posting.person) %>, <%= distance_of_time_in_words(Time.now, posting.created_at) %> ago</li>
+    <% end %>
     <% end %>
   </ul>
   <% else %>
