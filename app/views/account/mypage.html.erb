@@ -24,7 +24,7 @@
   <% if @person == @the_person %>
   <h2>Activity in your models</h2>
   <% else %>
-  <h2>Activity in <%= person.first_name %>'s models</h2>
+  <h2>Activity in <%= @person.first_name %>'s models</h2>
   <% end %>
   <ul>
     <% @model_events.each do |model| %>
@@ -37,7 +37,7 @@
   <% if @person == @the_person %>
   <h2>Activity in your tags</h2>
   <% else %>
-  <h2>Activity in <%= person.first_name %>'s tags</h2>
+  <h2>Activity in <%= @person.first_name %>'s tags</h2>
   <% end %>
   <ul>
     <% @tag_events.each do |tag| %>
