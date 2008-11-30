@@ -1,5 +1,5 @@
 <div class="file">
     <%= text_field_tag 'new_tag[]',  'Tag name', {:class => 'empty-on-click'} %>
     <%= text_field_tag 'new_comment[]', "(Optional) comment about why this tag is relevant to this model", {:size => 50, :class => 'empty-on-click'} %>
-    <%= link_to_function "remove", "$(this).up('.file').remove()" %>
+    <%= link_to_function "Remove tag field", "$(this).up('.file').remove()" %>
 </div>

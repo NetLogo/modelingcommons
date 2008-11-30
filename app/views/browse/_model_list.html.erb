@@ -10,10 +10,16 @@
     <% model_list.each do |model| %>
 
         <tr>
-            <td><%= link_to model.name, :controller => "browse", :action => "one_model", :id => model.id %></td>
-            <td><%= model.tags.sort_by {|t| t.name}.map {|t| link_to t.name, :controller => :tags, :action => :one_tag, :id => t.id}.uniq.join(', ') %></td>
-            <td><%= model.node_versions.first.updated_at %></td>
-            <td> <img id="preview-image" src="<%= url_for :controller => "browse", :action => "display_preview", :id => @model.id %>"></td>
+            <td><%= link_to model.name, :controller => "browse", :action => "one_model", :id => model.id %><%= render :partial => "preview_image", :locals => {:model => @model} -%></td>
+            <td>
+            <% if model.tags.empty? %>
+               (No tags)
+            <% else %>
+                 <%= model.tags.sort_by {|t| t.name}.map {|t| link_to t.name, :controller => :tags, :action => :one_tag, :id => t.id}.uniq.join(', ') %>
+            <% end %>
+            </td>
+
+            <td><%= distance_of_time_in_words(Time.now, model.node_versions.first.updated_at) %></td>
             <td>
                 <ul>
                     <% model.people.each do |person| %>

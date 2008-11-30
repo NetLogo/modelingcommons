@@ -12,12 +12,13 @@
 <% end -%>
 
 <div id="add-tags">
+  <h2>Add one or more tags:</h2>
   <% form_tag :controller => "tags", :action => :new do |form| -%>
   <%= hidden_field_tag :node_id, @model.id -%>
   <div id="tags">
     <%= render :partial => "add_tag", :locals => {:form => form} -%>
   </div>
-  <p><%= add_tag_link "More tag fields" -%></p>
+  <p><%= add_tag_link "Additional tag fields" -%></p>
   <p><%= submit_tag "Submit tags" -%></p>
   <% end -%>
 </div>

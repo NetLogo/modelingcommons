@@ -1,36 +1,9 @@
 <% @title = "Welcome back, #{@person.first_name}!" %>
 
-
 <p>Manage my groups</p>
+<p><%= link_to "All recent site activity", :controller => :browse, :action => :whats_new %></p>
 
-<div class="news-box">
-  <h2>Your most recent activity</h2>
-</div>
-
-<div class="news-box">
-  <h2>People</h2>
-  <h3>New people</h3>
-  <h3>Activity from others in my groups</h3>
-</div>
-
-<div class="news-box">
-  <h2>Models</h2>
-  <h3>My models</h3>
-  <h3>Activity in my models</h3>
-</div>
-
-<div class="news-box">
-  <h2>Conversations</h2>
-  <h3>Activity in my conversations</h3>
-</div>
-
-<div class="news-box">
-  <h2>Groups</h2>
-  <h3>Manage my groups</h3>
-  <h3>Activity in my groups</h3>
-</div>
-
-<div class="news-box">
+<div id="viewed-models" class="right-news-box">
   <h2>Most-viewed models</h2>
   <ul>
     <li>One</li>
@@ -41,7 +14,7 @@
   </ul>
 </div>
 
-<div class="news-box">
+<div id="downloaded-models" class="right-news-box">
   <h2>Most-downloaded models</h2>
   <ul>
     <li>One</li>
@@ -52,22 +25,37 @@
   </ul>
 </div>
 
-
-<div class="news-box">
-  <h2>All of my models</h2>
-  <%= render :partial => "person_models", :object => @the_person.models %>
-</div>
-
-<div class="news-box">
-  <h2>Postings:</h2>
-  <%= render :partial => "person_postings", :object => @the_person.postings %>
-</div>
-
-<div class="news-box">
-  <h2>Tags:</h2>
+<div class="left-news-box">
+  <h2>Activity in your models</h2>
   <ul>
-    <% @the_person.tagged_nodes.map {|tm| tm.tag}.uniq.sort_by {|t| t.name}.each do |tag| %>
-    <li><%= link_to tag.name, :controller => "tags", :action => "one_tag", :id => tag.id %></li>
+    <% @model_events.each do |model| %>
+        <li><%= whats_new_text(model) %></li>
     <% end %>
   </ul>
 </div>
+
+<div class="left-news-box">
+  <h2>Activity in your tags</h2>
+  <ul>
+    <% @tag_events.each do |tag| %>
+        <li><%= whats_new_text(tag) %></li>
+    <% end %>
+  </ul>
+</div>
+
+<div class="left-news-box">
+  <h2>Questions that you might want to answer</h2>
+  <% if @postings.length >= 1 %>
+     <ul>
+       <% @postings.each do |posting| %>
+       <% if posting.person != @person %>
+       <li><%= link_to posting.title, :controller => "browse", :action => "one_model", :id => posting.node.id %> by <%= person_link(posting.person) %>, <%= distance_of_time_in_words(Time.now, posting.created_at) %> ago</li>
+<% end %>
+<% end %>
+</ul>
+<% else %>
+<p>No questions from other people to answer</p>
+<% end %>
+</div>
+
+

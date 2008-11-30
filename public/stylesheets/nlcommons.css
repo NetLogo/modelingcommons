@@ -109,9 +109,20 @@ div ul.subsection_tabs li.tab a:hover {
     background-color: #666;
 }
 
-.news-box {
+.right-news-box, .left-news-box {
     border: 2px solid #f00;
-    background-color: #3e2;
+    background-color: #fff;
     margin-bottom: 2em;
-    width: 25%;
+    width: 40%;
+}
+
+.right-news-box {
+    position: relative;
+    left: 50%;
+}
+
+.left-news-box {
+    top: -24em;
+    position: relative;
+    left: 0px;
 }

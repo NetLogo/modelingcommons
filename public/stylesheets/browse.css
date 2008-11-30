@@ -37,6 +37,7 @@ img#preview-image  {
     background-color: #fff;
     display: none;
     clear: left;
+    width: 60%;
 }
 
 .one-model-shown-div {

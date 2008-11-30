@@ -55,7 +55,38 @@ class AccountController < ApplicationController
       @the_person = Person.find(params[:id].to_i)
     end
 
-    logger.warn "the_person = '#{@the_person.to_yaml}'"
+    how_new_is_new = 6.months.ago
+
+    @postings = Posting.find(:all,
+                             :conditions => ["is_question = true AND person_id <> ? and created_at >= ?", @the_person.id, how_new_is_new])
+
+    @recent_tags = Tag.find(:all, :order => 'created_at DESC',
+                            :conditions => ["created_at >= ?", how_new_is_new ])
+
+    @recent_tagged_models = TaggedNode.find(:all, :order => 'created_at DESC',
+                                            :conditions => ["created_at >= ?", how_new_is_new ])
+    @tag_events = [@recent_tags, @recent_tagged_models].flatten.sort_by { |t| t.created_at}
+
+
+    # Model updates
+    @recent_models = Node.models.find(:all,
+                                      :order => 'created_at DESC',
+                                      :conditions => ["created_at >= ?", how_new_is_new ])
+
+    @updated_models = Node.models.find(:all,
+                                       :order => 'updated_at DESC',
+                                       :conditions => ["created_at >= ?", how_new_is_new ])
+
+    @model_events = [@recent_models, @recent_tagged_models].flatten.sort_by { |m| m.created_at}
+
+
+    # mode-viewed models
+    @most_viewed = LoggedAction.find(:all, :conditions => "url = '/one_model")
+
+    # mode-downloaded models
+    @most_viewed = LoggedAction.find(:all, :conditions => "url = '/download")
+
+
   end
 
   def reset_password

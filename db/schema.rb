@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20081128000507) do
+ActiveRecord::Schema.define(:version => 20081130071736) do
 
   create_table "groups", :force => true do |t|
     t.string   "name"
@@ -29,9 +29,11 @@ ActiveRecord::Schema.define(:version => 20081128000507) do
     t.text     "cookies"
     t.text     "flash"
     t.text     "referrer"
+    t.integer  "node_id"
   end
 
   add_index "logged_actions", ["ip_address"], :name => "index_logged_actions_on_ip_address"
+  add_index "logged_actions", ["node_id"], :name => "index_logged_actions_on_node_id"
   add_index "logged_actions", ["person_id"], :name => "index_logged_actions_on_person_id"
   add_index "logged_actions", ["referrer"], :name => "index_logged_actions_on_referrer"
   add_index "logged_actions", ["url"], :name => "index_logged_actions_on_url"

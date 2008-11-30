@@ -44,6 +44,12 @@ class ApplicationController < ActionController::Base
       person_id = @person.id
     end
 
+    if @node.nil?
+      node_id = nil
+    else
+      node_id = @node.id
+    end
+
     browser_info = request.env['HTTP_USER_AGENT'] || 'No browser info passed'
     ip_address = request.remote_ip || 'No IP address passed'
 
@@ -57,7 +63,8 @@ class ApplicationController < ActionController::Base
                         :session => session.to_yaml,
                         :cookies => cookies.to_yaml,
                         :flash => flash.to_yaml,
-                        :referrer => request.env['HTTP_REFERER'])
+                        :referrer => request.env['HTTP_REFERER'],
+                        :node_id => node_id)
   end
 
   def get_node_types
