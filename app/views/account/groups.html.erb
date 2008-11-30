@@ -1,0 +1,69 @@
+<div id="your-groups-div" class="group-tab">
+  <h2>Your groups</h2>
+  <% if @person.memberships.length == 0 %>
+  <p>You are not a member of any groups.</p>
+  <% else %>
+  <ul>
+    <% @person.memberships.each do |membership| %>
+    <li><%= membership.group.name %>
+      (<%= link_to "leave this group", :controller => :membership, :action => :leave, :id => membership.id %>)
+    </li>
+    <% end %>
+  </ul>
+  <% end %>
+</div>
+
+<div id="create-group-div" class="group-tab">
+  <h2>Create a group</h2>
+  <% form_tag :controller => "membership", :action => :create_group do |form| %>
+  <%= text_field_tag "group_name" %>
+  <p><%= submit_tag "Create group" %></p>
+  <% end %>
+
+</div>
+
+<div id="manage-groups-div" class="group-tab">
+  <h2>Groups you manage</h2>
+  <% if @person.memberships.length == 0 %>
+  <p>You are not a member of any groups.</p>
+  <% else %>
+  <ul>
+    <% @person.administrated_groups.each do |group| %>
+    <li><%= group.name %></li>
+    <ul>
+      <% group.memberships.each do |membership| %>
+      <li><%= membership.person.fullname -%>
+        <% if membership.status == 'pending' %>
+        (<%= link_to "approve", :controller => :membership, :action => :approve_membership, :id => membership.id %>)
+        <% end %>
+
+        <% if membership.person != @person %>
+        (<%= link_to "remove", :controller => :membership, :action => :leave, :id => membership.id %>)
+        <% if membership.is_administrator? %>
+        (<%= link_to "remove administrator", :controller => :membership, :action => :remove_administrator, :id => membership.id %>)
+        <% else %>
+        (<%= link_to "make administrator", :controller => :membership, :action => :make_administrator, :id => membership.id %>)
+        <% end %>
+        <% end %>
+      </li>
+      <% end %>
+    </ul>
+    <% end %>
+  </ul>
+  <% end %>
+
+  <h2>Invite people to join one of your groups:</h2>
+
+  <% if @person.memberships.length == 0 %>
+  <p>You are not a member of any groups.</p>
+  <% else %>
+
+  <% form_tag :controller => "membership", :action => :invite_people do |form| %>
+  <%= select("group", "id", @person.groups.to_hash) %>
+  <p>E-mail addresses, separated by commas:</p>
+  <p><%= text_area_tag "invitees" %></p>
+  <p><%= submit_tag "Invite users" %></p>
+  <% end %>
+
+  <% end %>
+</div>

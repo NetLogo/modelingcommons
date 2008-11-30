@@ -20,7 +20,7 @@
     <div id="main-menu-div">
       <ul id="main-menu">
         <li><%= link_to_unless_current "Home", :controller => "account", :action => "mypage" %></li>
-<        <li><%= link_to_unless_current "Share", :controller => "upload", :action => "new_model" %></li>
+        <li><%= link_to_unless_current "Share", :controller => "upload", :action => "new_model" %></li>
 
         <li><%= link_to_unless_current "Site news", :controller => "browse", :action => "news" %></li>
 
@@ -32,12 +32,12 @@
 
     <div id="logged-in-as">
       <% if @person %>
-          Logged in as <%= link_to @person.fullname, :controller => :account, :action => :mypage -%>
-          (<%= link_to_unless_current "Logout", :controller => "account", :action => "logout" %>)
+      Logged in as <%= link_to @person.fullname, :controller => :account, :action => :mypage -%>
+      (<%= link_to_unless_current "Logout", :controller => "account", :action => "logout" %>)
 
-          <% if @person.administrator %>
-          <%= link_to_unless_current "Admin", :controller => "admin", :action => "index" %>
-          <% end %>
+      <% if @person.administrator %>
+      <%= link_to_unless_current "Admin", :controller => "admin", :action => "index" %>
+      <% end %>
       <% end %>
     </div>
 

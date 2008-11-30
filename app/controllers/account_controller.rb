@@ -69,22 +69,21 @@ class AccountController < ApplicationController
 
 
     # Model updates
-    @recent_models = Node.models.find(:all,
-                                      :order => 'created_at DESC',
-                                      :conditions => ["created_at >= ?", how_new_is_new ])
+    @recent_models = @the_person.models.select { |m| m.created_at >= how_new_is_new }.sort_by { |m| m.created_at }
 
-    @updated_models = Node.models.find(:all,
-                                       :order => 'updated_at DESC',
-                                       :conditions => ["created_at >= ?", how_new_is_new ])
+    @model_events = @recent_models;
 
-    @model_events = [@recent_models, @recent_tagged_models].flatten.sort_by { |m| m.created_at}
+    #     # mode-viewed models
+    @most_viewed = LoggedAction.count(:conditions => "url ilike '/browse/one_model%' and node_id IS NOT null",
+                                      :group => "node_id",
+                                      :order => "count_all DESC")
+    @most_viewed = @most_viewed.map { |m| [Node.find(m[0]), m[1]]}
 
-
-    # mode-viewed models
-    @most_viewed = LoggedAction.find(:all, :conditions => "url = '/one_model")
-
-    # mode-downloaded models
-    @most_viewed = LoggedAction.find(:all, :conditions => "url = '/download")
+    #     # mode-downloaded models
+    @most_downloaded = LoggedAction.count(:conditions => "url ilike '/browse/download_model%' and node_id IS NOT null",
+                                      :group => "node_id",
+                                      :order => "count_all DESC")
+    @most_downloaded = @most_downloaded.map { |m| [Node.find(m[0]), m[1]]}
 
 
   end

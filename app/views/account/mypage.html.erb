@@ -1,27 +1,22 @@
 <% @title = "Welcome back, #{@person.first_name}!" %>
 
-<p>Manage my groups</p>
-<p><%= link_to "All recent site activity", :controller => :browse, :action => :whats_new %></p>
+<p><%= link_to "Manage my groups", :controller => :account, :action => :groups %> &bull; <%= link_to "All recent site activity", :controller => :browse, :action => :whats_new %></p>
 
 <div id="viewed-models" class="right-news-box">
   <h2>Most-viewed models</h2>
   <ul>
-    <li>One</li>
-    <li>Two</li>
-    <li>Three</li>
-    <li>Four</li>
-    <li>Five</li>
+    <% @most_viewed.each do |model| %>
+        <li><%= link_to model[0].name, :controller => :browse, :action => :one_model, :id => model[0].id %> (<%= model[1] %> times)</li>
+    <% end %>
   </ul>
 </div>
 
 <div id="downloaded-models" class="right-news-box">
   <h2>Most-downloaded models</h2>
   <ul>
-    <li>One</li>
-    <li>Two</li>
-    <li>Three</li>
-    <li>Four</li>
-    <li>Five</li>
+    <% @most_downloaded.each do |model| %>
+        <li><%= link_to model[0].name, :controller => :browse, :action => :one_model, :id => model[0].id %> (<%= model[1] %> times)</li>
+    <% end %>
   </ul>
 </div>
 
