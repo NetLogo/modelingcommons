@@ -1,12 +1,16 @@
-<% @title = "Welcome back, #{@person.first_name}!" %>
+<% @title = "Personal page for #{@the_person.fullname}" %>
 
-<p><%= link_to "Manage my groups", :controller => :account, :action => :groups %> &bull; <%= link_to "All recent site activity", :controller => :browse, :action => :whats_new %></p>
+<p>
+  <% if @person == @the_person %>
+  <%= link_to "Manage my groups", :controller => :account, :action => :groups %> &bull;
+  <% end %>
+  <%= link_to "All recent site activity", :controller => :browse, :action => :whats_new %></p>
 
 <div id="viewed-models" class="right-news-box">
   <h2>Most-viewed models</h2>
   <ul>
     <% @most_viewed.each do |model| %>
-    <li><%= link_to model[0].name, :controller => :browse, :action => :one_model, :id => model[0].id %> (<%= model[1] %> times)</li>
+    <li><%= link_to model[0].name, :controller => :browse, :action => :one_model, :id => model[0].id %> (<%= number_with_delimiter(model[1]) %> times)</li>
     <% end %>
   </ul>
 </div>
@@ -15,48 +19,58 @@
   <h2>Most-downloaded models</h2>
   <ul>
     <% @most_downloaded.each do |model| %>
-    <li><%= link_to model[0].name, :controller => :browse, :action => :one_model, :id => model[0].id %> (<%= model[1] %> times)</li>
+    <li><%= link_to model[0].name, :controller => :browse, :action => :one_model, :id => model[0].id %> (<%= number_with_delimiter(model[1]) %> times)</li>
     <% end %>
   </ul>
 </div>
 
 <div class="left-news-box">
   <% if @person == @the_person %>
-  <h2>Activity in your models</h2>
+  <h2>Recent activity in your models</h2>
   <% else %>
-  <h2>Activity in <%= @person.first_name %>'s models</h2>
+  <h2>Recent activity in <%= @the_person.first_name %>'s models</h2>
   <% end %>
+
+  <% if @model_events.empty? %>
+  <p>No recent activity</p>
+  <% else %>
   <ul>
-    <% @model_events.each do |model| %>
-    <li><%= whats_new_text(model) %></li>
+    <% @model_events.each do |tag| %>
+    <li><%= whats_new_text(tag) %></li>
     <% end %>
   </ul>
+  <% end %>
 </div>
 
 <div class="left-news-box">
   <% if @person == @the_person %>
-  <h2>Activity in your tags</h2>
+  <h2>Recent activity in your tags</h2>
   <% else %>
-  <h2>Activity in <%= @person.first_name %>'s tags</h2>
+  <h2>Recent activity in <%= @the_person.first_name %>'s tags</h2>
   <% end %>
+
+  <% if @tag_events.empty? %>
+  <p>No recent activity</p>
+  <% else %>
   <ul>
     <% @tag_events.each do |tag| %>
     <li><%= whats_new_text(tag) %></li>
     <% end %>
   </ul>
+  <% end %>
 </div>
 
 <div class="left-news-box">
-  <h2>Requests for help</h2>
-  <% if @postings.length >= 1 %>
+  <h2>Recent requests for help</h2>
+  <% if @postings.empty? %>
+  <p>No questions from other people to answer</p>
+  <% else %>
   <ul>
     <% @postings.each do |posting| %>
-    <% if posting.person != @person %>
+    <% if posting.person != @the_person %>
     <li><%= link_to posting.title, :controller => "browse", :action => "one_model", :id => posting.node.id %> by <%= person_link(posting.person) %>, <%= distance_of_time_in_words(Time.now, posting.created_at) %> ago</li>
     <% end %>
     <% end %>
   </ul>
-  <% else %>
-  <p>No questions from other people to answer</p>
   <% end %>
 </div>

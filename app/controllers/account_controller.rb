@@ -60,12 +60,15 @@ class AccountController < ApplicationController
     @postings = Posting.find(:all,
                              :conditions => ["is_question = true AND person_id <> ? and created_at >= ?", @the_person.id, how_new_is_new])
 
-    @recent_tags = Tag.find(:all, :order => 'created_at DESC',
-                            :conditions => ["created_at >= ?", how_new_is_new ])
+    @recent_tags = @the_person.tags.select { |t| t.created_at >= how_new_is_new}
+    @recent_tagged_models =
+      @the_person.tagged_nodes.select { |tn| tn.created_at >= how_new_is_new}
+    @tag_events =
+      [@recent_tags, @recent_tagged_models].flatten.sort_by { |t| t.created_at}.reverse
 
-    @recent_tagged_models = TaggedNode.find(:all, :order => 'created_at DESC',
-                                            :conditions => ["created_at >= ?", how_new_is_new ])
-    @tag_events = [@recent_tags, @recent_tagged_models].flatten.sort_by { |t| t.created_at}.reverse
+    if @tag_events.length > 10
+      @tag_events = @tag_events[0..9]
+    end
 
 
     # Model updates
@@ -76,13 +79,15 @@ class AccountController < ApplicationController
     #     # mode-viewed models
     @most_viewed = LoggedAction.count(:conditions => "url ilike '/browse/one_model%' and node_id IS NOT null",
                                       :group => "node_id",
-                                      :order => "count_all DESC")
+                                      :order => "count_all DESC",
+                                      :limit => 10)
     @most_viewed = @most_viewed.map { |m| [Node.find(m[0]), m[1]]}
 
     #     # mode-downloaded models
     @most_downloaded = LoggedAction.count(:conditions => "url ilike '/browse/download_model%' and node_id IS NOT null",
-                                      :group => "node_id",
-                                      :order => "count_all DESC")
+                                          :group => "node_id",
+                                          :order => "count_all DESC",
+                                          :limit => 10)
     @most_downloaded = @most_downloaded.map { |m| [Node.find(m[0]), m[1]]}
 
 
