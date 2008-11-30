@@ -65,11 +65,11 @@ class AccountController < ApplicationController
 
     @recent_tagged_models = TaggedNode.find(:all, :order => 'created_at DESC',
                                             :conditions => ["created_at >= ?", how_new_is_new ])
-    @tag_events = [@recent_tags, @recent_tagged_models].flatten.sort_by { |t| t.created_at}
+    @tag_events = [@recent_tags, @recent_tagged_models].flatten.sort_by { |t| t.created_at}.reverse
 
 
     # Model updates
-    @recent_models = @the_person.models.select { |m| m.created_at >= how_new_is_new }.sort_by { |m| m.created_at }
+    @recent_models = @the_person.models.select { |m| m.created_at >= how_new_is_new }.sort_by { |m| m.created_at }.reverse
 
     @model_events = @recent_models;
 
