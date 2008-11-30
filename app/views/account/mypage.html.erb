@@ -53,7 +53,6 @@
     <% if posting.person != @person %>
     <li><%= link_to posting.title, :controller => "browse", :action => "one_model", :id => posting.node.id %> by <%= person_link(posting.person) %>, <%= distance_of_time_in_words(Time.now, posting.created_at) %> ago</li>
     <% end %>
-    <% end %>
   </ul>
   <% else %>
   <p>No questions from other people to answer</p>
