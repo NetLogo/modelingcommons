@@ -48,7 +48,7 @@ class AccountController < ApplicationController
     redirect_to :controller => "account", :action => "index"
   end
 
-  def mypage
+def mypage
     if params[:id].blank?
       @the_person = @person
     else
