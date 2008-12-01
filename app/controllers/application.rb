@@ -44,10 +44,13 @@ class ApplicationController < ActionController::Base
       person_id = @person.id
     end
 
-    if @node.nil?
-      node_id = nil
-    else
+    # Get the node ID
+    if @model
+      node_id = @model.id
+    elsif @node
       node_id = @node.id
+    else
+      node_id = nil
     end
 
     browser_info = request.env['HTTP_USER_AGENT'] || 'No browser info passed'
