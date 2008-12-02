@@ -45,6 +45,8 @@ class ApplicationController < ActionController::Base
     end
 
     # Get the node ID
+    logger.warn "[log_one_action]: model = '#{@model.to_yaml}'"
+
     if @model
       node_id = @model.id
     elsif @node
