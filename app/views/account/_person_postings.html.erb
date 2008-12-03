@@ -5,7 +5,7 @@
     <% person_postings.sort_by {|posting| posting.created_at}.each do |posting| %>
         <h3><%= h(posting.title) %></h3>
         <span>for model <%= link_to h(posting.node.name), :controller => "browse", :action => "one_model", :id => posting.node.id %></span><br />
-        <span>by <%= link_to h(posting.person.fullname), :controller => "account", :action => "mypage", :id => posting.person.id %>, at <%= posting.created_at %> (reply)</span><br />
+        <span>by <%= person_link(posting.person) %>, at <%= posting.created_at %> (reply)</span><br />
         <br />
         <span><%= h(posting.body) %></span><br />
         <br />

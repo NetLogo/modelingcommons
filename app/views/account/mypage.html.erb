@@ -1,4 +1,8 @@
-<% @title = "Personal page for #{@the_person.fullname}" %>
+<% if @person == @the_person %>
+    <% @title = "Your personal page" %>
+<% else %>
+    <% @title = "Page for #{@the_person.fullname}" %>
+<% end %>
 
 <p>
   <% if @person == @the_person %>

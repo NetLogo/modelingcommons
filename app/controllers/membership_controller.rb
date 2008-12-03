@@ -156,4 +156,24 @@ class MembershipController < ApplicationController
     return
   end
 
+  def find_group
+    group_name_to_find = params[:group_name].downcase
+
+    if group_name_to_find.empty?
+      flash[:notice] = "You must enter a group name to search.  Please try again."
+      redirect_to :back
+      return
+    end
+
+    @groups = Group.find(:all,
+                        :conditions => ["lower(name) = ? ", group_name_to_find])
+
+    if @groups.empty?
+      flash[:notice] = "Sorry, but no groups have the name '#{group_name_to_find}'."
+      redirect_to :back
+      return
+    end
+
+  end
+
 end

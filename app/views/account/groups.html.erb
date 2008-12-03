@@ -13,15 +13,25 @@
   <% end %>
 </div>
 
+<hr />
 <div id="create-group-div" class="group-tab">
-  <h2>Create a group</h2>
+  <h2>Create a new group</h2>
   <% form_tag :controller => "membership", :action => :create_group do |form| %>
   <%= text_field_tag "group_name" %>
   <p><%= submit_tag "Create group" %></p>
   <% end %>
-
 </div>
 
+<hr />
+<div id="find-group-div" class="group-tab">
+  <h2>Find an existing group</h2>
+  <% form_tag :controller => "membership", :action => :find_group do |form| %>
+  <%= text_field_tag "group_name" %>
+  <p><%= submit_tag "Find group" %></p>
+  <% end %>
+</div>
+
+<hr />
 <div id="manage-groups-div" class="group-tab">
   <h2>Groups you manage</h2>
   <% if @person.memberships.length == 0 %>
@@ -32,7 +42,9 @@
     <li><%= group.name %></li>
     <ul>
       <% group.memberships.each do |membership| %>
-      <li><%= membership.person.fullname -%>
+      <li>
+            <%= person_link(membership.person) -%>
+
         <% if membership.status == 'pending' %>
         (<%= link_to "approve", :controller => :membership, :action => :approve_membership, :id => membership.id %>)
         <% end %>
@@ -52,6 +64,7 @@
   </ul>
   <% end %>
 
+<hr />
   <h2>Invite people to join one of your groups:</h2>
 
   <% if @person.memberships.length == 0 %>
