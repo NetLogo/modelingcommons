@@ -32,7 +32,7 @@
 
     <div id="logged-in-as">
       <% if @person %>
-      Logged in as <%= link_to @person.fullname, :controller => :account, :action => :mypage -%>
+      Logged in as <%= person_link(@person -%>
       (<%= link_to_unless_current "Logout", :controller => "account", :action => "logout" %>)
 
       <% if @person.administrator %>

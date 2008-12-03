@@ -6,7 +6,7 @@
 <p>Existing tags:</p>
 <ul>
   <% @model.tagged_nodes.sort_by {|t| t.updated_at}.each do |tm| -%>
-  <li><%= link_to tm.tag.name, :controller => "tags", :action => "one_tag", :id => tm.tag_id -%> (<%= tm.comment -%>), by <%= tm.person.fullname -%> <%= distance_of_time_in_words(Time.now, tm.updated_at) -%> ago </li>
+  <li><%= link_to tm.tag.name, :controller => "tags", :action => "one_tag", :id => tm.tag_id -%> (<%= tm.comment -%>), by <%= person_link(tm.person) -%> <%= distance_of_time_in_words(Time.now, tm.updated_at) -%> ago </li>
   <% end -%>
 </ul>
 <% end -%>

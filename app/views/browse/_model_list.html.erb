@@ -23,7 +23,7 @@
             <td>
                 <ul>
                     <% model.people.each do |person| %>
-                        <li><%= link_to person.fullname, :controller => "account", :action => "mypage", :id => person.id %></li>
+                        <li><%= person_link(person) %></li>
                     <% end %>
                 </ul>
             </td>

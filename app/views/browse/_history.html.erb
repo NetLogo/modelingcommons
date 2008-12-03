@@ -16,7 +16,7 @@
   <tr>
     <td><input type="radio" name="compare_1" value="<%= version.id -%>" /></td>
     <td><input type="radio" name="compare_2" value="<%= version.id -%>" /></td>
-    <td><%= link_to version.person.fullname, :controller => "account", :action => "mypage", :id => version.person.id %></td>
+    <td><%= person_link(version.person) %></td>
     <td><%= distance_of_time_in_words(Time.now, version.created_at) -%> ago </td>
     <td><%= version.description %></td>
     <td><%= link_to "Download this version", :controller => "browse", :action => "download_model", :id => @model.id, :version => version.id %></td>

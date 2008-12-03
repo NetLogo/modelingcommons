@@ -4,7 +4,7 @@
 <ul>
     <li><h2><%= item.title %></h2>
         <p><%= item.body %></p>
-        <p>-- <i><%= link_to item.person.fullname, :controller => "account", :action => "mypage", :id => item.person.id %></i>, posted <%= distance_of_time_in_words(Time.now, item.created_at) -%> ago</p>
+        <p>-- <i><%= person_link(item.person) %></i>, posted <%= distance_of_time_in_words(Time.now, item.created_at) -%> ago</p>
     </ul>
 
 </li>

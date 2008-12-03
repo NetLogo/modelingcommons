@@ -2,7 +2,7 @@
 
 <h2>Tag creation:</h2>
 <ul>
-  <li>Tag created by <%= link_to @tag.person.fullname, :controller => "account", :action => "mypage", :id => @tag.person.id %> on <%= @tag.created_at %></li>
+  <li>Tag created by <%= person_link(@tag.person) %> on <%= @tag.created_at %></li>
   <% if @tag.tagged_nodes.empty? %>
   <p>This tag has never been used.</p>
   <% else %>
