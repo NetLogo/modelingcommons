@@ -26,7 +26,13 @@
             <td><%= person.email_address %></td>
             <td><%= person.password %></td>
             <td><%= "yes" if person.administrator? %></td>
-            <td><%= distance_of_time_in_words(Time.now, person.logged_actions.sort_by {|action| action.logged_at}.reverse[0].logged_at) -%> ago</td>
+            <td>
+                <% if person.logged_actions.empty? %>
+                  (No actions)
+                <% else %>
+                  <%= distance_of_time_in_words(Time.now, person.logged_actions.sort_by {|action| action.logged_at}.last.logged_at) -%> ago
+                <% end %>
+            </td>
             <td><%= link_to "See user's actions", :controller => "admin", :action => "view_person_actions", :id => person.id %></td>
         </tr>
         <% end %>

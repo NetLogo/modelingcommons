@@ -48,7 +48,7 @@ class AccountController < ApplicationController
     redirect_to :controller => "account", :action => "index"
   end
 
-def mypage
+  def mypage
     if params[:id].blank?
       @the_person = @person
     else
@@ -76,14 +76,14 @@ def mypage
 
     @model_events = @recent_models;
 
-    #     # mode-viewed models
+    # most-viewed models
     @most_viewed = LoggedAction.count(:conditions => "url ilike '/browse/one_model%' and node_id IS NOT null",
                                       :group => "node_id",
                                       :order => "count_all DESC",
                                       :limit => 10)
     @most_viewed = @most_viewed.map { |m| [Node.find(m[0]), m[1]]}
 
-    #     # mode-downloaded models
+    # most-downloaded models
     @most_downloaded = LoggedAction.count(:conditions => "url ilike '/browse/download_model%' and node_id IS NOT null",
                                           :group => "node_id",
                                           :order => "count_all DESC",
