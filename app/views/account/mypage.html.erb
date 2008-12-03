@@ -10,7 +10,7 @@
   <h2>Most-viewed models</h2>
   <ul>
     <% @most_viewed.each do |model| %>
-    <li><%= link_to model[0].name, :controller => :browse, :action => :one_model, :id => model[0].id %> (<%= number_with_delimiter(model[1]) %> times)</li>
+    <li><%= link_to model[0].name, :controller => :browse, :action => :one_model, :id => model[0].id %> (<%= pluralize(number_with_delimiter(model[1]), "time", "times") -%>)</li>
     <% end %>
   </ul>
 </div>
@@ -19,7 +19,7 @@
   <h2>Most-downloaded models</h2>
   <ul>
     <% @most_downloaded.each do |model| %>
-    <li><%= link_to model[0].name, :controller => :browse, :action => :one_model, :id => model[0].id %> (<%= number_with_delimiter(model[1]) %> times)</li>
+    <li><%= link_to model[0].name, :controller => :browse, :action => :one_model, :id => model[0].id %> (<%= pluralize(number_with_delimiter(model[1]), "time", "times") -%>)</li>
     <% end %>
   </ul>
 </div>

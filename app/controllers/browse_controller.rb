@@ -141,12 +141,15 @@ class BrowseController < ApplicationController
   end
 
   def search_action
+    logger.warn "[search_action] Now starting search_action"
     @original_search_term = params[:search_term][:search_term]
     search_term = "%#{@original_search_term}%"
 
-    @models = Node.models.find(:all,
-                               :conditions => ["name ilike ? ", search_term],
-                               :order => 'name')
+    @models = Node.find(:all, :conditions => "node_type_id = 1").select {|m| m.name.downcase.index(@original_search_term.downcase)}
+
+    # @models = Node.models.find(:all,
+    # :conditions => ["name ilike ? ", search_term],
+    # :order => 'name')
 
     # Get all of the versions
     #     @tsearch_results =
@@ -155,11 +158,12 @@ class BrowseController < ApplicationController
 
     # @info_match_models = @tsearch_results.map{|n| n.info_tab}
 
-    @author_match_models =
-      Node.models.find_all {|m| m.people.map {|pid| Person.find(pid).fullname}.join(" ").downcase.index(@original_search_term.downcase)}
+    logger.warn "[search_action] Now checking @author_match_models"
+    @author_match_models = Node.find(:all, :conditions => "node_type_id = 1").select {|m| m.people.map { |person| person.fullname}.join(" ").downcase.index(@original_search_term.downcase)}
 
     # @procedures_match_models = @tsearch_results.map{|n| n.info_tab}
 
+    logger.warn "[search_action] Now checking @tag_match_models"
     @tag_match_models =
       Node.models.find_all {|m| m.tags.map { |t| t.name}.join(' ').downcase.index(@original_search_term.downcase)}
 
