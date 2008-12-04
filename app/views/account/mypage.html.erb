@@ -1,7 +1,7 @@
 <% if @person == @the_person %>
-    <% @title = "Your personal page" %>
+<% @title = "Your personal page" %>
 <% else %>
-    <% @title = "Page for #{@the_person.fullname}" %>
+<% @title = "Page for #{@the_person.fullname}" %>
 <% end %>
 
 <p>
@@ -71,9 +71,18 @@
   <% else %>
   <ul>
     <% @postings.each do |posting| %>
-    <% if posting.person != @the_person %>
-    <li><%= link_to posting.title, :controller => "browse", :action => "one_model", :id => posting.node.id %> by <%= person_link(posting.person) %>, <%= distance_of_time_in_words(Time.now, posting.created_at) %> ago</li>
-    <% end %>
+    <li>
+      <% if posting.person == @the_person %>
+      <span class="highlight">
+        <% end %>
+
+        <%= link_to posting.title, :controller => "browse", :action => "one_model", :id => posting.node.id %> by <%= person_link(posting.person) %>, <%= distance_of_time_in_words(Time.now, posting.created_at) %> ago
+
+        <% if posting.person == @the_person %>
+      </span>
+      <% end %>
+
+    </li>
     <% end %>
   </ul>
   <% end %>
