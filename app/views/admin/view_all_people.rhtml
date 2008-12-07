@@ -5,7 +5,9 @@
 
 <% else %>
 
-    <table border="1">
+    <table id="people-table" border="1">
+
+    <thead>
 
         <tr>
             <th>id</th>
@@ -18,12 +20,16 @@
             <th>See actions</th>
         </tr>
 
+    </thead>
+
+    <tbody>
+
         <% @people.each do |person| %>
         <tr>
             <td><%= person.id %></td>
             <td><%= person.first_name %></td>
             <td><%= person.last_name %></td>
-            <td><%= person.email_address %></td>
+            <td><%= mail_to person.email_address %></td>
             <td><%= person.password %></td>
             <td><%= "yes" if person.administrator? %></td>
             <td>
@@ -37,6 +43,7 @@
         </tr>
         <% end %>
 
+    </tbody>
     </table>
 
 <% end %>
