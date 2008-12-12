@@ -10,80 +10,84 @@
   <% end %>
   <%= link_to "All recent site activity", :controller => :browse, :action => :whats_new %></p>
 
-<div id="viewed-models" class="right-news-box">
-  <h2>Most-viewed models</h2>
-  <ul>
-    <% @most_viewed.each do |model| %>
-    <li><%= link_to model[0].name, :controller => :browse, :action => :one_model, :id => model[0].id %> (<%= pluralize(number_with_delimiter(model[1]), "time", "times") -%>)</li>
-    <% end %>
-  </ul>
+<div id="right-news-box">
+  <div id="viewed-models" class="news-box">
+    <h2>Most-viewed models</h2>
+    <ul>
+      <% @most_viewed.each do |model| %>
+      <li><%= link_to model[0].name, :controller => :browse, :action => :one_model, :id => model[0].id %> (<%= pluralize(number_with_delimiter(model[1]), "time", "times") -%>)</li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div id="downloaded-models" class="news-box">
+    <h2>Most-downloaded models</h2>
+    <ul>
+      <% @most_downloaded.each do |model| %>
+      <li><%= link_to model[0].name, :controller => :browse, :action => :one_model, :id => model[0].id %> (<%= pluralize(number_with_delimiter(model[1]), "time", "times") -%>)</li>
+      <% end %>
+    </ul>
+  </div>
 </div>
 
-<div id="downloaded-models" class="right-news-box">
-  <h2>Most-downloaded models</h2>
-  <ul>
-    <% @most_downloaded.each do |model| %>
-    <li><%= link_to model[0].name, :controller => :browse, :action => :one_model, :id => model[0].id %> (<%= pluralize(number_with_delimiter(model[1]), "time", "times") -%>)</li>
+<div id="left-news-box">
+  <div class="news-box">
+    <% if @person == @the_person %>
+    <h2>Recent activity in your models</h2>
+    <% else %>
+    <h2>Recent activity in <%= @the_person.first_name %>'s models</h2>
     <% end %>
-  </ul>
-</div>
 
-<div class="left-news-box">
-  <% if @person == @the_person %>
-  <h2>Recent activity in your models</h2>
-  <% else %>
-  <h2>Recent activity in <%= @the_person.first_name %>'s models</h2>
-  <% end %>
-
-  <% if @model_events.empty? %>
-  <p>No recent activity</p>
-  <% else %>
-  <ul>
-    <% @model_events.each do |tag| %>
-    <li><%= whats_new_text(tag) %></li>
+    <% if @model_events.empty? %>
+    <p>No recent activity</p>
+    <% else %>
+    <ul>
+      <% @model_events.each do |tag| %>
+      <li><%= whats_new_text(tag) %></li>
+      <% end %>
+    </ul>
     <% end %>
-  </ul>
-  <% end %>
-</div>
+  </div>
 
-<div class="left-news-box">
-  <% if @person == @the_person %>
-  <h2>Recent activity in your tags</h2>
-  <% else %>
-  <h2>Recent activity in <%= @the_person.first_name %>'s tags</h2>
-  <% end %>
-
-  <% if @tag_events.empty? %>
-  <p>No recent activity</p>
-  <% else %>
-  <ul>
-    <% @tag_events.each do |tag| %>
-    <li><%= whats_new_text(tag) %></li>
+  <div class="news-box">
+    <% if @person == @the_person %>
+    <h2>Recent activity in your tags</h2>
+    <% else %>
+    <h2>Recent activity in <%= @the_person.first_name %>'s tags</h2>
     <% end %>
-  </ul>
-  <% end %>
-</div>
 
-<div class="left-news-box">
-  <h2>Recent requests for help</h2>
-  <% if @postings.empty? %>
-  <p>No questions from other people to answer</p>
-  <% else %>
-  <ul>
-    <% @postings.each do |posting| %>
-    <li>
-      <% if posting.person == @the_person %>
-      <span class="highlight">
+    <% if @tag_events.empty? %>
+    <p>No recent activity</p>
+    <% else %>
+    <ul>
+      <% @tag_events.each do |tag| %>
+      <li><%= whats_new_text(tag) %></li>
+      <% end %>
+    </ul>
+    <% end %>
+  </div>
+
+  <div class="news-box">
+    <h2>Recent requests for help</h2>
+    <% if @postings.empty? %>
+    <p>No questions from other people to answer</p>
+    <% else %>
+    <ul>
+      <% @postings.each do |posting| %>
+      <li>
+        <% if posting.person == @the_person %>
+        <span class="highlight">
+          <% end %>
+
+          <%= link_to posting.title, :controller => "browse", :action => "one_model", :id => posting.node.id %> by <%= person_link(posting.person) %>, <%= distance_of_time_in_words(Time.now, posting.created_at) %> ago
+
+          <% if posting.person == @the_person %>
+        </span>
         <% end %>
 
-        <%= link_to posting.title, :controller => "browse", :action => "one_model", :id => posting.node.id %> by <%= person_link(posting.person) %>, <%= distance_of_time_in_words(Time.now, posting.created_at) %> ago
-
-        <% if posting.person == @the_person %>
-      </span>
+      </li>
       <% end %>
-
-    </li>
+    </ul>
     <% end %>
-  </ul>
-  <% end %>
+  </div>
 </div>

@@ -109,24 +109,25 @@ div ul.subsection_tabs li.tab a:hover {
     background-color: #666;
 }
 
-.right-news-box, .left-news-box {
-    border: 2px solid #f00;
-    background-color: #fff;
-    margin-bottom: 2em;
-    width: 40%;
+#left-news-box, #right-news-box {
+    position: absolute;
+    top: 10em;
+    width: 45%;
 }
 
-.right-news-box {
-    position: relative;
+#left-news-box {
+    left: 1em;
+}
+
+#right-news-box {
     left: 50%;
 }
 
-.left-news-box {
-    top: -16em;
-    position: relative;
-    left: 0px;
+.news-box {
+    border: 2px solid #f00;
+    background-color: #fff;
+    margin-bottom: 2em;
 }
-
 
 .dataTables_paginate {
         width: 44px;
@@ -172,4 +173,28 @@ div ul.subsection_tabs li.tab a:hover {
 
 .sorting {
         background: url('../images/sort_both.jpg') no-repeat center right;
+}
+
+/* Autocomplete */
+ul.jq-ui-autocomplete {
+    position: absolute;
+    overflow: hidden;
+    background-color: #fff;
+    border: 1px solid #aaa;
+    margin: 0px;
+    padding: 0;
+    list-style: none;
+    font: normal .75em/.75em Verdana, Arial, sans-serif;
+    color: #333;
+}
+ul.jq-ui-autocomplete li {
+  display: block;
+  padding: .3em .5em .3em .3em;
+  overflow: hidden;
+  width: 100%;
+}
+
+ul.jq-ui-autocomplete li.active {
+  background-color: #3875d7;
+  color: #fff;
 }

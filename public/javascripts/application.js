@@ -4,4 +4,9 @@
 $(document).ready(function () {
                     $('#people-table').dataTable();
 
+                    $(document).ready(function(){
+                      $("input.autocomplete").autocomplete({ list: ["hello", "hello person", "goodbye"]})
+                        .bind("activate.autocomplete", function(e,d) { alert(d) })
+                          });
+
                   });

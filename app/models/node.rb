@@ -212,4 +212,8 @@ class Node < ActiveRecord::Base
     { :height => height, :width => width}
   end
 
+  def foo
+    return 1
+  end
+
 end
