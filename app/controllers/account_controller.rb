@@ -58,7 +58,8 @@ class AccountController < ApplicationController
     how_new_is_new = 6.months.ago
 
     @postings = Posting.find(:all,
-                             :conditions => ["is_question = true AND person_id <> ? and created_at >= ?", @the_person.id, how_new_is_new])
+                             :conditions => ["is_question = true AND person_id <> ? and created_at >= ?", @the_person.id, how_new_is_new],
+                             :order => "created_at DESC")
 
     @recent_tags = @the_person.tags.select { |t| t.created_at >= how_new_is_new}
     @recent_tagged_models =
