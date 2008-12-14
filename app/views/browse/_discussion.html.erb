@@ -32,8 +32,7 @@
         <%= form.hidden_field :node_id, {:value => node.id} %></td>
     </tr>
     <tr>
-      <td>Question?</td>
-      <td><%= form.check_box :is_question %></td>
+      <td colspan="2"><%= form.check_box :is_question %><label for="new_posting_is_question">Display this question on the Modeling Commons question list</label></td>
     </tr>
 
     <tr>

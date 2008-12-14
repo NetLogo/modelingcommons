@@ -6,7 +6,7 @@
 
 <p>
   <% if @person == @the_person %>
-  <%= link_to "Manage my groups", :controller => :account, :action => :groups %> &bull;
+  <%= link_to "Manage your groups", :controller => :account, :action => :groups %> &bull;
   <% end %>
   <%= link_to "All recent site activity", :controller => :browse, :action => :whats_new %></p>
 
@@ -70,7 +70,7 @@
   <div class="news-box">
     <h2>Recent requests for help</h2>
     <% if @postings.empty? %>
-    <p>No questions from other people to answer</p>
+    <p>No questions to display</p>
     <% else %>
     <ul>
       <% @postings.each do |posting| %>

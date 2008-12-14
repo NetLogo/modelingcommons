@@ -7,6 +7,7 @@ class Person < ActiveRecord::Base
   has_many :logged_actions
   has_many :tags
   has_many :tagged_nodes
+  has_many :email_recommendations
 
   has_many :memberships
   has_many :groups, :through => :memberships, :order => :name

@@ -5,7 +5,6 @@
 </div>
 
 <script type="text/javascript">
-
   // initialise plugins
   jQuery(function(){
 
@@ -32,8 +31,9 @@
   $('ul.sf-menu li a').click(handle_menu_click);
   $('ul.sf-menu li ul li a').click(handle_menu_click);
   });
-
 </script>
+
+<p><%= link_to "Recommend this model to a friend", :controller => :ff%></p>
 
 <div id="menu-div">
   <ul class="sf-menu sf-navbar">
