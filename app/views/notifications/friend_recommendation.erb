@@ -1,18 +1,17 @@
 <html>
     <body>
     <p><%= @sender.fullname -%>, a member of the
-<%= link_to "NetLogo Modeling Commons", :controller => :account, :action => :mypage %>,
+    <%= link_to "NetLogo Modeling Commons", "http://monk.ccl.northwestern.edu:3000/" %>,
     thinks that the '<%= @node.name %>' model might be of interest to you.</p>
 
     <p>You can see this model for yourself by clicking
-<%= link_to "here", :controller => :browse, :action => :one_model, :id => @node.id %>
+    <%= link_to "here", "http://monk.ccl.northwestern.edu:3000/browse/one_model/#{@node.id}" %>,
     .</p>
 
 <p>
 <%= link_to "NetLogo", "http://ccl.northwestern.edu/netlogo" %>
     is a computer program that lets you create and view computerized
-    models (i.e., simulations).  The
-<%= link_to "Modeling Commons", :controller => :account, :action => :mypage %>
+    models (i.e., simulations).  The Modeling Commons
     is a collaborative
     modeling Web site, allowing people with common interests to share
     models and modeling ideas with one another.</p>
