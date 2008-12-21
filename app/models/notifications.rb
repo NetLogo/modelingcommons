@@ -1,4 +1,5 @@
 class Notifications < ActionMailer::Base
+  include ActionController::UrlWriter
 
   def signup(person)
     @recipients = person.email_address
