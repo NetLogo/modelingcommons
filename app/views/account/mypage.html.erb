@@ -28,6 +28,15 @@
       <% end %>
     </ul>
   </div>
+
+  <div id="applied-tag" class="news-box">
+    <h2>Most popular tags</h2>
+    <ul>
+      <% @most_popular_tags.each do |tn| %>
+      <li><%= link_to tn[0].name %> (<%= pluralize(number_with_delimiter(tn[1]), "time", "times") -%>)</li>
+      <% end %>
+    </ul>
+  </div>
 </div>
 
 <div id="left-news-box">

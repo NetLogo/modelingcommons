@@ -71,7 +71,6 @@ class AccountController < ApplicationController
       @tag_events = @tag_events[0..9]
     end
 
-
     # Model updates
     @recent_models = @the_person.models.select { |m| m.created_at >= how_new_is_new }.sort_by { |m| m.created_at }.reverse
 
@@ -91,7 +90,12 @@ class AccountController < ApplicationController
                                           :limit => 10)
     @most_downloaded = @most_downloaded.map { |m| [Node.find(m[0]), m[1]]}
 
-
+    # most-applied tags
+    @most_popular_tags =
+      TaggedNode.count(:group => "tag_id",
+                       :order => "count_all DESC",
+                       :limit => 10)
+    @most_popular_tags = @most_popular_tags.map { |n| [Tag.find(n[0]), n[1]]}
   end
 
   def reset_password

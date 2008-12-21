@@ -33,7 +33,7 @@
   });
 </script>
 
-<p><%= link_to "Recommend this model to a friend", :controller => :ff%></p>
+<p><%= link_to "E-mail a friend about this model", :controller => :recommend, :action => :email_friend %> &bull; <%= link_to "Recommend this model", :controller => :recommend, :action => :add_recommendation %></p>
 
 <div id="menu-div">
   <ul class="sf-menu sf-navbar">

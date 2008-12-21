@@ -73,4 +73,14 @@ class Notifications < ActionMailer::Base
     @content_type = 'text/html'
   end
 
+  def friend_recommendation(sender, friend_email_address, node)
+    @recipients = friend_email_address
+    @from = "nlcommons@monk.ccl.northwestern.edu"
+    @subject    = 'View an interesting NetLogo model'
+    @body[:node] = node
+    @body[:sender] = sender
+    @sent_on    = Time.now()
+    @content_type = 'text/html'
+  end
+
 end
