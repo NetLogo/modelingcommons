@@ -1,12 +1,11 @@
 <html>
     <body>
     <p><%= @sender.fullname -%>, a member of the
-    <%= link_to "NetLogo Modeling Commons", "http://monk.ccl.northwestern.edu:3000/" %>,
+    <%= link_to "NetLogo Modeling Commons", "http://monk.ccl.northwestern.edu:3000/" -%>,
     thinks that the '<%= @node.name %>' model might be of interest to you.</p>
 
     <p>You can see this model for yourself by clicking
-    <%= link_to "here", "http://monk.ccl.northwestern.edu:3000/browse/one_model/#{@node.id}" %>,
-    .</p>
+    <%= link_to "here", "http://monk.ccl.northwestern.edu:3000/browse/one_model/#{@node.id}" -%>.</p>
 
 <p>
 <%= link_to "NetLogo", "http://ccl.northwestern.edu/netlogo" %>
