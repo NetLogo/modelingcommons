@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20081212123315) do
+ActiveRecord::Schema.define(:version => 20081221071249) do
 
   create_table "email_recommendations", :force => true do |t|
     t.integer  "sender_id"
@@ -153,6 +153,13 @@ ActiveRecord::Schema.define(:version => 20081212123315) do
   add_index "postings", ["person_id"], :name => "index_postings_on_person_id"
   add_index "postings", ["title"], :name => "index_postings_on_title"
   add_index "postings", ["updated_at"], :name => "index_postings_on_updated_at"
+
+  create_table "recommendations", :force => true do |t|
+    t.integer  "node_id"
+    t.integer  "person_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "sessions", :force => true do |t|
     t.string   "session_id", :null => false

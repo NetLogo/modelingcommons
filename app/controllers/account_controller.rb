@@ -96,6 +96,13 @@ class AccountController < ApplicationController
                        :order => "count_all DESC",
                        :limit => 10)
     @most_popular_tags = @most_popular_tags.map { |n| [Tag.find(n[0]), n[1]]}
+
+    # most-recommended models
+    @most_recommended_models =
+      Recommendation.count(:group => "node_id",
+                           :order => "count_all DESC",
+                           :limit => 10)
+    @most_recommended_models = @most_recommended_models.map { |n| [Node.find(n[0]), n[1]]}
   end
 
   def reset_password

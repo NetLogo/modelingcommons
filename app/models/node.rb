@@ -19,7 +19,8 @@ class Node < ActiveRecord::Base
   has_many :tagged_nodes
   has_many :tags, :through => :tagged_nodes
 
-  has_many :email_notifications
+  has_many :email_recommendations
+  has_many :recommendations
 
   validates_presence_of :name, :node_type_id, :visibility_id, :changeability_id
   validates_numericality_of :node_type_id, :visibility_id, :changeability_id

@@ -33,7 +33,16 @@
   });
 </script>
 
-<p><%= link_to "E-mail a friend about this model", :controller => :recommend, :action => :email_friend %> &bull; <%= link_to "Recommend this model", :controller => :recommend, :action => :add_recommendation %></p>
+<p><%= link_to "E-mail a friend about this model", :controller => :recommend, :action => :email_friend %> &bull;
+
+<% if @recommendations.select {|r| r.person_id == @person.id}.empty? %>
+<%= link_to "Recommend this model", :controller => :recommend, :action => :add_recommendation, :id => @model.id %>
+<% end %>
+
+<% if !@recommendations.empty? %>
+(<%= link_to pluralize(@recommendations.length, "recommendation"), :controller => :recommend, :action => :show_recommendations, :id => @model.id -%> to date)
+<% end %>
+</p>
 
 <div id="menu-div">
   <ul class="sf-menu sf-navbar">

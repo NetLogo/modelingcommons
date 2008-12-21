@@ -1,2 +1,8 @@
-<h1>Recommend#email_friend</h1>
-<p>Find me in app/views/recommend/email_friend.html.erb</p>
+<% @title = "Email a friend about #{@node.name}" %>
+
+<% form_tag(:controller => :recommend, :action => :email_friend_action) do |form| -%>
+    <p>Your friend's e-mail address: <%= text_field_tag :email_address -%></p>
+    <p><%= submit_tag "Send e-mail" %></p>
+<% end -%>
+
+<p><%= link_to "Return to the '#{@node.name}' page", :controller => :browse, :action => :one_node, :id => @node.id %></p>

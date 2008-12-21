@@ -1,0 +1,9 @@
+<% @title = "Recommendations for #{@node.name}" %>
+
+<ul>
+<% @recommendations.each do |recommendation| %>
+    <li><%= person_link(recommendation.person) %> recommended it <%= distance_of_time_in_words(Time.now, recommendation.created_at) -%> ago</li>
+<% end %>
+</ul>
+
+<p><%= link_to "Return to the '#{@node.name}' page", :controller => :browse, :action => :one_node, :id => @node.id %></p>

@@ -37,6 +37,15 @@
       <% end %>
     </ul>
   </div>
+
+  <div id="recommended" class="news-box">
+    <h2>Most-recommended models</h2>
+    <ul>
+      <% @most_recommended_models.each do |m| %>
+      <li><%= link_to m[0].name %> (<%= pluralize(number_with_delimiter(m[1]), "time", "times") -%>)</li>
+      <% end %>
+    </ul>
+  </div>
 </div>
 
 <div id="left-news-box">

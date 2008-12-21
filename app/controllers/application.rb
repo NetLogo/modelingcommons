@@ -159,5 +159,19 @@ class ApplicationController < ActionController::Base
     return false
   end
 
+  def get_model_from_id_param
+    if params[:id].blank?
+      flash[:notice] = "No model ID provided"
+      redirect_to :back
+      return
+    end
+
+    @model = Node.models.find(params[:id])
+    @node = @model
+  rescue
+    render :text => "No model with ID '#{params[:id]}'"
+    return
+  end
+
 
 end

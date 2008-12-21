@@ -25,6 +25,7 @@ class BrowseController < ApplicationController
       return
     end
 
+    @recommendations = Recommendation.find_all_by_node_id(@model.id) || []
   end
 
   def one_node
@@ -266,20 +267,6 @@ class BrowseController < ApplicationController
   # ------------------------------------------------------------
 
   private
-  def get_model_from_id_param
-    if params[:id].blank?
-      flash[:notice] = "No model ID provided"
-      redirect_to :back
-      return
-    end
-
-    @model = Node.models.find(params[:id])
-    @node = @model
-  rescue
-    render :text => "No model with ID '#{params[:id]}'"
-    return
-  end
-
   def diff_as_string(data_old, data_new, format=:unified, context_lines=1)
     data_old = data_old.split(/\n/).map! { |e| e.chomp}
     data_new = data_new.split(/\n/).map! { |e| e.chomp}
