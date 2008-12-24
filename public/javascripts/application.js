@@ -5,8 +5,13 @@ $(document).ready(function () {
                     $('#people-table').dataTable();
 
                     $(document).ready(function(){
-                      $("input.autocomplete").autocomplete({ list: ["hello", "hello person", "goodbye"]})
-                        .bind("activate.autocomplete", function(e,d) { alert(d) })
-                          });
+                                        $('#search_term_search_term').click(function() {
+                                                                              if ($(this).attr('value') == 'Search')
+                                                                              {
+                                                                                $(this).attr({'value': ''});
+                                                                              }
+                                                                            }
 
-                  });
+                                                                           )});
+
+                                     });

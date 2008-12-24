@@ -16,7 +16,7 @@ class BrowseController < ApplicationController
   end
 
   def list_models
-    @models = Node.models.find(:all, :order => 'name')
+    @models = Node.paginate(:page => params[:page], :order => 'name ASC', :conditions => "node_type_id = 1")
   end
 
   def one_model

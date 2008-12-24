@@ -8,7 +8,9 @@
   <% if @person == @the_person %>
   <%= link_to "Manage your groups", :controller => :account, :action => :groups %> &bull;
   <% end %>
-  <%= link_to "All recent site activity", :controller => :browse, :action => :whats_new %></p>
+  <%= link_to "All models", :controller => :browse, :action => :list_models %> &bull;
+  <%= link_to "All recent site activity", :controller => :browse, :action => :whats_new %>
+</p>
 
 <div id="right-news-box">
   <div id="viewed-models" class="news-box">
