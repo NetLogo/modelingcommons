@@ -75,7 +75,7 @@ class AccountController < ApplicationController
     @recent_models = @the_person.models.select { |m| m.created_at >= how_new_is_new }.sort_by { |m| m.created_at }.reverse
     @model_events = @recent_models;
 
-    @group_recent_models = @the_person.models.select { |m| m.created_at >= how_new_is_new }.sort_by { |m| m.created_at }.reverse
+    @group_recent_models = @the_person.models.select { |m| m.group and m.created_at >= how_new_is_new }.sort_by { |m| m.created_at }.reverse
     @group_model_events = @group_recent_models.select { |m| m.group.members.include?(@person)}
 
     # most-viewed models

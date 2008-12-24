@@ -19,6 +19,16 @@ class TagsController < ApplicationController
 
       logger.warn "Dealing with tag '#{tag_name}', comment '#{comment}'"
 
+      # Default text for the tag or comment?  Blank it out.
+      if tag_name == 'tag name'
+        flash[:notice] << "Tag had was the default text; ignoring. "
+        next
+      end
+
+      if comment == '(Optional) comment about why this tag is relevant to this model'
+        comment = ''
+      end
+
       # Blank tag?  Ignore it.
       if tag_name.blank?
         flash[:notice] << "Tag '#{tag_name}' was blank; ignored. "

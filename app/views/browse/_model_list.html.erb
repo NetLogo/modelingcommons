@@ -32,11 +32,16 @@
             </td>
             <td><%= distance_of_time_in_words(Time.now, model.node_versions.first.updated_at) %> ago</td>
             <td>
-                <ul>
-                    <% model.people.each do |person| %>
-                        <li><%= person_link(person) %></li>
-                    <% end %>
-                </ul>
+                <% if model.people.length == 1 %>
+                    <%= person_link(model.people[0]) %>
+                <% else %>
+                    <ul>
+                        <% model.people.each do |person| %>
+                            <li><%= person_link(person) %></li>
+                        <% end %>
+                    </ul>
+                <% end %>
+
             </td>
         </tr>
 
