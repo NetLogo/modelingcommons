@@ -115,6 +115,9 @@
 </div>
 
 <div id="applet-div" class="one-model-div">
+<% if @model.name =~ /3D/ %>
+<p>Sorry, but 3D models cannot be viewed as applets.  You must download this model to try it.</p>
+<% else %>
 <applet
    code="org.nlogo.window.Applet"
    align="baseline"
@@ -122,11 +125,11 @@
    archive="/NetLogoLite.jar">
   <param name="DefaultModel" value="<%= url_for :controller => :browse, :action => :model_contents, :id => @model.id %> ">
 </applet>
+<% end %>
 </div>
 
 <!-- Download menu -->
 <div id="download-div" class="one-model-div">
-  <h2>Download the latest version</h2>
   <%= link_to "Download model (as a zip file)", :controller => "browse", :action => "download_model", :id => @model.id -%>
 </div>
 

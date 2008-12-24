@@ -1,13 +1,10 @@
 <div>
-  <h2>Model discussion</h2>
-
   <% if node.postings.empty? %>
   <b>Please start the conversation about this model.</b>
   <% else %>
   <b>Please add to the conversation about this model.</b>
-  <% end %>
-
   <hr />
+  <% end %>
 
   <% node.postings.sort_by {|posting| posting.created_at}.each do |posting| %>
   <h3><%= h(posting.title) %></h3>
