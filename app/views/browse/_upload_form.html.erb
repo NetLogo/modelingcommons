@@ -14,11 +14,8 @@
 
     <tr>
       <td colspan="2">
-        <% if  @model.changeabiility.short_form == 'g' or @model.changeabiility.short_form == 'g'  %>
         <p><%= radio_button_tag :fork, 'overwrite', {:checked => true} %><label for="fork_overwrite">Replace the existing model</label></p>
-        <% else %>
-        <p><i>You cannot replace this model.</i></p>
-        <% end %>
+        <!-- <p><i>You cannot replace this model.</i></p> -->
         <p><%= radio_button_tag :fork, 'child' %><label for="fork_child">Upload a new child</label></p>
         <!-- <p><%= radio_button_tag :fork, 'newmodel' %><label for="fork_newmodel">Upload a new model, unrelated to this one</label></p> -->
         <!-- <p><%= radio_button_tag :fork, 'clone' %><label for="fork_clone">Don't upload anythingjust clone this model</label></p> -->

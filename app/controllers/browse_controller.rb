@@ -5,7 +5,7 @@ require 'diff/lcs/hunk'
 
 class BrowseController < ApplicationController
 
-  prepend_before_filter :get_model_from_id_param, :except => [:index, :list_models, :search, :search_action, :news, :one_node, :create_group, :whats_new, :about]
+  prepend_before_filter :get_model_from_id_param, :except => [:index, :list_models, :list_models_group, :search, :search_action, :news, :one_node, :create_group, :whats_new, :about]
   before_filter :require_login, :except => [:model_contents, :one_applet, :about]
   before_filter :check_visibility_permissions, :only => [:one_model, :model_contents, :one_applet ]
   before_filter :check_changeability_permissions, :only => [:revert_model]
@@ -17,6 +17,19 @@ class BrowseController < ApplicationController
 
   def list_models
     @models = Node.paginate(:page => params[:page], :order => 'name ASC', :conditions => "node_type_id = 1")
+  end
+
+  def list_models_group
+    if params[:id].empty?
+      @group_ids = @person.groups.map {|g| g.id}.join(',')
+      @title = "List of models in all of your groups"
+    else
+      @group_ids = params[:id]
+      @group = Group.find(@group_ids)
+      @title = "List of models in the '#{@group.name}' group"
+    end
+
+    @models = Node.paginate(:page => params[:page], :order => 'name ASC', :conditions => [ "node_type_id = 1 and group_id in (#{@group_ids}) "])
   end
 
   def one_model

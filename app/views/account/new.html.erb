@@ -6,6 +6,8 @@ your e-mail address (so that we can send you notifications, as well as
 act as a unique username), and a password, which ensures the security
 and privacy of your work.</p>
 
+<p>Already registered?  You may <%= link_to "log in", :controller => :account, :action => :login -%>.</p>
+
 <table>
 
 <% form_for :new_person, :url => { :action => :create } do |form| %>

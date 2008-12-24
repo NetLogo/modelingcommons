@@ -3,7 +3,8 @@
     <tr>
         <th>Model</td>
         <th>Tags</td>
-        <th>Most recently modified</td>
+        <th>Group</td>
+        <th>Modified</td>
         <th>Modified by</th>
     </tr>
 
@@ -22,7 +23,14 @@
             <% end %>
             </td>
 
-            <td><%= distance_of_time_in_words(Time.now, model.node_versions.first.updated_at) %></td>
+            <td>
+            <% if model.group.nil? %>
+                (No group)
+            <% else %>
+                <%= model.group.name %>
+            <% end %>
+            </td>
+            <td><%= distance_of_time_in_words(Time.now, model.node_versions.first.updated_at) %> ago</td>
             <td>
                 <ul>
                     <% model.people.each do |person| %>

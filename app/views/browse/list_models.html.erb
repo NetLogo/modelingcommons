@@ -1,5 +1,7 @@
 <% @title = "List of models" %>
 
+<p><%= link_to "See only models in your groups", :controller => :browse, :action => :list_models_group %><,/p>
+
 <%= will_paginate @models %>
 <%= render :partial => "model_list", :object => @models %>
 <%= will_paginate @models %>
