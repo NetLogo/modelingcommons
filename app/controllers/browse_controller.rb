@@ -20,7 +20,7 @@ class BrowseController < ApplicationController
   end
 
   def list_models_group
-    if params[:id].empty?
+    if params[:id].blank?
       @group_ids = @person.groups.map {|g| g.id}.join(',')
       @title = "List of models in all of your groups"
     else

@@ -1,18 +1,20 @@
 <ul>
     <% @person.groups.each do |group| %>
     <% if @group and @group.id == group.id %>
-        <li><%= group.name %></li>
+        <li>Showing models in the <%= group.name %> group</li>
     <% else %>
-        <li><%= link_to group.name, :controller => :browse, :action => :list_models_group, :id => group.id %></li>
+        <li>Only show models in the <%= link_to group.name, :controller => :browse, :action => :list_models_group, :id => group.id %> group</li>
     <% end %>
     <% end %>
 </ul>
 
+<% if @models.empty? %>
+<p>Sorry, no models to show in this group.</p>
+<% else %>
 <%= will_paginate @models %>
 <%= render :partial => "model_list", :object => @models %>
 <%= will_paginate @models %>
-
-<% if not params[:search_term].blank? %>
-    <p><%= link_to "See a complete list of models", :controller => "browse", :action => "list_models" %></p>
 <% end %>
+
+<p><%= link_to "See a complete list of models", :controller => "browse", :action => "list_models" %></p>
 
