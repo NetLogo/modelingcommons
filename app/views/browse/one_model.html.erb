@@ -33,7 +33,7 @@
   });
 </script>
 
-<p><%= link_to "E-mail a friend about this model", :controller => :recommend, :action => :email_friend %> &bull;
+<p><%= link_to "E-mail a friend about this model", :controller => :recommend, :action => :email_friend, :id => @model.id %> &bull;
 
 <% if @recommendations.select {|r| r.person_id == @person.id}.empty? %>
 <%= link_to "Recommend this model", :controller => :recommend, :action => :add_recommendation, :id => @model.id %>

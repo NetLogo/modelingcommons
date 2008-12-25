@@ -157,6 +157,12 @@ class BrowseController < ApplicationController
   end
 
   def search_action
+    if params[:search_term].blank?
+      flash[:notice] = "You must enter a search term in order to search."
+      redirect_to :controller => :account, :action => :mypage
+      return
+    end
+
     logger.warn "[search_action] Now starting search_action"
     @original_search_term = params[:search_term][:search_term]
     search_term = "%#{@original_search_term}%"
