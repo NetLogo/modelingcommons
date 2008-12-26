@@ -4,6 +4,12 @@ body {
     font-size: 15px;
 }
 
+a:hover {
+    color: #3e2;
+    background-color: #ff0;
+    border: 0.5px solid #000;
+}
+
 #main-menu-div {
     top: 0;
     margin-top: -1em;
@@ -27,9 +33,10 @@ body {
     vertical-align: middle;
 }
 
-#main-menu li:hover {
+#main-menu li:hover, #main-menu li a:hover {
     color: #3e2;
     background-color: #fff;
+    border: none;
 }
 
 #main-menu li a {
