@@ -2,7 +2,7 @@
 // This file is automatically included by javascript_include_tag :defaults
 
 $(document).ready(function () {
-                    $('#people-table').dataTable();
+                    //$('#people-table').dataTable();
 
                     $('#search_term_search_term').click(function() {
                                                           if ($(this).attr('value') == 'Search')
