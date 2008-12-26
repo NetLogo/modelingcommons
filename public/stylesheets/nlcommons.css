@@ -46,6 +46,10 @@ body {
     display: inline;
 }
 
+#logged-in-as {
+    margin-top: 2em;
+}
+
 #main-menu, h1, h2, h3, #flash-notice, #logged-in-as {
     font-family: Optima, sans-serif;
     font-weight: bold;
