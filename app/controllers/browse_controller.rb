@@ -165,25 +165,17 @@ class BrowseController < ApplicationController
 
     logger.warn "[search_action] Now starting search_action"
     @original_search_term = params[:search_term][:search_term]
-    search_term = "%#{@original_search_term}%"
 
     @models = Node.find(:all, :conditions => "node_type_id = 1").select {|m| m.name.downcase.index(@original_search_term.downcase)}
 
-    # @models = Node.models.find(:all,
-    # :conditions => ["name ilike ? ", search_term],
-    # :order => 'name')
+    @ferret_results = NodeVersion.find_by_contents(@original_search_term).map {|nv| nv.node}.uniq
 
-    # Get all of the versions
-    #     @tsearch_results =
-    #       NodeVersion.find_by_tsearch(@original_search_term,
-    #                                   :order => 'tsearch_rank DESC').map{|nv| nv.parent}.uniq
-
-    # @info_match_models = @tsearch_results.map{|n| n.info_tab}
+    @info_match_models = @ferret_results.select { |r| r.info_tab.downcase.index(@original_search_term.downcase)}
 
     logger.warn "[search_action] Now checking @author_match_models"
     @author_match_models = Node.find(:all, :conditions => "node_type_id = 1").select {|m| m.people.map { |person| person.fullname}.join(" ").downcase.index(@original_search_term.downcase)}
 
-    # @procedures_match_models = @tsearch_results.map{|n| n.info_tab}
+    @procedures_match_models = @ferret_results.select { |r| r.procedures_tab.downcase.index(@original_search_term.downcase)}
 
     logger.warn "[search_action] Now checking @tag_match_models"
     @tag_match_models =

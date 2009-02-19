@@ -2,10 +2,7 @@ class NodeVersion < ActiveRecord::Base
   belongs_to :node
   belongs_to :person
 
-  # acts_as_tsearch :vectors => {:fields => ["contents"], :locale => ''}
-  # Doesn't work, because 'contents' is a bytea!  Can we change it to text?
-
-  # NodeVersion.find_by_tsearch('who what where')
+  acts_as_ferret :fields => ['contents']
 
   SECTION_SEPARATOR = '@#$#@#$#@'
 
