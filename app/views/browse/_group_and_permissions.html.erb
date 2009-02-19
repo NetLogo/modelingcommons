@@ -1,0 +1,9 @@
+
+<% form_tag(:action => 'set_permissions') do %>
+
+<%= hidden_field_tag 'id', @model.id %>
+
+<%= render :partial => "permission_selector", :locals => {:person => @person, :model => @model} -%>
+<%= render :partial => "group_selector", :locals => {:person => @person, :model => @model} -%>
+
+<% end %>

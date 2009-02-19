@@ -205,6 +205,12 @@ class BrowseController < ApplicationController
     @version_1 = NodeVersion.find(params[:compare_1])
     @version_2 = NodeVersion.find(params[:compare_2])
 
+    if @version_1 == @version_2
+      flash[:notice] = "You cannot compare a version with itself!"
+      redirect_to :back
+      return
+    end
+
     @comparison_results = { }
     @comparison_results['info_tab'] =
       diff_as_string(@version_1.info_tab, @version_2.info_tab)
@@ -234,7 +240,11 @@ class BrowseController < ApplicationController
         @model.changeability_id = write_permission.id
 
         if params[:group] and params[:group][:id]
-          @model.group = Group.find(params[:group][:id])
+          if params[:group][:id].to_i == 0
+            @model.group = nil
+          else
+            @model.group = Group.find(params[:group][:id])
+          end
         end
 
         if @model.save

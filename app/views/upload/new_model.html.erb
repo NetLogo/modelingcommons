@@ -1,27 +1,37 @@
 <% @title = "Upload a NetLogo model" %>
 
+<% form_for (:new_model,
+   :url => { :action => :create_model },
+:html => {:multipart => true}) do |form| %>
+
 <table>
 
-<% form_for (:new_model,
-            :url => { :action => :create_model },
-            :html => {:multipart => true}) do |form| %>
-<tr>
+  <tr>
     <td>Model name</td>
     <td><%= form.text_field :name, :size => 30 %></td>
-</tr>
-<tr>
+  </tr>
+  <tr>
     <td>Model file</td>
     <td><%= form.file_field :uploaded_body %></td>
-</tr>
-<tr>
+  </tr>
+  <tr>
     <td><b>Optional:</b>Preview image, in PNG format</td>
     <td><%= form.file_field :uploaded_preview %></td>
-</tr>
-
-<tr>
-    <td colspan="2"><%= submit_tag "Upload model", :class => "submit" %></td>
-</tr>
-
-<% end %>
+  </tr>
 
 </table>
+
+<hr />
+<h2>Optional: Set the group</h2>
+
+<%= render :partial => "browse/group_selector", :locals => {:person => @person, :model => nil} -%>
+
+<hr />
+<h2>Optional: Set the permissions</h2>
+
+<%= render :partial => "browse/permission_selector", :locals => {:person => @person, :model => nil} -%>
+
+<br />
+<%= submit_tag "Upload model", :class => "submit" %>
+<% end %>
+

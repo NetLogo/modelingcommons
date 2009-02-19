@@ -43,6 +43,23 @@ class UploadController < ApplicationController
                              :description => 'Initial preview version')
         new_version.reload
       end
+
+      # If we got a group and permission settings, set those as well
+      read_permission = PermissionSetting.find_by_short_form(params[:read_permission])
+      write_permission = PermissionSetting.find_by_short_form(params[:write_permission])
+
+      @model.visibility_id = read_permission.id
+      @model.changeability_id = write_permission.id
+
+      if params[:group] and params[:group][:id]
+        if params[:group][:id].to_i == 0
+          @model.group = nil
+        else
+          @model.group = Group.find(params[:group][:id])
+        end
+      end
+
+      @model.save!
     end
 
     flash[:notice] = "Thanks for uploading the new model called '#{model_name}'."

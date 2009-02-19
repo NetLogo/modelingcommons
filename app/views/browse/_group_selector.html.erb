@@ -1,0 +1,12 @@
+<% groups_for_select = @person.groups.to_hash %>
+<% groups_for_select['No group'] = 0 %>
+
+<% if not @person.groups.empty? %>
+    <% if @model and @model.group %>
+        <% model_group_id = @model.group.id %>
+    <% else %>
+        <% model_group_id = 0 %>
+    <% end %>
+<p id="permission-group-selector">Model group: <%= select("group", "id", groups_for_select, :selected => model_group_id) %>&nbsp;&nbsp;<%= submit_tag "Set permissions and group" %></p>
+<% end %>
+
