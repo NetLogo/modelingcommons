@@ -32,6 +32,7 @@
 
     <div id="logged-in-as">
       <% if @person %>
+      <%= image_tag @person.avatar.url %>
       Logged in as <%= link_to @person.fullname, :controller => :account, :action => :mypage -%>
       (<%= link_to_unless_current "Logout", :controller => "account", :action => "logout" %>)
 

@@ -54,15 +54,16 @@ a:hover {
 }
 
 #logged-in-as {
-    margin-top: 2em;
-}
+vertical-align: text-top;
+ float: left;
+ }
 
 #main-menu, h1, h2, h3, #flash-notice, #logged-in-as {
     font-family: Optima, sans-serif;
     font-weight: bold;
 }
 
-h1, #flash-notice, #logged-in-as {
+h1, #flash-notice {
     clear: both;
 }
 

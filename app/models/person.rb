@@ -13,6 +13,10 @@ class Person < ActiveRecord::Base
   has_many :memberships
   has_many :groups, :through => :memberships, :order => :name
 
+  has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }
+
+  attr_protected :avatar_file_name, :avatar_content_type, :avatar_size
+
   attr_accessor :password_confirmation
 
   validates_presence_of :first_name, :last_name, :email_address, :password

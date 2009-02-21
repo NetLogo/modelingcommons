@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20081221071249) do
+ActiveRecord::Schema.define(:version => 20090219135245) do
 
   create_table "email_recommendations", :force => true do |t|
     t.integer  "sender_id"
@@ -118,6 +118,10 @@ ActiveRecord::Schema.define(:version => 20081221071249) do
     t.boolean  "administrator"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
   end
 
   add_index "people", ["email_address"], :name => "index_people_on_email_address"
