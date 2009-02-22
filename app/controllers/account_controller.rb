@@ -22,6 +22,21 @@ class AccountController < ApplicationController
 
   end
 
+  def edit
+  end
+
+  def update
+    begin
+      @person.update_attributes!(params[:person])
+      flash[:notice] = "Successfully updated your account."
+      redirect_to :back
+    rescue Exception => e
+      flash[:notice] = "Error updating your account: '#{e.message}'"
+      redirect_to :back
+    end
+
+  end
+
   def login
   end
 
