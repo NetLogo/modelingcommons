@@ -2,6 +2,7 @@
 <% @title = "Your personal page" %>
 <% else %>
 <% @title = "Page for #{@the_person.fullname}" %>
+<% @headline_avatar = @the_person.avatar.url(:small) %>
 <% end %>
 
 <p>

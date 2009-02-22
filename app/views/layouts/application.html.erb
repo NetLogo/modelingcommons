@@ -51,7 +51,12 @@
     </script>
     <% end -%>
 
-    <h1 id="main-title"><%= @title -%></h1>
+    <h1 id="main-title">
+    <% if @headline_avatar %>
+        <%= image_tag @headline_avatar %>
+    <% end %>
+
+    <%= @title -%></h1>
     <%= yield :layout %>
 
   </body>
