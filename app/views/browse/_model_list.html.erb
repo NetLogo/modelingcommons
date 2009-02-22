@@ -33,11 +33,11 @@
             <td><%= distance_of_time_in_words(Time.now, model.node_versions.first.updated_at) %> ago</td>
             <td>
                 <% if model.people.length == 1 %>
-                    <%= person_link(model.people[0]) %>
+                    <%= image_tag model.people[0].avatar.url -%><%= person_link(model.people[0]) %>
                 <% else %>
                     <ul>
                         <% model.people.each do |person| %>
-                            <li><%= person_link(person) %></li>
+                            <li><%= image_tag @person.avatar.url(:small) %><%= person_link(person) %></li>
                         <% end %>
                     </ul>
                 <% end %>
