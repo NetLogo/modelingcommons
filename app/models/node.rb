@@ -22,6 +22,8 @@ class Node < ActiveRecord::Base
   has_many :email_recommendations
   has_many :recommendations
 
+  has_many :spam_warnings
+
   validates_presence_of :name, :node_type_id, :visibility_id, :changeability_id
   validates_numericality_of :node_type_id, :visibility_id, :changeability_id
 

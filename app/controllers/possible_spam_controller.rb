@@ -7,6 +7,7 @@ class PossibleSpamController < ApplicationController
   end
 
   def list
+    
   end
 
 end

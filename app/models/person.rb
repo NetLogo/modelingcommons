@@ -9,6 +9,7 @@ class Person < ActiveRecord::Base
   has_many :tagged_nodes
   has_many :recommendations
   has_many :email_recommendations
+  has_many :spam_warnings
 
   has_many :memberships
   has_many :groups, :through => :memberships, :order => :name
