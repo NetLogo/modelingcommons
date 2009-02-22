@@ -1,0 +1,2 @@
+module PossibleSpamHelper
+end

@@ -13,7 +13,7 @@ class Person < ActiveRecord::Base
   has_many :memberships
   has_many :groups, :through => :memberships, :order => :name
 
-  has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }
+  has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "/images/missing.jpeg"
 
   attr_protected :avatar_file_name, :avatar_content_type, :avatar_size
 

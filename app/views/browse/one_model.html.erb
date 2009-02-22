@@ -41,6 +41,17 @@
 <% if !@recommendations.empty? %>
 (<%= link_to pluralize(@recommendations.length, "recommendation"), :controller => :recommend, :action => :show_recommendations, :id => @model.id -%> to date)
 <% end %>
+
+&bull;
+
+<% if @spam_warnings.select {|sw| sw.person_id == @person.id}.empty? %>
+<%= link_to "Mark this model as inappropriate", :confirm => "Do you really want to mark this smodel as inappropriate?", :controller => :possible_spam, :action => :mark_as_spam, :id => @model.id %>
+<% end %>
+
+<% if !@spam_warnings.empty? %>
+(You marked as inappropriate <%= distance_of_time_in_words(Time.now, @spam_warnings[0].created_at) %> ago)
+<% end %>
+
 </p>
 
 <div id="menu-div">

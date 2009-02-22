@@ -41,6 +41,7 @@ class BrowseController < ApplicationController
     end
 
     @recommendations = Recommendation.find_all_by_node_id(@model.id) || []
+    @spam_warnings = SpamWarning.find_all_by_node_id(@model.id) || []
   end
 
   def one_node
