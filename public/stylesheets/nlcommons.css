@@ -53,8 +53,9 @@ a:hover {
     display: inline;
 }
 
-#logged-in-as {
- vertical-align: text-top;
+
+
+#menubar-avatar, #logged-in-as {
  float: left;
  margin-left: 1em;
  }

@@ -131,4 +131,15 @@ class TagsController < ApplicationController
     Tag.find(params[:id]).destroy
     redirect_to :action => 'list'
   end
+
+  def follow
+    @tag = Tag.find(params[:id])
+    @tags = @tag.tagged_nodes.sort_by { |tn| tn.created_at }
+
+    respond_to do |format|
+      format.html
+      format.atom
+    end
+  end
+
 end

@@ -285,6 +285,9 @@ class BrowseController < ApplicationController
   end
 
 
+  def as_tree
+
+  end
 
   # ------------------------------------------------------------
   # Below here is PRIVATE!
