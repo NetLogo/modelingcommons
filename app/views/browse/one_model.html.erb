@@ -32,7 +32,7 @@
   });
 </script>
 
-<p><%= link_to "E-mail a friend about this model", :controller => :recommend, :action => :email_friend, :id => @model.id %> &bull;
+<p><%= link_to "Tell a friend", :controller => :recommend, :action => :email_friend, :id => @model.id %> &bull;
 
 <% if @recommendations.select {|r| r.person_id == @person.id}.empty? %>
 <%= link_to "Recommend this model", :controller => :recommend, :action => :add_recommendation, :id => @model.id %>
@@ -45,7 +45,7 @@
 &bull;
 
 <% if @spam_warnings.select {|sw| sw.person_id == @person.id}.empty? %>
-<%= link_to "Mark this model as inappropriate", {:controller => :possible_spam, :action => :mark_as_spam, :id => @model.id}, :confirm => "Do you really want to mark this smodel as inappropriate?" %>
+<%= link_to "Flag as inappropriate", {:controller => :possible_spam, :action => :mark_as_spam, :id => @model.id}, :confirm => "Do you really want to mark this smodel as inappropriate?" %>
 <% end %>
 
 <% if !@spam_warnings.empty? %>

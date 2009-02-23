@@ -1,4 +1,7 @@
 class TagsController < ApplicationController
+
+  before_filter :require_login, :except => [:follow]
+
   def index
     @tags = Tag.find(:all)
   end
@@ -134,11 +137,11 @@ class TagsController < ApplicationController
 
   def follow
     @tag = Tag.find(params[:id])
-    @tags = @tag.tagged_nodes.sort_by { |tn| tn.created_at }
+    @tagged_nodes = @tag.tagged_nodes.sort_by { |tn| tn.created_at }
 
     respond_to do |format|
-      format.html
-      format.atom
+      format.html { @tagged_nodes }
+      format.atom { @tagged_nodes }
     end
   end
 
