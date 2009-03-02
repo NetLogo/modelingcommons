@@ -5,8 +5,8 @@ require 'diff/lcs/hunk'
 
 class BrowseController < ApplicationController
 
-  prepend_before_filter :get_model_from_id_param, :except => [:index, :list_models, :list_models_group, :search, :search_action, :news, :one_node, :create_group, :whats_new, :about]
-  before_filter :require_login, :except => [:model_contents, :one_applet, :about]
+  prepend_before_filter :get_model_from_id_param, :except => [:index, :list_models, :list_models_group, :search, :search_action, :news, :one_node, :create_group, :whats_new, :about, :foo]
+  before_filter :require_login, :except => [:model_contents, :one_applet, :about, :follow]
   before_filter :check_visibility_permissions, :only => [:one_model, :model_contents, :one_applet ]
   before_filter :check_changeability_permissions, :only => [:revert_model]
 
@@ -255,38 +255,25 @@ class BrowseController < ApplicationController
   end
 
   def whats_new
-    how_new_is_new = 1.month.ago
-
-    @recent_members = Person.find(:all,
-                                  :order => 'created_at DESC',
-                                  :conditions => ["created_at >= ?", how_new_is_new ])
-
-    @recent_models = Node.models.find(:all,
-                                      :order => 'created_at DESC',
-                                      :conditions => ["created_at >= ?", how_new_is_new ])
-
-    @updated_models = Node.models.find(:all,
-                                       :order => 'updated_at DESC',
-                                       :conditions => ["created_at >= ?", how_new_is_new ])
-
-    @recent_postings = Posting.find(:all,
-                                    :order => 'created_at DESC',
-                                    :conditions => ["created_at >= ?", how_new_is_new ])
-
-    @recent_tags = Tag.find(:all, :order => 'created_at DESC',
-                            :conditions => ["created_at >= ?", how_new_is_new ])
-
-    @recent_tagged_models = TaggedNode.find(:all, :order => 'created_at DESC',
-                                            :conditions => ["created_at >= ?", how_new_is_new ])
-
-    @all_whats_new = [@recent_members, @recent_models, @updated_models, @recent_postings,
-                      @recent_tags, @recent_tagged_models].flatten.sort_by {|n| n.updated_at}.reverse
-
+    @all_whats_new = all_whats_new
   end
 
 
   def as_tree
 
+  end
+
+  def follow
+    @node_events = @node.node_versions
+    @node_events.sort_by { |e| e.created_at }
+
+    respond_to do |format|
+      format.html { @node_events }
+      format.atom { @node_events }
+    end
+  end
+
+  def foo
   end
 
   # ------------------------------------------------------------

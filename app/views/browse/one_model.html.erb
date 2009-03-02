@@ -5,32 +5,9 @@
 </div>
 
 <script type="text/javascript">
-  // initialise plugins
-  jQuery(function(){
-
-  // Start Superfish menu
-  jQuery('ul.sf-menu').superfish({ pathClass: 'current' });
-
-  // Function to handle clicks
-  handle_menu_click = function() {
-
-  if (this.hash == '')
-  {
-  return false;
-  }
-
-  $('.one-model-div').hide();     // Hide all of the divs
-  $('a').removeClass('current');  // Remove "current" class
-
-  $(this).addClass('current');
-  $(this.hash).show(); // Show the one for what was clicked on
-  return false;
-  }
-
-  $('ul.sf-menu li a').click(handle_menu_click);
-  $('ul.sf-menu li ul li a').click(handle_menu_click);
-  });
 </script>
+
+<!-- <div id="model-atom-feed"><%= link_to image_tag("feed.png"), :controller => :browse, :action => :follow, :id => @model.id, :format => :atom %> Follow activity about <%= @model.name -%> in your feed reader</div> -->
 
 <p><%= link_to "Tell a friend", :controller => :recommend, :action => :email_friend, :id => @model.id %> &bull;
 

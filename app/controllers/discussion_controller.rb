@@ -4,12 +4,6 @@ class DiscussionController < ApplicationController
     params[:new_posting][:person_id] = @person.id
     @posting = Posting.create(params[:new_posting])
 
-    if @posting.save
-      flash[:notice] = "Thanks for contributing to our discussion!"
-    else
-      flash[:notice] = "Error saving your posting.  Sorry!"
-    end
-
     # Now send e-mail notification
     # discussion_people = @posting.nlmodel.postings.map { |p| p.person}
     # discussion_people << @posting.nlmodel.all_people
@@ -18,10 +12,22 @@ class DiscussionController < ApplicationController
     # discussion_people.delete_if {|p| p == @person}
 
     # if not discussion_people.empty?
-      # Notifications.deliver_updated_discussion(discussion_people, @posting.nlmodel)
+    # Notifications.deliver_updated_discussion(discussion_people, @posting.nlmodel)
     # end
 
-    redirect_to :back, :anchor => "discuss-div"
+    respond_to do |format|
+
+      format.html do
+        if @posting.save
+          flash[:notice] = "Thanks for contributing to our discussion!"
+        else
+          flash[:notice] = "Error saving your posting.  Sorry!"
+        end
+
+        redirect_to :back, :anchor => "discussion-table"
+      end
+      format.js
+    end
   end
 
   def create
@@ -30,3 +36,4 @@ class DiscussionController < ApplicationController
   def delete
   end
 end
+

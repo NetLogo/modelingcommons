@@ -16,6 +16,38 @@ $(document).ready(function () {
                                                  $(this).attr({'value': ''});
                                                }
                                              });
+                    // Start Superfish menu
+                    jQuery('ul.sf-menu').superfish({ pathClass: 'current' });
+
+                    // Function to handle clicks
+                    handle_menu_click = function() {
+
+                      if (this.hash == '')
+                      {
+                        return false;
+                      }
+
+                      $('.one-model-div').hide();     // Hide all of the divs
+                      $('a').removeClass('current');  // Remove "current" class
+
+                      $(this).addClass('current');
+                      $(this.hash).show(); // Show the one for what was clicked on
+                      return false;
+                    }
+
+                    $('ul.sf-menu li a').click(handle_menu_click);
+                    $('ul.sf-menu li ul li a').click(handle_menu_click);
+
+                    $(".empty-on-click").livequery('click', function() {
+                                                     if (this.hash == '') ($(this).attr('value') == 'Tag name')
+                                                     {
+                                                       $(this).attr({'value': ''});
+                                                     }
+                                                   });
+
+                    $(".complete").autocomplete('/tags/complete_tags',
+                                                {extraParams: {foo: 5 } });
+
                   });
 
 $('#people-table').ready(function () {

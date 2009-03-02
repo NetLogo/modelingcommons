@@ -39,6 +39,10 @@ class Node < ActiveRecord::Base
   # Grab children of various sorts
   # ------------------------------------------------------------
 
+  def person
+    self.node_versions.sort { |n| n.created_at}.last.person
+  end
+
   def children_of_id(id)
     self.children.select { |v| v.node_type_id == id}
   end

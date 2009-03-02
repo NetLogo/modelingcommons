@@ -1,0 +1,91 @@
+<% @title = "Graph" %>
+
+<p>Hello!</p>
+<p>Model ID '<%= @model.id -%>', named '<%= @model.name -%>'.</p>
+
+<% if @model.parent %>
+    <p>Parent ID: '<%= @model.parent.id -%>'</p>
+<% else %>
+    <p>No parent</p>
+<% end %>
+
+<p>Child IDs: <p>
+
+  <ul>
+    <% @model.children.each do |child| %>
+    <li><%= child.id -%></li>
+    <% end %>
+  </ul>
+
+<div id="infovis"></div>
+
+<script type="text/javascript">
+function init() {
+  //Set node interpolation to linear (can also be 'polar')
+  Config.interpolation = "linear";
+  //Set distance for concentric circles
+  Config.levelDistance = 100;
+
+  var json= //data defined previously
+
+  //Create a new canvas instance.
+  var canvas = new Canvas('mycanvas', {
+                            //Where to inject the canvas. Any div container will do.
+                            'injectInto':'infovis',
+                            //width and height for canvas. Default's to 200.
+                            'width': 900,
+                            'height':500,
+                            //Canvas styles
+                            'styles': {
+                              'fillStyle': '#ccddee',
+                              'strokeStyle': '#772277'
+                            },
+                            //Add a background canvas for plotting
+                            //concentric circles.
+                            'backgroundCanvas': {
+                              //Add Canvas styles for the bck canvas.
+                              'styles': {
+                                'fillStyle': '#444',
+                                'strokeStyle': '#444'
+                              },
+                              //Add the initialization and plotting functions.
+                              'impl': {
+                                'init': $empty,
+                                'plot': function(canvas, ctx) {
+                                  var times = 6, d = Config.levelDistance;
+                                  var pi2 = Math.PI*2;
+                                  for(var i=1; i<=times; i++) {
+                                    ctx.beginPath();
+                                    ctx.arc(0, 0, i * d, 0, pi2, true);
+                                    ctx.stroke();
+                                    ctx.closePath();
+                                  }
+                                }
+                              }
+                            }
+                          });
+
+  var rgraph= new RGraph(canvas,  {
+                           //Add a controller to make the tree move on click.
+                           onCreateLabel: function(domElement, node) {
+                             var d = $(domElement);
+                             d.addEvents({
+                                           'click': function() {
+                                             rgraph.onClick(d.id);
+                                           }
+                                         });
+                           }
+                         });
+
+  //load tree from tree data.
+  rgraph.loadTreeFromJSON(json);
+  //compute positions
+  rgraph.compute();
+  //make first plot
+  rgraph.plot();
+}
+
+$(document).ready(function() {
+    init();
+});
+</script>

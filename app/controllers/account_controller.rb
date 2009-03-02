@@ -1,6 +1,6 @@
 class AccountController < ApplicationController
 
-  before_filter :require_login, :except => [:new, :create, :login, :login_action, :send_password, :send_password_action]
+  before_filter :require_login, :except => [:new, :create, :login, :login_action, :send_password, :send_password_action, :follow]
 
   def new
     @new_person = Person.new
@@ -190,6 +190,18 @@ class AccountController < ApplicationController
       redirect_to :back
     end
 
+  end
+
+  def follow
+    @the_person = Person.find(params[:id])
+    @all_whats_new = all_whats_new
+    # @person_whats_new = @all_whats_new.select { |wn| wn.person.id == @the_person.id}
+     @person_whats_new = @all_whats_new
+
+    respond_to do |format|
+      format.html { @person_whats_new }
+      format.atom { @person_whats_new }
+    end
   end
 
 end

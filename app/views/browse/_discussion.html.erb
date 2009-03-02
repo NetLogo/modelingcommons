@@ -6,19 +6,15 @@
   <hr />
   <% end %>
 
-  <% node.postings.sort_by {|posting| posting.created_at}.each do |posting| %>
-  <h3><%= h(posting.title) %></h3>
-  <span>by <%= image_tag posting.person.avatar.url %> <%= person_link posting.person %>, <%= distance_of_time_in_words(Time.now, posting.created_at) -%> ago </span><br />
-  <span><%= h(posting.body) %></span><br />
-  <br />
-  <% end %>
+  <table id="discussion">
+  <%= render :partial => "discussion/one_posting", :collection => node.postings.sort_by {|posting| posting.created_at}, :as => :posting -%>
+  </table>
 
-<hr />
+  <hr />
 
-  <table>
-    <% form_for(:new_posting,
-       :url => { :controller => "discussion",
-    :action => :new }) do |form| %>
+  <% remote_form_for(:new_posting,
+     :url => { :controller => "discussion", :action => :new }) do |form| %>
+  <table id="posting-table">
     <tr>
       <td>Title</td>
       <td><%= form.text_field :title %>
@@ -29,13 +25,13 @@
         <%= form.hidden_field :node_id, {:value => node.id} %></td>
     </tr>
     <tr>
-      <td colspan="2"><%= form.check_box :is_question %><label for="new_posting_is_question">Display this question on the Modeling Commons question list</label></td>
+      <td colspan="2"><%= form.check_box :is_question %><label for="new_posting_is_question">This is a question that I would like answered</label></td>
     </tr>
 
     <tr>
-      <td colspan="2"><%= submit_tag "Submit comment" %></td>
+      <td colspan="2"><%= submit_tag 'Submit comment' %></td>
     </tr>
 
-    <% end %>
   </table>
+  <% end %>
 </div>

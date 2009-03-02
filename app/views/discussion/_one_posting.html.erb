@@ -1,0 +1,5 @@
+<tr><td colspan="2"><%= h(posting.title) %></td>
+    <td>by <%= image_tag posting.person.avatar.url %> <%= person_link posting.person %>, <%= distance_of_time_in_words(Time.now, posting.created_at) -%> ago </td>
+    <td><%= h(posting.body) %></td>
+    <td>&nbsp;</td>
+</tr>
