@@ -15,6 +15,7 @@ class TagsController < ApplicationController
     @node = Node.find(params[:node_id])
 
     flash[:notice] = ''
+    @new_tagged_nodes = [ ]
 
     new_tags.each_with_index do |tag_name, i|
       tag_name = tag_name.downcase.strip
@@ -68,6 +69,7 @@ class TagsController < ApplicationController
                                :person_id => @person.id,
                                :node_id => @node.id,
                                :comment => comment)
+        @new_tagged_nodes << tn
 
         begin
           tn.save!
@@ -91,7 +93,12 @@ class TagsController < ApplicationController
       end
     end
 
-    redirect_to :back
+    respond_to do |format|
+      format.html { redirect_to :back }
+      format.js
+    end
+
+
   end
 
   def one_tag

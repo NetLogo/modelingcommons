@@ -2,16 +2,14 @@
 <p><i>No tags</i></p>
 <% else -%>
 <p>Existing tags:</p>
-<ul>
-  <% @model.tagged_nodes.sort_by {|t| t.updated_at}.each do |tm| -%>
-  <li><%= link_to tm.tag.name, :controller => "tags", :action => "one_tag", :id => tm.tag_id -%> (<%= tm.comment -%>), by <%= person_link(tm.person) -%> <%= distance_of_time_in_words(Time.now, tm.updated_at) -%> ago </li>
-  <% end -%>
-</ul>
+<table id="existing_tags">
+  <%= render :partial => "tags/one_tag", :collection => @model.tagged_nodes.sort_by {|tn| tn.updated_at}, :as => :tm -%>
+</table>
 <% end -%>
 
 <div id="add-tags">
   <h2>Add one or more tags:</h2>
-  <% form_tag :controller => "tags", :action => :new do |form| -%>
+  <% remote_form_for(:new_tag, :url => {:controller => "tags", :action => :new}) do |form| -%>
   <%= hidden_field_tag :node_id, @model.id -%>
   <div id="tags">
     <%= render :partial => "add_tag", :locals => {:form => form} -%>
