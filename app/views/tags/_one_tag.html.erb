@@ -1,0 +1,7 @@
+<tr>
+  <td><%= link_to tm.tag.name, :controller => "tags", :action => "one_tag", :id => tm.tag_id -%></td>
+  <td><%= tm.comment -%></td>
+  <td>by <%= person_link(tm.person) -%></td>
+  <td><%= distance_of_time_in_words(Time.now, tm.updated_at) -%> ago</td>
+</tr>
+
