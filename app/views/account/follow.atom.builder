@@ -9,32 +9,32 @@ xml.feed :xmlns=>'http://www.w3.org/2005/Atom' do
    EOF
   end
 
-  xml.title   "Actions by the user '#{@the_person.fullname}'"
-  xml.link    :rel=>'self',
-  :href=>url_for(:only_path=>false, :action=>'posts', :path=>['index.atom'])
-  xml.link    :href=>url_for(:action=>'posts', :path=>nil)
-  xml.id      :href=>url_for(:only_path=>false, :action=>'posts', :path=>nil)
+  xml.title   "Activity by the user '#{@the_person.fullname}'"
+  xml.link    :href=>url_for(:only_path=>false, :controller => 'account', :action=>'follow', :id => @the_person.id, :format => 'atom')
   xml.updated Time.now.iso8601
   xml.author  { xml.name 'Modeling Commons, CCL, Northwestern University' }
 
-  @person_whats_new.each do |entry|
+  @new_things.each do |thing|
     xml.entry do
-      xml.title   <%= whats_new_text(@entry) %>
-        xml.link    :href => url_for(:action => 'one_model').to_s
+      xml.title   thing[:description]
+      xml.link    :href=>url_for(:only_path => false, :controller => 'browse', :action => 'one_model', :id => thing[:node_id])
       xml.id      Time.now
-      xml.updated entry.created_at
-      xml.author  { xml.name entry.person.fullname } if entry.person
+      xml.updated thing[:date]
+      xml.author  @the_person.fullname
       xml.summary do
         xml.div :xmlns=>'http://www.w3.org/1999/xhtml' do
-          xml << "<p><%= whats_new_text(@entry) %></p>"
+          xml << thing[:title]
         end
       end
       xml.content do
         xml.div :xmlns=>'http://www.w3.org/1999/xhtml' do
-          xml << "<p><%= whats_new_text(@entry) %></p>"
+          xml << "<h1>#{thing[:title]}</h1>"
+          xml << "<p>#{thing[:contents]}</p>"
+          xml << "<hr />"
           xml << "<p>This took place in the #{link_to 'Modeling Commons', :controller => :account, :action => :index}, where #{link_to 'NetLogo', 'http://ccl.northwestern.edu/netlogo'} modelers can share and collaboratively build models.  The Modeling Commons is written by Reuven M. Lerner, a PhD candidate in Learning Sciences at the #{link_to 'Center for Collaborative Learning and Computer-Based Modeling', 'http://ccl.northwestern.edu'} (directed by Uri Wilensky) at Northwestern University.</p>"
         end
       end
     end
   end
+
 end

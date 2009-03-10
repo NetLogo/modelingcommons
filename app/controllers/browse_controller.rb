@@ -188,12 +188,6 @@ class BrowseController < ApplicationController
     @news_items = NewsItem.find(:all, :order => "created_at DESC")
   end
 
-  def rss
-    @updates = NodeVersion.find(:all,
-                                :limit => 25,
-                                :order => "updated_at DESC")
-  end
-
   def compare_versions
     @version_1 = NodeVersion.find(params[:compare_1])
     @version_2 = NodeVersion.find(params[:compare_2])

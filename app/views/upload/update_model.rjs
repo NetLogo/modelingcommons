@@ -1,0 +1,6 @@
+page[:flash].remove
+page.insert_html :after, "logged-in-as", "<div id=\"flash-notice\">#{@notice}</div>"
+
+page.delay(3) do
+  page.visual_effect :fade, 'flash-notice'
+end
