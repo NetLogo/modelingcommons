@@ -102,6 +102,7 @@ class BrowseController < ApplicationController
 
     send_file(zipfile_name,
               :filename => "#{download_model_name}.zip",
+              :type => 'application/zip',
               :disposition => "inline")
   end
 
