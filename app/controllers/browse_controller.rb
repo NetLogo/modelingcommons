@@ -74,7 +74,7 @@ class BrowseController < ApplicationController
       return
     end
 
-    if @model.latest_preview.empty?
+    if @model.latest_preview.blank?
       redirect_to "/images/no-preview.png"
       return
     else
@@ -219,7 +219,7 @@ class BrowseController < ApplicationController
   end
 
   def set_permissions
-    if params[:read_permission].empty? or params[:write_permission].empty?
+    if params[:read_permission].blank? or params[:write_permission].blank?
       flash[:notice] = 'Both read and write permissions must be specified. '
     else
 
@@ -241,17 +241,12 @@ class BrowseController < ApplicationController
         end
 
         if @model.save
-          flash[:notice] = "Successfully set permissions for '#{@model.name}'. "
+          @outcome = 'good'
         else
-          flash[:notice] = "Error setting permissions for '#{@model.name}': "
-          @model.errors.each do |error|
-            flash[:notice] << error
-          end
+          @outcome = 'bad'
         end
       end
     end
-
-    redirect_to :back, :anchor => "permissions-div"
   end
 
   def whats_new
