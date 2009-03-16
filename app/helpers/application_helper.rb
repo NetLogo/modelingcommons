@@ -57,7 +57,10 @@ module ApplicationHelper
     else
       link_to(person.fullname, :controller => :account, :action => :mypage, :id => person.id)
     end
+  end
 
+  def group_link(group)
+    link_to(group.name, :controller => :membership, :action => :one_group, :id => group.id)
   end
 
   def model_link(node)

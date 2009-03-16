@@ -93,7 +93,7 @@
     <% else %>
     <ul>
       <% @group_model_events.each do |model| %>
-      <li>(Group: <%= model.group.name %>) <%= whats_new_text(model) %></li>
+      <li>(Group: <%= group_link(model.group) %>) <%= whats_new_text(model) %></li>
       <% end %>
     </ul>
     <% end %>

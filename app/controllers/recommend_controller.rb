@@ -6,7 +6,7 @@ class RecommendController < ApplicationController
   before_filter :check_changeability_permissions, :only => [:revert_model]
 
   def email_friend
-    @node = Node.find(:first, params[:node_id])
+    @node = Node.find(params[:id])
   end
 
   def email_friend_action

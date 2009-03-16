@@ -14,7 +14,7 @@ class Person < ActiveRecord::Base
   has_many :memberships
   has_many :groups, :through => :memberships, :order => :name
 
-  has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "/images/missing.jpeg"
+  has_attached_file :avatar, :styles => { :medium => "200x200>", :thumb => "40x40>" }, :default_url => "/images/default-person.png"
 
   attr_protected :avatar_file_name, :avatar_content_type, :avatar_size
 

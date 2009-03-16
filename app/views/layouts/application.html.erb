@@ -16,6 +16,8 @@
     <%= javascript_include_tag 'jquery.autocomplete' %>
     <%= javascript_include_tag 'hoverIntent' %>
     <%= javascript_include_tag 'superfish' %>
+    <%= javascript_include_tag 'js-class' %>
+    <%= javascript_include_tag 'bluff-min' %>
     <%= javascript_include_tag 'nlcommons' %>
   </head>
 
@@ -35,7 +37,7 @@
 
     <% if @person %>
     <div id="menubar-avatar">
-      <%= image_tag @person.avatar.url %>
+      <%= image_tag @person.avatar.url(:thumb) %>
     </div>
     <% end %>
 

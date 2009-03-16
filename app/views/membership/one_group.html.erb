@@ -1,0 +1,9 @@
+<% @title = "Group info for '#{@group.name}'" %>
+
+<h2>Members of the <%= @group.name %> group:</h2>
+
+<ul>
+  <% @group.people.sort_by {|p| p.last_name + p.first_name}.each do |person| %>
+  <li><%= person_link(person) -%></li>
+  <% end %>
+</ul>

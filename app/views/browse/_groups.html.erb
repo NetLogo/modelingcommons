@@ -13,7 +13,7 @@
   <% else %>
   <ul>
     <% @person.memberships.each do |membership| %>
-    <li><%= membership.group.name %>
+    <li><%= group_link(membership.group) %>
       (<%= link_to "leave", :controller => :membership, :action => :leave, :id => membership.id %>)
     </li>
     <% end %>
@@ -37,7 +37,7 @@
   <% else %>
   <ul>
     <% @person.administrated_groups.each do |group| %>
-    <li><%= group.name %></li>
+    <li><%= group_link(group) %></li>
     <ul>
       <% group.memberships.each do |membership| %>
       <li><%= membership.person.fullname -%>

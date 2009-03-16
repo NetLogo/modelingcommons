@@ -166,7 +166,7 @@ class MembershipController < ApplicationController
     end
 
     @groups = Group.find(:all,
-                        :conditions => ["lower(name) = ? ", group_name_to_find])
+                         :conditions => ["lower(name) = ? ", group_name_to_find])
 
     if @groups.empty?
       flash[:notice] = "Sorry, but no groups have the name '#{group_name_to_find}'."
@@ -174,6 +174,19 @@ class MembershipController < ApplicationController
       return
     end
 
+  end
+
+  def one_group
+    if params[:id].blank?
+      flash[:notice] = "Sorry, but you must indicate a group ID."
+      redirect_to :back
+    end
+
+    @group = Group.find(params[:id])
+
+  rescue
+    flash[:notice] = "Sorry, but no group has an ID of '#{params[:id]}'."
+    redirect_to :controller => :account, :action => :mypage
   end
 
 end
