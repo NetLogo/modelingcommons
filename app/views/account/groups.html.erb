@@ -39,7 +39,7 @@
   <% else %>
   <ul>
     <% @person.administrated_groups.each do |group| %>
-    <li><%= grop_link(group) %></li>
+    <li><%= group_link(group) %></li>
     <ul>
       <% group.memberships.each do |membership| %>
       <li>
