@@ -28,7 +28,7 @@
         <li><%= link_to "Models", :controller => :browse, :action => :list_models %></li>
         <li><%= link_to "Groups", :controller => :account, :action => :groups %></li>
         <li><%= link_to "Tags", :controller => :account, :action => :tags, :id => @person.id  %></li>
-        <li><%= link_to_unless_current "About us", :controller => "browse", :action => "about" %></li>
+        <li><%= link_to_unless_current "Aboutus", :controller => "browse", :action => "about" %></li>
         <li><% form_for(:search_term, :url => { :controller => "browse", :action => :search_action }, :html => { :id => "navbar-search-form"}) do |form| -%> <%= form.text_field :search_term, :value => 'Search', :size => 10 -%><% end -%></li>
 
       </ul>

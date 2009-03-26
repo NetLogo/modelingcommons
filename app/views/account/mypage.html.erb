@@ -9,13 +9,6 @@
 <div id="person-atom-feed"><%= link_to image_tag("feed.png"), :controller => :account, :action => :follow, :id => @the_person.id, :format => :atom %> Follow <%= @the_person.first_name -%>'s activity in your feed reader</div>
 <% end %>
 
-<p>
-  <% if @person == @the_person %>
-  <%= link_to "Jump to a random model", :controller => :browse, :action => :view_random_model %> &bull;
-  <% end %>
-  <%= link_to "All recent site activity", :controller => :browse, :action => :whats_new %>
-</p>
-
 <div id="right-news-box">
   <div id="viewed-models" class="news-box">
     <h2>Most-viewed models</h2>

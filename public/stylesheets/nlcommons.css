@@ -83,7 +83,7 @@ h3, #menu-bar {
 
 #person-atom-feed {
     position: absolute;
-    top: 6em;
+    top: 3em;
     left: 20em;
 }
 
@@ -138,7 +138,7 @@ div ul.subsection_tabs li.tab a:hover {
 
 #left-news-box, #right-news-box {
     position: absolute;
-    top: 11em;
+    top: 6em;
     width: 45%;
 }
 
