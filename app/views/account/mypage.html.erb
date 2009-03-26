@@ -11,12 +11,9 @@
 
 <p>
   <% if @person == @the_person %>
-  <%= link_to "Edit account details", :controller => :account, :action => :edit %> &bull;
-  <%= link_to "Manage your groups", :controller => :account, :action => :groups %> &bull;
   <%= link_to "Models in your groups", :controller => :browse, :action => :list_models_group %> &bull;
   <%= link_to "Jump to a random model", :controller => :browse, :action => :view_random_model %> &bull;
   <% end %>
-  <%= link_to "All models", :controller => :browse, :action => :list_models %> &bull;
   <%= link_to "All recent site activity", :controller => :browse, :action => :whats_new %>
 </p>
 

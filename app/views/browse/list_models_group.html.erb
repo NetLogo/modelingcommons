@@ -7,7 +7,7 @@
     <% if @group and @group.id == person_group.id %>
         <li><b>Now showing '<%= pluralize(person_group.nodes.length, "model") %>' in the '<%= group_link(person_group) %>' group</b></li>
     <% else %>
-        <li>Only show the <%= pluralize(person_group.nodes.length, "model") %> in the '<%= link_to person_group.name, :controller => :browse, :action => :list_models_group, :id => person_group.id %>' group</li>
+        <li>Only show the <%= pluralize(person_group.nodes.length, "model") %> in the '<%= link_to group_link(person_group), :controller => :browse, :action => :list_models_group, :id => person_group.id %>' group</li>
     <% end %>
     <% end %>
 </ul>
