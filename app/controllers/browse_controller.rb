@@ -5,7 +5,7 @@ require 'diff/lcs/hunk'
 
 class BrowseController < ApplicationController
 
-  prepend_before_filter :get_model_from_id_param, :except => [:index, :list_models, :list_models_group, :search, :search_action, :news, :one_node, :create_group, :whats_new, :about, :stuff, :spider]
+  prepend_before_filter :get_model_from_id_param, :except => [:index, :list_models, :list_models_group, :search, :search_action, :news, :one_node, :create_group, :whats_new, :about, :stuff, :spider, :view_random_model]
   before_filter :require_login, :except => [:model_contents, :one_applet, :about, :follow]
   before_filter :check_visibility_permissions, :only => [:one_model, :model_contents, :one_applet ]
   before_filter :check_changeability_permissions, :only => [:revert_model]
@@ -298,6 +298,10 @@ class BrowseController < ApplicationController
       format.html { @new_things }
       format.atom { @new_things }
     end
+  end
+
+  def view_random_model
+    redirect_to :controller => :browse, :action => :one_model, :id => Node.models.rand.id
   end
 
   # ------------------------------------------------------------

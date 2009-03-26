@@ -14,6 +14,7 @@
   <%= link_to "Edit account details", :controller => :account, :action => :edit %> &bull;
   <%= link_to "Manage your groups", :controller => :account, :action => :groups %> &bull;
   <%= link_to "Models in your groups", :controller => :browse, :action => :list_models_group %> &bull;
+  <%= link_to "Jump to a random model", :controller => :browse, :action => :view_random_model %> &bull;
   <% end %>
   <%= link_to "All models", :controller => :browse, :action => :list_models %> &bull;
   <%= link_to "All recent site activity", :controller => :browse, :action => :whats_new %>
@@ -65,7 +66,7 @@
 <div id="left-news-box">
   <div class="news-box">
     <% if @person == @the_person %>
-    <h2>Recent activity in your models</h2>
+    <h2>Recent activity in <%= link_to 'your models', :controller => :account, :action => :models, :id => @the_person.id -%></h2>
     <% else %>
     <h2>Recent activity in <%= @the_person.first_name %>'s models</h2>
     <% end %>
@@ -83,25 +84,7 @@
 
   <div class="news-box">
     <% if @person == @the_person %>
-    <h2>Recent activity in your groups' models</h2>
-    <% else %>
-    <h2>Recent activity in <%= @the_person.first_name %>'s groups' models</h2>
-    <% end %>
-
-    <% if @group_model_events.empty? %>
-    <p>No recent activity</p>
-    <% else %>
-    <ul>
-      <% @group_model_events.each do |model| %>
-      <li>(Group: <%= group_link(model.group) %>) <%= whats_new_text(model) %></li>
-      <% end %>
-    </ul>
-    <% end %>
-  </div>
-
-  <div class="news-box">
-    <% if @person == @the_person %>
-    <h2>Recent activity in your tags</h2>
+    <h2>Recent activity in <%= link_to "your tags", :controller => :account, :action => :tags -%> </h2>
     <% else %>
     <h2>Recent activity in <%= @the_person.first_name %>'s tags</h2>
     <% end %>

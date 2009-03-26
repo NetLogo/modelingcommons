@@ -22,7 +22,7 @@
 &bull;
 
 <% if @spam_warnings.select {|sw| sw.person_id == @person.id}.empty? %>
-<%= link_to "Flag as inappropriate", {:controller => :possible_spam, :action => :mark_as_spam, :id => @model.id}, :confirm => "Do you really want to mark this smodel as inappropriate?" %>
+<%= link_to "Flag as inappropriate", {:controller => :possible_spam, :action => :mark_as_spam, :id => @model.id}, :confirm => "Do you really want to mark this model as inappropriate?" %>
 <% end %>
 
 <% if !@spam_warnings.empty? %>

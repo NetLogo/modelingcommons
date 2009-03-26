@@ -241,4 +241,8 @@ class AccountController < ApplicationController
     end
   end
 
+  def models
+
+  end
+
 end

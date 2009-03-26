@@ -13,7 +13,7 @@
         <tr>
             <td>
                 <img src="/browse/display_preview/<%= model.id %>" width="30" height="30" />
-                <%= link_to model.name, :controller => "browse", :action => "one_model", :id => model.id %><%= render :partial => "preview_image", :locals => {:model => @model} -%>
+                <%= link_to model.name, :controller => "browse", :action => "one_model", :id => model.id %><%= render :partial => "browse/preview_image", :locals => {:model => @model} -%>
             </td>
             <td>
             <% if model.tags.empty? %>
@@ -27,7 +27,7 @@
             <% if model.group.nil? %>
                 (No group)
             <% else %>
-                <%= model.group.name %>
+                <%= group_link(model.group) %>
             <% end %>
             </td>
             <td><%= distance_of_time_in_words(Time.now, model.node_versions.first.updated_at) %> ago</td>

@@ -4,6 +4,6 @@
 
 <ul>
   <% @group.people.sort_by {|p| p.last_name + p.first_name}.each do |person| %>
-  <li><%= person_link(person) -%></li>
+  <li><%= image_tag person.avatar.url(:thumb) %>&nbsp;<%= person_link(person) -%></li>
   <% end %>
 </ul>

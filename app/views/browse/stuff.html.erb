@@ -1,0 +1,19 @@
+<% @title = 'Stuff!' %>
+
+<canvas id="example"></canvas>
+
+<script type="text/javascript">
+  var g = new Bluff.Net('example', 600);
+  g.theme_37signals();
+  g.title = 'Models';
+
+  g.data('A', [1, 2, 3]);
+  g.data('B', [2, 3, 4]);
+  g.data('C', [5, 4, 3]);
+  g.data('D', [3, 4, 5]);
+  g.data('E', [1, 1, 5]);
+
+  g.labels = {0: '2002', 1: '2003', 2: '2004', 3: '2005', 4: '2006'};
+
+  g.draw();
+</script>

@@ -1,0 +1,3 @@
+@new_tagged_nodes.each do |tn|
+  page.insert_html :bottom, :existing_tags, :partial => 'one_tag', :locals => { :tm => tn}
+end

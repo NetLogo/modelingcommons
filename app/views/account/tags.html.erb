@@ -1,0 +1,11 @@
+<% @title = 'Your tags' %>
+
+<ul>
+  <% @person.tags.sort_by {|t| t.name}.each do |tag| %>
+  <li><%= link_to tag.name, :controller => :tags, :action => :one_tag, :id => tag.id -%>
+    <% unless tag.nodes.empty? %>
+    (applied to <%= tag.nodes.sort_by {|m| m.name}.map {|m| m.name}.to_sentence -%>)
+    <% end %>
+  </li>
+  <% end %>
+</ul>
