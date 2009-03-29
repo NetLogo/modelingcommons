@@ -13,13 +13,13 @@ module ApplicationHelper
     elsif item.is_a?(TaggedNode)
       this_user_did_it = true if item.person == @person
 
-      output << "#{person_link(item.person)} applied the tag #{link_to(item.tag.name, :controller => :tags, :action => :one_tag, :id => item.tag.id)} to the model #{model_link(item.node)}, #{distance_of_time_in_words(Time.now, item.created_at)} ago."
+      output << "#{model_link(item.node)} was tagged #{link_to(item.tag.name, :controller => :tags, :action => :one_tag, :id => item.tag.id)} by #{person_link(item.person)}, #{distance_of_time_in_words(Time.now, item.created_at)} ago."
 
     elsif item.is_a?(Node)
       original_node_author = item.node_versions.sort_by { |nv| nv.updated_at}.reverse.first.person
       this_user_did_it = true if original_node_author == @person
 
-      output << "The model #{link_to(item.name, :controller => :browse, :action => :one_model, :id => item.id)} was updated by #{person_link(original_node_author)} #{distance_of_time_in_words(Time.now, item.created_at)} ago."
+      output << "#{model_link(item)} was updated by #{person_link(original_node_author)} #{distance_of_time_in_words(Time.now, item.created_at)} ago."
 
     elsif item.is_a?(Posting)
       this_user_did_it = true if item.person == @person
@@ -38,7 +38,7 @@ module ApplicationHelper
     end
 
     if this_user_did_it
-      output = "<span class=\"highlight\"#{output}</span>"
+      output = "<span class=\"highlight\">#{output}</span>"
     end
 
     output

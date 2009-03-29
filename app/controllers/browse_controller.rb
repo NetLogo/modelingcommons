@@ -44,6 +44,16 @@ class BrowseController < ApplicationController
     @spam_warnings = SpamWarning.find_all_by_node_id(@model.id) || []
   end
 
+  def one_model_tabs
+    if @model.nil?
+      render :text => "No model found with ID '#{params[:id]}'"
+      return
+    end
+
+    @recommendations = Recommendation.find_all_by_node_id(@model.id) || []
+    @spam_warnings = SpamWarning.find_all_by_node_id(@model.id) || []
+  end
+
   def one_node
     if params[:id].blank?
       flash[:notice] = "No node ID passed. "
