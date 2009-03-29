@@ -1,46 +1,46 @@
 <% @title = "Register as a new user" %>
 
 <p>Before you can participate in the Commons, you must first register.
-We ask for your first and last names (so that we know who you are),
-your e-mail address (so that we can send you notifications, as well as
-act as a unique username), and a password, which ensures the security
-and privacy of your work.</p>
+  We ask for your first and last names (so that we know who you are),
+  your e-mail address (so that we can send you notifications, as well as
+  act as a unique username), and a password, which ensures the security
+  and privacy of your work.</p>
 
 <p>Already registered?  You may <%= link_to "log in", :controller => :account, :action => :login -%>.</p>
 
+<% form_for :new_person, :url => { :action => :create }, :html => {:multipart => true} do |form| %>
 <table>
 
-<% form_for :new_person, :url => { :action => :create }, :html => {:multipart => true} do |form| %>
-<tr>
+  <tr>
     <td>First name</td>
     <td><%= form.text_field :first_name, :size => 30 %></td>
-</tr>
-<tr>
+  </tr>
+  <tr>
     <td>Last name</td>
     <td><%= form.text_field :last_name, :size => 30 %></td>
-</tr>
-<tr>
+  </tr>
+  <tr>
     <td>E-mail address</td>
     <td><%= form.text_field :email_address, :size => 30 %></td>
-</tr>
-<tr>
+  </tr>
+  <tr>
     <td>Password</td>
     <td><%= form.password_field :password, :size => 30 %></td>
-</tr>
-<tr>
+  </tr>
+  <tr>
     <td>Password confirmation</td>
     <td><%= form.password_field :password_confirmation, :size => 30 %></td>
-</tr>
+  </tr>
 
-<tr>
+  <tr>
     <td>Optional image</td>
     <td><%= form.file_field :avatar %></td>
-</tr>
+  </tr>
 
-<tr>
+  <tr>
     <td colspan="2"><%= submit_tag "Register", :class => "submit" %></td>
-</tr>
+  </tr>
 
-<% end %>
 
 </table>
+<% end %>

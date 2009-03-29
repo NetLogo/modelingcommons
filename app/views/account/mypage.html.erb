@@ -17,7 +17,7 @@
     <% else %>
     <ul>
       <% @most_viewed.each do |model| %>
-      <li><%= link_to model[0].name, :controller => :browse, :action => :one_model, :id => model[0].id %> (<%= pluralize(number_with_delimiter(model[1]), "time", "times") -%>)</li>
+      <li><%= model_link(model[0]) %> (<%= pluralize(number_with_delimiter(model[1]), "time", "times") -%>)</li>
       <% end %>
     </ul>
     <% end %>
@@ -30,7 +30,7 @@
     <% else %>
     <ul>
       <% @most_downloaded.each do |model| %>
-      <li><%= link_to model[0].name, :controller => :browse, :action => :one_model, :id => model[0].id %> (<%= pluralize(number_with_delimiter(model[1]), "time", "times") -%>)</li>
+      <li><%= model_link(model[0]) %> (<%= pluralize(number_with_delimiter(model[1]), "time", "times") -%>)</li>
       <% end %>
     </ul>
     <% end %>
@@ -46,7 +46,7 @@
       <li><%= link_to tn[0].name, :controller => :tags, :action => :one_tag, :id => tn[0].id %> (<%= pluralize(number_with_delimiter(tn[1]), "time", "times") -%>)</li>
       <% end %>
     </ul>
-    <% end >%
+    <% end %>
   </div>
 
 
@@ -57,7 +57,7 @@
     <% else %>
     <ul>
       <% @most_recommended_models.each do |m| %>
-      <li><%= link_to m[0].name, :controller => :browse, :action => :one_model, :id => m[0].id %> (<%= pluralize(number_with_delimiter(m[1]), "time", "times") -%>)</li>
+      <li><%= model_link m[0] %> (<%= pluralize(number_with_delimiter(m[1]), "time", "times") -%>)</li>
       <% end %>
     </ul>
     <% end %>
