@@ -41,6 +41,12 @@ class AccountController < ApplicationController
   end
 
   def login_action
+    if params[:email_address].blank? or params[:password].blank?
+      flash[:notice] = "You must provide an e-mail address and pasword in order to log in."
+      redirect_to :back
+      return
+    end
+
     @person =
       Person.find_by_email_address_and_password(params[:email_address].strip,
                                                 params[:password].strip)
@@ -142,7 +148,7 @@ class AccountController < ApplicationController
 
     flash[:notice] = "Your password has been reset.  A new password was sent to you via e-mail."
     Notifications.deliver_reset_password(@person)
-    redirect_to :controller => "browse", :action => "index"
+    redirect_to :controller => :browse, :action => :index
   end
 
   def update_password_action
@@ -157,13 +163,15 @@ class AccountController < ApplicationController
       @person.password = new_password
       flash[:notice] = "Your new password has been set.  A confirmation notice was sent via e-mail."
       Notifications.deliver_changed_password(@person)
-      redirect_to :mypage
       begin
         @person.save!
       rescue Exception => e
         flash[:notice] = e.message
         redirect_to :back
+        return
       end
+
+      redirect_to :controller => :account, :action => :mypage
     end
   end
 
@@ -193,6 +201,13 @@ class AccountController < ApplicationController
   end
 
   def follow
+    if params[:id].blank?
+      flash[:notice] = "You must indicate the person whose actions you wish to follow."
+      logger.warn "[follow] Sending user back; no ID specified"
+      redirect_to :back
+      return
+    end
+
     @new_things = [ ]
     how_recent = 6.months.ago
 

@@ -1,24 +1,24 @@
 <% @title = "Log into the Modeling Commons" %>
 
+<% form_tag :action => :login_action do %>
 <table>
 
-<% form_tag :action => :login_action do %>
-<tr>
+  <tr>
     <td>E-mail address</td>
     <td><%= text_field_tag :email_address %></td>
-</tr>
-<tr>
+  </tr>
+  <tr>
     <td>Password</td>
     <td><%= password_field_tag :password %></td>
-</tr>
+  </tr>
 
-<tr>
+  <tr>
     <td colspan="2"><%= submit_tag "Login", :class => "submit" %></td>
-</tr>
+  </tr>
 
-<% end %>
 
 </table>
+<% end %>
 
 <p>New user?  You must first <%= link_to "register", :controller => :account, :action => :new -%>.</p>
 <p>Don't remember your password?  We can <%= link_to "e-mail it to you", :controller => :account, :action => :send_password -%>.</p>

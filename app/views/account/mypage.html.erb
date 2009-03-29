@@ -12,29 +12,41 @@
 <div id="right-news-box">
   <div id="viewed-models" class="news-box">
     <h2>Most-viewed models</h2>
+    <% if @most_viewed.empty? %>
+    <p>No statistics on most-viewed models</p>
+    <% else %>
     <ul>
       <% @most_viewed.each do |model| %>
       <li><%= link_to model[0].name, :controller => :browse, :action => :one_model, :id => model[0].id %> (<%= pluralize(number_with_delimiter(model[1]), "time", "times") -%>)</li>
       <% end %>
     </ul>
+    <% end %>
   </div>
 
   <div id="downloaded-models" class="news-box">
     <h2>Most-downloaded models</h2>
+    <% if @most_downloaded.empty? %>
+    <p>No statistics on most-downloaded models</p>
+    <% else %>
     <ul>
       <% @most_downloaded.each do |model| %>
       <li><%= link_to model[0].name, :controller => :browse, :action => :one_model, :id => model[0].id %> (<%= pluralize(number_with_delimiter(model[1]), "time", "times") -%>)</li>
       <% end %>
     </ul>
+    <% end %>
   </div>
 
   <div id="applied-tag" class="news-box">
     <h2>Most popular tags</h2>
+    <% if @most_downloaded.empty? %>
+    <p>No statistics on most-popular tags</p>
+    <% else %>
     <ul>
       <% @most_popular_tags.each do |tn| %>
       <li><%= link_to tn[0].name, :controller => :tags, :action => :one_tag, :id => tn[0].id %> (<%= pluralize(number_with_delimiter(tn[1]), "time", "times") -%>)</li>
       <% end %>
     </ul>
+    <% end >%
   </div>
 
 

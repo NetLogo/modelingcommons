@@ -22,8 +22,8 @@ class ApplicationController < ActionController::Base
   def require_login
     if @person.nil?
       flash[:notice] = "You must log in before proceeding."
-
-      redirect_to :controller => "account", :action => "login"
+      logger.warn "[require_login] Redirecting user to the login page"
+      redirect_to :controller => :account, :action => :login
       return false
     end
   end
@@ -31,7 +31,7 @@ class ApplicationController < ActionController::Base
   def require_administrator
     if not @person.administrator?
       flash[:notice] = "Only administrators may visit this URL."
-      redirect_to :controller => "account", :action => "login"
+      redirect_to :controller => :account, :action => :login
       return false
     end
   end
@@ -45,8 +45,6 @@ class ApplicationController < ActionController::Base
     end
 
     # Get the node ID
-    logger.warn "[log_one_action]: model = '#{@model.to_yaml}'"
-
     if @model
       node_id = @model.id
     elsif @node
@@ -58,6 +56,12 @@ class ApplicationController < ActionController::Base
     browser_info = request.env['HTTP_USER_AGENT'] || 'No browser info passed'
     ip_address = request.remote_ip || 'No IP address passed'
 
+    begin
+      session_yaml = session.to_yaml
+    rescue
+      session_yaml = '(Cannot dump session.to_yaml)'
+    end
+
     LoggedAction.create(:person_id => person_id,
                         :logged_at => Time.now(),
                         :message => message,
@@ -65,7 +69,7 @@ class ApplicationController < ActionController::Base
                         :browser_info => browser_info,
                         :url => request.request_uri,
                         :params => params.to_yaml,
-                        :session => session.to_yaml,
+                        :session => session_yaml,
                         :cookies => cookies.to_yaml,
                         :flash => flash.to_yaml,
                         :referrer => request.env['HTTP_REFERER'],
@@ -107,7 +111,7 @@ class ApplicationController < ActionController::Base
     end
 
     flash[:notice] = "You do not have permission to view this model."
-    redirect_to :controller => "account", :action => "mypage"
+    redirect_to :controller => :account, :action => :mypage
     return false
   end
 
@@ -155,7 +159,7 @@ class ApplicationController < ActionController::Base
       @model.group.approved_members.member?(@person)
 
     flash[:notice] = "You do not have permission to modify this model."
-    redirect_to :controller => "account", :action => "mypage"
+    redirect_to :controller => :account, :action => :mypage
     return false
   end
 
