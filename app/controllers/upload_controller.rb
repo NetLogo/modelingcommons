@@ -31,7 +31,7 @@ class UploadController < ApplicationController
         # Create a new preview node, whose parent is the new model node
         preview_node = Node.create(:node_type_id => 2,
                                    :parent_id => new_model_node.id,
-                                   :name => "Preview image for #{model_name}")
+                                   :name => model_name + ".png")
 
         preview_node.reload
 

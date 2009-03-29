@@ -64,7 +64,12 @@ module ApplicationHelper
   end
 
   def model_link(node)
-    image_tag_output = image_tag("/browse/display_preview/" + node.id.to_s, :width => "30",  :height => "30", :alt => "(No preview)")
+    if !node.previews.empty?
+      image_tag_output = image_tag("/browse/display_preview/" + node.id.to_s, :width => "30",  :height => "30", :alt => "Preview image")
+    else
+      image_tag_output = ''
+    end
+
     link_to_output = link_to(node.name, :controller => "browse", :action => "one_model", :id => node.id)
     "#{image_tag_output} #{link_to_output}"
   end
