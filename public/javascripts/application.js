@@ -48,6 +48,9 @@ $(document).ready(function () {
                     $(".complete").autocomplete('/tags/complete_tags',
                                                 {extraParams: {foo: 5 } });
 
+
+                    $("#model-tabs").tabs();
+
                   });
 
 $('#people-table').ready(function () {

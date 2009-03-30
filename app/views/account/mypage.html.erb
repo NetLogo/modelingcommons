@@ -113,7 +113,7 @@
         <span class="highlight">
           <% end %>
 
-          <%= link_to posting.title, :controller => "browse", :action => "one_model", :id => posting.node.id %> by <%= person_link(posting.person) %>, <%= distance_of_time_in_words(Time.now, posting.created_at) %> ago
+          Question about <%= model_link(posting.node) -%>, "<%=link_to posting.title, :controller => "browse", :action => "one_model", :id => posting.node.id %>," by <%= person_link(posting.person) %>, <%= distance_of_time_in_words(Time.now, posting.created_at) %> ago
 
           <% if posting.person == @the_person %>
         </span>
