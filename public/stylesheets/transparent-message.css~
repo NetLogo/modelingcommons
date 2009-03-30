@@ -1,0 +1,51 @@
+/* Transparent form message (error and notice) for ajax form */
+.transparent_ajax_message {
+  width: 100%;
+  text-align: center;
+  font-size: 20px;
+  position: absolute;
+  opacity:  0.8;
+}
+
+.transparent_ajax_error p {
+  color: #560109;
+  background: #FFA3A9;
+
+  border-left: 1px solid #750004;
+  border-right: 1px solid #750004;
+  border-bottom: 1px solid #750004;
+  margin: 0px 20px 0px 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  -moz-border-radius-bottomleft: 10px;
+  -moz-border-radius-bottomright: 10px;
+}
+
+.transparent_ajax_notice p {
+  color: #23571D;
+  background: #9BFFA3;
+
+  border-left: 1px solid #23571D;
+  border-right: 1px solid #23571D;
+  border-bottom: 1px solid #23571D;
+  margin: 0px 20px 0px 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  -moz-border-radius-bottomleft: 10px;
+  -moz-border-radius-bottomright: 10px;
+}
+
+
+/* Saving message for ajax form */
+#ajax_info_message {
+  position: absolute;
+  background: #FFF;
+  opacity:  0.7;
+}
+
+#ajax_info_message p {
+  padding-top: 0px;
+  font-size: 30px;
+  color: #B1A861;
+  text-align:  center;
+}
