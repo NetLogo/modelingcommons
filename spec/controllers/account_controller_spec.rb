@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
-describe AccountController, " create an account" do
+describe AccountController, " manipulate an account" do
 
   before do
     @params = {
@@ -11,10 +11,15 @@ describe AccountController, " create an account" do
     }
 
     def do_post
+      before_person = Person.find_by_name(@params[:email_address])
+      before_person.should_be nil
+
       post :create, :new_person => @params
+      before_person.should_not_be nil
     end
 
     it "should let a new user create an account"
+
     it "should produce an error message if someone tries to register with an already-used e-mail address"
     it "should produce an error message if a user registers without providing first name, last name, e-mail address, and password"
   end

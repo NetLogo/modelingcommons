@@ -31,38 +31,20 @@
 
 </p>
 
-<p>HERE GO THE TABS</p>
-
 <div id="model-tabs">
      <ul>
-         <li><a href="ahah_1.html"><span>Content 1</span></a></li>
-         <li><a href="ahah_2.html"><span>Content 2</span></a></li>
-         <li><a href="ahah_3.html"><span>Content 3</span></a></li>
+         <li><a href="<%= url_for :controller => :browse, :action => :info, :id => @model.id -%>"><span>Info</span></a></li>
+         <li><a href="<%= url_for :controller => :browse, :action => :applet, :id => @model.id -%>"><span>Run</span></a></li>
+         <li><a href="<%= url_for :controller => :browse, :action => :download, :id => @model.id -%>"><span>Download</span></a></li>
+         <li><a href="<%= url_for :controller => :browse, :action => :discuss, :id => @model.id -%>"><span>Discuss</span></a></li>
+         <li><a href="<%= url_for :controller => :browse, :action => :related, :id => @model.id -%>"><span>Related</span></a></li>
+         <li><a href="<%= url_for :controller => :browse, :action => :files, :id => @model.id -%>"><span>Files</span></a></li>
+         <li><a href="<%= url_for :controller => :browse, :action => :procedures, :id => @model.id -%>"><span>Procedures</span></a></li>
+         <li><a href="<%= url_for :controller => :browse, :action => :gui, :id => @model.id -%>"><span>GUI</span></a></li>
+         <li><a href="<%= url_for :controller => :browse, :action => :upload, :id => @model.id -%>"><span>Upload</span></a></li>
+         <li><a href="<%= url_for :controller => :browse, :action => :permissions, :id => @model.id -%>"><span>Permissions</span></a></li>
+         <li><a href="<%= url_for :controller => :browse, :action => :history, :id => @model.id -%>"><span>History</span></a></li>
      </ul>
-</div>
-
-<div id="menu-div">
-  <ul class="sf-menu sf-navbar">
-    <li>
-      <a href="">Model</a>
-      <ul>
-        <li><a id="info-menu" href="#info-div">Info</a></li>
-        <li><a id="related-menu" href="#related-div">Related</a></li>
-        <li><a id="files-menu" href="#files-div">Files</a></li>
-        <li><a id="procedures-menu" href="#procedures-div">Procedures</a></li>
-        <li><a id="gui-menu" href="#gui-div">GUI</a></li>
-        <li><a id="applet-menu" href="#applet-div">Applet</a></li>
-      </ul>
-    </li>
-
-    <li><a id="download-menu" href="#download-div">Download</a></li>
-    <li><a id="upload-menu" href="#upload-div">Upload</a></li>
-    <li><a href="#permissions-div">Permissions</a></li>
-    <li><a href="#history-div">History</a></li>
-    <li><a href="#discuss-div">Discuss</a></li>
-    <li><a href="#tags-div">Tags</a></li>
-
-  </ul>
 </div>
 
 <!-- Model menu -->

@@ -7,11 +7,8 @@
 }
 
 img#preview-image  {
-    position: absolute;
-    width: 400px;
-    height: 400px;
-    top: 60px;
-    left: 820px;
+    width: 200px;
+    height: 200px;
 }
 
 .model-tab, .group-tabs {

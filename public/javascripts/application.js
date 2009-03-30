@@ -49,10 +49,13 @@ $(document).ready(function () {
                                                 {extraParams: {foo: 5 } });
 
 
-                    $("#model-tabs").tabs();
-
                   });
 
 $('#people-table').ready(function () {
                            $('#people-table').dataTable();
                          });
+
+$("#model-tabs").ready(function () {
+  $("#model-tabs").tabs();
+                       });
+
