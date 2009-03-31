@@ -7,8 +7,10 @@
 }
 
 img#preview-image  {
-    width: 200px;
-    height: 200px;
+    width: 70px;
+    height: 70px;
+    float: left;
+    margin-right: 20px;
 }
 
 .model-tab, .group-tabs {

@@ -1,0 +1,9 @@
+<% if @model.files.empty? -%>
+<p>No files</p>
+<% else -%>
+<ul>
+  <% @model.files.sort_by {|f| f.name}.each do |f| -%>
+  <li><%= link_to f.filename, :controller => :browse, :action => :one_node, :id => f.id -%> (<%= f.node_type.short_name -%>)</li>
+  <% end -%>
+</ul>
+<% end -%>

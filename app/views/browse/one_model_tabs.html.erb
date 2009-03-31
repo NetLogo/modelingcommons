@@ -4,9 +4,6 @@
   <%= render :partial => "preview_image", :locals => {:model => @model} -%>
 </div>
 
-<script type="text/javascript">
-</script>
-
 <div id="model-atom-feed"><%= link_to image_tag("feed.png"), :controller => :browse, :action => :follow, :id => @model.id, :format => :atom %> Follow activity about <%= @model.name -%> in your feed reader</div>
 
 <p><%= link_to "Tell a friend", :controller => :recommend, :action => :email_friend, :id => @model.id %> &bull;
@@ -33,108 +30,14 @@
 
 <div id="model-tabs">
      <ul>
-         <li><a href="<%= url_for :controller => :browse, :action => :info, :id => @model.id -%>"><span>Info</span></a></li>
-         <li><a href="<%= url_for :controller => :browse, :action => :applet, :id => @model.id -%>"><span>Run</span></a></li>
-         <li><a href="<%= url_for :controller => :browse, :action => :download, :id => @model.id -%>"><span>Download</span></a></li>
-         <li><a href="<%= url_for :controller => :browse, :action => :discuss, :id => @model.id -%>"><span>Discuss</span></a></li>
-         <li><a href="<%= url_for :controller => :browse, :action => :related, :id => @model.id -%>"><span>Related</span></a></li>
-         <li><a href="<%= url_for :controller => :browse, :action => :files, :id => @model.id -%>"><span>Files</span></a></li>
-         <li><a href="<%= url_for :controller => :browse, :action => :procedures, :id => @model.id -%>"><span>Procedures</span></a></li>
-         <li><a href="<%= url_for :controller => :browse, :action => :gui, :id => @model.id -%>"><span>GUI</span></a></li>
-         <li><a href="<%= url_for :controller => :browse, :action => :upload, :id => @model.id -%>"><span>Upload</span></a></li>
-         <li><a href="<%= url_for :controller => :browse, :action => :permissions, :id => @model.id -%>"><span>Permissions</span></a></li>
-         <li><a href="<%= url_for :controller => :browse, :action => :history, :id => @model.id -%>"><span>History</span></a></li>
+         <li><a href="<%= url_for :controller => :browse, :action => :browse_applet_tab, :id => @model.id -%>"><span>Run</span></a></li>
+         <li><a href="<%= url_for :controller => :browse, :action => :browse_info_tab, :id => @model.id -%>"><span>Info</span></a></li>
+         <li><a href="<%= url_for :controller => :browse, :action => :browse_procedures_tab, :id => @model.id -%>"><span>Procedures</span></a></li>
+         <li><a href="<%= url_for :controller => :browse, :action => :browse_download_tab, :id => @model.id -%>"><span>Download</span></a></li>
+         <li><a href="<%= url_for :controller => :browse, :action => :browse_discuss_tab, :id => @model.id -%>"><span>Discuss</span></a></li>
+         <li><a href="<%= url_for :controller => :browse, :action => :browse_history_tab, :id => @model.id -%>"><span>History</span></a></li>
+         <li><a href="<%= url_for :controller => :browse, :action => :browse_files_tab, :id => @model.id -%>"><span>Associated files</span></a></li>
+         <li><a href="<%= url_for :controller => :browse, :action => :browse_related_tab, :id => @model.id -%>"><span>Related models</span></a></li>
+         <li><a href="<%= url_for :controller => :browse, :action => :browse_upload_tab, :id => @model.id -%>"><span>Upload</span></a></li>
      </ul>
-</div>
-
-<!-- Model menu -->
-<div id="info-div" class="one-model-div">
-  <%= render :partial => "info_div", :locals => {:model => @model} -%>
-</div>
-
-<div id="related-div" class="one-model-div">
-  <% if @model.parent.nil? -%>
-  <p>No parent node</p>
-  <% else -%>
-  <p><b>Parent:</b> <%= link_to @model.parent.name, :controller => 'browse', :action => 'one_model', :id => @model.parent.id  -%></p>
-  <% end -%>
-
-  <% if @model.models.empty? -%>
-  <p>No child nodes</p>
-  <% else -%>
-  <h3>Children:</h3>
-  <ul>
-    <% @model.models.each do |child| -%>
-    <li><%= link_to child.name, :controller => 'browse', :action => 'one_model', :id => child.id  -%></li>
-    <% end -%>
-  </ul>
-  <% end -%>
-
-</div>
-
-<div id="files-div" class="one-model-div">
-  <% if @model.files.empty? -%>
-  <p>No files</p>
-  <% else -%>
-  <ul>
-    <% @model.files.sort_by {|f| f.name}.each do |f| -%>
-    <li><%= link_to f.filename, :controller => :browse, :action => :one_node, :id => f.id -%> (<%= f.node_type.short_name -%>)</li>
-    <% end -%>
-  </ul>
-  <% end -%>
-
-</div>
-
-<div id="procedures-div" class="one-model-div">
-  <p><%= @model.procedures_tab(with_html=true) -%></p>
-</div>
-
-<div id="gui-div" class="one-model-div">
-  <p><%= @model.gui_tab(with_html=true) -%></p>
-</div>
-
-<div id="applet-div" class="one-model-div">
-<% if @model.name =~ /3D/ %>
-<p>Sorry, but 3D models cannot be viewed as applets.  You must download this model to try it.</p>
-<% else %>
-<applet
-   code="org.nlogo.window.Applet"
-   align="baseline"
-   width="<%= @model.dimensions[:width] -%>" height="<%= @model.dimensions[:height] -%>"
-   archive="/NetLogoLite.jar">
-  <param name="DefaultModel" value="<%= url_for :controller => :browse, :action => :model_contents, :id => @model.id %> ">
-</applet>
-<% end %>
-</div>
-
-<!-- Download menu -->
-<div id="download-div" class="one-model-div">
-  <%= link_to "Download model (as a zip file)", :controller => "browse", :action => "download_model", :id => @model.id -%>
-</div>
-
-<!-- Upload menu -->
-<div id="upload-div" class="one-model-div">
-  <%= render :partial => "upload_form", :locals => {:node => @model} -%>
-</div>
-
-<!-- Permissions menu -->
-<div id="permissions-div" class="one-model-div">
-  <%= render :partial => "group_and_permissions", :locals => {:model => @model} -%>
-</div>
-
-<!-- History menu -->
-<div id="history-div" class="one-model-div">
-  <%= render :partial => "history", :locals => {:node => @model} -%>
-</div>
-
-<!-- Discuss menu -->
-<div id="discuss-div" class="one-model-div">
-  <%= render :partial => "discussion", :locals => {:node => @model} -%>
-</div>
-
-<%= render :partial => "model_tab", :locals => {:model => @model} -%>
-
-<!-- Tags menu -->
-<div id="tags-div" class="one-model-div">
-  <%= render :partial => "tags", :locals => {:node => @model} -%>
 </div>

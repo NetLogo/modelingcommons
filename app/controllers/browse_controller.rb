@@ -314,6 +314,51 @@ class BrowseController < ApplicationController
     redirect_to :controller => :browse, :action => :one_model, :id => Node.models.rand.id
   end
 
+  def browse_info_tab
+    render :layout => false
+  end
+
+  def browse_applet_tab
+    render :layout => false
+  end
+
+  def browse_download_tab
+    render :layout => false
+  end
+
+  def browse_discuss_tab
+    render :layout => false
+  end
+
+  def browse_related_tab
+    render :layout => false
+  end
+
+  def browse_files_tab
+    render :layout => false
+  end
+
+  def browse_procedures_tab
+    render :layout => false
+  end
+
+  def browse_gui_tab
+    render :layout => false
+  end
+
+  def browse_upload_tab
+    render :layout => false
+  end
+
+  def browse_permissions_tab
+    render :layout => false
+  end
+
+  def browse_history_tab
+    render :layout => false
+  end
+
+
   # ------------------------------------------------------------
   # Below here is PRIVATE!
   # ------------------------------------------------------------

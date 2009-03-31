@@ -1,0 +1,27 @@
+<h2>Upload a new version</h2>
+<% form_for(:new_version, :url => { :controller => "upload", :action => :update_model }, :html => {:multipart => true}) do |form| %>
+<table>
+  <tr>
+    <td>Model file</td>
+    <td><%= form.file_field :uploaded_body %>
+      <%= form.hidden_field :node_id, {:value => @model.id} %></td>
+  </tr>
+  <tr>
+    <td>Short comment</td>
+    <td><%= form.text_field :description %></td>
+  </tr>
+
+  <tr>
+    <td colspan="2">
+      <p><%= radio_button_tag :fork, 'overwrite', {:checked => true} %><label for="fork_overwrite">Replace the existing model</label></p>
+      <p><%= radio_button_tag :fork, 'child' %><label for="fork_child">Upload a new child</label></p>
+    </td>
+  </tr>
+
+  <tr>
+    <td colspan="2"><%= submit_tag "Upload model", :class => "submit" %><tr>
+        <td colspan="2"><%= submit_tag "Upload document", :class => "submit" %></td>
+      </tr>
+
+</table>
+<% end %>
