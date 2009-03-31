@@ -165,8 +165,9 @@ class MembershipController < ApplicationController
       return
     end
 
+    group_name_to_find_ilike = '%' + group_name_to_find + '%'
     @groups = Group.find(:all,
-                         :conditions => ["lower(name) = ? ", group_name_to_find])
+                         :conditions => ["lower(name) ilike ? ", group_name_to_find_ilike])
 
     if @groups.empty?
       flash[:notice] = "Sorry, but no groups have the name '#{group_name_to_find}'."

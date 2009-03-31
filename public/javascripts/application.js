@@ -10,15 +10,6 @@ $(document).ready(function () {
                                                           }
                                                         });
 
-                    $('#new_comment_').click(function() {
-                                               if ($(this).attr('value') == '(Optional) comment about why this tag is relevant to this model')
-                                               {
-                                                 $(this).attr({'value': ''});
-                                               }
-                                             });
-                    // Start Superfish menu
-                    jQuery('ul.sf-menu').superfish({ pathClass: 'current' });
-
                     // Function to handle clicks
                     handle_menu_click = function() {
 
@@ -35,14 +26,12 @@ $(document).ready(function () {
                       return false;
                     }
 
-                    $('ul.sf-menu li a').click(handle_menu_click);
-                    $('ul.sf-menu li ul li a').click(handle_menu_click);
-
                     $(".empty-on-click").livequery('click', function() {
-                                                     if (this.hash == '') ($(this).attr('value') == 'Tag name')
-                                                     {
-                                                       $(this).attr({'value': ''});
-                                                     }
+                                                     if ($(this).attr("has_been_clicked_on") != "yes")
+                                                       {
+                                                         $(this).attr("value", "");
+                                                         $(this).attr("has_been_clicked_on", "yes");
+                                                       }
                                                    });
 
                     $(".complete").autocomplete('/tags/complete_tags',

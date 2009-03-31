@@ -14,14 +14,9 @@
         <% model_visibility_letter = nil %>
         <% model_changeability_letter = nil %>
         <% end %>
-        <!--
+
         <tr>
-          <td><%= radio_button_tag 'read_permission', 's', model_visibility_letter == 's' %></td>
-          <td><label for="search_permission_a">This model shows up in search, but is otherwise hidden.</label></td>
-        </tr>
-        -->
-        <tr>
-          <td><%= radio_button_tag 'read_permission', 'a', model_visibility_letter.nil? or model_visibility_letter == 'a' %></td>
+          <td><%= radio_button_tag 'read_permission', 'a', (model_visibility_letter.blank? or model_visibility_letter == 'a') %></td>
           <td><label for="read_permission_a">Everyone can see this model.</label></td>
         </tr>
         <tr>
@@ -38,7 +33,7 @@
     <td>
       <table>
         <tr>
-          <td><%= radio_button_tag 'write_permission', 'a', model_changeability_letter.nil? or model_changeability_letter == 'a' -%></td>
+          <td><%= radio_button_tag 'write_permission', 'a', (model_changeability_letter.blank? or model_changeability_letter == 'a') -%></td>
           <td><label for="write_permission_a">Everyone can modify this model.</label></td>
         </tr>
         <tr>

@@ -1,11 +1,11 @@
 <% if @model.parent.nil? -%>
-<p>No parent node</p>
+<p>This model does not have any ancestors.</p>
 <% else -%>
 <p><b>Parent:</b> <%= link_to @model.parent.name, :controller => 'browse', :action => 'one_model', :id => @model.parent.id  -%></p>
 <% end -%>
 
 <% if @model.models.empty? -%>
-<p>No child nodes</p>
+<p>This model does not have any descendants.</p>
 <% else -%>
 <h3>Children:</h3>
 <ul>

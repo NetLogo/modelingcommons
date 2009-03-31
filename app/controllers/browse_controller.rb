@@ -330,6 +330,10 @@ class BrowseController < ApplicationController
     render :layout => false
   end
 
+  def browse_tags_tab
+    render :layout => false
+  end
+
   def browse_related_tab
     render :layout => false
   end

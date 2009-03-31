@@ -1,0 +1,20 @@
+<% if @model.tagged_nodes.empty? -%>
+<p><i>No tags</i></p>
+<% else -%>
+<p>Existing tags:</p>
+<table id="existing_tags">
+  <%= render :partial => "tags/one_tag", :collection => @model.tagged_nodes.sort_by {|tn| tn.updated_at}, :as => :tm -%>
+</table>
+<% end -%>
+
+<div id="add-tags">
+  <h2>Add one or more tags:</h2>
+  <% remote_form_for(:new_tag, :url => {:controller => "tags", :action => :new}) do |form| -%>
+  <%= hidden_field_tag :node_id, @model.id -%>
+  <div id="tags">
+    <%= render :partial => "add_tag", :locals => {:form => form} -%>
+  </div>
+  <p><%= add_tag_link "Another tag field" -%></p>
+  <p><%= submit_tag "Save tags to the Commons" -%></p>
+  <% end -%>
+</div>

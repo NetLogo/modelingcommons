@@ -6,20 +6,14 @@
 
     <%= stylesheet_link_tag 'nlcommons' %>
     <%= stylesheet_link_tag 'browse' %>
-    <%= stylesheet_link_tag 'superfish' %>
-    <%= stylesheet_link_tag 'superfish-navbar' %>
     <%= stylesheet_link_tag 'jquery.autocomplete' %>
     <%= stylesheet_link_tag 'themes/nlcommons/ui.all.css' %>
 
     <%= javascript_include_tag :defaults %>
     <%= javascript_include_tag 'jquery-ui' %>
-
     <%= javascript_include_tag 'jquery.dataTables' %>
     <%= javascript_include_tag 'jquery.livequery' %>
     <%= javascript_include_tag 'jquery.autocomplete' %>
-
-    <%= javascript_include_tag 'hoverIntent' %>
-    <%= javascript_include_tag 'superfish' %>
     <%= javascript_include_tag 'nlcommons' %>
   </head>
 
@@ -33,7 +27,7 @@
         <li><%= link_to "Tags", :controller => :account, :action => :tags, :id => @person.id  %></li>
     <% end %>
         <li><%= link_to_unless_current "About", :controller => "browse", :action => "about" %></li>
-        <li><% form_for(:search_term, :url => { :controller => "browse", :action => :search_action }, :html => { :id => "navbar-search-form"}) do |form| -%> <%= form.text_field :search_term, :value => 'Search', :size => 10 -%><% end -%></li>
+        <li id="header_search_form_box"><% form_for(:search_term, :url => { :controller => "browse", :action => :search_action }, :html => { :id => "navbar-search-form"}) do |form| -%> <%= form.text_field :search_term, :value => 'Search', :size => 10 -%><% end -%></li>
 
       </ul>
     </div>

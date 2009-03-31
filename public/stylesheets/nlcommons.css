@@ -28,7 +28,8 @@ a:hover {
     border: 1px solid #000;
     float: left;
     height: 2em;
-    width: 7%;
+    /* width: 7%; */
+    width: 6em;
     text-align: center;
     vertical-align: middle;
 }
