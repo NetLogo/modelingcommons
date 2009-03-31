@@ -1,6 +1,7 @@
 <% if @model.node_versions.count == 1 %>
 
-<p>There is only one version of this model.</p>
+<p>There is only one version of this model, created
+  <%= distance_of_time_in_words(Time.now, @model.node_versions.first.created_at) %> ago.</p>
 
 <% else %>
 
