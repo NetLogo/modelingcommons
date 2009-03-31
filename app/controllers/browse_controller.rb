@@ -34,7 +34,7 @@ class BrowseController < ApplicationController
     @models = Node.paginate(:page => params[:page], :order => 'name ASC', :conditions => [ "node_type_id = 1 and group_id in (#{@group_ids}) "])
   end
 
-  def one_model
+  def one_model_old
     if @model.nil?
       render :text => "No model found with ID '#{params[:id]}'"
       return
@@ -44,7 +44,7 @@ class BrowseController < ApplicationController
     @spam_warnings = SpamWarning.find_all_by_node_id(@model.id) || []
   end
 
-  def one_model_tabs
+  def one_model
     if @model.nil?
       render :text => "No model found with ID '#{params[:id]}'"
       return
