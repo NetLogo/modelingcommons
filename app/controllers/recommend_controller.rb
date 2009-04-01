@@ -11,13 +11,15 @@ class RecommendController < ApplicationController
 
   def email_friend_action
     friend_email_address = params[:email_address]
-    node = Node.find(:first, params[:node_id])
+    node = Node.find_by_id(params[:node_id])
 
     if friend_email_address.blank?
       flash[:notice] = "You must enter an e-mail address."
     elsif friend_email_address.index('@').nil?
       flash[:notice] = "You must enter a valid e-mail address."
-    elsif node
+    elsif node.nil?
+      flash[:notice] = "There is no node with an ID number of '#{params[:node_id]}'."
+    else
       Notifications.deliver_friend_recommendation(@person, friend_email_address, node)
 
       EmailRecommendation.create(:sender_id => @person.id,
@@ -25,8 +27,6 @@ class RecommendController < ApplicationController
                                  :node_id => node.id)
 
       flash[:notice] = "Sent e-mail to '#{friend_email_address}'."
-    else
-      flash[:notice] = "Error -- something went wrong!"
     end
 
     redirect_to :back

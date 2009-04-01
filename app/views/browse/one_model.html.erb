@@ -30,6 +30,7 @@
 
 <div id="model-tabs">
      <ul>
+         <li><a href="<%= url_for :controller => :browse, :action => :browse_preview_tab, :id => @model.id -%>"><span>Preview</span></a></li>
          <li><a href="<%= url_for :controller => :browse, :action => :browse_applet_tab, :id => @model.id -%>"><span>Run</span></a></li>
          <li><a href="<%= url_for :controller => :browse, :action => :browse_info_tab, :id => @model.id -%>"><span>Info</span></a></li>
          <li><a href="<%= url_for :controller => :browse, :action => :browse_procedures_tab, :id => @model.id -%>"><span>Procedures</span></a></li>

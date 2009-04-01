@@ -113,8 +113,9 @@
         <span class="highlight">
           <% end %>
 
-          Question about <%= model_link(posting.node) -%>,
-          "<%=link_to posting.title, :controller => :browse, :action => :one_model, :anchor => 'ui-tabs-16', :id => posting.node.id %>," by <%= person_link(posting.person) %>, <%= distance_of_time_in_words(Time.now, posting.created_at) %> ago
+          <%= model_link(posting.node) -%>:
+          <%= person_link(posting.person) %> asked about'
+          <%=link_to posting.title, :controller => :browse, :action => :one_model, :anchor => 'ui-tabs-16', :id => posting.node.id %>, <%= distance_of_time_in_words(Time.now, posting.created_at) %> ago
 
           <% if posting.person == @the_person %>
         </span>

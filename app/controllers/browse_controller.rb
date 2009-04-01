@@ -314,6 +314,10 @@ class BrowseController < ApplicationController
     redirect_to :controller => :browse, :action => :one_model, :id => Node.models.rand.id
   end
 
+  def browse_preview_tab
+    render :layout => false
+  end
+
   def browse_info_tab
     render :layout => false
   end
