@@ -83,11 +83,13 @@ class Notifications < ActionMailer::Base
     @content_type = 'text/html'
   end
 
-  def recommended_message(people, model)
+  def recommended_message(recommender, people, model)
     @recipients = people.map{|p| p.email_address}
+    @cc = recommender.email_address
     @from = "nlcommons@monk.ccl.northwestern.edu"
-    @subject    = 'Recommendation for #{model.name} model in the Modeling Commons'
-    @body[:model] = model
+    @subject    = "Recommendation for the '#{model.name}' model in the NetLogo Modeling Commons"
+    @body[:nlmodel] = model
+    @body[:recommender] = recommender
     @sent_on    = Time.now()
     @content_type = 'text/html'
   end

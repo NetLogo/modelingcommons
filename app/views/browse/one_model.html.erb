@@ -4,7 +4,7 @@
   <%= render :partial => "preview_image", :locals => {:model => @model} -%>
 </div>
 
-<div id="model-atom-feed"><%= link_to image_tag("feed.png"), :controller => :browse, :action => :follow, :id => @model.id, :format => :atom %> Follow activity about <%= @model.name -%> in your feed reader</div>
+<div id="model-atom-feed"><%= link_to image_tag("feed.png"), :controller => :browse, :action => :follow, :id => @model.id, :format => :atom %> Follow activity about "<%= @model.name -%>" in your feed reader</div>
 
 <p><%= link_to "Tell a friend", :controller => :recommend, :action => :email_friend, :id => @model.id %> &bull;
 

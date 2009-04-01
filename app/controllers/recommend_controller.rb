@@ -36,6 +36,12 @@ class RecommendController < ApplicationController
     Recommendation.create(:node_id => @model.id,
                           :person_id => @person.id)
 
+    model_people = @model.people
+    model_people.delete_if {|p| p == @person}
+    if not model_people.empty?
+      Notifications.deliver_recommended_message(@person, model_people, @node)
+    end
+
     flash[:notice] = "Added your recommendation."
     redirect_to :back
   end
@@ -43,12 +49,6 @@ class RecommendController < ApplicationController
   def show_recommendations
     @recommendations = Recommendation.find_all_by_node_id(@model.id,
                                                           :order => "created_at DESC") || []
-
-    model_people = @model.people
-    model_people.delete_if {|p| p == @person}
-    if not model_people.empty?
-      Notifications.deliver_recommended_message(model_people, @node)
-    end
   end
 
 end
