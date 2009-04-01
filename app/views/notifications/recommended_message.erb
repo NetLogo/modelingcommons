@@ -1,10 +1,8 @@
 <html>
-    <body>
+  <body>
     <h1>Model recommendation</h1>
 
-    <p>This is to inform you that the model "<%= link_to @model.name, :controller => :browse, :action => :one_model, :id => @model.id %>",
-    which you have used in the past, has been recommended in the
-    <%= link_to "NetLogo Modeling Commons", :controller => :account, :action => :mypage %>.</p>
+    <p>This is to inform you that the <a href="http://monk.ccl.northwestern.edu:3000/browse/one_model/<%= @nlmodel.id -%>"><%= @nlmodel.name -%></a> model, which you have used in the past, has been recommended in the <a href="http://monk.ccl.northwestern.edu:3000/">NetLogo Modeling Commons</a>.</p>
 
-    </body>
+  </body>
 </html>
