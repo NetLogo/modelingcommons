@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090222003303) do
+ActiveRecord::Schema.define(:version => 20090419171536) do
 
   create_table "email_recommendations", :force => true do |t|
     t.integer  "sender_id"
@@ -38,6 +38,8 @@ ActiveRecord::Schema.define(:version => 20090222003303) do
     t.text     "flash"
     t.text     "referrer"
     t.integer  "node_id"
+    t.string   "controller"
+    t.string   "action"
   end
 
   add_index "logged_actions", ["ip_address"], :name => "index_logged_actions_on_ip_address"

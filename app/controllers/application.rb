@@ -21,8 +21,12 @@ class ApplicationController < ActionController::Base
 
   def require_login
     if @person.nil?
-      flash[:notice] = "You must log in before proceeding."
+
+      if (request[:controller] != 'account' and request[:action] != 'mypage')
+        flash[:notice] = "You must log in before proceeding."
+      end
       logger.warn "[require_login] Redirecting user to the login page"
+
       redirect_to :controller => :account, :action => :login
       return false
     end
@@ -63,6 +67,8 @@ class ApplicationController < ActionController::Base
     end
 
     LoggedAction.create(:person_id => person_id,
+                        :controller => params[:controller],
+                        :action => params[:action],
                         :logged_at => Time.now(),
                         :message => message,
                         :ip_address => ip_address,
