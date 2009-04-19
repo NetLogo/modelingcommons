@@ -27,6 +27,7 @@
         <li><%= link_to "Tags", :controller => :account, :action => :tags, :id => @person.id  %></li>
     <% end %>
         <li><%= link_to_unless_current "About", :controller => "browse", :action => "about" %></li>
+        <li><%= link_to "Help", :controller => :help, :action => :index  %></li>
         <li id="header_search_form_box"><% form_for(:search_term, :url => { :controller => "browse", :action => :search_action }, :html => { :id => "navbar-search-form"}) do |form| -%> <%= form.text_field :search_term, :value => 'Search', :size => 10 -%><% end -%></li>
 
       </ul>
