@@ -116,23 +116,6 @@ class BrowseController < ApplicationController
               :disposition => "inline")
   end
 
-  def procedures_tab
-    @procedures_tab_contents = @model.procedures_tab
-  end
-
-  def gui_tab
-    @gui_tab_contents = @model.gui_tab
-  end
-
-  def info_tab
-    @info_tab_contents = @model.info_tab
-
-    @info_tab_contents.gsub!(/http:\/\/\S+/) { |url| "<a href='#{url}' target='_blank'>#{url}</a>"}
-    @info_tab_contents.gsub!("\n\n", "<p>\n\n</p>")
-    @info_tab_contents.gsub!(/^[A-Z ?]+$/) { |headline| "<h2>#{headline.capitalize}</h2>"}
-    @info_tab_contents.gsub!(/^-+$/, '')
-  end
-
   def model_contents
     send_data @model.contents
   end

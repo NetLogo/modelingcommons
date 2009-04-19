@@ -66,7 +66,7 @@ class AccountController < ApplicationController
     @person = nil
     session[:person_id] = nil
     flash[:notice] = "You have been logged out.  Please come back soon!"
-    redirect_to :controller => "account", :action => "index"
+    redirect_to :controller => :account, :action => :login
   end
 
   def mypage
@@ -148,7 +148,7 @@ class AccountController < ApplicationController
 
     flash[:notice] = "Your password has been reset.  A new password was sent to you via e-mail."
     Notifications.deliver_reset_password(@person)
-    redirect_to :controller => :browse, :action => :index
+    redirect_to :controller => :account, :action => :index
   end
 
   def update_password_action

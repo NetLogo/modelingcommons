@@ -25,10 +25,10 @@ class Test::Unit::TestCase
   self.use_instantiated_fixtures  = false
 
   # Add more helper methods to be used by all tests here...
-  ApplicationController.validate_all = true
-  ApplicationController.validators = [:w3c]
+#   ApplicationController.validate_all = true
+#   ApplicationController.validators = [:w3c]
 
-  ApplicationController.check_urls = true
-  ApplicationController.check_redirects = true
+#   ApplicationController.check_urls = true
+#   ApplicationController.check_redirects = true
 
 end
