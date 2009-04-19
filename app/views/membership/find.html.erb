@@ -1,0 +1,8 @@
+<div id="find-group-div" class="group-tab">
+  <h2>Find an existing group</h2>
+  <% form_tag :controller => "membership", :action => :find_group do |form| %>
+  <%= text_field_tag "group_name" %>
+  <p><%= submit_tag "Find group" %></p>
+  <% end %>
+</div>
+

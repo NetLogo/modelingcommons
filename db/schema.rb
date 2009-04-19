@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(:version => 20090419171536) do
     t.boolean  "is_administrator", :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "status",           :default => "pending", :null => false
+    t.text     "status",           :default => "pending", :null => false
   end
 
   add_index "memberships", ["group_id"], :name => "index_memberships_on_group_id"
@@ -92,8 +92,6 @@ ActiveRecord::Schema.define(:version => 20090419171536) do
     t.binary   "contents"
     t.text     "vectors"
   end
-
-  add_index "node_versions", ["vectors"], :name => "node_versions_fts_vectors_index"
 
   create_table "nodes", :force => true do |t|
     t.integer  "node_type_id",                    :null => false
@@ -140,6 +138,36 @@ ActiveRecord::Schema.define(:version => 20090419171536) do
   end
 
   add_index "permission_settings", ["name"], :name => "index_permission_settings_on_name"
+
+  create_table "pg_ts_cfg", :id => false, :force => true do |t|
+    t.text "ts_name",  :null => false
+    t.text "prs_name", :null => false
+    t.text "locale"
+  end
+
+  create_table "pg_ts_cfgmap", :id => false, :force => true do |t|
+    t.text   "ts_name",                  :null => false
+    t.text   "tok_alias",                :null => false
+    t.string "dict_name", :limit => nil
+  end
+
+  create_table "pg_ts_dict", :id => false, :force => true do |t|
+    t.text   "dict_name",                      :null => false
+    t.string "dict_init",       :limit => nil
+    t.text   "dict_initoption"
+    t.string "dict_lexize",     :limit => nil, :null => false
+    t.text   "dict_comment"
+  end
+
+  create_table "pg_ts_parser", :id => false, :force => true do |t|
+    t.text   "prs_name",                     :null => false
+    t.string "prs_start",     :limit => nil, :null => false
+    t.string "prs_nexttoken", :limit => nil, :null => false
+    t.string "prs_end",       :limit => nil, :null => false
+    t.string "prs_headline",  :limit => nil, :null => false
+    t.string "prs_lextype",   :limit => nil, :null => false
+    t.text   "prs_comment"
+  end
 
   create_table "postings", :force => true do |t|
     t.integer  "person_id"
@@ -210,5 +238,10 @@ ActiveRecord::Schema.define(:version => 20090419171536) do
   add_index "tags", ["name"], :name => "index_tags_on_name"
   add_index "tags", ["person_id"], :name => "index_tags_on_person_id"
   add_index "tags", ["updated_at"], :name => "index_tags_on_updated_at"
+
+  create_table "test_tsquery", :id => false, :force => true do |t|
+    t.text "txtkeyword"
+    t.text "txtsample"
+  end
 
 end

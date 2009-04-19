@@ -1,0 +1,32 @@
+<div id="manage-groups-div" class="group-tab">
+  <h2>Groups you manage</h2>
+  <% if @person.memberships.length == 0 %>
+  <p>You are not a member of any groups.</p>
+  <% else %>
+  <ul>
+    <% @person.administrated_groups.sort_by {|g| g.name}.each do |group| %>
+    <li><%= group_link(group) %></li>
+    <ul>
+      <% group.memberships.each do |membership| %>
+      <li>
+            <%= person_link(membership.person) -%>
+
+        <% if membership.status == 'pending' %>
+        (<%= link_to "approve", :controller => :membership, :action => :approve_membership, :id => membership.id %>)
+        <% end %>
+
+        <% if membership.person != @person %>
+        (<%= link_to "remove", :controller => :membership, :action => :leave, :id => membership.id %>)
+        <% if membership.is_administrator? %>
+        (<%= link_to "remove administrator", :controller => :membership, :action => :remove_administrator, :id => membership.id %>)
+        <% else %>
+        (<%= link_to "make administrator", :controller => :membership, :action => :make_administrator, :id => membership.id %>)
+        <% end %>
+        <% end %>
+      </li>
+      <% end %>
+    </ul>
+    <% end %>
+  </ul>
+  <% end %>
+

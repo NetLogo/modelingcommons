@@ -1,0 +1,16 @@
+<div id="invite-group-div" class="group-tab">
+
+  <% if @person.memberships.length == 0 %>
+  <p>You are not a member of any groups.</p>
+  <% else %>
+
+  <% form_tag :controller => "membership", :action => :invite_people do |form| %>
+  <p>Invite people to join the <%= select("group", "id", @person.groups.to_hash) %> group:</p>
+
+  <p>E-mail addresses, separated by commas:</p>
+  <p><%= text_area_tag "invitees", nil, :cols => 60, :rows => 10 %></p>
+  <p><%= submit_tag "Invite users" %></p>
+  <% end %>
+
+  <% end %>
+</div>

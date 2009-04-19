@@ -128,6 +128,10 @@ class AccountController < ApplicationController
     @most_recommended_models = @most_recommended_models.map { |n| [Node.find(n[0]), n[1]]}
   end
 
+  def mygroups
+    render :layout => false
+  end
+
   def reset_password
     dictionary_file = File.new('/etc/dictionaries-common/words', 'r')
     dictionary_file_contents = dictionary_file.read

@@ -190,4 +190,20 @@ class MembershipController < ApplicationController
     redirect_to :controller => :account, :action => :mypage
   end
 
+  def new_group
+    render :layout => false
+  end
+
+  def find_group
+    render :layout => false
+  end
+
+  def manage_groups
+    render :layout => false
+  end
+
+  def invite
+    render :layout => false
+  end
+
 end

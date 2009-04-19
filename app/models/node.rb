@@ -221,8 +221,10 @@ class Node < ActiveRecord::Base
     { :height => height, :width => width}
   end
 
-  def foo
-    return 1
+  def can_by_read_by?(person)
+    return true if self.people.member?(person)
+
+    return false
   end
 
 end

@@ -1,0 +1,12 @@
+<div id="create-group-div" class="group-tab">
+
+  <p>You may create as many groups as you wish.  You will be the
+  initial administrator of any group you create, meaning that you will
+  need to approve new group members.  Each group must have a unique name.</p>
+
+  <% form_tag :controller => "membership", :action => :create_group do |form| %>
+  <p>Name of your new group: <%= text_field_tag "group_name" %></p>
+  <p><%= submit_tag "Create group" %></p>
+  <% end %>
+</div>
+

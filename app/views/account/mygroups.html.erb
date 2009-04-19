@@ -1,0 +1,14 @@
+<div id="your-groups-div" class="group-tab">
+  <% if @person.memberships.length == 0 %>
+  <p>You are not a member of any groups.</p>
+  <% else %>
+  <ul>
+    <% @person.memberships.each do |membership| %>
+    <li><%= group_link(membership.group) %>
+      (<%= pluralize(membership.group.members.length, "member") %>)
+      (<%= link_to "leave this group", :controller => :membership, :action => :leave, :id => membership.id, :confirm => "Are you sure that you want to leave this group?" %>)
+    </li>
+    <% end %>
+  </ul>
+  <% end %>
+</div>
