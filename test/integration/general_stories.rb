@@ -48,7 +48,7 @@ class GeneralStoriesTest < ActionController::IntegrationTest
   def test_account_methods_without_being_logged_in_first
     controller_actions = %w(edit update mypage reset_password update_password_action models)
     controller_actions.each do |url|
-      get '/account' + url
+      get '/account/' + url
       assert_redirected_to :controller => :account, :action => :login
       follow_redirect!
       assert_response :success
