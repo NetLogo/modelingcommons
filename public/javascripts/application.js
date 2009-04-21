@@ -40,10 +40,6 @@ $(document).ready(function () {
 
                   });
 
-$('#people-table').ready(function () {
-                           $('#people-table').dataTable();
-                         });
-
 $("#model-tabs").ready(function () {
   $("#model-tabs").tabs();
                        });

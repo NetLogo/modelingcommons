@@ -2,11 +2,30 @@
   <% if @model.files.empty? -%>
   <p>No files</p>
   <% else -%>
-  <ul>
-    <% @model.files.sort_by {|f| f.name}.each do |f| -%>
-    <li><%= link_to f.filename, :controller => :browse, :action => :one_node, :id => f.id -%> (<%= f.node_type.short_name -%>)</li>
-    <% end -%>
-  </ul>
+  <table id="file-table" border="1">
+    <thead>
+      <tr>
+        <th>File</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Last updated</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @model.files.sort_by {|f| f.name.downcase}.each do |f| -%>
+
+      <tr>
+        <td><%= link_to f.name, :controller => :browse, :action => :one_node, :id => f.id -%></td>
+        <td><%= f.node_type.name -%></td>
+        <td><%= f.description %></td>
+        <td><%= distance_of_time_in_words(Time.now, f.updated_at) -%> ago, by <%= person_link(f.most_recent_author) %></td>
+      </tr>
+      <% end -%>
+    </tbody>
+
+  </table>
+
   <% end -%>
 
   <h2>Add or update a file</h2>
@@ -15,13 +34,13 @@
   <table>
     <tr>
       <td>File</td>
-      <td><%= file_field_tag 'document[uploaded_body]' %>
-        <%= hidden_field_tag 'document[parent_node_id]', @model.id %>
+      <td><%= file_field_tag :uploaded_file %>
+        <%= hidden_field_tag :parent_node_id, @model.id %>
     </tr>
 
     <tr>
       <td>Description</td>
-      <td><%= text_field_tag 'document[description]', nil, :size => 80 %></td>
+      <td><%= text_field_tag :description, nil, :size => 80 %></td>
     </tr>
 
     <tr>

@@ -52,19 +52,16 @@ class BrowseController < ApplicationController
     end
 
     node = Node.find(params[:id])
-    node_type = node.node_type
 
+    logger.warn "[one_node] Found node '#{node.id}, with a name of '#{node.name}' and a type of '#{node.mime_type}'."
 
     if node.node_type_id == 1
       redirect_to :action => :one_model, :id => params[:id]
       return
 
-    elsif node.node_type_id == 2
-      redirect_to :action => :display_preview, :id => node.parent.id
-      return
-
     else
-      send_data node.contents, :type => 'application/binary'
+      logger.warn "[one_node] sending contents as type '#{node.mime_type}'"
+      send_data node.contents, :filename => node.name, :type => node.mime_type
     end
   end
 

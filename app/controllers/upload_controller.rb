@@ -198,10 +198,10 @@ class UploadController < ApplicationController
 
   # Add a document
   def add_document
-    parent_node_id = params[:new_document][:parent_node_id]
-    description = params[:new_document][:description]
-    node_type_id = params[:new_document][:node_type]
-    filename = params[:new_document][:uploaded_document].original_filename
+    parent_node_id = params[:parent_node_id]
+    description = params[:description]
+    node_type_id = params[:document][:node_type_id]
+    filename = params[:uploaded_file].original_filename
 
     Node.transaction do
 
@@ -219,11 +219,11 @@ class UploadController < ApplicationController
       # Now we have a node (and node ID).  So we can create a new version!
       NodeVersion.create(:node_id => node.id,
                          :person_id => @person.id,
-                         :contents => params[:new_document][:uploaded_document].read,
+                         :contents => params[:uploaded_file].read,
                          :description => description)
 
       flash[:notice] = "Successfully added file!"
-      redirect_to :back, :anchor => "upload-div"
+      redirect_to :controller => :browse, :action => :one_model, :anchor => "ui-tabs-24"
     end
   end
 

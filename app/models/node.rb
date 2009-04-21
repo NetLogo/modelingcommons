@@ -80,6 +80,26 @@ class Node < ActiveRecord::Base
   end
 
   # ------------------------------------------------------------
+  # Info from the latest version
+  # ------------------------------------------------------------
+
+  def description
+    self.node_versions.sort_by {|nv| nv.created_at}.last.description
+  end
+
+  def updated_at
+    self.node_versions.sort_by {|nv| nv.created_at}.last.updated_at
+  end
+
+  def most_recent_author
+    self.node_versions.sort_by {|nv| nv.created_at}.last.person
+  end
+
+  def mime_type
+    self.node_type.mime_type
+  end
+
+  # ------------------------------------------------------------
   # Get the contents of a model file
   # ------------------------------------------------------------
 
