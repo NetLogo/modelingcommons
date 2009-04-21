@@ -43,12 +43,12 @@ class Node < ActiveRecord::Base
     self.node_versions.sort { |n| n.created_at}.last.person
   end
 
-  def children_of_id(id)
+  def children_of_type(id)
     self.children.select { |v| v.node_type_id == id}
   end
 
   def models
-    self.children_of_id(MODEL_NODE_TYPE)
+    self.children_of_type(MODEL_NODE_TYPE)
   end
 
   def non_models
@@ -56,23 +56,23 @@ class Node < ActiveRecord::Base
   end
 
   def previews
-    self.children_of_id(PREVIEW_NODE_TYPE)
+    self.children_of_type(PREVIEW_NODE_TYPE)
   end
 
   def latest_preview
-    self.children.last.node_versions.sort { |n| n.created_at}.last.contents
+    self.previews.sort_by { |p| p.created_at}.last.contents
   end
 
   def documents
-    self.children_of_id(DOCUMENT_NODE_TYPE)
+    self.children_of_type(DOCUMENT_NODE_TYPE)
   end
 
   def images
-    self.children_of_id(IMAGE_NODE_TYPE)
+    self.children_of_type(IMAGE_NODE_TYPE)
   end
 
   def data
-    self.children_of_id(DATA_NODE_TYPE)
+    self.children_of_type(DATA_NODE_TYPE)
   end
 
   def files
