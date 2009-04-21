@@ -48,3 +48,6 @@ $("#model-tabs").ready(function () {
   $("#model-tabs").tabs();
                        });
 
+$("#email_address").ready(function () {
+                            $("#email_address").focus();
+                          });
