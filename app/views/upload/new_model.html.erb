@@ -21,6 +21,7 @@
 
 </table>
 
+<% if !@person.groups.empty? %>
 <hr />
 <h2>Optional: Set the group</h2>
 
@@ -33,5 +34,6 @@
 
 <br />
 <%= submit_tag "Upload model", :class => "submit" %>
+<% end %>
 <% end %>
 

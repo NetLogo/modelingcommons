@@ -98,7 +98,6 @@ class TagsController < ApplicationController
       format.js
     end
 
-
   end
 
   def one_tag
