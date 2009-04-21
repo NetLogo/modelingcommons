@@ -9,9 +9,6 @@ class ApplicationController < ActionController::Base
   before_filter :log_one_action
   before_filter :get_node_types
 
-  # Pick a unique cookie name to distinguish our session data from others'
-  session :session_key => '_finish_session_id'
-
   def get_person
     person_id = session[:person_id]
     @person = Person.find(person_id)

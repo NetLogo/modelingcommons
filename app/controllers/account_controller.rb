@@ -14,7 +14,7 @@ class AccountController < ApplicationController
       flash[:notice] = "Congratulations, #{@new_person.first_name}!  You are now registered with the Modeling Commons.  We're delighted that you've joined us."
       Notifications.deliver_signup(@new_person)
       session[:person_id] = @new_person.id
-      redirect_to :controller => "browse", :action => "index"
+      redirect_to :controller => :account, :action => :mypage
     rescue Exception => e
       flash[:notice] = e.message
       redirect_to :back
@@ -59,7 +59,7 @@ class AccountController < ApplicationController
 
     flash[:notice] = "Welcome back to the Commons, #{@person.first_name}!"
     session[:person_id] = @person.id
-    redirect_to :controller => "account", :action => "mypage"
+    redirect_to :controller => :account, :action => :mypage
   end
 
   def logout

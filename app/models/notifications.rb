@@ -3,7 +3,7 @@ class Notifications < ActionMailer::Base
     @recipients = person.email_address
     @bcc = 'reuven@lerner.co.il'
     @from = "nlcommons@monk.ccl.northwestern.edu"
-    @subject = "Welcome to the commons!"
+    @subject = "Welcome to the NetLogo Modeling Commons!"
     @body[:person] = person
     @sent_on    = Time.now()
     @content_type = 'text/html'
