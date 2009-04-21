@@ -149,7 +149,7 @@ class MembershipController < ApplicationController
       membership.status = 'pending'
       membership.save
 
-      flash[:notice] = "You will be a member as soon as the administrator confirms your membership."
+      flash[:notice] = "Congratulations!  You're now a member of the '#{membership.group.name}' group."
     end
 
     redirect_to :controller => 'account', :action => 'mypage'
