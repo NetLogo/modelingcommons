@@ -136,7 +136,7 @@ class ApplicationController < ActionController::Base
     if @model.nil?
       logger.warn "Error -- model is nil.  Cannot upload."
       flash[:notice] = "Error detected; cannot upload.  Please notify the site administrator."
-      return nil
+      return false
     end
 
     logger.warn "Checking changeability permissions for model '#{@model.to_yaml}' and person '#{@person.to_yaml}'"

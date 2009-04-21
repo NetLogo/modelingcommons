@@ -198,10 +198,21 @@ class UploadController < ApplicationController
 
   # Add a document
   def add_document
-    parent_node_id = params[:parent_node_id]
+    parent_node_id = params[:parent_node_id].to_i
     description = params[:description]
-    node_type_id = params[:document][:node_type_id]
+    node_type_id = params[:document][:node_type_id].to_i
     filename = params[:uploaded_file].original_filename
+
+    # If we have a preview image, then change the name to be the same as the model.  Otherwise,
+    # we'll go a bit crazy.
+    if node_type_id == 2
+      logger.warn "[add_document] Uploading a preview -- setting the name"
+      parent_node = Node.find(parent_node_id)
+      filename = parent_node.name + '.png'
+      logger.warn "[add_document] Filename is now '#{filename}'"
+    else
+      logger.warn "[add_document] Keeping filename as '#{filename}'"
+    end
 
     Node.transaction do
 
@@ -223,7 +234,7 @@ class UploadController < ApplicationController
                          :description => description)
 
       flash[:notice] = "Successfully added file!"
-      redirect_to :controller => :browse, :action => :one_model, :anchor => "ui-tabs-24"
+      redirect_to :controller => :browse, :action => :one_model, :id => parent_node_id, :anchor => "ui-tabs-24"
     end
   end
 

@@ -3,7 +3,7 @@
   <p>You are not a member of any groups.</p>
   <% else %>
   <ul>
-    <% @person.memberships.each do |membership| %>
+    <% @person.memberships.sort_by {|m| m.group.name.downcase}.each do |membership| %>
     <li><%= group_link(membership.group) %>
       (<%= pluralize(membership.group.members.length, "member") %>)
       (<%= link_to "leave this group", :controller => :membership, :action => :leave, :id => membership.id, :confirm => "Are you sure that you want to leave this group?" %>)

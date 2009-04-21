@@ -1,0 +1,15 @@
+<div id="find-group-div" class="group-tab">
+  <% @title = "Group search results" %>
+
+  <ul>
+    <% @groups.sort_by {|g| g.name}.each do |group| %>
+    <li>
+      <%= group_link(group) %>
+      <% if not group.administrators.empty? %>
+      (Group owner: <%= person_link(group.administrators.first.person) %>)
+      <% end %>
+    </li>
+    <% end %>
+  </ul>
+
+</div>

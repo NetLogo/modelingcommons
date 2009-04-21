@@ -66,7 +66,7 @@ class MembershipController < ApplicationController
   def create_group
     @new_group_name = params[:group_name]
 
-    if Group.exists?(:name => @new_group_name)
+    if Group.exists?(["lower(name) = ? ", @new_group_name.downcase])
 
       group = Group.find_by_name(@new_group_name)
 
@@ -90,7 +90,7 @@ class MembershipController < ApplicationController
       end
     end
 
-    redirect_to :back
+    redirect_to :controller => :account, :action => :groups, :anchor => "ui-tabs-10"
 
   end
 
@@ -156,12 +156,15 @@ class MembershipController < ApplicationController
     return
   end
 
-  def find_group
-    group_name_to_find = params[:group_name].downcase
+  def find
+    render :layout => false
+  end
+
+  def find_action
+    group_name_to_find = params[:group_name].downcase.strip
 
     if group_name_to_find.empty?
-      flash[:notice] = "You must enter a group name to search.  Please try again."
-      redirect_to :back
+      render :text => "You must enter a group name to search.  Please try again."
       return
     end
 
@@ -170,11 +173,11 @@ class MembershipController < ApplicationController
                          :conditions => ["lower(name) ilike ? ", group_name_to_find_ilike])
 
     if @groups.empty?
-      flash[:notice] = "Sorry, but no groups have the name '#{group_name_to_find}'."
-      redirect_to :back
+      render :text => "No groups contain '#{group_name_to_find}'. Please try again."
       return
     end
 
+    render :layout => false
   end
 
   def one_group
