@@ -1,33 +1,38 @@
-<% if @model.files.empty? -%>
-<p>No files</p>
-<% else -%>
-<ul>
-  <% @model.files.sort_by {|f| f.name}.each do |f| -%>
-  <li><%= link_to f.filename, :controller => :browse, :action => :one_node, :id => f.id -%> (<%= f.node_type.short_name -%>)</li>
+<div>
+  <% if @model.files.empty? -%>
+  <p>No files</p>
+  <% else -%>
+  <ul>
+    <% @model.files.sort_by {|f| f.name}.each do |f| -%>
+    <li><%= link_to f.filename, :controller => :browse, :action => :one_node, :id => f.id -%> (<%= f.node_type.short_name -%>)</li>
+    <% end -%>
+  </ul>
   <% end -%>
-</ul>
-<% end -%>
 
-<h2>Add another file</h2>
+  <h2>Add or update a file</h2>
 
-<% form_tag(:controller => "upload", :action => :add_document, :html => {:multipart => true}) do |form| %>
-<table>
-  <tr>
-    <td>File</td>
-    <td><%= form.file_field :uploaded_body %>
-      <%= form.hidden_field :parent_node_id, {:value => @model.id} %></td>
-  </tr>
+  <% form_tag({:controller => "upload", :action => :add_document}, {:multipart => true}) do %>
+  <table>
+    <tr>
+      <td>File</td>
+      <td><%= file_field_tag 'document[uploaded_body]' %>
+        <%= hidden_field_tag 'document[parent_node_id]', @model.id %>
+    </tr>
 
-      <%= form.hidden_field :node_type, {:value => "3"} %></td>
+    <tr>
+      <td>Description</td>
+      <td><%= text_field_tag 'document[description]', nil, :size => 80 %></td>
+    </tr>
 
-  <tr>
-    <td>Short comment</td>
-    <td><%= form.text_field :description %></td>
-  </tr>
+    <tr>
+      <td>File type:</td>
+      <td><%= select("document", "node_type_id", NodeType.find(:all, :conditions => "id > 1").sort_by {|nt| nt.name}.collect {|nt| [ nt.name, nt.id ] }, { :include_blank => false }) %>
+    </tr>
 
-  <tr>
-    <td colspan="2"><%= submit_tag "Upload document", :class => "submit" %></td>
-  </tr>
+    <tr>
+      <td colspan="2"><%= submit_tag "Upload document", :class => "submit" %></td>
+    </tr>
 
-</table>
-<% end %>
+  </table>
+  <% end %>
+</div>

@@ -1,16 +1,18 @@
-<% if @model.parent.nil? -%>
-<p>This model does not have any ancestors.</p>
-<% else -%>
-<p><b>Parent:</b> <%= link_to @model.parent.name, :controller => 'browse', :action => 'one_model', :id => @model.parent.id  -%></p>
-<% end -%>
-
-<% if @model.models.empty? -%>
-<p>This model does not have any descendants.</p>
-<% else -%>
-<h3>Children:</h3>
-<ul>
-  <% @model.models.each do |child| -%>
-  <li><%= link_to child.name, :controller => 'browse', :action => 'one_model', :id => child.id  -%></li>
+<div>
+  <% if @model.parent.nil? -%>
+  <p>This model does not have any ancestors.</p>
+  <% else -%>
+  <p><b>Parent:</b> <%= link_to @model.parent.name, :controller => 'browse', :action => 'one_model', :id => @model.parent.id  -%></p>
   <% end -%>
-</ul>
-<% end -%>
+
+  <% if @model.models.empty? -%>
+  <p>This model does not have any descendants.</p>
+  <% else -%>
+  <h3>Children:</h3>
+  <ul>
+    <% @model.models.each do |child| -%>
+    <li><%= link_to child.name, :controller => 'browse', :action => 'one_model', :id => child.id  -%></li>
+    <% end -%>
+  </ul>
+  <% end -%>
+</div>

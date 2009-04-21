@@ -1,32 +1,34 @@
-<% if @model.postings.empty? %>
-<b>Please start the conversation about this model.</b>
-<% end %>
+<div>
+  <% if @model.postings.empty? %>
+  <b>Please start the conversation about this model.</b>
+  <% end %>
 
-<table id="discussion">
-  <%= render :partial => "discussion/one_posting", :collection => @model.postings.sort_by {|posting| posting.created_at}, :as => :posting -%>
-</table>
+  <table id="discussion">
+    <%= render :partial => "discussion/one_posting", :collection => @model.postings.sort_by {|posting| posting.created_at}, :as => :posting -%>
+  </table>
 
-<hr />
+  <hr />
 
-<% remote_form_for(:new_posting,
-   :url => { :controller => "discussion", :action => :new }) do |form| %>
-<table id="posting-table">
-  <tr>
-    <td>Title</td>
-    <td><%= form.text_field :title %>
-  </tr>
-  <tr>
-    <td>Body</td>
-    <td><%= form.text_area :body, {:cols => 40, :rows => 10} %>
-      <%= form.hidden_field :node_id, {:value => @model.id} %></td>
-  </tr>
-  <tr>
-    <td colspan="2"><%= form.check_box :is_question %><label for="new_posting_is_question">This is a question that I would like answered</label></td>
-  </tr>
+  <% remote_form_for(:new_posting,
+     :url => { :controller => "discussion", :action => :new }) do |form| %>
+  <table id="posting-table">
+    <tr>
+      <td>Title</td>
+      <td><%= form.text_field :title %>
+    </tr>
+    <tr>
+      <td>Body</td>
+      <td><%= form.text_area :body, {:cols => 40, :rows => 10} %>
+        <%= form.hidden_field :node_id, {:value => @model.id} %></td>
+    </tr>
+    <tr>
+      <td colspan="2"><%= form.check_box :is_question %><label for="new_posting_is_question">This is a question that I would like answered</label></td>
+    </tr>
 
-  <tr>
-    <td colspan="2"><%= submit_tag 'Submit comment' %></td>
-  </tr>
+    <tr>
+      <td colspan="2"><%= submit_tag 'Submit comment' %></td>
+    </tr>
 
-</table>
-<% end %>
+  </table>
+  <% end %>
+</div>
