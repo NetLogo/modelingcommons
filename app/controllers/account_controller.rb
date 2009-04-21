@@ -57,7 +57,7 @@ class AccountController < ApplicationController
       return
     end
 
-    flash[:notice] = "Welcome back to the commons, #{@person.first_name}!"
+    flash[:notice] = "Welcome back to the Commons, #{@person.first_name}!"
     session[:person_id] = @person.id
     redirect_to :controller => "account", :action => "mypage"
   end

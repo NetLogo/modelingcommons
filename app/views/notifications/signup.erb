@@ -3,7 +3,7 @@
     <h1>Welcome, <%= @person.first_name %>!</h1>
 
     <p>You have successfully registered with the
-    <%= link_to "NetLogo modeling commons", :host => 'monk.ccl.northwestern.edu:3000', :controller => "browse" %>.</p>
+    <%= link_to "NetLogo Modeling Commons", :host => 'monk.ccl.northwestern.edu:3000', :controller => "browse" %>.</p>
 
     <p>Your e-mail address (which is used to log in) is
     '<%= @person.email_address %>', and your password is
@@ -19,7 +19,7 @@
 
     <ul>
         <li><%= link_to "Your personal home page", :host => 'monk.ccl.northwestern.edu:3000', :controller => "account", :action => "mypage" %></li>
-        <li><%= link_to "List models in the commons", :host => 'monk.ccl.northwestern.edu:3000', :controller => "browse", :action => "list_models" %></li>
+        <li><%= link_to "List models in the Commons", :host => 'monk.ccl.northwestern.edu:3000', :controller => "browse", :action => "list_models" %></li>
         <li><%= link_to "Upload a new model", :host => 'monk.ccl.northwestern.edu:3000', :controller => "upload", :action => "new_model" %></li>
     </ul>
 
