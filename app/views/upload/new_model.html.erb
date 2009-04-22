@@ -21,7 +21,6 @@
 
 </table>
 
-<% if !@person.groups.empty? %>
 <hr />
 <h2>Optional: Set the group</h2>
 
@@ -33,7 +32,6 @@
 <%= render :partial => "browse/permission_selector", :locals => {:person => @person, :model => nil} -%>
 
 <br />
-<% end %>
 <%= submit_tag "Upload model", :class => "submit" %>
 <% end %>
 

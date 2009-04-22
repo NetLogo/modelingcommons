@@ -31,4 +31,8 @@ class Group < ActiveRecord::Base
     self.memberships.select {|m| m.person if m.is_administrator? }
   end
 
+  def models
+    self.nodes
+  end
+
 end

@@ -6,7 +6,8 @@ require 'diff/lcs/hunk'
 class BrowseController < ApplicationController
 
   prepend_before_filter :get_model_from_id_param, :except => [:index, :list_models, :list_models_group, :search, :search_action, :news, :one_node, :create_group, :whats_new, :about, :stuff, :spider, :view_random_model]
-  before_filter :require_login, :except => [:model_contents, :one_applet, :about, :follow]
+  before_filter :require_login, :only => [:revert_model, :set_permissions]
+
   before_filter :check_visibility_permissions, :only => [:one_model, :model_contents, :one_applet ]
   before_filter :check_changeability_permissions, :only => [:revert_model]
 
@@ -199,7 +200,14 @@ class BrowseController < ApplicationController
     else
 
       read_permission = PermissionSetting.find_by_short_form(params[:read_permission])
+      if read_permission.short_form == 'g' and @model.group.nil?
+        read_permission = PermissionSetting.find_by_short_form('a')
+      end
+
       write_permission = PermissionSetting.find_by_short_form(params[:write_permission])
+      if write_permission.short_form == 'g' and @model.group.nil?
+        write_permission = PermissionSetting.find_by_short_form('a')
+      end
 
       Model.transaction do
 

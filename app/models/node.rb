@@ -24,6 +24,8 @@ class Node < ActiveRecord::Base
 
   has_many :spam_warnings
 
+  has_many :logged_actions
+
   validates_presence_of :name, :node_type_id, :visibility_id, :changeability_id
   validates_numericality_of :node_type_id, :visibility_id, :changeability_id
 
@@ -85,10 +87,6 @@ class Node < ActiveRecord::Base
 
   def description
     self.node_versions.sort_by {|nv| nv.created_at}.last.description
-  end
-
-  def updated_at
-    self.node_versions.sort_by {|nv| nv.created_at}.last.updated_at
   end
 
   def most_recent_author

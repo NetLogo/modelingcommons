@@ -5,7 +5,6 @@ class ApplicationController < ActionController::Base
   helper :transparent_message
 
   before_filter :get_person
-  before_filter :require_login
   before_filter :log_one_action
   before_filter :get_node_types
 
@@ -86,7 +85,7 @@ class ApplicationController < ActionController::Base
   def check_visibility_permissions
     return true if @model.nil? or @person.nil?
 
-    logger.warn "Checking visibility permissions for model '#{@model.id}' and person '#{@person.id}'"
+    logger.warn "[check_visibility_permissions] Checking visibility permissions for model '#{@model.id}' and person '#{@person.id}'"
 
     # This only applies if the node is a model
     return true unless @model.is_model?
@@ -98,15 +97,17 @@ class ApplicationController < ActionController::Base
     # Note that the "user" permission works for anyone who has already submitted
     # a version to this model.  Otherwise, things get a bit sticky.  I think.
     if @model.visibility.short_form == 'u' and @model.people.member?(@person)
-      logger.warn "Visiblity permission is 'u' and person '#{@person}' is in the member list.  Allowing."
+      logger.warn "[check_visibility_permissions] Visiblity permission is 'u' and person '#{@person}' is in the member list.  Allowing."
       return true
     end
 
     # If only the group can see this model, then get the model's group, and
     # determine if @person is a member of the group.
-    if @model.visibility.short_form == 'g' and @model.group.approved_members.member?(@person)
-      logger.warn "Visiblity permission is 'g' and person '#{@person}' is a member of group '#{@model.group.name}'.  Allowing."
-      return true
+    if @model.group
+      if @model.visibility.short_form == 'g' and @model.group and @model.group.approved_members.member?(@person)
+        logger.warn "[check_visibility_permissions] Visiblity permission is 'g' and person '#{@person}' is a member of group '#{@model.group.name}'.  Allowing."
+        return true
+      end
     end
 
     flash[:notice] = "You do not have permission to view this model."
@@ -127,7 +128,7 @@ class ApplicationController < ActionController::Base
     end
 
     if @model.nil?
-      logger.warn "Error -- model is nil.  Cannot upload."
+      logger.warn "[check_changeability_permissions] Error -- model is nil.  Cannot upload."
       flash[:notice] = "Error detected; cannot upload.  Please notify the site administrator."
       return false
     end
@@ -154,8 +155,9 @@ class ApplicationController < ActionController::Base
 
     # If only the group can see this model, then get the model's group, and
     # determine if @person is a member of the group.
-    return true if @model.changeability.short_form == 'g' and
-      @model.group.approved_members.member?(@person)
+    if @model.group
+      return true if @model.changeability.short_form == 'g' and @model.group.approved_members.member?(@person)
+    end
 
     flash[:notice] = "You do not have permission to modify this model."
     redirect_to :controller => :account, :action => :mypage

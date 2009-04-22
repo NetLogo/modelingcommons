@@ -1,5 +1,6 @@
 class UploadController < ApplicationController
 
+  prepend_before_filter :get_model_from_id_param, :only => [:add_document]
   before_filter :check_changeability_permissions, :only => [:update_model, :add_document]
 
   def new_model
@@ -12,7 +13,9 @@ class UploadController < ApplicationController
     Node.transaction do
       new_model_node = Node.create(:node_type_id => 1,
                                    :parent_id => nil,
-                                   :name => model_name)
+                                   :name => model_name,
+                                   :updated_at => Time.now,
+                                   :created_at => Time.now)
       new_model_node.reload
 
       @model = new_model_node
@@ -198,7 +201,6 @@ class UploadController < ApplicationController
 
   # Add a document
   def add_document
-    parent_node_id = params[:parent_node_id].to_i
     description = params[:description]
     node_type_id = params[:document][:node_type_id].to_i
     filename = params[:uploaded_file].original_filename
@@ -207,8 +209,7 @@ class UploadController < ApplicationController
     # we'll go a bit crazy.
     if node_type_id == 2
       logger.warn "[add_document] Uploading a preview -- setting the name"
-      parent_node = Node.find(parent_node_id)
-      filename = parent_node.name + '.png'
+      filename = @model.name + '.png'
       logger.warn "[add_document] Filename is now '#{filename}'"
     else
       logger.warn "[add_document] Keeping filename as '#{filename}'"
@@ -219,11 +220,11 @@ class UploadController < ApplicationController
       # Grab this node if it exists, or create it if it doesn't
       node = Node.find(:first,
                        :conditions => ["parent_id = ? and name = ? and node_type_id = ?",
-                                       parent_node_id, filename, node_type_id])
+                                       @model.id, filename, node_type_id])
 
       if node.nil?
         node = Node.create(:node_type_id => node_type_id,
-                           :parent_id => parent_node_id,
+                           :parent_id => @model.id,
                            :name => filename)
       end
 
@@ -234,7 +235,7 @@ class UploadController < ApplicationController
                          :description => description)
 
       flash[:notice] = "Successfully added file!"
-      redirect_to :controller => :browse, :action => :one_model, :id => parent_node_id, :anchor => "ui-tabs-24"
+      redirect_to :controller => :browse, :action => :one_model, :id => @model.id, :anchor => "ui-tabs-24"
     end
   end
 

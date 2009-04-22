@@ -1,5 +1,6 @@
 class AdminController < ApplicationController
 
+  before_filter :require_login
   before_filter :require_administrator
 
   def index
@@ -24,8 +25,9 @@ class AdminController < ApplicationController
   end
 
   def view_all_actions
-    @actions = LoggedAction.find(:all,
-                                 :order => "logged_at")
+    @actions = LoggedAction.paginate(:page => params[:page],
+                                     :order => 'logged_at ASC')
+
     render :template => "admin/view_actions"
   end
 

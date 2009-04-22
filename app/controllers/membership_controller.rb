@@ -1,5 +1,7 @@
 class MembershipController < ApplicationController
 
+  before_filter :require_login
+
   def leave
     if params[:id].empty?
       flash[:notice] = "No such membership."

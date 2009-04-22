@@ -35,7 +35,7 @@
 
     <% if @person %>
     <div id="menubar-avatar">
-      <%= image_tag @person.avatar.url(:thumb) %>
+      <%= person_image(@person) %>
     </div>
     <% end %>
 

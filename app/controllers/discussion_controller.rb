@@ -1,5 +1,7 @@
 class DiscussionController < ApplicationController
 
+  before_filter :require_login, :only => [:new, :create, :delete]
+
   def new
     params[:new_posting][:person_id] = @person.id
     @posting = Posting.create(params[:new_posting])

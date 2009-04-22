@@ -1,34 +1,54 @@
+<%= will_paginate @actions %>
+
 <table border="1">
 
-        <tr>
-            <th>id</th>
-            <th>Timestamp</th>
-            <th>Person</th>
-            <th>URL</th>
-            <th>IP address</th>
-            <th>Browser info</th>
-            <th>Parameters</th>
-            <th>Flash</th>
-        </tr>
+  <tr>
+    <th>id</th>
+    <th>Timestamp</th>
+    <th>Person</th>
+    <th>URL</th>
+    <th>Controller</th>
+    <th>Action</th>
+    <th>Node ID</th>
+    <th>Parameters</th>
+    <th>IP address</th>
+    <th>Referrer</th>
+    <th>Browser info</th>
+    <th>Flash</th>
+  </tr>
 
-<% @actions.each do |action| %>
+  <% @actions.each do |action| %>
 
-        <tr>
-            <td><%= action.id %></td>
-            <td><%= action.logged_at %> (<%= distance_of_time_in_words(Time.now, action.logged_at) -%> ago)</td>
-            <td>
-                <% if action.person %>
-                    <%= action.person.fullname %>
-                <% else %>
-                    (No person)
-                <% end %>
-            </td>
-            <td><%= action.url %></td>
-            <td><%= action.ip_address %></td>
-            <td><%= action.browser_info %></td>
-            <td><pre><%= action.params %></pre></td>
-            <td><pre><%= action.flash %></pre></td>
-        </tr>
+  <tr>
+    <td><%= action.id %></td>
+    <td><%= action.logged_at %> (<%= distance_of_time_in_words(Time.now, action.logged_at) -%> ago)</td>
+    <td>
+      <% if action.person %>
+      <%= person_link(action.person) %>
+      <% else %>
+      (No person)
+      <% end %>
+    </td>
+    <td><%= link_to action.url, action.url, :target => "_blank" %></td>
+    <td><%= action.controller %></td>
+    <td><%= action.action %></td>
+    <td>
+        <% if action.node.nil? %>
+            (No node)
+        <% elsif action.node.node_type_id == Node::MODEL_NODE_TYPE %>
+            <%= link_to action.node.name, :controller => :browse, :action => :one_model, :id => action.node_id, :target => "_blank" %>
+        <% else %>
+            <%= action.node_id %>
+        <% end %>
+    </td>
+    <td><pre><%= action.params %></pre></td>
+    <td><%= action.ip_address %></td>
+    <td><%= link_to action.referrer, action.referrer %></td>
+    <td><%= action.browser_info %></td>
+    <td><pre><%= action.flash %></pre></td>
+  </tr>
 
-<% end %>
+  <% end %>
 </table>
+
+<%= will_paginate @actions %>

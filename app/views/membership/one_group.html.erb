@@ -1,9 +1,17 @@
 <% @title = "Group info for '#{@group.name}'" %>
 
+<h2>Models in the <%= @group.name %> group:</h2>
+
+<% if @group.models and (not @group.models.empty?) %>
+    <%= render :partial => "browse/model_list", :object => @group.models %>
+<% else %>
+    <p>No models.</p>
+<% end %>
+
 <h2>Members of the <%= @group.name %> group:</h2>
 
 <ul>
   <% @group.people.sort_by {|p| p.last_name + p.first_name}.each do |person| %>
-  <li><%= image_tag person.avatar.url(:thumb) %>&nbsp;<%= person_link(person) -%></li>
+  <li><%= person_image(person) %>&nbsp;<%= person_link(person) -%></li>
   <% end %>
 </ul>

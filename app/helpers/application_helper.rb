@@ -51,6 +51,10 @@ module ApplicationHelper
     end
   end
 
+  def person_image(person)
+    image_tag(person.avatar.url(:thumb))
+  end
+
   def person_link(person)
     if person == @person
       link_to('You', :controller => :account, :action => :mypage, :id => person.id)

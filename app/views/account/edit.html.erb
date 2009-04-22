@@ -26,7 +26,7 @@
 
   <tr>
     <td>Optional image</td>
-    <td><%= form.file_field :avatar %><%= image_tag @person.avatar.url(:thumb) %> </td>
+    <td><%= form.file_field :avatar %><%= person_image(@person) %> </td>
   </tr>
 
   <tr>
