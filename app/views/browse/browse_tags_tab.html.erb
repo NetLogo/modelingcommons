@@ -8,6 +8,7 @@
   </table>
   <% end -%>
 
+  <% if @person %>
   <div id="add-tags">
     <h2>Add one or more tags:</h2>
     <% remote_form_for(:new_tag, :url => {:controller => "tags", :action => :new}) do |form| -%>
@@ -19,4 +20,6 @@
     <p><%= submit_tag "Save tags to the Commons" -%></p>
     <% end -%>
   </div>
+
+  <% end %>
 </div>

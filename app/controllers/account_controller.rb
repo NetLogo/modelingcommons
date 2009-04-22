@@ -1,6 +1,6 @@
 class AccountController < ApplicationController
 
-  before_filter :require_login, :except => [:new, :create, :login, :login_action, :send_password, :send_password_action, :follow]
+  before_filter :require_login, :only => [:edit, :update, :logout]
 
   def new
     @new_person = Person.new
@@ -70,6 +70,12 @@ class AccountController < ApplicationController
   end
 
   def mypage
+    if @person.nil? and params[:id].blank?
+      flash[:notice] = "You must first log in to get a personal home page."
+      redirect_to :controller => :account, :action => :login
+      return
+    end
+
     if params[:id].blank?
       @the_person = @person
     else

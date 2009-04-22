@@ -28,6 +28,7 @@
 
   <% end -%>
 
+  <% if @person %>
   <h2>Add or update a file</h2>
 
   <% form_tag({:controller => "upload", :action => :add_document}, {:multipart => true}) do %>
@@ -53,5 +54,6 @@
     </tr>
 
   </table>
+  <% end %>
   <% end %>
 </div>

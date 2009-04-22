@@ -1,4 +1,7 @@
 class ModelsController < ApplicationController
+
+  before_filter :require_login, :only => [:new, :create, :edit, :update, :destroy]
+
   def index
     list
     render :action => 'list'

@@ -1,6 +1,6 @@
 class TagsController < ApplicationController
 
-  before_filter :require_login, :except => [:follow]
+  before_filter :require_login, :only => [:new, :create, :edit, :update, :destroy]
 
   def index
     @tags = Tag.find(:all)

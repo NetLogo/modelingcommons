@@ -1,11 +1,13 @@
 <div>
-  <% if @model.postings.empty? %>
+  <% if @model.postings.empty? and @person %>
   <b>Please start the conversation about this model.</b>
   <% end %>
 
   <table id="discussion">
     <%= render :partial => "discussion/one_posting", :collection => @model.postings.sort_by {|posting| posting.created_at}, :as => :posting -%>
   </table>
+
+  <%  if @person %>
 
   <hr />
 
@@ -30,5 +32,7 @@
     </tr>
 
   </table>
+  <% end %>
+
   <% end %>
 </div>

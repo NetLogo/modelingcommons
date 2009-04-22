@@ -1,5 +1,6 @@
 class UploadController < ApplicationController
 
+  before_filter :require_login
   prepend_before_filter :get_model_from_id_param, :only => [:add_document]
   before_filter :check_changeability_permissions, :only => [:update_model, :add_document]
 
@@ -11,7 +12,7 @@ class UploadController < ApplicationController
 
     # Create a new node, without a parent
     Node.transaction do
-      new_model_node = Node.create(:node_type_id => 1,
+      new_model_node = Node.create(:node_type_id => Node::MODEL_NODE_TYPE,
                                    :parent_id => nil,
                                    :name => model_name,
                                    :updated_at => Time.now,
@@ -32,7 +33,7 @@ class UploadController < ApplicationController
       if not params[:new_model][:uploaded_preview].blank?
 
         # Create a new preview node, whose parent is the new model node
-        preview_node = Node.create(:node_type_id => 2,
+        preview_node = Node.create(:node_type_id => Node::PREVIEW_NODE_TYPE,
                                    :parent_id => new_model_node.id,
                                    :name => model_name + ".png")
 
@@ -85,7 +86,7 @@ class UploadController < ApplicationController
     # If we're cloning, then there's no need to look for any uploaded document.
     if fork == 'clone'
       Node.transaction do
-        clone_child = Node.create(:node_type_id => 1,
+        clone_child = Node.create(:node_type_id => Node::MODEL_NODE_TYPE,
                                   :parent_id => existing_node.id,
                                   :name => "Cloned child of #{existing_node.name}")
         clone_child.reload
@@ -161,13 +162,13 @@ class UploadController < ApplicationController
     # use node.id as the node ID.
 
     if fork == 'child'
-      child_node = Node.create(:node_type_id => 1,
+      child_node = Node.create(:node_type_id => Node::MODEL_NODE_TYPE,
                                :parent_id => existing_node.id,
                                :name => "Child of #{existing_node.name}")
       node_id = child_node.id
       flash[:notice] << "Added new node (#{child_node.id}), a child to node #{existing_node.id}. "
     elsif fork == 'newmodel'
-      new_node = Node.create(:node_type_id => 1,
+      new_node = Node.create(:node_type_id => Node::MODEL_NODE_TYPE,
                              :parent_id => nil,
                              :name => params[:new_version][:description])
       node_id = new_node.id
@@ -207,7 +208,7 @@ class UploadController < ApplicationController
 
     # If we have a preview image, then change the name to be the same as the model.  Otherwise,
     # we'll go a bit crazy.
-    if node_type_id == 2
+    if node_type_id == Node::PREVIEW_NODE_TYPE
       logger.warn "[add_document] Uploading a preview -- setting the name"
       filename = @model.name + '.png'
       logger.warn "[add_document] Filename is now '#{filename}'"

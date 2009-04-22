@@ -19,7 +19,7 @@ class BrowseController < ApplicationController
   def list_models
     @models = Node.paginate(:page => params[:page],
                             :order => 'name ASC',
-                            :conditions => "node_type_id = 1")
+                            :conditions => ["node_type_id = ? ", Node::MODEL_NODE_TYPE])
   end
 
   def list_models_group
@@ -32,7 +32,7 @@ class BrowseController < ApplicationController
       @title = "List of models in the '#{@group.name}' group"
     end
 
-    @models = Node.paginate(:page => params[:page], :order => 'name ASC', :conditions => [ "node_type_id = 1 and group_id in (#{@group_ids}) "])
+    @models = Node.paginate(:page => params[:page], :order => 'name ASC', :conditions => [ "node_type_id = ? and group_id in (#{@group_ids}) ", Node::MODEL_NODE_TYPE])
   end
 
   def one_model
@@ -56,7 +56,7 @@ class BrowseController < ApplicationController
 
     logger.warn "[one_node] Found node '#{node.id}, with a name of '#{node.name}' and a type of '#{node.mime_type}'."
 
-    if node.node_type_id == 1
+    if node.node_type_id == Node::MODEL_NODE_TYPE
       redirect_to :action => :one_model, :id => params[:id]
       return
 
@@ -149,14 +149,14 @@ class BrowseController < ApplicationController
     logger.warn "[search_action] Now starting search_action"
     @original_search_term = params[:search_term][:search_term]
 
-    @models = Node.find(:all, :conditions => "node_type_id = 1").select {|m| m.name.downcase.index(@original_search_term.downcase)}
+    @models = Node.find(:all, :conditions => ["node_type_id = ? ", Node::MODEL_NODE_TYPE]).select {|m| m.name.downcase.index(@original_search_term.downcase)}
 
     @ferret_results = NodeVersion.find_by_contents(@original_search_term).map {|nv| nv.node}.uniq
 
     @info_match_models = @ferret_results.select { |r| r.info_tab.downcase.index(@original_search_term.downcase)}
 
     logger.warn "[search_action] Now checking @author_match_models"
-    @author_match_models = Node.find(:all, :conditions => "node_type_id = 1").select {|m| m.people.map { |person| person.fullname}.join(" ").downcase.index(@original_search_term.downcase)}
+    @author_match_models = Node.find(:all, :conditions => ["node_type_id = ? ", Node::MODEL_NODE_TYPE]).select {|m| m.people.map { |person| person.fullname}.join(" ").downcase.index(@original_search_term.downcase)}
 
     @procedures_match_models = @ferret_results.select { |r| r.procedures_tab.downcase.index(@original_search_term.downcase)}
 

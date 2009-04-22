@@ -1,4 +1,7 @@
 class PossibleSpamController < ApplicationController
+
+  before_filter :require_login
+
   def mark_as_spam
     SpamWarning.create(:person_id => @person.id,
                        :node_id => params[:id])
@@ -7,7 +10,7 @@ class PossibleSpamController < ApplicationController
   end
 
   def list
-    
+
   end
 
 end

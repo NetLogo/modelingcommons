@@ -1,5 +1,7 @@
 class LogController < ApplicationController
 
+  before_filter :require_login
+
   def view_one_action
   end
 

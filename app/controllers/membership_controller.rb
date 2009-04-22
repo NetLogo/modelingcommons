@@ -1,6 +1,6 @@
 class MembershipController < ApplicationController
 
-  before_filter :require_login
+  before_filter :require_login, :except => [:find, :find_group]
 
   def leave
     if params[:id].empty?
