@@ -205,6 +205,7 @@ class UploadController < ApplicationController
     description = params[:description]
     node_type_id = params[:document][:node_type_id].to_i
     filename = params[:uploaded_file].original_filename
+    logger.warn "[add_document] Model is '#{@model.name}', ID '#{@model.id}'"
 
     # If we have a preview image, then change the name to be the same as the model.  Otherwise,
     # we'll go a bit crazy.
@@ -216,28 +217,39 @@ class UploadController < ApplicationController
       logger.warn "[add_document] Keeping filename as '#{filename}'"
     end
 
+    logger.warn "[add_document] About to start Node.transaction"
     Node.transaction do
 
       # Grab this node if it exists, or create it if it doesn't
+      logger.warn "[add_document] Looking to see if there is already a node of type '#{node_type_id}' named '#{filename}'"
       node = Node.find(:first,
                        :conditions => ["parent_id = ? and name = ? and node_type_id = ?",
                                        @model.id, filename, node_type_id])
 
       if node.nil?
+        logger.warn "[add_document] Nope, it's new -- creating a new node version"
         node = Node.create(:node_type_id => node_type_id,
                            :parent_id => @model.id,
                            :name => filename)
       end
 
       # Now we have a node (and node ID).  So we can create a new version!
-      NodeVersion.create(:node_id => node.id,
-                         :person_id => @person.id,
-                         :contents => params[:uploaded_file].read,
-                         :description => description)
-
-      flash[:notice] = "Successfully added file!"
+      logger.warn "[add_document] Now creating a new node_version for node '#{node.id}'"
+      new_node_version = NodeVersion.new(:node_id => node.id,
+                                         :person_id => @person.id,
+                                         :contents => params[:uploaded_file].read,
+                                         :description => description)
+      if new_node_version.save
+        logger.warn "[add_document] Saved the node_version, ID '#{new_node_version.id}'.  Woo-hoo!"
+        flash[:notice] = "Successfully added file, as node '#{new_node_version.id}'"
+      else
+        logger.warn "[add_document] Error saving the node_version.  Rats!"
+        flash[:notice] = "Error adding file"
+      end
       redirect_to :controller => :browse, :action => :one_model, :id => @model.id, :anchor => "ui-tabs-24"
     end
+
+    logger.warn "[add_document] Ended Node.transaction"
   end
 
 end

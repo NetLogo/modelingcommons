@@ -17,7 +17,7 @@
 
       <tr>
         <td><%= link_to f.name, :controller => :browse, :action => :one_node, :id => f.id -%></td>
-        <td><%= f.node_type.name -%></td>
+        <td><%= f.node_type.name -%> (<%= pluralize(f.node_versions.count, "version") -%>)</td>
         <td><%= f.description %></td>
         <td><%= distance_of_time_in_words(Time.now, f.updated_at) -%> ago, by <%= person_link(f.most_recent_author) %></td>
       </tr>
@@ -35,7 +35,7 @@
   <table>
     <tr>
       <td>File</td>
-      <td><%= file_field_tag :uploaded_file %>
+      <td><%= file_field_tag :uploaded_file, :size => 60 %>
         <%= hidden_field_tag :id, @model.id %>
     </tr>
 
@@ -50,7 +50,7 @@
     </tr>
 
     <tr>
-      <td colspan="2"><%= submit_tag "Upload document", :class => "submit" %></td>
+      <td colspan="2"><%= submit_tag "Upload file", :class => "submit" %></td>
     </tr>
 
   </table>

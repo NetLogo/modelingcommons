@@ -58,11 +58,15 @@ class Node < ActiveRecord::Base
   end
 
   def previews
-    self.children_of_type(PREVIEW_NODE_TYPE)
+    if self.children_of_type(PREVIEW_NODE_TYPE).empty?
+      [ ]
+    else
+      self.children_of_type(PREVIEW_NODE_TYPE)[0].node_versions.sort_by { |nv| nv.created_at}
+    end
   end
 
   def latest_preview
-    self.previews.sort_by { |p| p.created_at}.last.contents
+    self.previews.last.contents
   end
 
   def documents
