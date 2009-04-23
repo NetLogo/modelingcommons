@@ -26,7 +26,7 @@ module ApplicationHelper
 
       question_type = item.is_question? ? 'question' : 'comment'
 
-      output << "#{person_link(item.person)} posted a #{discuss_link(item.node, question_type)} about #{link_to(item.node.name, :controller => :browse, :action => :one_model, :id => item.node.id)} #{distance_of_time_in_words(Time.now, item.created_at)} ago."
+      output << "#{person_image(item.person)} #{person_link(item.person)} posted a #{discuss_link(item.node, question_type)} about #{link_to(item.node.name, :controller => :browse, :action => :one_model, :id => item.node.id)} #{distance_of_time_in_words(Time.now, item.created_at)} ago."
 
     elsif item.is_a?(Person)
       this_user_did_it = true if item == @person
@@ -79,7 +79,7 @@ module ApplicationHelper
   end
 
   def discuss_link(node, text)
-    link_to(text, :controller => :browse, :action => :one_model, :id => node.id, :anchor => 'discuss-div')
+    link_to(text, :controller => :browse, :action => :one_model, :id => node.id, :anchor => 'ui-tabs-25')
   end
 
 end
