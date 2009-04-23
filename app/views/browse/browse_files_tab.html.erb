@@ -9,6 +9,7 @@
         <th>Type</th>
         <th>Description</th>
         <th>Last updated</th>
+        <th></th>
       </tr>
     </thead>
 
@@ -20,6 +21,9 @@
         <td><%= f.node_type.name -%> (<%= pluralize(f.node_versions.count, "version") -%>)</td>
         <td><%= f.description %></td>
         <td><%= distance_of_time_in_words(Time.now, f.updated_at) -%> ago, by <%= person_link(f.most_recent_author) %></td>
+        <td><% if !f.is_preview? and f.node_versions.length == 1 and f.node_versions[0].person == @person %>
+          <%= link_to("Delete", {:controller => :file, :action => :delete, :id => f.id}, :confirm => "Really delete '#{f.name}'?" ) %></td>
+        <% end %>
       </tr>
       <% end -%>
     </tbody>

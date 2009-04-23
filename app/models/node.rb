@@ -109,6 +109,10 @@ class Node < ActiveRecord::Base
     return self.node_type_id == MODEL_NODE_TYPE
   end
 
+  def is_preview?
+    return self.node_type_id == PREVIEW_NODE_TYPE
+  end
+
   def people
     self.node_versions.map {|m| m.person}.uniq
   end
