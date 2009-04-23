@@ -1,9 +1,13 @@
 class Node < ActiveRecord::Base
   MODEL_NODE_TYPE = 1
   PREVIEW_NODE_TYPE = 2
-  DOCUMENT_NODE_TYPE = 3
+  PDF_NODE_TYPE = 3
   IMAGE_NODE_TYPE = 4
   DATA_NODE_TYPE = 5
+  EXTENSION_NODE_TYPE = 6
+  WORD_NODE_TYPE = 7
+  POWERPOINT_NODE_TYPE = 8
+  APPLET_HTML_NODE_TYPE = 9
 
   acts_as_tree :order => "name"
 
@@ -33,9 +37,13 @@ class Node < ActiveRecord::Base
   named_scope :models, :conditions => ['node_type_id = ? ', MODEL_NODE_TYPE]
   named_scope :non_models, :conditions => ['node_type_id <> ? ', MODEL_NODE_TYPE]
   named_scope :previews, :conditions => ['node_type_id = ? ', PREVIEW_NODE_TYPE]
-  named_scope :documents, :conditions => ['node_type_id = ? ', DOCUMENT_NODE_TYPE]
+  named_scope :pdfs, :conditions => ['node_type_id = ? ', PDF_NODE_TYPE]
   named_scope :images, :conditions => ['node_type_id = ? ', IMAGE_NODE_TYPE]
   named_scope :data, :conditions => ['node_type_id = ? ', DATA_NODE_TYPE]
+  named_scope :extensions, :conditions => ['node_type_id = ? ', EXTENSION_NODE_TYPE]
+  named_scope :word_docs, :conditions => ['node_type_id = ? ', WORD_NODE_TYPE]
+  named_scope :powerpoint_docs, :conditions => ['node_type_id = ? ', POWERPOINT_NODE_TYPE]
+  named_scope :applet_htmls, :conditions => ['node_type_id = ? ', APPLET_HTML_NODE_TYPE]
 
   # ------------------------------------------------------------
   # Grab children of various sorts
@@ -67,6 +75,18 @@ class Node < ActiveRecord::Base
 
   def latest_preview
     self.previews.last.contents
+  end
+
+  def applet_htmls
+    self.children_of_type(APPLET_HTML_NODE_TYPE)
+  end
+
+  def applet_html
+    if self.applet_htmls.empty?
+      nil
+    else
+      self.applet_htmls.last.contents
+    end
   end
 
   def documents

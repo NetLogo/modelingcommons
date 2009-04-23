@@ -62,3 +62,11 @@ img#big-preview-image  {
     padding: 5px;
 }
 
+applet {
+    float: left;
+}
+
+#activity {
+    margin-left: 10px;
+    float: left;
+}

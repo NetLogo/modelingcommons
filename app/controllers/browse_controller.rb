@@ -301,6 +301,8 @@ class BrowseController < ApplicationController
   end
 
   def browse_applet_tab
+    @applet_html = @model.applet_html
+
     render :layout => false
   end
 
