@@ -58,8 +58,13 @@ img#big-preview-image  {
     font-family: Optima, sans-serif;
 }
 
-#discussion {
+#discussion tr td {
+    border: 1px solid;
     padding: 5px;
+}
+
+.posting-title {
+    font-weight: bold;
 }
 
 applet {

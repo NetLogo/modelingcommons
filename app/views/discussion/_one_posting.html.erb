@@ -1,5 +1,4 @@
-<tr><td><%= person_image(posting.person) %> <%= person_link(posting.person) %>, <%= distance_of_time_in_words(Time.now, posting.created_at) -%> ago </td>
-  <th><%= h(posting.title) %></th>
-  <td><%= h(posting.body) %></td>
-  <td>&nbsp;</td>
+<tr><td class="posting-person"><%= person_image(posting.person) %> <%= person_link(posting.person) %>, <%= distance_of_time_in_words(Time.now, posting.created_at) -%> ago </td>
+  <td class="posting-title"><%= h(posting.title) %></td>
+  <td class="posting-body"><%= h(posting.body) %></td>
 </tr>

@@ -1,12 +1,22 @@
 <% @title = @model.name %>
 
-<div id="preview-image-div">
-  <%= render :partial => "preview_image", :locals => {:model => @model} -%>
-</div>
+<p>By:
+  <% @model.people.each_with_index do |p, index| %>
+  <% if index == 0 %>
+  <%= person_link(p) -%>
+  <% else %>
+  ,<%= person_link(p) -%>
+  <% end %>
+  <% end %>
+<p>
 
-<div id="model-atom-feed"><%= link_to image_tag("feed.png"), :controller => :browse, :action => :follow, :id => @model.id, :format => :atom %> Follow activity about "<%= @model.name -%>" in your feed reader</div>
+  <div id="preview-image-div">
+    <%= render :partial => "preview_image", :locals => {:model => @model} -%>
+  </div>
 
-<% if @person %>
+  <div id="model-atom-feed"><%= link_to image_tag("feed.png"), :controller => :browse, :action => :follow, :id => @model.id, :format => :atom %> Follow activity about "<%= @model.name -%>" in your feed reader</div>
+
+  <% if @person %>
 <p><%= link_to "Tell a friend", :controller => :recommend, :action => :email_friend, :id => @model.id %> &bull;
 
   <% if @recommendations.select {|r| r.person_id == @person.id}.empty? %>
@@ -19,33 +29,33 @@
 
   &bull;
 
-    <% if !@model.spam_warnings.empty? %>
-        <%= pluralize(@model.spam_warnings.length, "person") %> marked it as spam.
-    <% end %>
+  <% if !@model.spam_warnings.empty? %>
+  <%= pluralize(@model.spam_warnings.length, "person") %> marked it as spam.
+  <% end %>
 
-    <% if !@person.spam_warning(@model) %>
-        <%= link_to "Report this model as spam.", :controller => :possible_spam, :action => :mark_as_spam, :id => @model.id %>
-    <% end %>
+  <% if !@person.spam_warning(@model) %>
+  <%= link_to "Report this model as spam.", :controller => :possible_spam, :action => :mark_as_spam, :id => @model.id %>
+  <% end %>
 
-<% end %>
+  <% end %>
 </p>
 
 <div id="model-tabs">
   <ul>
-    <li><a href="<%= url_for :controller => :browse, :action => :browse_preview_tab, :id => @model.id -%>"><span>Preview</span></a></li>
-    <li><a href="<%= url_for :controller => :browse, :action => :browse_applet_tab, :id => @model.id -%>"><span>Run</span></a></li>
-    <li><a href="<%= url_for :controller => :browse, :action => :browse_info_tab, :id => @model.id -%>"><span>Info</span></a></li>
-    <li><a href="<%= url_for :controller => :browse, :action => :browse_procedures_tab, :id => @model.id -%>"><span>Procedures</span></a></li>
-    <li><a href="<%= url_for :controller => :browse, :action => :browse_download_tab, :id => @model.id -%>"><span>Download</span></a></li>
-    <li><a href="<%= url_for :controller => :browse, :action => :browse_discuss_tab, :id => @model.id -%>"><span>Discuss</span></a></li>
-    <li><a href="<%= url_for :controller => :browse, :action => :browse_history_tab, :id => @model.id -%>"><span>History</span></a></li>
-    <li><a href="<%= url_for :controller => :browse, :action => :browse_tags_tab, :id => @model.id -%>"><span>Tags</span></a></li>
-    <li><a href="<%= url_for :controller => :browse, :action => :browse_files_tab, :id => @model.id -%>"><span>Files</span></a></li>
-    <li><a href="<%= url_for :controller => :browse, :action => :browse_related_tab, :id => @model.id -%>"><span>Related</span></a></li>
+    <li><a href="<%= url_for :controller => :browse, :action => :browse_preview_tab, :id => @model.id -%>" title="preview"><span>Preview</span></a></li>
+    <li><a href="<%= url_for :controller => :browse, :action => :browse_applet_tab, :id => @model.id -%>" title="run"><span>Run</span></a></li>
+    <li><a href="<%= url_for :controller => :browse, :action => :browse_info_tab, :id => @model.id -%>" title="info"><span>Info</span></a></li>
+    <li><a href="<%= url_for :controller => :browse, :action => :browse_procedures_tab, :id => @model.id -%>" title="procedures"><span>Procedures</span></a></li>
+    <li><a href="<%= url_for :controller => :browse, :action => :browse_download_tab, :id => @model.id -%>" title="download"><span>Download</span></a></li>
+    <li><a href="<%= url_for :controller => :browse, :action => :browse_discuss_tab, :id => @model.id -%>" title="discuss"><span>Discuss</span></a></li>
+    <li><a href="<%= url_for :controller => :browse, :action => :browse_history_tab, :id => @model.id -%>" title="history"><span>History</span></a></li>
+    <li><a href="<%= url_for :controller => :browse, :action => :browse_tags_tab, :id => @model.id -%>" title="tags"><span>Tags</span></a></li>
+    <li><a href="<%= url_for :controller => :browse, :action => :browse_files_tab, :id => @model.id -%>" title="files"><span>Files</span></a></li>
+    <li><a href="<%= url_for :controller => :browse, :action => :browse_related_tab, :id => @model.id -%>" title="related"><span>Related</span></a></li>
 
     <% if @person %>
-    <li><a href="<%= url_for :controller => :browse, :action => :browse_upload_tab, :id => @model.id -%>"><span>Upload</span></a></li>
-    <li><a href="<%= url_for :controller => :browse, :action => :browse_permissions_tab, :id => @model.id -%>"><span>Permissions</span></a></li>
+    <li><a href="<%= url_for :controller => :browse, :action => :browse_upload_tab, :id => @model.id -%>" title="upload"><span>Upload</span></a></li>
+    <li><a href="<%= url_for :controller => :browse, :action => :browse_permissions_tab, :id => @model.id -%>" title="permissions"><span>Permissions</span></a></li>
     <% end %>
   </ul>
 </div>

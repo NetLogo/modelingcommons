@@ -5,7 +5,7 @@
   <% else %>
 
   <% form_tag :controller => "membership", :action => :invite_people do |form| %>
-  <p>Invite people to join the <%= select("group", "id", @person.groups.map {|g| [g.name, g.id]}) %> group:</p>
+  <p>Invite people to join the <%= select("group", "id", @person.groups.map {|g| [g.name, g.id]}, :include_blank => true) %> group:</p>
 
   <p><%= select("invitees", "id", @potential_invitees, {:include_blank => false}, {:size => 15, :multiple => true}) %></p>
 

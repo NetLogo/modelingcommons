@@ -34,7 +34,7 @@ class MembershipController < ApplicationController
       flash[:notice] = "User '#{membership.person.fullname}' is now an administrator of '#{membership.group.name}'."
     end
 
-    redirect_to :back
+    redirect_to :controller => :account, :action => :groups, :anchor => 'manage'
   end
 
   def remove_administrator
@@ -48,7 +48,7 @@ class MembershipController < ApplicationController
       flash[:notice] = "User '#{membership.person.fullname}' is no longer an administrator of '#{membership.group.name}'."
     end
 
-    redirect_to :back
+    redirect_to :controller => :account, :action => :groups, :anchor => 'manage'
   end
 
   def approve_membership
@@ -92,7 +92,7 @@ class MembershipController < ApplicationController
       end
     end
 
-    redirect_to :controller => :account, :action => :groups, :anchor => "ui-tabs-10"
+    redirect_to :controller => :account, :action => :groups, :anchor => "create"
 
   end
 
@@ -129,7 +129,7 @@ class MembershipController < ApplicationController
     end
 
     flash[:notice] = "Sent #{counter} invitation(s) to the '#{group.name}' group."
-    redirect_to :controller => :account, :action => :groups, :anchor => "ui-tabs-23"
+    redirect_to :controller => :account, :action => :groups, :anchor => "invite"
   end
 
   def accept_invitation
@@ -145,7 +145,7 @@ class MembershipController < ApplicationController
       flash[:notice] = "Congratulations!  You're now a member of the '#{membership.group.name}' group."
     end
 
-    redirect_to :controller => 'account', :action => 'mypage'
+    redirect_to :controller => :account, :action => :mypage
     return
   end
 

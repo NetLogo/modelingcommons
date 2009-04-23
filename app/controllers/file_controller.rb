@@ -12,7 +12,7 @@ class FileController < ApplicationController
     Node.destroy(file_node.id)
 
     flash[:notice] = "Removed the file."
-    redirect_to :controller => :browse, :action => :one_model, :id => model_id, :anchor => "ui-tabs-31"
+    redirect_to :controller => :browse, :action => :one_model, :id => model_id, :anchor => "files"
   end
 
 end

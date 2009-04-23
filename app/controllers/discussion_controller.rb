@@ -26,7 +26,7 @@ class DiscussionController < ApplicationController
           flash[:notice] = "Error saving your posting.  Sorry!"
         end
 
-        redirect_to :back, :anchor => "discussion-table"
+        redirect_to :back, :anchor => "discussion"
       end
       format.js
     end

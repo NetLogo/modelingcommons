@@ -246,7 +246,7 @@ class UploadController < ApplicationController
         logger.warn "[add_document] Error saving the node_version.  Rats!"
         flash[:notice] = "Error adding file"
       end
-      redirect_to :controller => :browse, :action => :one_model, :id => @model.id, :anchor => "ui-tabs-31"
+      redirect_to :controller => :browse, :action => :one_model, :id => @model.id, :anchor => "files"
     end
 
     logger.warn "[add_document] Ended Node.transaction"
