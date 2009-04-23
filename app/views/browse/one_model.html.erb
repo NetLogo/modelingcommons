@@ -19,21 +19,15 @@
 
   &bull;
 
-  <% if @person.spam_warning(@model) %>
-  You marked it as a bad model,
-  <% if @model.spam_warnings.length > 1 %>
-  as did <%= pluralize(@model.spam_warnings.length - 1, "other person") %> marked it as spam.
-  <% end %>
-  <% elsif !@model.spam_warnings.empty? %>
-  <%= pluralize(@model.spam_warnings.length, "person") %> marked it as spam.
-  <%= link_to "Report this model", :controller => :possible_spam,
-  :action => :mark_as_spam, :id => @model.id
-  %>
-  <% else %>
-  No spam warnings.
-  <% end %>
+    <% if !@model.spam_warnings.empty? %>
+        <%= pluralize(@model.spam_warnings.length, "person") %> marked it as spam.
+    <% end %>
 
-  <% end %>
+    <% if !@person.spam_warning(@model) %>
+        <%= link_to "Report this model as spam.", :controller => :possible_spam, :action => :mark_as_spam, :id => @model.id %>
+    <% end %>
+
+<% end %>
 </p>
 
 <div id="model-tabs">

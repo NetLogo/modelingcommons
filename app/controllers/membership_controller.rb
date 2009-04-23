@@ -103,42 +103,33 @@ class MembershipController < ApplicationController
 
   def invite_people
     group = Group.find(params[:group][:id])
-    email_addresses = params[:invitees]
+    invitees = params[:invitees][:id]
 
-    notice = ''
+    counter = 0
 
-    email_addresses.split(',').each do |address|
-      invitee = Person.find_by_email_address(address.downcase.strip)
+    invitees.each do |person_id|
 
-      if invitee.nil?
-        notice << "Could not invite '#{address}', since they are not in the system. "
+      already_invited = Membership.find_by_group_id_and_person_id(group.id, person_id)
+
+      if already_invited
+        logger.warn "Ignoring person ID '#{person_id}', who was already invited go group '#{group.id}'."
+
       else
+        # Make them pending
+        m = Membership.create(:person_id => person_id,
+                              :group => group,
+                              :is_administrator => false,
+                              :status => 'invited')
 
-        already_invited = Membership.find_by_group_id_and_person_id(group.id,
-                                                                    invitee.id)
-
-        if  already_invited
-
-          notice << "User '#{invitee.fullname}' has already been invited to join group '#{group.name}'. "
-
-        else
-          # Make them pending
-          m = Membership.create(:person => invitee,
-                                :group => group,
-                                :is_administrator => false,
-                                :status => 'invited')
-
-          # Send them e-mail
-          Notifications.deliver_invited_to_group(invitee, m)
-
-        end
-
+        # Send them e-mail
+        Notifications.deliver_invited_to_group(Person.find(person_id), m)
+        counter = counter + 1
       end
 
     end
 
-    flash[:notice] = notice
-    redirect_to :back
+    flash[:notice] = "Sent #{counter} invitation(s) to the '#{group.name}' group."
+    redirect_to :controller => :account, :action => :groups, :anchor => "ui-tabs-23"
   end
 
   def accept_invitation
@@ -208,6 +199,8 @@ class MembershipController < ApplicationController
   end
 
   def invite
+    @potential_invitees = Person.find(:all, :order => "last_name, first_name").map {|p| ["#{p.first_name} #{p.last_name} (#{p.email_address})", p.id]}
+
     render :layout => false
   end
 
