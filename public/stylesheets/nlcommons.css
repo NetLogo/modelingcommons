@@ -38,6 +38,7 @@ a:hover {
     color: #3e2;
     background-color: #fff;
     border: none;
+    cursor: pointer;
 }
 
 #main-menu li a {

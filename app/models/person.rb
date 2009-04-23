@@ -12,7 +12,7 @@ class Person < ActiveRecord::Base
   has_many :spam_warnings
 
   has_many :memberships
-  has_many :groups, :through => :memberships, :order => :name
+  has_many :groups, :through => :memberships, :order => "lower(name) ASC"
 
   has_attached_file :avatar, :styles => { :medium => "200x200>", :thumb => "40x40>" }, :default_url => "/images/default-person.png"
 
@@ -34,6 +34,10 @@ class Person < ActiveRecord::Base
 
   def administrated_groups
     self.groups.select {|g| g.is_administrator?(self) }
+  end
+
+  def spam_warning(model)
+    self.spam_warnings.select { |sw| sw.node_id == model.id }.first || nil
   end
 
 end

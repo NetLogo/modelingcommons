@@ -19,12 +19,18 @@
 
   &bull;
 
-  <% if @spam_warnings.select {|sw| sw.person_id == @person.id}.empty? %>
-  <%= link_to "Flag as inappropriate", {:controller => :possible_spam, :action => :mark_as_spam, :id => @model.id}, :confirm => "Do you really want to mark this model as inappropriate?" %>
+  <% if @person.spam_warning(@model) %>
+  You marked it as a bad model,
+  <% if @model.spam_warnings.length > 1 %>
+  as did <%= pluralize(@model.spam_warnings.length - 1, "other person") %> marked it as spam.
   <% end %>
-
-  <% if !@spam_warnings.empty? %>
-  (You marked as inappropriate <%= distance_of_time_in_words(Time.now, @spam_warnings[0].created_at) %> ago)
+  <% elsif !@model.spam_warnings.empty? %>
+  <%= pluralize(@model.spam_warnings.length, "person") %> marked it as spam.
+  <%= link_to "Report this model", :controller => :possible_spam,
+  :action => :mark_as_spam, :id => @model.id
+  %>
+  <% else %>
+  No spam warnings.
   <% end %>
 
   <% end %>

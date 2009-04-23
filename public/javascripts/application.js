@@ -34,9 +34,11 @@ $(document).ready(function () {
                                                        }
                                                    });
 
-                    $(".complete").autocomplete('/tags/complete_tags',
-                                                {extraParams: {foo: 5 } });
+                    $(".complete").autocomplete('/tags/complete_tags', {extraParams: {foo: 5 } });
 
+                    $("#main-menu li").click(function () {
+                                               window.location = $(this).children()[0];
+                                          });
 
                   });
 

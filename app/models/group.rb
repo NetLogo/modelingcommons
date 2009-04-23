@@ -7,14 +7,6 @@ class Group < ActiveRecord::Base
 
   has_many :nodes
 
-  def self.to_hash
-    groups = Group.find(:all)
-    groups.inject({ }) do |hash, group|
-      hash[group.name] = group.id
-      hash
-    end
-  end
-
   def members
     self.memberships.map {|m| m.person}
   end

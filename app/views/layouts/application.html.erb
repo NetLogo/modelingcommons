@@ -49,7 +49,9 @@
       &bull; <%= link_to_unless_current "Admin", :controller => :admin, :action => :index %>
       <% end %>
       <% else %>
-        <p><%= link_to "Log in", :controller => :account, :action => :login -%></p>
+        <% if params[:action] != 'login' %>
+        <p><%= link_to "Log into the Modeling Commons", :controller => :account, :action => :login -%></p>
+                <% end %>
       <% end %>
     </div>
 
