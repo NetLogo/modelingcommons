@@ -40,5 +40,5 @@ test:
 production:
   adapter: postgresql
   database: nlcommons_production
-  username: nlcommons
-  password:
+  username: reuven
+  password: reuven
