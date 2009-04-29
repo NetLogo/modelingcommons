@@ -20,14 +20,14 @@
   <body>
     <div id="main-menu-div">
       <ul id="main-menu">
-        <li><%= link_to_unless_current "Home", :controller => :account, :action => :mypage %></li>
+        <li class="menu-option"><%= link_to_unless_current "Home", :controller => :account, :action => :mypage %></li>
         <% if @person %>
-        <li><%= link_to "Models", :controller => :browse, :action => :list_models %></li>
-        <li><%= link_to "Groups", :controller => :account, :action => :groups %></li>
-        <li><%= link_to "Tags", :controller => :account, :action => :tags, :id => @person.id  %></li>
+        <li class="menu-option"><%= link_to "Models", :controller => :browse, :action => :list_models %></li>
+        <li class="menu-option"><%= link_to "Groups", :controller => :account, :action => :groups %></li>
+        <li class="menu-option"><%= link_to "Tags", :controller => :account, :action => :tags, :id => @person.id  %></li>
         <% end %>
-        <li><%= link_to_unless_current "About", :controller => :browse, :action => :about %></li>
-        <li><%= link_to "Help", :controller => :help, :action => :index  %></li>
+        <li class="menu-option"><%= link_to_unless_current "About", :controller => :browse, :action => :about %></li>
+        <li class="menu-option"><%= link_to "Help", :controller => :help, :action => :index  %></li>
         <li id="header_search_form_box"><% form_for(:search_term, :url => { :controller => :browse, :action => :search_action }, :html => { :id => "navbar-search-form"}) do |form| -%> <%= form.text_field :search_term, :value => 'Search', :size => 10 -%><% end -%></li>
 
       </ul>

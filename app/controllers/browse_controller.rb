@@ -62,7 +62,7 @@ class BrowseController < ApplicationController
 
     else
       logger.warn "[one_node] sending contents as type '#{node.mime_type}'"
-      send_data node.contents, :filename => node.name, :type => node.mime_type
+      send_data node.file_contents, :filename => node.name, :type => node.mime_type
     end
   end
 
@@ -89,12 +89,12 @@ class BrowseController < ApplicationController
     # Create the zipfile
     Zip::ZipOutputStream::open(zipfile_name) do |io|
       io.put_next_entry("#{download_model_name}.nlogo")
-      io.write(@model.contents)
+      io.write(@model.file_contents)
 
       # Now we get all child nodes that are not themselves models.
       @model.non_models.each do |child|
         io.put_next_entry("#{child.filename}")
-        io.write(child.contents)
+        io.write(child.file_contents)
       end
     end
 
@@ -105,7 +105,7 @@ class BrowseController < ApplicationController
   end
 
   def model_contents
-    send_data @model.contents
+    send_data @model.file_contents
   end
 
   def revert_model
@@ -128,7 +128,7 @@ class BrowseController < ApplicationController
     @new_version =
       NodeVersion.create(:nlmodel_id => @model.id,
                          :person_id => @person.id,
-                         :contents => version.contents,
+                         :node_contents => version.file_contents,
                          :note => "Reverted to older version")
     if @new_version.save
       flash[:notice] = "Model was reverted to an older version"
@@ -151,7 +151,7 @@ class BrowseController < ApplicationController
 
     @models = Node.find(:all, :conditions => ["node_type_id = ? ", Node::MODEL_NODE_TYPE]).select {|m| m.name.downcase.index(@original_search_term.downcase)}
 
-    @ferret_results = NodeVersion.find_by_contents(@original_search_term).map {|nv| nv.node}.uniq
+    @ferret_results = NodeVersion.find_with_ferret(@original_search_term, { :limit => :all}).map {|nv| nv.node}.uniq
 
     @info_match_models = @ferret_results.select { |r| r.info_tab.downcase.index(@original_search_term.downcase)}
 
@@ -254,7 +254,7 @@ class BrowseController < ApplicationController
         :date => nv.created_at,
         :description => "New version of '#{nv.node.name}' uploaded by '#{nv.person.fullname}'",
         :title => "Update to model '#{nv.node.name}'",
-        :contents => nv.description}
+        :file_contents => nv.description}
     end
 
     @node.postings.find(:all, :conditions => ["created_at >= ? ", how_recent]).each do |posting|
@@ -266,7 +266,7 @@ class BrowseController < ApplicationController
         :date => posting.created_at,
         :description => "Posting by '#{posting.person.fullname}' about the '#{posting.node.name}' model",
         :title => posting.title,
-        :contents => posting.body}
+        :file_contents => posting.body}
     end
 
     @node.tagged_nodes.find(:all, :conditions => ["created_at >= ? ", how_recent]).each do |tn|
@@ -278,7 +278,7 @@ class BrowseController < ApplicationController
         :date => tn.created_at,
         :description => "Model '#{tn.node.name}' tagged with '#{tn.tag.name}' by '#{tn.person.fullname}'",
         :title => "Model '#{tn.node.name}' tagged with '#{tn.tag.name}' by '#{tn.person.fullname}'",
-        :contents => "<p>'#{tn.person.fullname} tagged the '#{tn.node.name}' model</p>"
+        :file_contents => "<p>'#{tn.person.fullname} tagged the '#{tn.node.name}' model</p>"
       }
     end
 

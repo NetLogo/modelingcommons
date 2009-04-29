@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090426153124) do
+ActiveRecord::Schema.define(:version => 20090429103554) do
 
   create_table "email_recommendations", :force => true do |t|
     t.integer  "sender_id"
@@ -84,13 +84,13 @@ ActiveRecord::Schema.define(:version => 20090426153124) do
   add_index "node_types", ["name"], :name => "index_node_types_on_name", :unique => true
 
   create_table "node_versions", :force => true do |t|
-    t.integer  "node_id",      :null => false
+    t.integer  "node_id",       :null => false
     t.integer  "person_id"
     t.text     "old_contents"
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.binary   "contents"
+    t.binary   "file_contents"
   end
 
   create_table "nodes", :force => true do |t|

@@ -74,7 +74,7 @@ class Node < ActiveRecord::Base
   end
 
   def latest_preview
-    self.previews.last.contents
+    self.previews.last.file_contents
   end
 
   def applet_htmls
@@ -85,7 +85,7 @@ class Node < ActiveRecord::Base
     if self.applet_htmls.empty?
       nil
     else
-      self.applet_htmls.last.contents
+      self.applet_htmls.last.file_contents
     end
   end
 
@@ -137,8 +137,8 @@ class Node < ActiveRecord::Base
     self.node_versions.map {|m| m.person}.uniq
   end
 
-  def contents
-    self.node_versions.sort_by {|nv| nv.created_at}.last.contents
+  def file_contents
+    self.node_versions.sort_by {|nv| nv.created_at}.last.file_contents
   end
 
   def info_tab(with_html=false)
@@ -219,7 +219,7 @@ class Node < ActiveRecord::Base
     width = 0
     height = 0
 
-    self.contents.each do |line|
+    self.file_contents.each do |line|
 
       # Handle dividers
       if line =~ /\@\#\$\#\@\#\$\#\@/

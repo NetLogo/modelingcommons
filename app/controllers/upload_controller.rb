@@ -25,7 +25,7 @@ class UploadController < ApplicationController
       new_version =
         NodeVersion.create(:node_id => new_model_node.id,
                            :person_id => @person.id,
-                           :contents => params[:new_model][:uploaded_body].read,
+                           :file_contents => params[:new_model][:uploaded_body].read,
                            :description => 'Initial upload')
       new_version.reload
 
@@ -43,7 +43,7 @@ class UploadController < ApplicationController
         preview_version =
           NodeVersion.create(:node_id => preview_node.id,
                              :person_id => @person.id,
-                             :contents => params[:new_model][:uploaded_preview].read,
+                             :file_contents => params[:new_model][:uploaded_preview].read,
                              :description => 'Initial preview version')
         new_version.reload
       end
@@ -182,7 +182,7 @@ class UploadController < ApplicationController
     new_version =
       NodeVersion.create(:node_id => node_id,
                          :person_id => @person.id,
-                         :contents => params[:new_version][:uploaded_body].read,
+                         :file_contents => params[:new_version][:uploaded_body].read,
                          :description => params[:new_version][:description])
 
     # Now send e-mail notification
@@ -237,7 +237,7 @@ class UploadController < ApplicationController
       logger.warn "[add_document] Now creating a new node_version for node '#{node.id}'"
       new_node_version = NodeVersion.new(:node_id => node.id,
                                          :person_id => @person.id,
-                                         :contents => params[:uploaded_file].read,
+                                         :file_contents => params[:uploaded_file].read,
                                          :description => description)
       if new_node_version.save
         logger.warn "[add_document] Saved the node_version, ID '#{new_node_version.id}'.  Woo-hoo!"

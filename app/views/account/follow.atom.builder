@@ -29,7 +29,7 @@ xml.feed :xmlns=>'http://www.w3.org/2005/Atom' do
       xml.content do
         xml.div :xmlns=>'http://www.w3.org/1999/xhtml' do
           xml << "<h1>#{thing[:title]}</h1>"
-          xml << "<p>#{thing[:contents]}</p>"
+          xml << "<p>#{thing[:file_contents]}</p>"
           xml << "<hr />"
           xml << "<p>This took place in the #{link_to 'Modeling Commons', :controller => :account, :action => :index}, where #{link_to 'NetLogo', 'http://ccl.northwestern.edu/netlogo'} modelers can share and collaboratively build models.  The Modeling Commons is written by Reuven M. Lerner, a PhD candidate in Learning Sciences at the #{link_to 'Center for Collaborative Learning and Computer-Based Modeling', 'http://ccl.northwestern.edu'} (directed by Uri Wilensky) at Northwestern University.</p>"
         end
