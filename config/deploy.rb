@@ -4,7 +4,7 @@ default_run_options[:pty] = true
 set :repository,  "git@lerner.co.il:/home/git/nlcommons.git"
 set :scm, "git"
 set :scm_passphrase, "" #This is your custom users password
-set :user, "deployer"
+set :user, "deploy"
 set :branch, 'master'
 
 role :db, "main.lerner.co.il"
