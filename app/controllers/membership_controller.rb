@@ -102,6 +102,12 @@ class MembershipController < ApplicationController
   end
 
   def invite_people
+    if params[:group][:id].blank?
+      flash[:notice] = "You must specify a group to which people will be invited."
+      redirect_to :controller => :account, :action => :groups, :anchor => "invite"
+      return
+    end
+
     group = Group.find(params[:group][:id])
     invitees = params[:invitees][:id]
 
@@ -199,7 +205,7 @@ class MembershipController < ApplicationController
   end
 
   def invite
-    @potential_invitees = Person.find(:all, :order => "last_name, first_name").map {|p| ["#{p.first_name} #{p.last_name} (#{p.email_address})", p.id]}
+    @potential_invitees = Person.find(:all, :order => "last_name, first_name").map {|p| ["#{p.last_name}, #{p.first_name} (#{p.email_address})", p.id]}
 
     render :layout => false
   end

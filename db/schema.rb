@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090429103554) do
+ActiveRecord::Schema.define(:version => 20090430091507) do
 
   create_table "email_recommendations", :force => true do |t|
     t.integer  "sender_id"
@@ -178,6 +178,7 @@ ActiveRecord::Schema.define(:version => 20090429103554) do
     t.datetime "updated_at"
     t.integer  "parent_id"
     t.boolean  "is_question", :default => false, :null => false
+    t.datetime "deleted_at"
   end
 
   add_index "postings", ["body"], :name => "index_postings_on_body"

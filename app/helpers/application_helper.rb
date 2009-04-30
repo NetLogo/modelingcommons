@@ -67,6 +67,10 @@ module ApplicationHelper
     link_to(group.name, :controller => :membership, :action => :one_group, :id => group.id)
   end
 
+  def tag_link(tag)
+    link_to(tag.name, :controller => :tags, :action => :one_tag, :id => tag.id)
+  end
+
   def model_link(node)
     if !node.previews.empty?
       image_tag_output = image_tag("/browse/display_preview/" + node.id.to_s, :width => "30",  :height => "30", :alt => "Preview image")
@@ -79,7 +83,7 @@ module ApplicationHelper
   end
 
   def discuss_link(node, text)
-    link_to(text, :controller => :browse, :action => :one_model, :id => node.id, :anchor => 'ui-tabs-25')
+    link_to(text, :controller => :browse, :action => :one_model, :id => node.id, :anchor => 'discuss')
   end
 
 end

@@ -19,6 +19,7 @@ class Node < ActiveRecord::Base
 
   has_many :node_versions, :order => 'updated_at DESC'
   has_many :postings, :order => 'updated_at'
+  has_many :active_postings, :class_name => "Posting", :conditions => "deleted_at is null", :order => 'updated_at'
 
   has_many :tagged_nodes
   has_many :tags, :through => :tagged_nodes

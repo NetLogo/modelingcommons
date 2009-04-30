@@ -8,6 +8,8 @@
 
 <p>Already registered?  You may <%= link_to "log in", :controller => :account, :action => :login -%>.</p>
 
+<%= error_messages_for :new_person %>
+
 <% form_for :new_person, :url => { :action => :create }, :html => {:multipart => true} do |form| %>
 <table>
 

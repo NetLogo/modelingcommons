@@ -1,4 +1,13 @@
-<tr><td class="posting-person"><%= person_image(posting.person) %> <%= person_link(posting.person) %>, <%= distance_of_time_in_words(Time.now, posting.created_at) -%> ago </td>
-  <td class="posting-title"><%= h(posting.title) %></td>
-  <td class="posting-body"><%= h(posting.body) %></td>
+<% if posting.deleted_at.nil? or posting.person == @person %>
+<tr><td class="posting-person"><%= person_image(posting.person) %> <%= person_link(posting.person) %>, <%= distance_of_time_in_words(Time.now, posting.created_at) -%> ago
+    <% if posting.person == @person %>
+        <% if posting.deleted_at %>
+        <%= link_to "undelete", :controller => :discussion, :action => :undelete, :id => posting.id %>
+        <% else %>
+        <%= link_to "delete", :controller => :discussion, :action => :delete, :id => posting.id %>
+        <% end %>
+    <% end %></td>
+  <td class="posting-title <%= 'deleted' if posting.deleted_at? -%>"><%= h(posting.title) %></td>
+  <td class="posting-body <%= 'deleted' if posting.deleted_at? -%>"><%= h(posting.body) %></td>
 </tr>
+<% end %>

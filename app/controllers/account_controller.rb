@@ -16,8 +16,7 @@ class AccountController < ApplicationController
       session[:person_id] = @new_person.id
       redirect_to :controller => :account, :action => :mypage
     rescue Exception => e
-      flash[:notice] = e.message
-      redirect_to :back
+      render :action => :new
     end
 
   end
@@ -106,18 +105,22 @@ class AccountController < ApplicationController
     @group_model_events = @group_recent_models.select { |m| m.group.members.include?(@person)}
 
     # most-viewed models
-    @most_viewed = LoggedAction.count(:conditions => "url ilike '/browse/one_model%' and node_id IS NOT null",
-                                      :group => "node_id",
-                                      :order => "count_all DESC",
-                                      :limit => 10)
-    @most_viewed = @most_viewed.map { |m| [Node.find(m[0]), m[1]]}
+    @most_viewed = LoggedAction.find_by_sql("SELECT COUNT(DISTINCT person_id), node_id
+                                                FROM Logged_Actions
+                                               WHERE url ILIKE '/browse/one_model%'
+                                                 AND node_id IS NOT NULL
+                                            GROUP BY node_id
+                                            ORDER BY count DESC
+                                               LIMIT 10;").map { |la| [la.node, la.count]}
 
     # most-downloaded models
-    @most_downloaded = LoggedAction.count(:conditions => "url ilike '/browse/download_model%' and node_id IS NOT null",
-                                          :group => "node_id",
-                                          :order => "count_all DESC",
-                                          :limit => 10)
-    @most_downloaded = @most_downloaded.map { |m| [Node.find(m[0]), m[1]]}
+    @most_downloaded = LoggedAction.find_by_sql("SELECT COUNT(DISTINCT person_id), node_id
+                                                   FROM Logged_Actions
+                                                  WHERE url ILIKE '/browse/download_model%'
+                                                    AND node_id IS NOT NULL
+                                               GROUP BY node_id
+                                               ORDER BY count DESC
+                                                  LIMIT 10;").map { |la| [la.node, la.count]}
 
     # most-applied tags
     @most_popular_tags =

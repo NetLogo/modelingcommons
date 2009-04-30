@@ -85,7 +85,7 @@ h3, #menu-bar {
 
 #person-atom-feed {
     position: absolute;
-    top: 3em;
+    top: 3.5em;
     left: 20em;
 }
 
@@ -140,7 +140,7 @@ div ul.subsection_tabs li.tab a:hover {
 
 #left-news-box, #right-news-box {
     position: absolute;
-    top: 6em;
+    top: 7em;
     width: 45%;
 }
 
@@ -228,3 +228,10 @@ ul.jq-ui-autocomplete li.active {
   color: #fff;
 }
 
+.deleted {
+    text-decoration: line-through;
+}
+
+#errorExplanation {
+    background: #3875d7;
+}

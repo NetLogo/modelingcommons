@@ -1,11 +1,25 @@
 <% @title = 'Your tags' %>
 
+<h2>Tags you created</h2>
 <ul>
   <% @person.tags.sort_by {|t| t.name}.each do |tag| %>
   <li><%= link_to tag.name, :controller => :tags, :action => :one_tag, :id => tag.id -%>
-    <% unless tag.nodes.empty? %>
-    (applied to <%= tag.nodes.sort_by {|m| m.name}.map {|m| m.name}.to_sentence -%>)
-    <% end %>
+    <td>
+      <% if tag.nodes.empty? %>
+      (No models)
+      <% else %>
+      (Applied to
+      <%= tag.nodes.sort_by {|n| n.name}.map {|n| link_to n.name, :controller => :browse, :action => :one_model, :id => n.id}.uniq.join(', ') %>
+      )
+      <% end %>
+    </td>
   </li>
+  <% end %>
+</ul>
+
+<h2>Tags you applied</h2>
+<ul>
+  <% @person.tagged_nodes.sort_by {|tn| tn.tag.name}.each do |tm| %>
+  <li>Applied <%= tag_link(tm.tag) -%> to <%= model_link(tm.node) -%>, with a comment of <%= tm.comment %>, <%= distance_of_time_in_words(Time.now, tm.updated_at) -%> ago </li>
   <% end %>
 </ul>

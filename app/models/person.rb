@@ -20,7 +20,11 @@ class Person < ActiveRecord::Base
 
   attr_accessor :password_confirmation
 
-  validates_presence_of :first_name, :last_name, :email_address, :password
+  validates_presence_of :first_name
+  validates_presence_of :last_name
+  validates_presence_of :email_address
+  validates_email :email_address, :level => 1
+  validates_presence_of :password
   validates_uniqueness_of :email_address
   validates_confirmation_of :password
 

@@ -11,7 +11,7 @@
 /* Component containers
 ----------------------------------*/
 .ui-widget { font-family: Optima,Verdana,Arial,sans-serif; font-size: 0.8em; }
-.ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button { font-family: Optima,Verdana,Arial,sans-serif; font-size: 0.7em; }
+.ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button { font-family: Optima,Verdana,Arial,sans-serif; font-size: 0.9em; }
 .ui-widget-content { border: 1px solid #aaaaaa; background: #abcdef; color: #222222; }
 .ui-widget-content a { color: #222222; }
 .ui-widget-header { border: 1px solid #aaaaaa; background: #cccccc url(images/ui-bg_highlight-soft_75_cccccc_1x100.png) 50% 50% repeat-x; color: #222222; font-weight: bold; }
