@@ -30,11 +30,11 @@
   &bull;
 
   <% if !@model.spam_warnings.empty? %>
-  <%= pluralize(@model.spam_warnings.length, "person") %> marked it as spam.
+  <%= pluralize(@model.spam_warnings.length, "person") %> marked it as spam
   <% end %>
 
   <% if !@person.spam_warning(@model) %>
-  <%= link_to "Report this model as spam.", :controller => :possible_spam, :action => :mark_as_spam, :id => @model.id %>
+  <%= link_to "Report this model as spam", :controller => :possible_spam, :action => :mark_as_spam, :id => @model.id %>
   <% end %>
 
   <% end %>

@@ -6,7 +6,7 @@ require 'diff/lcs/hunk'
 class BrowseController < ApplicationController
 
   prepend_before_filter :get_model_from_id_param, :except => [:index, :list_models, :list_models_group, :search, :search_action, :news, :one_node, :create_group, :whats_new, :about, :stuff, :spider, :view_random_model]
-  before_filter :require_login, :only => [:revert_model, :set_permissions]
+  before_filter :require_login, :only => [:revert_model, :set_permissions, :whats_new]
 
   before_filter :check_visibility_permissions, :only => [:one_model, :model_contents, :one_applet ]
   before_filter :check_changeability_permissions, :only => [:revert_model]
