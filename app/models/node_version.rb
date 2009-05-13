@@ -11,16 +11,43 @@ class NodeVersion < ActiveRecord::Base
   end
 
   def procedures_tab
-    self.file_contents.split(SECTION_SEPARATOR)[0]
+    if self.node.node_type_id == Node::MODEL_NODE_TYPE
+      self.file_contents.split(SECTION_SEPARATOR)[0]
+    else
+      ""
+    end
   end
 
   def gui_tab
-    self.file_contents.split(SECTION_SEPARATOR)[1]
+    if self.node.node_type_id == Node::MODEL_NODE_TYPE
+      self.file_contents.split(SECTION_SEPARATOR)[1]
+    else
+      ""
+    end
   end
 
   def info_tab
+    if self.node.node_type_id == Node::MODEL_NODE_TYPE
+      self.file_contents.split(SECTION_SEPARATOR)[2]
+    else
+      ""
+    end
+  end
 
-    self.file_contents.split(SECTION_SEPARATOR)[2]
+  def model_shapes
+    if self.node.node_type_id == Node::MODEL_NODE_TYPE
+      self.file_contents.split(SECTION_SEPARATOR)[3]
+    else
+      ""
+    end
+  end
+
+  def model_version
+    if self.node.node_type_id == Node::MODEL_NODE_TYPE
+      self.file_contents.split(SECTION_SEPARATOR)[4]
+    else
+      ""
+    end
   end
 
 end

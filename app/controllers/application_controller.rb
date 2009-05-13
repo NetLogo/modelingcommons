@@ -179,7 +179,7 @@ class ApplicationController < ActionController::Base
   end
 
   def all_whats_new
-    how_new_is_new = 3.months.ago
+    how_new_is_new = 2.weeks.ago
 
     @recent_members = Person.find(:all,
                                   :order => 'created_at DESC',

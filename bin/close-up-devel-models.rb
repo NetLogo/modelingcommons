@@ -88,11 +88,12 @@ ARGV.each do |dirname|
           node.changeability_id = PermissionSetting::GROUP
         end
 
-        #if node.save
-        # puts "\t\t\tSuccessfully set group and permissions"
-        #else
-        #puts "\t\t\tERROR updating group and permissions"
-        #end
+        if node.save
+          puts "\t\t\tSuccessfully set group and permissions"
+        else
+          puts "\t\t\tERROR updating group and permissions"
+          exit
+        end
       end
     else
       puts "\t\tIgnoring non-NetLogo file '#{filename}'"

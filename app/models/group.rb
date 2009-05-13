@@ -6,6 +6,7 @@ class Group < ActiveRecord::Base
   has_many :people, :through => :memberships
 
   has_many :nodes
+  has_many :models, :class_name => 'Node', :include => [:tags, :node_versions]
 
   def members
     self.memberships.map {|m| m.person}
@@ -21,10 +22,6 @@ class Group < ActiveRecord::Base
 
   def administrators
     self.memberships.select {|m| m.person if m.is_administrator? }
-  end
-
-  def models
-    self.nodes
   end
 
 end
