@@ -66,3 +66,4 @@ end
 require "will_paginate"
 require 'acts_as_ferret'
 require 'validates_email'
+
