@@ -7,9 +7,9 @@ set :scm_passphrase, "" #This is your custom users password
 set :user, "deploy"
 set :branch, 'master'
 
-role :db, "main.lerner.co.il"
-role :app, "main.lerner.co.il"
-role :web, "main.lerner.co.il"
+role :db, "lerner.co.il"
+role :app, "lerner.co.il"
+role :web, "lerner.co.il"
 
 set :deploy_to, "/var/www/www.modelingcommons.org/www/"
 set :deploy_via, :export
