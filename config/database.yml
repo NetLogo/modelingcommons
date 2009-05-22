@@ -13,14 +13,14 @@ development:
   # Connect on a TCP socket.  Omitted by default since the client uses a
   # domain socket that doesn't need configuration.  Windows does not have
   # domain sockets, so uncomment these lines.
-  #host: localhost
-  #port: 5432
+  host: localhost
+  port: 5432
 
   # Schema search path.  The server defaults to $user,public
   #schema_search_path: myapp,sharedapp,public
 
   # Character set encoding.  The server defaults to sql_ascii.
-  #encoding: UTF8
+  encoding: UTF8
 
   # Minimum log levels, in increasing order:
   #   debug5, debug4, debug3, debug2, debug1,
@@ -36,9 +36,13 @@ test:
   database: nlcommons_test
   username: nlcommons
   password: nlcommons
+  host: localhost
+  port: 5432
 
 production:
   adapter: postgresql
   database: nlcommons_production
   username: nlcommons
   password: nlcommons
+  host: localhost
+  port: 5432
