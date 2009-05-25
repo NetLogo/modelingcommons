@@ -1,9 +1,9 @@
 <% if @model.tagged_nodes.empty? -%>
-<p><i>No tags</i></p>
+<p><i>No tags have been defined</i></p>
 <% else -%>
 <p>Existing tags:</p>
 <table id="existing_tags">
-  <%= render :partial => "tags/one_tag", :collection => @model.tagged_nodes.sort_by {|tn| tn.updated_at}, :as => :tm -%>
+  <%= render :partial => "browse/add_tag", :collection => @model.tagged_nodes.sort_by {|tn| tn.updated_at}, :as => :tm -%>
 </table>
 <% end -%>
 

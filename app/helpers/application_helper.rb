@@ -45,8 +45,8 @@ module ApplicationHelper
   end
 
   def add_tag_link(name)
-    link_to_function name do |page|
-      page.insert_html :bottom, :tags, :partial => 'add_tag'
+    link_to_function name, { :id => 'add_tag_link'} do |page|
+      page.insert_html :bottom, :new_tags, :partial => 'add_tag'
       page << "$('.complete').autocomplete('/tags/complete_tags');"
     end
   end

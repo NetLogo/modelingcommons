@@ -43,7 +43,7 @@ $(document).ready(function () {
                 }
             });
 
-        $(".complete").autocomplete('/tags/complete_tags', {extraParams: {foo: 5 } });
+        $(".complete").autocomplete('/tags/complete_tags', {} );
 
         $(".menu-option").click(function () {
                 window.location = $(this).children()[0];
