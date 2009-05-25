@@ -1,0 +1,7 @@
+<% @title = "Rename model '#{@model.name}'" %>
+
+<% form_tag :controller => :browse, :action => :rename_model_action do %>
+    <%= hidden_field_tag :id, @model.id -%>
+    <%= text_field_tag 'new_name' -%>
+    <%= submit_tag "Rename model" -%>
+<% end %>

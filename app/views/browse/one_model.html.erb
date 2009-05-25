@@ -17,7 +17,13 @@
   <div id="model-atom-feed"><%= link_to image_tag("feed.png"), :controller => :browse, :action => :follow, :id => @model.id, :format => :atom %> Follow activity about "<%= @model.name -%>" in your feed reader</div>
 
   <% if @person %>
-<p><%= link_to "Tell a friend", :controller => :recommend, :action => :email_friend, :id => @model.id %> &bull;
+<p>
+
+<% if @model.people.member?(@person) %>
+<%= link_to "Rename this model", :controller => :browse, :action => :rename_model, :id => @model.id %> &bull;
+<% end %>
+
+<%= link_to "Tell a friend", :controller => :recommend, :action => :email_friend, :id => @model.id %> &bull;
 
   <% if @recommendations.select {|r| r.person_id == @person.id}.empty? %>
   <%= link_to "Recommend this model", :controller => :recommend, :action => :add_recommendation, :id => @model.id %>

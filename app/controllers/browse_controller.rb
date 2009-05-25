@@ -346,6 +346,29 @@ class BrowseController < ApplicationController
     render :layout => false
   end
 
+  def rename_model
+  end
+
+  def rename_model_action
+    if params[:id].blank?
+      flash[:notice] = 'No model ID provided'
+      redirect_to :back
+      return
+    end
+
+    if params[:new_name].blank?
+      flash[:notice] = 'You must enter a new name for the model.'
+      redirect_to :back
+      return
+    end
+
+    @model.name = params[:new_name]
+    @model.save!
+
+    flash[:notice] = 'Success!'
+    redirect_to :controller => :browse, :action => :one_model, :id => @model.id
+  end
+
 
   # ------------------------------------------------------------
   # Below here is PRIVATE!
