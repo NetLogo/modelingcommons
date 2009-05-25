@@ -46,36 +46,25 @@ class DiscussionController < ApplicationController
     redirect_to :controller => :browse, :action => :one_model, :id => posting.node_id, :anchor => "discuss"
   end
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   def create
     posting = Posting.find(params[:id])
     posting.deleted_at = Time.now
-    postings.save!
+    posting.save!
   end
+
+  def mark_as_answered
+    posting = Posting.find(params[:id])
+    posting.answered_at = Time.now
+    posting.save!
+    redirect_to :controller => :browse, :action => :one_model, :id => posting.node_id, :anchor => :discuss
+  end
+
+  def mark_as_unanswered
+    posting = Posting.find(params[:id])
+    posting.answered_at = nil
+    posting.save!
+    redirect_to :controller => :browse, :action => :one_model, :id => posting.node_id, :anchor => :discuss
+  end
+
 end
 

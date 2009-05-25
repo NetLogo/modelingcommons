@@ -1,11 +1,25 @@
 <% if posting.deleted_at.nil? or posting.person == @person %>
 <tr><td class="posting-person"><%= person_image(posting.person) %> <%= person_link(posting.person) %>, <%= distance_of_time_in_words(Time.now, posting.created_at) -%> ago
     <% if posting.person == @person %>
-        <% if posting.deleted_at %>
-        <%= link_to "undelete", :controller => :discussion, :action => :undelete, :id => posting.id %>
-        <% else %>
-        <%= link_to "delete", :controller => :discussion, :action => :delete, :id => posting.id %>
-        <% end %>
+    <p>
+      <% if posting.deleted_at %>
+      <%= link_to "Undelete", :controller => :discussion, :action => :undelete, :id => posting.id %>
+      <% else %>
+      <%= link_to "Delete", :controller => :discussion, :action => :delete, :id => posting.id %>
+      <% end %>
+
+      <% if posting.is_question? %>
+
+      &bull;
+
+      <% if posting.was_answered? %>
+          <%= link_to "Mark as unanswered", :controller => :discussion, :action => :mark_as_unanswered, :id => posting.id %>
+          <% else %>
+          <%= link_to "Mark as answered", :controller => :discussion, :action => :mark_as_answered, :id => posting.id %>
+          <% end %>
+      <% end %>
+    </p>
+
     <% end %></td>
   <td class="posting-title <%= 'deleted' if posting.deleted_at? -%>"><%= h(posting.title) %></td>
   <td class="posting-body <%= 'deleted' if posting.deleted_at? -%>"><%= h(posting.body) %></td>

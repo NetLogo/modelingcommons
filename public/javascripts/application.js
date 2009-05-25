@@ -3,49 +3,58 @@
 
 $(document).ready(function () {
 
-                    $('#search_term_search_term').click(function() {
-                                                          if ($(this).attr('value') == 'Search')
-                                                          {
-                                                            $(this).attr({'value': ''});
-                                                          }
-                                                        });
+        datatable_options = {
+            // bLengthChange: false,
+            // iDisplayLength: 1000,
+            // bSort: false
+        };
 
-                    // Function to handle clicks
-                    handle_menu_click = function() {
+        // create the datatable
+        $(".datatable").dataTable();
 
-                      if (this.hash == '')
-                      {
-                        return false;
-                      }
+        $('#search_term_search_term').click(function() {
+                if ($(this).attr('value') == 'Search')
+                {
+                    $(this).attr({'value': ''});
+                }
+            });
 
-                      $('.one-model-div').hide();     // Hide all of the divs
-                      $('a').removeClass('current');  // Remove "current" class
+        // Function to handle clicks
+        handle_menu_click = function() {
 
-                      $(this).addClass('current');
-                      $(this.hash).show(); // Show the one for what was clicked on
-                      return false;
-                    }
+            if (this.hash == '')
+            {
+                return false;
+            }
 
-                    $(".empty-on-click").livequery('click', function() {
-                                                     if ($(this).attr("has_been_clicked_on") != "yes")
-                                                       {
-                                                         $(this).attr("value", "");
-                                                         $(this).attr("has_been_clicked_on", "yes");
-                                                       }
-                                                   });
+            $('.one-model-div').hide();     // Hide all of the divs
+            $('a').removeClass('current');  // Remove "current" class
 
-                    $(".complete").autocomplete('/tags/complete_tags', {extraParams: {foo: 5 } });
+            $(this).addClass('current');
+            $(this.hash).show(); // Show the one for what was clicked on
+            return false;
+        }
 
-                    $(".menu-option").click(function () {
-                                               window.location = $(this).children()[0];
-                                          });
+        $(".empty-on-click").livequery('click', function() {
+                if ($(this).attr("has_been_clicked_on") != "yes")
+                {
+                    $(this).attr("value", "");
+                    $(this).attr("has_been_clicked_on", "yes");
+                }
+            });
 
-                  });
+        $(".complete").autocomplete('/tags/complete_tags', {extraParams: {foo: 5 } });
+
+        $(".menu-option").click(function () {
+                window.location = $(this).children()[0];
+            });
+
+    });
 
 $("#model-tabs").ready(function () {
-  $("#model-tabs").tabs();
-                       });
+        $("#model-tabs").tabs();
+    });
 
 $("#email_address").ready(function () {
-                            $("#email_address").focus();
-                          });
+        $("#email_address").focus();
+    });

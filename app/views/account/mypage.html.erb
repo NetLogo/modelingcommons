@@ -43,7 +43,10 @@
     <% else %>
     <ul>
       <% @most_popular_tags.each do |tn| %>
-      <li><%= link_to tn[0].name, :controller => :tags, :action => :one_tag, :id => tn[0].id %> (<%= pluralize(number_with_delimiter(tn[1]), "time", "times") -%>)</li>
+      <li>
+        <%= link_to tn[0].name, :controller => :tags, :action => :one_tag, :id => tn[0].id %>
+        (<%= pluralize(number_with_delimiter(tn[1]), "time", "times" ) -%>)
+      </li>
       <% end %>
     </ul>
     <% end %>
@@ -67,10 +70,10 @@
   <div class="news-box">
     <% if @person == @the_person %>
     <h2>Recent activity in <%= link_to 'your models', :controller => :account, :action => :models, :id => @the_person.id -%>
-    <%= link_to "(All of your models)", :controller => :account, :action => :models, :id => @the_person.id -%></h2>
+      <%= link_to "(All of your models)", :controller => :account, :action => :models, :id => @the_person.id -%></h2>
     <% else %>
     <h2>Recent activity in <%= @the_person.first_name %>'s models
-    <%= link_to "(All of #{@the_person.first_name}'s models)", :controller => :account, :action => :models, :id => @the_person.id -%></h2>
+      <%= link_to "(All of #{@the_person.first_name}'s models)", :controller => :account, :action => :models, :id => @the_person.id -%></h2>
     <% end %>
 
     <% if @model_events.empty? %>
@@ -104,11 +107,11 @@
 
   <div class="news-box">
     <h2>Recent requests for help</h2>
-    <% if @postings.empty? %>
+    <% if @questions.empty? %>
     <p>No questions to display</p>
     <% else %>
     <ul>
-      <% @postings.each do |posting| %>
+      <% @questions.each do |posting| %>
       <li>
         <% if posting.person == @the_person %>
         <span class="highlight">

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090430091507) do
+ActiveRecord::Schema.define(:version => 20090525144838) do
 
   create_table "email_recommendations", :force => true do |t|
     t.integer  "sender_id"
@@ -151,23 +151,11 @@ ActiveRecord::Schema.define(:version => 20090430091507) do
     t.string "dict_name", :limit => nil
   end
 
-  create_table "pg_ts_dict", :id => false, :force => true do |t|
-    t.text   "dict_name",                      :null => false
-    t.string "dict_init",       :limit => nil
-    t.text   "dict_initoption"
-    t.string "dict_lexize",     :limit => nil, :null => false
-    t.text   "dict_comment"
-  end
+# Could not dump table "pg_ts_dict" because of following StandardError
+#   Unknown type 'name' for column 'dictname'
 
-  create_table "pg_ts_parser", :id => false, :force => true do |t|
-    t.text   "prs_name",                     :null => false
-    t.string "prs_start",     :limit => nil, :null => false
-    t.string "prs_nexttoken", :limit => nil, :null => false
-    t.string "prs_end",       :limit => nil, :null => false
-    t.string "prs_headline",  :limit => nil, :null => false
-    t.string "prs_lextype",   :limit => nil, :null => false
-    t.text   "prs_comment"
-  end
+# Could not dump table "pg_ts_parser" because of following StandardError
+#   Unknown type 'name' for column 'prsname'
 
   create_table "postings", :force => true do |t|
     t.integer  "person_id"
@@ -179,6 +167,7 @@ ActiveRecord::Schema.define(:version => 20090430091507) do
     t.integer  "parent_id"
     t.boolean  "is_question", :default => false, :null => false
     t.datetime "deleted_at"
+    t.datetime "answered_at"
   end
 
   add_index "postings", ["body"], :name => "index_postings_on_body"

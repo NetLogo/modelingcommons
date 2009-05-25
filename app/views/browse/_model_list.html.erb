@@ -1,51 +1,51 @@
-<table border="1">
+<table class="datatable" border="1">
 
   <tr>
-    <th>Model</td>
-<th>Tags</td>
-<th>Group</td>
-<th>Modified</td>
-<th>Modified by</th>
-</tr>
+    <th>Model</th>
+    <th>Tags</th>
+    <th>Group</th>
+    <th>Modified</th>
+    <th>Modified by</th>
+  </tr>
 
-<% model_list.sort_by {|m| m.name.downcase}.each do |model| %>
+  <% model_list.sort_by {|m| m.name.downcase}.each do |model| %>
 
-<tr>
-  <td>
-    <img src="/browse/display_preview/<%= model.id %>" width="30" height="30" />
-    <%= link_to model.name, :controller => "browse", :action => "one_model", :id => model.id %><%= render :partial => "browse/preview_image", :locals => {:model => @model} -%>
-  </td>
-  <td>
-    <% if model.tags.empty? %>
-    (No tags)
-    <% else %>
-    <%= model.tags.sort_by {|t| t.name}.map {|t| link_to t.name, :controller => :tags, :action => :one_tag, :id => t.id}.uniq.join(', ') %>
-    <% end %>
-  </td>
-
-  <td>
-    <% if model.group.nil? %>
-    (No group)
-    <% else %>
-    <%= group_link(model.group) %>
-    <% end %>
-  </td>
-  <td><%= distance_of_time_in_words(Time.now, model.node_versions.first.updated_at) %> ago</td>
-  <td>
-    <% if model.people.length == 1 %>
-    <%= person_image(model.people[0]) %><%= person_link(model.people[0]) %>
-    <% else %>
-    <ul>
-      <% model.people.each do |person| %>
-      <li><%= person_image(person) %><%= person_link(person) %></li>
+  <tr>
+    <td>
+      <img src="/browse/display_preview/<%= model.id %>" width="30" height="30" />
+      <%= link_to model.name, :controller => "browse", :action => "one_model", :id => model.id %><%= render :partial => "browse/preview_image", :locals => {:model => @model} -%>
+    </td>
+    <td>
+      <% if model.tags.empty? %>
+      (No tags)
+      <% else %>
+      <%= model.tags.sort_by {|t| t.name}.map {|t| link_to t.name, :controller => :tags, :action => :one_tag, :id => t.id}.uniq.join(', ') %>
       <% end %>
-    </ul>
-    <% end %>
+    </td>
 
-  </td>
-</tr>
+    <td>
+      <% if model.group.nil? %>
+      (No group)
+      <% else %>
+      <%= group_link(model.group) %>
+      <% end %>
+    </td>
+    <td><%= distance_of_time_in_words(Time.now, model.node_versions.first.updated_at) %> ago</td>
+    <td>
+      <% if model.people.length == 1 %>
+      <%= person_image(model.people[0]) %><%= person_link(model.people[0]) %>
+      <% else %>
+      <ul>
+        <% model.people.each do |person| %>
+        <li><%= person_image(person) %><%= person_link(person) %></li>
+        <% end %>
+      </ul>
+      <% end %>
 
-<% end %>
+    </td>
+  </tr>
+
+  <% end %>
 
 </table>
 
