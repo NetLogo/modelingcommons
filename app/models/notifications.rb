@@ -84,8 +84,8 @@ class Notifications < ActionMailer::Base
   end
 
   def recommended_message(recommender, people, model)
-    @recipients = people.map{|p| p.email_address}
-    @cc = recommender.email_address
+    @recipients = recommender.email_address
+    @bcc = people.map{|p| p.email_address}
     @from = "nlcommons@monk.ccl.northwestern.edu"
     @subject    = "Recommendation for the '#{model.name}' model in the NetLogo Modeling Commons"
     @body[:nlmodel] = model
