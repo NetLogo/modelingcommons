@@ -347,6 +347,11 @@ class BrowseController < ApplicationController
   end
 
   def rename_model
+    if !@model.people.member?(@person)
+      flash[:notice] = 'You are not allowed to rename this model.'
+      redirect_to :controller => :browse, :action => :one_model, :id => params[:id]
+      return
+    end
   end
 
   def rename_model_action
