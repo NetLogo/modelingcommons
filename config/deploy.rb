@@ -7,7 +7,7 @@ set :scm_passphrase, "" #This is your custom users password
 set :user, "deploy"
 set :branch, 'master'
 
-role :db, "main.lerner.co.il"
+role :db, "main.lerner.co.il", :primary => true
 role :app, "main.lerner.co.il"
 role :web, "main.lerner.co.il"
 
