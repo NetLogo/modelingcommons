@@ -1,2 +1,8 @@
-<% @title = 'Your models' %>
-<%= render :partial => "browse/model_list", :object => @person.models %>
+<% if @person == @the_person %>
+<% @title = "Your models" %>
+<% else %>
+<% @title = "Models belonging to #{@the_person.fullname}" %>
+<% @headline_avatar = @the_person.avatar.url(:thumb) %>
+<% end %>
+
+<%= render :partial => "browse/model_list", :object => @the_person.models %>

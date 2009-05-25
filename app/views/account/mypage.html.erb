@@ -49,7 +49,6 @@
     <% end %>
   </div>
 
-
   <div id="recommended" class="news-box">
     <h2>Most-recommended models</h2>
     <% if @most_recommended_models.empty? %>
@@ -67,9 +66,11 @@
 <div id="left-news-box">
   <div class="news-box">
     <% if @person == @the_person %>
-    <h2>Recent activity in <%= link_to 'your models', :controller => :account, :action => :models, :id => @the_person.id -%></h2>
+    <h2>Recent activity in <%= link_to 'your models', :controller => :account, :action => :models, :id => @the_person.id -%>
+    <%= link_to "(All of your models)", :controller => :account, :action => :models, :id => @the_person.id -%></h2>
     <% else %>
-    <h2>Recent activity in <%= @the_person.first_name %>'s models</h2>
+    <h2>Recent activity in <%= @the_person.first_name %>'s models
+    <%= link_to "(All of #{@the_person.first_name}'s models)", :controller => :account, :action => :models, :id => @the_person.id -%></h2>
     <% end %>
 
     <% if @model_events.empty? %>

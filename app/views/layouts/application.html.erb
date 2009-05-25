@@ -65,11 +65,16 @@
     <% end -%>
 
     <h1 id="main-title">
-      <% if @headline_avatar %>
-      <%= image_tag @headline_avatar %>
-      <% end %>
+      <% if @headline_avatar -%>
+          <%= image_tag @headline_avatar -%>
+      <% end -%>
 
-      <%= @title -%></h1>
+      <% if @headline.blank? -%>
+          <%= @title -%>
+      <% else -%>
+          <%= @headline -%>
+      <% end -%>
+    </h1>
     <%= yield :layout %>
 
     <script type="text/javascript">

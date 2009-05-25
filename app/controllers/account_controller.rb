@@ -270,7 +270,7 @@ class AccountController < ApplicationController
   end
 
   def models
-
+    @the_person = Person.find(params[:id])
   end
 
 end
