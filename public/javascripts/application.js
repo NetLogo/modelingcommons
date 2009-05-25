@@ -43,8 +43,6 @@ $(document).ready(function () {
                 }
             });
 
-        $(".complete").autocomplete('/tags/complete_tags', {} );
-
         $(".menu-option").click(function () {
                 window.location = $(this).children()[0];
             });
@@ -52,8 +50,12 @@ $(document).ready(function () {
     });
 
 $("#model-tabs").ready(function () {
-        $("#model-tabs").tabs();
+        $("#model-tabs").tabs( {
+            load: function () {
+                $(".complete").autocomplete('/tags/complete_tags', {} );
+             }});
     });
+
 
 $("#email_address").ready(function () {
         $("#email_address").focus();
