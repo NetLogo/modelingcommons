@@ -1,8 +1,5 @@
 require 'test_helper'
 
 class RecommendationTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
-  test "the truth" do
-    assert true
-  end
+  should_validate_uniqueness_of :node_id, :scoped_to => :person_id
 end

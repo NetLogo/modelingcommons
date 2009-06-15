@@ -1,8 +1,6 @@
 require 'test_helper'
 
 class NodeVersionTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
-  def test_truth
-    assert true
-  end
+  should_belong_to :node
+  should_belong_to :person
 end

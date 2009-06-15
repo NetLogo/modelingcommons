@@ -1,11 +1,9 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-
 one:
-  person_id: 1
-  group_id: 1
+  person: administrative_user
+  group: ccl
   is_administrator: false
 
 two:
-  person_id: 1
-  group_id: 1
+  person: plain_user
+  group: course
   is_administrator: false

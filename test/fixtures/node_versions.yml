@@ -1,13 +1,11 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+wolfsheep_one:
+  node: wolfsheep
+  person: plain_user
+  file_contents: blahblah
+  description: First version of wolfsheep
 
-one:
-  node_id: 1
-  person_id: 1
-  contents: MyText
-  description: MyText
-
-two:
-  node_id: 1
-  person_id: 1
-  contents: MyText
-  description: MyText
+wolfsheep_two:
+  node: wolfsheep
+  person: plain_user
+  file_contents: blahblahblahblah
+  description: Second version of wolfsheep

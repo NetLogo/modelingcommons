@@ -1,14 +1,14 @@
 plain_user:
-  id: 1
   email_address: testuser@bluerectangle.com
   password: testuser
   first_name: TestBlue
   last_name: O'User
   administrator: false
+
 administrative_user:
-  id: 2
   email_address: adminuser@bluerectangle.com
   password: adminuser
   first_name: Admin
   last_name: Adminson
-  administrator: false
+  administrator: true
+

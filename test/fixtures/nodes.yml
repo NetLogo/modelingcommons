@@ -1,11 +1,11 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+wolfsheep:
+  node_type: model
+  name: Wolf-Sheep Predation
+  visibility: everyone
+  changeability: everyone
 
-one:
-  node_type_id: 1
-  parent_id: 1
-  name: MyString
-
-two:
-  node_type_id: 1
-  parent_id: 1
-  name: MyString
+autumn:
+  node_type: model
+  name: Autumn
+  visibility: everyone
+  changeability: everyone

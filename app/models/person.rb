@@ -25,7 +25,7 @@ class Person < ActiveRecord::Base
   validates_presence_of :email_address
   validates_email :email_address, :level => 1
   validates_presence_of :password
-  validates_uniqueness_of :email_address
+  validates_uniqueness_of :email_address, :case_sensitive => false
   validates_confirmation_of :password
 
   def models

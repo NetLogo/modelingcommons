@@ -1,9 +1,18 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+model:
+  name: Model type
+  description: Models
 
-one:
-  name: MyString
-  description: MyText
+preview:
+  name: Preview type
+  description: Previews
 
-two:
-  name: MyString
-  description: MyText
+pdf:
+  name: PDF type
+  description: PDF
+
+image:
+  name: Image type
+  description: Image
+
+
+

@@ -1,9 +1,6 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-
 one:
-  node_id: 1
-  person_id: 1
-
+  node: wolfsheep
+  person: plain_user
 two:
-  node_id: 1
-  person_id: 1
+  node: autumn
+  person: administrative_user
