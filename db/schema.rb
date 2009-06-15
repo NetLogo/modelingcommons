@@ -9,10 +9,10 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090525144838) do
+ActiveRecord::Schema.define(:version => 20090614172259) do
 
   create_table "email_recommendations", :force => true do |t|
-    t.integer  "sender_id"
+    t.integer  "person_id"
     t.string   "recipient_email_address"
     t.integer  "node_id"
     t.datetime "created_at"
@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(:version => 20090525144838) do
     t.boolean  "is_administrator", :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "status",           :default => "pending", :null => false
+    t.string   "status",           :default => "pending", :null => false
   end
 
   add_index "memberships", ["group_id"], :name => "index_memberships_on_group_id"
@@ -139,24 +139,6 @@ ActiveRecord::Schema.define(:version => 20090525144838) do
 
   add_index "permission_settings", ["name"], :name => "index_permission_settings_on_name"
 
-  create_table "pg_ts_cfg", :id => false, :force => true do |t|
-    t.text "ts_name",  :null => false
-    t.text "prs_name", :null => false
-    t.text "locale"
-  end
-
-  create_table "pg_ts_cfgmap", :id => false, :force => true do |t|
-    t.text   "ts_name",                  :null => false
-    t.text   "tok_alias",                :null => false
-    t.string "dict_name", :limit => nil
-  end
-
-# Could not dump table "pg_ts_dict" because of following StandardError
-#   Unknown type 'name' for column 'dictname'
-
-# Could not dump table "pg_ts_parser" because of following StandardError
-#   Unknown type 'name' for column 'prsname'
-
   create_table "postings", :force => true do |t|
     t.integer  "person_id"
     t.integer  "node_id"
@@ -228,10 +210,5 @@ ActiveRecord::Schema.define(:version => 20090525144838) do
   add_index "tags", ["name"], :name => "index_tags_on_name"
   add_index "tags", ["person_id"], :name => "index_tags_on_person_id"
   add_index "tags", ["updated_at"], :name => "index_tags_on_updated_at"
-
-  create_table "test_tsquery", :id => false, :force => true do |t|
-    t.text "txtkeyword"
-    t.text "txtsample"
-  end
 
 end
