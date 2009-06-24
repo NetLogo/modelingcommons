@@ -8,4 +8,12 @@ require 'rake/testtask'
 require 'rake/rdoctask'
 
 require 'tasks/rails'
+
 require 'metric_fu'
+
+MetricFu::Configuration.run do |config|
+
+  config.rcov     = {
+    :test_files => ['test/*/*_test.rb'],
+    :rcov_opts => ["-Itest --rails"]}
+end
