@@ -14,6 +14,7 @@ require 'metric_fu'
 MetricFu::Configuration.run do |config|
 
   config.rcov     = {
+    # config.metrics          = [:coverage, :flog]
     :test_files => ['test/*/*_test.rb'],
-    :rcov_opts => ["-Itest --rails"]}
+    :rcov_opts => ["-Itest --rails --exclude /Library/"]}
 end

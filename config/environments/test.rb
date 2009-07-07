@@ -17,5 +17,3 @@ config.action_controller.perform_caching             = false
 # The :test delivery method accumulates sent emails in the
 # ActionMailer::Base.deliveries array.
 config.action_mailer.delivery_method = :test
-
-config.gem 'jscruggs-metric_fu', :version => '>= 1.0.2', :lib => 'metric_fu', :source => 'http://gems.github.com'

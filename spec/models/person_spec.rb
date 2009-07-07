@@ -4,7 +4,7 @@ describe Person do
   before(:each) do
     @valid_attributes = {
       :first_name => 'First', :last_name => 'Last',
-      :email_address => 'email@foo', :password => 'pw'}
+      :email_address => 'email@foo.com', :password => 'pw'}
   end
 
   it "should require a number of attributes in a valid person" do
