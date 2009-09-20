@@ -11,10 +11,13 @@ require 'tasks/rails'
 
 require 'metric_fu'
 
-MetricFu::Configuration.run do |config|
 
-  config.rcov     = {
-    # config.metrics          = [:coverage, :flog]
-    :test_files => ['test/*/*_test.rb'],
-    :rcov_opts => ["-Itest --rails --exclude /Library/"]}
+MetricFu::Configuration.run do |config|
+  config.rcov[:rcov_opts] << "-Itest"
+end
+
+desc "Build a code coverage report"
+task :coverage do
+  files = test_files.join(" ")
+  sh "rcov -o coverage #{files} --exclude ^/Library/Ruby/,^init.rb --include lib/ --include-file ^lib/.*\\.rb"
 end
