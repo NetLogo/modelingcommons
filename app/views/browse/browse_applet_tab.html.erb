@@ -3,7 +3,7 @@
   <p>Sorry, but 3D models cannot be viewed as applets.  You must download this model to try it.</p>
   <% else %>
   <applet
-     code="org.nlogo.lite.Applet"
+     code="org.nlogo.applet.LiteApplet"
      align="baseline"
      width="<%= @model.dimensions[:width] -%>" height="<%= @model.dimensions[:height] -%>"
      archive="/applet/<%= @model.netlogo_version_for_applet -%>/NetLogoLite.jar">
