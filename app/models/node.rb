@@ -143,15 +143,18 @@ class Node < ActiveRecord::Base
   end
 
   def netlogo_version
-    netlogo_version = self.node_versions.sort_by {|nv| nv.created_at}.last.netlogo_version
+    version_string = self.node_versions.sort_by {|nv| nv.created_at}.last.netlogo_version
+  end
 
-    # If we don't support that NetLogo version, then we will just take the
-    # highest stable version that we do support
-    # applet_directory = "#{RAILS_ROOT}/public/applet/"
+  def netlogo_version_for_applet
+    applet_directory = "#{RAILS_ROOT}/public/applet/"
 
-    #if !File.exists?("#{applet_directory}/#{netlogo_version}")
-      #Dir.entries(applet_directory)
-    #end
+    [netlogo_version,
+     netlogo_version.gsub(/^(\d+\.\d+).*/, '\1'),
+     Dir.entries(applet_directory).grep(/^\d+\.\d+$/).sort.last].each do |version|
+
+      return version if File.exists?("#{applet_directory}/#{version}")
+    end
   end
 
   def info_tab(with_html=false)
