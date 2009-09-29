@@ -5,6 +5,6 @@
 <% model_group_id = 0 %>
 <% end %>
 
-<p id="permission-group-selector">Model group: <%= select("group", "id", @person.groups.map {|g| [g.name, g.id]}, :selected => model_group_id, :include_blank => true) %>&nbsp;&nbsp;
+<p id="permission-group-selector">Model group: <%= select("group", "id", @person.groups.map {|g| [g.name, g.id]}, :selected => model_group_id, :include_blank => "Select a group") %>&nbsp;&nbsp;
   <%= submit_tag "Set permissions and group" %></p>
 <% end %>

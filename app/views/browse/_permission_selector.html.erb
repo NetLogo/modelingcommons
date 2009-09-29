@@ -38,7 +38,9 @@
         </tr>
         <tr>
           <td><%= radio_button_tag 'write_permission', 'g', model_changeability_letter == 'g' %></td>
-          <td><label for="write_permission_g">The model can only be modified by group members. </label></td>
+          <td><label for="write_permission_g">
+              The model can only be modified by group members.
+          </label></td>
         </tr>
         <tr>
           <td><%= radio_button_tag 'write_permission', 'u', model_changeability_letter == 'u' %></td>
