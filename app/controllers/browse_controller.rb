@@ -374,7 +374,6 @@ class BrowseController < ApplicationController
     redirect_to :controller => :browse, :action => :one_model, :id => @model.id
   end
 
-
   # ------------------------------------------------------------
   # Below here is PRIVATE!
   # ------------------------------------------------------------

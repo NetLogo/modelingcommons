@@ -10,42 +10,42 @@ class UploadController < ApplicationController
   def create_model
     model_name = params[:new_model][:name]
 
-    # Create a new node, without a parent
     Node.transaction do
-      new_model_node = Node.create(:node_type_id => Node::MODEL_NODE_TYPE,
-                                   :parent_id => nil,
-                                   :name => model_name,
-                                   :updated_at => Time.now,
-                                   :created_at => Time.now)
-      new_model_node.reload
 
-      @model = new_model_node
+      # Create a new node, without a parent
+      logger.warn "About to Node.create"
+      @model = Node.create(:node_type_id => Node::MODEL_NODE_TYPE,
+                           :parent_id => nil,
+                           :name => model_name)
 
       # Create a new version for that node, and stick the contents in there
+      logger.warn "About to NodeVersion.create"
+      node_version_contents = params[:new_model][:uploaded_body].read
+
+      logger.warn "node_version_contents = '#{node_version_contents}'"
+
       new_version =
-        NodeVersion.create(:node_id => new_model_node.id,
+        NodeVersion.create(:node_id => @model.id,
                            :person_id => @person.id,
-                           :file_contents => params[:new_model][:uploaded_body].read,
+                           :file_contents => node_version_contents,
                            :description => 'Initial upload')
-      new_version.reload
 
       # If we got a preview, then create a node and version for it
-      if not params[:new_model][:uploaded_preview].blank?
+      if params[:new_model][:uploaded_preview].present?
 
         # Create a new preview node, whose parent is the new model node
+        logger.warn "About to Node.create (preview)"
         preview_node = Node.create(:node_type_id => Node::PREVIEW_NODE_TYPE,
-                                   :parent_id => new_model_node.id,
+                                   :parent_id => @model.id,
                                    :name => model_name + ".png")
 
-        preview_node.reload
-
         # Create a new version for the preview, and stick the contents in there
+        logger.warn "About to NodeVersion.create (preview)"
         preview_version =
           NodeVersion.create(:node_id => preview_node.id,
                              :person_id => @person.id,
                              :file_contents => params[:new_model][:uploaded_preview].read,
                              :description => 'Initial preview version')
-        new_version.reload
       end
 
       # If we got a group and permission settings, set those as well
@@ -56,14 +56,11 @@ class UploadController < ApplicationController
       @model.changeability_id = write_permission.id
 
       if params[:group] and params[:group][:id]
-        if params[:group][:id].to_i == 0
-          @model.group = nil
-        else
-          @model.group = Group.find(params[:group][:id])
-        end
+        @model.update_attribute!(:group_id => params[:group][:id])
       end
 
       @model.save!
+      # end
     end
 
     flash[:notice] = "Thanks for uploading the new model called '#{model_name}'."

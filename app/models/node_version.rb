@@ -2,6 +2,9 @@ class NodeVersion < ActiveRecord::Base
   belongs_to :node
   belongs_to :person
 
+  validates_presence_of :node_id
+  validates_presence_of :person_id
+
   acts_as_ferret :fields => ['file_contents']
 
   SECTION_SEPARATOR = '@#$#@#$#@'

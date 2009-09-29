@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class EmailRecommendationTest < ActiveSupport::TestCase
+class LoggedActionTest < ActiveSupport::TestCase
   should_belong_to :person
   should_belong_to :node
 end

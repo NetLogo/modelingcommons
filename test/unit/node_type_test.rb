@@ -1,8 +1,8 @@
 require 'test_helper'
 
 class NodeTypeTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
-  def test_truth
-    assert true
-  end
+  should_have_many :nodes
+  should_validate_presence_of :name
+  should_validate_presence_of :description
+  should_validate_uniqueness_of :name
 end

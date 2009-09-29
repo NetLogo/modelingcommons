@@ -5,7 +5,7 @@ class Tag < ActiveRecord::Base
   has_many :nodes, :through => :tagged_nodes
 
   validates_presence_of :name, :person_id
-  validates_uniqueness_of :name
+  validates_uniqueness_of :name, :case_sensitive => false
 
   def people
     return self.nodes.map {|m| m.person}.uniq

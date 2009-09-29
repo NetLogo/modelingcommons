@@ -1,10 +1,15 @@
 <% @title = "List of models" %>
 
-<p><%= link_to "Upload a new model", :controller => :upload, :action => :new_model %> &bull;
-<%= link_to "Jump to a random model", :controller => :browse, :action => :view_random_model %></p>
+<% if @models.empty? %>
+<p>There are no models to view.</p>
+
+<p><%= link_to "Upload a new model", :controller => :upload, :action => :new_model %><p>
+
+<% else %>
+<p><%= link_to "Jump to a random model", :controller => :browse, :action => :view_random_model %></p>
 <p><%= link_to "See only models in your groups", :controller => :browse, :action => :list_models_group %></p>
 
 <%= will_paginate @models %>
 <%= render :partial => "model_list", :object => @models %>
 <%= will_paginate @models %>
-
+<% end %>
