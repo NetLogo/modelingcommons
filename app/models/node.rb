@@ -142,6 +142,18 @@ class Node < ActiveRecord::Base
     self.node_versions.sort_by {|nv| nv.created_at}.last.file_contents
   end
 
+  def netlogo_version
+    netlogo_version = self.node_versions.sort_by {|nv| nv.created_at}.last.netlogo_version
+
+    # If we don't support that NetLogo version, then we will just take the
+    # highest stable version that we do support
+    # applet_directory = "#{RAILS_ROOT}/public/applet/"
+
+    #if !File.exists?("#{applet_directory}/#{netlogo_version}")
+      #Dir.entries(applet_directory)
+    #end
+  end
+
   def info_tab(with_html=false)
     text = self.node_versions.sort_by {|nv| nv.created_at }.last.info_tab
 

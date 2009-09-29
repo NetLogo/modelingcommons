@@ -6,7 +6,7 @@
      code="org.nlogo.lite.Applet"
      align="baseline"
      width="<%= @model.dimensions[:width] -%>" height="<%= @model.dimensions[:height] -%>"
-     archive="/NetLogoLite.jar">
+     archive="/applet/<%= @model.netlogo_version -%>/NetLogoLite.jar">
     <param name="DefaultModel" value="<%= url_for :controller => :browse, :action => :model_contents, :id => @model.id %> ">
   </applet>
   <% end %>
