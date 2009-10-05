@@ -3,13 +3,11 @@
   <p>Sorry, but 3D models cannot be viewed as applets.  You must download this model to try it.</p>
   <% else %>
   <applet
-<% if @model.netlogo_version_for_applet =~ /4\.1/ %>
-     code="org.nlogo.lite.Applet"
-<% end %>
-     code="org.nlogo.window.Applet"
-<% else %>
+     code="org.nlogo.applet.Applet"
      align="baseline"
      width="<%= @model.dimensions[:width] -%>" height="<%= @model.dimensions[:height] -%>"
+
+
      archive="/applet/<%= @model.netlogo_version_for_applet -%>/NetLogoLite.jar">
     <param name="DefaultModel" value="<%= url_for :controller => :browse, :action => :model_contents, :id => @model.id %> ">
   </applet>
