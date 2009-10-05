@@ -143,7 +143,7 @@ class Node < ActiveRecord::Base
   end
 
   def netlogo_version
-    version_string = self.node_versions.sort_by {|nv| nv.created_at}.last.netlogo_version
+    self.node_versions.sort_by {|nv| nv.created_at}.last.netlogo_version
   end
 
   def netlogo_version_for_applet
@@ -154,6 +154,18 @@ class Node < ActiveRecord::Base
      Dir.entries(applet_directory).grep(/^\d+\.\d+$/).sort.last].each do |version|
 
       return version if File.exists?("#{applet_directory}/#{version}")
+    end
+  end
+
+  def applet_class
+    applet_jar_version = netlogo_version_for_applet
+
+    if applet_jar_version.to_f < 4.1
+      "org.nlogo.window.Applet"
+    elsif ["4.1pre4", "4.1pre5", "4.1pre6", "4.1pre7", "4.1pre8", "4.1pre9"].member?(netlogo_version)
+      "org.nlogo.applet.Applet"
+    else
+      "org.nlogo.lite.Applet"
     end
   end
 
