@@ -1,4 +1,13 @@
 class Notifications < ActionMailer::Base
+
+  ActionMailer::Base.smtp_settings = {
+    :address => "mail.modelingcommons.org",
+    :port => 25,
+    :domain => "modelingcommons.org",
+    :authentication => :plain,
+    :user_name => "nlcommons@modelingcommons.org"
+  }
+
   def signup(person)
     @recipients = person.email_address
     @bcc = 'reuven@lerner.co.il'
