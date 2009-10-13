@@ -5,7 +5,7 @@ class Notifications < ActionMailer::Base
     :port => 25,
     :domain => "modelingcommons.org",
     :authentication => :plain,
-    :user_name => "nlcommons@modelingcommons.org"
+    :enable_starttls_auto => false
   }
 
   def signup(person)
