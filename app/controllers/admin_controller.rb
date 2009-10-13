@@ -19,8 +19,9 @@ class AdminController < ApplicationController
       return
     end
 
-    @actions = LoggedAction.find_all_by_person_id(person_id,
-                                                  :order => "logged_at")
+    @actions = LoggedAction.paginate(:page => params[:page],
+                                     :conditions => { :person_id => person_id},
+                                     :order => "logged_at")
     render :template => "admin/view_actions"
   end
 
