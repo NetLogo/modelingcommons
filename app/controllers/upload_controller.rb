@@ -63,7 +63,9 @@ class UploadController < ApplicationController
 
       logger.warn "[create_model] About to set group"
       if params[:group] and params[:group][:id]
-        @model.update_attributes(:group_id => params[:group][:id])
+        successfully_set_group = @model.update_attributes(:group_id => params[:group][:id])
+
+        logger.warn "[create_model] successfully_set_group = '#{successfully_set_group}'"
       end
 
       logger.warn "[create_model] About to save model"
@@ -170,7 +172,7 @@ class UploadController < ApplicationController
                                :parent_id => existing_node.id,
                                :name => "Child of #{existing_node.name}")
       node_id = child_node.id
-      flash[:notice] << "Added new node (#{child_node.id}), a child to node #{existing_node.id}. "
+      flash[:notice] << "Added a new child to this model. "
     elsif fork == 'newmodel'
       new_node = Node.create(:node_type_id => Node::MODEL_NODE_TYPE,
                              :parent_id => nil,
@@ -197,11 +199,9 @@ class UploadController < ApplicationController
       Notifications.deliver_modified_model(model_people, new_version.node)
     end
 
-    flash[:notice] << "Successfully saved a new version, overwriting the previous one."
+    flash[:notice] << "Successfully saved a new version."
     redirect_to :back, :anchor => "upload-div"
-
   end
-
 
 
   # Add a document
