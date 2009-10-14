@@ -13,17 +13,18 @@ class UploadController < ApplicationController
     Node.transaction do
 
       # Create a new node, without a parent
-      logger.warn "About to Node.create"
+      logger.warn "[create_model] About to Node.create"
       @model = Node.create(:node_type_id => Node::MODEL_NODE_TYPE,
                            :parent_id => nil,
                            :name => model_name)
 
       # Create a new version for that node, and stick the contents in there
-      logger.warn "About to NodeVersion.create"
+      logger.warn "[create_model] About to get uploaded body contents"
       node_version_contents = params[:new_model][:uploaded_body].read
 
-      logger.warn "node_version_contents = '#{node_version_contents}'"
+      logger.warn "[create_model] node_version_contents = '#{node_version_contents}'"
 
+      logger.warn "[create_model] About to NodeVersion.create"
       new_version =
         NodeVersion.create(:node_id => @model.id,
                            :person_id => @person.id,
@@ -31,36 +32,42 @@ class UploadController < ApplicationController
                            :description => 'Initial upload')
 
       # If we got a preview, then create a node and version for it
+      logger.warn "[create_model] About to check for an uploaded preview"
       if params[:new_model][:uploaded_preview].present?
 
         # Create a new preview node, whose parent is the new model node
-        logger.warn "About to Node.create (preview)"
+        logger.warn "[create_model] About to Node.create (preview)"
         preview_node = Node.create(:node_type_id => Node::PREVIEW_NODE_TYPE,
                                    :parent_id => @model.id,
                                    :name => model_name + ".png")
 
         # Create a new version for the preview, and stick the contents in there
-        logger.warn "About to NodeVersion.create (preview)"
+        logger.warn "[create_model] About to NodeVersion.create (preview)"
         preview_version =
           NodeVersion.create(:node_id => preview_node.id,
                              :person_id => @person.id,
                              :file_contents => params[:new_model][:uploaded_preview].read,
                              :description => 'Initial preview version')
+      else
+        logger.warn "[create_model] No uploaded preview"
       end
 
       # If we got a group and permission settings, set those as well
+      logger.warn "[create_model] About to get permissions"
       read_permission = PermissionSetting.find_by_short_form(params[:read_permission])
       write_permission = PermissionSetting.find_by_short_form(params[:write_permission])
 
+      logger.warn "[create_model] About to set permissions"
       @model.visibility_id = read_permission.id
       @model.changeability_id = write_permission.id
 
+      logger.warn "[create_model] About to set group"
       if params[:group] and params[:group][:id]
-        @model.update_attribute!(:group_id => params[:group][:id])
+        @model.update_attributes(:group_id => params[:group][:id])
       end
 
+      logger.warn "[create_model] About to save model"
       @model.save!
-      # end
     end
 
     flash[:notice] = "Thanks for uploading the new model called '#{model_name}'."
