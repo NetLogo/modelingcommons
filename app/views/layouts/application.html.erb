@@ -22,7 +22,8 @@
       <ul id="main-menu">
         <li class="menu-option"><%= link_to_unless_current "Home", :controller => :account, :action => :mypage %></li>
         <% if @person %>
-        <li class="menu-option"><%= link_to "Models", :controller => :browse, :action => :list_models %></li>
+        <li class="menu-option"><%= link_to "Add model", :controller => :upload, :action => :new_model %></li>
+        <li class="menu-option"><%= link_to "List models", :controller => :browse, :action => :list_models %></li>
         <li class="menu-option"><%= link_to "Groups", :controller => :account, :action => :groups %></li>
         <li class="menu-option"><%= link_to "Tags", :controller => :account, :action => :tags, :id => @person.id  %></li>
         <% end %>
@@ -41,8 +42,9 @@
 
     <div id="logged-in-as">
       <% if @person %>
-      Logged in as <%= link_to @person.fullname, :controller => :account, :action => :mypage -%><br />
-      <%= link_to_unless_current "Edit details", :controller => :account, :action => :edit, :id => @person.id %> &bull;
+      Logged in as <%= link_to @person.fullname, :controller => :account, :action => :mypage -%>
+      <br />
+      <%= link_to_unless_current "Edit personal details", :controller => :account, :action => :edit, :id => @person.id %> &bull;
       <%= link_to_unless_current "Logout", :controller => :account, :action => :logout %>
 
       <% if @person.administrator %>
@@ -66,13 +68,13 @@
 
     <h1 id="main-title">
       <% if @headline_avatar -%>
-          <%= image_tag @headline_avatar -%>
+      <%= image_tag @headline_avatar -%>
       <% end -%>
 
       <% if @headline.blank? -%>
-          <%= @title -%>
+      <%= @title -%>
       <% else -%>
-          <%= @headline -%>
+      <%= @headline -%>
       <% end -%>
     </h1>
     <%= yield :layout %>

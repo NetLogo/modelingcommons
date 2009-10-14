@@ -75,6 +75,7 @@ class Node < ActiveRecord::Base
   end
 
   def latest_preview
+    return nil if self.previews.empty?
     self.previews.last.file_contents
   end
 

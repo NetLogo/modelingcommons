@@ -199,7 +199,6 @@ class UploadController < ApplicationController
       Notifications.deliver_modified_model(model_people, new_version.node)
     end
 
-    flash[:notice] << "Successfully saved a new version."
     redirect_to :back, :anchor => "upload-div"
   end
 
