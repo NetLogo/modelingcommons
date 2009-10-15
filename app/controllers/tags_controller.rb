@@ -146,7 +146,6 @@ class TagsController < ApplicationController
     @tagged_nodes = @tag.tagged_nodes.sort_by { |tn| tn.created_at }
 
     respond_to do |format|
-      format.html { @tagged_nodes }
       format.atom { @tagged_nodes }
     end
   end

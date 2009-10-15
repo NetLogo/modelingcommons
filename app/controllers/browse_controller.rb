@@ -283,7 +283,6 @@ class BrowseController < ApplicationController
     end
 
     respond_to do |format|
-      format.html { @new_things }
       format.atom { @new_things }
     end
   end
