@@ -61,7 +61,10 @@
 
     <% if @person %>
     <li><a href="<%= url_for :controller => :browse, :action => :browse_upload_tab, :id => @model.id -%>" title="upload"><span>Upload</span></a></li>
-    <li><a href="<%= url_for :controller => :browse, :action => :browse_permissions_tab, :id => @model.id -%>" title="permissions"><span>Permissions</span></a></li>
+
+    <% if @model.people.include?(@person) %>
+        <li><a href="<%= url_for :controller => :browse, :action => :browse_permissions_tab, :id => @model.id -%>" title="permissions"><span>Permissions</span></a></li>
+    <% end %>
     <% end %>
   </ul>
 </div>

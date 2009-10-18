@@ -14,6 +14,7 @@ require 'metric_fu'
 
 MetricFu::Configuration.run do |config|
   config.rcov[:rcov_opts] << "-Itest"
+  config.rcov[:run_cucumber] = true
 end
 
 desc "Build a code coverage report"

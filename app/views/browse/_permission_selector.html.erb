@@ -23,10 +23,21 @@
           <td><%= radio_button_tag 'read_permission', 'g', model_visibility_letter == 'g' %></td>
           <td><label for="read_permission_g">The model is only visible to group members. </label></td>
         </tr>
-        <tr>
-          <td><%= radio_button_tag 'read_permission', 'u', model_visibility_letter == 'u'  %></td>
-          <td><label for="read_permission_u">Only you may see this model.</label></td>
-        </tr>
+
+        <% if @person == @model.person %>
+            <tr>
+              <td><%= radio_button_tag 'read_permission', 'u', model_visibility_letter == 'u'  %></td>
+              <td>
+                <label for="read_permission_u">
+                    <% if @model %>
+                        Only <%= person_link(@model.person) %> may see this model.
+                    <% else %>
+                        Only you may see this model.
+                    <% end %>
+                </label>
+              </td>
+            </tr>
+        <% end %>
       </table>
     </td>
 
@@ -42,10 +53,21 @@
               The model can only be modified by group members.
           </label></td>
         </tr>
-        <tr>
-          <td><%= radio_button_tag 'write_permission', 'u', model_changeability_letter == 'u' %></td>
-          <td><label for="write_permission_u">Only you can modify this model.</label></td>
-        </tr>
+
+        <% if @person == @model.person %>
+            <tr>
+              <td><%= radio_button_tag 'write_permission', 'u', model_changeability_letter == 'u' %></td>
+              <td><label for="write_permission_u">
+                    <% if @model %>
+                        Only <%= person_link(@model.person) %> may see this model.
+                    <% else %>
+                        Only you may see this model.
+                    <% end %>
+                    </label>
+                </td>
+            </tr>
+        <% end %>
+
       </table>
     </td>
 </table>
