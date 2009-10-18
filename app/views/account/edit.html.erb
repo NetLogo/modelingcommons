@@ -4,23 +4,23 @@
 <table>
 
   <tr>
-    <td>First name</td>
+    <td><label for="person_first_name">First name</label></td>
     <td><%= form.text_field :first_name, :size => 30, :value => @person.first_name %></td>
   </tr>
   <tr>
-    <td>Last name</td>
+    <td><label for="person_last_name">Last name</label></td>
     <td><%= form.text_field :last_name, :size => 30, :value => @person.last_name %></td>
   </tr>
   <tr>
-    <td>E-mail address</td>
+    <td><label for="person_email_address">E-mail address</label></td>
     <td><%= form.text_field :email_address, :size => 30, :value => @person.email_address %></td>
   </tr>
   <tr>
-    <td>Password</td>
+    <td><label for="person_password">Password</label></td>
     <td><%= form.password_field :password, :size => 30, :value => @person.password %></td>
   </tr>
   <tr>
-    <td>Password confirmation</td>
+    <td><label for="person_password_confirmation">Password confirmation</label></td>
     <td><%= form.password_field :password_confirmation, :size => 30, :value => @person.password_confirmation %></td>
   </tr>
 

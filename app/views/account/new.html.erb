@@ -14,23 +14,23 @@
 <table>
 
   <tr>
-    <td>First name</td>
+    <td><label for="new_person_first_name">First name</label></td>
     <td><%= form.text_field :first_name, :size => 30 %></td>
   </tr>
   <tr>
-    <td>Last name</td>
+    <td><label for="new_person_last_name">Last name</label></td>
     <td><%= form.text_field :last_name, :size => 30 %></td>
   </tr>
   <tr>
-    <td>E-mail address</td>
+    <td><label for="new_person_email_address">E-mail address</label></td>
     <td><%= form.text_field :email_address, :size => 30 %></td>
   </tr>
   <tr>
-    <td>Password</td>
+    <td><label for="new_person_password">Password</label></td>
     <td><%= form.password_field :password, :size => 30 %></td>
   </tr>
   <tr>
-    <td>Password confirmation</td>
+    <td><label for="new_person_password_confirmation">Password confirmation</label></td>
     <td><%= form.password_field :password_confirmation, :size => 30 %></td>
   </tr>
 

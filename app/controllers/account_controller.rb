@@ -41,7 +41,7 @@ class AccountController < ApplicationController
 
   def login_action
     if params[:email_address].blank? or params[:password].blank?
-      flash[:notice] = "You must provide an e-mail address and pasword in order to log in."
+      flash[:notice] = "You must provide an e-mail address and password in order to log in."
       redirect_to :back
       return
     end
@@ -139,53 +139,6 @@ class AccountController < ApplicationController
 
   def mygroups
     render :layout => false
-  end
-
-  def reset_password
-    dictionary_file = File.new('/etc/dictionaries-common/words', 'r')
-    dictionary_file_contents = dictionary_file.read
-    dictionary_words  = dictionary_file_contents.split("\n")
-    dictionary_words.delete_if { |word| word.length > 5 }
-
-    # Create our password
-    word1 = dictionary_words[rand(dictionary_words.length)].strip.downcase
-    number = rand 10000
-    word2 = dictionary_words[rand(dictionary_words.length)].strip.downcase
-
-    new_password = word1 + number.to_s + word2
-
-    new_password.gsub!(/[^a-z0-9]/, '')
-
-    @person.password = new_password
-    @person.save!
-
-    flash[:notice] = "Your password has been reset.  A new password was sent to you via e-mail."
-    Notifications.deliver_reset_password(@person)
-    redirect_to :controller => :account, :action => :index
-  end
-
-  def update_password_action
-    new_password = params[:new_password]
-    new_password_confirmation = params[:new_password_confirmation]
-
-    if new_password != new_password_confirmation
-      flash[:notice] = "You did not enter the same password in both fields.  Please try again."
-      redirect_to :back
-      return
-    else
-      @person.password = new_password
-      flash[:notice] = "Your new password has been set.  A confirmation notice was sent via e-mail."
-      Notifications.deliver_changed_password(@person)
-      begin
-        @person.save!
-      rescue Exception => e
-        flash[:notice] = e.message
-        redirect_to :back
-        return
-      end
-
-      redirect_to :controller => :account, :action => :mypage
-    end
   end
 
   def send_password_action
