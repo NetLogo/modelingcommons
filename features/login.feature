@@ -72,6 +72,10 @@ So that I can use the system
      And I press "Update account"
     Then I should see "Successfully updated your account."
 
+  Scenario: Password reminder page should work
+    When I go to the password reminder page
+    Then I should see "Send password reminder"
+
   Scenario: Get password reminder for a real address
     When I go to the password reminder page
      And I fill in "reuven@lerner.co.il" for "E-mail address"
@@ -83,3 +87,4 @@ So that I can use the system
      And I fill in "reuvennnn@lernerrrr.coooo.illll" for "E-mail address"
      And I press "Send password reminder"
     Then I should see "Sorry, but 'reuvennnn@lernerrrr.coooo.illll' is not listed in our system.  Please register."
+
