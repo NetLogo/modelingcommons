@@ -20,6 +20,12 @@ module NavigationHelpers
     when /the registration page/
       '/account/new'
 
+    when /the login page/
+      '/account/login'
+
+    when /the administration page/
+      '/admin/index'
+
     when /the password reminder page/
       '/account/send_password'
 
