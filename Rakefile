@@ -6,11 +6,8 @@ require(File.join(File.dirname(__FILE__), 'config', 'boot'))
 require 'rake'
 require 'rake/testtask'
 require 'rake/rdoctask'
-
 require 'tasks/rails'
-
 require 'metric_fu'
-
 
 MetricFu::Configuration.run do |config|
   config.rcov[:rcov_opts] << "-Itest"
