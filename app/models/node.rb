@@ -173,6 +173,10 @@ class Node < ActiveRecord::Base
   def info_tab(with_html=false)
     text = self.node_versions.sort_by {|nv| nv.created_at }.last.info_tab
 
+    if text.blank?
+      "Info tab is empty."
+    end
+
     if with_html
       # Handle headlines
       text.gsub! /([-_.?A-Z ]+)\n-+/ do

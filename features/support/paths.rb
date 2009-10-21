@@ -29,6 +29,9 @@ module NavigationHelpers
     when /the password reminder page/
       '/account/send_password'
 
+    when /the page for "([^\"]+)"/
+      "/browse/one_model/#{Node.find_by_name($1).id}"
+
     else
       raise "Can't find mapping from \"#{page_name}\" to a path.\n" +
         "Now, go and add a mapping in #{__FILE__}"

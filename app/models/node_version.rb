@@ -47,7 +47,11 @@ class NodeVersion < ActiveRecord::Base
 
   def netlogo_version
     if self.node.node_type_id == Node::MODEL_NODE_TYPE
-      self.file_contents.split(SECTION_SEPARATOR)[4].gsub("\n", "").gsub("NetLogo ", "")
+      if self.file_contents.blank?
+        ""
+      else
+        self.file_contents.split(SECTION_SEPARATOR)[4].gsub("\n", "").gsub("NetLogo ", "")
+      end
     else
       ""
     end
