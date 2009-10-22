@@ -24,7 +24,7 @@
           <td><label for="read_permission_g">The model is only visible to group members. </label></td>
         </tr>
 
-        <% if @person == @model.person %>
+        <% if @person and @person == @model.person %>
             <tr>
               <td><%= radio_button_tag 'read_permission', 'u', model_visibility_letter == 'u'  %></td>
               <td>
@@ -54,7 +54,7 @@
           </label></td>
         </tr>
 
-        <% if @person == @model.person %>
+        <% if @person and @person == @model.person %>
             <tr>
               <td><%= radio_button_tag 'write_permission', 'u', model_changeability_letter == 'u' %></td>
               <td><label for="write_permission_u">
