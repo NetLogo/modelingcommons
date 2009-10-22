@@ -23,6 +23,9 @@ module NavigationHelpers
     when /the login page/
       '/account/login'
 
+    when /the upload page/
+      '/upload/new_model'
+
     when /the administration page/
       '/admin/index'
 
