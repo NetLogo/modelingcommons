@@ -50,3 +50,7 @@ So that I can use the system
      And I fill in "newpw" for "Password confirmation"
      And I press "Update account"
     Then I should see "Successfully updated your account."
+
+  Scenario: Trying to go to the login_action page results in a message
+    When I go to the login action page
+    Then I should see "You must provide an e-mail address and password in order to log in."

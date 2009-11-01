@@ -42,7 +42,7 @@ class AccountController < ApplicationController
   def login_action
     if params[:email_address].blank? or params[:password].blank?
       flash[:notice] = "You must provide an e-mail address and password in order to log in."
-      redirect_to :back
+      redirect_to :controller => :account, :action => :login
       return
     end
 
@@ -146,7 +146,7 @@ class AccountController < ApplicationController
 
     if email_address.blank?
       flash[:notice] = "You must enter an e-mail address to receive a reminder."
-      redirect_to :back
+      redirect_to :controller => :account, :action => :send_password
       return
     end
 

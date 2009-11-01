@@ -38,6 +38,12 @@ module NavigationHelpers
     when /the user page for "([^\"]+)"/
       "/account/mypage/#{Person.find_by_email_address($1).id}"
 
+    when /the login action page/
+      "/account/login_action"
+
+    when /the password reminder action page/
+      "/account/send_password_action"
+
     else
       raise "Can't find mapping from \"#{page_name}\" to a path.\n" +
         "Now, go and add a mapping in #{__FILE__}"

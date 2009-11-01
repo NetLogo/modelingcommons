@@ -23,3 +23,6 @@ So that I can log in
      And I press "Send password reminder"
     Then I should see "Sorry, but 'reuvennnn@lernerrrr.coooo.illll' is not listed in our system.  Please register."
 
+  Scenario: Trying to go to the send_password_action page results in a message
+    When I go to the password reminder action page
+    Then I should see "You must enter an e-mail address to receive a reminder."
