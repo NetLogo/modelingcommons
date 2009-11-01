@@ -12,4 +12,5 @@ So that I can know when they have been updated
   Scenario: A user may follow a model
     When I log in as "reuven@lerner.co.il" with password "password"
      And I go to the page for "amodel"
-     And I follow "Follow activity"
+     And I follow "Follow 'amodel' in your reader"
+

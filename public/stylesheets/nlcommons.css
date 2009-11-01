@@ -46,9 +46,13 @@ a:hover {
 }
 
 #flash-notice {
+    position: absolute;
+    top: 2em;
+    left: 2em;
     background: #000;
     color: #FFF;
     border: 2px solid #F00;
+    padding: 2em;
 }
 
 #navbar-search-form {

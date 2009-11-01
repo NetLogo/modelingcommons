@@ -1,8 +1,14 @@
+Factory.define(:permission_setting) do |p|
+  p.name "all"
+  p.short_form "a"
+end
+
 Factory.define(:node) do |node|
-  node.sequence(:name) { |n| "model#{n}"}
+  node.name "node"
   node.node_type_id 1
-  node.visibility_id 1
-  node.changeability_id 1
+
+  node.association :visibility, :factory => :permission_setting
+  node.association :changeability, :factory => :permission_setting
 end
 
 Factory.define(:node_version) do |nv|
@@ -12,7 +18,3 @@ Factory.define(:node_version) do |nv|
   nv.file_contents "foo"
 end
 
-Factory.define(:permission_setting) do |p|
-  p.name "Permission"
-  p.short_form "x"
-end

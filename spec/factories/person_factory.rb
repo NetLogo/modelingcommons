@@ -1,6 +1,7 @@
 Factory.define(:person) do |person|
   person.sequence(:first_name) { |n| "first#{n}"}
   person.sequence(:last_name) { |n| "last#{n}"}
+  person.sequence(:email_address) { |n| "email#{n}@example.com"}
   person.password "password"
   person.administrator false
 
