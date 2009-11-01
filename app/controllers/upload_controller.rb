@@ -52,6 +52,11 @@ class UploadController < ApplicationController
                                 :parent_id => @model.id,
                                 :name => model_name + ".png")
 
+        if !preview_node.save
+          flash[:notice] = "Error creating a new preview object; it was not saved."
+          redirect_to :back
+        end
+
         # Create a new version for the preview, and stick the contents in there
         preview_version =
           NodeVersion.new(:node_id => preview_node.id,
@@ -59,17 +64,13 @@ class UploadController < ApplicationController
                           :file_contents => params[:new_model][:uploaded_preview].read,
                           :description => 'Initial preview version')
 
-        if preview_node.invalid?
-          flash[:notice] = "Error creating a new preview object; it was not saved."
-          redirect_to :back
-        elsif preview_version.invalid?
+
+        if !preview_version.save
           flash[:notice] = "Error creating a new preview version; it was not saved."
           redirect_to :back
-        else
-          preview_node.save!
-          preview_version.save!
-          flash[:notice] << "  The preview image was also saved."
         end
+
+        flash[:notice] << "  The preview image was also saved."
 
         # If we got a group and permission settings, set those as well
         @model.update_attributes(:visibility_id => PermissionSetting.find_by_short_form(params[:read_permission]),
