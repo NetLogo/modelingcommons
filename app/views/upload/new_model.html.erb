@@ -21,10 +21,12 @@
 
 </table>
 
-<hr />
-<h2>Optional: Set the group</h2>
+<% if !@person.groups.empty? %>
+    <hr />
+    <h2>Optional: Set the group</h2>
 
-<%= render :partial => "browse/group_selector", :locals => {:person => @person, :model => nil} -%>
+    <%= render :partial => "browse/group_selector", :locals => {:person => @person, :model => nil} -%>
+<% end %>
 
 <hr />
 <h2>Optional: Set the permissions</h2>

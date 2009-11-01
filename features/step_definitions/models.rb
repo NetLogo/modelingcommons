@@ -17,3 +17,8 @@ Given /^a permission setting named "([^\"]*)" with a short form of "([^\"]*)"$/ 
                                        :short_form => short_form)
 end
 
+
+When /^I upload a file with valid data for 3 new products$/ do
+  attach_file(:model_file, File.join(RAILS_ROOT, 'features', 'upload-files', 'test.nlogo'))
+  click_button "Send file"
+end

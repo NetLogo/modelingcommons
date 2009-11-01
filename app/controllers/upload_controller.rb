@@ -10,6 +10,12 @@ class UploadController < ApplicationController
   def create_model
     model_name = params[:new_model][:name]
 
+    if model_name.blank?
+      flash[:notice] = "Sorry, but you must enter a model name and file."
+      redirect_to :back
+      return
+    end
+
     Node.transaction do
 
       # Create a new node, without a parent
