@@ -13,66 +13,68 @@ class UploadController < ApplicationController
     Node.transaction do
 
       # Create a new node, without a parent
-      logger.warn "[create_model] About to Node.create"
-      @model = Node.create(:node_type_id => Node::MODEL_NODE_TYPE,
-                           :parent_id => nil,
-                           :name => model_name)
+      @model = Node.new(:node_type_id => Node::MODEL_NODE_TYPE,
+                        :parent_id => nil,
+                        :name => model_name)
 
       # Create a new version for that node, and stick the contents in there
-      logger.warn "[create_model] About to get uploaded body contents"
       node_version_contents = params[:new_model][:uploaded_body].read
 
-      logger.warn "[create_model] node_version_contents = '#{node_version_contents}'"
-
-      logger.warn "[create_model] About to NodeVersion.create"
       new_version =
-        NodeVersion.create(:node_id => @model.id,
-                           :person_id => @person.id,
-                           :file_contents => node_version_contents,
-                           :description => 'Initial upload')
+        NodeVersion.new(:node_id => @model.id,
+                        :person_id => @person.id,
+                        :file_contents => node_version_contents,
+                        :description => 'Initial upload')
+
+      if @model.invalid?
+        flash[:notice] = "Error creating a new model object; it was not saved."
+        redirect_to :back
+      elsif model_version.invalid?
+        flash[:notice] = "Error creating a new model version; it was not saved."
+        redirect_to :back
+      else
+        @model.save!
+        new_version.save!
+        flash[:notice] = "Thanks for uploading the new model called '#{model_name}'."
+      end
 
       # If we got a preview, then create a node and version for it
-      logger.warn "[create_model] About to check for an uploaded preview"
       if params[:new_model][:uploaded_preview].present?
 
         # Create a new preview node, whose parent is the new model node
-        logger.warn "[create_model] About to Node.create (preview)"
-        preview_node = Node.create(:node_type_id => Node::PREVIEW_NODE_TYPE,
-                                   :parent_id => @model.id,
-                                   :name => model_name + ".png")
+        preview_node = Node.new(:node_type_id => Node::PREVIEW_NODE_TYPE,
+                                :parent_id => @model.id,
+                                :name => model_name + ".png")
 
         # Create a new version for the preview, and stick the contents in there
-        logger.warn "[create_model] About to NodeVersion.create (preview)"
         preview_version =
-          NodeVersion.create(:node_id => preview_node.id,
-                             :person_id => @person.id,
-                             :file_contents => params[:new_model][:uploaded_preview].read,
-                             :description => 'Initial preview version')
-      else
-        logger.warn "[create_model] No uploaded preview"
+          NodeVersion.new(:node_id => preview_node.id,
+                          :person_id => @person.id,
+                          :file_contents => params[:new_model][:uploaded_preview].read,
+                          :description => 'Initial preview version')
+
+        if preview_node.invalid?
+          flash[:notice] = "Error creating a new preview object; it was not saved."
+          redirect_to :back
+        elsif preview_version.invalid?
+          flash[:notice] = "Error creating a new preview version; it was not saved."
+          redirect_to :back
+        else
+          preview_node.save!
+          preview_version.save!
+          flash[:notice] << "  The preview image was also saved."
+        end
+
+        # If we got a group and permission settings, set those as well
+        @model.update_attributes(:visibility_id => PermissionSetting.find_by_short_form(params[:read_permission]),
+                                 :changeability_id => PermissionSetting.find_by_short_form(params[:write_permission]))
+
+        if params[:group] and params[:group][:id]
+          successfully_set_group = @model.update_attributes(:group_id => params[:group][:id])
+        end
       end
 
-      # If we got a group and permission settings, set those as well
-      logger.warn "[create_model] About to get permissions"
-      read_permission = PermissionSetting.find_by_short_form(params[:read_permission])
-      write_permission = PermissionSetting.find_by_short_form(params[:write_permission])
-
-      logger.warn "[create_model] About to set permissions"
-      @model.visibility_id = read_permission.id
-      @model.changeability_id = write_permission.id
-
-      logger.warn "[create_model] About to set group"
-      if params[:group] and params[:group][:id]
-        successfully_set_group = @model.update_attributes(:group_id => params[:group][:id])
-
-        logger.warn "[create_model] successfully_set_group = '#{successfully_set_group}'"
-      end
-
-      logger.warn "[create_model] About to save model"
-      @model.save!
     end
-
-    flash[:notice] = "Thanks for uploading the new model called '#{model_name}'."
   end
 
   def update_model
