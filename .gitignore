@@ -3,3 +3,7 @@ log/*
 tmp/*
 public/modelzips
 index/*
+profiling/
+coverage/
+*.DS_Store
+
