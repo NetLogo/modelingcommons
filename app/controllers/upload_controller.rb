@@ -23,6 +23,11 @@ class UploadController < ApplicationController
                         :parent_id => nil,
                         :name => model_name)
 
+      if !@model.save
+        flash[:notice] = "Error creating a new model object; it was not saved."
+        redirect_to :back
+      end
+
       # Create a new version for that node, and stick the contents in there
       node_version_contents = params[:new_model][:uploaded_body].read
 
@@ -32,17 +37,12 @@ class UploadController < ApplicationController
                         :file_contents => node_version_contents,
                         :description => 'Initial upload')
 
-      if @model.invalid?
-        flash[:notice] = "Error creating a new model object; it was not saved."
-        redirect_to :back
-      elsif model_version.invalid?
+      if !new_version.save
         flash[:notice] = "Error creating a new model version; it was not saved."
         redirect_to :back
-      else
-        @model.save!
-        new_version.save!
-        flash[:notice] = "Thanks for uploading the new model called '#{model_name}'."
       end
+
+      flash[:notice] = "Thanks for uploading the new model called '#{model_name}'."
 
       # If we got a preview, then create a node and version for it
       if params[:new_model][:uploaded_preview].present?

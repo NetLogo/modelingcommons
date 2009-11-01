@@ -23,9 +23,9 @@ So that other people can interact with it
      And I press "Upload model"
     Then I should see "Sorry, but you must enter a model name and file."
 
-  Scenario: A user may upload a poorly formed model
+  Scenario: A user may upload a valid model file
     When I log in as "reuven@lerner.co.il" with password "password"
      And I go to the upload page
-     And I attach a model file
-     And I press "Upload model"
-    Then I should see "Sorry, but you must enter a model name and file."
+     And I fill in "New Model" for "new_model_name"
+     And I upload a model
+    Then I should see "Thanks for uploading the new model called 'New Model'."
