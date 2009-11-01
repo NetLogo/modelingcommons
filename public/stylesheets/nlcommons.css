@@ -46,6 +46,7 @@ a:hover {
 }
 
 #flash-notice {
+    z-index: 10;
     position: absolute;
     top: 2em;
     left: 2em;
