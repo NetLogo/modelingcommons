@@ -29,6 +29,9 @@ module NavigationHelpers
     when /the group creation page/
       '/membership/new_group'
 
+    when /the group finding page/
+      '/membership/find'
+
     when /the upload page/
       '/upload/new_model'
 

@@ -3,7 +3,7 @@
 
 <div id="find-group-div" class="group-tab">
   <% form_remote_tag(:url => {:controller => "membership", :action => :find_action}, :update => 'results-div') do |form| %>
-  <p>Group name to search for: <%= text_field_tag "group_name" %></p>
+  <p><label for="group_name">Group name to search for</label>: <%= text_field_tag "group_name" %></p>
   <p><%= submit_tag "Find" %></p>
   <% end %>
 </div>
