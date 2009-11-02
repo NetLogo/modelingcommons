@@ -1,4 +1,4 @@
-<% if not @person.groups.empty? %>
+<% if @person and !@person.groups.empty? %>
 <% if @model and @model.group %>
 <% model_group_id = @model.group.id %>
 <% else %>

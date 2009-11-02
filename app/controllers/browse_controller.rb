@@ -5,7 +5,7 @@ require 'diff/lcs/hunk'
 
 class BrowseController < ApplicationController
 
-  prepend_before_filter :get_model_from_id_param, :except => [:index, :list_models, :list_models_group, :search, :search_action, :news, :one_node, :create_group, :whats_new, :about, :stuff, :spider, :view_random_model]
+  prepend_before_filter :get_model_from_id_param, :except => [:index, :list_models, :list_models_group, :search, :search_action, :news, :one_node, :whats_new, :view_random_model]
   before_filter :require_login, :only => [:revert_model, :set_permissions, :whats_new]
 
   before_filter :check_visibility_permissions, :only => [:one_model, :model_contents, :one_applet ]
@@ -291,58 +291,12 @@ class BrowseController < ApplicationController
     redirect_to :controller => :browse, :action => :one_model, :id => Node.models.rand.id
   end
 
-  def browse_preview_tab
-    render :layout => false
-  end
-
-  def browse_info_tab
-    render :layout => false
-  end
-
-  def browse_applet_tab
-    @applet_html = @model.applet_html
-
-    render :layout => false
-  end
-
-  def browse_download_tab
-    render :layout => false
-  end
-
-  def browse_discuss_tab
-    render :layout => false
-  end
-
-  def browse_tags_tab
-    render :layout => false
-  end
-
-  def browse_related_tab
-    render :layout => false
-  end
-
-  def browse_files_tab
-    render :layout => false
-  end
-
-  def browse_procedures_tab
-    render :layout => false
-  end
-
-  def browse_gui_tab
-    render :layout => false
-  end
-
-  def browse_upload_tab
-    render :layout => false
-  end
-
-  def browse_permissions_tab
-    render :layout => false
-  end
-
-  def browse_history_tab
-    render :layout => false
+  # Define methods for tabs
+  ['preview', 'applet', 'info', 'procedures', 'download', 'discuss', 'history', 'tags',  'files',
+   'related', 'upload', 'permissions'].each do |tab_name|
+    define_method("browse_#{tab_name}_tab".to_sym) do
+      render :layout => 'browse_tab'
+    end
   end
 
   def rename_model

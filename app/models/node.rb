@@ -175,9 +175,8 @@ class Node < ActiveRecord::Base
 
     if text.blank?
       "Info tab is empty."
-    end
 
-    if with_html
+    elsif with_html
       # Handle headlines
       text.gsub! /([-_.?A-Z ]+)\n-+/ do
         "<h3>#{$1}</h3>"
@@ -191,8 +190,6 @@ class Node < ActiveRecord::Base
       # Handle newlines
       text.gsub!("\n", "</p>\n<p>")
     end
-
-    text
   end
 
   def procedures_tab(with_html=false)

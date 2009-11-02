@@ -48,22 +48,22 @@
 
 <div id="model-tabs">
   <ul>
-    <li><a href="<%= url_for :controller => :browse, :action => :browse_preview_tab, :id => @model.id -%>" title="preview"><span>Preview</span></a></li>
-    <li><a href="<%= url_for :controller => :browse, :action => :browse_applet_tab, :id => @model.id -%>" title="run"><span>Run</span></a></li>
-    <li><a href="<%= url_for :controller => :browse, :action => :browse_info_tab, :id => @model.id -%>" title="info"><span>Info</span></a></li>
-    <li><a href="<%= url_for :controller => :browse, :action => :browse_procedures_tab, :id => @model.id -%>" title="procedures"><span>Procedures</span></a></li>
-    <li><a href="<%= url_for :controller => :browse, :action => :browse_download_tab, :id => @model.id -%>" title="download"><span>Download</span></a></li>
-    <li><a href="<%= url_for :controller => :browse, :action => :browse_discuss_tab, :id => @model.id -%>" title="discuss"><span>Discuss</span></a></li>
-    <li><a href="<%= url_for :controller => :browse, :action => :browse_history_tab, :id => @model.id -%>" title="history"><span>History</span></a></li>
-    <li><a href="<%= url_for :controller => :browse, :action => :browse_tags_tab, :id => @model.id -%>" title="tags"><span>Tags</span></a></li>
-    <li><a href="<%= url_for :controller => :browse, :action => :browse_files_tab, :id => @model.id -%>" title="files"><span>Files</span></a></li>
-    <li><a href="<%= url_for :controller => :browse, :action => :browse_related_tab, :id => @model.id -%>" title="related"><span>Related</span></a></li>
+    <li><a href="<%= url_for :controller => :browse, :action => :browse_preview_tab, :id => @model.id, :tab => 'true' -%>" title="preview"><span>Preview</span></a></li>
+    <li><a href="<%= url_for :controller => :browse, :action => :browse_applet_tab, :id => @model.id , :tab => 'true' -%>" title="run"><span>Run</span></a></li>
+    <li><a href="<%= url_for :controller => :browse, :action => :browse_info_tab, :id => @model.id , :tab => 'true' -%>" title="info"><span>Info</span></a></li>
+    <li><a href="<%= url_for :controller => :browse, :action => :browse_procedures_tab, :id => @model.id , :tab => 'true' -%>" title="procedures"><span>Procedures</span></a></li>
+    <li><a href="<%= url_for :controller => :browse, :action => :browse_download_tab, :id => @model.id , :tab => 'true' -%>" title="download"><span>Download</span></a></li>
+    <li><a href="<%= url_for :controller => :browse, :action => :browse_discuss_tab, :id => @model.id , :tab => 'true' -%>" title="discuss"><span>Discuss</span></a></li>
+    <li><a href="<%= url_for :controller => :browse, :action => :browse_history_tab, :id => @model.id , :tab => 'true' -%>" title="history"><span>History</span></a></li>
+    <li><a href="<%= url_for :controller => :browse, :action => :browse_tags_tab, :id => @model.id , :tab => 'true' -%>" title="tags"><span>Tags</span></a></li>
+    <li><a href="<%= url_for :controller => :browse, :action => :browse_files_tab, :id => @model.id , :tab => 'true' -%>" title="files"><span>Files</span></a></li>
+    <li><a href="<%= url_for :controller => :browse, :action => :browse_related_tab, :id => @model.id , :tab => 'true' -%>" title="related"><span>Related</span></a></li>
 
     <% if @person %>
-    <li><a href="<%= url_for :controller => :browse, :action => :browse_upload_tab, :id => @model.id -%>" title="upload"><span>Upload</span></a></li>
+    <li><a href="<%= url_for :controller => :browse, :action => :browse_upload_tab, :id => @model.id, :tab => 'true' -%>" title="upload"><span>Upload</span></a></li>
 
     <% if @model.people.include?(@person) %>
-        <li><a href="<%= url_for :controller => :browse, :action => :browse_permissions_tab, :id => @model.id -%>" title="permissions"><span>Permissions</span></a></li>
+        <li><a href="<%= url_for :controller => :browse, :action => :browse_permissions_tab, :id => @model.id, :tab => 'true' -%>" title="permissions"><span>Permissions</span></a></li>
     <% end %>
     <% end %>
   </ul>

@@ -32,8 +32,11 @@ module NavigationHelpers
     when /the password reminder page/
       '/account/send_password'
 
-    when /the page for "([^\"]+)"/
+    when /the model page for "([^\"]+)"/
       "/browse/one_model/#{Node.find_by_name($1).id}"
+
+    when /the "([^\"]+)" tab for "([^\"]+)"/
+      "/browse/browse_#{$1}_tab/#{Node.find_by_name($2).id}"
 
     when /the user page for "([^\"]+)"/
       "/account/mypage/#{Person.find_by_email_address($1).id}"

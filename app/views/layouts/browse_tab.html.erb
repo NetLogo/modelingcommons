@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <title>NetLogo Modeling Commons -- <%= @title %></title>
+
+    <%= stylesheet_link_tag 'nlcommons' %>
+    <%= stylesheet_link_tag 'browse' %>
+    <%= stylesheet_link_tag 'jquery.autocomplete' %>
+    <%= stylesheet_link_tag 'themes/nlcommons/ui.all.css' %>
+
+    <%= javascript_include_tag :defaults %>
+    <%= javascript_include_tag 'jquery-ui' %>
+    <%= javascript_include_tag 'jquery.dataTables' %>
+    <%= javascript_include_tag 'jquery.livequery' %>
+    <%= javascript_include_tag 'jquery.autocomplete' %>
+    <%= javascript_include_tag 'nlcommons' %>
+  </head>
+
+  <body>
+    <% if params['tab'].blank? %>
+        <p><%= link_to "Return to page for the '#{@model.name}' model", :controller => :browse, :action => :one_model, :id => @model.id %></p>
+        <hr />
+    <% end %>
+
+    <%= yield :layout %>
+  </body>
+
+</html>
