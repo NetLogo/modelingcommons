@@ -21,3 +21,12 @@ So that I can help to connect models in a folksonomy
     Then I should see /mytag\s+mycomment\s+by\s+You/
      And I should see "Existing tags:"
      And I should not see "No tags have been defined for this model."
+
+  Scenario: A user's tag should appear on the home page
+    When I go to the "tags" tab for "Test model"
+     And I fill in "mytag" for "new_tag_"
+     And I fill in "mycomment" for "new_comment_"
+     And I press "Save tags to the Commons"
+     And I go to the home page
+    Then I should see "Test model was tagged mytag by You"
+     And I should see "You created a new tag, mytag"
