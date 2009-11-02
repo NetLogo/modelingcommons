@@ -23,6 +23,12 @@ module NavigationHelpers
     when /the login page/
       '/account/login'
 
+    when /my groups page/
+      '/account/mygroups'
+
+    when /the group creation page/
+      '/membership/new_group'
+
     when /the upload page/
       '/upload/new_model'
 

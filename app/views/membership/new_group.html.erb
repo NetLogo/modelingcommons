@@ -5,7 +5,7 @@
   need to approve new group members.  Each group must have a unique name.</p>
 
   <% form_tag :controller => "membership", :action => :create_group do |form| %>
-  <p>Name of your new group: <%= text_field_tag "group_name" %></p>
+  <p><label for="group_name">Name of your new group:</label> <%= text_field_tag "group_name" %></p>
   <p><%= submit_tag "Create group" %></p>
   <% end %>
 </div>
