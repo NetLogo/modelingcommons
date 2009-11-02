@@ -2,8 +2,6 @@
 # Likewise, all the methods added will be available for all controllers.
 
 class ApplicationController < ActionController::Base
-  helper :transparent_message
-
   before_filter :get_person
   before_filter :log_one_action
   before_filter :get_node_types

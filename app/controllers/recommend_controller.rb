@@ -22,7 +22,7 @@ class RecommendController < ApplicationController
     else
       Notifications.deliver_friend_recommendation(@person, friend_email_address, node)
 
-      EmailRecommendation.create(:sender_id => @person.id,
+      EmailRecommendation.create(:person_id => @person.id,
                                  :recipient_email_address => friend_email_address,
                                  :node_id => node.id)
 

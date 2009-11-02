@@ -1,7 +1,7 @@
 <% @title = "Email a friend about #{@node.name}" %>
 
 <% form_tag(:controller => :recommend, :action => :email_friend_action) do |form| -%>
-    <p>Your friend's e-mail address: <%= text_field_tag :email_address -%></p>
+    <p><label for="email_address">Your friend's e-mail address:</label> <%= text_field_tag :email_address -%></p>
     <p><%= hidden_field_tag 'node_id', @node.id %></p>
     <p><%= submit_tag "Send e-mail" %></p>
 <% end -%>
