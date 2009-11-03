@@ -44,12 +44,10 @@ class TagsController < ApplicationController
 
       if tag.nil?
         logger.warn "Creating new tag '#{tag_name}', since it didn't exist yet"
-        tag = Tag.create(:name => tag_name,
-                         :person_id => @person.id)
+        tag = Tag.new(:name => tag_name,
+                      :person_id => @person.id)
 
-        begin
-          tag.save!
-        rescue Exception => e
+        if !tag.save
           flash[:notice] << "Error saving newly created tag '#{tag_name}': '#{e.message}'"
           next
         end
@@ -151,7 +149,7 @@ class TagsController < ApplicationController
   end
 
   def complete_tags
-      # Parameters: {"timestamp"=>"1235989842305", "q"=>"ab", "limit"=>"150"}
+    # Parameters: {"timestamp"=>"1235989842305", "q"=>"ab", "limit"=>"150"}
     query = params[:q]
     query_like = "#{query}%"
 

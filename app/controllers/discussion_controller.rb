@@ -17,54 +17,37 @@ class DiscussionController < ApplicationController
     # Notifications.deliver_updated_discussion(discussion_people, @posting.nlmodel)
     # end
 
-    respond_to do |format|
-
-      format.html do
-        if @posting.save
-          flash[:notice] = "Thanks for contributing to our discussion!"
-        else
-          flash[:notice] = "Error saving your posting.  Sorry!"
-        end
-
-        redirect_to :back, :anchor => "discussion"
-      end
-      format.js
+    if @posting.save
+      flash[:notice] = "Thanks for contributing to our discussion!"
+    else
+      flash[:notice] = "Error saving your posting.  Sorry!"
     end
+
+    redirect_to :back, :anchor => "discuss"
   end
 
   def delete
-    posting = Posting.find(params[:id])
-    posting.deleted_at = Time.now
-    posting.save!
+    Posting.find(params[:id]).update_attributes(:deleted_at => Time.now)
     redirect_to :controller => :browse, :action => :one_model, :id => posting.node_id, :anchor => "discuss"
   end
 
   def undelete
-    posting = Posting.find(params[:id])
-    posting.deleted_at = nil
-    posting.save!
+    Posting.find(params[:id]).update_attributes(:deleted_at => nil)
     redirect_to :controller => :browse, :action => :one_model, :id => posting.node_id, :anchor => "discuss"
   end
 
   def create
-    posting = Posting.find(params[:id])
-    posting.deleted_at = Time.now
-    posting.save!
+    Posting.find(params[:id]).update_attributes(:deleted_at => Time.now)
   end
 
   def mark_as_answered
-    posting = Posting.find(params[:id])
-    posting.answered_at = Time.now
-    posting.save!
+    Posting.find(params[:id]).update_attributes(:answered_at => Time.now)
     redirect_to :controller => :browse, :action => :one_model, :id => posting.node_id, :anchor => :discuss
   end
 
   def mark_as_unanswered
-    posting = Posting.find(params[:id])
-    posting.answered_at = nil
-    posting.save!
+    Posting.find(params[:id]).update_attributes(:answered_at => nil)
     redirect_to :controller => :browse, :action => :one_model, :id => posting.node_id, :anchor => :discuss
   end
 
 end
-
