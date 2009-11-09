@@ -81,7 +81,7 @@ class BrowseController < ApplicationController
   end
 
   def download_model
-    download_model_name = @model.name.gsub(' ', '_')
+    download_model_name = @model.name.gsub(/[\s\/]/, '_')
     zipfile_name = "#{RAILS_ROOT}/public/modelzips/#{download_model_name}.zip"
 
     logger.warn "Zipfile name = '#{zipfile_name}'"
