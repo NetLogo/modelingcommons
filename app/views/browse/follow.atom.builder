@@ -11,7 +11,7 @@ xml.feed :xmlns=>'http://www.w3.org/2005/Atom' do
 
   xml.title   "Activity in the model '#{@node.name}'"
   xml.link    :href=>url_for(:only_path=>false, :controller => 'account', :action=>'follow', :id => @node.id, :format => 'atom')
-  xml.updated @new_things.sort_by {|t| t[:date]}.last[:date].iso8601
+  xml.updated @new_things.empty? ? 'No recent updates' : @new_things.sort_by {|t| t[:date]}.last[:date].iso8601
   xml.author  { xml.name 'Modeling Commons, CCL, Northwestern University' }
 
   @new_things.each do |thing|
