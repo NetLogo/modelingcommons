@@ -1,7 +1,7 @@
 *~
 log/*
 tmp/*
-public/modelzips
+public/modelzips/*
 index/*
 profiling/
 coverage/

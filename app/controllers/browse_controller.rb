@@ -81,14 +81,9 @@ class BrowseController < ApplicationController
   end
 
   def download_model
-    download_model_name = @model.name.gsub(/[\s\/]/, '_')
-    zipfile_name = "#{RAILS_ROOT}/public/modelzips/#{download_model_name}.zip"
-
-    logger.warn "Zipfile name = '#{zipfile_name}'"
-
     # Create the zipfile
-    Zip::ZipOutputStream::open(zipfile_name) do |io|
-      io.put_next_entry("#{download_model_name}.nlogo")
+    Zip::ZipOutputStream::open(@model.zipfile_name_full_path) do |io|
+      io.put_next_entry("#{@model.download_name}.nlogo")
       io.write(@model.file_contents)
 
       # Now we get all child nodes that are not themselves models.
@@ -98,8 +93,8 @@ class BrowseController < ApplicationController
       end
     end
 
-    send_file(zipfile_name,
-              :filename => "#{download_model_name}.zip",
+    send_file(@model.zipfile_name_full_path,
+              :filename => @model.zipfile_name,
               :type => 'application/zip',
               :disposition => "inline")
   end

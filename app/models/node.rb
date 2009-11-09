@@ -303,4 +303,16 @@ class Node < ActiveRecord::Base
     return false
   end
 
+  def download_name
+    name.gsub(/[\s\/]/, '_')
+  end
+
+  def zipfile_name
+    "#{download_name}.zip"
+  end
+
+  def zipfile_name_full_path
+    "#{RAILS_ROOT}/public/modelzips/#{zipfile_name}"
+  end
+
 end
