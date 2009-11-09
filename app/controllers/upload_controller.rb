@@ -8,6 +8,12 @@ class UploadController < ApplicationController
   end
 
   def create_model
+    if params[:new_model].blank?
+      flash[:notice] = "Sorry, but you must enter a model name and file."
+      redirect_to :action => :new
+      return
+    end
+
     model_name = params[:new_model][:name]
 
     if model_name.blank?
