@@ -70,7 +70,7 @@ class AccountController < ApplicationController
 
   def mypage
     if @person.nil? and params[:id].blank?
-      flash[:notice] = "You must first log in to get a personal home page."
+      flash[:notice] = "Please log in first."
       redirect_to :controller => :account, :action => :login
       return
     end
