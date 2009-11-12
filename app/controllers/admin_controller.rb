@@ -35,16 +35,4 @@ class AdminController < ApplicationController
   def view_all_models
     @models = Nlmodel.find(:all, :order => "name")
   end
-
-  def add_news_posting
-  end
-
-  def create_news_posting
-    params[:new_posting][:person_id] = @person.id
-    NewsItem.create(params[:new_posting])
-
-    flash[:notice] = "Successfully added posting."
-    redirect_to :back
-  end
-
 end
