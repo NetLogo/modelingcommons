@@ -23,6 +23,15 @@ module NavigationHelpers
     when /the login page/
       '/account/login'
 
+    when /the about page/
+      '/browse/about'
+
+    when /the help page/
+      '/help'
+
+    when /the screencasts page/
+      '/help/screencasts'
+
     when /my groups page/
       '/account/mygroups'
 

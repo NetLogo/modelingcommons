@@ -30,3 +30,15 @@ and even more menu options when I am not logged in.
     And I should see "Add model"
     And I should see "Groups"
     And I should see "Tags"
+
+  Scenario: Users can go to the "About" page
+    When I go to the about page
+    Then I should see "About the Modeling Commons"
+
+  Scenario: Users can go to the "Help" page
+    When I go to the help page
+    Then I should see "Modeling Commons help"
+
+  Scenario: Users can go to the "Screencasts" page
+    When I go to the screencasts page
+    Then I should see "Screencasts"
