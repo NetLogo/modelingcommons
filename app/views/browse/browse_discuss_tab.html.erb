@@ -12,14 +12,14 @@
   <hr />
 
   <% remote_form_for(:new_posting,
-     :url => { :controller => "discussion", :action => :new }) do |form| %>
+     :url => { :controller => "discussion", :action => :create }) do |form| %>
   <table id="posting-table">
     <tr>
-      <td>Title</td>
+      <td><label for="new_posting_title">Title</label></td>
       <td><%= form.text_field :title %>
     </tr>
     <tr>
-      <td>Body</td>
+      <td><label for="new_posting_body">Body</label></td>
       <td><%= form.text_area :body, {:cols => 40, :rows => 10} %>
         <%= form.hidden_field :node_id, {:value => @model.id} %></td>
     </tr>

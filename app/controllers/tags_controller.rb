@@ -6,7 +6,7 @@ class TagsController < ApplicationController
     @tags = Tag.find(:all)
   end
 
-  def new
+  def create
     # Get the new tags
     new_tags = params[:new_tag]
     new_comments = params[:new_comment]
@@ -25,7 +25,7 @@ class TagsController < ApplicationController
 
       # Default text for the tag or comment?  Blank it out.
       if tag_name == 'tag name'
-        flash[:notice] << "Tag had was the default text; ignoring. "
+        flash[:notice] << "Tag had the default text; ignoring. "
         next
       end
 
@@ -108,35 +108,6 @@ class TagsController < ApplicationController
     end
 
     @tag = Tag.find(tag_id)
-  end
-
-  def create
-    @tag = Tag.new(params[:tag])
-    if @tag.save
-      flash[:notice] = 'Tag was successfully created.'
-      redirect_to :action => 'list'
-    else
-      render :action => 'new'
-    end
-  end
-
-  def edit
-    @tag = Tag.find(:all, conditions => name = "Mousetraps" )
-  end
-
-  def update
-    @tag = Tag.find(params[:id])
-    if @tag.update_attributes(params[:tag])
-      flash[:notice] = 'Tag was successfully updated.'
-      redirect_to :action => 'show', :id => @tag
-    else
-      render :action => 'edit'
-    end
-  end
-
-  def destroy
-    Tag.find(params[:id]).destroy
-    redirect_to :action => 'list'
   end
 
   def follow

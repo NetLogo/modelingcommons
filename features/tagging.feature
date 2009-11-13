@@ -22,6 +22,13 @@ So that I can help to connect models in a folksonomy
      And I should see "Existing tags:"
      And I should not see "No tags have been defined for this model."
 
+  Scenario: The default tag comment should be considered empty
+    When I go to the "tags" tab for "Test model"
+     And I fill in "mytag" for "new_tag_"
+     And I fill in "(Optional) comment about why this tag is relevant to this model" for "new_comment_"
+     And I press "Save tags to the Commons"
+    Then I should see /mytag\s+by\s+You/
+
   Scenario: A user's tag should appear on the home page
     When I go to the "tags" tab for "Test model"
      And I fill in "mytag" for "new_tag_"
