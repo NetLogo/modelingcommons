@@ -3,7 +3,7 @@ Factory.define(:tag) do |tag|
   tag.association :person
 end
 
-Factory.define(:tagged_nodes) do |tn|
+Factory.define(:tagged_node) do |tn|
   tn.association :node
   tn.association :tag
   tn.association :person

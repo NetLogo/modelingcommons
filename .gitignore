@@ -8,3 +8,4 @@ coverage/
 *.DS_Store
 coverage.data
 public/system/*
+mkmf.log

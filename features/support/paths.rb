@@ -32,6 +32,9 @@ module NavigationHelpers
     when /the tags page/
       "/account/tags"
 
+    when /the tag index page/
+      "/tags/index"
+
     when /the groups page/
       '/account/groups'
 
