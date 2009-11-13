@@ -7,3 +7,4 @@ profiling/
 coverage/
 *.DS_Store
 coverage.data
+public/system/*

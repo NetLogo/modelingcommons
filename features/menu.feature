@@ -31,6 +31,44 @@ and even more menu options when I am not logged in.
     And I should see "Groups"
     And I should see "Tags"
 
+  Scenario: Users can go to the "List models" page
+    When I go to the list-models page
+    Then I should see "List of models"
+
+  Scenario: Guest users cannot go to the "upload a model" page
+    When I go to the list-models page
+    And I follow "Upload a new model"
+    Then I should see "You must log in before proceeding."
+
+  Scenario: Logged in users can go to the "upload a model" page
+    When I log in as "reuven@lerner.co.il" with password "password"
+    And I go to the list-models page
+    And I follow "Upload a new model"
+    Then I should see "Upload a NetLogo model"
+
+  Scenario: Guest users cannot go to the "Add model" page
+    When I go to the upload page
+    Then I should see "You must log in before proceeding."
+
+  Scenario: Logged-in users can go to the "Add model" page
+    When I log in as "reuven@lerner.co.il" with password "password"
+    And I go to the upload page
+    Then I should see "Upload a NetLogo model"
+
+  Scenario: Users can go to the "Groups" page
+    When I go to the groups page
+    Then I should see "Groups"
+
+  Scenario: Guest users cannot go to the "Add model" page
+    When I go to the tags page
+    Then I should see "You must log in before proceeding."
+
+  Scenario: Users can go to the "Tags" page
+    When I log in as "reuven@lerner.co.il" with password "password"
+    And I go to the tags page
+    Then I should see "Tags you created"
+    And I should see "Tags you applied"
+
   Scenario: Users can go to the "About" page
     When I go to the about page
     Then I should see "About the Modeling Commons"
@@ -42,3 +80,4 @@ and even more menu options when I am not logged in.
   Scenario: Users can go to the "Screencasts" page
     When I go to the screencasts page
     Then I should see "Screencasts"
+

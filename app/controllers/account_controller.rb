@@ -1,6 +1,6 @@
 class AccountController < ApplicationController
 
-  before_filter :require_login, :only => [:edit, :update, :logout]
+  before_filter :require_login, :only => [:edit, :update, :logout, :tags]
 
   def new
     @new_person = Person.new
@@ -22,6 +22,9 @@ class AccountController < ApplicationController
   end
 
   def edit
+  end
+
+  def tags
   end
 
   def update
@@ -84,8 +87,8 @@ class AccountController < ApplicationController
     how_new_is_new = 6.months.ago
 
     @questions = Posting.find(:all,
-                             :conditions => ["is_question = true AND created_at >= ? AND answered_at IS NULL", how_new_is_new],
-                             :order => "created_at DESC")
+                              :conditions => ["is_question = true AND created_at >= ? AND answered_at IS NULL", how_new_is_new],
+                              :order => "created_at DESC")
 
     @recent_tags = @the_person.tags.select { |t| t.created_at >= how_new_is_new}
     @recent_tagged_models =

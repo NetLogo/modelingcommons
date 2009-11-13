@@ -20,11 +20,20 @@ module NavigationHelpers
     when /the registration page/
       '/account/new'
 
+    when /the list-models page/
+      '/browse/list_models'
+
     when /the login page/
       '/account/login'
 
     when /the about page/
       '/browse/about'
+
+    when /the tags page/
+      "/account/tags"
+
+    when /the groups page/
+      '/account/groups'
 
     when /the help page/
       '/help'
@@ -42,6 +51,9 @@ module NavigationHelpers
       '/membership/find'
 
     when /the upload page/
+      '/upload/new_model'
+
+    when /the NetLogo manual/
       '/upload/new_model'
 
     when /the administration page/
