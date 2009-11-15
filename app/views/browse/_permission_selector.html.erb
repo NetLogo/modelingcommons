@@ -56,9 +56,9 @@
           <td><%= radio_button_tag 'write_permission', 'u', model_changeability_letter == 'u' %></td>
           <td><label for="write_permission_u">
               <% if @model %>
-              Only <%= person_link(@model.person) %> may see this model.
+              Only <%= person_link(@model.person) %> may modify this model.
               <% else %>
-              Only you may see this model.
+              Only you may modify this model.
               <% end %>
             </label>
           </td>

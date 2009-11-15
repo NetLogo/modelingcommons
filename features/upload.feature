@@ -31,6 +31,16 @@ So that other people can interact with it
      And I press "Upload model"
     Then I should see "Thanks for uploading the new model called 'New Model'."
 
+  Scenario: A user may upload a valid model file
+    When I log in as "reuven@lerner.co.il" with password "password"
+     And I go to the upload page
+     And I fill in "New Model" for "new_model_name"
+     And I choose "Only you may see this model."
+     And I choose "Only you may modify this model."
+     And I attach a model file
+     And I press "Upload model"
+    Then I should see "Thanks for uploading the new model called 'New Model'."
+
   Scenario: A user may upload a valid model file with a preview
     When I log in as "reuven@lerner.co.il" with password "password"
      And I go to the upload page

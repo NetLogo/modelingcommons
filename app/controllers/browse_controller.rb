@@ -6,10 +6,9 @@ require 'diff/lcs/hunk'
 class BrowseController < ApplicationController
 
   prepend_before_filter :get_model_from_id_param, :except => [:index, :list_models, :search, :news, :one_node, :whats_new, :view_random_model, :about]
-  before_filter :require_login, :only => [:revert_model, :set_permissions, :whats_new]
+  before_filter :require_login, :only => [:set_permissions, :whats_new]
 
   before_filter :check_visibility_permissions, :only => [:one_model, :model_contents, :one_applet ]
-  before_filter :check_changeability_permissions, :only => [:revert_model]
 
   def list_models
     @models = Node.paginate(:page => params[:page],
@@ -58,96 +57,20 @@ class BrowseController < ApplicationController
     send_data @model.file_contents
   end
 
-  def revert_model
-    # Make sure that we got an older version
-    version_id = params[:version]
-    if version_id.blank?
-      flash[:notice] = "Sorry, but you must specify a version to which you want to revert."
-      redirect_to :back
-      return
-    end
-
-    # Check that we're not reverting to the latest version!
-    version = NodeVersion.find(version_id)
-    if version == @model.current_version
-      flash[:notice] = "That is already the current version!"
-      redirect_to :back
-      return
-    end
-
-    @new_version =
-      NodeVersion.create(:nlmodel_id => @model.id,
-                         :person_id => @person.id,
-                         :node_contents => version.file_contents,
-                         :note => "Reverted to older version")
-    if @new_version.save
-      flash[:notice] = "Model was reverted to an older version"
-    else
-      flash[:notice] = "Error reverting the model; nothing was changed."
-    end
-
-    redirect_to :back
-  end
-
-  def compare_versions
-    @version_1 = NodeVersion.find(params[:compare_1])
-    @version_2 = NodeVersion.find(params[:compare_2])
-
-    if @version_1 == @version_2
-      flash[:notice] = "You cannot compare a version with itself!"
-      redirect_to :back
-      return
-    end
-
-    @comparison_results = { }
-    @comparison_results['info_tab'] =
-      diff_as_string(@version_1.info_tab, @version_2.info_tab)
-
-    # @comparison_results['gui_tab'] =
-    #diff_as_string(@version_1.gui_tab, @version_2.gui_tab)
-
-    # @comparison_results['procedures_tab'] =
-    # diff_as_string(@version_1.procedures_tab, @version_2.procedures_tab)
-  end
-
   def one_applet
   end
 
   def set_permissions
     if params[:read_permission].blank? or params[:write_permission].blank?
-      flash[:notice] = 'Both read and write permissions must be specified. '
+      flash[:notice] = 'Both read and write permissions must be specified.'
+    elsif (params[:read_permission] == 'g' or params[:write_permission] == 'g') and params[:group][:id].blank?
+      flash[:notice] = 'You can only set group permissions if you also set a group.'
     else
-
-      read_permission = PermissionSetting.find_by_short_form(params[:read_permission])
-      if read_permission.short_form == 'g' and @model.group.nil?
-        read_permission = PermissionSetting.find_by_short_form('a')
-      end
-
-      write_permission = PermissionSetting.find_by_short_form(params[:write_permission])
-      if write_permission.short_form == 'g' and @model.group.nil?
-        write_permission = PermissionSetting.find_by_short_form('a')
-      end
-
-      Model.transaction do
-
-        # Set the read permissions
-        @model.visibility_id = read_permission.id
-        @model.changeability_id = write_permission.id
-
-        if params[:group] and params[:group][:id]
-          if params[:group][:id].to_i == 0
-            @model.group = nil
-          else
-            @model.group = Group.find(params[:group][:id])
-          end
-        end
-
-        if @model.save
-          @outcome = 'good'
-        else
-          @outcome = 'bad'
-        end
-      end
+      group = Group.find(:first, params[:group][:id])
+      @model.update_attributes(:visibility => PermissionSetting.find_by_short_form(params[:read_permission]),
+                               :changeability => PermissionSetting.find_by_short_form(params[:write_permission]),
+                               :group => group)
+      flash[:notice] = 'Successfully set permissions.'
     end
   end
 

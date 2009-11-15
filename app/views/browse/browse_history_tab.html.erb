@@ -7,7 +7,7 @@
 
   <% else %>
 
-  <% form_tag :controller => :browse, :action => :compare_versions, :id => @model.id do |form| %>
+  <% form_tag :controller => :version, :action => :compare_versions, :id => @model.id do |form| %>
 
   <p><input type="submit" value="Compare selected versions" /></p>
 

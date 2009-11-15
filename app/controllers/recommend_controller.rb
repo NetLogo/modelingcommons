@@ -3,7 +3,6 @@ class RecommendController < ApplicationController
   prepend_before_filter :get_model_from_id_param, :except => [:email_friend, :email_friend_action]
   before_filter :require_login, :only => [ :email_friend, :email_friend_action, :add_recommendation ]
   before_filter :check_visibility_permissions, :only => [:one_model, :model_contents, :one_applet ]
-  before_filter :check_changeability_permissions, :only => [:revert_model]
 
   def email_friend
     @node = Node.find(params[:id])
