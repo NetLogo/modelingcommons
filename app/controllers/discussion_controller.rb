@@ -32,12 +32,14 @@ class DiscussionController < ApplicationController
   def mark_as_answered
     posting = Posting.find(params[:id])
     posting.update_attributes(:answered_at => Time.now)
+    flash[:notice] = "Question marked as answered"
     redirect_to :controller => :browse, :action => :one_model, :id => posting.node_id, :anchor => :discuss
   end
 
   def mark_as_unanswered
     posting = Posting.find(params[:id])
     posting.update_attributes(:answered_at => nil)
+    flash[:notice] = "Question marked as unanswered"
     redirect_to :controller => :browse, :action => :one_model, :id => posting.node_id, :anchor => :discuss
   end
 

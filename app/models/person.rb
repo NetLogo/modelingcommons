@@ -3,7 +3,6 @@ class Person < ActiveRecord::Base
   has_many :nodes, :through => :node_versions
 
   has_many :postings
-  has_many :news_items
   has_many :logged_actions
   has_many :tags
   has_many :tagged_nodes

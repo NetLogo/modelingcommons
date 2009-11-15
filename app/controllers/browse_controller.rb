@@ -161,10 +161,6 @@ class BrowseController < ApplicationController
 
   end
 
-  def news
-    @news_items = NewsItem.find(:all, :order => "created_at DESC")
-  end
-
   def compare_versions
     @version_1 = NodeVersion.find(params[:compare_1])
     @version_2 = NodeVersion.find(params[:compare_2])

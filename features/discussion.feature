@@ -37,3 +37,25 @@ So that I can connect with others and learn from them
     When I go to the "discuss" tab for "Test model"
     And I follow "Delete"
     Then I should see "Posting deleted"
+
+  Scenario: A logged-in user can undelete their own comment
+    Given a comment with with title "comment title" and body "comment body" for model "Test model" by user "reuven@lerner.co.il"
+    When I go to the "discuss" tab for "Test model"
+    And I follow "Delete"
+    And I go to the "discuss" tab for "Test model"
+    And I follow "Undelete"
+    Then I should see "Posting undeleted"
+
+  Scenario: A logged-in user can indicate that a question was answered
+    Given a question with with title "comment title" and body "comment body" for model "Test model" by user "reuven@lerner.co.il"
+    When I go to the "discuss" tab for "Test model"
+    And I follow "Mark as answered"
+    Then I should see "Question marked as answered"
+
+  Scenario: A logged-in user can indicate that a question was unanswered
+    Given a question with with title "comment title" and body "comment body" for model "Test model" by user "reuven@lerner.co.il"
+    When I go to the "discuss" tab for "Test model"
+    And I follow "Mark as answered"
+    When I go to the "discuss" tab for "Test model"
+    And I follow "Mark as unanswered"
+    Then I should see "Question marked as unanswered"
