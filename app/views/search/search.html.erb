@@ -2,7 +2,7 @@
 
 <table>
     <% form_for (:search_term,
-                :url => { :controller => "browse",
+                :url => { :controller => :search,
                           :action => :search_action }) do |form| %>
     <tr>
         <td>Enter search term:</td>

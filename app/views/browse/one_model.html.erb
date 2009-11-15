@@ -25,12 +25,12 @@
 
 <%= link_to "Tell a friend", :controller => :recommend, :action => :email_friend, :id => @model.id %> &bull;
 
-  <% if @recommendations.select {|r| r.person_id == @person.id}.empty? %>
+  <% if @model.recommendations.select {|r| r.person_id == @person.id}.empty? %>
   <%= link_to "Recommend this model", :controller => :recommend, :action => :add_recommendation, :id => @model.id %>
   <% end %>
 
-  <% if !@recommendations.empty? %>
-  (<%= link_to pluralize(@recommendations.length, "recommendation"), :controller => :recommend, :action => :show_recommendations, :id => @model.id -%> to date)
+  <% if !@model.recommendations.empty? %>
+  (<%= link_to pluralize(@model.recommendations.length, "recommendation"), :controller => :recommend, :action => :show_recommendations, :id => @model.id -%> to date)
   <% end %>
 
   &bull;

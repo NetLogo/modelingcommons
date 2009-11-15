@@ -185,4 +185,16 @@ class MembershipController < ApplicationController
     render :layout => false
   end
 
+  def list_models
+    if params[:id].blank?
+      @group_ids = @person.groups.map {|g| g.id}.join(',')
+      @title = "List of models in all of your groups"
+    else
+      @group_ids = params[:id]
+      @group = Group.find(@group_ids)
+      @title = "List of models in the '#{@group.name}' group"
+    end
+
+    @models = Node.paginate(:page => params[:page], :order => 'name ASC', :conditions => [ "node_type_id = ? and group_id in (#{@group_ids}) ", Node::MODEL_NODE_TYPE])
+  end
 end

@@ -5,16 +5,11 @@ require 'diff/lcs/hunk'
 
 class BrowseController < ApplicationController
 
-  prepend_before_filter :get_model_from_id_param, :except => [:index, :list_models, :list_models_group, :search, :search_action, :news, :one_node, :whats_new, :view_random_model, :about]
+  prepend_before_filter :get_model_from_id_param, :except => [:index, :list_models, :search, :news, :one_node, :whats_new, :view_random_model, :about]
   before_filter :require_login, :only => [:revert_model, :set_permissions, :whats_new]
 
   before_filter :check_visibility_permissions, :only => [:one_model, :model_contents, :one_applet ]
   before_filter :check_changeability_permissions, :only => [:revert_model]
-
-  def index
-    @postings = Posting.find(:all,
-                             :conditions => "is_question = true")
-  end
 
   def list_models
     @models = Node.paginate(:page => params[:page],
@@ -22,59 +17,19 @@ class BrowseController < ApplicationController
                             :conditions => ["node_type_id = ? ", Node::MODEL_NODE_TYPE])
   end
 
-  def list_models_group
-    if params[:id].blank?
-      @group_ids = @person.groups.map {|g| g.id}.join(',')
-      @title = "List of models in all of your groups"
-    else
-      @group_ids = params[:id]
-      @group = Group.find(@group_ids)
-      @title = "List of models in the '#{@group.name}' group"
-    end
-
-    @models = Node.paginate(:page => params[:page], :order => 'name ASC', :conditions => [ "node_type_id = ? and group_id in (#{@group_ids}) ", Node::MODEL_NODE_TYPE])
-  end
-
-  def one_model
-    if @model.nil?
-      render :text => "No model found with ID '#{params[:id]}'"
-      return
-    end
-
-    @recommendations = Recommendation.find_all_by_node_id(@model.id) || []
-    @spam_warnings = SpamWarning.find_all_by_node_id(@model.id) || []
-  end
-
   def one_node
-    if params[:id].blank?
-      flash[:notice] = "No node ID passed. "
-      redirect_to :back
-      return
-    end
-
     node = Node.find(params[:id])
 
-    logger.warn "[one_node] Found node '#{node.id}, with a name of '#{node.name}' and a type of '#{node.mime_type}'."
-
-    if node.node_type_id == Node::MODEL_NODE_TYPE
+    if node.is_model?
       redirect_to :action => :one_model, :id => params[:id]
-      return
-
     else
-      logger.warn "[one_node] sending contents as type '#{node.mime_type}'"
       send_data node.file_contents, :filename => node.name, :type => node.mime_type
     end
   end
 
   def display_preview
-    if params[:id].blank?
-      render :text => "No model ID provided"
-      return
-    end
-
     if @model.latest_preview.blank?
       redirect_to "/images/no-preview.png"
-      return
     else
       send_data(@model.latest_preview, :type => 'image/png', :disposition => 'inline')
     end
@@ -132,33 +87,6 @@ class BrowseController < ApplicationController
     end
 
     redirect_to :back
-  end
-
-  def search_action
-    if params[:search_term].blank?
-      flash[:notice] = "You must enter a search term in order to search."
-      redirect_to :controller => :account, :action => :mypage
-      return
-    end
-
-    logger.warn "[search_action] Now starting search_action"
-    @original_search_term = params[:search_term][:search_term]
-
-    @models = Node.find(:all, :conditions => ["node_type_id = ? ", Node::MODEL_NODE_TYPE]).select {|m| m.name.downcase.index(@original_search_term.downcase)}
-
-    @ferret_results = NodeVersion.find_with_ferret(@original_search_term, { :limit => :all}).map {|nv| nv.node}.uniq
-
-    @info_match_models = @ferret_results.select { |r| r.info_tab.downcase.index(@original_search_term.downcase)}
-
-    logger.warn "[search_action] Now checking @author_match_models"
-    @author_match_models = Node.find(:all, :conditions => ["node_type_id = ? ", Node::MODEL_NODE_TYPE]).select {|m| m.people.map { |person| person.fullname}.join(" ").downcase.index(@original_search_term.downcase)}
-
-    @procedures_match_models = @ferret_results.select { |r| r.procedures_tab.downcase.index(@original_search_term.downcase)}
-
-    logger.warn "[search_action] Now checking @tag_match_models"
-    @tag_match_models =
-      Node.models.find_all {|m| m.tags.map { |t| t.name}.join(' ').downcase.index(@original_search_term.downcase)}
-
   end
 
   def compare_versions

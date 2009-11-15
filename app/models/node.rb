@@ -26,7 +26,6 @@ class Node < ActiveRecord::Base
 
   has_many :email_recommendations
   has_many :recommendations
-
   has_many :spam_warnings
 
   has_many :logged_actions
