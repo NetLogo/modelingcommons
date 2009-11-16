@@ -39,3 +39,8 @@ Given /^(\d+) additional versions? of "([^\"]*)"$/ do |number_of_versions, model
                                      :person => person)
   end
 end
+
+Given /^I spill my guts$/ do
+  STDERR.puts response.body
+end
+

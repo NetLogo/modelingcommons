@@ -34,3 +34,22 @@ To examine changes that occurred over time
      And I go to the "history" tab for "Test model"
      And I press "Compare selected versions"
     Then I should be on the "history" tab for "Test model"
+
+  Scenario: The user compares two model versions
+   Given 1 additional version of "Test model"
+    When I log in as "reuven@lerner.co.il" with password "password"
+     And I go to the "history" tab for "Test model"
+     And I choose "compare_1" for version 1
+     And I choose "compare_2" for version 2
+     And I press "Compare selected versions"
+    Then I should see "No differences in the Info tab"
+     And I should see "No differences in the Procedures tab"
+
+  Scenario: The user compares the same model version
+   Given 1 additional version of "Test model"
+    When I log in as "reuven@lerner.co.il" with password "password"
+     And I go to the "history" tab for "Test model"
+     And I choose "compare_1" for version 1
+     And I choose "compare_2" for version 1
+     And I press "Compare selected versions"
+    Then I should be on the "history" tab for "Test model"
