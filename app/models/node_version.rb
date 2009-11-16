@@ -5,7 +5,7 @@ class NodeVersion < ActiveRecord::Base
   validates_presence_of :node_id
   validates_presence_of :person_id
 
-  acts_as_ferret :fields => ['file_contents']
+  # acts_as_ferret :fields => ['file_contents']
 
   SECTION_SEPARATOR = '@#$#@#$#@'
 
