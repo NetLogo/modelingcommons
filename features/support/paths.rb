@@ -29,6 +29,9 @@ module NavigationHelpers
     when /the about page/
       '/browse/about'
 
+    when /the search page/
+      '/search/search'
+
     when /the tags page/
       "/account/tags"
 

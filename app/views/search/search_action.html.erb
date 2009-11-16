@@ -5,7 +5,7 @@
 <% if @models and (not @models.empty?) %>
     <%= render :partial => "/browse/model_list", :object => @models %>
 <% else %>
-    <p>No matches.</p>
+    <p>No matches in model names.</p>
 <% end %>
 
 <h2>Models with '<%= @original_search_term %>' in their info tab</h2>
@@ -21,7 +21,7 @@
 <% if @procedures_match_models and (not @procedures_match_models.empty?) %>
     <%= render :partial => "/browse/model_list", :object => @procedures_match_models %>
 <% else %>
-    <p>Search of Info tab is under construction.</p>
+    <p>Search of Procedures tab is under construction.</p>
 <% end %>
 
 <h2>Models with '<%= @original_search_term %>' in author name(s)</h2>
@@ -29,7 +29,7 @@
 <% if @author_match_models and (not @author_match_models.empty?) %>
     <%= render :partial => "/browse/model_list", :object => @author_match_models %>
 <% else %>
-    <p>No matches.</p>
+    <p>No matches in author names.</p>
 <% end %>
 
 <h2>Models with '<%= @original_search_term %>' in one or more tags</h2>
@@ -37,7 +37,7 @@
 <% if @tag_match_models and (not @tag_match_models.empty?) %>
     <%= render :partial => "/browse/model_list", :object => @tag_match_models %>
 <% else %>
-    <p>No matches.</p>
+    <p>No matches in tag names.</p>
 <% end %>
 
 

@@ -7,7 +7,7 @@ class SearchController < ApplicationController
     end
 
     logger.warn "[search_action] Now starting search_action"
-    @original_search_term = params[:search_term][:search_term]
+    @original_search_term = params[:search_term]
 
     @models = Node.find(:all, :conditions => ["node_type_id = ? ", Node::MODEL_NODE_TYPE]).select {|m| m.name.downcase.index(@original_search_term.downcase)}
 
@@ -23,7 +23,6 @@ class SearchController < ApplicationController
     logger.warn "[search_action] Now checking @tag_match_models"
     @tag_match_models =
       Node.models.find_all {|m| m.tags.map { |t| t.name}.join(' ').downcase.index(@original_search_term.downcase)}
-
   end
 
 end

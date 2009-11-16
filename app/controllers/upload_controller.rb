@@ -99,37 +99,18 @@ class UploadController < ApplicationController
   end
 
   def update_model
-    # Make sure that the user chose a fork method
-    if params[:fork].blank?
-      flash[:notice] = "Please select an action."
-      redirect_to :back, :anchor => "upload-div"
-      return
-    end
-
     # Get the node, and the fork method
     existing_node = Node.find(params[:new_version][:node_id])
-    fork = params[:fork]
+    fork = params[:fork] || 'overwrite'
 
     flash[:notice] = ''
 
-    # Make sure that we are getting some inputs
-    if params[:new_version].blank?
-      logger.warn "Blank new_version -- returning"
-      flash[:notice] = "new_version was not set in form -- try again?"
-      redirect_to :back, :anchor => "upload-div"
-    end
+    # If fork is 'child', then we have create a new node, and then
+    # set its parent to the current node.  Then we create a new node_version
+    # attached to this new (child) node.
 
-    # There are four possibilities:
-    # (1) New version for this model
-    # (2) New node and new version -- but the node's parent is this model
-    # (3) New version and new model -- node's parent is null
-    # (4) Don't upload anything -- just clone this model (taken care of above)
-
-    # If fork is 'child' or 'newmodel', then we have to create a new
-    # node, and then use that as the node_id to which the new version
-    # is attached. If fork is 'clone', then create a copy of this
-    # model, and connect the child to the parent.  Otherwise, we just
-    # use node.id as the node ID.
+    # If fork is 'overwrite', then we create a new node_version,
+    # attached to the existing node.
 
     if fork == 'child'
       child_node = Node.create(:node_type_id => Node::MODEL_NODE_TYPE,
@@ -137,13 +118,7 @@ class UploadController < ApplicationController
                                :name => "Child of #{existing_node.name}")
       node_id = child_node.id
       flash[:notice] << "Added a new child to this model. "
-    elsif fork == 'newmodel'
-      new_node = Node.create(:node_type_id => Node::MODEL_NODE_TYPE,
-                             :parent_id => nil,
-                             :name => params[:new_version][:description])
-      node_id = new_node.id
-      flash[:notice] << "Added new model (#{new_node.id}). "
-    else
+    elsif fork == 'overwrite'
       node_id = existing_node.id
       flash[:notice] << "Added new version to node #{existing_node.id}. "
     end
@@ -155,13 +130,7 @@ class UploadController < ApplicationController
                          :file_contents => params[:new_version][:uploaded_body].read,
                          :description => params[:new_version][:description])
 
-    # Now send e-mail notification
-    model_people = new_version.node.people
-    model_people.delete_if {|p| p == @person}
-
-    if not model_people.empty?
-      Notifications.deliver_modified_model(model_people, new_version.node)
-    end
+    Notifications.deliver_modified_model(new_version.node.people.reject { |p| p == @person}, new_version.node)
 
     redirect_to :back, :anchor => "upload-div"
   end

@@ -1,12 +1,10 @@
 <% @title = "Search through models" %>
 
 <table>
-    <% form_for (:search_term,
-                :url => { :controller => :search,
-                          :action => :search_action }) do |form| %>
+    <% form_tag(url_for(:controller => :search, :action => :search_action)) do %>
     <tr>
-        <td>Enter search term:</td>
-        <td><%= form.text_field :search_term %></td>
+        <td><label for="search_term">Enter search term:</label></td>
+        <td><%= text_field_tag :search_term %></td>
     </tr>
 
     <tr>
