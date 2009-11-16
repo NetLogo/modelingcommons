@@ -41,6 +41,12 @@ module NavigationHelpers
     when /the admin all-actions page/
       "/admin/view_all_actions"
 
+    when /the admin all-people page/
+      "/admin/view_all_people"
+
+    when /the admin person-actions page for "([^\"]+)"/
+      "/admin/view_person_actions/#{Person.find_by_email_address($1).id}"
+
     when /the tag index page/
       "/tags/index"
 
