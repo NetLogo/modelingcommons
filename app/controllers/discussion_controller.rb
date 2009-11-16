@@ -12,7 +12,19 @@ class DiscussionController < ApplicationController
       flash[:notice] = "Error saving your posting.  Sorry!"
     end
 
-    redirect_to :back, :anchor => "discuss"
+    respond_to do |format|
+
+      format.html do
+        if @posting.save
+          flash[:notice] = "Thanks for contributing to our discussion!"
+        else
+          flash[:notice] = "Error saving your posting.  Sorry!"
+        end
+
+        redirect_to :back, :anchor => "discussion"
+      end
+      format.js
+    end
   end
 
   def delete
