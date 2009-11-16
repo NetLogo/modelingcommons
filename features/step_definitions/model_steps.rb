@@ -28,3 +28,14 @@ end
 When /^the model "([^\"]*)" should have (\d+) child(ren)?$/ do |model_name, number_of_children, ignore|
   Node.find_by_name(model_name).children.length.should == number_of_children.to_i
 end
+
+Given /^(\d+) additional versions? of "([^\"]*)"$/ do |number_of_versions, model_name|
+  @model = Node.find_by_name(model_name)
+  @node_versions = []
+
+  number_of_versions.to_i.times do
+    @node_versions << Factory.create(:node_version,
+                                     :node => @model,
+                                     :person => person)
+  end
+end

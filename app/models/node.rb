@@ -219,17 +219,6 @@ class Node < ActiveRecord::Base
     text
   end
 
-  def gui_tab(with_html=false)
-    text = self.node_versions.sort_by {|nv| nv.created_at}.last.gui_tab
-
-    if with_html
-      # Handle newlines
-      text.gsub!("\n", "\n<br />")
-    end
-
-    text
-  end
-
   def filename
     name.gsub('/', '_').gsub(' ', '_')
   end

@@ -1,4 +1,7 @@
-class VersionController < ApplicationController
+class HistoryController < ApplicationController
+
+  prepend_before_filter :get_model_from_id_param, :except => [:compare_versions]
+
   def revert_model
     # Make sure that we got an older version
     version_id = params[:version]
@@ -31,6 +34,12 @@ class VersionController < ApplicationController
   end
 
   def compare_versions
+    if params[:compare_1].blank? or params[:compare_2].blank?
+      flash[:notice] = "You must select versions in order to compare them."
+      redirect_to :back
+      return
+    end
+
     @version_1 = NodeVersion.find(params[:compare_1])
     @version_2 = NodeVersion.find(params[:compare_2])
 
@@ -43,9 +52,6 @@ class VersionController < ApplicationController
     @comparison_results = { }
     @comparison_results['info_tab'] =
       diff_as_string(@version_1.info_tab, @version_2.info_tab)
-
-    # @comparison_results['gui_tab'] =
-    #diff_as_string(@version_1.gui_tab, @version_2.gui_tab)
 
     # @comparison_results['procedures_tab'] =
     # diff_as_string(@version_1.procedures_tab, @version_2.procedures_tab)

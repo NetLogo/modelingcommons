@@ -1,4 +1,3 @@
-
 @#$#@#$#@
 GRAPHICS-WINDOW
 210

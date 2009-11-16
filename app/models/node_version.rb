@@ -21,14 +21,6 @@ class NodeVersion < ActiveRecord::Base
     end
   end
 
-  def gui_tab
-    if self.node.node_type_id == Node::MODEL_NODE_TYPE
-      self.file_contents.split(SECTION_SEPARATOR)[1]
-    else
-      ""
-    end
-  end
-
   def info_tab
     if self.node.node_type_id == Node::MODEL_NODE_TYPE
       self.file_contents.split(SECTION_SEPARATOR)[2]

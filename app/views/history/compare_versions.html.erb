@@ -17,12 +17,3 @@
   <%= @comparison_results['procedures_tab'] -%>
 </pre>
 <% end %>
-
-<h2>GUI tab</h2>
-<% if @comparison_results['gui_tab'].blank? %>
-<p>No differences in the GUI.</p>
-<% else %>
-<pre>
-  <%= @comparison_results['gui_tab'] -%>
-</pre>
-<% end %>

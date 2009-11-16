@@ -15,6 +15,5 @@ Factory.define(:node_version) do |nv|
   nv.association :node
   nv.association :person
   nv.description "Test description"
-  nv.file_contents "foo"
+  nv.file_contents File.open(RAILS_ROOT + "/features/upload_files/test.nlogo").readlines.join("\n")
 end
-

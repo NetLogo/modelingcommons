@@ -5,7 +5,6 @@
       <li class="tab"><a id="related-tab" href="#related-div">Related</a></li>
       <li class="tab"><a id="associated-files-tab" href="#associated-files-div">Files</a></li>
       <li class="tab"><a id="procedures-tab" href="#procedures-div">Procedures</a></li>
-      <li class="tab"><a id="gui-tab" href="#gui-div">GUI</a></li>
       <li class="tab"><a id="applet-tab" href="#applet-div">Applet</a></li>
     </ul>
   </div>
@@ -49,10 +48,6 @@
 
   <div id="procedures-div" class="model-tab"  style="display:none;">
     <p><%= @model.procedures_tab(with_html=true) -%></p>
-  </div>
-
-  <div id="gui-div" class="model-tab" style="display:none;">
-    <p><%= @model.gui_tab(with_html=true) -%></p>
   </div>
 
   <div id="applet-div" class="model-tab" style="display:none;">
