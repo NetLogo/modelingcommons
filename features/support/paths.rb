@@ -83,6 +83,9 @@ module NavigationHelpers
     when /the model page for "([^\"]+)"/
       "/browse/one_model/#{Node.find_by_name($1).id}"
 
+    when /the rename page for "([^\"]+)"/
+      "/browse/rename_model/#{Node.find_by_name($1).id}"
+
     when /the "([^\"]+)" tab for "([^\"]+)"/
       "/browse/browse_#{$1}_tab/#{Node.find_by_name($2).id}"
 
