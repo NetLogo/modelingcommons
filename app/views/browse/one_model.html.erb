@@ -8,6 +8,23 @@
   ,<%= person_link(p) -%>
   <% end %>
   <% end %>
+
+&bull;
+
+Visible by <%= @model.visibility.name %>
+
+<% if @model.visibility.is_group? %>
+    (<%= group_link(@model.group) -%>)
+<% end %>
+
+&bull;
+
+Changeable by <%= @model.changeability.name %>
+
+<% if @model.changeability.is_group? %>
+    (<%= group_link(@model.group) -%>)
+<% end %>
+
 <p>
 
   <div id="preview-image-div">

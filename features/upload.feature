@@ -31,7 +31,7 @@ So that other people can interact with it
      And I press "Upload model"
     Then I should see "Thanks for uploading the new model called 'New Model'."
 
-  Scenario: A user may upload a valid model file
+  Scenario: A user may upload a valid model file with individual permissions
     When I log in as "reuven@lerner.co.il" with password "password"
      And I go to the upload page
      And I fill in "New Model" for "new_model_name"
@@ -39,7 +39,33 @@ So that other people can interact with it
      And I choose "Only you may modify this model."
      And I attach a model file
      And I press "Upload model"
-    Then I should see "Thanks for uploading the new model called 'New Model'."
+     And I follow "New Model model's page"
+    Then I should see "Visible by No one but yourself"
+    Then I should see "Changeable by No one but yourself"
+
+  Scenario: A user may upload a valid model file with group permissions, but no group, thus giving owner permissions
+    When I log in as "reuven@lerner.co.il" with password "password"
+     And I go to the upload page
+     And I fill in "New Model" for "new_model_name"
+     And I choose "Only you may see this model."
+     And I choose "Only you may modify this model."
+     And I attach a model file
+     And I press "Upload model"
+     And I follow "New Model model's page"
+    Then I should see "Visible by No one but yourself"
+    Then I should see "Changeable by No one but yourself"
+
+  Scenario: A user may upload a valid model file with universal permissions
+    When I log in as "reuven@lerner.co.il" with password "password"
+     And I go to the upload page
+     And I fill in "New Model" for "new_model_name"
+     And I choose "Everyone can see this model."
+     And I choose "Everyone can modify this model."
+     And I attach a model file
+     And I press "Upload model"
+     And I follow "New Model model's page"
+    Then I should see "Visible by Everyone"
+    Then I should see "Changeable by Everyone"
 
   Scenario: A user may upload a valid model file with a preview
     When I log in as "reuven@lerner.co.il" with password "password"

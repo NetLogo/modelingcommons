@@ -4,11 +4,8 @@ class UploadController < ApplicationController
   prepend_before_filter :get_model_from_id_param, :only => [:add_document]
   before_filter :check_changeability_permissions, :only => [:update_model, :add_document]
 
-  def new_model
-  end
-
   def create_model
-    if params[:new_model].blank?
+    if params[:new_model].blank? or params[:new_model][:name].blank?
       flash[:notice] = "Sorry, but you must enter a model name and file."
       redirect_to :action => :new_model
       return
@@ -16,13 +13,11 @@ class UploadController < ApplicationController
 
     model_name = params[:new_model][:name]
 
-    if model_name.blank?
-      flash[:notice] = "Sorry, but you must enter a model name and file."
-      redirect_to :back
-      return
-    end
-
     Node.transaction do
+
+      # ------------------------------------------------------------
+      # Node and version for the model
+      # ------------------------------------------------------------
 
       # Create a new node, without a parent
       @model = Node.new(:node_type_id => Node::MODEL_NODE_TYPE,
@@ -43,14 +38,17 @@ class UploadController < ApplicationController
                         :file_contents => node_version_contents,
                         :description => 'Initial upload')
 
-      if !new_version.save
+      if new_version.save
+        flash[:notice] = "Thanks for uploading the new model called '#{model_name}'."
+      else
         flash[:notice] = "Error creating a new model version; it was not saved."
         redirect_to :back
       end
 
-      flash[:notice] = "Thanks for uploading the new model called '#{model_name}'."
+      # ------------------------------------------------------------
+      # Node and version for the preview image
+      # ------------------------------------------------------------
 
-      # If we got a preview, then create a node and version for it
       if params[:new_model][:uploaded_preview].present?
 
         # Create a new preview node, whose parent is the new model node
@@ -71,24 +69,36 @@ class UploadController < ApplicationController
                           :description => 'Initial preview version')
 
 
-        if !preview_version.save
+        if preview_version.save
+          flash[:notice] << "  The preview image was also saved."
+        else
           flash[:notice] = "Error creating a new preview version; it was not saved."
           redirect_to :back
         end
 
-        flash[:notice] << "  The preview image was also saved."
-
-        # If we got a group and permission settings, set those as well
-        @model.update_attributes(:visibility_id => PermissionSetting.find_by_short_form(params[:read_permission]),
-                                 :changeability_id => PermissionSetting.find_by_short_form(params[:write_permission]))
-
-        if params[:group] and params[:group][:id]
-          successfully_set_group = @model.update_attributes(:group_id => params[:group][:id])
-        end
       end
 
+      # If we got a group and permission settings, set those as well
+      group_id = params[:group_id].blank? ? nil : params[:group_id]
+      group = Group.find(:first, :conditions => { :id => group_id })
+
+      read_permission = PermissionSetting.find_by_short_form(params[:read_permission])
+      if group.nil? and read_permission and read_permission.is_group?
+        read_permission = PermissionSetting.find_by_short_form('u')
+      end
+
+      write_permission = PermissionSetting.find_by_short_form(params[:write_permission])
+      if group.nil? and write_permission and write_permission.is_group?
+        write_permission = PermissionSetting.find_by_short_form('u')
+      end
+
+      @model.update_attributes(:visibility => read_permission,
+                               :changeability => write_permission,
+                               :group => group)
     end
+
   end
+
 
   def update_model
     # Make sure that the user chose a fork method
