@@ -7,45 +7,33 @@ class TagsController < ApplicationController
   end
 
   def create
-    # Get the new tags
     new_tags = params[:new_tag]
     new_comments = params[:new_comment]
 
     # Get the model that we want to tag
     @node = Node.find(params[:node_id])
 
-    flash[:notice] = ''
     @new_tagged_nodes = [ ]
 
     new_tags.each_with_index do |tag_name, i|
       tag_name = tag_name.downcase.strip
       comment = new_comments[i].strip
 
-      logger.warn "Dealing with tag '#{tag_name}', comment '#{comment}'"
-
       # Default text for the tag or comment?  Blank it out.
-      if tag_name == 'tag name'
-        flash[:notice] << "Tag had the default text; ignoring. "
-        next
-      end
+      next if tag_name == 'tag name'
 
       if comment == '(Optional) comment about why this tag is relevant to this model'
         comment = ''
       end
 
       # Blank tag?  Ignore it.
-      if tag_name.blank?
-        flash[:notice] << "Tag '#{tag_name}' was blank; ignored. "
-        next
-      end
+      next if tag_name.blank?
 
       # If this tag exists, get it.  If not, create it
       tag = Tag.find_by_name(tag_name)
 
       if tag.nil?
-        logger.warn "Creating new tag '#{tag_name}', since it didn't exist yet"
-        tag = Tag.new(:name => tag_name,
-                      :person_id => @person.id)
+        tag = Tag.new(:name => tag_name, :person_id => @person.id)
 
         if !tag.save
           flash[:notice] << "Error saving newly created tag '#{tag_name}': '#{e.message}'"
@@ -95,7 +83,6 @@ class TagsController < ApplicationController
       format.html { redirect_to :back }
       format.js
     end
-
   end
 
   def one_tag

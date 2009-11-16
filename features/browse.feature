@@ -104,3 +104,26 @@ To learn, as well as share and collaborate with others
      And I press "Send e-mail"
     Then I should see "You must enter a valid e-mail address."
 
+  Scenario: A user should be able to download the model
+    When I log in as "reuven@lerner.co.il" with password "password"
+     And I go to the "download" tab for "Test model"
+     And I follow "Download model (as a zip file)"
+    Then the response should be of type "application/zip"
+     And the response should be successful
+
+  Scenario: A user should be able to go to a random model
+    When I go to the list-models page
+     And I follow "Jump to a random model"
+    Then I should be on the model page for "Test model"
+
+  Scenario: A user should be able to set permissions
+    When I log in as "reuven@lerner.co.il" with password "password"
+     And I go to the "permissions" tab for "Test model"
+     And I choose "Only You may see this model"
+     And I choose "Only You may modify this model"
+     And I spill my guts
+     And I press "Set permissions and group"
+     And I go to the model page for "Test model"
+    Then I should see "Successfully set permissions."
+    Then I should see "Visible by No one but yourself"
+    Then I should see "Changeable by No one but yourself"

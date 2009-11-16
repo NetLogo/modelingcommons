@@ -53,3 +53,10 @@ Given /^I spill my guts$/ do
   STDERR.puts response.body
 end
 
+Given /^the response should be successful$/ do
+  response.should be_success
+end
+
+Given /^the response should be of type "([^\"]*)"$/ do |mime_type|
+  response.content_type.should == mime_type
+end

@@ -8,7 +8,5 @@
 <% @options_for_select = [['Select a group', nil]] -%>
 <% @person.groups.each {|g| @options_for_select << [g.name, g.id] } -%>
 
-<p id="permission-group-selector">Model group: <%= select_tag("group_id", options_for_select(@options_for_select, model_group_id)) %>&nbsp;&nbsp;
-  <%= submit_tag "Set permissions and group" %></p>
+<p id="permission-group-selector">Model group: <%= select_tag("group_id", options_for_select(@options_for_select, model_group_id)) %></p>
 <% end %>
-

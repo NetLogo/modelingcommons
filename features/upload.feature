@@ -76,3 +76,22 @@ So that other people can interact with it
      And I press "Upload model"
     Then I should see "Thanks for uploading the new model called 'New Model'."
      And I should see "The preview image was also saved."
+
+  Scenario: A user may upload a valid model file with a preview
+    When I log in as "reuven@lerner.co.il" with password "password"
+     And I go to the upload page
+     And I fill in "New Model" for "new_model_name"
+     And I attach a model file to "new_model_uploaded_body"
+     And I press "Upload model"
+     And I go to the model page for "New Model"
+    Then I should see "No preview image"
+
+  Scenario: A user may upload a valid model file with a preview
+    When I log in as "reuven@lerner.co.il" with password "password"
+     And I go to the upload page
+     And I fill in "New Model" for "new_model_name"
+     And I attach a model file to "new_model_uploaded_body"
+     And I attach a preview image
+     And I press "Upload model"
+     And I go to the model page for "New Model"
+    Then I should not see "No preview image"

@@ -6,5 +6,7 @@
   <%= render :partial => "permission_selector", :locals => {:person => @person, :model => @model} -%>
   <%= render :partial => "group_selector", :locals => {:person => @person, :model => @model} -%>
 
+  <p><%= submit_tag "Set permissions and group" %></p>
+
   <% end %>
 </div>
