@@ -130,7 +130,7 @@ class UploadController < ApplicationController
                          :file_contents => params[:new_version][:uploaded_body].read,
                          :description => params[:new_version][:description])
 
-    Notifications.deliver_modified_model(new_version.node.people.reject { |p| p == @person}, new_version.node)
+    # Notifications.deliver_modified_model(new_version.node.people.reject { |p| p == @person}, new_version.node)
 
     redirect_to :back, :anchor => "upload-div"
   end
