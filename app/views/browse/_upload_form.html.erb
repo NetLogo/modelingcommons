@@ -36,8 +36,7 @@
   <h2>Upload a new related document</h2>
   <table>
     <% form_for(:new_document,
-       :url => { :controller => "upload",
-    :action => :add_document },
+       :url => { :controller => :file, :action => :create },
     :html => {:multipart => true}) do |form| %>
     <tr>
       <td>Document file</td>

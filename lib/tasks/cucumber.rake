@@ -13,7 +13,7 @@ unless ARGV.any? {|a| a =~ /^gems/}
     vendored_cucumber_binary = "#{vendored_cucumber_dir}/bin/cucumber" unless vendored_cucumber_dir.nil?
 
     namespace :cucumber do
-      Cucumber::Rake::Task.new({:ok => 'db:test:prepare'}, 'Run features that should pass') do |t|
+      Cucumber::Rake::Task.new(:ok, 'Run features that should pass') do |t|
         t.binary = vendored_cucumber_binary
         t.fork = true # You may get faster startup if you set this to false
         t.cucumber_opts = "--color --tags ~@wip --strict --format #{ENV['CUCUMBER_FORMAT'] || 'pretty'}"
@@ -23,7 +23,7 @@ unless ARGV.any? {|a| a =~ /^gems/}
 
       end
 
-      Cucumber::Rake::Task.new({:wip => 'db:test:prepare'}, 'Run features that are being worked on') do |t|
+      Cucumber::Rake::Task.new(:wip, 'Run features that are being worked on') do |t|
         t.binary = vendored_cucumber_binary
         t.fork = true # You may get faster startup if you set this to false
         t.cucumber_opts = "--color --tags @wip:2 --wip --format #{ENV['CUCUMBER_FORMAT'] || 'pretty'}"

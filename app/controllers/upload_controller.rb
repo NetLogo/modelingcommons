@@ -1,8 +1,7 @@
 class UploadController < ApplicationController
 
   before_filter :require_login
-  prepend_before_filter :get_model_from_id_param, :only => [:add_document]
-  before_filter :check_changeability_permissions, :only => [:update_model, :add_document]
+  before_filter :check_changeability_permissions, :only => [:update_model]
 
   def create_model
     if params[:new_model].blank? or params[:new_model][:name].blank?
@@ -99,7 +98,6 @@ class UploadController < ApplicationController
 
   end
 
-
   def update_model
     # Make sure that the user chose a fork method
     if params[:fork].blank?
@@ -113,65 +111,6 @@ class UploadController < ApplicationController
     fork = params[:fork]
 
     flash[:notice] = ''
-
-    # If we're cloning, then there's no need to look for any uploaded document.
-    if fork == 'clone'
-      Node.transaction do
-        clone_child = Node.create(:node_type_id => Node::MODEL_NODE_TYPE,
-                                  :parent_id => existing_node.id,
-                                  :name => "Cloned child of #{existing_node.name}")
-        clone_child.reload
-        logger.warn "ID of new clone_child is '#{clone_child.id}'"
-
-        # Iterate through each version of the parent node
-        existing_node.node_versions.each do |existing_version|
-          nv = existing_version.dup
-          nv.id = nil
-          nv.node_id = clone_child.id
-          nv.save!
-          nv.reload
-          logger.warn "new version ID '#{nv.id}' created"
-        end
-
-        # Iterate through each child of the parent node
-        existing_node.children.each do |existing_child|
-          logger.warn "iterating through existing_node.children: existing_child = #{existing_child.id}"
-
-          # Ignore the just-created clone child
-          if existing_child == clone_child
-            logger.warn "existing_child = clone_child; next!"
-            next
-          end
-
-          logger.warn "creating new node"
-          n = Node.create(:node_type_id => existing_child.node_type_id,
-                          :parent_id => clone_child.id,
-                          :name => existing_child.name)
-          n.save!
-          n.reload
-          logger.warn "new node ID '#{n.id}' created"
-
-          existing_child.node_versions.each do |existing_version|
-            logger.warn "iterating through existing_child.node_versions: existing_version == #{existing_version.id}"
-
-            nv = existing_version.dup
-            nv.id = nil
-            nv.node_id = n.id
-            nv.save!
-            nv.reload
-            logger.warn "new version ID '#{nv.id}' created"
-
-          end
-        end
-
-        existing_node.updated_at = Time.now
-        existing_node.save!
-
-        flash[:notice] << "Added new node ID '#{clone_child.id}', a cloned child to node #{existing_node.id}. "
-        redirect_to :back, :anchor => "upload-div"
-        return
-      end
-    end
 
     # Make sure that we are getting some inputs
     if params[:new_version].blank?
@@ -227,57 +166,5 @@ class UploadController < ApplicationController
     redirect_to :back, :anchor => "upload-div"
   end
 
-
-  # Add a document
-  def add_document
-    description = params[:description]
-    node_type_id = params[:document][:node_type_id].to_i
-    filename = params[:uploaded_file].original_filename
-    logger.warn "[add_document] Model is '#{@model.name}', ID '#{@model.id}'"
-
-    # If we have a preview image, then change the name to be the same as the model.  Otherwise,
-    # we'll go a bit crazy.
-    if node_type_id == Node::PREVIEW_NODE_TYPE
-      logger.warn "[add_document] Uploading a preview -- setting the name"
-      filename = @model.name + '.png'
-      logger.warn "[add_document] Filename is now '#{filename}'"
-    else
-      logger.warn "[add_document] Keeping filename as '#{filename}'"
-    end
-
-    logger.warn "[add_document] About to start Node.transaction"
-    Node.transaction do
-
-      # Grab this node if it exists, or create it if it doesn't
-      logger.warn "[add_document] Looking to see if there is already a node of type '#{node_type_id}' named '#{filename}'"
-      node = Node.find(:first,
-                       :conditions => ["parent_id = ? and name = ? and node_type_id = ?",
-                                       @model.id, filename, node_type_id])
-
-      if node.nil?
-        logger.warn "[add_document] Nope, it's new -- creating a new node version"
-        node = Node.create(:node_type_id => node_type_id,
-                           :parent_id => @model.id,
-                           :name => filename)
-      end
-
-      # Now we have a node (and node ID).  So we can create a new version!
-      logger.warn "[add_document] Now creating a new node_version for node '#{node.id}'"
-      new_node_version = NodeVersion.new(:node_id => node.id,
-                                         :person_id => @person.id,
-                                         :file_contents => params[:uploaded_file].read,
-                                         :description => description)
-      if new_node_version.save
-        logger.warn "[add_document] Saved the node_version, ID '#{new_node_version.id}'.  Woo-hoo!"
-        flash[:notice] = "Successfully added file, as node '#{new_node_version.id}'"
-      else
-        logger.warn "[add_document] Error saving the node_version.  Rats!"
-        flash[:notice] = "Error adding file"
-      end
-      redirect_to :controller => :browse, :action => :one_model, :id => @model.id, :anchor => "files"
-    end
-
-    logger.warn "[add_document] Ended Node.transaction"
-  end
 
 end

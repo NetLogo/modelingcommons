@@ -27,7 +27,7 @@ So that other people can interact with it
     When I log in as "reuven@lerner.co.il" with password "password"
      And I go to the upload page
      And I fill in "New Model" for "new_model_name"
-     And I attach a model file
+     And I attach a model file to "new_model_uploaded_body"
      And I press "Upload model"
     Then I should see "Thanks for uploading the new model called 'New Model'."
 
@@ -37,7 +37,7 @@ So that other people can interact with it
      And I fill in "New Model" for "new_model_name"
      And I choose "Only you may see this model."
      And I choose "Only you may modify this model."
-     And I attach a model file
+     And I attach a model file to "new_model_uploaded_body"
      And I press "Upload model"
      And I follow "New Model model's page"
     Then I should see "Visible by No one but yourself"
@@ -49,7 +49,7 @@ So that other people can interact with it
      And I fill in "New Model" for "new_model_name"
      And I choose "Only you may see this model."
      And I choose "Only you may modify this model."
-     And I attach a model file
+     And I attach a model file to "new_model_uploaded_body"
      And I press "Upload model"
      And I follow "New Model model's page"
     Then I should see "Visible by No one but yourself"
@@ -61,7 +61,7 @@ So that other people can interact with it
      And I fill in "New Model" for "new_model_name"
      And I choose "Everyone can see this model."
      And I choose "Everyone can modify this model."
-     And I attach a model file
+     And I attach a model file to "new_model_uploaded_body"
      And I press "Upload model"
      And I follow "New Model model's page"
     Then I should see "Visible by Everyone"
@@ -71,7 +71,7 @@ So that other people can interact with it
     When I log in as "reuven@lerner.co.il" with password "password"
      And I go to the upload page
      And I fill in "New Model" for "new_model_name"
-     And I attach a model file
+     And I attach a model file to "new_model_uploaded_body"
      And I attach a preview image
      And I press "Upload model"
     Then I should see "Thanks for uploading the new model called 'New Model'."

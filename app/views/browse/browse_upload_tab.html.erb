@@ -3,12 +3,12 @@
   <% form_for(:new_version, :url => { :controller => "upload", :action => :update_model }, :html => {:multipart => true}) do |form| %>
   <table>
     <tr>
-      <td>Model file</td>
+      <td><label for="new_version_uploaded_body">Model file</label></td>
       <td><%= form.file_field :uploaded_body %>
         <%= form.hidden_field :node_id, {:value => @model.id} %></td>
     </tr>
     <tr>
-      <td>Short comment</td>
+      <td><label for="new_version_description">Short comment</label></td>
       <td><%= form.text_field :description %></td>
     </tr>
 
