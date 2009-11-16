@@ -40,6 +40,15 @@ Given /^(\d+) additional versions? of "([^\"]*)"$/ do |number_of_versions, model
   end
 end
 
+Given /^a version of "([^\"]*)" with different content$/ do |model_name|
+  @model = Node.find_by_name(model_name)
+
+  @node_version = Factory.create(:node_version,
+                                     :node => @model,
+                                     :person => person,
+                                     :file_contents => File.open(RAILS_ROOT + "/features/upload_files/test2.nlogo").readlines.join("\n"))
+end
+
 Given /^I spill my guts$/ do
   STDERR.puts response.body
 end

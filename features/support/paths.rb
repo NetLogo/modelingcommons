@@ -35,6 +35,12 @@ module NavigationHelpers
     when /the tags page/
       "/account/tags"
 
+    when /the admin all-models page/
+      "/admin/view_all_models"
+
+    when /the admin all-actions page/
+      "/admin/view_all_actions"
+
     when /the tag index page/
       "/tags/index"
 

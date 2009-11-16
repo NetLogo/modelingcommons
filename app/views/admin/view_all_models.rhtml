@@ -18,7 +18,7 @@
             <td><%= link_to model.name, :controller => "browse", :action => "one_model", :id => model.id %></td>
             <td>
                 <ul>
-                    <% model.all_people.each do |person_id| %>
+                    <% model.people.each do |person_id| %>
                         <li><%= link_to Person.find(person_id).fullname, :controller => "account", :action => "mypage", :id => person_id %></li>
                     <% end %>
                 </ul>

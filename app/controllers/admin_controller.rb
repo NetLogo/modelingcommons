@@ -33,6 +33,6 @@ class AdminController < ApplicationController
   end
 
   def view_all_models
-    @models = Nlmodel.find(:all, :order => "name")
+    @models = Node.models
   end
 end
