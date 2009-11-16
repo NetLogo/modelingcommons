@@ -35,10 +35,7 @@ class TagsController < ApplicationController
       if tag.nil?
         tag = Tag.new(:name => tag_name, :person_id => @person.id)
 
-        if !tag.save
-          flash[:notice] << "Error saving newly created tag '#{tag_name}': '#{e.message}'"
-          next
-        end
+        next if !tag.save
       end
 
       # Now that we have a tag, we can create a TaggedModel -- but only
@@ -59,22 +56,16 @@ class TagsController < ApplicationController
 
         begin
           tn.save!
-          flash[:notice] << "Successfully tagged this model as '#{tag_name}'.  "
+
+          flash[:notice] = "Successfully tagged this model as '#{tag_name}'.  "
 
           # Now send e-mail notification
-          tag_people = tn.node.people
-          tag_people.delete_if {|p| p == @person}
-
-          if not tag_people.empty?
-            Notifications.deliver_applied_tag(tag_people, tn.tag)
-          end
+          Notifications.deliver_applied_tag(tn.node.people.reject {|p| p == @person}, tn.tag)
 
         rescue Exception => e
-          flash[:notice] << "Error associating tag/person/node: '#{e.message}'"
           next
         end
       else
-        flash[:notice] << "You already applied tag '#{tag_name}' to this node."
         next
       end
     end
