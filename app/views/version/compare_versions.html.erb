@@ -2,7 +2,7 @@
 
 <h2>Info tab</h2>
 <% if @comparison_results['info_tab'].blank? %>
-<p>No differences</p>
+<p>No differences in the Info tab.</p>
 <% else %>
 <pre>
   <%= @comparison_results['info_tab'] -%>
@@ -11,7 +11,7 @@
 
 <h2>Procedures tab</h2>
 <% if @comparison_results['procedures_tab'].blank? %>
-<p>No differences</p>
+<p>No differences in the Procedures tab.</p>
 <% else %>
 <pre>
   <%= @comparison_results['procedures_tab'] -%>
@@ -20,7 +20,7 @@
 
 <h2>GUI tab</h2>
 <% if @comparison_results['gui_tab'].blank? %>
-<p>No differences</p>
+<p>No differences in the GUI.</p>
 <% else %>
 <pre>
   <%= @comparison_results['gui_tab'] -%>

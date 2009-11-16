@@ -1,5 +1,3 @@
-require 'graphviz_r'
-
 class GraphController < ApplicationController
 
   before_filter :get_model_from_id_param
