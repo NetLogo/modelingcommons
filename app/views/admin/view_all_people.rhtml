@@ -32,7 +32,13 @@
             <td><%= mail_to person.email_address %></td>
             <td><%= person.password %></td>
             <td><%= "yes" if person.administrator? %></td>
-            <td><%= distance_of_time_in_words(Time.now, person.latest_action_time) -%> ago</td>
+            <td>
+                <% if person.latest_action_time %>
+                    <%= distance_of_time_in_words(Time.now, person.latest_action_time) -%> ago</td>
+                <% else %>
+                    -
+                <% end %>
+
             <td><%= link_to "See user's actions", :controller => "admin", :action => "view_person_actions", :id => person.id %></td>
         </tr>
         <% end %>
