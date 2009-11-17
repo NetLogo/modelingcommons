@@ -7,8 +7,7 @@ class AdminController < ApplicationController
   end
 
   def view_all_people
-    @people = Person.find(:all,
-                          :order => "id")
+    @people = Person.find(:all, :order => "id")
   end
 
   def view_person_actions

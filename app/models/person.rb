@@ -43,4 +43,8 @@ class Person < ActiveRecord::Base
     self.spam_warnings.select { |sw| sw.node_id == model.id }.first || nil
   end
 
+  def latest_action_time
+    LoggedAction.maximum('logged_at', :conditions => ["person_id = ?", id])
+  end
+
 end
