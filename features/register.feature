@@ -12,4 +12,4 @@ So that I can use the Modeling Commons
      And I fill in "password" for "Password"
      And I fill in "password" for "Password confirmation"
      And I press "register"
-    Then I should see "You are now registered with the Modeling Commons.  We're delighted that you've joined us."
+    Then I should see "You are now registered with the Modeling Commons."
