@@ -12,7 +12,7 @@ $(document).ready(function () {
         // create the datatable
         $(".datatable").dataTable();
 
-        $('#search_term_search_term').click(function() {
+        $('#navbar-search-form').click(function() {
                 if ($(this).attr('value') == 'Search')
                 {
                     $(this).attr({'value': ''});

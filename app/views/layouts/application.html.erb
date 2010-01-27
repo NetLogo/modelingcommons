@@ -14,7 +14,7 @@
     <!-- defaults above here -->
     <%= javascript_include_tag 'jquery.livequery' %>
     <%= javascript_include_tag 'jquery.autocomplete' %>
-    <%= javascript_include_tag 'jquery.dataTables' %>
+  <%= javascript_include_tag 'jquery.dataTables' %>
     <%= javascript_include_tag 'nlcommons' %>
 
     <!-- ClickTale Top part -->
@@ -103,7 +103,7 @@
     <div id="flash-notice"><%= flash[:notice] -%></div>
     <script type="text/javascript">
       $(document).ready(function() {
-      $('#flash-notice').fadeOut(5000);
+      $('#flash-notice').fadeOut(3500);
       });
     </script>
     <% end -%>
