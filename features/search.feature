@@ -20,9 +20,7 @@ To find those that match a particular text string
      And I go to the search page
      And I fill in "est" for "Enter search term:"
      And I press "Search!"
-    Then I should see "Models whose names contain 'est'"
+    Then I should see "Models with 'est' in their name"
      And I should see "Test model"
-     And I should see "Search of Info tab is under construction."
-     And I should see "Search of Procedures tab is under construction."
      And I should see "No matches in author names."
      And I should see "No matches in tag names."

@@ -18,12 +18,12 @@ So that I can use the system
 
   Scenario: Entering a bad username should produce a warning message
     When I log in as "reuvennnnn@lernerrrrr.coooo.illll" with password "password"
-    Then I should see "Sorry, but no user exists with that e-mail address and password.  Please try again"
+    Then I should see "Sorry, but no user exists with that e-mail address and password. Please try again."
      And I should not see "Welcome back to the Commons, Reuven!"
 
   Scenario: Entering a bad password should produce a warning message
     When I log in as "reuven@lerner.co.il" with password "badbadpasspass"
-    Then I should see "Sorry, but no user exists with that e-mail address and password.  Please try again"
+    Then I should see "Sorry, but no user exists with that e-mail address and password. Please try again."
      And I should not see "Welcome back to the Commons, Reuven!"
 
   Scenario: Entering a blank username should produce a warning message
@@ -39,7 +39,7 @@ So that I can use the system
   Scenario: Log out
     When I log in as "reuven@lerner.co.il" with password "password"
      And I follow "Logout"
-    Then I should see "You have been logged out.  Please come back soon!"
+    Then I should see "You have been logged out. Please come back soon!"
 
   Scenario: Edit account information
     When I log in as "reuven@lerner.co.il" with password "password"
