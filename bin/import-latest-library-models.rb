@@ -37,7 +37,7 @@ end
 
 # Talk to the database
 ActiveRecord::Base.establish_connection(:adapter  => 'postgresql',
-                                        :database => 'nlcommons_development',
+                                        :database => 'nlcommons_production',
                                         :username => 'nlcommons',
                                         :password => 'nlcommons',
                                         :host     => 'localhost')
@@ -45,7 +45,7 @@ ActiveRecord::Base.establish_connection(:adapter  => 'postgresql',
 modeling_commons_user = Person.find_by_first_name_and_last_name('Modeling', 'Commons')
 
 if modeling_commons_user.nil?
-  STDERR.puts "No such user 'Modeling' 'Commons' -- try again"
+  puts "No such user 'Modeling' 'Commons' -- try again"
   exit
 end
 
@@ -80,7 +80,7 @@ ARGV.each do |dirname|
 
       Node.transaction do
 
-        STDERR.puts "\n"
+        puts "\n"
 
         if node.nil?
           puts "\t\t\tNot found in the Modeling Commons"
@@ -90,9 +90,9 @@ ARGV.each do |dirname|
                           :name => model_name)
 
           if node.save
-            STDERR.puts "\tSuccessfully saved a new node for '#{model_name}'"
+            puts "\tSuccessfully saved a new node for '#{model_name}', node ID '#{node.id}'"
           else
-            STDERR.puts "\tError saving '#{model_name}'"
+            puts "\tError saving '#{model_name}'"
           end
 
           # Add a node
@@ -101,7 +101,7 @@ ARGV.each do |dirname|
         end
 
 
-        puts "\t\t\t\tNow adding a new version to node '#{node.id}'"
+        puts "\t\t\t\tNow adding a new version to node '#{model_name}', ID '#{node.id}'"
 
         nv = NodeVersion.new(:node_id => node.id,
                              :person => modeling_commons_user,
@@ -109,9 +109,9 @@ ARGV.each do |dirname|
                              :file_contents => file_contents)
 
         if nv.save
-          STDERR.puts "\tSuccessfully saved a new version of '#{filename_no_path}'"
+          puts "\tSuccessfully saved a new version of '#{filename_no_path}', node version ID '#{nv.id}'"
         else
-          STDERR.puts "\tError saving '#{filename_no_path}'!"
+          puts "\tError saving '#{filename_no_path}'!"
         end
 
       end
