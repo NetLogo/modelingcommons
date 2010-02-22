@@ -18,5 +18,5 @@ config.action_controller.perform_caching             = false
 # ActionMailer::Base.deliveries array.
 config.action_mailer.delivery_method = :test
 
-config.gem 'jscruggs-metric_fu', :lib => 'metric_fu', :source => 'http://gems.github.com'
+config.gem 'metric_fu'
 config.gem 'GraphvizR', :lib => 'graphviz_r'

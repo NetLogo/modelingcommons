@@ -30,6 +30,9 @@ class Node < ActiveRecord::Base
 
   has_many :logged_actions
 
+  has_many :node_projects
+  has_many :projects, :through => :node_projects
+
   validates_presence_of :name, :node_type_id, :visibility_id, :changeability_id
   validates_numericality_of :node_type_id, :visibility_id, :changeability_id
 

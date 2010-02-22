@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090614172259) do
+ActiveRecord::Schema.define(:version => 20100222143655) do
 
   create_table "email_recommendations", :force => true do |t|
     t.integer  "person_id"
@@ -72,6 +72,13 @@ ActiveRecord::Schema.define(:version => 20090614172259) do
   add_index "news_items", ["person_id"], :name => "index_news_items_on_person_id"
   add_index "news_items", ["title"], :name => "index_news_items_on_title"
 
+  create_table "node_projects", :force => true do |t|
+    t.integer  "project_id"
+    t.integer  "node_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "node_types", :force => true do |t|
     t.string   "name"
     t.text     "description"
@@ -91,7 +98,10 @@ ActiveRecord::Schema.define(:version => 20090614172259) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.binary   "file_contents"
+    t.text     "vectors"
   end
+
+  add_index "node_versions", ["vectors"], :name => "node_versions_fts_vectors_index"
 
   create_table "nodes", :force => true do |t|
     t.integer  "node_type_id",                    :null => false
@@ -159,6 +169,12 @@ ActiveRecord::Schema.define(:version => 20090614172259) do
   add_index "postings", ["person_id"], :name => "index_postings_on_person_id"
   add_index "postings", ["title"], :name => "index_postings_on_title"
   add_index "postings", ["updated_at"], :name => "index_postings_on_updated_at"
+
+  create_table "projects", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "recommendations", :force => true do |t|
     t.integer  "node_id"

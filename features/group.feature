@@ -45,7 +45,7 @@ So that I can create subsets of the Modeling Commons community
      And I press "Find"
     Then I should see "No groups contain 'newgroup'. Please try again."
 
-  Scenario: A user may search for a group that does not exist
+  Scenario: A user may search for a group that does exist
    Given a group named "newgroup"
     When I go to the group finding page
      And I fill in "newgroup" for "Group name to search for"
