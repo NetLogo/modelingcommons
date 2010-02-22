@@ -38,8 +38,8 @@ end
 # Talk to the database
 ActiveRecord::Base.establish_connection(:adapter  => 'postgresql',
                                         :database => 'nlcommons_development',
-                                        :username => 'reuven',
-                                        :password => 'reuven',
+                                        :username => 'nlcommons',
+                                        :password => 'nlcommons',
                                         :host     => 'localhost')
 
 modeling_commons_user = Person.find_by_first_name_and_last_name('Modeling', 'Commons')

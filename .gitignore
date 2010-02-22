@@ -9,3 +9,5 @@ coverage/
 coverage.data
 public/system/*
 mkmf.log
+nohup.out
+rerun.txt
