@@ -11,7 +11,7 @@
     <th>Revert</th>
   </tr>
 
-  <% form_tag :controller => :history, :action => :compare_versions, :id => node.id do |form| %>
+  <% form_tag :controller => :history, :action => :compare_versions, :id => node.id do %>
 
   <% @model.node_versions.sort_by {|v| v.created_at}.reverse.each do |version| %>
   <tr>
