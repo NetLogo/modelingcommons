@@ -1,13 +1,18 @@
 <% @title = 'Projects' %>
 
+<% if @projects.empty? %>
+<p><i>No projects have been created.</i></p>
+<% else %>
+
 <ul>
-    <% @projects.each do |project| %>
-        <li>
-            <%= link_to project.name, :controller => :projects, :action => :show, :id => project.id -%>
-            (<%= pluralize(project.nodes.count, "model") -%>)
-        </li>
-    <% end %>
+  <% @projects.each do |project| %>
+  <li>
+    <%= link_to project.name, :controller => :projects, :action => :show, :id => project.id -%>
+    (<%= pluralize(project.nodes.count, "model") -%>)
+  </li>
+  <% end %>
 </ul>
+<% end %>
 
 <p><%= link_to "Create a new project", :controller => :projects, :action => :new -%></p>
 
