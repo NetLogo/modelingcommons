@@ -1,0 +1,12 @@
+<p>Information about the '<%= @project.name -%>' project</p>
+
+<% if @project.nodes.empty? %>
+    <p><i>No models in this project.</i></p>
+<% else %>
+    <p>Models in this project:</p>
+    <ul>
+        <% @project.nodes.each do |node| -%>
+            <li><%= link_to node.name, :controller => :browse, :action => :one_node, :id => node.id  -%></li>
+        <% end %>
+    </ul>
+<% end %>

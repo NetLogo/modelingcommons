@@ -68,6 +68,18 @@ module NavigationHelpers
     when /the group finding page/
       '/membership/find'
 
+    when /the project creation page/
+      '/projects/new'
+
+    when /the project finding page/
+      '/projects/find'
+
+    when /the project list/
+      '/projects/'
+
+    when /the project page for "([^\"]+)"/
+      "/projects/show/#{Node.find_by_name($1).id}"
+
     when /the upload page/
       '/upload/new_model'
 
