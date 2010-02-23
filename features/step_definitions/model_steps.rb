@@ -13,6 +13,23 @@ Given /^a NetLogo model named "([^\"]*)"$/ do |model_name|
                                  :person => person)
 end
 
+Given /^a NetLogo model named "([^\"]*)" in the project "([^\"]*)"$/ do |model_name, project_name|
+  @node = Factory.create(:node,
+                         :name => model_name,
+                         :visibility_id => 1,
+                         :changeability_id => 1)
+
+  @node_version = Factory.create(:node_version,
+                                 :node => @node,
+                                 :person => person)
+
+  @project = Factory.create(:project,
+                            :name => project_name)
+
+  @project.nodes << @node
+  @project.save!
+end
+
 When /^I attach a model file to "([^\"]*)"$/ do |file_upload_element_id|
   attach_file(file_upload_element_id, File.join(RAILS_ROOT, 'features', 'upload_files', 'test.nlogo'))
 end

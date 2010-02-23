@@ -3,13 +3,20 @@
 <% if @project.nodes.empty? %>
     <p><i>No models in this project.</i></p>
 <% else %>
-    <p>Models in this project:</p>
+    <p><%= pluralize(@project.nodes.size, "model") -%> in this project:</p>
     <ul>
         <% @project.nodes.each do |node| -%>
-            <li><%= link_to node.name, :controller => :browse, :action => :one_node, :id => node.id  -%></li>
+            <li><%= link_to node.name, :controller => :browse, :action => :one_node, :id => node.id  -%> (<%= link_to 'remove', :controller => :projects, :action => :remove_model, :id => @project.id, :model_id => node.id -%>)</li>
         <% end %>
     </ul>
 <% end %>
 
-<p>Add a model to this project: </p>
-
+<% form_tag :controller => :projects, :action => :add_model do  %>
+    <%= hidden_field_tag :project_id, @project.id -%>
+    <p>
+        Add a model to this project:
+        <%= select_tag :model_id, options_for_select(@person.models.select {|m| !m.projects.member?(@project)}.sort_by{|m| m.name.downcase}.map {|m| [m.name, m.id]})  %>
+        <%= submit_tag "Add model" %>
+    </p>
+<% end %>
+</p>
