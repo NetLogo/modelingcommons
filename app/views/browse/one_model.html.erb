@@ -34,9 +34,21 @@ Changeable by <%= @model.changeability.name %>
   <div id="model-atom-feed"><%= link_to image_tag("feed.png", :id => 'atom-image'), :controller => :browse, :action => :follow, :id => @model.id, :format => :atom %><%= link_to "Follow '#{@model.name}' in your reader", :controller => :browse, :action => :follow, :id => @model.id, :format => :atom -%></div>
 
   <% if @person %>
-<p>
 
 <% if @model.people.member?(@person) %>
+
+<p>
+
+<% if @model.projects.empty? %>
+    Not part of any project
+<% else %>
+    Part of project '<%= link_to @model.projects.first.name, :controller => :projects, :action => :show, :id => @model.projects.first.id -%>'
+<% end %>
+
+</p>
+
+<p>
+
 <%= link_to "Rename this model", :controller => :browse, :action => :rename_model, :id => @model.id %> &bull;
 <% end %>
 

@@ -78,7 +78,7 @@ module NavigationHelpers
       '/projects/'
 
     when /the project page for "([^\"]+)"/
-      "/projects/show/#{Node.find_by_name($1).id}"
+      "/projects/show/#{Project.find_by_name($1).id}"
 
     when /the upload page/
       '/upload/new_model'

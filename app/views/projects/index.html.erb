@@ -1,5 +1,13 @@
+<% @title = 'Projects' %>
+
 <ul>
     <% @projects.each do |project| %>
-        <li><%= link_to project.name, :controller => :projects, :action => :show, :id => project.id -%></li>
+        <li>
+            <%= link_to project.name, :controller => :projects, :action => :show, :id => project.id -%>
+            (<%= pluralize(project.nodes.count, "model") -%>)
+        </li>
     <% end %>
 </ul>
+
+<p><%= link_to "Create a new project", :controller => :projects, :action => :new -%></p>
+

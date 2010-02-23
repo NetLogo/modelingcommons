@@ -1,4 +1,4 @@
-<p>Information about the '<%= @project.name -%>' project</p>
+<% @title = "Information about the '#{@project.name}' project" -%>
 
 <% if @project.nodes.empty? %>
     <p><i>No models in this project.</i></p>
@@ -10,3 +10,6 @@
         <% end %>
     </ul>
 <% end %>
+
+<p>Add a model to this project: </p>
+

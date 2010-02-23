@@ -11,7 +11,7 @@ class ProjectsController < ApplicationController
     @project = Project.create!(:name => params[:project_name])
 
     flash[:notice] = "Successfully created the project '#{@project.name}'"
-    redirect_to :controller => :account, :action => :index
+    redirect_to :controller => :account, :action => :mypage
   end
 
   def show
