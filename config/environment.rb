@@ -14,7 +14,6 @@ Rails::Initializer.run do |config|
   config.gem 'mislav-will_paginate', :version => '~> 2.3.2', :lib => 'will_paginate', :source => 'http://gems.github.com'
   config.gem 'validates_email', :version => '>= 0.0.2'
   config.gem "thoughtbot-shoulda", :lib => "shoulda", :source => "http://gems.github.com"
-  config.gem 'metric_fu'
   config.gem 'GraphvizR', :lib => 'graphviz_r'
   config.gem "newrelic_rpm"
 
