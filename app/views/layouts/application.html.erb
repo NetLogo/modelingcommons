@@ -59,6 +59,7 @@
         <li class="menu-option"><%= link_to "List models", :controller => :browse, :action => :list_models %></li>
         <% if @person %>
         <li class="menu-option"><%= link_to "Add model", :controller => :upload, :action => :new_model %></li>
+        <li class="menu-option"><%= link_to "Projects", :controller => :projects, :action => :index %></li>
         <li class="menu-option"><%= link_to "Groups", :controller => :account, :action => :groups %></li>
         <li class="menu-option"><%= link_to "Tags", :controller => :account, :action => :tags, :id => @person.id  %></li>
         <% end %>
