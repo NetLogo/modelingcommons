@@ -19,4 +19,4 @@ config.action_controller.perform_caching             = false
 config.action_mailer.delivery_method = :test
 
 config.gem 'metric_fu'
-config.gem 'GraphvizR', :lib => 'graphviz_r'
+config.gem "thoughtbot-shoulda", :lib => "shoulda", :source => "http://gems.github.com"
