@@ -1,8 +1,3 @@
-Factory.define(:permission_setting) do |p|
-  p.name "all"
-  p.short_form "a"
-end
-
 Factory.define(:node) do |node|
   node.name "node"
   node.node_type_id 1

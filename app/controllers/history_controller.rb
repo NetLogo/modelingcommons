@@ -40,10 +40,10 @@ class HistoryController < ApplicationController
       return
     end
 
-    @version_1 = NodeVersion.find(params[:compare_1])
-    @version_2 = NodeVersion.find(params[:compare_2])
+    @earlier_version = NodeVersion.find(params[:compare_1])
+    @later_version = NodeVersion.find(params[:compare_2])
 
-    if @version_1 == @version_2
+    if @earlier_version == @later_version
       flash[:notice] = "You cannot compare a version with itself!"
       redirect_to :back
       return
@@ -51,16 +51,16 @@ class HistoryController < ApplicationController
 
     @comparison_results = { }
     @comparison_results['info_tab'] =
-      diff_as_string(@version_1.info_tab, @version_2.info_tab)
+      diff_as_string(@earlier_version.info_tab, @later_version.info_tab)
 
     # @comparison_results['procedures_tab'] =
-    # diff_as_string(@version_1.procedures_tab, @version_2.procedures_tab)
+    # diff_as_string(@earlier_version.procedures_tab, @later_version.procedures_tab)
   end
 
   private
   def diff_as_string(data_old, data_new, format=:unified, context_lines=1)
-    data_old = data_old.split(/\n/).map! { |e| e.chomp}
-    data_new = data_new.split(/\n/).map! { |e| e.chomp}
+    data_old = data_old.split(/\n/).map! { |line| line.chomp}
+    data_new = data_new.split(/\n/).map! { |line| line.chomp}
 
     output = ''
     diffs = Diff::LCS.diff(data_old,data_new)

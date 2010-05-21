@@ -57,7 +57,7 @@ class Notifications < ActionMailer::Base
   end
 
   def applied_tag(people, tag)
-    @recipients = people.map{|p| p.email_address}
+    @recipients = people.map{|person| person.email_address}
     @from = FROM_ADDRESS
     @subject = 'Tag was applied'
     @body[:tag] = tag
@@ -66,7 +66,7 @@ class Notifications < ActionMailer::Base
   end
 
   def updated_discussion(people, nlmodel)
-    @recipients = people.map{|p| p.email_address}
+    @recipients = people.map{|person| person.email_address}
     @from = FROM_ADDRESS
     @subject = 'Updated discussion'
     @body[:nlmodel] = nlmodel
@@ -96,7 +96,7 @@ class Notifications < ActionMailer::Base
 
   def recommended_message(recommender, people, model)
     @recipients = recommender.email_address
-    @bcc = people.map{|p| p.email_address}
+    @bcc = people.map{|person| person.email_address}
     @from = FROM_ADDRESS
     @subject = "Recommendation for the '#{model.name}' model in the NetLogo Modeling Commons"
     @body[:nlmodel] = model

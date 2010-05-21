@@ -60,9 +60,9 @@ class TagsController < ApplicationController
           flash[:notice] = "Successfully tagged this model as '#{tag_name}'.  "
 
           # Now send e-mail notification
-          Notifications.deliver_applied_tag(tn.node.people.reject {|p| p == @person}, tn.tag)
+          Notifications.deliver_applied_tag(tn.node.people.reject {|person| person == @person}, tn.tag)
 
-        rescue Exception => e
+        rescue Exception => exception
           next
         end
       else
@@ -106,7 +106,7 @@ class TagsController < ApplicationController
 
     tag_names = Tag.find(:all,
                          :conditions => [ "name ilike ? ", query_like] ,
-                         :limit => limit).map { |t| t.name}
+                         :limit => limit).map { |tag| tag.name}
 
     render :text => tag_names.join("\n")
   end

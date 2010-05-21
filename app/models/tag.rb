@@ -8,7 +8,7 @@ class Tag < ActiveRecord::Base
   validates_uniqueness_of :name, :case_sensitive => false
 
   def people
-    return self.nodes.map {|m| m.person}.uniq
+    return self.nodes.map {|model| model.person}.uniq
   end
 
 end

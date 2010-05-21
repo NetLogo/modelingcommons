@@ -28,7 +28,7 @@ class Person < ActiveRecord::Base
   validates_confirmation_of :password
 
   def models
-    self.nodes.select {|n| n.node_type_id == 1}.uniq
+    self.nodes.select {|node| node.node_type_id == 1}.uniq
   end
 
   def fullname
@@ -36,7 +36,7 @@ class Person < ActiveRecord::Base
   end
 
   def administrated_groups
-    self.groups.select {|g| g.is_administrator?(self) }
+    self.groups.select {|group| group.is_administrator?(self) }
   end
 
   def spam_warning(model)

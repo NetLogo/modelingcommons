@@ -97,13 +97,13 @@ class MembershipController < ApplicationController
 
       else
         # Make them pending
-        m = Membership.create(:person_id => person_id,
-                              :group => group,
-                              :is_administrator => false,
-                              :status => 'invited')
+        membership = Membership.create(:person_id => person_id,
+                                       :group => group,
+                                       :is_administrator => false,
+                                       :status => 'invited')
 
         # Send them e-mail
-        Notifications.deliver_invited_to_group(Person.find(person_id), m)
+        Notifications.deliver_invited_to_group(Person.find(person_id), membership)
         counter = counter + 1
       end
 
@@ -180,14 +180,14 @@ class MembershipController < ApplicationController
   end
 
   def invite
-    @potential_invitees = Person.find(:all, :order => "last_name, first_name").map {|p| ["#{p.last_name}, #{p.first_name} (#{p.email_address})", p.id]}
+    @potential_invitees = Person.find(:all, :order => "last_name, first_name").map {|person| ["#{person.last_name}, #{person.first_name} (#{person.email_address})", p.id]}
 
     render :layout => false
   end
 
   def list_models
     if params[:id].blank?
-      @group_ids = @person.groups.map {|g| g.id}.join(',')
+      @group_ids = @person.groups.map {|group| group.id}.join(',')
       @title = "List of models in all of your groups"
     else
       @group_ids = params[:id]

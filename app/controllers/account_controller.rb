@@ -15,7 +15,7 @@ class AccountController < ApplicationController
       Notifications.deliver_signup(@new_person)
       session[:person_id] = @new_person.id
       redirect_to :controller => :account, :action => :mypage
-    rescue Exception => e
+    rescue Exception => exception
       render :action => :new
     end
 
@@ -32,7 +32,7 @@ class AccountController < ApplicationController
       @person.update_attributes!(params[:person])
       flash[:notice] = "Successfully updated your account."
       redirect_to :back
-    rescue Exception => e
+    rescue Exception => exception
       flash[:notice] = "Error updating your account: '#{e.message}'"
       redirect_to :back
     end
@@ -101,11 +101,11 @@ class AccountController < ApplicationController
     end
 
     # Model updates
-    @recent_models = @the_person.models.select { |m| m.created_at >= how_new_is_new }.sort_by { |m| m.created_at }.reverse
+    @recent_models = @the_person.models.select { |model| model.created_at >= how_new_is_new }.sort_by { |model| model.created_at }.reverse
     @model_events = @recent_models;
 
-    @group_recent_models = @the_person.models.select { |m| m.group and m.created_at >= how_new_is_new }.sort_by { |m| m.created_at }.reverse
-    @group_model_events = @group_recent_models.select { |m| m.group.members.include?(@person)}
+    @group_recent_models = @the_person.models.select { |model| model.group and model.created_at >= how_new_is_new }.sort_by { |model| model.created_at }.reverse
+    @group_model_events = @group_recent_models.select { |model| model.group.members.include?(@person)}
 
     # most-viewed models
     @most_viewed = LoggedAction.find_by_sql("SELECT COUNT(DISTINCT person_id), node_id
@@ -130,14 +130,14 @@ class AccountController < ApplicationController
       TaggedNode.count(:group => "tag_id",
                        :order => "count_all DESC",
                        :limit => 10)
-    @most_popular_tags = @most_popular_tags.map { |n| [Tag.find(n[0]), n[1]]}
+    @most_popular_tags = @most_popular_tags.map { |tag| [Tag.find(tag[0]), tag[1]]}
 
     # most-recommended models
     @most_recommended_models =
       Recommendation.count(:group => "node_id",
                            :order => "count_all DESC",
                            :limit => 10)
-    @most_recommended_models = @most_recommended_models.map { |n| [Node.find(n[0]), n[1]]}
+    @most_recommended_models = @most_recommended_models.map { |node| [Node.find(node[0]), node[1]]}
   end
 
   def mygroups

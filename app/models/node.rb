@@ -57,7 +57,7 @@ class Node < ActiveRecord::Base
   end
 
   def children_of_type(id)
-    self.children.select { |v| v.node_type_id == id}
+    self.children.select { |version| version.node_type_id == id}
   end
 
   def models
@@ -65,7 +65,7 @@ class Node < ActiveRecord::Base
   end
 
   def non_models
-    self.children.select { |v| v.node_type_id != MODEL_NODE_TYPE}
+    self.children.select { |version| version.node_type_id != MODEL_NODE_TYPE}
   end
 
   def previews
@@ -138,15 +138,15 @@ class Node < ActiveRecord::Base
   end
 
   def people
-    self.node_versions.map {|m| m.person}.uniq
+    self.node_versions.map {|version| version.person}.uniq
   end
 
   def file_contents
-    self.node_versions.sort_by {|nv| nv.created_at}.last.file_contents
+    self.node_versions.sort_by {|version| version.created_at}.last.file_contents
   end
 
   def netlogo_version
-    self.node_versions.sort_by {|nv| nv.created_at}.last.netlogo_version
+    self.node_versions.sort_by {|version| version.created_at}.last.netlogo_version
   end
 
   def netlogo_version_for_applet

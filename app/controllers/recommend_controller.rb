@@ -36,7 +36,7 @@ class RecommendController < ApplicationController
                           :person_id => @person.id)
 
     model_people = @model.people
-    model_people.delete_if {|p| p == @person}
+    model_people.delete_if {|person| person == @person}
     if not model_people.empty?
       Notifications.deliver_recommended_message(@person, model_people, @node)
     end
