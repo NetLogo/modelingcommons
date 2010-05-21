@@ -6,7 +6,11 @@
   <%= render :partial => "permission_selector", :locals => {:person => @person, :model => @model} -%>
   <%= render :partial => "group_selector", :locals => {:person => @person, :model => @model} -%>
 
+  <% if @person and @person.groups.empty? %>
+  <p><%= submit_tag "Set permissions" %></p>
+  <% else %>
   <p><%= submit_tag "Set permissions and group" %></p>
+  <% end %>
 
   <% end %>
 </div>

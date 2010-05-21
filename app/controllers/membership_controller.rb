@@ -3,23 +3,19 @@ class MembershipController < ApplicationController
   before_filter :require_login, :except => [:find, :find_group]
 
   def leave
-    if params[:id].empty?
-      flash[:notice] = "No such membership."
+    membership = Membership.find(params[:id])
 
+    membership.destroy
+
+    if membership.group.members.length == 1
+      flash[:notice] = "You have left the group.  The group has also been removed from the system, as you were the last member."
+    elsif membership.person == @person
+      flash[:notice] = "You have left the group."
     else
-
-      membership = Membership.find(params[:id])
-      membership.destroy
-
-      if membership.person == @person
-        flash[:notice] = "You have left the group."
-      else
-        flash[:notice] = "#{membership.person.fullname} is no longer a member of #{membership.group.name}."
-      end
+      flash[:notice] = "#{membership.person.fullname} is no longer a member of #{membership.group.name}."
     end
 
     redirect_to :back
-
   end
 
   def make_administrator
@@ -180,7 +176,7 @@ class MembershipController < ApplicationController
   end
 
   def invite
-    @potential_invitees = Person.find(:all, :order => "last_name, first_name").map {|person| ["#{person.last_name}, #{person.first_name} (#{person.email_address})", p.id]}
+    @potential_invitees = Person.find(:all, :order => "last_name, first_name").map {|person| ["#{person.last_name}, #{person.first_name} (#{person.email_address})", person.id]}
 
     render :layout => false
   end

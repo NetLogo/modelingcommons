@@ -14,7 +14,7 @@
 Visible by <%= @model.visibility.name %>
 
 <% if @model.visibility.is_group? %>
-    (<%= group_link(@model.group) -%>)
+    (<%= group_link(@model.group) -%> group)
 <% end %>
 
 &bull;

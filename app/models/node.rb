@@ -288,10 +288,8 @@ class Node < ActiveRecord::Base
     { :height => height, :width => width}
   end
 
-  def can_by_read_by?(person)
-    return true if self.people.member?(person)
-
-    return false
+  def can_be_read_by?(person)
+    people.member?(person)
   end
 
   def download_name

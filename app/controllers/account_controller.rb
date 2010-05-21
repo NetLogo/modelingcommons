@@ -33,7 +33,7 @@ class AccountController < ApplicationController
       flash[:notice] = "Successfully updated your account."
       redirect_to :back
     rescue Exception => exception
-      flash[:notice] = "Error updating your account: '#{e.message}'"
+      flash[:notice] = "Error updating your account: '#{exception.message}'"
       redirect_to :back
     end
 

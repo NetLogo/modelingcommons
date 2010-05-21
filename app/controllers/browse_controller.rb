@@ -11,6 +11,9 @@ class BrowseController < ApplicationController
                             :conditions => ["node_type_id = ? ", Node::MODEL_NODE_TYPE])
   end
 
+  def one_model
+  end
+
   def one_node
     node = Node.find(params[:id])
 
@@ -58,7 +61,7 @@ class BrowseController < ApplicationController
   def set_permissions
     if params[:read_permission].blank? or params[:write_permission].blank?
       flash[:notice] = 'Both read and write permissions must be specified.'
-    elsif (params[:read_permission] == 'g' or params[:write_permission] == 'g') and params[:group][:id].blank?
+    elsif (params[:read_permission] == 'g' or params[:write_permission] == 'g') and params[:group_id].blank?
       flash[:notice] = 'You can only set group permissions if you also set a group.'
     else
       group = Group.find(:first, params[:group_id])
