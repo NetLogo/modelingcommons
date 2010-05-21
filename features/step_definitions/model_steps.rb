@@ -13,6 +13,19 @@ Given /^a NetLogo model named "([^\"]*)"$/ do |model_name|
                                  :person => person)
 end
 
+Given /^a NetLogo model named "([^\"]*)" uploaded by "([^\"]*)"$/ do |model_name, email_address|
+  p = Person.find_by_email_address(email_address)
+
+  @node = Factory.create(:node,
+                         :name => model_name,
+                         :visibility_id => 1,
+                         :changeability_id => 1)
+
+  @node_version = Factory.create(:node_version,
+                                 :node => @node,
+                                 :person => p)
+end
+
 Given /^a NetLogo model named "([^\"]*)" in the project "([^\"]*)"$/ do |model_name, project_name|
   @node = Factory.create(:node,
                          :name => model_name,
