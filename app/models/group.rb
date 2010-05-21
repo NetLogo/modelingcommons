@@ -12,6 +12,8 @@ class Group < ActiveRecord::Base
   has_many :nodes
   has_many :models, :class_name => 'Node', :include => [:tags, :node_versions]
 
+  before_destroy :remove_group_from_models
+
   def members
     self.memberships.map {|membership| membership.person}
   end
@@ -26,6 +28,17 @@ class Group < ActiveRecord::Base
 
   def administrators
     self.memberships.select {|membership| m.person if membership.is_administrator? }
+  end
+
+  def remove_group_from_models
+    models.each do |model|
+      new_settings = { :group => nil }
+
+      new_settings[:visibility_id] = 1 if model.visibility.short_form == 'g'
+      new_settings[:changeability_id] = 1 if model.changeability.short_form == 'g'
+
+      model.update_attributes(new_settings)
+    end
   end
 
 end

@@ -7,7 +7,7 @@ class MembershipController < ApplicationController
 
     membership.destroy
 
-    if membership.group.members.length == 1
+    if membership.group.members.empty?
       flash[:notice] = "You have left the group.  The group has also been removed from the system, as you were the last member."
     elsif membership.person == @person
       flash[:notice] = "You have left the group."

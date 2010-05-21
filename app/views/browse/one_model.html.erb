@@ -22,7 +22,7 @@ Visible by <%= @model.visibility.name %>
 Changeable by <%= @model.changeability.name %>
 
 <% if @model.changeability.is_group? %>
-    (<%= group_link(@model.group) -%>)
+    (<%= group_link(@model.group) -%> group)
 <% end %>
 
 <p>

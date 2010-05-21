@@ -7,4 +7,10 @@ class Membership < ActiveRecord::Base
   belongs_to :person
   belongs_to :group
 
+  after_destroy :remove_group_if_empty
+
+  def remove_group_if_empty
+    group.destroy if group.members.empty?
+  end
+
 end

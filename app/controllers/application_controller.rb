@@ -84,8 +84,6 @@ class ApplicationController < ActionController::Base
   def check_visibility_permissions
     return true if @model.nil? or @person.nil?
 
-    logger.warn "[check_visibility_permissions] Checking visibility permissions for model '#{@model.id}' and person '#{@person.id}'"
-
     # This only applies if the node is a model
     return true unless @model.is_model?
 
