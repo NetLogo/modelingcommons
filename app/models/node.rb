@@ -304,4 +304,16 @@ class Node < ActiveRecord::Base
     "#{RAILS_ROOT}/public/modelzips/#{zipfile_name}"
   end
 
+  def world_visible?
+    visibility.short_form == 'a'
+  end
+
+  def author_visible?
+    visibility.short_form == 'u'
+  end
+
+  def group_visible?
+    visibility.short_form == 'g'
+  end
+
 end

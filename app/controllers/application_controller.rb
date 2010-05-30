@@ -88,17 +88,15 @@ class ApplicationController < ActionController::Base
     return true unless @model.is_model?
 
     # If everyone can see this model, then deal with the simple case
-    return true if @model.visibility.short_form == 'a'
+    return true if @model.world_visible?
 
     # If only the author can see this model, then allow anyone who has
     # contributed to the model to see it
-    return true if @model.visibility.short_form == 'u' and @model.people.member?(@person)
+    return true if @model.author_visible? and @model.people.member?(@person)
 
     # If only the group can see this model, then check if the user is logged in
     # and a member of the group
-    if @model.group and @model.visibility.short_form == 'g'
-      return true if @model.group.approved_members.member?(@person)
-    end
+    return true if @model.group and @model.group_visible? and @model.group.approved_members.member?(@person)
 
     flash[:notice] = "You do not have permission to view this model."
     if @person
