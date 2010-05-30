@@ -82,30 +82,15 @@ class ApplicationController < ActionController::Base
   end
 
   def check_visibility_permissions
-    return true if @model.nil?
-
-    # This only applies if the node is a model
-    return true unless @model.is_model?
-
-    # If everyone can see this model, then deal with the simple case
-    return true if @model.world_visible?
-
-    # If only the author can see this model, then allow anyone who has
-    # contributed to the model to see it
-    return true if @model.author_visible? and @model.people.member?(@person)
-
-    # If only the group can see this model, then check if the user is logged in
-    # and a member of the group
-    return true if @model.group and @model.group_visible? and @model.group.approved_members.member?(@person)
+    return true if @model.nil? or @model.visible_to_user?(@person)
 
     flash[:notice] = "You do not have permission to view this model."
+
     if @person
       redirect_to :controller => :account, :action => :mypage
     else
       redirect_to :controller => :account, :action => :login
     end
-
-    return false
   end
 
   def check_changeability_permissions

@@ -316,4 +316,22 @@ class Node < ActiveRecord::Base
     visibility.short_form == 'g'
   end
 
+  def visible_to_user?(person)
+    # This only applies if the node is a model
+    return true unless is_model?
+
+    # If everyone can see this model, then deal with the simple case
+    return true if world_visible?
+
+    # If only the author can see this model, then allow anyone who has
+    # contributed to the model to see it
+    return true if author_visible? and people.member?(person)
+
+    # If only the group can see this model, then check if the user is logged in
+    # and a member of the group
+    return true if group and group_visible? and group.approved_members.member?(person)
+
+    return false
+  end
+
 end

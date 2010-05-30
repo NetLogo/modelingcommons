@@ -59,3 +59,59 @@ So that only certain people may read or write the model
     When I log in as "reuven@lerner.co.il" with password "password"
      And I go to the model page for "My cool model"
     Then I should see "My cool model"
+
+  Scenario: A private model is seen by the author when searching
+   Given the model "My cool model" is only visible by its authors
+    When I log in as "reuven@lerner.co.il" with password "password"
+     And I go to the search page
+     And I fill in "ool" for "Enter search term:"
+     And I press "Search!"
+    Then I should see "Models with 'ool' in their name"
+     And I should see "My cool model"
+     And I should see "No matches in author names."
+     And I should see "No matches in tag names."
+
+  Scenario: A private model is not seen by anonymous users when searching
+   Given the model "My cool model" is only visible by its authors
+    When I go to the search page
+     And I fill in "ool" for "Enter search term:"
+     And I press "Search!"
+    Then I should see "No matches in author names."
+     And I should see "No matches in model names."
+     And I should see "No matches in tag names."
+
+  Scenario: A group-only model is seen by the author when searching
+   Given a group named "mygroup"
+     And the model "My cool model" is only visible by members of the group "mygroup"
+     And the user "reuven@lerner.co.il" is a member of the group "mygroup"
+    When I log in as "reuven@lerner.co.il" with password "password"
+     And I go to the search page
+     And I fill in "ool" for "Enter search term:"
+     And I press "Search!"
+    Then I should see "Models with 'ool' in their name"
+     And I should see "My cool model"
+     And I should see "No matches in author names."
+     And I should see "No matches in tag names."
+
+  Scenario: A group-only model is not seen by logged-in users outside of the group when searching
+   Given a group named "mygroup"
+     And the model "My cool model" is only visible by members of the group "mygroup"
+     And the user "reuven@lerner.co.il" is a member of the group "mygroup"
+    When I log in as "nonauthor@lerner.co.il" with password "password"
+     And I go to the search page
+     And I fill in "ool" for "Enter search term:"
+     And I press "Search!"
+     And I should see "No matches in model names."
+     And I should see "No matches in author names."
+     And I should see "No matches in tag names."
+
+  Scenario: A world-viewable model is seen by the author when searching
+   Given the model "My cool model" is visible by the entire world
+    When I log in as "reuven@lerner.co.il" with password "password"
+     And I go to the search page
+     And I fill in "ool" for "Enter search term:"
+     And I press "Search!"
+    Then I should see "Models with 'ool' in their name"
+     And I should see "My cool model"
+     And I should see "No matches in author names."
+     And I should see "No matches in tag names."

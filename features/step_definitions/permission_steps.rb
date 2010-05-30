@@ -11,7 +11,8 @@ end
 
 Given /^the user "([^\"]*)" is a member of the group "([^\"]*)"$/ do |email_address, group_name|
   group = Group.find_by_name(group_name)
-  Factory.create(:membership, :group => group, :person => @person)
+  person = Person.find_by_email_address(email_address)
+  membership = Factory.create(:membership, :group => group, :person => person, :status => 'approved')
 end
 
 Given /^the model "([^\"]*)" is only visible by members of the group "([^\"]*)"$/ do |model_name, group_name|
