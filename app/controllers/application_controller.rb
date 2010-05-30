@@ -82,7 +82,7 @@ class ApplicationController < ActionController::Base
   end
 
   def check_visibility_permissions
-    return true if @model.nil? or @person.nil?
+    return true if @model.nil?
 
     # This only applies if the node is a model
     return true unless @model.is_model?
@@ -90,25 +90,23 @@ class ApplicationController < ActionController::Base
     # If everyone can see this model, then deal with the simple case
     return true if @model.visibility.short_form == 'a'
 
-    # If only the author can see this model, then deal with the simple case
-    # Note that the "user" permission works for anyone who has already submitted
-    # a version to this model.  Otherwise, things get a bit sticky.  I think.
-    if @model.visibility.short_form == 'u' and @model.people.member?(@person)
-      logger.warn "[check_visibility_permissions] Visiblity permission is 'u' and person '#{@person}' is in the member list.  Allowing."
-      return true
-    end
+    # If only the author can see this model, then allow anyone who has
+    # contributed to the model to see it
+    return true if @model.visibility.short_form == 'u' and @model.people.member?(@person)
 
-    # If only the group can see this model, then get the model's group, and
-    # determine if @person is a member of the group.
-    if @model.group
-      if @model.visibility.short_form == 'g' and @model.group and @model.group.approved_members.member?(@person)
-        logger.warn "[check_visibility_permissions] Visiblity permission is 'g' and person '#{@person}' is a member of group '#{@model.group.name}'.  Allowing."
-        return true
-      end
+    # If only the group can see this model, then check if the user is logged in
+    # and a member of the group
+    if @model.group and @model.visibility.short_form == 'g'
+      return true if @model.group.approved_members.member?(@person)
     end
 
     flash[:notice] = "You do not have permission to view this model."
-    redirect_to :controller => :account, :action => :mypage
+    if @person
+      redirect_to :controller => :account, :action => :mypage
+    else
+      redirect_to :controller => :account, :action => :login
+    end
+
     return false
   end
 
