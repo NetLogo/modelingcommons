@@ -103,7 +103,7 @@ class AccountController < ApplicationController
     end
 
     # Model updates
-    @recent_models = @the_person.models.select { |model| model.created_at >= how_new_is_new }.sort_by { |model| model.created_at }.reverse
+    @recent_models = @the_person.models.select { |model| model.updated_at >= how_new_is_new }.sort_by { |model| model.updated_at }.reverse
     @model_events = @recent_models;
 
     @group_recent_models = @the_person.models.select { |model| model.group and model.created_at >= how_new_is_new }.sort_by { |model| model.created_at }.reverse

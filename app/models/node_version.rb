@@ -7,6 +7,8 @@ class NodeVersion < ActiveRecord::Base
   validates_presence_of :node_id
   validates_presence_of :person_id
 
+  after_save :update_model_modification_time
+
   # acts_as_tsearch :fields => ["file_contents"]
 
   SECTION_SEPARATOR = '@#$#@#$#@'
@@ -49,6 +51,10 @@ class NodeVersion < ActiveRecord::Base
     else
       ""
     end
+  end
+
+  def update_model_modification_time
+    node.update_attributes(:updated_at => Time.now)
   end
 
 end
