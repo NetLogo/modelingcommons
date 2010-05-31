@@ -1,63 +1,37 @@
 <% @title = @model.name %>
 
-<!-- AddThis Button BEGIN -->
-<a class="addthis_button" href="http://addthis.com/bookmark.php?v=250&amp;username=reuvenmlerner"><img src="http://s7.addthis.com/static/btn/v2/lg-share-en.gif" width="125" height="16" alt="Bookmark and Share" style="border:0"/></a><script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#username=reuvenmlerner"></script>
-<!-- AddThis Button END -->
-
 <p>By:
-  <% @model.people.each_with_index do |p, index| %>
-  <% if index == 0 %>
-  <%= person_link(p) -%>
-  <% else %>
-  ,<%= person_link(p) -%>
+  <%= @model.people.map {|person| person_link(person)}.join(", ") -%>
+  &bull;
+  <%= model_visibility(@model) %>
+  &bull;
+  <%= model_changeability(@model) %>
+
+  <% if @model.author?(@person) -%>
+  &bull;
+  <%= link_to "Rename this model", :controller => :browse, :action => :rename_model, :id => @model.id %>
   <% end %>
-  <% end %>
-
-&bull;
-
-Visible by <%= @model.visibility.name %>
-
-<% if @model.visibility.is_group? %>
-    (<%= group_link(@model.group) -%> group)
-<% end %>
-
-&bull;
-
-Changeable by <%= @model.changeability.name %>
-
-<% if @model.changeability.is_group? %>
-    (<%= group_link(@model.group) -%> group)
-<% end %>
-
 <p>
 
   <div id="preview-image-div">
     <%= render :partial => "preview_image", :locals => {:model => @model} -%>
   </div>
 
-  <div id="model-atom-feed"><%= link_to image_tag("feed.png", :id => 'atom-image'), :controller => :browse, :action => :follow, :id => @model.id, :format => :atom %><%= link_to "Follow '#{@model.name}' in your reader", :controller => :browse, :action => :follow, :id => @model.id, :format => :atom -%></div>
-
-  <% if @person %>
-
-<% if @model.author?(@person) %>
-
-<p>
-
-<% if @model.projects.empty? %>
-    Not part of any project
-<% else %>
-    Part of project '<%= link_to @model.projects.first.name, :controller => :projects, :action => :show, :id => @model.projects.first.id -%>'
-<% end %>
+  <% if !@model.projects.empty? %>
+  Part of project '<%= link_to @model.projects.first.name, :controller => :projects, :action => :show, :id => @model.projects.first.id -%>'
+  <% end %>
 
 </p>
 
 <p>
-
-<%= link_to "Rename this model", :controller => :browse, :action => :rename_model, :id => @model.id %> &bull;
-<% end %>
+  <span id="model-atom-feed"><%= link_to image_tag("feed.png", :id => 'atom-image', :alt => "Follow '#{@model.name}' in your reader"), :controller => :browse, :action => :follow, :id => @model.id, :format => :atom -%></span>
+  <!-- AddThis Button BEGIN -->
+  <a class="addthis_button" href="http://addthis.com/bookmark.php?v=250&amp;username=reuvenmlerner"><img src="http://s7.addthis.com/static/btn/v2/lg-share-en.gif" width="125" height="16" alt="Bookmark and Share" style="border:0"/></a><script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#username=reuvenmlerner"></script>
+  <!-- AddThis Button END -->
 
   <%= link_to "Download", :controller => "browse", :action => "download_model", :id => @model.id -%> &bull;
 
+  <% if @person %>
   <% if @model.recommendations.select {|r| r.person_id == @person.id}.empty? %>
   <%= link_to "Recommend", :controller => :recommend, :action => :add_recommendation, :id => @model.id %>
   <% end %>
@@ -75,7 +49,6 @@ Changeable by <%= @model.changeability.name %>
   <% if !@person.spam_warning(@model) %>
   <%= link_to "Report as spam", :controller => :possible_spam, :action => :mark_as_spam, :id => @model.id %>
   <% end %>
-
   <% end %>
 </p>
 
@@ -95,7 +68,7 @@ Changeable by <%= @model.changeability.name %>
     <li><a href="<%= url_for :controller => :browse, :action => :browse_upload_tab, :id => @model.id, :tab => 'true' -%>" title="upload"><span>Upload</span></a></li>
 
     <% if @model.people.include?(@person) %>
-        <li><a href="<%= url_for :controller => :browse, :action => :browse_permissions_tab, :id => @model.id, :tab => 'true' -%>" title="permissions"><span>Permissions</span></a></li>
+    <li><a href="<%= url_for :controller => :browse, :action => :browse_permissions_tab, :id => @model.id, :tab => 'true' -%>" title="permissions"><span>Permissions</span></a></li>
     <% end %>
     <% end %>
   </ul>

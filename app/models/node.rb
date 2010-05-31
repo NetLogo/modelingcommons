@@ -340,4 +340,16 @@ class Node < ActiveRecord::Base
     return false
   end
 
+  def world_changeable?
+    changeability.short_form == 'a'
+  end
+
+  def author_changeable?
+    changeability.short_form == 'u'
+  end
+
+  def group_changeable?
+    changeability.short_form == 'g'
+  end
+
 end

@@ -5,9 +5,8 @@ body {
 }
 
 a:hover {
-    color: #3e2;
+    color: #000;
     background-color: #ff0;
-    border: 0.5px solid #000;
 }
 
 #main-menu-div {

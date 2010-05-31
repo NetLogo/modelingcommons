@@ -36,7 +36,7 @@ So that I can create subsets of the Modeling Commons community
   Scenario: A user should see a link allowing adding to a project
    Given a NetLogo model named "Test model"
     When I go to the model page for "Test model"
-    Then I should see "Not part of any project"
+    Then I should not see "Part of project"
 
   Scenario: A user should see his or her models for adding to a project
    Given a NetLogo model named "Test model"

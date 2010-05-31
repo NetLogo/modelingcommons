@@ -12,12 +12,10 @@ To learn, as well as share and collaborate with others
     When I log in as "reuven@lerner.co.il" with password "password"
      And I go to the model page for "Test model"
     Then I should see "Test model"
-     And I should see "Follow 'Test model' in your reader"
 
   Scenario: A user should be able to view the model page with logging in
     When I go to the model page for "Test model"
     Then I should see "Test model"
-     And I should see "Follow 'Test model' in your reader"
 
   Scenario Outline: Try each of the tabs for the model when not logged in
     When I go to the "<tab_name>" tab for "Test model"
