@@ -1,3 +1,5 @@
+# Controller that handles administrative functions
+
 class AdminController < ApplicationController
 
   before_filter :require_login

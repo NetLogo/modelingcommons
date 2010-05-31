@@ -1,3 +1,5 @@
+# Controller to deal witih projects
+
 class ProjectsController < ApplicationController
 
   def index

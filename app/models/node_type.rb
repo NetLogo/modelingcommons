@@ -1,3 +1,5 @@
+# Model that handles node types
+
 class NodeType < ActiveRecord::Base
   has_many :nodes
 

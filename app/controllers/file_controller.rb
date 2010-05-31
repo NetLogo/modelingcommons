@@ -1,3 +1,5 @@
+# Controller that deals with creating files
+
 class FileController < ApplicationController
 
   prepend_before_filter :get_model_from_id_param

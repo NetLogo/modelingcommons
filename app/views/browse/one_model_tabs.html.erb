@@ -6,7 +6,7 @@
 
 <div id="model-atom-feed"><%= link_to image_tag("feed.png"), :controller => :browse, :action => :follow, :id => @model.id, :format => :atom %> Follow activity about <%= @model.name -%> in your feed reader</div>
 
-<p><%= link_to "Tell a friend", :controller => :recommend, :action => :email_friend, :id => @model.id %> &bull;
+  <%= link_to "Download", :controller => "browse", :action => "download_model", :id => @model.id -%> &bull;
 
 <% if @recommendations.select {|r| r.person_id == @person.id}.empty? %>
 <%= link_to "Recommend this model", :controller => :recommend, :action => :add_recommendation, :id => @model.id %>
@@ -33,7 +33,6 @@
          <li><a href="<%= url_for :controller => :browse, :action => :browse_applet_tab, :id => @model.id -%>"><span>Run</span></a></li>
          <li><a href="<%= url_for :controller => :browse, :action => :browse_info_tab, :id => @model.id -%>"><span>Info</span></a></li>
          <li><a href="<%= url_for :controller => :browse, :action => :browse_procedures_tab, :id => @model.id -%>"><span>Procedures</span></a></li>
-         <li><a href="<%= url_for :controller => :browse, :action => :browse_download_tab, :id => @model.id -%>"><span>Download</span></a></li>
          <li><a href="<%= url_for :controller => :browse, :action => :browse_discuss_tab, :id => @model.id -%>"><span>Discuss</span></a></li>
          <li><a href="<%= url_for :controller => :browse, :action => :browse_history_tab, :id => @model.id -%>"><span>History</span></a></li>
          <li><a href="<%= url_for :controller => :browse, :action => :browse_files_tab, :id => @model.id -%>"><span>Files</span></a></li>

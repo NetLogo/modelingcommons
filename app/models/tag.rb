@@ -1,3 +1,5 @@
+# Model to store and track social tags
+
 class Tag < ActiveRecord::Base
   belongs_to :person
 

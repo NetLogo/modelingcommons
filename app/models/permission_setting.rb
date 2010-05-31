@@ -1,3 +1,5 @@
+# Model to handle different permission settings
+
 class PermissionSetting < ActiveRecord::Base
   ANYONE = 1
   OWNER = 2

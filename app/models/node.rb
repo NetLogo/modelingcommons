@@ -1,3 +1,5 @@
+# Model for an individual node in our graph
+
 class Node < ActiveRecord::Base
   MODEL_NODE_TYPE = 1
   PREVIEW_NODE_TYPE = 2
@@ -139,6 +141,10 @@ class Node < ActiveRecord::Base
 
   def people
     self.node_versions.map {|version| version.person}.uniq
+  end
+
+  def author?(person)
+    people.member?(person)
   end
 
   def file_contents
@@ -289,7 +295,7 @@ class Node < ActiveRecord::Base
   end
 
   def can_be_read_by?(person)
-    people.member?(person)
+    author?(person)
   end
 
   def download_name
@@ -325,7 +331,7 @@ class Node < ActiveRecord::Base
 
     # If only the author can see this model, then allow anyone who has
     # contributed to the model to see it
-    return true if author_visible? and people.member?(person)
+    return true if author_visible? and author?(person)
 
     # If only the group can see this model, then check if the user is logged in
     # and a member of the group

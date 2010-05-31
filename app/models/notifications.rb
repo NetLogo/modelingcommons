@@ -1,3 +1,5 @@
+# Model for sending e-mail notifications
+
 class Notifications < ActionMailer::Base
 
   ActionMailer::Base.smtp_settings = {

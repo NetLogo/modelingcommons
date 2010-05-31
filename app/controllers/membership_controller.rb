@@ -1,3 +1,5 @@
+# Controller that handles membership
+
 class MembershipController < ApplicationController
 
   before_filter :require_login, :except => [:find, :find_group]

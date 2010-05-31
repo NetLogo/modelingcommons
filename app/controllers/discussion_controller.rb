@@ -1,3 +1,5 @@
+# Controller that handles discussions
+
 class DiscussionController < ApplicationController
 
   before_filter :require_login, :only => [:new, :create, :delete]

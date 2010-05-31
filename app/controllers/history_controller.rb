@@ -1,3 +1,5 @@
+# Controller that shows the history of a model
+
 class HistoryController < ApplicationController
 
   prepend_before_filter :get_model_from_id_param, :except => [:compare_versions]

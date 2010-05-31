@@ -1,3 +1,5 @@
+# Model to keep track of discussion postings
+
 class Posting < ActiveRecord::Base
   belongs_to :node
   belongs_to :person

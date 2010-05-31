@@ -1,3 +1,5 @@
+# Controller that handles creation and working with user accounts
+
 class AccountController < ApplicationController
 
   before_filter :require_login, :only => [:edit, :update, :logout, :tags]

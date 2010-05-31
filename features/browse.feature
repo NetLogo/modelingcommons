@@ -29,7 +29,6 @@ To learn, as well as share and collaborate with others
     | applet      |
     | info        |
     | procedures  |
-    | download    |
     | discuss     |
     | history     |
     | tags        |
@@ -49,7 +48,6 @@ To learn, as well as share and collaborate with others
     | applet      |
     | info        |
     | procedures  |
-    | download    |
     | discuss     |
     | history     |
     | tags        |
@@ -61,14 +59,14 @@ To learn, as well as share and collaborate with others
   Scenario: A user should be able to recommend a model
     When I log in as "reuven@lerner.co.il" with password "password"
      And I go to the model page for "Test model"
-     And I follow "Recommend this model"
+     And I follow "Recommend"
     Then I should see "Added your recommendation."
      And I should see "1 recommendation to date"
 
   Scenario: A user should be able to see the list of recommenders
     When I log in as "reuven@lerner.co.il" with password "password"
      And I go to the model page for "Test model"
-     And I follow "Recommend this model"
+     And I follow "Recommend"
      And I follow "1 recommendation"
     Then I should see "Recommendations for Test model"
      And I should see "You recommended it"
@@ -76,38 +74,14 @@ To learn, as well as share and collaborate with others
   Scenario: A user should be able to flag a model as spam
     When I log in as "reuven@lerner.co.il" with password "password"
      And I go to the model page for "Test model"
-     And I follow "Report this model as spam"
+     And I follow "Report as spam"
     Then I should see "Thanks for letting us know about this possible spam!"
      And I should see "1 person marked it as spam"
 
-  Scenario: A user should be able to tell a friend about a model
-    When I log in as "reuven@lerner.co.il" with password "password"
-     And I go to the model page for "Test model"
-     And I follow "Tell a friend"
-     And I fill in "reuven@lerner.co.il" for "Your friend's e-mail address"
-     And I press "Send e-mail"
-    Then I should see "Sent e-mail to 'reuven@lerner.co.il'"
-
-  Scenario: A user must enter an e-mail address when telling a friend
-    When I log in as "reuven@lerner.co.il" with password "password"
-     And I go to the model page for "Test model"
-     And I follow "Tell a friend"
-     And I fill in "" for "Your friend's e-mail address"
-     And I press "Send e-mail"
-    Then I should see "You must enter an e-mail address."
-
-  Scenario: A user must enter a valid e-mail address when telling a friend
-    When I log in as "reuven@lerner.co.il" with password "password"
-     And I go to the model page for "Test model"
-     And I follow "Tell a friend"
-     And I fill in "blahblahblah" for "Your friend's e-mail address"
-     And I press "Send e-mail"
-    Then I should see "You must enter a valid e-mail address."
-
   Scenario: A user should be able to download the model
     When I log in as "reuven@lerner.co.il" with password "password"
-     And I go to the "download" tab for "Test model"
-     And I follow "Download model (as a zip file)"
+     And I go to the model page for "Test model"
+     And I follow "Download"
     Then the response should be of type "application/zip"
      And the response should be successful
 

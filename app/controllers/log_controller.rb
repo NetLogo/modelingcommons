@@ -1,3 +1,5 @@
+# Controller that handles logging
+
 class LogController < ApplicationController
 
   before_filter :require_login

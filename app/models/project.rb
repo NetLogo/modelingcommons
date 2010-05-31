@@ -1,3 +1,5 @@
+# Model to keep track of projects (i.e., collections of models)
+
 class Project < ActiveRecord::Base
   validates_presence_of :name
   validates_uniqueness_of :name

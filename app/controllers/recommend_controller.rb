@@ -1,3 +1,5 @@
+# Controller to deal with recommendations
+
 class RecommendController < ApplicationController
 
   prepend_before_filter :get_model_from_id_param, :except => [:email_friend, :email_friend_action]

@@ -1,3 +1,5 @@
+# Controller to create graphviz graphics
+
 class GraphController < ApplicationController
 
   before_filter :get_model_from_id_param

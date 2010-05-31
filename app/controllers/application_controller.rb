@@ -129,7 +129,7 @@ class ApplicationController < ActionController::Base
     # Note that the "user" permission works for anyone who has already submitted
     # a version to this model.  Otherwise, things get a bit sticky.  I think.
     return true if @model.changeability.short_form == 'u' and
-      @model.people.member?(@person)
+      @model.author?(@person)
 
     # If only the group can see this model, then get the model's group, and
     # determine if @person is a member of the group.

@@ -1,3 +1,5 @@
+# Model to keep track of tag-node joins
+
 class TaggedNode < ActiveRecord::Base
   belongs_to :node
   belongs_to :tag

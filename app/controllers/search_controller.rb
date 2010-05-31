@@ -1,3 +1,5 @@
+# Controller to deal with search
+
 class SearchController < ApplicationController
   def search_action
     if params[:search_term].blank?

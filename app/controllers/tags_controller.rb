@@ -1,3 +1,5 @@
+# Controller to deal with tagging
+
 class TagsController < ApplicationController
 
   before_filter :require_login, :only => [:new, :create, :edit, :update, :destroy]

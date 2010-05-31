@@ -1,3 +1,5 @@
+# Model for storing versions of nodes
+
 class NodeVersion < ActiveRecord::Base
   belongs_to :node
   belongs_to :person

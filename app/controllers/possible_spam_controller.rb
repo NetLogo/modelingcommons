@@ -1,3 +1,5 @@
+# Controller that lets users mark models and spam
+
 class PossibleSpamController < ApplicationController
 
   before_filter :require_login

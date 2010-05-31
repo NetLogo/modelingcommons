@@ -1,3 +1,5 @@
+# Controller that handles browsing through models
+
 class BrowseController < ApplicationController
 
   prepend_before_filter :get_model_from_id_param, :except => [:index, :list_models, :search, :news, :one_node, :view_random_model, :about]

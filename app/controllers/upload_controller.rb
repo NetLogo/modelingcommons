@@ -1,3 +1,5 @@
+# Controller to handle uploads
+
 class UploadController < ApplicationController
 
   before_filter :require_login

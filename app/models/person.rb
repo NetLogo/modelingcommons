@@ -1,3 +1,5 @@
+# Class to model people (users) of the system
+
 class Person < ActiveRecord::Base
   has_many :node_versions
   has_many :nodes, :through => :node_versions

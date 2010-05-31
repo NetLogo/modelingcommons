@@ -1,5 +1,9 @@
 <% @title = @model.name %>
 
+<!-- AddThis Button BEGIN -->
+<a class="addthis_button" href="http://addthis.com/bookmark.php?v=250&amp;username=reuvenmlerner"><img src="http://s7.addthis.com/static/btn/v2/lg-share-en.gif" width="125" height="16" alt="Bookmark and Share" style="border:0"/></a><script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#username=reuvenmlerner"></script>
+<!-- AddThis Button END -->
+
 <p>By:
   <% @model.people.each_with_index do |p, index| %>
   <% if index == 0 %>
@@ -8,10 +12,6 @@
   ,<%= person_link(p) -%>
   <% end %>
   <% end %>
-
-<!-- AddThis Button BEGIN -->
-<a class="addthis_button" href="http://addthis.com/bookmark.php?v=250&amp;username=reuvenmlerner"><img src="http://s7.addthis.com/static/btn/v2/lg-share-en.gif" width="125" height="16" alt="Bookmark and Share" style="border:0"/></a><script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#username=reuvenmlerner"></script>
-<!-- AddThis Button END -->
 
 &bull;
 
@@ -39,7 +39,7 @@ Changeable by <%= @model.changeability.name %>
 
   <% if @person %>
 
-<% if @model.people.member?(@person) %>
+<% if @model.author?(@person) %>
 
 <p>
 
@@ -56,10 +56,10 @@ Changeable by <%= @model.changeability.name %>
 <%= link_to "Rename this model", :controller => :browse, :action => :rename_model, :id => @model.id %> &bull;
 <% end %>
 
-<%= link_to "Tell a friend", :controller => :recommend, :action => :email_friend, :id => @model.id %> &bull;
+  <%= link_to "Download", :controller => "browse", :action => "download_model", :id => @model.id -%> &bull;
 
   <% if @model.recommendations.select {|r| r.person_id == @person.id}.empty? %>
-  <%= link_to "Recommend this model", :controller => :recommend, :action => :add_recommendation, :id => @model.id %>
+  <%= link_to "Recommend", :controller => :recommend, :action => :add_recommendation, :id => @model.id %>
   <% end %>
 
   <% if !@model.recommendations.empty? %>
@@ -73,7 +73,7 @@ Changeable by <%= @model.changeability.name %>
   <% end %>
 
   <% if !@person.spam_warning(@model) %>
-  <%= link_to "Report this model as spam", :controller => :possible_spam, :action => :mark_as_spam, :id => @model.id %>
+  <%= link_to "Report as spam", :controller => :possible_spam, :action => :mark_as_spam, :id => @model.id %>
   <% end %>
 
   <% end %>
@@ -85,7 +85,6 @@ Changeable by <%= @model.changeability.name %>
     <li><a href="<%= url_for :controller => :browse, :action => :browse_applet_tab, :id => @model.id , :tab => 'true' -%>" title="run"><span>Run</span></a></li>
     <li><a href="<%= url_for :controller => :browse, :action => :browse_info_tab, :id => @model.id , :tab => 'true' -%>" title="info"><span>Info</span></a></li>
     <li><a href="<%= url_for :controller => :browse, :action => :browse_procedures_tab, :id => @model.id , :tab => 'true' -%>" title="procedures"><span>Procedures</span></a></li>
-    <li><a href="<%= url_for :controller => :browse, :action => :browse_download_tab, :id => @model.id , :tab => 'true' -%>" title="download"><span>Download</span></a></li>
     <li><a href="<%= url_for :controller => :browse, :action => :browse_discuss_tab, :id => @model.id , :tab => 'true' -%>" title="discuss"><span>Discuss</span></a></li>
     <li><a href="<%= url_for :controller => :browse, :action => :browse_history_tab, :id => @model.id , :tab => 'true' -%>" title="history"><span>History</span></a></li>
     <li><a href="<%= url_for :controller => :browse, :action => :browse_tags_tab, :id => @model.id , :tab => 'true' -%>" title="tags"><span>Tags</span></a></li>
