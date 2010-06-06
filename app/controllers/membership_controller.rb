@@ -166,15 +166,15 @@ class MembershipController < ApplicationController
   end
 
   def new_group
-    render :layout => false
+    render :layout => 'plain'
   end
 
   def find_group
-    render :layout => false
+    render :layout => 'plain'
   end
 
   def manage_groups
-    render :layout => false
+    render :layout => 'plain'
   end
 
   def invite

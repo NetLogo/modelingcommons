@@ -1,8 +1,8 @@
 <% @title = @model.name %>
 
-<p><%= link_to image_tag("download.png", :height => 40, :width => 40, :border=>0, :alt => "Download the '#{@model.name}' model"), :controller => :browse, :action => :download_model, :id => @model.id   %> <%= link_to "Download this model", :controller => "browse", :action => "download_model", :id => @model.id -%> &bull;
+<p><%= link_to image_tag("download.png", :height => 40, :width => 40, :border=>0, :alt => "Download the '#{@model.name}' model", :title => "Download the '#{@model.name}' model"), :controller => :browse, :action => :download_model, :id => @model.id   %> <%= link_to "Download this model", :controller => "browse", :action => "download_model", :id => @model.id -%> &bull;
 
-By:
+  By:
   <%= @model.people.map {|person| person_link(person)}.join(", ") -%>
   &bull;
   <%= model_visibility(@model) %>
@@ -15,26 +15,26 @@ By:
   <% end %>
 </p>
 
+<div id="preview-image-div">
+  <%= render :partial => "preview_image", :locals => {:model => @model} -%>
+</div>
+
+<% if !@model.projects.empty? %>
 <p>
-
-  <div id="preview-image-div">
-    <%= render :partial => "preview_image", :locals => {:model => @model} -%>
-  </div>
-
-  <% if !@model.projects.empty? %>
   Part of project '<%= link_to @model.projects.first.name, :controller => :projects, :action => :show, :id => @model.projects.first.id -%>'
-  <% end %>
-
 </p>
+<% end %>
 
 <p>
-  <span id="model-atom-feed"><%= link_to image_tag("feed.png", :id => 'atom-image', :alt => "Follow '#{@model.name}' in your reader"), :controller => :browse, :action => :follow, :id => @model.id, :format => :atom -%></span>
+  <span id="model-atom-feed"><%= link_to image_tag("feed.png", :id => 'atom-image', :alt => "Follow '#{@model.name}' in your feed reader", :title => "Follow '#{@model.name}' in your feed reader"), :controller => :browse, :action => :follow, :id => @model.id, :format => :atom -%></span>
   <!-- AddThis Button BEGIN -->
   <a class="addthis_button" href="http://addthis.com/bookmark.php?v=250&amp;username=reuvenmlerner"><img src="http://s7.addthis.com/static/btn/v2/lg-share-en.gif" width="125" height="16" alt="Bookmark and Share" style="border:0"/></a><script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#username=reuvenmlerner"></script>
   <!-- AddThis Button END -->
 
+  &bull;
   <% if @person %>
   <% if @model.recommendations.select {|r| r.person_id == @person.id}.empty? %>
+  <%= link_to image_tag("thumb.jpeg", :id => 'thumbs-up-image', :height => 30, :width => 30, :alt => "Recommend '#{@model.name}' to other users", :title => "Recommend '#{@model.name}' ot other users"), :controller => :recommend, :action => :add_recommendation, :id => @model.id -%>
   <%= link_to "Recommend", :controller => :recommend, :action => :add_recommendation, :id => @model.id %>
   <% end %>
 

@@ -143,7 +143,7 @@ class AccountController < ApplicationController
   end
 
   def mygroups
-    render :layout => false
+    render :layout => 'plain'
   end
 
   def send_password_action

@@ -16,6 +16,7 @@
   </ul>
   <% end -%>
 
-<p><img src="/graph/graphviz/<%= @model.id -%>" /></p>
-
+<% if @model.parent or !@model.models.empty? %>
+<p><img src="/graph/graphviz/<%= @model.id -%>" alt="Graph of models related to '<%= @model.name -%>' " /></p>
+<% end %>
 </div>
