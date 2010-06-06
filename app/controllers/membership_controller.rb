@@ -129,7 +129,7 @@ class MembershipController < ApplicationController
   end
 
   def find
-    render :layout => false
+    render :layout => 'plain'
   end
 
   def find_action
@@ -149,7 +149,7 @@ class MembershipController < ApplicationController
       return
     end
 
-    render :layout => false
+    render :layout => 'plain'
   end
 
   def one_group
@@ -180,7 +180,7 @@ class MembershipController < ApplicationController
   def invite
     @potential_invitees = Person.find(:all, :order => "last_name, first_name").map {|person| ["#{person.last_name}, #{person.first_name} (#{person.email_address})", person.id]}
 
-    render :layout => false
+    render :layout => 'plain'
   end
 
   def list_models

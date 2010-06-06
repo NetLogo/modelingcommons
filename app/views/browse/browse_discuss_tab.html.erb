@@ -3,9 +3,11 @@
   <b>Please start the conversation about this model.</b>
   <% end %>
 
+  <% if !@model.postings.empty? %>
   <table id="discussion">
     <%= render :partial => "discussion/one_posting", :collection => @model.postings.sort_by {|posting| posting.created_at}, :as => :posting -%>
   </table>
+  <% end %>
 
   <%  if @person %>
 
@@ -16,7 +18,7 @@
   <table id="posting-table">
     <tr>
       <td><label for="new_posting_title">Title</label></td>
-      <td><%= form.text_field :title %>
+      <td><%= form.text_field :title %></td>
     </tr>
     <tr>
       <td><label for="new_posting_body">Body</label></td>

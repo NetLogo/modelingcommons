@@ -1,6 +1,9 @@
 <% @title = 'Your tags' %>
 
 <h2>Tags you created</h2>
+<% if @person.tags.empty? %>
+<p>You haven't created any tags.</p>
+<% else %>
 <ul>
   <% @person.tags.sort_by {|t| t.name}.each do |tag| %>
   <li><%= link_to tag.name, :controller => :tags, :action => :one_tag, :id => tag.id -%>
@@ -16,10 +19,15 @@
   </li>
   <% end %>
 </ul>
+<% end %>
 
 <h2>Tags you applied</h2>
+<% if @person.tagged_nodes.empty? %>
+<p>You haven't applied any tags.</p>
+<% else %>
 <ul>
   <% @person.tagged_nodes.sort_by {|tn| tn.tag.name}.each do |tm| %>
   <li>Applied <%= tag_link(tm.tag) -%> to <%= model_link(tm.node) -%>, with a comment of <%= tm.comment %>, <%= distance_of_time_in_words(Time.now, tm.updated_at) -%> ago </li>
   <% end %>
 </ul>
+<% end %>
