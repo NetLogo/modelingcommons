@@ -9,7 +9,5 @@
 <p><%= link_to "Jump to a random model", :controller => :browse, :action => :view_random_model %></p>
 <p><%= link_to "See only models in your groups", :controller => :membership, :action => :list_models %></p>
 
-<%= will_paginate @models %>
 <%= render :partial => "model_list", :object => @models %>
-<%= will_paginate @models %>
 <% end %>

@@ -163,11 +163,11 @@ div ul.subsection_tabs li.tab a:hover {
     margin-bottom: 2em;
 }
 
-.dataTables_paginate {
-        width: 44px;
-        * width: 50px;
-        float: right;
-        text-align: right;
+/* ------------------------------------------------------------ */
+/* DataTables */
+
+.datatable .even {
+  background-color: #abcde0;
 }
 
 /* ------------------------------------------------------------ */

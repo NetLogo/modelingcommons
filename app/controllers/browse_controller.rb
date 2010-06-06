@@ -8,9 +8,9 @@ class BrowseController < ApplicationController
   before_filter :check_visibility_permissions, :only => [:one_model, :model_contents, :one_applet ]
 
   def list_models
-    @models = Node.paginate(:page => params[:page],
-                            :order => 'name ASC',
-                            :conditions => ["node_type_id = ? ", Node::MODEL_NODE_TYPE])
+    @models = Node.find(:all,
+                        :order => 'name ASC',
+                        :conditions => ["node_type_id = ? ", Node::MODEL_NODE_TYPE])
   end
 
   def one_model
