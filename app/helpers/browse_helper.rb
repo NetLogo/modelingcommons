@@ -11,10 +11,10 @@ module BrowseHelper
   end
 
   def model_changeability(model)
-    output = "Changeable by #{model.visibility.name}"
+    output = "Changeable by #{model.changeability.name}"
 
     if model.group_changeable?
-      output += "(#{group_link(model.group)} group)"
+      output += " (#{group_link(model.group)} group)"
     end
 
     output

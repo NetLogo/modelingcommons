@@ -40,7 +40,7 @@ class UploadController < ApplicationController
                         :description => 'Initial upload')
 
       if new_version.save
-        flash[:notice] = "Thanks for uploading the new model called '#{model_name}'."
+        flash.now[:notice] = "Thanks for uploading the new model called '#{model_name}'."
       else
         flash[:notice] = "Error creating a new model version; it was not saved."
         redirect_to :back
@@ -71,7 +71,7 @@ class UploadController < ApplicationController
 
 
         if preview_version.save
-          flash[:notice] << "  The preview image was also saved."
+          flash.now[:notice] << "  The preview image was also saved."
         else
           flash[:notice] = "Error creating a new preview version; it was not saved."
           redirect_to :back

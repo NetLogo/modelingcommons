@@ -12,7 +12,7 @@ So that I can know when they have been updated
   Scenario: A user may follow a model
     When I log in as "reuven@lerner.co.il" with password "password"
      And I go to the model page for "amodel"
-     And I follow "Follow 'amodel' in your reader"
+     And I follow "atom-image"
 
   Scenario: A user may follow a user
     When I log in as "reuven@lerner.co.il" with password "password"

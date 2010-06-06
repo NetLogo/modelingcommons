@@ -13,6 +13,3 @@ So that I can explore families of models
     Then I should see "This model does not have any ancestors."
      And I should see "This model does not have any descendants."
 
-  Scenario: We should be able to get a graph for our model
-    When I go to the related graph for "Test model"
-    Then I should not see "This model does not have any descendants."

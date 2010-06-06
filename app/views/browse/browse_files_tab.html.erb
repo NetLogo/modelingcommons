@@ -40,7 +40,7 @@
     <tr>
       <td>File</td>
       <td><%= file_field_tag :uploaded_file, :size => 60 %>
-        <%= hidden_field_tag :id, @model.id %>
+        <%= hidden_field_tag :id, @model.id %></td>
     </tr>
 
     <tr>
@@ -50,7 +50,7 @@
 
     <tr>
       <td>File type:</td>
-      <td><%= select("document", "node_type_id", NodeType.find(:all, :conditions => "id > 1").sort_by {|nt| nt.name}.collect {|nt| [ nt.name, nt.id ] }, { :include_blank => false }) %>
+      <td><%= select("document", "node_type_id", @non_model_file_types, { :include_blank => false }) %></td>
     </tr>
 
     <tr>

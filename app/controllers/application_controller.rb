@@ -152,7 +152,8 @@ class ApplicationController < ActionController::Base
     @model = Node.models.find(params[:id])
     @node = @model
   rescue
-    render :text => "No model with ID '#{params[:id]}'"
+    flash[:notice] = "No model with ID '#{params[:id]}'"
+    redirect_to :back
     return
   end
 

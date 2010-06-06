@@ -8,12 +8,6 @@ class DiscussionController < ApplicationController
     params[:new_posting][:person_id] = @person.id
     @posting = Posting.create(params[:new_posting])
 
-    if @posting.save
-      flash[:notice] = "Thanks for contributing to our discussion!"
-    else
-      flash[:notice] = "Error saving your posting.  Sorry!"
-    end
-
     respond_to do |format|
 
       format.html do

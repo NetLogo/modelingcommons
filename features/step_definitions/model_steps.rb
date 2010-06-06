@@ -79,6 +79,10 @@ Given /^a version of "([^\"]*)" with different content$/ do |model_name|
                                      :file_contents => File.open(RAILS_ROOT + "/features/upload_files/test2.nlogo").readlines.join("\n"))
 end
 
+Given /^a node type of "([^\"]*)"$/ do |node_type|
+  Factory.create(:node_type, :name => node_type)
+end
+
 Given /^I spill my guts$/ do
   STDERR.puts response.body
 end
