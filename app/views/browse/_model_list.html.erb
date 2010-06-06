@@ -12,7 +12,7 @@
 
   <tr>
     <td>
-      <img src="/browse/display_preview/<%= model.id %>" width="30" height="30" />
+      <img src="/browse/display_preview/<%= model.id %>" width="30" height="30" alt="Preview of model '#{model.name}'" />
       <%= link_to model.name, :controller => "browse", :action => "one_model", :id => model.id %><%= render :partial => "browse/preview_image", :locals => {:model => @model} -%>
     </td>
     <td>

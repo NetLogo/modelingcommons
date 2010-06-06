@@ -1,3 +1,5 @@
+require 'be_valid_asset'
+
 include BeValidAsset
 
 BeValidAsset::Configuration.display_invalid_content = true
