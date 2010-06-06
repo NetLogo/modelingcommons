@@ -121,11 +121,18 @@ class BrowseController < ApplicationController
   end
 
   def view_random_model
-    redirect_to :controller => :browse, :action => :one_model, :id => Node.models.rand.id
+    models = Node.models.select {|model| model.visible_to_user?(@person)}
+
+    if models.empty?
+      flash[:notice] = 'Sorry, but you do not have permission to see any models.'
+      redirect_to :controller => :account, :action => :login
+    end
+
+    redirect_to :controller => :browse, :action => :one_model, :id => models.rand.id
   end
 
   # Define methods for tabs
-  ['preview', 'applet', 'info', 'procedures', 'download', 'discuss', 'history', 'tags',  'files',
+  ['preview', 'applet', 'info', 'procedures', 'discuss', 'history', 'tags',  'files',
    'related', 'upload', 'permissions'].each do |tab_name|
     define_method("browse_#{tab_name}_tab".to_sym) do
       render :layout => 'browse_tab'

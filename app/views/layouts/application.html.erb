@@ -22,7 +22,7 @@
   <body>
     <div id="main-menu-div">
       <ul id="main-menu">
-        <li class="menu-option"><%= link_to_unless_current "Home", :controller => :account, :action => :mypage %></li>
+        <li class="menu-option"><%= link_to "Home", :controller => :account, :action => :mypage %></li>
         <li class="menu-option"><%= link_to "List models", :controller => :browse, :action => :list_models %></li>
         <% if @person %>
         <li class="menu-option"><%= link_to "Add model", :controller => :upload, :action => :new_model %></li>
