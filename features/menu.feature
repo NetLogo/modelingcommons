@@ -13,7 +13,6 @@ and even more menu options when I am not logged in.
     And I should see "You must first log in"
     And I should see "Home"
     And I should see "List models"
-    And I should see "About"
     And I should see "Help"
     And I should not see "Add model"
     And I should not see "Groups"
@@ -26,7 +25,6 @@ and even more menu options when I am not logged in.
     Then I should see "Modeling Commons"
     And I should see "Home"
     And I should see "List models"
-    And I should see "About"
     And I should see "Help"
     And I should see "Add model"
     And I should see "Groups"
@@ -70,10 +68,6 @@ and even more menu options when I am not logged in.
     And I go to the tags page
     Then I should see "Tags you created"
     And I should see "Tags you applied"
-
-  Scenario: Users can go to the "About" page
-    When I go to the about page
-    Then I should see "About the Modeling Commons"
 
   Scenario: Users can go to the "Help" page
     When I go to the help page

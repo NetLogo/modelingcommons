@@ -30,7 +30,6 @@
         <li class="menu-option"><%= link_to "Groups", :controller => :account, :action => :groups %></li>
         <li class="menu-option"><%= link_to "Tags", :controller => :account, :action => :tags, :id => @person.id  %></li>
         <% end %>
-        <li class="menu-option"><%= link_to_unless_current "About", :controller => :browse, :action => :about %></li>
         <li class="menu-option"><%= link_to "Help", :controller => :help, :action => :index  %></li>
         <li id="header_search_form_box">
 
