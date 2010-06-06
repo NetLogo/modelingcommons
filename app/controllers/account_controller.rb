@@ -30,6 +30,11 @@ class AccountController < ApplicationController
   end
 
   def update
+    if params[:person][:password].blank?
+      params[:person].delete(:password)
+      params[:person].delete(:password_confirmation)
+    end
+
     begin
       @person.update_attributes!(params[:person])
       flash[:notice] = "Successfully updated your account."
