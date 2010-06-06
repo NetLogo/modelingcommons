@@ -2,7 +2,7 @@
   <% if @model.parent.nil? -%>
   <p>This model does not have any ancestors.</p>
   <% else -%>
-  <p><b>Parent:</b> <%= link_to @model.parent.name, :controller => 'browse', :action => 'one_model', :id => @model.parent.id  -%></p>
+  <p><b>Parent:</b> <%= link_to @model.parent.name, :controller => 'browse', :action => 'one_model', :anchor => 'related', :id => @model.parent.id  -%></p>
   <% end -%>
 
   <% if @model.models.empty? -%>
@@ -11,7 +11,7 @@
   <h3>Children:</h3>
   <ul>
     <% @model.models.each do |child| -%>
-    <li><%= link_to child.name, :controller => 'browse', :action => 'one_model', :id => child.id  -%></li>
+    <li><%= link_to child.name, :controller => 'browse', :action => 'one_model', :anchor => 'related', :id => child.id  -%></li>
     <% end -%>
   </ul>
   <% end -%>

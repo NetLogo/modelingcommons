@@ -1,6 +1,8 @@
 <% @title = @model.name %>
 
-<p>By:
+<p><%= link_to image_tag("download.png", :height => 40, :width => 40, :border=>0, :alt => "Download the '#{@model.name}' model"), :controller => :browse, :action => :download_model, :id => @model.id   %> <%= link_to "Download this model", :controller => "browse", :action => "download_model", :id => @model.id -%> &bull;
+
+By:
   <%= @model.people.map {|person| person_link(person)}.join(", ") -%>
   &bull;
   <%= model_visibility(@model) %>
@@ -28,8 +30,6 @@
   <!-- AddThis Button BEGIN -->
   <a class="addthis_button" href="http://addthis.com/bookmark.php?v=250&amp;username=reuvenmlerner"><img src="http://s7.addthis.com/static/btn/v2/lg-share-en.gif" width="125" height="16" alt="Bookmark and Share" style="border:0"/></a><script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#username=reuvenmlerner"></script>
   <!-- AddThis Button END -->
-
-  <%= link_to "Download", :controller => "browse", :action => "download_model", :id => @model.id -%> &bull;
 
   <% if @person %>
   <% if @model.recommendations.select {|r| r.person_id == @person.id}.empty? %>
