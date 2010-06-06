@@ -33,8 +33,8 @@
         <li class="menu-option"><%= link_to "Help", :controller => :help, :action => :index  %></li>
         <li id="header_search_form_box">
 
-          <% form_tag(url_for(:controller => :search, :action => :search_action), :html => { :id => "navbar-search-form"}) do %>
-          <%= text_field_tag :search_term, 'Search', {:size => 5, :id => 'navbar-search-form'} -%>
+          <% form_tag(url_for(:controller => :search, :action => :search_action), { :id => "navbar-search-form"}) do %>
+          <%= text_field_tag :search_term, 'Search', {:size => 5, :id => 'navbar-search-form-text'} -%>
 
           <% end %>
 
