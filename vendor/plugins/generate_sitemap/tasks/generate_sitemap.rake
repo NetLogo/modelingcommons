@@ -9,7 +9,7 @@ namespace :plugin do
   task :generate_sitemap do
 
     # set domain to crawl
-    DOMAIN = 'bluerectangle.com'
+    DOMAIN = 'modelingcommons.org'
     BASE_URL = 'http://' + DOMAIN
 
     STDERR.puts "Now crawling from base URL '#{BASE_URL}'"
