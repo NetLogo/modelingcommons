@@ -25,7 +25,7 @@ end
 namespace :rake do
  desc "Generate a sitemap on a remote server."
  task :generate_sitemap do
-    run("cd #{deploy_to}/current; /usr/bin/rake plugin:generate_sitemap RAILS_ENV=production")
+    run("cd #{deploy_to}/current; /usr/bin/rake sitemap:generate RAILS_ENV=production")
  end
 end
 

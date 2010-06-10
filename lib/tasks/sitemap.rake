@@ -1,12 +1,11 @@
-# -*-ruby-*-
 require 'hpricot'
 require 'open-uri'
 require 'builder'
 
-namespace :plugin do
+namespace :sitemap do
   desc 'Generates sitemap.xml file in public directory'
 
-  task :generate_sitemap do
+  task :generate => :environment do
 
     # set domain to crawl
     DOMAIN = 'modelingcommons.org'
@@ -16,7 +15,29 @@ namespace :plugin do
 
     # holds pages to go into map, and pages crawled
     @pages = []
-    @pages_crawled = []
+
+    @pages = [ ]
+    @pages += Tag.all.map { |t| "http://modelingcommons.org/tags/one_tag/#{t.id}"}
+    @pages += Person.all.map { |person| "http://modelingcommons.org/?id=#{person.id}"}
+    @pages += Project.all.map { |p| "http://modelingcommons.org/projects/#{p.id}"}
+
+    Node.all.each do |node|
+      next unless node.is_model?
+      @pages << "http://modelingcommons.org/browse/one_model/#{node.id}"
+      @pages << "http://modelingcommons.org/browse/one_model/#{node.id}"
+      @pages << "http://modelingcommons.org/browse/browse_preview_tab/#{node.id}?tab=true"
+      @pages << "http://modelingcommons.org/browse/browse_applet_tab/#{node.id}?tab=true"
+      @pages << "http://modelingcommons.org/browse/browse_info_tab/#{node.id}?tab=true"
+      @pages << "http://modelingcommons.org/browse/browse_procedures_tab/#{node.id}?tab=true"
+      @pages << "http://modelingcommons.org/browse/browse_discuss_tab/#{node.id}?tab=true"
+      @pages << "http://modelingcommons.org/browse/browse_history_tab/#{node.id}?tab=true"
+      @pages << "http://modelingcommons.org/browse/browse_tags_tab/#{node.id}?tab=true"
+      @pages << "http://modelingcommons.org/browse/browse_files_tab/#{node.id}?tab=true"
+      @pages << "http://modelingcommons.org/browse/browse_related_tab/#{node.id}?tab=true"
+      @pages << "http://modelingcommons.org/browse/download_model/#{node.id}"
+    end
+
+    @pages_crawled = @pages
 
     # start with home page
     crawl_for_links('/')
@@ -32,6 +53,7 @@ namespace :plugin do
     xml.comment! "Generated on: " + Time.now.to_s
     xml.urlset("xmlns" => "http://www.sitemaps.org/schemas/sitemap/0.9") {
       # loop through array of pages, and build sitemap.xml
+
       @pages.sort.each {|link|
         xml.url {
           if link.index(BASE_URL) == 0

@@ -142,7 +142,7 @@ class BrowseController < ApplicationController
   def browse_files_tab
     @non_model_file_types = NodeType.find(:all, :conditions => "id > 1").sort_by {|nt| nt.name}.collect {|nt| [ nt.name, nt.id ] }
     if @non_model_file_types.empty?
-      flash[:notice] = "No file types have been defined in the system!  Please contact an administrator to fix this problem."
+      flash[:notice] = "No file types have been defined in the system!  Please contact an administrator to fix this problem on the '#{params[:controller]}' - '#{params[:action]}' page."
       redirect_to :controller => :account, :action => :mypage
       return
     end

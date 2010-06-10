@@ -1,6 +1,6 @@
 Factory.define(:node) do |node|
   node.name "node"
-  node.node_type_id 1
+  node.association :node_type
 
   node.association :visibility, :factory => :permission_setting
   node.association :changeability, :factory => :permission_setting

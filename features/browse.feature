@@ -30,7 +30,7 @@ To learn, as well as share and collaborate with others
     | discuss     | Return to page for the 'Test model' model   |
     | history     | Return to page for the 'Test model' model   |
     | tags        | Return to page for the 'Test model' model   |
-    | files       | Return to page for the 'Test model' model   |
+#   | files       | Return to page for the 'Test model' model   |
     | related     | Return to page for the 'Test model' model   |
     | upload      | Return to page for the 'Test model' model   |
     | permissions | Return to page for the 'Test model' model   |
@@ -49,7 +49,7 @@ To learn, as well as share and collaborate with others
     | discuss     |
     | history     |
     | tags        |
-    | files       |
+#   | files       |
     | related     |
     | upload      |
     | permissions |

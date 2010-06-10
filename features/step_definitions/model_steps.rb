@@ -3,10 +3,13 @@ def person
 end
 
 Given /^a NetLogo model named "([^\"]*)"$/ do |model_name|
+  @model_node_type = Factory.create(:node_type, :id => 1, :name => 'model')
+
   @node = Factory.create(:node,
                          :name => model_name,
                          :visibility_id => 1,
-                         :changeability_id => 1)
+                         :changeability_id => 1,
+                         :node_type => @model_node_type)
 
   @node_version = Factory.create(:node_version,
                                  :node => @node,
@@ -14,12 +17,15 @@ Given /^a NetLogo model named "([^\"]*)"$/ do |model_name|
 end
 
 Given /^a NetLogo model named "([^\"]*)" uploaded by "([^\"]*)"$/ do |model_name, email_address|
+  @model_node_type = Factory.create(:node_type, :id => 1, :name => 'model')
+
   p = Person.find_by_email_address(email_address)
 
   @node = Factory.create(:node,
                          :name => model_name,
                          :visibility_id => 1,
-                         :changeability_id => 1)
+                         :changeability_id => 1,
+                         :node_type => @model_node_type)
 
   @node_version = Factory.create(:node_version,
                                  :node => @node,
@@ -27,10 +33,13 @@ Given /^a NetLogo model named "([^\"]*)" uploaded by "([^\"]*)"$/ do |model_name
 end
 
 Given /^a NetLogo model named "([^\"]*)" in the project "([^\"]*)"$/ do |model_name, project_name|
+  @model_node_type = Factory.create(:node_type, :id => 1, :name => 'model')
+
   @node = Factory.create(:node,
                          :name => model_name,
                          :visibility_id => 1,
-                         :changeability_id => 1)
+                         :changeability_id => 1,
+                         :node_type => @model_node_type)
 
   @node_version = Factory.create(:node_version,
                                  :node => @node,
@@ -79,10 +88,6 @@ Given /^a version of "([^\"]*)" with different content$/ do |model_name|
                                      :file_contents => File.open(RAILS_ROOT + "/features/upload_files/test2.nlogo").readlines.join("\n"))
 end
 
-Given /^a node type of "([^\"]*)"$/ do |node_type|
-  Factory.create(:node_type, :name => node_type)
-end
-
 Given /^I spill my guts$/ do
   STDERR.puts response.body
 end
@@ -93,4 +98,8 @@ end
 
 Given /^the response should be of type "([^\"]*)"$/ do |mime_type|
   response.content_type.should == mime_type
+end
+
+Given /^a node type of "([^\"]*)"$/ do |node_type_name|
+  Factory.create(:node_type, :name => node_type_name)
 end
