@@ -1,7 +1,8 @@
 <div>
-  <% if @model.name =~ /3D/ %>
+  <% if @model.cannot_be_run_as_applet? %>
   <p>Sorry, but 3D models cannot be viewed as applets.  You must download this model to try it.</p>
   <% else %>
+  <!-- browse_applet_tab -->
   <applet
      code="<%= @model.applet_class -%>"
      align="bottom"

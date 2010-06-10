@@ -366,4 +366,9 @@ class Node < ActiveRecord::Base
     changeability.short_form == 'g'
   end
 
+  def cannot_be_run_as_applet?
+    return true if name =~ /3D/
+    return true if procedures_tab =~ /hubnet-/
+  end
+
 end
