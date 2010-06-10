@@ -117,7 +117,7 @@ development:
   # turn off communication to RPM service in development mode.
   # NOTE: for initial evaluation purposes, you may want to temporarily turn
   # the agent on in development mode.
-  enabled: true
+  enabled: false
 
   # When running in Developer Mode, the New Relic Agent will present
   # performance information on the last 100 transactions you have

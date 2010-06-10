@@ -19,21 +19,21 @@ To learn, as well as share and collaborate with others
 
   Scenario Outline: Try each of the tabs for the model when not logged in
     When I go to the "<tab_name>" tab for "Test model"
-    Then I should see "Return to page for the 'Test model' model"
+    Then I should see "<string_to_find>"
 
   Scenarios: Different tabs
-    | tab_name    |
-    | preview     |
-    | applet      |
-    | info        |
-    | procedures  |
-    | discuss     |
-    | history     |
-    | tags        |
-    | files       |
-    | related     |
-    | upload      |
-    | permissions |
+    | tab_name    | string_to_find                              |
+    | preview     | Return to page for the 'Test model' model   |
+    | applet      | Return to page for the 'Test model' model   |
+    | info        | Return to page for the 'Test model' model   |
+    | procedures  | Return to page for the 'Test model' model   |
+    | discuss     | Return to page for the 'Test model' model   |
+    | history     | Return to page for the 'Test model' model   |
+    | tags        | Return to page for the 'Test model' model   |
+    | files       | Return to page for the 'Test model' model   |
+    | related     | Return to page for the 'Test model' model   |
+    | upload      | Return to page for the 'Test model' model   |
+    | permissions | Return to page for the 'Test model' model   |
 
   Scenario Outline: Try each of the tabs for the model when I am logged in
     When I log in as "reuven@lerner.co.il" with password "password"

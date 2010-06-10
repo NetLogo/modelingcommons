@@ -1,6 +1,7 @@
 # Controller to deal with search
 
 class SearchController < ApplicationController
+
   def search_action
     if params[:search_term].blank?
       flash[:notice] = "You must enter a search term in order to search."
@@ -24,6 +25,11 @@ class SearchController < ApplicationController
 
     @tag_match_models =
       Node.models.find_all {|model| model.visible_to_user?(@person) and model.tags.map { |tag| tag.name}.join(' ').downcase.index(@original_search_term)}
+
+    @procedures_match_models =
+      Node.models.find_all {|model| model.visible_to_user?(@person) and model.procedures_tab.index(@original_search_term)}
+
   end
+
 
 end

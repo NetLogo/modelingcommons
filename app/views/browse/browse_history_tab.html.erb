@@ -21,6 +21,9 @@
       <th>When</th>
       <th>Description</th>
       <th>Download</th>
+      <% if @model.changeable_by_user?(@person) -%>
+      <th>Revert</th>
+      <% end %>
     </tr>
 
     <% @model.node_versions.sort_by {|v| v.created_at}.reverse.each do |version| %>
@@ -30,8 +33,10 @@
       <td><%= person_link(version.person) %></td>
       <td><%= distance_of_time_in_words(Time.now, version.created_at) -%> ago </td>
       <td><%= version.description %></td>
-      <td><%= link_to "Download this version", :controller => "browse", :action => "download_model", :id => @model.id, :version => version.id %></td>
-
+      <td><%= link_to "Download this version", :controller => :browse, :action => :download_model, :id => @model.id, :version => version.id %></td>
+      <% if @model.changeable_by_user?(@person) -%>
+      <td><%= link_to_unless @model.current_version.id == version.id, "Revert", :controller => :history, :action => :revert_model, :id => @model.id, :version => version.id -%></td>
+      <% end %>
     </tr>
     <% end %>
 

@@ -112,4 +112,19 @@ class TagsController < ApplicationController
 
     render :text => tag_names.join("\n")
   end
+
+  def destroy
+    tn = TaggedNode.find(params[:id])
+    model = tn.node
+
+    if tn.person == @person or @person.administrator?
+      tn.destroy
+      flash[:notice] = "Tag '#{tn.tag.name}' removed from the '#{model.name}' model."
+    else
+      flash[:notice] = "You are not authorized to remove this tag."
+    end
+
+    redirect_to :controller => :browse, :action => :one_model, :id => model.id
+  end
+
 end

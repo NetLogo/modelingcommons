@@ -6,7 +6,7 @@
 <p><%= pluralize(@project.nodes.size, "model") -%> in this project:</p>
 <ul>
   <% @project.nodes.each do |node| -%>
-  <li><%= link_to node.name, :controller => :browse, :action => :one_node, :id => node.id  -%> (<%= link_to 'remove', :controller => :projects, :action => :remove_model, :id => @project.id, :model_id => node.id -%>)</li>
+  <li><%= link_to node.name, :controller => :browse, :action => :one_node, :id => node.id  -%> (<%= link_to 'remove from project', :controller => :projects, :action => :remove_model, :id => @project.id, :model_id => node.id -%>)</li>
   <% end %>
 </ul>
 <% end %>

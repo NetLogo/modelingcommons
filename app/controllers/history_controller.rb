@@ -22,17 +22,17 @@ class HistoryController < ApplicationController
     end
 
     @new_version =
-      NodeVersion.create(:nlmodel_id => @model.id,
+      NodeVersion.create(:node_id => @model.id,
                          :person_id => @person.id,
-                         :node_contents => version.file_contents,
-                         :note => "Reverted to older version")
+                         :file_contents => version.file_contents,
+                         :description => "Reverted to older version")
     if @new_version.save
       flash[:notice] = "Model was reverted to an older version"
     else
       flash[:notice] = "Error reverting the model; nothing was changed."
     end
 
-    redirect_to :back
+    redirect_to :controller => :browse, :action => :one_model, :id => @model.id, :anchor => :history
   end
 
   def compare_versions
@@ -44,6 +44,7 @@ class HistoryController < ApplicationController
 
     @earlier_version = NodeVersion.find(params[:compare_1])
     @later_version = NodeVersion.find(params[:compare_2])
+    @model = @earlier_version.node
 
     if @earlier_version == @later_version
       flash[:notice] = "You cannot compare a version with itself!"

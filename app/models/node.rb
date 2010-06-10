@@ -78,6 +78,10 @@ class Node < ActiveRecord::Base
     end
   end
 
+  def current_version
+    node_versions.first
+  end
+
   def latest_preview
     return nil if self.previews.empty?
     self.previews.last.file_contents
@@ -336,6 +340,16 @@ class Node < ActiveRecord::Base
     # If only the group can see this model, then check if the user is logged in
     # and a member of the group
     return true if group and group_visible? and group.approved_members.member?(person)
+
+    return false
+  end
+
+  def changeable_by_user?(person)
+    return false if person.nil?
+
+    return true if author?(person)
+
+    return true if group and group_changeable? and group.approved_members.member?(person)
 
     return false
   end

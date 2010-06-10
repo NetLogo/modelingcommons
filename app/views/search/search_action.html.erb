@@ -3,6 +3,7 @@
 <h2>Models with '<%= @original_search_term %>' in their name</h2>
 <% if @models and (not @models.empty?) %>
 <%= render :partial => "/browse/model_list", :object => @models %>
+<br />
 <% else %>
 <p>No matches in model names.</p>
 <% end %>
@@ -10,6 +11,7 @@
 <h2>Models with '<%= @original_search_term %>' in the author's name</h2>
 <% if @author_match_models and (not @author_match_models.empty?) %>
 <%= render :partial => "/browse/model_list", :object => @author_match_models %>
+<br />
 <% else %>
 <p>No matches in author names.</p>
 <% end %>
@@ -17,6 +19,15 @@
 <h2>Models with '<%= @original_search_term %>' in one or more tags</h2>
 <% if @tag_match_models and (not @tag_match_models.empty?) %>
 <%= render :partial => "/browse/model_list", :object => @tag_match_models %>
+<br />
 <% else %>
 <p>No matches in tag names.</p>
+<% end %>
+
+<h2>Models with '<%= @original_search_term %>' in the procedures tab</h2>
+<% if @procedures_match_models and (not @procedures_match_models.empty?) %>
+<%= render :partial => "/browse/model_list", :object => @procedures_match_models %>
+<br />
+<% else %>
+<p>No matches in procedures names.</p>
 <% end %>
