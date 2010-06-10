@@ -9,6 +9,8 @@ class NodeVersion < ActiveRecord::Base
 
   after_save :update_model_modification_time
 
+  delegate :is_model?, :to => :node
+
   # acts_as_tsearch :fields => ["file_contents"]
 
   SECTION_SEPARATOR = '@#$#@#$#@'
@@ -18,31 +20,15 @@ class NodeVersion < ActiveRecord::Base
   end
 
   def procedures_tab
-    if self.node.node_type_id == Node::MODEL_NODE_TYPE
-      self.file_contents.split(SECTION_SEPARATOR)[0]
-    else
-      ""
-    end
+    is_model? ? file_contents.split(SECTION_SEPARATOR)[0] : ""
   end
 
   def info_tab
-    if self.node.node_type_id == Node::MODEL_NODE_TYPE
-      self.file_contents.split(SECTION_SEPARATOR)[2]
-    else
-      ""
-    end
-  end
-
-  def model_shapes
-    if self.node.node_type_id == Node::MODEL_NODE_TYPE
-      self.file_contents.split(SECTION_SEPARATOR)[3]
-    else
-      ""
-    end
+    is_model? ? file_contents.split(SECTION_SEPARATOR)[2] : ""
   end
 
   def netlogo_version
-    if self.node.node_type_id == Node::MODEL_NODE_TYPE
+    if is_model?
       if self.file_contents.index(SECTION_SEPARATOR).nil?
         ""
       else
@@ -55,6 +41,14 @@ class NodeVersion < ActiveRecord::Base
 
   def update_model_modification_time
     node.update_attributes(:updated_at => Time.now)
+  end
+
+  def procedures_content
+    file_contents.split(SECTION_SEPARATOR)[0]
+  end
+
+  def info_content
+    file_contents.split(SECTION_SEPARATOR)[2]
   end
 
 end
