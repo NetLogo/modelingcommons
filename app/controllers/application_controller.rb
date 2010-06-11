@@ -82,13 +82,26 @@ class ApplicationController < ActionController::Base
   end
 
   def check_visibility_permissions
+    if @model.nil?
+      logger.warn "[check_visibility_permissions] Model is nil!"
+    end
+
+    if @person.nil?
+      logger.warn "[check_visibility_permissions] Person is nil!"
+    end
+
+    logger.warn "[check_visibility_permissions] visible to user? Answer: #{@model.visibile_to_user(@person)}"
+
     return true if @model.nil? or @model.visible_to_user?(@person)
+    logger.warn "[check_visibility_permissions] Model ID is '#{@model.id}'"
 
     flash[:notice] = "You do not have permission to view this model."
 
     if @person
+      logger.warn "[check_visibility_permissions] Redirecting to my page"
       redirect_to :controller => :account, :action => :mypage
     else
+      logger.warn "[check_visibility_permissions] Redirecting to login"
       redirect_to :controller => :account, :action => :login
     end
   end
