@@ -34,6 +34,6 @@ class AdminController < ApplicationController
   end
 
   def view_all_models
-    @models = Node.models
+    @models = Node.all
   end
 end

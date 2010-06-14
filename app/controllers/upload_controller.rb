@@ -21,8 +21,7 @@ class UploadController < ApplicationController
       # ------------------------------------------------------------
 
       # Create a new node, without a parent
-      @model = Node.new(:node_type_id => Node::MODEL_NODE_TYPE,
-                        :parent_id => nil,
+      @model = Node.new(:parent_id => nil,
                         :name => model_name)
 
       if !@model.save
@@ -36,7 +35,7 @@ class UploadController < ApplicationController
       new_version =
         NodeVersion.new(:node_id => @model.id,
                         :person_id => @person.id,
-                        :file_contents => node_version_contents,
+                        :contents => node_version_contents,
                         :description => 'Initial upload')
 
       if new_version.save
@@ -52,31 +51,17 @@ class UploadController < ApplicationController
 
       if params[:new_model][:uploaded_preview].present?
 
-        # Create a new preview node, whose parent is the new model node
-        preview_node = Node.new(:node_type_id => Node::PREVIEW_NODE_TYPE,
-                                :parent_id => @model.id,
-                                :name => model_name + ".png")
-
-        if !preview_node.save
+        # Create a preview
+        attachment = NodeAttachment.new(:node_id => @model.id,
+                                        :person_id => @person.id,
+                                        :description => "Preview for '#{model_name}'",
+                                        :filename => model_name + '.png',
+                                        :type => 'preview',
+                                        :contents => params[:new_model][:uploaded_preview].read)
+        if !attachment.save
           flash[:notice] = "Error creating a new preview object; it was not saved."
           redirect_to :back
         end
-
-        # Create a new version for the preview, and stick the contents in there
-        preview_version =
-          NodeVersion.new(:node_id => preview_node.id,
-                          :person_id => @person.id,
-                          :file_contents => params[:new_model][:uploaded_preview].read,
-                          :description => 'Initial preview version')
-
-
-        if preview_version.save
-          flash.now[:notice] << "  The preview image was also saved."
-        else
-          flash[:notice] = "Error creating a new preview version; it was not saved."
-          redirect_to :back
-        end
-
       end
 
       # If we got a group and permission settings, set those as well
@@ -115,8 +100,7 @@ class UploadController < ApplicationController
     # attached to the existing node.
 
     if fork == 'child'
-      child_node = Node.create(:node_type_id => Node::MODEL_NODE_TYPE,
-                               :parent_id => existing_node.id,
+      child_node = Node.create(:parent_id => existing_node.id,
                                :name => "Child of #{existing_node.name}")
       node_id = child_node.id
       flash[:notice] << "Added a new child to this model. "
@@ -129,7 +113,7 @@ class UploadController < ApplicationController
     new_version =
       NodeVersion.create(:node_id => node_id,
                          :person_id => @person.id,
-                         :file_contents => params[:new_version][:uploaded_body].read,
+                         :contents => params[:new_version][:uploaded_body].read,
                          :description => params[:new_version][:description])
 
     # Notifications.deliver_modified_model(new_version.node.people.reject { |p| p == @person}, new_version.node)

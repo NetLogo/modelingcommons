@@ -16,12 +16,12 @@
     <p><b>Parent:</b> <%= link_to @model.parent.name, :controller => 'browse', :action => 'one_model', :id => @model.parent.id  -%></p>
     <% end -%>
 
-    <% if @model.models.empty? -%>
+    <% if @model.children.empty? -%>
     <p>No child nodes</p>
     <% else -%>
     <h3>Children:</h3>
     <ul>
-      <% @model.models.each do |child| -%>
+      <% @model.children.each do |child| -%>
       <li><%= link_to child.name, :controller => 'browse', :action => 'one_model', :id => child.id  -%></li>
       <% end -%>
     </ul>
@@ -35,7 +35,7 @@
     <% else -%>
     <ul>
       <% @model.files.sort_by {|f| f.name}.each do |f| -%>
-      <li><%= link_to f.filename, :controller => :browse, :action => :one_node, :id => f.id -%> (<%= f.node_type.short_name -%>)</li>
+      <li><%= link_to f.filename, :controller => :browse, :action => :one_node, :id => f.id -%> (<%= f.type -%>)</li>
       <% end -%>
     </ul>
     <% end -%>

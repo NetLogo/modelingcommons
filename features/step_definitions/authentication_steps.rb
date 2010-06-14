@@ -21,4 +21,5 @@ When /^I log in as "([^\"]*)" with password "([^\"]*)"$/ do |email, pwd|
   And "I fill in \"#{email}\" for \"email_address\""
   And "I fill in \"#{pwd}\" for \"password\""
   And "I press \"submit\""
+  STDERR.puts "Logged in as user ID '#{@person.id}'"
 end

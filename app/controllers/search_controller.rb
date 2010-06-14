@@ -12,22 +12,16 @@ class SearchController < ApplicationController
     @original_search_term = params[:search_term].downcase
 
     @models =
-      Node.find(:all,
-                :conditions => ["node_type_id = ? ",
-                                Node::MODEL_NODE_TYPE]
-                ).select { |model| model.visible_to_user?(@person) and model.name.downcase.index(@original_search_term)}
+      Node.all.select { |model| model.visible_to_user?(@person) and model.name.downcase.index(@original_search_term)}
 
     @author_match_models =
-      Node.find(:all,
-                :conditions => ["node_type_id = ? ",
-                                Node::MODEL_NODE_TYPE]
-                ).select {|model| model.visible_to_user?(@person) and model.people.map { |person| person.fullname}.join(" ").downcase.index(@original_search_term)}
+      Node.all.select {|model| model.visible_to_user?(@person) and model.people.map { |person| person.fullname}.join(" ").downcase.index(@original_search_term)}
 
     @tag_match_models =
-      Node.models.find_all {|model| model.visible_to_user?(@person) and model.tags.map { |tag| tag.name}.join(' ').downcase.index(@original_search_term)}
+      Node.all.select {|model| model.visible_to_user?(@person) and model.tags.map { |tag| tag.name}.join(' ').downcase.index(@original_search_term)}
 
     @procedures_match_models =
-      Node.models.find_all {|model| model.visible_to_user?(@person) and model.procedures_tab.index(@original_search_term)}
+      Node.all.select {|model| model.visible_to_user?(@person) and model.procedures_tab.index(@original_search_term)}
 
   end
 

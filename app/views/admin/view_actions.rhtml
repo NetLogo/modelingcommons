@@ -35,8 +35,6 @@
     <td>
         <% if action.node.nil? %>
             (No node)
-        <% elsif action.node.node_type_id == Node::MODEL_NODE_TYPE %>
-            <%= link_to action.node.name, :controller => :browse, :action => :one_model, :id => action.node_id, :target => "_blank" %>
         <% else %>
             <%= action.node_id %>
         <% end %>

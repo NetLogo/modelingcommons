@@ -197,7 +197,7 @@ class AccountController < ApplicationController
         :date => nv.created_at,
         :description => "New version of '#{nv.node.name}' uploaded by '#{nv.person.fullname}'",
         :title => "Update to model '#{nv.node.name}'",
-        :file_contents => nv.description}
+        :contents => nv.description}
     end
 
 
@@ -210,7 +210,7 @@ class AccountController < ApplicationController
         :date => posting.created_at,
         :description => "Posting by '#{posting.person.fullname}' about the '#{posting.node.name}' model",
         :title => posting.title,
-        :file_contents => posting.body}
+        :contents => posting.body}
     end
 
     @the_person.tagged_nodes.find(:all, :conditions => ["created_at >= ? ", how_recent]).each do |tn|
@@ -222,7 +222,7 @@ class AccountController < ApplicationController
         :date => tn.created_at,
         :description => "Model '#{tn.node.name}' tagged with '#{tn.tag.name}' by '#{tn.person.fullname}'",
         :title => "Model '#{tn.node.name}' tagged with '#{tn.tag.name}' by '#{tn.person.fullname}'",
-        :file_contents => "<p>'#{tn.person.fullname} tagged the '#{tn.node.name}' model</p>"
+        :contents => "<p>'#{tn.person.fullname} tagged the '#{tn.node.name}' model</p>"
       }
     end
 

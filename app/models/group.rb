@@ -10,7 +10,7 @@ class Group < ActiveRecord::Base
   has_many :people, :through => :memberships
 
   has_many :nodes
-  has_many :models, :class_name => 'Node', :include => [:tags, :node_versions]
+  has_many :models, :class_name => 'Node', :include => :tags
 
   before_destroy :remove_group_from_models
 

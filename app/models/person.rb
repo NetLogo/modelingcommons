@@ -1,9 +1,6 @@
 # Class to model people (users) of the system
 
 class Person < ActiveRecord::Base
-  has_many :node_versions
-  has_many :nodes, :through => :node_versions
-
   has_many :postings
   has_many :logged_actions
   has_many :tags
@@ -29,8 +26,20 @@ class Person < ActiveRecord::Base
   validates_uniqueness_of :email_address, :case_sensitive => false
   validates_confirmation_of :password
 
+  def nodes
+    node_versions.map { |nv| nv.node_id}.uniq.map{ |node_id| Node.find(node_id)}
+  end
+
+  def node_versions
+    NodeVersion.all(:conditions => { :person_id => id})
+  end
+
+  def attachments
+    NodeAttachment.all(:conditions => { :person_id => id})
+  end
+
   def models
-    self.nodes.select {|node| node.node_type_id == 1}.uniq
+    nodes
   end
 
   def fullname

@@ -1,25 +1,13 @@
 # Model for an individual node in our graph
 
 class Node < ActiveRecord::Base
-  MODEL_NODE_TYPE = 1
-  PREVIEW_NODE_TYPE = 2
-  PDF_NODE_TYPE = 3
-  IMAGE_NODE_TYPE = 4
-  DATA_NODE_TYPE = 5
-  EXTENSION_NODE_TYPE = 6
-  WORD_NODE_TYPE = 7
-  POWERPOINT_NODE_TYPE = 8
-  APPLET_HTML_NODE_TYPE = 9
-
   acts_as_tree :order => "name"
 
-  belongs_to :node_type
   belongs_to :group
 
   belongs_to :visibility, :class_name => "PermissionSetting", :foreign_key => :visibility_id
   belongs_to :changeability, :class_name => "PermissionSetting", :foreign_key => :changeability_id
 
-  has_many :node_versions, :order => 'updated_at DESC'
   has_many :postings, :order => 'updated_at'
   has_many :active_postings, :class_name => "Posting", :conditions => "deleted_at is null", :order => 'updated_at'
 
@@ -35,84 +23,40 @@ class Node < ActiveRecord::Base
   has_many :node_projects
   has_many :projects, :through => :node_projects
 
-  validates_presence_of :name, :node_type_id, :visibility_id, :changeability_id
-  validates_numericality_of :node_type_id, :visibility_id, :changeability_id
-
-  # Convenience named scopes for grabbing certain types of children
-  named_scope :models, :conditions => ['node_type_id = ? ', MODEL_NODE_TYPE]
-  named_scope :non_models, :conditions => ['node_type_id <> ? ', MODEL_NODE_TYPE]
-  named_scope :previews, :conditions => ['node_type_id = ? ', PREVIEW_NODE_TYPE]
-  named_scope :pdfs, :conditions => ['node_type_id = ? ', PDF_NODE_TYPE]
-  named_scope :images, :conditions => ['node_type_id = ? ', IMAGE_NODE_TYPE]
-  named_scope :data, :conditions => ['node_type_id = ? ', DATA_NODE_TYPE]
-  named_scope :extensions, :conditions => ['node_type_id = ? ', EXTENSION_NODE_TYPE]
-  named_scope :word_docs, :conditions => ['node_type_id = ? ', WORD_NODE_TYPE]
-  named_scope :powerpoint_docs, :conditions => ['node_type_id = ? ', POWERPOINT_NODE_TYPE]
-  named_scope :applet_htmls, :conditions => ['node_type_id = ? ', APPLET_HTML_NODE_TYPE]
+  validates_presence_of :name, :visibility_id, :changeability_id
+  validates_numericality_of :visibility_id, :changeability_id
 
   # ------------------------------------------------------------
   # Grab children of various sorts
   # ------------------------------------------------------------
 
+  def node_versions
+    NodeVersion.all(:conditions => { :node_id => id})
+  end
+
   def person
-    self.node_versions.sort { |n| n.created_at}.last.person
-  end
-
-  def children_of_type(id)
-    self.children.select { |version| version.node_type_id == id}
-  end
-
-  def models
-    self.children_of_type(MODEL_NODE_TYPE)
-  end
-
-  def non_models
-    self.children.select { |version| version.node_type_id != MODEL_NODE_TYPE}
-  end
-
-  def previews
-    if self.children_of_type(PREVIEW_NODE_TYPE).empty?
-      [ ]
-    else
-      self.children_of_type(PREVIEW_NODE_TYPE)[0].node_versions.sort_by { |nv| nv.created_at}
-    end
+    node_versions.sort { |n| n.created_at}.last.person
   end
 
   def current_version
     node_versions.first
   end
 
-  def latest_preview
-    return nil if self.previews.empty?
-    self.previews.last.file_contents
-  end
+  NodeAttachment::TYPES.keys.each do |attachment_type|
 
-  def applet_htmls
-    self.children_of_type(APPLET_HTML_NODE_TYPE)
-  end
+    define_method(attachment_type.to_sym) do
+      NodeAttachment.first(:conditions => { :type => attachment_type, :node_id => id},
+                           :order => 'created_at DESC')
+    end
 
-  def applet_html
-    if self.applet_htmls.empty?
-      nil
-    else
-      self.applet_htmls.last.file_contents
+    define_method("#{attachment_type}s".to_sym) do
+      NodeAttachment.all(:conditions => { :type => attachment_type, :node_id => id},
+                         :order => 'created_at DESC')
     end
   end
 
-  def documents
-    self.children_of_type(DOCUMENT_NODE_TYPE)
-  end
-
-  def images
-    self.children_of_type(IMAGE_NODE_TYPE)
-  end
-
-  def data
-    self.children_of_type(DATA_NODE_TYPE)
-  end
-
-  def files
-    self.non_models
+  def attachments
+    NodeAttachment.all(:conditions => { :node_id => id})
   end
 
   # ------------------------------------------------------------
@@ -127,36 +71,24 @@ class Node < ActiveRecord::Base
     self.node_versions.sort_by {|nv| nv.created_at}.last.person
   end
 
-  def mime_type
-    self.node_type.mime_type
-  end
-
   # ------------------------------------------------------------
   # Get the contents of a model file
   # ------------------------------------------------------------
 
-  def is_model?
-    return self.node_type_id == MODEL_NODE_TYPE
-  end
-
-  def is_preview?
-    return self.node_type_id == PREVIEW_NODE_TYPE
-  end
-
   def people
-    self.node_versions.map {|version| version.person}.uniq
+    node_versions.map {|version| version.person}.uniq
   end
 
   def author?(person)
     people.member?(person)
   end
 
-  def file_contents
-    self.node_versions.sort_by {|version| version.created_at}.last.file_contents
+  def contents
+    node_versions.sort_by {|version| version.created_at}.last.contents
   end
 
   def netlogo_version
-    self.node_versions.sort_by {|version| version.created_at}.last.netlogo_version
+    node_versions.sort_by {|version| version.created_at}.last.netlogo_version
   end
 
   def netlogo_version_for_applet
@@ -183,7 +115,7 @@ class Node < ActiveRecord::Base
   end
 
   def info_tab(with_html=false)
-    text = self.node_versions.sort_by {|nv| nv.created_at }.last.info_tab
+    text = node_versions.sort_by {|nv| nv.created_at }.last.info_tab
 
     if text.blank?
       "Info tab is empty."
@@ -205,7 +137,7 @@ class Node < ActiveRecord::Base
   end
 
   def procedures_tab(with_html=false)
-    text = self.node_versions.sort_by {|nv| nv.created_at}.last.procedures_tab
+    text = node_versions.sort_by {|nv| nv.created_at}.last.procedures_tab
 
     if with_html
       # Italicize comments
@@ -250,7 +182,7 @@ class Node < ActiveRecord::Base
     width = 0
     height = 0
 
-    self.file_contents.each do |line|
+    contents.each do |line|
 
       # Handle dividers
       if line =~ /\@\#\$\#\@\#\$\#\@/
@@ -327,9 +259,6 @@ class Node < ActiveRecord::Base
   end
 
   def visible_to_user?(person)
-    # This only applies if the node is a model
-    return true unless is_model?
-
     # If everyone can see this model, then deal with the simple case
     return true if world_visible?
 

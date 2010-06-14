@@ -24,7 +24,7 @@ class HistoryController < ApplicationController
     @new_version =
       NodeVersion.create(:node_id => @model.id,
                          :person_id => @person.id,
-                         :file_contents => version.file_contents,
+                         :contents => version.contents,
                          :description => "Reverted to older version")
     if @new_version.save
       flash[:notice] = "Model was reverted to an older version"

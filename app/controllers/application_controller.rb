@@ -10,7 +10,6 @@ require 'zip/zip'
 class ApplicationController < ActionController::Base
   before_filter :get_person
   before_filter :log_one_action
-  before_filter :get_node_types
 
   def get_person
     person_id = session[:person_id]
@@ -77,10 +76,6 @@ class ApplicationController < ActionController::Base
                         :node_id => node_id)
   end
 
-  def get_node_types
-    @node_types = NodeType.find(:all)
-  end
-
   def check_visibility_permissions
     if @model.nil?
       logger.warn "[check_visibility_permissions] Model is nil!"
@@ -127,8 +122,6 @@ class ApplicationController < ActionController::Base
     logger.warn "Checking changeability permissions for model '#{@model.to_yaml}' and person '#{@person.to_yaml}'"
 
     # This only applies if the node is a model
-    return true unless @model.is_model?
-
     # If there's no model, then allow everything
     return true unless @model
 
@@ -162,7 +155,7 @@ class ApplicationController < ActionController::Base
       return
     end
 
-    @model = Node.models.find(params[:id])
+    @model = Node.find(params[:id])
     @node = @model
   rescue
     flash[:notice] = "No model with ID '#{params[:id]}'"
@@ -177,13 +170,13 @@ class ApplicationController < ActionController::Base
                                   :order => 'created_at DESC',
                                   :conditions => ["created_at >= ?", how_new_is_new ])
 
-    @recent_models = Node.models.find(:all,
-                                      :order => 'created_at DESC',
-                                      :conditions => ["created_at >= ?", how_new_is_new ])
+    @recent_models = Node.find(:all,
+                               :order => 'created_at DESC',
+                               :conditions => ["created_at >= ?", how_new_is_new ])
 
-    @updated_models = Node.models.find(:all,
-                                       :order => 'updated_at DESC',
-                                       :conditions => ["created_at >= ?", how_new_is_new ])
+    @updated_models = Node.find(:all,
+                                :order => 'updated_at DESC',
+                                :conditions => ["created_at >= ?", how_new_is_new ])
 
     @recent_postings = Posting.find(:all,
                                     :order => 'created_at DESC',

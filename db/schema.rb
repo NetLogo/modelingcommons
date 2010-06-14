@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100222143655) do
+ActiveRecord::Schema.define(:version => 20100614153954) do
 
   create_table "email_recommendations", :force => true do |t|
     t.integer  "person_id"
@@ -79,32 +79,7 @@ ActiveRecord::Schema.define(:version => 20100222143655) do
     t.datetime "updated_at"
   end
 
-  create_table "node_types", :force => true do |t|
-    t.string   "name"
-    t.text     "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "short_name"
-    t.string   "mime_type"
-  end
-
-  add_index "node_types", ["name"], :name => "index_node_types_on_name", :unique => true
-
-  create_table "node_versions", :force => true do |t|
-    t.integer  "node_id",       :null => false
-    t.integer  "person_id"
-    t.text     "old_contents"
-    t.text     "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.binary   "file_contents"
-    t.text     "vectors"
-  end
-
-  add_index "node_versions", ["vectors"], :name => "node_versions_fts_vectors_index"
-
   create_table "nodes", :force => true do |t|
-    t.integer  "node_type_id",                    :null => false
     t.integer  "parent_id"
     t.text     "name",                            :null => false
     t.datetime "created_at"
@@ -118,7 +93,6 @@ ActiveRecord::Schema.define(:version => 20100222143655) do
   add_index "nodes", ["created_at"], :name => "index_nodes_on_created_at"
   add_index "nodes", ["group_id"], :name => "index_nodes_on_group_id"
   add_index "nodes", ["name"], :name => "index_nodes_on_name"
-  add_index "nodes", ["node_type_id"], :name => "index_nodes_on_node_type_id"
   add_index "nodes", ["parent_id"], :name => "index_nodes_on_parent_id"
   add_index "nodes", ["visibility_id"], :name => "index_nodes_on_visibility_id"
 
