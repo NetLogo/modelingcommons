@@ -75,7 +75,6 @@ So that other people can interact with it
      And I attach a preview image
      And I press "Upload model"
     Then I should see "Thanks for uploading the new model called 'New Model'."
-     And I should see "The preview image was also saved."
 
   Scenario: A user may upload a valid model file with a preview
     When I log in as "reuven@lerner.co.il" with password "password"

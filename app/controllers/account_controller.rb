@@ -188,7 +188,10 @@ class AccountController < ApplicationController
     how_recent = 6.months.ago
 
     @the_person = Person.find(params[:id])
-    @the_person.node_versions.find(:all, :conditions => ["created_at >= ? ", how_recent]).each do |nv|
+
+    NodeVersion.all(:conditions => {
+                       :person_id => @the_person.id,
+                       :created_at.gte => how_recent}).each do |nv|
 
       @new_things <<
         {:id => nv.id,

@@ -9,4 +9,7 @@ Before do
   Factory.create(:permission_setting, :id => 1, :short_form => 'a', :name => 'Everyone')
   Factory.create(:permission_setting, :id => 2, :short_form => 'u', :name => 'No one but yourself')
   Factory.create(:permission_setting, :id => 3, :short_form => 'g', :name => 'Members of your group')
+
+  NodeAttachment.all.each { |na| na.destroy }
+  NodeVersion.all.each { |nv| nv.destroy }
 end

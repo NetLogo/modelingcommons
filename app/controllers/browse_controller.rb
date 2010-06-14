@@ -70,7 +70,9 @@ class BrowseController < ApplicationController
     @new_things = [ ]
     how_recent = 6.months.ago
 
-    @node.node_versions.find(:all, :conditions => ["created_at >= ? ", how_recent]).each do |nv|
+    NodeVersion.all(:conditions => {
+                       :node_id => @node.id,
+                       :created_at.gte => how_recent}).each do |nv|
 
       @new_things <<
         {:id => nv.id,

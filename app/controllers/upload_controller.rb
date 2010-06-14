@@ -46,7 +46,7 @@ class UploadController < ApplicationController
       end
 
       # ------------------------------------------------------------
-      # Node and version for the preview image
+      # Preview image
       # ------------------------------------------------------------
 
       if params[:new_model][:uploaded_preview].present?
@@ -111,10 +111,12 @@ class UploadController < ApplicationController
 
     # Create the new version for this node
     new_version =
-      NodeVersion.create(:node_id => node_id,
-                         :person_id => @person.id,
-                         :contents => params[:new_version][:uploaded_body].read,
-                         :description => params[:new_version][:description])
+      NodeVersion.new(:node_id => node_id,
+                      :person_id => @person.id,
+                      :contents => params[:new_version][:uploaded_body].read,
+                      :description => params[:new_version][:description])
+
+    new_version.save!
 
     # Notifications.deliver_modified_model(new_version.node.people.reject { |p| p == @person}, new_version.node)
 
