@@ -77,14 +77,6 @@ class ApplicationController < ActionController::Base
   end
 
   def check_visibility_permissions
-    if @model.nil?
-      logger.warn "[check_visibility_permissions] Model is nil!"
-    end
-
-    if @person.nil?
-      logger.warn "[check_visibility_permissions] Person is nil!"
-    end
-
     logger.warn "[check_visibility_permissions] visible to user? Answer: #{@model.visible_to_user?(@person)}"
 
     return true if @model.nil? or @model.visible_to_user?(@person)
