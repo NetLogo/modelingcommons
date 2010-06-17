@@ -10,6 +10,10 @@ class NodeVersion
   key :person_id, Integer, :index => true
   key :description, String, :index => true
   key :contents, String
+
+  key :info_keyword_index, Array
+  key :procedures_keyword_index, Array
+
   timestamps!
 
   validates_presence_of :node_id
@@ -17,7 +21,8 @@ class NodeVersion
   validates_presence_of :description
   validates_presence_of :contents
 
-  after_save :update_model_modification_time
+  before_save :update_indexes
+  after_save :update_node_modification_time
 
   SECTION_SEPARATOR = '@#$#@#$#@'
 
@@ -59,8 +64,12 @@ class NodeVersion
   end
 
   # Callbacks
+  def update_indexes
+    self.info_keyword_index = info_tab.downcase.split.select {|word| word =~ /^\w[-\w.]+$/ }.uniq
+    self.procedures_keyword_index = procedures_tab.downcase.split.select {|word| word =~ /^\w[-\w.]+$/ }.uniq
+  end
 
-  def update_model_modification_time
+  def update_node_modification_time
     node.update_attributes(:updated_at => Time.now)
   end
 

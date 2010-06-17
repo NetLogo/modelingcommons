@@ -24,6 +24,14 @@
 <p>No matches in tag names.</p>
 <% end %>
 
+<h2>Models with '<%= @original_search_term %>' in the infos tab</h2>
+<% if @info_match_models and (not @info_match_models.empty?) %>
+<%= render :partial => "/browse/model_list", :object => @info_match_models %>
+<br />
+<% else %>
+<p>No matches in info tab.</p>
+<% end %>
+
 <h2>Models with '<%= @original_search_term %>' in the procedures tab</h2>
 <% if @procedures_match_models and (not @procedures_match_models.empty?) %>
 <%= render :partial => "/browse/model_list", :object => @procedures_match_models %>

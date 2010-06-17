@@ -11,17 +11,21 @@ class SearchController < ApplicationController
 
     @original_search_term = params[:search_term].downcase
 
-    @models =
-      Node.all.select { |model| model.visible_to_user?(@person) and model.name.downcase.index(@original_search_term)}
+    @viewable_models = Node.all.select { |model| model.visible_to_user?(@person)}
+
+    @models = @viewable_models.select { |model| model.name.downcase.index(@original_search_term)}
 
     @author_match_models =
-      Node.all.select {|model| model.visible_to_user?(@person) and model.people.map { |person| person.fullname}.join(" ").downcase.index(@original_search_term)}
+      @viewable_models.select { |model| model.people.map { |person| person.fullname}.join(" ").downcase.index(@original_search_term)}
 
     @tag_match_models =
-      Node.all.select {|model| model.visible_to_user?(@person) and model.tags.map { |tag| tag.name}.join(' ').downcase.index(@original_search_term)}
+      @viewable_models.select { |model| model.tags.map { |tag| tag.name}.join(' ').downcase.index(@original_search_term)}
+
+    @info_match_models =
+      @viewable_models.select { |model| model.current_version.info_keyword_index.member?(@original_search_term)}
 
     @procedures_match_models =
-      Node.all.select {|model| model.visible_to_user?(@person) and model.procedures_tab.index(@original_search_term)}
+      @viewable_models.select { |model| model.current_version.procedures_keyword_index.member?(@original_search_term)}
 
   end
 
