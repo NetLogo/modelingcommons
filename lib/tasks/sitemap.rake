@@ -22,7 +22,6 @@ namespace :sitemap do
     @pages += Project.all.map { |p| "http://modelingcommons.org/projects/#{p.id}"}
 
     Node.all.each do |node|
-      next unless node.is_model?
       @pages << "http://modelingcommons.org/browse/one_model/#{node.id}"
       @pages << "http://modelingcommons.org/browse/one_model/#{node.id}"
       @pages << "http://modelingcommons.org/browse/browse_preview_tab/#{node.id}?tab=true"
