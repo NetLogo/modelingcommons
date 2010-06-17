@@ -67,5 +67,19 @@ Rails::Initializer.run do |config|
 end
 
 require "will_paginate"
-# require 'acts_as_ferret'
 require 'validates_email'
+
+# Handle the creation of new processes by Phusion Passenger
+if defined?(PhusionPassenger)
+  PhusionPassenger.on_event(:starting_worker_process) do |forked|
+    if forked
+      # We're in smart spawning mode.
+
+      # Reset the connection to MongoDB
+      MongoMapper.database.close
+      load File.join(RAILS_ROOT, 'config/initializers/mongodb.rb')
+    else
+      # We're in conservative spawning mode. We don't need to do anything.
+    end
+  end
+end
