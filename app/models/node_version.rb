@@ -6,10 +6,10 @@
 class NodeVersion
   include MongoMapper::Document
 
-  key :node_id, Integer
-  key :person_id, Integer
-  key :description, String
-  key :contents, String
+  key :node_id, Integer, :index => true
+  key :person_id, Integer, :index => true
+  key :description, String, :index => true
+  key :contents, String, :index => true
   timestamps!
 
   validates_presence_of :node_id

@@ -3,11 +3,11 @@
 class NodeAttachment
   include MongoMapper::Document
 
-  key :node_id, Integer
-  key :person_id, Integer
-  key :description, String
-  key :filename, String
-  key :type, String
+  key :node_id, Integer, :index => true
+  key :person_id, Integer,  :index => true
+  key :description, String,  :index => true
+  key :filename, String,  :index => true
+  key :type, String,  :index => true
   key :contents, Binary
   timestamps!
 
