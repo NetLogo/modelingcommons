@@ -3,7 +3,7 @@
   <td><%= tm.comment -%></td>
   <td>by <%= person_link(tm.person) -%></td>
   <td><%= distance_of_time_in_words(Time.now, tm.updated_at) -%> ago</td>
-  <% if @person.administrator? or @person == tm.person -%>
+  <% if @person and (@person.administrator? or @person == tm.person) -%>
   <td>admin: <%= link_to "Remove", :controller => :tags, :action => :destroy, :id => tm.id -%></td>
   <% end %>
 </tr>

@@ -11,8 +11,8 @@ class NodeVersion
   key :description, String, :index => true
   key :contents, String
 
-  key :info_keyword_index, Array
-  key :procedures_keyword_index, Array
+  key :info_keyword_index, Array, :index => true
+  key :procedures_keyword_index, Array, :index => true
 
   timestamps!
 
@@ -65,8 +65,8 @@ class NodeVersion
 
   # Callbacks
   def update_indexes
-    self.info_keyword_index = info_tab.downcase.split.select {|word| word =~ /^\w[-\w.]+$/ }.uniq
-    self.procedures_keyword_index = procedures_tab.downcase.split.select {|word| word =~ /^\w[-\w.]+$/ }.uniq
+    self.info_keyword_index = info_tab.downcase.split.select {|word| word =~ /^\w[-\w.]+$/ }.uniq if info_tab
+    self.procedures_keyword_index = procedures_tab.downcase.split.select {|word| word =~ /^\w[-\w.]+$/ }.uniq if procedures_tab
   end
 
   def update_node_modification_time
