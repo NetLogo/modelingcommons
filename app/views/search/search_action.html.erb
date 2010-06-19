@@ -27,7 +27,7 @@
 <% if @info_match_models.empty? %>
 <h2>No matches in info tabs.</h2>
 <% else %>
-<h2><%= @info_match_models -%> matched '<%= @original_search_term %>' in the info tab:</h2>
+<h2><%= @info_match_models.size -%> matched '<%= @original_search_term %>' in the info tab:</h2>
 <%= render :partial => "/browse/model_list", :object => @info_match_models %>
 <br />
 <% end %>
