@@ -6,7 +6,7 @@
       <th>Tags</th>
       <th>Group</th>
       <th>Modified</th>
-      <th>Modified by</th>
+      <!-- <th>Modified by</th> -->
     </tr>
   </thead>
   <tbody>
@@ -18,7 +18,7 @@
         <% start_time = Time.now -%>
         <img src="/browse/display_preview/<%= model.id %>" width="30" height="30" alt="Preview of model '#{model.name}'" />
         <%= link_to model.name, :controller => "browse", :action => "one_model", :id => model.id %><%= render :partial => "browse/preview_image", :locals => {:model => @model} -%>
-        <!-- Render time = <%= Time.now - start_time  -%> -->
+        <!-- Name and preview render time = <%= Time.now - start_time  -%> -->
       </td>
       <td>
         <% start_time = Time.now -%>
@@ -27,7 +27,7 @@
         <% else %>
         <%= model.tags.sort_by {|t| t.name}.map {|t| link_to t.name, :controller => :tags, :action => :one_tag, :id => t.id}.uniq.join(', ') %>
         <% end %>
-        <!-- Render time = <%= Time.now - start_time  -%> -->
+        <!-- Tags render time = <%= Time.now - start_time  -%> -->
       </td>
 
       <td>
@@ -37,16 +37,22 @@
         <% else %>
         (No group)
         <% end %>
-        <!-- Render time = <%= Time.now - start_time  -%> -->
+        <!-- Group render time = <%= Time.now - start_time  -%> -->
       </td>
-      <td><%= distance_of_time_in_words(Time.now, model.node_versions.first.updated_at) %> ago</td>
+      <td>
+        <% start_time = Time.now -%>
+        <%= distance_of_time_in_words(Time.now, model.node_versions.first.updated_at) %> ago
+        <!-- Last modified render time = <%= Time.now - start_time  -%> -->
+      </td>
+      <% if false %>
       <td>
         <% start_time = Time.now -%>
         <% model.people.each do |person| %>
         <%= person_image(person) %><%= person_link(person) %><br />
         <% end %>
-        <!-- Render time = <%= Time.now - start_time  -%> -->
+        <!-- People render time = <%= Time.now - start_time  -%> -->
       </td>
+      <% end %>
     </tr>
 
     <% end %>
