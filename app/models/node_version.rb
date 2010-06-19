@@ -27,7 +27,7 @@ class NodeVersion
   SECTION_SEPARATOR = '@#$#@#$#@'
 
   def node
-    node_id.nil? ? nil : Node.find(node_id, :include => [:visibility, :changeability, :tags, :group, :people])
+    node_id.nil? ? nil : Node.find(node_id, :include => [:visibility, :changeability, :tags, :group])
   end
 
   def person

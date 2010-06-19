@@ -4,10 +4,10 @@
   <head>
     <title>NetLogo Modeling Commons -- <%= @title %></title>
 
-    <%= stylesheet_link_tag 'nlcommons', 'browse', 'jquery.autocomplete', 'themes/nlcommons/ui.all.css', :cache => true%>
+    <%= stylesheet_link_tag 'nlcommons', 'browse', 'jquery.autocomplete', 'themes/nlcommons/ui.base.css', 'themes/nlcommons/ui.theme.css', :cache => true -%>
 
     <!-- defaults below here -->
-    <%= javascript_include_tag 'jquery', 'jquery-ui', 'superfish', 'jquery.livequery', 'jquery.autocomplete', 'jquery.dataTables', 'application', :cache => true %>
+    <%= javascript_include_tag 'jquery', 'jquery-ui', 'superfish', 'jquery.livequery', 'jquery.autocomplete', 'jquery.dataTables', 'application', :cache => true -%>
     <!-- ClickTale Top part -->
     <script type="text/javascript">
       var WRInitTime=(new Date()).getTime();
