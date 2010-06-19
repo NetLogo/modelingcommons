@@ -6,7 +6,7 @@
       <th>Tags</th>
       <th>Group</th>
       <th>Modified</th>
-      <!-- <th>Modified by</th> -->
+      <th>Modified by</th>
     </tr>
   </thead>
   <tbody>
@@ -44,7 +44,6 @@
         <%= distance_of_time_in_words(Time.now, model.updated_at) %> ago
         <!-- Last modified render time = <%= Time.now - start_time  -%> -->
       </td>
-      <% if false %>
       <td>
         <% start_time = Time.now -%>
         <% model.people.each do |person| %>
@@ -52,7 +51,6 @@
         <% end %>
         <!-- People render time = <%= Time.now - start_time  -%> -->
       </td>
-      <% end %>
     </tr>
 
     <% end %>

@@ -4,7 +4,8 @@
   <head>
     <title>NetLogo Modeling Commons -- <%= @title %></title>
 
-    <%= stylesheet_link_tag 'nlcommons', 'browse', 'jquery.autocomplete', 'themes/nlcommons/ui.base.css', 'themes/nlcommons/ui.theme.css', :cache => true -%>
+    <%= stylesheet_link_tag 'nlcommons', 'browse', 'jquery.autocomplete', :cache => true -%>
+    <%= stylesheet_link_tag 'themes/nlcommons/ui.all.css' %>
 
     <%= javascript_include_tag 'jquery', 'jquery-ui', 'superfish', 'jquery.livequery', 'jquery.autocomplete', 'jquery.dataTables', 'application', :cache => true %>
   </head>
