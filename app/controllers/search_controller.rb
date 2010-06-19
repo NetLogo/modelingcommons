@@ -35,6 +35,4 @@ class SearchController < ApplicationController
     logger.warn "[SearchController#search_action] [#{Time.now}] Done"
   end
 
-  render :layout => nil
-
 end
