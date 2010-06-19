@@ -11,19 +11,18 @@ class SearchController < ApplicationController
 
     @original_search_term = params[:search_term].downcase
 
-    @viewable_models = Node.all.select { |model| model.visible_to_user?(@person)}
+    @models = Node.find(:all,
+                        :conditions => [ "position( ? in lower(name) ) > 0 ", @original_search_term] ).select { |n| n.visible_to_user?(@person)}
 
-    @models = @viewable_models.select { |model| model.name.downcase.index(@original_search_term)}
+    @author_match_models = [ ]
+      # @viewable_models.select { |model| model.people.map { |person| person.fullname}.join(" ").downcase.index(@original_search_term)}
 
-    @author_match_models =
-      @viewable_models.select { |model| model.people.map { |person| person.fullname}.join(" ").downcase.index(@original_search_term)}
+    @tag_match_models = [ ]
+      # @viewable_models.select { |model| model.tags.map { |tag| tag.name}.join(' ').downcase.index(@original_search_term)}
 
-    @tag_match_models =
-      @viewable_models.select { |model| model.tags.map { |tag| tag.name}.join(' ').downcase.index(@original_search_term)}
+    @info_match_models = NodeVersion.all(:info_keyword_index => @original_search_term).map {|nv| nv.node}.select { |n| n.visible_to_user?(@person)}
 
-    @info_match_models = @viewable_models & NodeVersion.all(:info_keyword_index => @original_search_term).map {|nv| nv.node_id}
-
-    @procedures_match_models = @viewable_models & NodeVersion.all(:procedures_keyword_index => @original_search_term).map {|nv| nv.node_id}
+    @procedures_match_models = NodeVersion.all(:procedures_keyword_index => @original_search_term).map {|nv| nv.node}.select { |n| n.visible_to_user?(@person)}
 
   end
 
