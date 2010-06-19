@@ -41,7 +41,7 @@
       </td>
       <td>
         <% start_time = Time.now -%>
-        <%= distance_of_time_in_words(Time.now, model.node_versions.first.updated_at) %> ago
+        <%= distance_of_time_in_words(Time.now, model.updated_at) %> ago
         <!-- Last modified render time = <%= Time.now - start_time  -%> -->
       </td>
       <% if false %>
