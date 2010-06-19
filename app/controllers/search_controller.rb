@@ -16,7 +16,8 @@ class SearchController < ApplicationController
 
     logger.warn "[SearchController#search_action] [#{Time.now}] Getting matching model names"
     @models = Node.find(:all,
-                        :conditions => [ "position( ? in lower(name) ) > 0 ", @original_search_term] ).select { |n| n.visible_to_user?(@person)}
+                        :conditions => [ "position( ? in lower(name) ) > 0 ", @original_search_term],
+                        :include => :visibility).select { |n| n.visible_to_user?(@person)}
 
     logger.warn "[SearchController#search_action] [#{Time.now}] Getting matching model authors"
     @author_match_models = [ ]

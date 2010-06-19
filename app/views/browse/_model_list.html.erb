@@ -11,7 +11,7 @@
   </thead>
   <tbody>
 
-    <% model_list.sort_by {|m| m.name.downcase}.each do |model| %>
+    <% model_list.each do |model| %>
 
     <tr class="<%= cycle('even', 'odd') -%>">
       <td>
@@ -27,10 +27,10 @@
       </td>
 
       <td>
-        <% if model.group.nil? %>
-        (No group)
-        <% else %>
+        <% if model.group %>
         <%= group_link(model.group) %>
+        <% else %>
+        (No group)
         <% end %>
       </td>
       <td><%= distance_of_time_in_words(Time.now, model.node_versions.first.updated_at) %> ago</td>
