@@ -18,6 +18,7 @@ Rails::Initializer.run do |config|
   config.gem 'hoptoad_notifier'
   config.gem 'plucky'
   config.gem 'mongo_mapper'
+  config.gem 'paperclip', :source => 'http://rubygems.org'
 
   # Settings in config/environments/* take precedence over those specified here.
   # Application configuration should go into files in config/initializers
