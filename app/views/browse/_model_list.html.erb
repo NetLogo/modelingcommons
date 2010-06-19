@@ -36,11 +36,13 @@
       </td>
       <td><%= distance_of_time_in_words(Time.now, model.node_versions.first.updated_at) %> ago</td>
       <td>
-        <% if model.people.length == 1 %>
-        <%= person_image(model.people[0]) %><%= person_link(model.people[0]) %>
+        <% @model_people = model.people -%>
+
+        <% if @model_people.length == 1 %>
+        <%= person_image(@model_people[0]) %><%= person_link(@model_people[0]) %>
         <% else %>
         <ul>
-          <% model.people.each do |person| %>
+          <% @model_people.each do |person| %>
           <li><%= person_image(person) %><%= person_link(person) %></li>
           <% end %>
         </ul>
