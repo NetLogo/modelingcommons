@@ -64,11 +64,11 @@ class Node < ActiveRecord::Base
   # ------------------------------------------------------------
 
   def description
-    self.node_versions.sort_by {|nv| nv.created_at}.last.description
+    @description ||= node_versions.sort_by {|nv| nv.created_at}.last.description
   end
 
   def most_recent_author
-    self.node_versions.sort_by {|nv| nv.created_at}.last.person
+    @most_recent_author ||= self.node_versions.sort_by {|nv| nv.created_at}.last.person
   end
 
   # ------------------------------------------------------------
@@ -76,7 +76,7 @@ class Node < ActiveRecord::Base
   # ------------------------------------------------------------
 
   def people
-    node_versions.map {|version| version.person}.uniq
+    @model_people ||= node_versions.map {|version| version.person}.uniq
   end
 
   def author?(person)
@@ -84,11 +84,11 @@ class Node < ActiveRecord::Base
   end
 
   def contents
-    node_versions.sort_by {|version| version.created_at}.last.contents
+    @contents ||= node_versions.sort_by {|version| version.created_at}.last.contents
   end
 
   def netlogo_version
-    node_versions.sort_by {|version| version.created_at}.last.netlogo_version
+    @netlogo_version ||= node_versions.sort_by {|version| version.created_at}.last.netlogo_version
   end
 
   def netlogo_version_for_applet
@@ -264,11 +264,14 @@ class Node < ActiveRecord::Base
 
     # If only the author can see this model, then allow anyone who has
     # contributed to the model to see it
-    return true if author_visible? and author?(person)
+    return true if author?(person)
 
     # If only the group can see this model, then check if the user is logged in
     # and a member of the group
     return true if group and group_visible? and group.approved_members.member?(person)
+
+    # If the user is an administrator, then let them see the model
+    return true if person.administrator?
 
     return false
   end
