@@ -27,10 +27,10 @@ class SearchController < ApplicationController
       # @viewable_models.select { |model| model.tags.map { |tag| tag.name}.join(' ').downcase.index(@original_search_term)}
 
     logger.warn "[SearchController#search_action] [#{Time.now}] Getting matching info tabs"
-    @info_match_models = NodeVersion.all(:info_keyword_index => @original_search_term).map {|nv| nv.node}.select { |n| n.visible_to_user?(@person)}
+    @info_match_models = NodeVersion.all(:info_keyword_index => @original_search_term).map {|nv| nv.node}.uniq.select { |n| n.visible_to_user?(@person)}
 
     logger.warn "[SearchController#search_action] [#{Time.now}] Getting matching procedure tabs"
-    @procedures_match_models = NodeVersion.all(:procedures_keyword_index => @original_search_term).map {|nv| nv.node}.select { |n| n.visible_to_user?(@person)}
+    @procedures_match_models = NodeVersion.all(:procedures_keyword_index => @original_search_term).map {|nv| nv.node}.uniq.select { |n| n.visible_to_user?(@person)}
 
     logger.warn "[SearchController#search_action] [#{Time.now}] Done"
   end
