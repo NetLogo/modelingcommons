@@ -1,1 +1,3 @@
-page.insert_html :bottom, :discussion, :partial => 'one_posting', :locals => { :posting => @posting}
+if @posting
+  page.insert_html :bottom, :discussion, :partial => 'one_posting', :locals => { :posting => @posting}
+end

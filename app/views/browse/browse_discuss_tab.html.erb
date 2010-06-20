@@ -1,10 +1,14 @@
 <div>
-  <% if @model.postings.empty? and @person %>
-  <b>Please start the conversation about this model.</b>
+  <% if @model.postings.empty? %>
+  <% if @person %>
+  <p>Please start the conversation about this model.</p>
+  <% else %>
+  <p>Only <%= link_to "signed-in users", :controller => :account, :action => :login -%> may participate in the discussion.</p>
+  <% end %>
   <% end %>
 
-  <% if !@model.postings.empty? %>
   <table id="discussion">
+    <% if !@model.postings.empty? %>
     <%= render :partial => "discussion/one_posting", :collection => @model.postings.sort_by {|posting| posting.created_at}, :as => :posting -%>
   </table>
   <% end %>
@@ -33,8 +37,8 @@
       <td colspan="2"><%= submit_tag 'Submit comment' %></td>
     </tr>
 
+    <% end %>
   </table>
-  <% end %>
 
   <% end %>
 </div>

@@ -148,12 +148,12 @@ class Node < ActiveRecord::Base
         "<span class=\"proc-comment\">#{$1}</span>\n"
       end
 
-      # Make "to" and "end" stand out
-      text.gsub! /^\s*to / do
-        "<span class=\"proc-to\">to</span> "
+      # Make "to" and "to-report" stand out
+      text.gsub! /^\s*(to(-report)?) / do
+        "<span class=\"proc-to\">#{$1}</span> "
       end
 
-      # Make "to" and "end" stand out
+      # Make "end" stand out
       text.gsub! /^\s*end\b/ do
         "<span class=\"proc-end\">end</span><br /> "
       end
