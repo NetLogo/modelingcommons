@@ -29,19 +29,8 @@ To find those that match a particular text string
      And I go to the search page
      And I fill in "est" for "Enter search term:"
      And I press "Search!"
-    Then I should see "Models with 'est' in their name"
+    Then I should see "1 matched 'est' in the model name"
      And I should see "Test model"
      And I should see "No matches in author names."
      And I should see "No matches in tag names."
 
-  Scenario: A user should be able to find a model by searching for its name
-    When I log in as "reuven@lerner.co.il" with password "password"
-     And I go to the search page
-     And I fill in "Reuven" for "Enter search term:"
-     And I press "Search!"
-    Then I should see "Models with 'reuven' in their name"
-     And I should see "No matches in model names."
-     And I should see "Models with 'reuven' in the author's name"
-     And I should see "Test model"
-     And I should see "Models with 'reuven' in one or more tags"
-     And I should see "No matches in tag names."
