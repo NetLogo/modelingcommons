@@ -22,7 +22,7 @@ class SearchController < ApplicationController
     logger.warn "[SearchController#search_action] [#{Time.now}] Getting matching model authors"
     @author_match_models = [ ]
     Person.find(:all,
-                :conditions => [ "position( ? in lower(name) ) > 0 ", @original_search_term]) do |person|
+                :conditions => [ "position( ? in lower(first_name || last_name) ) > 0 ", @original_search_term]) do |person|
       @author_match_models += person.models
     end
     @author_match_models = @author_match_models.uniq.select { |n| n.visible_to_user?(@person)}
