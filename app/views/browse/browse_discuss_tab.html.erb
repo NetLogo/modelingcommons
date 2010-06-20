@@ -10,9 +10,9 @@
   <table id="discussion">
     <% if @model.postings.empty? %>
     <tr>
-      <td></td>
-      <td></td>
-      <td></td>
+      <th></th>
+      <th></th>
+      <th></th>
     </tr>
     <% else %>
     <%= render :partial => "discussion/one_posting", :collection => @model.postings.sort_by {|posting| posting.created_at}, :as => :posting -%>
