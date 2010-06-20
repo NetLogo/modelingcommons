@@ -95,6 +95,9 @@ class Node < ActiveRecord::Base
     applet_directory = "#{RAILS_ROOT}/public/applet/"
 
     [netlogo_version,
+     netlogo_version.gsub(/RC\d+$/, ''),
+     netlogo_version.gsub(/pre.*$/, ''),
+     netlogo_version.gsub(/beta.*$/, ''),
      netlogo_version.gsub(/^(\d+\.\d+).*/, '\1'),
      Dir.entries(applet_directory).grep(/^\d+\.\d+$/).sort.last].each do |version|
 
