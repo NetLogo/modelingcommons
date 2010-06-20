@@ -1,4 +1,8 @@
-<table class="datatable" border="1">
+<% if model_list.length > 10 %>
+<% @class = 'datatable' -%>
+<% end %>
+
+<table class="<%= @class -%>" border="1">
 
   <thead>
     <tr>
