@@ -20,7 +20,9 @@ class BrowseController < ApplicationController
 
   def display_preview
     if @model.preview.blank?
-      redirect_to "/images/no-preview.png"
+      send_file(:filename => "#{RAILS_ROOT}/public/images/1x1.png",
+                :type => 'image/png',
+                :disposition => 'inline')
     else
       send_data(@model.preview.contents.to_s, :type => 'image/png', :disposition => 'inline')
     end
