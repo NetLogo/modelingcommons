@@ -8,10 +8,16 @@
   <% end %>
 
   <table id="discussion">
-    <% if !@model.postings.empty? %>
+    <% if @model.postings.empty? %>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <% else %>
     <%= render :partial => "discussion/one_posting", :collection => @model.postings.sort_by {|posting| posting.created_at}, :as => :posting -%>
+    <% end %>
   </table>
-  <% end %>
 
   <%  if @person %>
 
@@ -37,8 +43,8 @@
       <td colspan="2"><%= submit_tag 'Submit comment' %></td>
     </tr>
 
-    <% end %>
   </table>
+  <% end %>
 
   <% end %>
 </div>

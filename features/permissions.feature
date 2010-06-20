@@ -66,7 +66,7 @@ So that only certain people may read or write the model
      And I go to the search page
      And I fill in "ool" for "Enter search term:"
      And I press "Search!"
-    Then I should see "Models with 'ool' in their name"
+    Then I should see "1 matched 'ool' in the model name"
      And I should see "My cool model"
      And I should see "No matches in author names."
      And I should see "No matches in tag names."
@@ -88,7 +88,7 @@ So that only certain people may read or write the model
      And I go to the search page
      And I fill in "ool" for "Enter search term:"
      And I press "Search!"
-    Then I should see "Models with 'ool' in their name"
+    Then I should see "1 matched 'ool' in the model name"
      And I should see "My cool model"
      And I should see "No matches in author names."
      And I should see "No matches in tag names."
@@ -111,7 +111,7 @@ So that only certain people may read or write the model
      And I go to the search page
      And I fill in "ool" for "Enter search term:"
      And I press "Search!"
-    Then I should see "Models with 'ool' in their name"
+    Then I should see "1 matched 'ool' in the model name"
      And I should see "My cool model"
      And I should see "No matches in author names."
      And I should see "No matches in tag names."

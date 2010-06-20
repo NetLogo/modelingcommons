@@ -274,7 +274,7 @@ class Node < ActiveRecord::Base
     return true if group and group_visible? and group.approved_members.member?(person)
 
     # If the user is an administrator, then let them see the model
-    return true if person.administrator?
+    return true if person and person.administrator?
 
     return false
   end
