@@ -30,8 +30,8 @@ class SearchController < ApplicationController
     logger.warn "[SearchController#search_action] [#{Time.now}] Getting matching model tags"
     @tag_match_models = [ ]
     Tag.find(:all,
-             :conditions => [ "position( ? in lower(name) ) > 0 ", @original_search_term]) do |person|
-      @tag_match_models += person.models
+             :conditions => [ "position( ? in lower(name) ) > 0 ", @original_search_term]) do |tag|
+      @tag_match_models += tag.models
     end
     @tag_match_models = @tag_match_models.uniq.select { |n| n.visible_to_user?(@person)}
 
