@@ -43,6 +43,7 @@ class UploadController < ApplicationController
       else
         flash[:notice] = "Error creating a new model version; it was not saved."
         redirect_to :back
+        raise ActiveRecord::Rollback, "Call tech support!"
       end
 
       # ------------------------------------------------------------

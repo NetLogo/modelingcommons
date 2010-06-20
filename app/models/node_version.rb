@@ -25,6 +25,12 @@ class NodeVersion
   after_save :update_node_modification_time
 
   SECTION_SEPARATOR = '@#$#@#$#@'
+  validate :must_be_valid_netlogo_file
+  def must_be_valid_netlogo_file
+    if contents.split(SECTION_SEPARATOR).length < 8
+      errors.add_to_base "Does not appear to be a valid NetLogo file"
+    end
+  end
 
   def node
     node_id.nil? ? nil : Node.find(node_id, :include => [:visibility, :changeability, :tags, :group])
