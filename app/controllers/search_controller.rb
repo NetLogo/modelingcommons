@@ -20,10 +20,20 @@ class SearchController < ApplicationController
                         :include => :visibility).select { |n| n.visible_to_user?(@person)}
 
     logger.warn "[SearchController#search_action] [#{Time.now}] Getting matching model authors"
-    @author_match_models = Node.find(:all).select { |model| model.visible_to_user?(@person) and model.people.map { |person| person.fullname}.join(" ").downcase.index(@original_search_term)}
+    @author_match_models = [ ]
+    Person.find(:all,
+                :conditions => [ "position( ? in lower(name) ) > 0 ", @original_search_term]) do |person|
+      @author_match_models += person.models
+    end
+    @author_match_models = @author_match_models.uniq.select { |n| n.visible_to_user?(@person)}
 
     logger.warn "[SearchController#search_action] [#{Time.now}] Getting matching model tags"
-    @tag_match_models = Node.find(:all).select { |model| model.visible_to_user?(@person) and model.tags.map { |tag| tag.name}.join(" ").downcase.index(@original_search_term)}
+    @tag_match_models = [ ]
+    Tag.find(:all,
+             :conditions => [ "position( ? in lower(name) ) > 0 ", @original_search_term]) do |person|
+      @tag_match_models += person.models
+    end
+    @tag_match_models = @tag_match_models.uniq.select { |n| n.visible_to_user?(@person)}
 
     logger.warn "[SearchController#search_action] [#{Time.now}] Getting matching info tabs"
     @info_match_models = NodeVersion.all(:info_keyword_index => @original_search_term).map {|nv| nv.node}.uniq.select { |n| n.visible_to_user?(@person)}
