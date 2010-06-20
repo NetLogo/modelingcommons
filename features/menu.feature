@@ -10,7 +10,7 @@ and even more menu options when I am not logged in.
   Scenario: Guest users who go to the home page should see a restricted menu
     When I go to the home page
     Then I should see "Modeling Commons"
-    And I should see "You must first log in"
+    And I should see "Welcome to the Modeling Commons!"
     And I should see "Home"
     And I should see "List models"
     And I should see "Help"

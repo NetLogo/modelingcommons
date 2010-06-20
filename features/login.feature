@@ -10,7 +10,7 @@ So that I can use the system
   Scenario: Users who go to the home page are asked to log in
     When I go to the home page
     Then I should see "Modeling Commons"
-    And I should see "You must first log in"
+    And I should see "Welcome to the Modeling Commons!"
 
   Scenario: Users can log in by entering their name and e-mail address
     When I log in as "reuven@lerner.co.il" with password "password"
