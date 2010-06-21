@@ -69,6 +69,16 @@ class NodeVersion
     contents.split(SECTION_SEPARATOR)[2]
   end
 
+  def new_thing
+    {:id => id,
+      :node_id => node_id,
+      :node_name => node.name,
+      :date => created_at,
+      :description => "New version of '#{node.name}' uploaded by '#{person.fullname}'",
+      :title => "Update to model '#{node.name}'",
+      :contents => description}
+  end
+
   # Callbacks
   def update_indexes
     self.info_keyword_index = info_tab.downcase.split.select {|word| word =~ /^\w[-\w.]+$/ }.uniq if info_tab

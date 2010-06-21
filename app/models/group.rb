@@ -15,19 +15,19 @@ class Group < ActiveRecord::Base
   before_destroy :remove_group_from_models
 
   def members
-    self.memberships.map {|membership| membership.person}
+    people
   end
 
   def approved_members
-    self.memberships.select {|membership| membership.status == 'approved'}.map {|membership| membership.person}
+    memberships.find(:all, :conditions => {:status => 'approved'}).map { |membership| membership.person }
   end
 
   def is_administrator?(person)
-    not self.memberships.select {|membership| membership.person == person and membership.is_administrator?}.empty?
+    memberships.find(:all, :conditions => {:person_id => person.id, :is_administrator => true})
   end
 
   def administrators
-    self.memberships.select {|membership| m.person if membership.is_administrator? }
+    memberships.find(:all, :conditions => {:is_administrator => true})
   end
 
   def remove_group_from_models

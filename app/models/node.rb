@@ -306,4 +306,10 @@ class Node < ActiveRecord::Base
     return true if procedures_tab =~ /hubnet-/
   end
 
+  def self.search(search_term, person)
+    find(:all,
+         :conditions => [ "position( ? in lower(name) ) > 0 ", search_term],
+         :include => :visibility).select { |n| n.visible_to_user?(person)}
+  end
+
 end

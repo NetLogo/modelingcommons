@@ -72,44 +72,9 @@ class BrowseController < ApplicationController
     @new_things = [ ]
     how_recent = 6.months.ago
 
-    NodeVersion.all(:conditions => {
-                       :node_id => @node.id,
-                       :created_at.gte => how_recent}).each do |nv|
-
-      @new_things <<
-        {:id => nv.id,
-        :node_id => nv.node_id,
-        :node_name => nv.node.name,
-        :date => nv.created_at,
-        :description => "New version of '#{nv.node.name}' uploaded by '#{nv.person.fullname}'",
-        :title => "Update to model '#{nv.node.name}'",
-        :contents => nv.description}
-    end
-
-    @node.postings.find(:all, :conditions => ["created_at >= ? ", how_recent]).each do |posting|
-
-      @new_things <<
-        {:id => posting.id,
-        :node_id => posting.node_id,
-        :node_name => posting.node.name,
-        :date => posting.created_at,
-        :description => "Posting by '#{posting.person.fullname}' about the '#{posting.node.name}' model",
-        :title => posting.title,
-        :contents => posting.body}
-    end
-
-    @node.tagged_nodes.find(:all, :conditions => ["created_at >= ? ", how_recent]).each do |tn|
-
-      @new_things <<
-        {:id => tn.id,
-        :node_id => tn.node_id,
-        :node_name => tn.node.name,
-        :date => tn.created_at,
-        :description => "Model '#{tn.node.name}' tagged with '#{tn.tag.name}' by '#{tn.person.fullname}'",
-        :title => "Model '#{tn.node.name}' tagged with '#{tn.tag.name}' by '#{tn.person.fullname}'",
-        :contents => "<p>'#{tn.person.fullname} tagged the '#{tn.node.name}' model</p>"
-      }
-    end
+    @new_things += @node.node_versions.select { |nv| nv.created_at >= how_recent }.map{ |nv| nv.new_thing }
+    @new_things += @node.postings.select { |p| p.created_at >= how_recent }.map{ |p| p.new_thing }
+    @new_things += @node.tagged_nodes.select { |tn| tn.created_at >= how_recent }.map{ |tn| tn.new_thing }
 
     respond_to do |format|
       format.atom { @new_things }

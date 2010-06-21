@@ -3,18 +3,21 @@
 class MembershipController < ApplicationController
 
   before_filter :require_login, :except => [:find, :find_group]
+  before_filter :get_membership, :only => [:leave, :accept_invitation]
+
+  def get_membership
+    @membership = Membership.find(params[:id])
+  end
 
   def leave
-    membership = Membership.find(params[:id])
+    @membership.destroy
 
-    membership.destroy
-
-    if membership.group.members.empty?
+    if @membership.group.members.empty?
       flash[:notice] = "You have left the group.  The group has also been removed from the system, as you were the last member."
-    elsif membership.person == @person
+    elsif @membership.person == @person
       flash[:notice] = "You have left the group."
     else
-      flash[:notice] = "#{membership.person.fullname} is no longer a member of #{membership.group.name}."
+      flash[:notice] = "#{@membership.person.fullname} is no longer a member of #{@membership.group.name}."
     end
 
     redirect_to :back
@@ -112,16 +115,12 @@ class MembershipController < ApplicationController
   end
 
   def accept_invitation
-    membership = Membership.find(params[:id])
-
-    if @person != membership.person
+    if @person != @membership.person
       flash[:notice] = "This is not your invitation.  Sorry!"
 
     else
-      membership.status = 'pending'
-      membership.save
-
-      flash[:notice] = "Congratulations!  You're now a member of the '#{membership.group.name}' group."
+      @membership.update_attributes(:status => 'pending')
+      flash[:notice] = "Congratulations!  You're now a member of the '#{@membership.group.name}' group."
     end
 
     redirect_to :controller => :account, :action => :mypage

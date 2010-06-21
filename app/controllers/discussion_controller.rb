@@ -3,6 +3,7 @@
 class DiscussionController < ApplicationController
 
   before_filter :require_login, :only => [:new, :create, :delete]
+  before_filter :get_posting_id, :only => [:delete, :undelete, :mark_as_answered, :mark_as_unanswered]
 
   def create
     params[:new_posting][:person_id] = @person.id
@@ -23,32 +24,32 @@ class DiscussionController < ApplicationController
     end
   end
 
+  def get_posting_id
+    @posting = Posting.find(params[:id])
+  end
+
   def delete
-    posting = Posting.find(params[:id])
-    posting.update_attributes(:deleted_at => Time.now)
+    @posting.update_attributes(:deleted_at => Time.now)
     flash[:notice] = "Posting deleted"
-    redirect_to :controller => :browse, :action => :one_model, :id => posting.node_id, :anchor => "discuss"
+    redirect_to :controller => :browse, :action => :one_model, :id => @posting.node_id, :anchor => "discuss"
   end
 
   def undelete
-    posting = Posting.find(params[:id])
-    posting.update_attributes(:deleted_at => nil)
+    @posting.update_attributes(:deleted_at => nil)
     flash[:notice] = "Posting undeleted"
-    redirect_to :controller => :browse, :action => :one_model, :id => posting.node_id, :anchor => "discuss"
+    redirect_to :controller => :browse, :action => :one_model, :id => @posting.node_id, :anchor => "discuss"
   end
 
   def mark_as_answered
-    posting = Posting.find(params[:id])
-    posting.update_attributes(:answered_at => Time.now)
+    @posting.update_attributes(:answered_at => Time.now)
     flash[:notice] = "Question marked as answered"
-    redirect_to :controller => :browse, :action => :one_model, :id => posting.node_id, :anchor => :discuss
+    redirect_to :controller => :browse, :action => :one_model, :id => @posting.node_id, :anchor => :discuss
   end
 
   def mark_as_unanswered
-    posting = Posting.find(params[:id])
-    posting.update_attributes(:answered_at => nil)
+    @posting.update_attributes(:answered_at => nil)
     flash[:notice] = "Question marked as unanswered"
-    redirect_to :controller => :browse, :action => :one_model, :id => posting.node_id, :anchor => :discuss
+    redirect_to :controller => :browse, :action => :one_model, :id => @posting.node_id, :anchor => :discuss
   end
 
 end

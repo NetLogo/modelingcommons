@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100614153954) do
+ActiveRecord::Schema.define(:version => 20100621152433) do
 
   create_table "email_recommendations", :force => true do |t|
     t.integer  "person_id"
@@ -18,6 +18,9 @@ ActiveRecord::Schema.define(:version => 20100614153954) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "email_recommendations", ["node_id"], :name => "index_email_recommendations_on_node_id"
+  add_index "email_recommendations", ["person_id"], :name => "index_email_recommendations_on_person_id"
 
   create_table "groups", :force => true do |t|
     t.string   "name"
@@ -59,6 +62,7 @@ ActiveRecord::Schema.define(:version => 20100614153954) do
 
   add_index "memberships", ["group_id"], :name => "index_memberships_on_group_id"
   add_index "memberships", ["person_id", "group_id"], :name => "index_memberships_on_person_id_and_group_id", :unique => true
+  add_index "memberships", ["person_id"], :name => "index_memberships_on_person_id"
 
   create_table "news_items", :force => true do |t|
     t.string   "title"
@@ -78,6 +82,9 @@ ActiveRecord::Schema.define(:version => 20100614153954) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "node_projects", ["node_id"], :name => "index_node_projects_on_node_id"
+  add_index "node_projects", ["project_id"], :name => "index_node_projects_on_project_id"
 
   create_table "nodes", :force => true do |t|
     t.integer  "parent_id"
@@ -157,6 +164,9 @@ ActiveRecord::Schema.define(:version => 20100614153954) do
     t.datetime "updated_at"
   end
 
+  add_index "recommendations", ["node_id"], :name => "index_recommendations_on_node_id"
+  add_index "recommendations", ["person_id"], :name => "index_recommendations_on_person_id"
+
   create_table "sessions", :force => true do |t|
     t.string   "session_id", :null => false
     t.text     "data"
@@ -173,6 +183,9 @@ ActiveRecord::Schema.define(:version => 20100614153954) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "spam_warnings", ["node_id"], :name => "index_spam_warnings_on_node_id"
+  add_index "spam_warnings", ["person_id"], :name => "index_spam_warnings_on_person_id"
 
   create_table "tagged_nodes", :force => true do |t|
     t.integer  "node_id"
