@@ -24,6 +24,9 @@ class NodeVersion
   before_save :update_indexes
   after_save :update_node_modification_time
 
+  scope :info_keyword_matches,  lambda { |term| where(:info_keyword_index => term) }
+  scope :procedures_keyword_matches,  lambda { |term| where(:procedures_keyword_index => term) }
+
   SECTION_SEPARATOR = '@#$#@#$#@'
   validate :must_be_valid_netlogo_file
   def must_be_valid_netlogo_file

@@ -17,7 +17,7 @@ class MembershipController < ApplicationController
     elsif @membership.person == @person
       flash[:notice] = "You have left the group."
     else
-      flash[:notice] = "#{@membership.person.fullname} is no longer a member of #{@membership.group.name}."
+      flash[:notice] = "#{@membership.person_fullname} is no longer a member of #{@membership.group_name}."
     end
 
     redirect_to :back
@@ -25,19 +25,19 @@ class MembershipController < ApplicationController
 
   def make_administrator
     Membership.find(params[:id]).update_attributes(:is_administrator => true, :status => 'approved')
-    flash[:notice] = "User '#{membership.person.fullname}' is now an administrator of '#{membership.group.name}'."
+    flash[:notice] = "User '#{membership.person_fullname}' is now an administrator of '#{membership.group_name}'."
     redirect_to :controller => :account, :action => :groups, :anchor => 'manage'
   end
 
   def remove_administrator
     Membership.find(params[:id]).update_attributes(:is_administrator => false)
-    flash[:notice] = "User '#{membership.person.fullname}' is no longer an administrator of '#{membership.group.name}'."
+    flash[:notice] = "User '#{membership.person_fullname}' is no longer an administrator of '#{membership.group_name}'."
     redirect_to :controller => :account, :action => :groups, :anchor => 'manage'
   end
 
   def approve_membership
     Membership.find(params[:id]).update_attributes(:status => 'approved')
-    flash[:notice] = "User '#{membership.person.fullname}' is now a member of '#{membership.group.name}'."
+    flash[:notice] = "User '#{membership.person_fullname}' is now a member of '#{membership.group_name}'."
     redirect_to :back
   end
 
@@ -120,7 +120,7 @@ class MembershipController < ApplicationController
 
     else
       @membership.update_attributes(:status => 'pending')
-      flash[:notice] = "Congratulations!  You're now a member of the '#{@membership.group.name}' group."
+      flash[:notice] = "Congratulations!  You're now a member of the '#{@membership.group_name}' group."
     end
 
     redirect_to :controller => :account, :action => :mypage
@@ -140,8 +140,8 @@ class MembershipController < ApplicationController
     end
 
     group_name_to_find_ilike = '%' + group_name_to_find + '%'
-    @groups = Group.find(:all,
-                         :conditions => ["lower(name) ilike ? ", group_name_to_find_ilike])
+
+    @groups = Group.search(group_name_to_find_ilike)
 
     if @groups.empty?
       render :text => "No groups contain '#{group_name_to_find}'. Please try again."
@@ -177,7 +177,7 @@ class MembershipController < ApplicationController
   end
 
   def invite
-    @potential_invitees = Person.find(:all, :order => "last_name, first_name").map {|person| ["#{person.last_name}, #{person.first_name} (#{person.email_address})", person.id]}
+    @potential_invitees = Person.phone_book.map {|person| ["#{person.last_name}, #{person.first_name} (#{person.email_address})", person.id]}
 
     render :layout => 'plain'
   end

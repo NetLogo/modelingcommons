@@ -101,16 +101,10 @@ class TagsController < ApplicationController
 
   def complete_tags
     # Parameters: {"timestamp"=>"1235989842305", "q"=>"ab", "limit"=>"150"}
-    query = params[:q]
-    query_like = "#{query}%"
+    query = params[:q].downcase
+    limit = params[:limit].to_i
 
-    limit = params[:limit]
-
-    tag_names = Tag.find(:all,
-                         :conditions => [ "name ilike ? ", query_like] ,
-                         :limit => limit).map { |tag| tag.name}
-
-    render :text => tag_names.join("\n")
+    render :text => Tag.search(query)[0..limit].map { |tag| tag.name}.join("\n")
   end
 
   def destroy

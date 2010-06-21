@@ -158,27 +158,12 @@ class ApplicationController < ActionController::Base
   def all_whats_new
     how_new_is_new = 2.weeks.ago
 
-    @recent_members = Person.find(:all,
-                                  :order => 'created_at DESC',
-                                  :conditions => ["created_at >= ?", how_new_is_new ])
-
-    @recent_models = Node.find(:all,
-                               :order => 'created_at DESC',
-                               :conditions => ["created_at >= ?", how_new_is_new ])
-
-    @updated_models = Node.find(:all,
-                                :order => 'updated_at DESC',
-                                :conditions => ["created_at >= ?", how_new_is_new ])
-
-    @recent_postings = Posting.find(:all,
-                                    :order => 'created_at DESC',
-                                    :conditions => ["created_at >= ?", how_new_is_new ])
-
-    @recent_tags = Tag.find(:all, :order => 'created_at DESC',
-                            :conditions => ["created_at >= ?", how_new_is_new ])
-
-    @recent_tagged_models = TaggedNode.find(:all, :order => 'created_at DESC',
-                                            :conditions => ["created_at >= ?", how_new_is_new ])
+    @recent_members = Person.created_since(how_new_is_new)
+    @recent_models = Node.created_since(how_new_is_new)
+    @updated_models = Node.updated_since(how_new_is_new)
+    @recent_postings = Posting.created_since(how_new_is_new)
+    @recent_tags = Tag.created_since(how_new_is_new)
+    @recent_tagged_models = TaggedNode.created_since(how_new_is_new)
 
     @all_whats_new = [@recent_members, @recent_models, @updated_models, @recent_postings,
                       @recent_tags, @recent_tagged_models].flatten.sort_by {|n| n.updated_at}.reverse

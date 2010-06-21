@@ -8,7 +8,7 @@ class BrowseController < ApplicationController
   before_filter :check_visibility_permissions, :only => [:one_model, :model_contents, :one_applet ]
 
   def list_models
-    @models = Node.find(:all, :order => 'name ASC')
+    @models = Node.all
   end
 
   def one_model
@@ -60,7 +60,8 @@ class BrowseController < ApplicationController
     elsif (params[:read_permission] == 'g' or params[:write_permission] == 'g') and params[:group_id].blank?
       flash[:notice] = 'You can only set group permissions if you also set a group.'
     else
-      group = Group.find(:first, params[:group_id])
+      group = Group.first(:conditions => { :id => params[:group_id] })
+
       @model.update_attributes(:visibility => PermissionSetting.find_by_short_form(params[:read_permission]),
                                :changeability => PermissionSetting.find_by_short_form(params[:write_permission]),
                                :group => group)

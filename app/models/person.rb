@@ -26,6 +26,9 @@ class Person < ActiveRecord::Base
   validates_uniqueness_of :email_address, :case_sensitive => false
   validates_confirmation_of :password
 
+  named_scope :created_since, lambda { |since| { :conditions => ['created_at >= ? ', since] }}
+  named_scope :phone_book, :order => "last_name, first_name"
+
   def nodes
     node_versions.map { |nv| nv.node_id}.uniq.map{ |node_id| Node.find(node_id)}
   end
@@ -56,6 +59,10 @@ class Person < ActiveRecord::Base
 
   def latest_action_time
     LoggedAction.maximum('logged_at', :conditions => ["person_id = ?", id])
+  end
+
+  def self.search(term)
+    all(:conditions => [ "position( ? in lower(first_name || last_name) ) > 0 ", term])
   end
 
 end

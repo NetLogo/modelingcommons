@@ -26,6 +26,11 @@ class Node < ActiveRecord::Base
   validates_presence_of :name, :visibility_id, :changeability_id
   validates_numericality_of :visibility_id, :changeability_id
 
+  default_scope :order => 'name ASC'
+
+  named_scope :created_since, lambda { |since| { :conditions => ['created_at >= ? ', since] }}
+  named_scope :updated_since, lambda { |since| { :conditions => ['updated_at >= ? ', since] }}
+
   # ------------------------------------------------------------
   # Grab children of various sorts
   # ------------------------------------------------------------

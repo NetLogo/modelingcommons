@@ -14,20 +14,22 @@ class Group < ActiveRecord::Base
 
   before_destroy :remove_group_from_models
 
+  named_scope :search, lambda { |term| { :conditions => ["lower(name) ilike ? ", term] } }
+
   def members
     people
   end
 
   def approved_members
-    memberships.find(:all, :conditions => {:status => 'approved'}).map { |membership| membership.person }
-  end
-
-  def is_administrator?(person)
-    memberships.find(:all, :conditions => {:person_id => person.id, :is_administrator => true})
+    memberships.approved.map { |membership| membership.person }
   end
 
   def administrators
-    memberships.find(:all, :conditions => {:is_administrator => true})
+    memberships.administrators.map { |membership| membership.person }
+  end
+
+  def is_administrator?(person)
+    administrators.member?(person)
   end
 
   def remove_group_from_models
