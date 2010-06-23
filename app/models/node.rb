@@ -36,17 +36,14 @@ class Node < ActiveRecord::Base
   # ------------------------------------------------------------
 
   def node_versions
-    NodeVersion.all(:conditions => { :node_id => id})
-  end
-
-  def person
-    node_versions.sort { |n| n.created_at}.last.person
+    NodeVersion.all(:conditions => { :node_id => id}, :order => :created_at.desc )
   end
 
   def current_version
     node_versions.first
   end
 
+  # Create methods for the different attachment types
   NodeAttachment::TYPES.keys.each do |attachment_type|
 
     define_method(attachment_type.to_sym) do
@@ -69,16 +66,16 @@ class Node < ActiveRecord::Base
   # ------------------------------------------------------------
 
   def description
-    @description ||= node_versions.sort_by {|nv| nv.created_at}.last.description
+    @description ||= current_version.description
+  end
+
+  def person
+    current_version.person
   end
 
   def most_recent_author
-    @most_recent_author ||= self.node_versions.sort_by {|nv| nv.created_at}.last.person
+    @most_recent_author ||= person
   end
-
-  # ------------------------------------------------------------
-  # Get the contents of a model file
-  # ------------------------------------------------------------
 
   def people
     @model_people ||= node_versions.map {|version| version.person}.uniq
@@ -88,12 +85,16 @@ class Node < ActiveRecord::Base
     people.member?(person)
   end
 
+  # ------------------------------------------------------------
+  # Get the contents of a model file
+  # ------------------------------------------------------------
+
   def contents
-    @contents ||= node_versions.sort_by {|version| version.created_at}.last.contents
+    @contents ||= current_version.contents
   end
 
   def netlogo_version
-    @netlogo_version ||= node_versions.sort_by {|version| version.created_at}.last.netlogo_version
+    @netlogo_version ||= current_version.netlogo_version
   end
 
   def netlogo_version_for_applet
@@ -122,54 +123,53 @@ class Node < ActiveRecord::Base
     end
   end
 
-  def info_tab(with_html=false)
-    text = node_versions.sort_by {|nv| nv.created_at }.last.info_tab
-
-    if text.blank?
-      "Info tab is empty."
-
-    elsif with_html
-      # Handle headlines
-      text.gsub! /([-_.?A-Z ]+)\n-+/ do
-        "<h3>#{$1}</h3>"
-      end
-
-      # Handle URLs
-      text.gsub! /(http:\/\/[-\/_.~\w]+\w)/ do
-        "<a target=\"_blank\" href=\"#{$1}\">#{$1}</a>"
-      end
-
-      # Handle newlines
-      text.gsub!("\n", "</p>\n<p>")
-    end
+  def info_tab
+    current_version.info_tab || "Info tab is empty."
   end
 
-  def procedures_tab(with_html=false)
-    text = node_versions.sort_by {|nv| nv.created_at}.last.procedures_tab
+  def info_tab_html
+    text = info_tab
 
-    if with_html
-      # Italicize comments
-      text.gsub! /(;.*)\n/ do
-        "<span class=\"proc-comment\">#{$1}</span>\n"
-      end
-
-      # Make "to" and "to-report" stand out
-      text.gsub! /^\s*(to(-report)?) / do
-        "<span class=\"proc-to\">#{$1}</span> "
-      end
-
-      # Make "end" stand out
-      text.gsub! /^\s*end\b/ do
-        "<span class=\"proc-end\">end</span><br /> "
-      end
-
-      # Handle newlines
-      text.gsub!("\n", "\n<br />")
+    # Handle headlines
+    text.gsub! /([-_.?A-Z ]+)\n-+/ do
+      "<h3>#{$1}</h3>"
     end
 
-    text = "<tt>#{text}</tt>"
+    # Handle URLs
+    text.gsub! /(http:\/\/[-\/_.~\w]+\w)/ do
+      "<a target=\"_blank\" href=\"#{$1}\">#{$1}</a>"
+    end
 
-    text
+    # Handle newlines
+    text.gsub!("\n", "</p>\n<p>")
+  end
+
+  def procedures_tab()
+    current_version.procedures_tab || "Procedures tab is empty."
+  end
+
+  def procedures_tab_html
+    text = procedures_tab
+
+    # Italicize comments
+    text.gsub! /(;.*)\n/ do
+      "<span class=\"proc-comment\">#{$1}</span>\n"
+    end
+
+    # Make "to" and "to-report" stand out
+    text.gsub! /^\s*(to(-report)?) / do
+      "<span class=\"proc-to\">#{$1}</span> "
+    end
+
+    # Make "end" stand out
+    text.gsub! /^\s*end\b/ do
+      "<span class=\"proc-end\">end</span><br /> "
+    end
+
+    # Handle newlines
+    text.gsub!("\n", "\n<br />")
+
+    "<tt>#{text}</tt>"
   end
 
   def filename

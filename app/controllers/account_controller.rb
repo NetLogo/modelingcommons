@@ -11,13 +11,12 @@ class AccountController < ApplicationController
   def create
     @new_person = Person.new(params[:new_person])
 
-    begin
-      @new_person.save!
+    if @new_person.save
       flash[:notice] = "Congratulations, #{@new_person.first_name}!  You are now registered with the Modeling Commons.  We're delighted that you've joined us."
       Notifications.deliver_signup(@new_person)
       session[:person_id] = @new_person.id
       redirect_to :controller => :account, :action => :mypage
-    rescue Exception => exception
+    else
       render :action => :new
     end
 
@@ -79,6 +78,7 @@ class AccountController < ApplicationController
   end
 
   def mypage
+
     if @person.nil? and params[:id].blank?
       flash[:notice] = "Welcome to the Modeling Commons!"
       redirect_to :controller => :account, :action => :login
