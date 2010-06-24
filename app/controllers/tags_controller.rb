@@ -13,10 +13,10 @@ class TagsController < ApplicationController
 
     @new_tagged_nodes = [ ]
 
-    params[:new_tag].each_with_index do |tag_name, i|
+    params[:new_tag].each_with_index do |tag_name, index|
       next if tag_name.blank? or tag_name == 'tag name'
 
-      comment = params[:new_comment][i].strip
+      comment = params[:new_comment][index].strip
       comment = '' if comment == '(Optional) comment about why this tag is relevant to this model'
 
       tag = Tag.find_or_create_by_name(tag_name.downcase.strip, :person_id => @person.id)

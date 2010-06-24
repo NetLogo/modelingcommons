@@ -20,7 +20,7 @@ class GraphController < ApplicationController
         nodes_to_graph << node.parent unless nodes_to_graph.member?(node.parent)
       end
 
-      node.models.sort_by { |n| n.id}.each do |child|
+      node.children.sort_by { |node| node.id}.each do |child|
         nodes_to_graph << child unless nodes_to_graph.member?(child)
       end
     end
@@ -28,7 +28,7 @@ class GraphController < ApplicationController
     # Iterate over the nodes, and graph them
     already_graphed = Hash.new({ })
 
-    nodes_to_graph.sort_by { |n| n.id}.each do |node|
+    nodes_to_graph.sort_by { |node| node.id}.each do |node|
 
       # First, draw the current model
       if node == @model

@@ -56,9 +56,12 @@ class BrowseController < ApplicationController
     @new_things = [ ]
     how_recent = 6.months.ago
 
-    @new_things += @node.node_versions.select { |nv| nv.created_at >= how_recent }.map{ |nv| nv.new_thing }
-    @new_things += @node.postings.select { |p| p.created_at >= how_recent }.map{ |p| p.new_thing }
-    @new_things += @node.tagged_nodes.select { |tn| tn.created_at >= how_recent }.map{ |tn| tn.new_thing }
+    @new_things +=
+      @node.node_versions.select { |node_version| node_version.created_at >= how_recent }.map{ |node_version| node_version.new_thing }
+    @new_things +=
+      @node.postings.select { |posting| posting.created_at >= how_recent }.map{ |posting| posting.new_thing }
+    @new_things +=
+      @node.tagged_nodes.select { |tagged_node| tagged_node.created_at >= how_recent }.map{ |tagged_node| tagged_node.new_thing }
 
     respond_to do |format|
       format.atom { @new_things }

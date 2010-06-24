@@ -93,11 +93,11 @@ class AccountController < ApplicationController
 
     how_new_is_new = 6.months.ago
 
-    @questions = Posting.unanswered_questions.select { |q| q.created_at >= how_new_is_new }
+    @questions = Posting.unanswered_questions.select { |question| question.created_at >= how_new_is_new }
 
-    @recent_tags = @the_person.tags.select { |t| t.created_at >= how_new_is_new}
-    @recent_tagged_models = @the_person.tagged_nodes.select { |tn| tn.created_at >= how_new_is_new}
-    @tag_events = [@recent_tags, @recent_tagged_models].flatten.sort_by { |t| t.created_at}.reverse
+    @recent_tags = @the_person.tags.select { |tag| tag.created_at >= how_new_is_new}
+    @recent_tagged_models = @the_person.tagged_nodes.select { |tagged_node| tagged_node.created_at >= how_new_is_new}
+    @tag_events = [@recent_tags, @recent_tagged_models].flatten.sort_by { |tag| tag.created_at}.reverse
     @tag_events = @tag_events[0..9] if @tag_events.length > 10
 
     # Model updates
@@ -183,9 +183,12 @@ class AccountController < ApplicationController
 
     @the_person = Person.find(params[:id])
 
-    @new_things += @person.node_versions.select { |nv| nv.created_at >= how_recent }.map{ |nv| nv.new_thing }
-    @new_things += @person.postings.select { |p| p.created_at >= how_recent }.map{ |p| p.new_thing }
-    @new_things += @person.tagged_nodes.select { |tn| tn.created_at >= how_recent }.map{ |tn| tn.new_thing }
+    @new_things +=
+      @person.node_versions.select { |node_version| node_verson.created_at >= how_recent }.map{ |node_version| node_verson.new_thing }
+    @new_things +=
+      @person.postings.select { |person| person.created_at >= how_recent }.map{ |person| person.new_thing }
+    @new_things +=
+      @person.tagged_nodes.select { |tagged_node| tagged_node.created_at >= how_recent }.map{ |tagged_node| tagged_node.new_thing }
 
     respond_to do |format|
       format.html { @new_things }

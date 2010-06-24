@@ -19,18 +19,18 @@ class SearchController < ApplicationController
     logger.warn "[SearchController#search_action] [#{Time.now}] Getting matching model authors"
     @author_match_models = [ ]
     Person.search(@original_search_term).each { |person| @author_match_models += person.models }
-    @author_match_models = @author_match_models.uniq.select { |n| n.visible_to_user?(@person)}
+    @author_match_models = @author_match_models.uniq.select { |node| node.visible_to_user?(@person)}
 
     logger.warn "[SearchController#search_action] [#{Time.now}] Getting matching model tags"
     @tag_match_models = [ ]
     Tag.search(@original_search_term).each {  |tag| @tag_match_models += tag.models }
-    @tag_match_models = @tag_match_models.uniq.select { |n| n.visible_to_user?(@person)}
+    @tag_match_models = @tag_match_models.uniq.select { |node| node.visible_to_user?(@person)}
 
     logger.warn "[SearchController#search_action] [#{Time.now}] Getting matching info tabs"
-    @info_match_models = NodeVersion.info_keyword_matches(@original_search_term).map {|nv| nv.node}.uniq.select { |n| n.visible_to_user?(@person)}
+    @info_match_models = NodeVersion.info_keyword_matches(@original_search_term).map {|nv| nv.node}.uniq.select { |node| node.visible_to_user?(@person)}
 
     logger.warn "[SearchController#search_action] [#{Time.now}] Getting matching procedure tabs"
-    @procedures_match_models = NodeVersion.procedures_keyword_matches(@original_search_term).map {|nv| nv.node}.uniq.select { |n| n.visible_to_user?(@person)}
+    @procedures_match_models = NodeVersion.procedures_keyword_matches(@original_search_term).map {|nv| nv.node}.uniq.select { |node| node.visible_to_user?(@person)}
 
     logger.warn "[SearchController#search_action] [#{Time.now}] Done"
   end

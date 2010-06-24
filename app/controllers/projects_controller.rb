@@ -20,7 +20,7 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
 
     if @person
-      @models_to_add = @person.models.select {|m| !m.projects.member?(@project)}.sort_by{|m| m.name.downcase}.map {|m| [m.name, m.id]}
+      @models_to_add = @person.models.select {|model| !model.projects.member?(@project)}.sort_by{|model| model.name.downcase}.map {|model| [model.name, model.id]}
       else
       @models_to_add = []
     end

@@ -166,7 +166,7 @@ class ApplicationController < ActionController::Base
     @recent_tagged_models = TaggedNode.created_since(how_new_is_new)
 
     @all_whats_new = [@recent_members, @recent_models, @updated_models, @recent_postings,
-                      @recent_tags, @recent_tagged_models].flatten.sort_by {|n| n.updated_at}.reverse
+                      @recent_tags, @recent_tagged_models].flatten.sort_by {|new_item| new_item.updated_at}.reverse
   end
 
 end
