@@ -29,22 +29,7 @@ class BrowseController < ApplicationController
   end
 
   def download_model
-    # Create the zipfile
-    Zip::ZipOutputStream::open(@model.zipfile_name_full_path) do |io|
-      io.put_next_entry("#{@model.download_name}.nlogo")
-      io.write(@model.contents.to_s)
-
-      # Now we get all child nodes that are not themselves models.
-      @model.attachments.each do |attachment|
-        io.put_next_entry("#{attachment.filename}")
-        io.write(attachment.contents.to_s)
-      end
-    end
-
-    send_file(@model.zipfile_name_full_path,
-              :filename => @model.zipfile_name,
-              :type => 'application/zip',
-              :disposition => "inline")
+    send_file(@model.create_zipfile, :filename => @model.zipfile_name, :type => 'application/zip', :disposition => "inline")
   end
 
   def model_contents

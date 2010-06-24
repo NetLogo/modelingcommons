@@ -317,4 +317,18 @@ class Node < ActiveRecord::Base
          :include => :visibility).select { |n| n.visible_to_user?(person)}
   end
 
+  def create_zipfile
+    Zip::ZipOutputStream::open(zipfile_name_full_path) do |io|
+      io.put_next_entry("#{download_name}.nlogo")
+      io.write(contents.to_s)
+
+      attachments.each do |attachment|
+        io.put_next_entry("#{attachment.filename}")
+        io.write(attachment.contents.to_s)
+      end
+    end
+
+    zipfile_name_full_path
+  end
+
 end
