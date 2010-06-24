@@ -36,8 +36,8 @@ class Group < ActiveRecord::Base
     models.each do |model|
       new_settings = { :group => nil }
 
-      new_settings[:visibility_id] = 1 if model.visibility.short_form == 'g'
-      new_settings[:changeability_id] = 1 if model.changeability.short_form == 'g'
+      new_settings[:visibility_id] = 1 if model.group_visible?
+      new_settings[:changeability_id] = 1 if model.group_changeable?
 
       model.update_attributes(new_settings)
     end

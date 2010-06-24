@@ -151,8 +151,7 @@ class ApplicationController < ActionController::Base
     @node = @model
   rescue
     flash[:notice] = "No model with ID '#{params[:id]}'"
-    redirect_to :back
-    return
+    redirect_to :controller => :account, :action => :mypage
   end
 
   def all_whats_new

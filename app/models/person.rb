@@ -49,6 +49,10 @@ class Person < ActiveRecord::Base
     "#{self.first_name} #{self.last_name}"
   end
 
+  def phonebook_name
+    "#{person.last_name}, #{person.first_name} (#{person.email_address})"
+  end
+
   def administrated_groups
     self.groups.select {|group| group.is_administrator?(self) }
   end
