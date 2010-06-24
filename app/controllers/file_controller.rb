@@ -3,7 +3,7 @@
 class FileController < ApplicationController
 
   prepend_before_filter :get_model_from_id_param
-  before_filter :check_changeability_permissions, :only => [:create]
+  before_filter :check_changeability_permissions, :only => [:create, :delete]
 
   def create
     description = params[:description]

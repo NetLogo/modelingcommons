@@ -17,12 +17,19 @@ So that I can log in
      And I press "Send password reminder"
     Then I should see "A password reminder was sent to your e-mail address."
 
-  Scenario: Get password reminder for an unregistered address
+  Scenario: Get password reminder for an illegal address
     When I go to the password reminder page
-     And I fill in "reuvennnn@lernerrrr.coooo.illll" for "E-mail address"
+     And I fill in "notemail" for "E-mail address"
      And I press "Send password reminder"
-    Then I should see "Sorry, but 'reuvennnn@lernerrrr.coooo.illll' is not listed in our system. Please register."
+    Then I should see "'notemail' is not a valid e-mail address."
+
+  Scenario: Get password reminder for a blank address
+    When I go to the password reminder page
+     And I fill in "" for "E-mail address"
+     And I press "Send password reminder"
+    Then I should see "'' is not a valid e-mail address"
 
   Scenario: Trying to go to the send_password_action page results in a message
     When I go to the password reminder action page
-    Then I should see "You must enter an e-mail address to receive a reminder."
+    Then I should see "'' is not a valid e-mail address."
+

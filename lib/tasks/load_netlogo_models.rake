@@ -59,7 +59,7 @@ namespace :netlogo do
             puts "\t\tFound more than one.  Ack!"
           end
 
-        elsif suffix = '.png'
+        elsif suffix == '.png'
 
           if matching_nodes.empty?
             # Create a new node, if necessary
@@ -74,12 +74,10 @@ namespace :netlogo do
             puts "\t\tFound more than one.  Ack!"
           end
 
+        else
+          puts "\t\tI have no idea what to do with a suffix of '#{suffix}'.  Ignoring."
         end
-
       end
     end
-
-
   end
-
 end

@@ -146,20 +146,17 @@ class AccountController < ApplicationController
   end
 
   def send_password_action
-    email_address = params[:email_address]
+    email_address = params[:email_address].to_s
 
-    if email_address.blank?
-      flash[:notice] = "You must enter an e-mail address to receive a reminder."
+    if email_address.index('@').nil?
+      flash[:notice] = "Sorry, but '#{email_address}' is not a valid e-mail address.  Please try again."
       redirect_to :controller => :account, :action => :send_password
       return
     end
 
     @person = Person.find_by_email_address(email_address)
 
-    if email_address.index('@').nil?
-      flash[:notice] = "Sorry, but '#{email_address}' is not a valid e-mail address.  Please try again."
-      redirect_to :back
-    elsif @person
+    if @person
       Notifications.deliver_password_reminder(@person)
       flash[:notice] = "A password reminder was sent to your e-mail address."
       redirect_to :controller => :account, :action => :login
