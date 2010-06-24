@@ -5,8 +5,13 @@ namespace :netlogo do
   desc 'Loads the latest batch of models from the filesystem into the Modeling Commons'
   task :load_models => :environment do
 
-    MODEL_LOCATIONS = '/Applications/NetLogo 4.1/models/'
-    total_size = 0
+    MODEL_LOCATIONS = ENV['MODEL_LOCATIONS']
+
+    if MODEL_LOCATIONS.blank?
+      puts "Did not find any value for model locations! Exiting."
+      exit
+    end
+    puts "Model locations = '#{MODEL_LOCATIONS}'"
 
     # Get the Modeling Commons user
     mc_user = Person.find_by_email_address("nlcommons@modelingcommons.org")
