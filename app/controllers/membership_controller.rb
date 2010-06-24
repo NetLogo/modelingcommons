@@ -12,12 +12,14 @@ class MembershipController < ApplicationController
   def leave
     @membership.destroy
 
-    if @membership.group.members.empty?
-      flash[:notice] = "You have left the group.  The group has also been removed from the system, as you were the last member."
-    elsif @membership.person == @person
+    if @membership.person == @person
       flash[:notice] = "You have left the group."
     else
       flash[:notice] = "#{@membership.person_fullname} is no longer a member of #{@membership.group_name}."
+    end
+
+    if @membership.group_empty?
+      flash[:notice] << " The group has also been removed from the system, as you were the last member."
     end
 
     redirect_to :back

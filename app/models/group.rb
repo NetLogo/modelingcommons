@@ -16,16 +16,16 @@ class Group < ActiveRecord::Base
 
   named_scope :search, lambda { |term| { :conditions => ["lower(name) ilike ? ", term] } }
 
-  def members
-    people
-  end
-
   def approved_members
-    memberships.approved.map { |membership| membership.person }
+    memberships.approved_members
   end
 
   def administrators
-    memberships.administrators.map { |membership| membership.person }
+    memberships.administrators
+  end
+
+  def members
+    people
   end
 
   def is_administrator?(person)
@@ -42,5 +42,10 @@ class Group < ActiveRecord::Base
       model.update_attributes(new_settings)
     end
   end
+
+  def self.group_or_nil(group_id)
+    first(:conditions => { :id => group_id })
+  end
+
 
 end

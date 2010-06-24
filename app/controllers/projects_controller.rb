@@ -18,7 +18,12 @@ class ProjectsController < ApplicationController
 
   def show
     @project = Project.find(params[:id])
-    @models_to_add = @person.models.select {|m| !m.projects.member?(@project)}.sort_by{|m| m.name.downcase}.map {|m| [m.name, m.id]}
+
+    if @person
+      @models_to_add = @person.models.select {|m| !m.projects.member?(@project)}.sort_by{|m| m.name.downcase}.map {|m| [m.name, m.id]}
+      else
+      @models_to_add = []
+    end
   end
 
   def find

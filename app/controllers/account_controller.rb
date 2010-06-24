@@ -96,20 +96,16 @@ class AccountController < ApplicationController
     @questions = Posting.unanswered_questions.select { |q| q.created_at >= how_new_is_new }
 
     @recent_tags = @the_person.tags.select { |t| t.created_at >= how_new_is_new}
-    @recent_tagged_models =
-      @the_person.tagged_nodes.select { |tn| tn.created_at >= how_new_is_new}
-    @tag_events =
-      [@recent_tags, @recent_tagged_models].flatten.sort_by { |t| t.created_at}.reverse
-
-    if @tag_events.length > 10
-      @tag_events = @tag_events[0..9]
-    end
+    @recent_tagged_models = @the_person.tagged_nodes.select { |tn| tn.created_at >= how_new_is_new}
+    @tag_events = [@recent_tags, @recent_tagged_models].flatten.sort_by { |t| t.created_at}.reverse
+    @tag_events = @tag_events[0..9] if @tag_events.length > 10
 
     # Model updates
-    @recent_models = @the_person.models.select { |model| model.updated_at >= how_new_is_new }.sort_by { |model| model.updated_at }.reverse
-    @model_events = @recent_models;
+    @model_events =
+      @the_person.models.select { |model| model.updated_at >= how_new_is_new }.sort_by { |model| model.updated_at }.reverse
 
-    @group_recent_models = @the_person.models.select { |model| model.group and model.created_at >= how_new_is_new }.sort_by { |model| model.created_at }.reverse
+    @group_recent_models =
+      @the_person.models.select { |model| model.group and model.created_at >= how_new_is_new }.sort_by { |model| model.created_at }.reverse
     @group_model_events = @group_recent_models.select { |model| model.group.members.include?(@person)}
 
     # most-viewed models

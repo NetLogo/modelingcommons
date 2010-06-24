@@ -5,7 +5,7 @@
   <ul>
     <% @person.memberships.sort_by {|m| m.group_name.downcase}.each do |membership| %>
     <li><%= group_link(membership.group) %>
-      (<%= pluralize(membership.group.members.length, "member") %>)
+      (<%= pluralize(membership.group_size, "member") %>)
       (<%= link_to "leave this group", :controller => :membership, :action => :leave, :id => membership.id, :confirm => "Are you sure that you want to leave this group?" %>)
     </li>
     <% end %>

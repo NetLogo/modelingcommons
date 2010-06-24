@@ -67,7 +67,7 @@ class UploadController < ApplicationController
 
       # If we got a group and permission settings, set those as well
       group_id = params[:group_id].blank? ? nil : params[:group_id]
-      group = Group.first(:conditions => { :id => group_id })
+      group = Group.group_or_nil(group_id)
 
       read_permission = PermissionSetting.find_by_short_form(params[:read_permission])
       if group.nil? and read_permission and read_permission.is_group?
