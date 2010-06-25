@@ -8,8 +8,6 @@ class BrowseController < ApplicationController
   before_filter :require_login, :only => [:set_permissions]
   before_filter :check_visibility_permissions, :only => [:one_model, :model_contents, :one_applet ]
 
-  caches_page :display_preview
-
   def list_models
     @models = Node.all(:include => [:tagged_nodes, :tags, :group])
   end
