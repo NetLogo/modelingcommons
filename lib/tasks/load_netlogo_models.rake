@@ -93,7 +93,7 @@ namespace :netlogo do
                                     :contents => File.open(path).read,
                                     :description => 'Updated from NetLogo 4.1')
             rescue => e
-              puts "\t\t*** Error trying to create a new version of existing node '#{node.name}', ID '#{node.id}': '#{e.inspect}'"
+              puts "\t\t*** Error trying to create a new version of existing node '#{matching_node.name}', ID '#{matching.node.id}': '#{e.inspect}'"
               next
             end
 
@@ -145,19 +145,20 @@ namespace :netlogo do
             puts "\t\tNo matching node found.  What the heck?"
 
           elsif matching_nodes.length == 1
+            matching_node = matching_nodes.first
             # Add a new version to an existing node
             puts "\t\tFound a matching node.  Creating a new attachment, of type preview."
 
             begin
               new_version =
-                attachment = NodeAttachment.create!(:node_id => matching_nodes.first.id,
+                attachment = NodeAttachment.create!(:node_id => matching_node.id,
                                                     :person_id => mc_user.id,
                                                     :description => "Preview for '#{filename}'",
                                                     :filename => filename + '.png',
                                                     :type => 'preview',
                                                     :contents => File.open(path).read)
             rescue => e
-              puts "\t\t*** Error trying to create a attachment to node '#{node.name}', ID '#{node.id}'"
+              puts "\t\t*** Error trying to create a attachment to node '#{matching_node.name}', ID '#{matching_node.id}'"
               next
             end
 
