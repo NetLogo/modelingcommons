@@ -36,11 +36,11 @@ class NodeVersion
   end
 
   def node
-    node_id.nil? ? nil : Node.find(node_id, :include => [:visibility, :changeability, :tags, :group])
+    @node ||= (node_id.nil? ? nil : Node.find(node_id, :include => [:visibility, :changeability, :tags, :group]))
   end
 
   def person
-    person_id.nil? ? nil : Person.find(person_id)
+    @person ||= (person_id.nil? ? nil : Person.find(person_id))
   end
 
   def person=(a_person)
@@ -53,23 +53,15 @@ class NodeVersion
   end
 
   def procedures_tab
-    contents.split(SECTION_SEPARATOR)[0]
+    @procedures_tab ||= contents.split(SECTION_SEPARATOR)[0]
   end
 
   def info_tab
-    contents.split(SECTION_SEPARATOR)[2]
+    @info_tab ||= contents.split(SECTION_SEPARATOR)[2]
   end
 
   def netlogo_version
-    contents.split(SECTION_SEPARATOR)[4].gsub("\n", "").gsub("NetLogo ", "")
-  end
-
-  def procedures_content
-    contents.split(SECTION_SEPARATOR)[0]
-  end
-
-  def info_content
-    contents.split(SECTION_SEPARATOR)[2]
+    @netlogo_version ||= contents.split(SECTION_SEPARATOR)[4].gsub("\n", "").gsub("NetLogo ", "")
   end
 
   def new_thing

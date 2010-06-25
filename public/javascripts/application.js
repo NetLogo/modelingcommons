@@ -10,7 +10,8 @@ $(document).ready(function () {
         };
 
         // create the datatable
-        $(".datatable").dataTable();
+        var datatable = $(".datatable").dataTable();
+        datatable.fnSort([ [1, 'asc']])
 
         $('#navbar-search-form-text').click(function() {
                 if ($(this).attr('value') == 'Search')

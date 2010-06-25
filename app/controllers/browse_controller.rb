@@ -2,13 +2,16 @@
 
 class BrowseController < ApplicationController
 
+  prepend_before_filter :log_one_action, :except => [:display_preview]
   prepend_before_filter :get_model_from_id_param, :except => [:index, :list_models, :search, :news, :one_node, :view_random_model, :about]
-  before_filter :require_login, :only => [:set_permissions]
 
+  before_filter :require_login, :only => [:set_permissions]
   before_filter :check_visibility_permissions, :only => [:one_model, :model_contents, :one_applet ]
 
+  caches_page :display_preview
+
   def list_models
-    @models = Node.all
+    @models = Node.all(:include => [:tagged_nodes, :tags, :group])
   end
 
   def one_model

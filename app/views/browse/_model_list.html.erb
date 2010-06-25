@@ -1,16 +1,14 @@
-<% if model_list.length > 10 %>
-<% @class = 'datatable' -%>
-<% end %>
+<% @render_time = Hash.new(0) %>
 
-<table class="<%= @class -%>" border="1">
+<table class="<%= model_list.length > 10 ? 'datatable' : '' -%>" border="1">
 
   <thead>
     <tr>
+      <th>Preview</th>
       <th>Model</th>
       <th>Tags</th>
       <th>Group</th>
       <th>Modified</th>
-      <th>Modified by</th>
     </tr>
   </thead>
   <tbody>
@@ -20,9 +18,16 @@
     <tr class="<%= cycle('even', 'odd') -%>">
       <td>
         <% start_time = Time.now -%>
-        <img src="/browse/display_preview/<%= model.id %>" width="30" height="30" alt="Preview of model '#{model.name}'" />
-        <%= link_to model.name, :controller => "browse", :action => "one_model", :id => model.id %><%= render :partial => "browse/preview_image", :locals => {:model => @model} -%>
-        <!-- Name and preview render time = <%= Time.now - start_time  -%> -->
+        <img src="/browse/display_preview/<%= model.id %>" width="30" height="30" alt="Preview of model '<%= model.name -%>'" />
+        <% @render_time[:preview] += Time.now - start_time -%>
+        <!-- Preview render time = <%= Time.now - start_time  -%> -->
+      </td>
+      <td>
+        <% start_time = Time.now -%>
+        <!-- <%= model.name -%> -->
+        <%= link_to model.name, :controller => "browse", :action => "one_model", :id => model.id %>
+        <% @render_time[:name] += Time.now - start_time -%>
+        <!-- Name render time = <%= Time.now - start_time  -%> -->
       </td>
       <td>
         <% start_time = Time.now -%>
@@ -31,6 +36,7 @@
         <% else %>
         <%= model.tags.sort_by {|t| t.name}.map {|t| link_to t.name, :controller => :tags, :action => :one_tag, :id => t.id}.uniq.join(', ') %>
         <% end %>
+        <% @render_time[:tags] += Time.now - start_time -%>
         <!-- Tags render time = <%= Time.now - start_time  -%> -->
       </td>
 
@@ -41,19 +47,14 @@
         <% else %>
         (No group)
         <% end %>
+        <% @render_time[:group] += Time.now - start_time -%>
         <!-- Group render time = <%= Time.now - start_time  -%> -->
       </td>
       <td>
         <% start_time = Time.now -%>
         <%= distance_of_time_in_words(Time.now, model.updated_at) %> ago
+        <% @render_time[:last_modified] += Time.now - start_time -%>
         <!-- Last modified render time = <%= Time.now - start_time  -%> -->
-      </td>
-      <td>
-        <% start_time = Time.now -%>
-        <% model.people.each do |person| %>
-        <%= person_image(person) %><%= person_link(person) %><br />
-        <% end %>
-        <!-- People render time = <%= Time.now - start_time  -%> -->
       </td>
     </tr>
 
@@ -62,3 +63,6 @@
   </tbody>
 </table>
 
+<div>
+<!-- Total render time: <%= @render_time.inspect -%> -->
+</div>

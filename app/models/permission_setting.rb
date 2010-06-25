@@ -21,4 +21,16 @@ class PermissionSetting < ActiveRecord::Base
     id == PermissionSetting::ANYONE
   end
 
+  def self.anyone
+    find_by_short_form('a')
+  end
+
+  def self.owner
+    find_by_short_form('o')
+  end
+
+  def self.group
+    find_by_short_form('g')
+  end
+
 end
