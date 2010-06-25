@@ -42,26 +42,24 @@ class HistoryController < ApplicationController
       return
     end
 
-    @earlier_version = NodeVersion.find(params[:compare_1])
-    @later_version = NodeVersion.find(params[:compare_2])
-    @model = @earlier_version.node
+    earlier_version = NodeVersion.find(params[:compare_1])
+    later_version = NodeVersion.find(params[:compare_2])
+    @model = earlier_version.node
 
-    if @earlier_version == @later_version
+    if earlier_version == later_version
       flash[:notice] = "You cannot compare a version with itself!"
       redirect_to :back
       return
     end
 
-    @comparison_results = { }
-    @comparison_results['info_tab'] =
-      diff_as_string(@earlier_version.info_tab, @later_version.info_tab)
-
-    # @comparison_results['procedures_tab'] =
-    # diff_as_string(@earlier_version.procedures_tab, @later_version.procedures_tab)
+    @comparison_results = {
+      'info_tab' => diff_as_string(earlier_version.info_tab, later_version.info_tab),
+      'procedures_tab' => diff_as_string(earlier_version.procedures_tab, later_version.procedures_tab)
+    }
   end
 
   private
-  def diff_as_string(data_old, data_new, format=:unified, context_lines=1)
+  def diff_as_string(data_old, data_new)
     data_old = data_old.split(/\n/).map! { |line| line.chomp}
     data_new = data_new.split(/\n/).map! { |line| line.chomp}
 
@@ -74,15 +72,14 @@ class HistoryController < ApplicationController
 
     diffs.each do |piece|
       begin
-        hunk = Diff::LCS::Hunk.new(data_old, data_new, piece, context_lines,
-                                   file_length_difference)
+        hunk = Diff::LCS::Hunk.new(data_old, data_new, piece, 1, file_length_difference)
         file_length_difference = hunk.file_length_difference
         next unless oldhunk
 
-        if (context_lines > 0) and hunk.overlaps?(oldhunk)
+        if hunk.overlaps?(oldhunk)
           hunk.unshift(oldhunk)
         else
-          output << oldhunk.diff(format)
+          output << oldhunk.diff(:unified)
         end
       ensure
         oldhunk = hunk
@@ -90,7 +87,7 @@ class HistoryController < ApplicationController
       end
     end
 
-    output << oldhunk.diff(format) << "\n"
+    output << oldhunk.diff(:unified) << "\n"
   end
 
 

@@ -9,7 +9,7 @@ class BrowseController < ApplicationController
   before_filter :check_visibility_permissions, :only => [:one_model, :model_contents, :one_applet ]
 
   def list_models
-    @models = Node.all(:include => [:tagged_nodes, :tags, :group])
+    @models = Node.all
   end
 
   def one_model

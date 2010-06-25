@@ -44,34 +44,20 @@ class MembershipController < ApplicationController
   end
 
   def create_group
-    @new_group_name = params[:group_name]
+    group_name = params[:group_name]
+    group = Group.find_by_name(group_name)
 
-    if Group.exists?(["lower(name) = ? ", @new_group_name.downcase])
-
-      group = Group.find_by_name(@new_group_name)
-
-      # If the current user is a group administrator, let them add new people to the group
-
-      flash[:notice] = "The name '#{@new_group_name}' is already taken; please try a different one."
-    else
-
+    flash[:notice] = group ? "The name '#{group_name}' is already taken; please try a different one." :
       Group.transaction do
-        # Create the group
-        @group = Group.create(:name => @new_group_name)
-        @group.save!
-
-        # Add the group owner as a member (and administrator) of this group
-        m = Membership.create(:person => @person,
-                              :group => @group,
-                              :is_administrator => true,
-                              :status => 'approved')
-
-        flash[:notice] = "Successfully created the group '#{@group.name}'."
-      end
+      group = Group.create!(:name => group_name)
+      Membership.create!(:person => @person,
+                         :group => group,
+                         :is_administrator => true,
+                         :status => 'approved')
+      "Successfully created the group '#{group_name}'."
     end
 
     redirect_to :controller => :account, :action => :groups, :anchor => "create"
-
   end
 
   def confirm_group_membership
@@ -134,20 +120,15 @@ class MembershipController < ApplicationController
   end
 
   def find_action
-    group_name_to_find = params[:group_name].downcase.strip
-
-    if group_name_to_find.empty?
+    if params[:group_name].strip.blank?
       render :text => "You must enter a group name to search.  Please try again."
-      return
-    end
+    else
+      @groups = Group.search('%' + params[:group_name].downcase.strip + '%')
 
-    group_name_to_find_ilike = '%' + group_name_to_find + '%'
-
-    @groups = Group.search(group_name_to_find_ilike)
-
-    if @groups.empty?
-      render :text => "No groups contain '#{group_name_to_find}'. Please try again."
-      return
+      if @groups.empty?
+        render :text => "No groups contain '#{params[:group_name]}'. Please try again."
+        return
+      end
     end
 
     render :layout => 'plain'
