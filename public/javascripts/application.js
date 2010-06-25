@@ -3,15 +3,8 @@
 
 $(document).ready(function () {
 
-        datatable_options = {
-            // bLengthChange: false,
-            // iDisplayLength: 1000,
-            // bSort: false
-        };
-
         // create the datatable
-        var datatable = $(".datatable").dataTable();
-        datatable.fnSort([ [1, 'asc']])
+        $(".datatable").dataTable({'aaSorting': [ [1, 'asc']] });
 
         $('#navbar-search-form-text').click(function() {
                 if ($(this).attr('value') == 'Search')

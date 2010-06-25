@@ -24,8 +24,8 @@ namespace :netlogo do
     ccl_group = Group.find_or_create_by_name('CCL')
 
     # Get appropriate tags
-    ccl_tag = Tag.find_or_create_by_name('CCL')
-    community_models_tag = Tag.find_or_create_by_name('community models')
+    ccl_tag = Tag.find_or_create_by_name('CCL', :person_id => mc_user.id)
+    community_models_tag = Tag.find_or_create_by_name('community models', :person_id => mc_user.id)
 
     # Add any nodes we find
     Find.find(MODEL_LOCATIONS) do |path|
