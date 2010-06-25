@@ -23,7 +23,7 @@ class SearchController < ApplicationController
 
     logger.warn "[SearchController#search_action] [#{Time.now}] Getting matching model tags"
     @tag_match_models = [ ]
-    Tag.search(@original_search_term).each {  |tag| @tag_match_models += tag.models }
+    Tag.search(@original_search_term).each {  |tag| @tag_match_models += tag.nodes }
     @tag_match_models = @tag_match_models.uniq.select { |node| node.visible_to_user?(@person)}
 
     logger.warn "[SearchController#search_action] [#{Time.now}] Getting matching info tabs"
