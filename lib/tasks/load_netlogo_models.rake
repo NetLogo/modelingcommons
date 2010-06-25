@@ -93,7 +93,7 @@ namespace :netlogo do
                                     :contents => File.open(path).read,
                                     :description => 'Updated from NetLogo 4.1')
             rescue => e
-              puts "\t\t*** Error trying to create a new version of existing node '#{matching_node.name}', ID '#{matching.node.id}': '#{e.inspect}'"
+              puts "\t\t*** Error trying to create a new version of existing node '#{matching_node.name}', ID '#{matching_node.id}': '#{e.inspect}'"
               next
             end
 
