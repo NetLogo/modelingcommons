@@ -42,7 +42,7 @@ class GraphController < ApplicationController
         already_graphed[node.parent.id][node.id] = 1
       end
 
-      node.models.each do |child|
+      node.children.each do |child|
         gvr[node.id] >> gvr[child.id] unless already_graphed[node.id].has_key?(child.id)
         already_graphed[node.id][child.id] = 1
       end
