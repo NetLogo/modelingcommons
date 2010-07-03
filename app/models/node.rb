@@ -99,12 +99,10 @@ class Node < ActiveRecord::Base
 
   def netlogo_version_for_applet
     applet_directory = "#{RAILS_ROOT}/public/applet/"
+    version = netlogo_version
 
-    [netlogo_version,
-     netlogo_version.gsub(/RC\d+$/, ''),
-     netlogo_version.gsub(/pre.*$/, ''),
-     netlogo_version.gsub(/beta.*$/, ''),
-     netlogo_version.gsub(/^(\d+\.\d+).*/, '\1'),
+    [version,
+     version.gsub(/^(\d+\.\d+).*/, '\1'),
      Dir.entries(applet_directory).grep(/^\d+\.\d+$/).sort.last].each do |version|
 
       return version if File.exists?("#{applet_directory}/#{version}")
@@ -114,10 +112,10 @@ class Node < ActiveRecord::Base
   def applet_class
     applet_jar_version = netlogo_version_for_applet
 
+    logger.warn "[applet_class] Version is '#{applet_jar_version}'"
+
     if applet_jar_version.to_f < 4.1
       "org.nlogo.window.Applet"
-    elsif ["4.1pre4", "4.1pre5", "4.1pre6", "4.1pre7", "4.1pre8", "4.1pre9"].member?(netlogo_version)
-      "org.nlogo.applet.Applet"
     else
       "org.nlogo.lite.Applet"
     end
@@ -131,7 +129,7 @@ class Node < ActiveRecord::Base
     text = info_tab
 
     # Handle headlines
-    text.gsub! /([-_.?A-Z ]+)\n-+/ do
+    text.gsub! /([-_.?A-Z ]+)\n--+/ do
       "<h3>#{$1}</h3>"
     end
 
@@ -163,13 +161,10 @@ class Node < ActiveRecord::Base
 
     # Make "end" stand out
     text.gsub! /^\s*end\b/ do
-      "<span class=\"proc-end\">end</span><br /> "
+      "<span class=\"proc-end\">end</span> "
     end
 
-    # Handle newlines
-    text.gsub!("\n", "\n<br />")
-
-    "<tt>#{text}</tt>"
+    "<pre>#{text}</pre>"
   end
 
   def filename

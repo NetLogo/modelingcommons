@@ -37,9 +37,6 @@ class BrowseController < ApplicationController
     send_data @model.contents
   end
 
-  def one_applet
-  end
-
   def set_permissions
     if params[:read_permission].blank? or params[:write_permission].blank?
       flash[:notice] = 'Both read and write permissions must be specified.'
