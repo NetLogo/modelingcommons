@@ -40,7 +40,7 @@ class Node < ActiveRecord::Base
   end
 
   def current_version
-    node_versions.first
+    node_versions.empty? ? nil : node_versions.first
   end
 
   # Create methods for the different attachment types
@@ -156,7 +156,7 @@ class Node < ActiveRecord::Base
 
     # Make "to" and "to-report" stand out
     text.gsub! /^\s*(to(-report)?) / do
-      "<span class=\"proc-to\">#{$1}</span> "
+      "\n<span class=\"proc-to\">#{$1}</span> "
     end
 
     # Make "end" stand out
@@ -290,15 +290,15 @@ class Node < ActiveRecord::Base
   end
 
   def world_changeable?
-    changeability.short_form == 'a'
+    changeability.is_anyone?
   end
 
   def author_changeable?
-    changeability.short_form == 'u'
+    changeability.is_owner?
   end
 
   def group_changeable?
-    changeability.short_form == 'g'
+    changeability.is_group?
   end
 
   def cannot_be_run_as_applet?

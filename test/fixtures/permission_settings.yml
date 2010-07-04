@@ -1,8 +1,14 @@
 everyone:
+  id: 1
   name: Everyone
+  short_form: a
 
 personal:
-  name: Personal
+  id: 2
+  name: No one but yourself
+  short_form: u
 
 group:
-  name: Group
+  id: 3
+  name: Group members only
+  short_form: g
