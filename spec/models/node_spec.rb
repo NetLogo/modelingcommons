@@ -111,6 +111,9 @@ describe Node do
     n.netlogo_version.should == '4.1'
     n.netlogo_version_for_applet.should == '4.1'
     n.applet_class.should == "org.nlogo.lite.Applet"
+
+    STDERR.puts "\n\n\n*** in rspec***\n\n\n"
+
   end
 
 end

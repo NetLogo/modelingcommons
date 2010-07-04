@@ -7,18 +7,3 @@ require 'rake'
 require 'rake/testtask'
 require 'rake/rdoctask'
 require 'tasks/rails'
-
-if Rails.env != 'production'
-  require 'metric_fu'
-
-  MetricFu::Configuration.run do |config|
-    config.rcov[:rcov_opts] << "-Itest --exclude ^/Library/Ruby/,^init.rb,features,spec,test"
-    config.rcov[:run_cucumber] = true
-  end
-
-  desc "Build a code coverage report"
-  task :coverage do
-    files = test_files.join(" ")
-    sh "rcov -o coverage #{files} --exclude ^/Library/Ruby/,^init.rb,features,spec,test --include lib/ --include-file ^lib/.*\\.rb"
-  end
-end
