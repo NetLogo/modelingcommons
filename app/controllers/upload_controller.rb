@@ -90,6 +90,7 @@ class UploadController < ApplicationController
     # Get the node, and the fork method
     existing_node = Node.find(params[:new_version][:node_id])
     fork = params[:fork] || 'overwrite'
+    description = params[:new_version][:description] || 'No description provided'
 
     flash[:notice] = ''
 
@@ -115,7 +116,7 @@ class UploadController < ApplicationController
       NodeVersion.new(:node_id => node_id,
                       :person_id => @person.id,
                       :contents => params[:new_version][:uploaded_body].read,
-                      :description => params[:new_version][:description])
+                      :description => description)
 
     new_version.save!
 
