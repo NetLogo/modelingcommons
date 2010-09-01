@@ -9,6 +9,7 @@
   </head>
 
   <body>
+    <!-- action: <%= params[:action] -%> -->
     <% if params['tab'].blank? %>
         <p><%= link_to "Return to page for the '#{@model.name}' model", :controller => :browse, :action => :one_model, :id => @model.id %></p>
         <hr />

@@ -7,6 +7,7 @@ class DiscussionController < ApplicationController
 
   def create
     params[:new_posting][:person_id] = @person.id
+    params[:new_posting][:title] ||= '(No title)'
     @posting = Posting.create(params[:new_posting])
 
     respond_to do |format|

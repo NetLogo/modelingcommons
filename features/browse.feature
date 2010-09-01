@@ -23,14 +23,12 @@ To learn, as well as share and collaborate with others
 
   Scenarios: Different tabs
     | tab_name    | string_to_find                              |
-    | preview     | Return to page for the 'Test model' model   |
+    | discuss     | Return to page for the 'Test model' model   |
     | applet      | Return to page for the 'Test model' model   |
     | info        | Return to page for the 'Test model' model   |
     | procedures  | Return to page for the 'Test model' model   |
-    | discuss     | Return to page for the 'Test model' model   |
     | history     | Return to page for the 'Test model' model   |
     | tags        | Return to page for the 'Test model' model   |
-#   | files       | Return to page for the 'Test model' model   |
     | related     | Return to page for the 'Test model' model   |
     | upload      | Return to page for the 'Test model' model   |
     | permissions | Return to page for the 'Test model' model   |
@@ -42,14 +40,12 @@ To learn, as well as share and collaborate with others
 
   Scenarios: Different tabs
     | tab_name    |
-    | preview     |
+    | discuss     |
     | applet      |
     | info        |
     | procedures  |
-    | discuss     |
     | history     |
     | tags        |
-#   | files       |
     | related     |
     | upload      |
     | permissions |

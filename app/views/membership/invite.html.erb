@@ -1,7 +1,12 @@
 <div id="invite-group-div" class="group-tab">
 
-  <% if @person.memberships.length == 0 %>
+  <% if @person.blank? %>
+
+  <p>You are not logged in.</p>
+
+  <% elsif @person.memberships.length == 0 %>
   <p>You are not a member of any groups.</p>
+
   <% else %>
 
   <% form_tag :controller => "membership", :action => :invite_people do %>
@@ -11,8 +16,6 @@
 
   <p><%= submit_tag "Invite users" %></p>
   <% end %>
-
-
 
 
   <% end %>

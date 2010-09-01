@@ -2,7 +2,7 @@
 
 class AccountController < ApplicationController
 
-  before_filter :require_login, :only => [:edit, :update, :logout, :tags]
+  before_filter :require_login, :only => [:edit, :update, :logout, :tags, :mygroups]
 
   def new
     @new_person = Person.new
