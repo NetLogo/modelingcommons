@@ -9,7 +9,7 @@ class BrowseController < ApplicationController
   before_filter :check_visibility_permissions, :only => [:one_model, :model_contents, :one_applet ]
 
   def list_models
-    @models = Node.all
+    @models = Node.all.select {|model| model.visible_to_user?(@person)}
   end
 
   def one_model
