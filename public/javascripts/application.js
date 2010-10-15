@@ -45,6 +45,7 @@ $(document).ready(function () {
 
 $("#model-tabs").ready(function () {
         $("#model-tabs").tabs( {
+
             load: function () {
                 $(".complete").autocomplete('/tags/complete_tags', {} );
              }});
