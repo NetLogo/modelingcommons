@@ -1,10 +1,6 @@
 <div>
   <% if @model.postings.empty? %>
-  <% if @person %>
-  <p>Please start the conversation about this model.</p>
-  <% else %>
-  <p>Only <%= link_to "signed-in users", :controller => :account, :action => :login -%> may participate in the discussion.</p>
-  <% end %>
+  <p>No comments so far!  Please <%= link_to("log in to", :controller => :account, :action => :login) unless @person -%> start the conversation about this model.</p>
   <% end %>
 
   <table id="discussion">
