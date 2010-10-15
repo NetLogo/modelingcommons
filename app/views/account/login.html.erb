@@ -1,4 +1,7 @@
-<% @title = "Log into the Modeling Commons" %>
+<% @title = "Welcome to the Modeling Commons!" %>
+
+<div id="login_form" class="panel">
+<h2>Already registered?  Please log in!</h2>
 
 <% form_tag :action => :login_action do %>
 <table>
@@ -20,5 +23,26 @@
 </table>
 <% end %>
 
-<p>New user?  You must first <%= link_to "register", :controller => :account, :action => :new -%>.</p>
 <p>Don't remember your password?  We can <%= link_to "e-mail it to you", :controller => :account, :action => :send_password -%>.</p>
+
+</div>
+
+<div id="new_user_list" class="panel">
+
+<h2>Want to contribute?  Please register!</h2>
+<%= render :partial => 'new_person_form' -%>
+
+
+</div>
+
+<div id="new_user_list" class="panel">
+<h2>Just visiting?  Welcome!</h2>
+
+<ul>
+    <li><%= link_to "Show all models", :controller => :browse, :action => :list_models -%></li>
+    <li><%= link_to "Show recent models", :controller => :browse, :action => :list_recent_models -%></li>
+    <li><%= link_to "View a random model", :controller => :browse, :action => :view_random_model -%></li>
+    <li><%= render :partial => "search/search_form" -%></li>
+</ul>
+
+</div>

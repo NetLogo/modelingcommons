@@ -101,6 +101,27 @@ a img {
 }
 
 
+.panel {
+    border: 3px solid;
+    padding: 5px;
+    width: 25%;
+    margin-right: 20px;
+    float: left;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;}
+
+.panel h2 {
+    text-align: center;
+}
+
+.panel table tr td {
+    padding-bottom: 5px;
+}
+
+.panel table tr td input[type="submit"] {
+    margin-left: 50%;
+}
+
 /* ------------------------------------------------------------ */
 /* Tabs */
 /* ------------------------------------------------------------ */

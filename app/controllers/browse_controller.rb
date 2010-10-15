@@ -3,13 +3,18 @@
 class BrowseController < ApplicationController
 
   prepend_before_filter :log_one_action, :except => [:display_preview]
-  prepend_before_filter :get_model_from_id_param, :except => [:index, :list_models, :search, :news, :one_node, :view_random_model, :about]
+  prepend_before_filter :get_model_from_id_param, :except => [:index, :list_models, :list_recent_models, :search, :news, :one_node, :view_random_model, :about]
 
   before_filter :require_login, :only => [:set_permissions]
   before_filter :check_visibility_permissions, :only => [:one_model, :model_contents, :one_applet ]
 
   def list_models
     @models = Node.all.select {|model| model.visible_to_user?(@person)}
+  end
+
+  def list_recent_models
+    @models = Node.all(:order => "updated_at DESC", :limit => 100).select {|model| model.visible_to_user?(@person)}[0..19]
+    render 'list_models'
   end
 
   def one_model

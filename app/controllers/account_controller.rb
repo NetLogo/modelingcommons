@@ -80,7 +80,6 @@ class AccountController < ApplicationController
   def mypage
 
     if @person.nil? and params[:id].blank?
-      flash[:notice] = "Welcome to the Modeling Commons!"
       redirect_to :controller => :account, :action => :login
       return
     end

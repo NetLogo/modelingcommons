@@ -10,39 +10,5 @@
 
 <%= error_messages_for :new_person %>
 
-<% form_for :new_person, :url => { :action => :create }, :html => {:multipart => true} do |form| %>
-<table>
+<%= render :partial => 'new_person_form' -%>
 
-  <tr>
-    <td><label for="new_person_first_name">First name</label></td>
-    <td><%= form.text_field :first_name, :size => 30 %></td>
-  </tr>
-  <tr>
-    <td><label for="new_person_last_name">Last name</label></td>
-    <td><%= form.text_field :last_name, :size => 30 %></td>
-  </tr>
-  <tr>
-    <td><label for="new_person_email_address">E-mail address</label></td>
-    <td><%= form.text_field :email_address, :size => 30 %></td>
-  </tr>
-  <tr>
-    <td><label for="new_person_password">Password</label></td>
-    <td><%= form.password_field :password, :size => 30 %></td>
-  </tr>
-  <tr>
-    <td><label for="new_person_password_confirmation">Password confirmation</label></td>
-    <td><%= form.password_field :password_confirmation, :size => 30 %></td>
-  </tr>
-
-  <tr>
-    <td>Optional image</td>
-    <td><%= form.file_field :avatar %></td>
-  </tr>
-
-  <tr>
-    <td colspan="2"><%= submit_tag "Register", :class => "submit" %></td>
-  </tr>
-
-
-</table>
-<% end %>
