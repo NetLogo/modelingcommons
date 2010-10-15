@@ -1,1 +1,1 @@
-public/javascripts/jquery-ui-1.8.5.custom.js
+jquery-ui-1.8.5.custom.js
