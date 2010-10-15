@@ -1,0 +1,186 @@
+--- !ruby/object:Gem::Specification 
+name: mongo
+version: !ruby/object:Gem::Version 
+  hash: 5
+  prerelease: false
+  segments: 
+  - 1
+  - 0
+  - 9
+  version: 1.0.9
+platform: ruby
+authors: 
+- Jim Menard
+- Mike Dirolf
+- Kyle Banker
+autorequire: 
+bindir: bin
+cert_chain: []
+
+date: 2010-09-20 00:00:00 +02:00
+default_executable: mongo_console
+dependencies: 
+- !ruby/object:Gem::Dependency 
+  name: bson
+  prerelease: false
+  requirement: &id001 !ruby/object:Gem::Requirement 
+    none: false
+    requirements: 
+    - - ">="
+      - !ruby/object:Gem::Version 
+        hash: 29
+        segments: 
+        - 1
+        - 0
+        - 5
+        version: 1.0.5
+  type: :runtime
+  version_requirements: *id001
+description: A Ruby driver for MongoDB. For more information about Mongo, see http://www.mongodb.org.
+email: mongodb-dev@googlegroups.com
+executables: 
+- mongo_console
+extensions: []
+
+extra_rdoc_files: 
+- README.rdoc
+files: 
+- README.rdoc
+- HISTORY
+- Rakefile
+- mongo.gemspec
+- LICENSE.txt
+- lib/mongo.rb
+- lib/mongo/collection.rb
+- lib/mongo/connection.rb
+- lib/mongo/cursor.rb
+- lib/mongo/db.rb
+- lib/mongo/exceptions.rb
+- lib/mongo/gridfs/grid.rb
+- lib/mongo/gridfs/grid_ext.rb
+- lib/mongo/gridfs/grid_file_system.rb
+- lib/mongo/gridfs/grid_io.rb
+- lib/mongo/util/conversions.rb
+- lib/mongo/util/core_ext.rb
+- lib/mongo/util/server_version.rb
+- lib/mongo/util/support.rb
+- examples/admin.rb
+- examples/capped.rb
+- examples/cursor.rb
+- examples/gridfs.rb
+- examples/index_test.rb
+- examples/info.rb
+- examples/queries.rb
+- examples/simple.rb
+- examples/strict.rb
+- examples/types.rb
+- bin/bson_benchmark.rb
+- bin/fail_if_no_c.rb
+- bin/insert.rb
+- bin/oid.rb
+- bin/mongo_console
+- test/auxillary/1.4_features.rb
+- test/auxillary/authentication_test.rb
+- test/auxillary/autoreconnect_test.rb
+- test/auxillary/slave_connection_test.rb
+- test/collection_test.rb
+- test/connection_test.rb
+- test/conversions_test.rb
+- test/cursor_fail_test.rb
+- test/cursor_message_test.rb
+- test/cursor_test.rb
+- test/db_api_test.rb
+- test/db_connection_test.rb
+- test/db_test.rb
+- test/grid_file_system_test.rb
+- test/grid_io_test.rb
+- test/grid_test.rb
+- test/replica_pairs/count_test.rb
+- test/replica_pairs/insert_test.rb
+- test/replica_pairs/pooled_insert_test.rb
+- test/replica_pairs/query_test.rb
+- test/replica_sets/count_test.rb
+- test/replica_sets/insert_test.rb
+- test/replica_sets/node_type_test.rb
+- test/replica_sets/pooled_insert_test.rb
+- test/replica_sets/query_test.rb
+- test/replica_sets/replication_ack_test.rb
+- test/support_test.rb
+- test/test_helper.rb
+- test/threading/test_threading_large_pool.rb
+- test/threading_test.rb
+- test/unit/collection_test.rb
+- test/unit/connection_test.rb
+- test/unit/cursor_test.rb
+- test/unit/db_test.rb
+has_rdoc: true
+homepage: http://www.mongodb.org
+licenses: []
+
+post_install_message: 
+rdoc_options: 
+- --main
+- README.rdoc
+- --inline-source
+require_paths: 
+- lib
+required_ruby_version: !ruby/object:Gem::Requirement 
+  none: false
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      hash: 3
+      segments: 
+      - 0
+      version: "0"
+required_rubygems_version: !ruby/object:Gem::Requirement 
+  none: false
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      hash: 3
+      segments: 
+      - 0
+      version: "0"
+requirements: []
+
+rubyforge_project: 
+rubygems_version: 1.3.7
+signing_key: 
+specification_version: 3
+summary: Ruby driver for the MongoDB
+test_files: 
+- test/auxillary/1.4_features.rb
+- test/auxillary/authentication_test.rb
+- test/auxillary/autoreconnect_test.rb
+- test/auxillary/slave_connection_test.rb
+- test/collection_test.rb
+- test/connection_test.rb
+- test/conversions_test.rb
+- test/cursor_fail_test.rb
+- test/cursor_message_test.rb
+- test/cursor_test.rb
+- test/db_api_test.rb
+- test/db_connection_test.rb
+- test/db_test.rb
+- test/grid_file_system_test.rb
+- test/grid_io_test.rb
+- test/grid_test.rb
+- test/replica_pairs/count_test.rb
+- test/replica_pairs/insert_test.rb
+- test/replica_pairs/pooled_insert_test.rb
+- test/replica_pairs/query_test.rb
+- test/replica_sets/count_test.rb
+- test/replica_sets/insert_test.rb
+- test/replica_sets/node_type_test.rb
+- test/replica_sets/pooled_insert_test.rb
+- test/replica_sets/query_test.rb
+- test/replica_sets/replication_ack_test.rb
+- test/support_test.rb
+- test/test_helper.rb
+- test/threading/test_threading_large_pool.rb
+- test/threading_test.rb
+- test/unit/collection_test.rb
+- test/unit/connection_test.rb
+- test/unit/cursor_test.rb
+- test/unit/db_test.rb

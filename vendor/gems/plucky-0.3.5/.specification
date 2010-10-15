@@ -1,0 +1,155 @@
+--- !ruby/object:Gem::Specification 
+name: plucky
+version: !ruby/object:Gem::Version 
+  hash: 25
+  prerelease: false
+  segments: 
+  - 0
+  - 3
+  - 5
+  version: 0.3.5
+platform: ruby
+authors: 
+- John Nunemaker
+autorequire: 
+bindir: bin
+cert_chain: []
+
+date: 2010-08-29 00:00:00 +03:00
+default_executable: 
+dependencies: 
+- !ruby/object:Gem::Dependency 
+  name: mongo
+  prerelease: false
+  requirement: &id001 !ruby/object:Gem::Requirement 
+    none: false
+    requirements: 
+    - - ~>
+      - !ruby/object:Gem::Version 
+        hash: 7
+        segments: 
+        - 1
+        - 0
+        - 8
+        version: 1.0.8
+  type: :runtime
+  version_requirements: *id001
+- !ruby/object:Gem::Dependency 
+  name: shoulda
+  prerelease: false
+  requirement: &id002 !ruby/object:Gem::Requirement 
+    none: false
+    requirements: 
+    - - ~>
+      - !ruby/object:Gem::Version 
+        hash: 21
+        segments: 
+        - 2
+        - 11
+        version: "2.11"
+  type: :development
+  version_requirements: *id002
+- !ruby/object:Gem::Dependency 
+  name: jnunemaker-matchy
+  prerelease: false
+  requirement: &id003 !ruby/object:Gem::Requirement 
+    none: false
+    requirements: 
+    - - ~>
+      - !ruby/object:Gem::Version 
+        hash: 15
+        segments: 
+        - 0
+        - 4
+        - 0
+        version: 0.4.0
+  type: :development
+  version_requirements: *id003
+- !ruby/object:Gem::Dependency 
+  name: mocha
+  prerelease: false
+  requirement: &id004 !ruby/object:Gem::Requirement 
+    none: false
+    requirements: 
+    - - ~>
+      - !ruby/object:Gem::Version 
+        hash: 43
+        segments: 
+        - 0
+        - 9
+        - 8
+        version: 0.9.8
+  type: :development
+  version_requirements: *id004
+- !ruby/object:Gem::Dependency 
+  name: log_buddy
+  prerelease: false
+  requirement: &id005 !ruby/object:Gem::Requirement 
+    none: false
+    requirements: 
+    - - ">="
+      - !ruby/object:Gem::Version 
+        hash: 3
+        segments: 
+        - 0
+        version: "0"
+  type: :development
+  version_requirements: *id005
+description: 
+email: 
+- nunemaker@gmail.com
+executables: []
+
+extensions: []
+
+extra_rdoc_files: []
+
+files: 
+- lib/plucky/criteria_hash.rb
+- lib/plucky/extensions/duplicable.rb
+- lib/plucky/extensions/symbol.rb
+- lib/plucky/extensions.rb
+- lib/plucky/options_hash.rb
+- lib/plucky/pagination/decorator.rb
+- lib/plucky/pagination/paginator.rb
+- lib/plucky/query.rb
+- lib/plucky/version.rb
+- lib/plucky.rb
+- LICENSE
+- README.rdoc
+has_rdoc: true
+homepage: http://github.com/jnunemaker/plucky
+licenses: []
+
+post_install_message: 
+rdoc_options: []
+
+require_paths: 
+- lib
+required_ruby_version: !ruby/object:Gem::Requirement 
+  none: false
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      hash: 3
+      segments: 
+      - 0
+      version: "0"
+required_rubygems_version: !ruby/object:Gem::Requirement 
+  none: false
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      hash: 3
+      segments: 
+      - 0
+      version: "0"
+requirements: []
+
+rubyforge_project: 
+rubygems_version: 1.3.7
+signing_key: 
+specification_version: 3
+summary: Thin layer over the ruby driver that allows you to quickly grab hold of your data (pluck it!).
+test_files: []
+
