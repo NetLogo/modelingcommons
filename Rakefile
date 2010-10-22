@@ -7,3 +7,13 @@ require 'rake'
 require 'rake/testtask'
 require 'rake/rdoctask'
 require 'tasks/rails'
+
+module Rails
+  class VendorGemSourceIndex
+    def version_for_dir(d)
+      tokens = d.split('-')
+      last = tokens.pop
+      Gem::Version.new(last =~ /[^-a-z)]+$/ ? last : tokens.last)
+    end
+  end
+end

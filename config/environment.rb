@@ -11,7 +11,7 @@ RAILS_GEM_VERSION = '2.3.8' unless defined? RAILS_GEM_VERSION
 require File.join(File.dirname(__FILE__), 'boot')
 
 Rails::Initializer.run do |config|
-  config.gem 'will_paginate'
+  config.gem 'will_paginate', :version => '~> 2.3.11', :source => 'http://gemcutter.org'
   config.gem 'validates_email'
   config.gem 'GraphvizR', :lib => 'graphviz_r'
   config.gem "newrelic_rpm"
