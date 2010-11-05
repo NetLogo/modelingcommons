@@ -18,7 +18,7 @@ So that I can connect with others and learn from them
      And I fill in "comment title" for "Title"
      And I fill in "comment body" for "Body"
      And I press "Submit comment"
-    Then I should see /You,\s*less than a minute ago/
+    Then I should see /less than a minute ago/
     And I should see "comment title"
     And I should see "comment body"
     And I should see "Delete"
@@ -27,8 +27,7 @@ So that I can connect with others and learn from them
     When I go to the "discuss" tab for "Test model"
      And I fill in "comment body" for "Body"
      And I press "Submit comment"
-    Then I should see /You,\s*less than a minute ago/
-    And I should see "comment title"
+    Then should see "comment title"
     And I should see "comment body"
     And I should see "Delete"
 
@@ -39,7 +38,7 @@ So that I can connect with others and learn from them
      And I check "This is a question that I would like answered"
      And I press "Submit comment"
      And I go to the home page
-    Then I should see /You asked about\s+'question title,' less than a minute ago/
+    Then I should see /'question title,' less than a minute ago/
 
   Scenario: A logged-in user can delete their own comment
     Given a comment with with title "comment title" and body "comment body" for model "Test model" by user "reuven@lerner.co.il"

@@ -59,7 +59,7 @@ When /^I attach a model file to "([^\"]*)"$/ do |file_upload_element_id|
 end
 
 When /^I attach a preview image$/ do
-  attach_file(:new_model_uploaded_preview, File.join(RAILS_ROOT, 'features', 'upload_files', 'test.png'))
+  attach_file('new_model_uploaded_preview', File.join(RAILS_ROOT, 'features', 'upload_files', 'test.png'))
 end
 
 When /^the model "([^\"]*)" should have (\d+) versions$/ do |model_name, number_of_versions|
