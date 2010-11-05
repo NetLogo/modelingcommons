@@ -11,5 +11,5 @@ So that I can use the Modeling Commons
      And I fill in "reuven@lerner.co.il" for "E-mail address"
      And I fill in "password" for "Password"
      And I fill in "password" for "Password confirmation"
-     And I press "register"
+     And I press "Register"
     Then I should see "You are now registered with the Modeling Commons."
