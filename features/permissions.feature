@@ -63,8 +63,7 @@ So that only certain people may read or write the model
   Scenario: A private model is seen by the author when searching
    Given the model "My cool model" is only visible by its authors
     When I log in as "reuven@lerner.co.il" with password "password"
-     And I go to the search page
-     And I fill in "ool" for "Enter search term:"
+     And I fill in "ool" for "search_term"
      And I press "Search!"
     Then I should see "1 matched 'ool' in the model name"
      And I should see "My cool model"
@@ -73,8 +72,7 @@ So that only certain people may read or write the model
 
   Scenario: A private model is not seen by anonymous users when searching
    Given the model "My cool model" is only visible by its authors
-    When I go to the search page
-     And I fill in "ool" for "Enter search term:"
+     And I fill in "ool" for "search_term"
      And I press "Search!"
     Then I should see "No matches in author names."
      And I should see "No matches in model names."
@@ -85,8 +83,7 @@ So that only certain people may read or write the model
      And the model "My cool model" is only visible by members of the group "mygroup"
      And the user "reuven@lerner.co.il" is a member of the group "mygroup"
     When I log in as "reuven@lerner.co.il" with password "password"
-     And I go to the search page
-     And I fill in "ool" for "Enter search term:"
+     And I fill in "ool" for "search_term"
      And I press "Search!"
     Then I should see "1 matched 'ool' in the model name"
      And I should see "My cool model"
@@ -98,8 +95,7 @@ So that only certain people may read or write the model
      And the model "My cool model" is only visible by members of the group "mygroup"
      And the user "reuven@lerner.co.il" is a member of the group "mygroup"
     When I log in as "nonauthor@lerner.co.il" with password "password"
-     And I go to the search page
-     And I fill in "ool" for "Enter search term:"
+     And I fill in "ool" for "search_term"
      And I press "Search!"
      And I should see "No matches in model names."
      And I should see "No matches in author names."
@@ -108,8 +104,7 @@ So that only certain people may read or write the model
   Scenario: A world-viewable model is seen by the author when searching
    Given the model "My cool model" is visible by the entire world
     When I log in as "reuven@lerner.co.il" with password "password"
-     And I go to the search page
-     And I fill in "ool" for "Enter search term:"
+     And I fill in "ool" for "search_term"
      And I press "Search!"
     Then I should see "1 matched 'ool' in the model name"
      And I should see "My cool model"

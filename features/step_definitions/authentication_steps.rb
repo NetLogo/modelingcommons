@@ -20,5 +20,5 @@ When /^I log in as "([^\"]*)" with password "([^\"]*)"$/ do |email, pwd|
   When "I go to the login page"
   And "I fill in \"#{email}\" for \"email_address\""
   And "I fill in \"#{pwd}\" for \"password\""
-  And "I press \"submit\""
+  And "I press \"Login\""
 end

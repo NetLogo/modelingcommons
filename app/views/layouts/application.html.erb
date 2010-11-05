@@ -31,6 +31,7 @@
 
           <% form_tag(url_for(:controller => :search, :action => :search_action), { :id => "navbar-search-form"}) do %>
           <%= text_field_tag :search_term, 'Search', {:size => 5, :id => 'navbar-search-form-text'} -%>
+          <input style="display: none;" type="submit" value="Search!" />
 
           <% end %>
 

@@ -37,8 +37,7 @@ and even more menu options when I am not logged in.
 
   Scenario: Guest users cannot go to the "upload a model" page
     When I go to the list-models page
-    And I follow "Upload a new model"
-    Then I should see "You must log in before proceeding."
+    Then I should not see "Upload a new model"
 
   Scenario: Logged in users can go to the "upload a model" page
     When I log in as "reuven@lerner.co.il" with password "password"
