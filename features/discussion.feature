@@ -23,14 +23,6 @@ So that I can connect with others and learn from them
     And I should see "comment body"
     And I should see "Delete"
 
-  Scenario: A logged-in user can submit a comment without a title
-    When I go to the "discuss" tab for "Test model"
-     And I fill in "comment body" for "Body"
-     And I press "Submit comment"
-    Then should see "comment title"
-    And I should see "comment body"
-    And I should see "Delete"
-
   Scenario: A logged-in user can submit a question
     When I go to the "discuss" tab for "Test model"
      And I fill in "question title" for "Title"
