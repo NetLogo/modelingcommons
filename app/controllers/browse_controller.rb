@@ -51,7 +51,7 @@ class BrowseController < ApplicationController
     else
       @model.update_attributes(:visibility => PermissionSetting.find_by_short_form(params[:read_permission]),
                                :changeability => PermissionSetting.find_by_short_form(params[:write_permission]),
-                               :group => Group.group_or_nil(params[:group_id]))
+                               :group_id => params[:group_id])
       flash[:notice] = 'Successfully set permissions.'
     end
   end
