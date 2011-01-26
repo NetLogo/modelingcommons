@@ -46,11 +46,11 @@ class Person < ActiveRecord::Base
   end
 
   def fullname
-    @fullname ||= "#{self.first_name} #{self.last_name}"
+    @fullname ||= "#{first_name} #{last_name}"
   end
 
   def phonebook_name
-    @phonebook_name ||= "#{person.last_name}, #{person.first_name} (#{person.email_address})"
+    @phonebook_name ||= "#{last_name}, #{first_name} (#{email_address})"
   end
 
   def administrated_groups
