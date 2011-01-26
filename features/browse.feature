@@ -72,12 +72,12 @@ To learn, as well as share and collaborate with others
     Then I should see "Thanks for letting us know about this possible spam!"
      And I should see "1 person marked it as spam"
 
-  # Scenario: A user should be able to download the model
-  #   When I log in as "reuven@lerner.co.il" with password "password"
-  #    And I go to the model page for "Test model"
-  #    And I follow "Download"
-  #   Then the response should be of type "application/zip"
-  #    And the response should be successful
+  Scenario: A user should be able to download the model
+    When I log in as "reuven@lerner.co.il" with password "password"
+     And I go to the model page for "Test model"
+     And I follow "Download"
+    Then the response should be of type "application/zip"
+     And the response should be successful
 
   Scenario: A user should be able to go to a random model
     When I go to the list-models page
