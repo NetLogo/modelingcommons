@@ -180,11 +180,11 @@ class AccountController < ApplicationController
     @the_person = Person.find(params[:id])
 
     @new_things +=
-      @person.node_versions.select { |node_version| node_version.created_at >= how_recent }.map{ |node_version| node_version.new_thing }
+      @person.node_versions.select { |node_version| node_version.created_at >= how_recent }.map{ |node_version| node_version.new_thing } if @person.node_versions
     @new_things +=
-      @person.postings.select { |person| person.created_at >= how_recent }.map{ |person| person.new_thing }
+      @person.postings.select { |person| person.created_at >= how_recent }.map{ |person| person.new_thing } if @person.postings
     @new_things +=
-      @person.tagged_nodes.select { |tagged_node| tagged_node.created_at >= how_recent }.map{ |tagged_node| tagged_node.new_thing }
+      @person.tagged_nodes.select { |tagged_node| tagged_node.created_at >= how_recent }.map{ |tagged_node| tagged_node.new_thing } if @person.tagged_nodes
 
     respond_to do |format|
       format.html { @new_things }
