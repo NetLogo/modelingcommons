@@ -18,5 +18,3 @@ config.action_controller.perform_caching             = false
 # ActionMailer::Base.deliveries array.
 config.action_mailer.delivery_method = :test
 
-config.gem 'metric_fu'
-config.gem "thoughtbot-shoulda", :lib => "shoulda", :source => "http://gems.github.com"

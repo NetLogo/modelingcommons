@@ -5,20 +5,30 @@
 # ENV['RAILS_ENV'] ||= 'production'
 
 # Specifies gem version of Rails to use when vendor/rails is not present
-RAILS_GEM_VERSION = '2.3.8' unless defined? RAILS_GEM_VERSION
+RAILS_GEM_VERSION = '2.3.10' unless defined? RAILS_GEM_VERSION
 
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
 
 Rails::Initializer.run do |config|
-  config.gem 'will_paginate', :version => '~> 2.3.11', :source => 'http://gemcutter.org'
-  config.gem 'validates_email'
-  config.gem 'GraphvizR', :lib => 'graphviz_r'
   config.gem "newrelic_rpm"
+  config.gem "thoughtbot-shoulda", :lib => "shoulda", :source => "http://gems.github.com"
+  config.gem 'capybara',         :lib => false, :version => '>=0.3.5' 
+  config.gem 'cucumber'
+  config.gem 'cucumber-rails',   :lib => false, :version => '>=0.3.2' 
+  config.gem 'database_cleaner', :lib => false, :version => '>=0.5.0' 
   config.gem 'hoptoad_notifier'
-  config.gem 'plucky'
+  config.gem 'metric_fu'
   config.gem 'mongo_mapper'
   config.gem 'paperclip', :source => 'http://rubygems.org'
+  config.gem 'plucky'
+  config.gem 'rspec',            :lib => false, :version => '>=1.3.0' 
+  config.gem 'rspec-rails',      :lib => false, :version => '>=1.3.2' 
+  config.gem 'validates_email'
+  config.gem 'will_paginate', :version => '~> 2.3.11', :source => 'http://gemcutter.org'
+  config.gem 'GraphvizR', :lib => 'graphviz_r'
+  config.gem 'ruby-debug'
+
 
   # Settings in config/environments/* take precedence over those specified here.
   # Application configuration should go into files in config/initializers
