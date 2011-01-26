@@ -26,19 +26,22 @@ class MembershipController < ApplicationController
   end
 
   def make_administrator
-    Membership.find(params[:id]).update_attributes(:is_administrator => true, :status => 'approved')
+    membership = Membership.find(params[:id])
+    membership.update_attributes(:is_administrator => true, :status => 'approved')
     flash[:notice] = "User '#{membership.person_fullname}' is now an administrator of '#{membership.group_name}'."
     redirect_to :controller => :account, :action => :groups, :anchor => 'manage'
   end
 
   def remove_administrator
-    Membership.find(params[:id]).update_attributes(:is_administrator => false)
+    membership = Membership.find(params[:id])
+    membership.update_attributes(:is_administrator => false)
     flash[:notice] = "User '#{membership.person_fullname}' is no longer an administrator of '#{membership.group_name}'."
     redirect_to :controller => :account, :action => :groups, :anchor => 'manage'
   end
 
   def approve_membership
-    Membership.find(params[:id]).update_attributes(:status => 'approved')
+    membership = Membership.find(params[:id])
+    membership.update_attributes(:status => 'approved')
     flash[:notice] = "User '#{membership.person_fullname}' is now a member of '#{membership.group_name}'."
     redirect_to :back
   end
