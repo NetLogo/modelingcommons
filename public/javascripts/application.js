@@ -41,14 +41,17 @@ $(document).ready(function () {
                 window.location = $(this).children()[0];
             });
 
+    });
 
+$("#model-tabs").ready(function () {
         $("#model-tabs").tabs( {
 
+            spinner: '',
             load: function () {
                 $(".complete").autocomplete('/tags/complete_tags', {} );
              }});
-
     });
+
 
 $("#email_address").ready(function () {
         $("#email_address").focus();
