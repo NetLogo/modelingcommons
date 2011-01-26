@@ -2,6 +2,7 @@
   <% if @person.memberships.length == 0 %>
   <p>You are not a member of any groups.</p>
   <% else %>
+
   <ul>
     <% @person.memberships.sort_by {|m| m.group_name.downcase}.each do |membership| %>
     <li><%= group_link(membership.group) %>
