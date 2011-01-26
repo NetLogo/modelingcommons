@@ -21,7 +21,7 @@ class Group < ActiveRecord::Base
   end
 
   def administrators
-    memberships.administrators
+    memberships.administrators.map {|a| a.person}
   end
 
   def members
