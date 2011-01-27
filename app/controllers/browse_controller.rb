@@ -18,7 +18,6 @@ class BrowseController < ApplicationController
   end
 
   def one_model
-    debugger
   end
 
   def one_node
