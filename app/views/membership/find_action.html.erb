@@ -6,7 +6,7 @@
     <li>
       <%= group_link(group) %>
       <% if not group.administrators.empty? %>
-      (Group owner: <%= person_link(group.administrators.first.person) %>)
+      (Group owner: <%= person_link(group.administrators.first) %>)
       <% end %>
     </li>
     <% end %>
