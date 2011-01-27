@@ -29,9 +29,13 @@ class FileController < ApplicationController
   end
 
   def delete
-    # Remove the attachment
-    NodeAttachment.destroy(params[:file_id])
-    flash[:notice] = "Removed the file."
+    if attachment = NodeAttachment.find(params[:file_id])
+      attachment.destroy
+      flash[:notice] = "Removed the file."
+    else
+      flash[:notice] = 'No such file to remove.'
+    end
+
     redirect_to :controller => :browse, :action => :one_model, :id => @model.id, :anchor => "files"
   end
 
