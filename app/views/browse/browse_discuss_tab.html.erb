@@ -11,6 +11,11 @@
       <th></th>
     </tr>
     <% else %>
+    <tr>
+      <th>User</th>
+      <th>Title</th>
+      <th>Message</th>
+    </tr>
     <%= render :partial => "discussion/one_posting", :collection => @model.postings.sort_by {|posting| posting.created_at}, :as => :posting -%>
     <% end %>
   </table>
