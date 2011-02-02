@@ -13,12 +13,9 @@ require File.join(File.dirname(__FILE__), 'boot')
 Rails::Initializer.run do |config|
   config.gem "newrelic_rpm"
   config.gem 'hoptoad_notifier'
-  config.gem 'metric_fu'
   config.gem 'mongo_mapper'
   config.gem 'paperclip', :source => 'http://rubygems.org'
   config.gem 'plucky'
-  config.gem 'rspec',            :lib => false, :version => '>=1.3.0' 
-  config.gem 'rspec-rails',      :lib => false, :version => '>=1.3.2' 
   config.gem 'validates_email'
   config.gem 'will_paginate', :version => '~> 2.3.11', :source => 'http://gemcutter.org'
   config.gem 'GraphvizR', :lib => 'graphviz_r'

@@ -69,12 +69,14 @@ class Notifications < ActionMailer::Base
   end
 
   def invited_to_group(person, membership)
+    standard_settings
     @recipients = person.email_address
     @subject = 'Group invitation from the NetLogo Modeling Commons'
     @body[:membership] = membership
   end
 
   def friend_recommendation(sender, friend_email_address, node)
+    standard_settings
     @recipients = friend_email_address
     @cc = sender.email_address
     @subject = 'View an interesting NetLogo model'
@@ -83,6 +85,7 @@ class Notifications < ActionMailer::Base
   end
 
   def recommended_message(recommender, people, model)
+    standard_settings
     @recipients = recommender.email_address
     @bcc = people.map{|person| person.email_address}
     @subject = "Recommendation for the '#{model.name}' model in the NetLogo Modeling Commons"
