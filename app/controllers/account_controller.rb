@@ -151,7 +151,7 @@ class AccountController < ApplicationController
     render :layout => 'plain'
   end
 
-  def send_password_action
+  def reset_password_action
     email_address = params[:email_address].to_s
 
     if email_address.index('@').nil?
@@ -163,8 +163,12 @@ class AccountController < ApplicationController
     @person = Person.find_by_email_address(email_address)
 
     if @person
-      Notifications.deliver_password_reminder(@person)
-      flash[:notice] = "A password reminder was sent to your e-mail address."
+      new_password = ''
+      8.times { new_password << ('a'..'z').to_a.shuffle.first }
+      @person.update_attributes!(:password => new_password)
+
+      Notifications.deliver_password_reminder(@person, new_password)
+      flash[:notice] = "Your password has been reset.  The new password was sent to your e-mail address."
       redirect_to :controller => :account, :action => :login
     else
       flash[:notice] = "Sorry, but '#{email_address}' is not listed in our system.  Please register."

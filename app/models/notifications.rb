@@ -35,10 +35,11 @@ class Notifications < ActionMailer::Base
     @subject = 'Your new password'
   end
 
-  def password_reminder(person)
+  def password_reminder(person, new_password)
     standard_settings
     @recipients = person.email_address
     @body[:person] = person
+    @body[:new_password] = new_password
     @subject = 'Your password'
   end
 

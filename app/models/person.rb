@@ -31,7 +31,8 @@ class Person < ActiveRecord::Base
   named_scope :created_since, lambda { |since| { :conditions => ['created_at >= ? ', since] }}
   named_scope :phone_book, :order => "last_name, first_name"
 
-  before_save :generate_salt_and_encrypt_password
+  after_validation_on_create :generate_salt_and_encrypt_password
+  after_validation_on_update :encrypt_updated_password
 
   def nodes
     node_versions.map { |nv| nv.node_id}.uniq.map{ |node_id| Node.find(node_id)}
@@ -58,18 +59,18 @@ class Person < ActiveRecord::Base
   end
 
   def administrated_groups
-    self.groups.select {|group| group.is_administrator?(self) }
+    groups.select {|group| group.is_administrator?(self) }
   end
 
   def spam_warning(model)
-    self.spam_warnings.select { |sw| sw.node_id == model.id }.first || nil
+    spam_warnings.select { |sw| sw.node_id == model.id }.first || nil
   end
 
   def latest_action_time
     LoggedAction.maximum('logged_at', :conditions => ["person_id = ?", id])
   end
 
-  def self.search(term)
+  def Person.search(term)
     all(:conditions => [ "position( ? in lower(first_name || last_name) ) > 0 ", term])
   end
 
@@ -81,11 +82,17 @@ class Person < ActiveRecord::Base
     Digest::SHA1.hexdigest("#{the_salt}--#{plaintext}")
   end
 
+  private
+
   def generate_salt_and_encrypt_password
     return unless new_record? 
 
     timestamp = created_at || Time.now
     self.salt = Person.generate_salt(timestamp)
+    self.password = Person.encrypted_password(salt, password)
+  end
+
+  def encrypt_updated_password
     self.password = Person.encrypted_password(salt, password)
   end
 
