@@ -18,12 +18,14 @@ class Notifications < ActionMailer::Base
     @content_type = 'text/html'
   end
 
-  def signup(person)
+  def signup(person, cleartext_password)
     standard_settings
     @recipients = person.email_address
     @bcc = 'reuven@lerner.co.il'
     @subject = "Welcome to the NetLogo Modeling Commons!"
     @body[:person] = person
+    logger.warn "Cleartext password = '#{cleartext_password}'"
+    @body[:cleartext_password] = cleartext_password
   end
 
   def reset_password(person)

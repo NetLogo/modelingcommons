@@ -13,7 +13,8 @@ class AccountController < ApplicationController
 
     if @new_person.save
       flash[:notice] = "Congratulations, #{@new_person.first_name}!  You are now registered with the Modeling Commons.  We're delighted that you've joined us."
-      Notifications.deliver_signup(@new_person)
+
+      Notifications.deliver_signup(@new_person, params[:new_person][:password])
       session[:person_id] = @new_person.id
       redirect_to :controller => :account, :action => :mypage
     else
@@ -55,11 +56,17 @@ class AccountController < ApplicationController
       return
     end
 
-    @person =
-      Person.find_by_email_address_and_password(params[:email_address].strip,
-                                                params[:password].strip)
+    @person = Person.find_by_email_address(params[:email_address].strip.downcase)
+    if @person.nil?
+      logger.warn "Attempted login with non-existent email_address '#{params[:email_address]}'"
+      flash[:notice] = "Sorry, but no user exists with that e-mail address and password.  Please try again."
+      redirect_to :back
+      return
+    end
 
-    if @person.blank?
+    encrypted_user_input = Person.encrypted_password(@person.salt, params[:password])
+    if encrypted_user_input != @person.password
+      logger.warn "Attempted login for email_address '#{params[:email_address]}' with incorrect password '#{params[:password]}'"
       flash[:notice] = "Sorry, but no user exists with that e-mail address and password.  Please try again."
       redirect_to :back
       return

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100621152433) do
+ActiveRecord::Schema.define(:version => 20110204050318) do
 
 # Could not dump table "appid" because of following StandardError
 #   Unknown type 'uuid' for column 'ApplicationID'
@@ -79,6 +79,11 @@ ActiveRecord::Schema.define(:version => 20100621152433) do
   add_index "memberships", ["person_id", "group_id"], :name => "index_memberships_on_person_id_and_group_id", :unique => true
   add_index "memberships", ["person_id"], :name => "index_memberships_on_person_id"
 
+  create_table "my_secret_table", :id => false, :force => true do |t|
+    t.integer "id",      :null => false
+    t.text    "myvalue"
+  end
+
   create_table "news_items", :force => true do |t|
     t.string   "title"
     t.text     "body"
@@ -130,6 +135,7 @@ ActiveRecord::Schema.define(:version => 20100621152433) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.string   "salt"
   end
 
   add_index "people", ["email_address"], :name => "index_people_on_email_address"
@@ -250,6 +256,21 @@ ActiveRecord::Schema.define(:version => 20100621152433) do
   create_table "test_tsquery", :id => false, :force => true do |t|
     t.text "txtkeyword"
     t.text "txtsample"
+  end
+
+  create_table "user_snapshot", :id => false, :force => true do |t|
+    t.integer  "id"
+    t.string   "email_address"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "password"
+    t.boolean  "administrator"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.text     "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
   end
 
 end

@@ -1,6 +1,8 @@
 # Class to model people (users) of the system
 
 class Person < ActiveRecord::Base
+  SALT_SECRET = 'NetLogo is a really cool modeling environment!'
+
   has_many :postings
   has_many :logged_actions
   has_many :tags
@@ -28,6 +30,8 @@ class Person < ActiveRecord::Base
 
   named_scope :created_since, lambda { |since| { :conditions => ['created_at >= ? ', since] }}
   named_scope :phone_book, :order => "last_name, first_name"
+
+  before_save :generate_salt_and_encrypt_password
 
   def nodes
     node_versions.map { |nv| nv.node_id}.uniq.map{ |node_id| Node.find(node_id)}
@@ -67,6 +71,22 @@ class Person < ActiveRecord::Base
 
   def self.search(term)
     all(:conditions => [ "position( ? in lower(first_name || last_name) ) > 0 ", term])
+  end
+
+  def Person.generate_salt(timestamp)
+    Digest::SHA1.hexdigest("#{SALT_SECRET}--#{timestamp}")
+  end
+
+  def Person.encrypted_password(the_salt, plaintext)
+    Digest::SHA1.hexdigest("#{the_salt}--#{plaintext}")
+  end
+
+  def generate_salt_and_encrypt_password
+    return unless new_record? 
+
+    timestamp = created_at || Time.now
+    self.salt = Person.generate_salt(timestamp)
+    self.password = Person.encrypted_password(salt, password)
   end
 
 end
