@@ -38,9 +38,10 @@ class UploadController < ApplicationController
                         :contents => node_version_contents,
                         :description => 'Initial upload')
 
-      if new_version.save
+      begin
+        new_version.save!
         flash.now[:notice] = "Thanks for uploading the new model called '#{model_name}'."
-      else
+      rescue
         flash[:notice] = "Error creating a new model version; it was not saved."
         redirect_to :back
         raise ActiveRecord::Rollback, "Call tech support!"
