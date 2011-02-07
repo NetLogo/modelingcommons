@@ -284,7 +284,7 @@ class Node < ActiveRecord::Base
 
     return true if author?(person)
 
-    return true if group and group_changeable? and group.approved_members.member?(person)
+    return true if group and group_changeable? and group.members.member?(person)
 
     return false
   end
