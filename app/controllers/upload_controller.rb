@@ -32,6 +32,8 @@ class UploadController < ApplicationController
       # Create a new version for that node, and stick the contents in there
       node_version_contents = params[:new_model][:uploaded_body].read
 
+      node_version_contents.gsub!(/[^\s\$#\@a-zA-Z0-9.!:?~`'"%^&*()\[\]{}\\|;+=,<>_\/-]/, "_")
+
       new_version =
         NodeVersion.new(:node_id => @model.id,
                         :person_id => @person.id,
@@ -41,7 +43,10 @@ class UploadController < ApplicationController
       begin
         new_version.save!
         flash.now[:notice] = "Thanks for uploading the new model called '#{model_name}'."
-      rescue
+      rescue Exception => e
+        logger.warn "Exception message: '#{e.message}'"
+        logger.warn "Exception backtrace: '#{e.backtrace.inspect}'"
+
         flash[:notice] = "Error creating a new model version; it was not saved."
         redirect_to :back
         raise ActiveRecord::Rollback, "Call tech support!"
