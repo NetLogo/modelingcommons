@@ -124,7 +124,8 @@ class AccountController < ApplicationController
     # most-viewed models
     @most_viewed = LoggedAction.find_by_sql("SELECT COUNT(DISTINCT person_id), node_id
                                                 FROM Logged_Actions
-                                               WHERE url LIKE '/browse/one_model%'
+                                               WHERE controller = 'browse'
+                                                 AND action = 'one_model'
                                                  AND node_id IS NOT NULL
                                                  AND logged_at >= NOW() - interval '3 months'
                                             GROUP BY node_id
@@ -134,7 +135,8 @@ class AccountController < ApplicationController
     # most-downloaded models
     @most_downloaded = LoggedAction.find_by_sql("SELECT COUNT(DISTINCT person_id), node_id
                                                    FROM Logged_Actions
-                                                  WHERE url LIKE '/browse/download_model%'
+                                                  WHERE controller = 'browse'
+                                                    AND action = 'download_model'
                                                     AND node_id IS NOT NULL
                                                     AND logged_at >= NOW() - interval '3 months'
                                                GROUP BY node_id
