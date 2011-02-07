@@ -107,18 +107,26 @@ class AccountController < ApplicationController
     @tag_events = @tag_events[0..9] if @tag_events.length > 10
 
     # Model updates
-    @model_events =
-      @the_person.models.select { |model| model.updated_at >= how_new_is_new }.sort_by { |model| model.updated_at }.reverse
+    @model_events = [ ]
+    @group_recent_models = [ ]
 
-    @group_recent_models =
-      @the_person.models.select { |model| model.group and model.created_at >= how_new_is_new }.sort_by { |model| model.created_at }.reverse
+    @the_person.models.each do |model|
+      if model.updated_at >= how_new_is_new
+        @model_events << model if model.updated_at >= how_new_is_new
+        @group_recent_models << model if model.group
+      end
+    end
+
+    @model_events = @model_events.sort_by {|model| model.updated_at}.reverse
+    @group_recent_models.sort_by {|model| model.updated_at}.reverse
     @group_model_events = @group_recent_models.select { |model| model.group.members.include?(@person)}
 
     # most-viewed models
     @most_viewed = LoggedAction.find_by_sql("SELECT COUNT(DISTINCT person_id), node_id
                                                 FROM Logged_Actions
-                                               WHERE url ILIKE '/browse/one_model%'
+                                               WHERE url LIKE '/browse/one_model%'
                                                  AND node_id IS NOT NULL
+                                                 AND logged_at >= NOW() - interval '3 months'
                                             GROUP BY node_id
                                             ORDER BY count DESC
                                                LIMIT 10;").map { |la| [la.node, la.count]}
@@ -126,8 +134,9 @@ class AccountController < ApplicationController
     # most-downloaded models
     @most_downloaded = LoggedAction.find_by_sql("SELECT COUNT(DISTINCT person_id), node_id
                                                    FROM Logged_Actions
-                                                  WHERE url ILIKE '/browse/download_model%'
+                                                  WHERE url LIKE '/browse/download_model%'
                                                     AND node_id IS NOT NULL
+                                                    AND logged_at >= NOW() - interval '3 months'
                                                GROUP BY node_id
                                                ORDER BY count DESC
                                                   LIMIT 10;").map { |la| [la.node, la.count]}
@@ -136,15 +145,13 @@ class AccountController < ApplicationController
     @most_popular_tags =
       TaggedNode.count(:group => "tag_id",
                        :order => "count_all DESC",
-                       :limit => 10)
-    @most_popular_tags = @most_popular_tags.map { |tag| [Tag.find(tag[0]), tag[1]]}
+                       :limit => 10).map { |tag| [Tag.find(tag[0]), tag[1]]}
 
     # most-recommended models
     @most_recommended_models =
       Recommendation.count(:group => "node_id",
                            :order => "count_all DESC",
-                           :limit => 10)
-    @most_recommended_models = @most_recommended_models.map { |node| [Node.find(node[0]), node[1]]}
+                           :limit => 10).map { |node| [Node.find(node[0]), node[1]]}
   end
 
   def mygroups
