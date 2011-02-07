@@ -84,7 +84,7 @@ class BrowseController < ApplicationController
 
   # Define methods for tabs
   ['preview', 'applet', 'info', 'procedures', 'discuss', 'files', 'history', 'tags',
-   'related', 'upload', 'permissions'].each do |tab_name|
+   'family', 'upload', 'permissions'].each do |tab_name|
     define_method("browse_#{tab_name}_tab".to_sym) do
       render :layout => 'browse_tab'
     end

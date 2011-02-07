@@ -67,7 +67,7 @@
     <li><a href="<%= url_for :controller => :browse, :action => :browse_history_tab, :id => @model.id , :tab => 'true' -%>" title="history"><span>History</span></a></li>
     <li><a href="<%= url_for :controller => :browse, :action => :browse_tags_tab, :id => @model.id , :tab => 'true' -%>" title="tags"><span>Tags</span></a></li>
     <li><a href="<%= url_for :controller => :browse, :action => :browse_files_tab, :id => @model.id , :tab => 'true' -%>" title="files"><span>Files</span></a></li>
-    <li><a href="<%= url_for :controller => :browse, :action => :browse_related_tab, :id => @model.id , :tab => 'true' -%>" title="related"><span>Related</span></a></li>
+    <li><a href="<%= url_for :controller => :browse, :action => :browse_family_tab, :id => @model.id , :tab => 'true' -%>" title="family"><span>Family</span></a></li>
 
     <% if @person %>
     <li><a href="<%= url_for :controller => :browse, :action => :browse_upload_tab, :id => @model.id, :tab => 'true' -%>" title="upload"><span>Upload</span></a></li>
