@@ -119,14 +119,26 @@ class UploadController < ApplicationController
       flash[:notice] << "Added new version to node #{existing_node.id}. "
     end
 
+    node_version_contents = params[:new_version][:uploaded_body].read
+    node_version_contents.gsub!(/[^\s\$#\@a-zA-Z0-9.!:?~`'"%^&*()\[\]{}\\|;+=,<>_\/-]/, "_")
+
     # Create the new version for this node
     new_version =
       NodeVersion.new(:node_id => node_id,
                       :person_id => @person.id,
-                      :contents => params[:new_version][:uploaded_body].read,
+                      :contents => node_version_contents,
                       :description => description)
 
-    new_version.save!
+      begin
+        new_version.save!
+      rescue Exception => e
+        logger.warn "Exception message: '#{e.message}'"
+        logger.warn "Exception backtrace: '#{e.backtrace.inspect}'"
+
+        flash[:notice] = "Error updating the model."
+        redirect_to :back
+        raise ActiveRecord::Rollback, "Call tech support!"
+      end
 
     # Notifications.deliver_modified_model(new_version.node.people.reject { |p| p == @person}, new_version.node)
 
