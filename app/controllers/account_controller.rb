@@ -112,7 +112,7 @@ class AccountController < ApplicationController
 
     @the_person.models.each do |model|
       if model.updated_at >= how_new_is_new
-        @model_events << model if model.updated_at >= how_new_is_new
+        @model_events << model 
         @group_recent_models << model if model.group
       end
     end
