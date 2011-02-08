@@ -177,8 +177,12 @@ class MembershipController < ApplicationController
       @title = "List of models in the '#{@group.name}' group"
     end
 
-    @models = Node.paginate(:page => params[:page],
-                            :order => 'name ASC',
-                            :conditions => "group_id in (#{@group_ids}) ")
+    if @group_ids.empty?
+      @models = [ ]
+    else
+      @models = Node.paginate(:page => params[:page],
+                              :order => 'name ASC',
+                              :conditions => "group_id in (#{@group_ids}) ")
+    end
   end
 end
