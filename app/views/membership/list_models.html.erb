@@ -16,7 +16,7 @@
 <p>Sorry, no models to show in this group.</p>
 <% else %>
 <%= will_paginate @models %>
-<%= render :partial => "model_list", :object => @models %>
+<%= render :partial => "browse/model_list", :object => @models %>
 <%= will_paginate @models %>
 <% end %>
 
