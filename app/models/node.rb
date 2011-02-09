@@ -271,7 +271,7 @@ class Node < ActiveRecord::Base
 
     # If only the group can see this model, then check if the user is logged in
     # and a member of the group
-    return true if group and group_visible? and group.approved_members.member?(person)
+    return true if group and group_visible? and group.members.member?(person)
 
     # If the user is an administrator, then let them see the model
     return true if person and person.administrator?

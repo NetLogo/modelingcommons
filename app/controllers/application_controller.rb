@@ -132,7 +132,7 @@ class ApplicationController < ActionController::Base
     # If only the group can see this model, then get the model's group, and
     # determine if @person is a member of the group.
     if @model.group
-      return true if @model.changeability.short_form == 'g' and @model.group.approved_members.member?(@person)
+      return true if @model.changeability.short_form == 'g' and @model.group.members.member?(@person)
     end
 
     flash[:notice] = "You do not have permission to modify this model."
