@@ -1,49 +1,57 @@
 <% if @people.empty? %>
 
-    <p>Sorry, but no one has registered!
-        Send people <%= link_to "here", :controller => "account", :action => "new" %>!</p>
+<p>Sorry, but no one has registered!
+  Send people <%= link_to "here", :controller => "account", :action => "new" %>!</p>
 
 <% else %>
 
-    <table id="people-table" border="1">
+<table id="people-table" border="1">
 
-    <thead>
+  <thead>
 
-        <tr>
-            <th>id</th>
-            <th>first_name</th>
-            <th>last_name</th>
-            <th>email_address</th>
-            <th>password</th>
-            <th>administrator?</th>
-            <th>Most recent action</th>
-            <th>See actions</th>
-        </tr>
+    <tr>
+      <th>id</th>
+      <th>first_name</th>
+      <th>last_name</th>
+      <th>email_address</th>
+      <th>password</th>
+      <th>administrator?</th>
+      <th>Most recent action</th>
+      <th>See actions</th>
+      <th>Become this user</th>
+    </tr>
 
-    </thead>
+  </thead>
 
-    <tbody>
+  <tbody>
 
-        <% @people.each do |person| %>
-        <tr>
-            <td><%= person.id %></td>
-            <td><%= person.first_name %></td>
-            <td><%= person.last_name %></td>
-            <td><%= mail_to person.email_address %></td>
-            <td><%= person.password %></td>
-            <td><%= "yes" if person.administrator? %></td>
-            <td>
-                <% if person.latest_action_time %>
-                    <%= distance_of_time_in_words(Time.now, person.latest_action_time) -%> ago</td>
-                <% else %>
-                    -
-                <% end %>
+    <% @people.each do |person| %>
+    <tr>
+      <td><%= person.id %></td>
+      <td><%= person.first_name %></td>
+      <td><%= person.last_name %></td>
+      <td><%= mail_to person.email_address %></td>
+      <td><%= person.password %></td>
+      <td><%= "yes" if person.administrator? %></td>
+      <td>
+        <% if person.latest_action_time %>
+        <%= distance_of_time_in_words(Time.now, person.latest_action_time) -%> ago</td>
+      <% else %>
+      -
+      <% end %>
 
-            <td><%= link_to "See user's actions", :controller => "admin", :action => "view_person_actions", :id => person.id %></td>
-        </tr>
-        <% end %>
+      <td><%= link_to "See user's actions", :controller => "admin", :action => "view_person_actions", :id => person.id %></td>
+      <td>
+	<% if person.administrator? %>
+	-
+	<% else %>
+	<%= link_to "Become this user", :action => :become_user, :id => person.id -%>
+	<% end %>
+      </td>
+    </tr>
+    <% end %>
 
-    </tbody>
-    </table>
+  </tbody>
+</table>
 
 <% end %>

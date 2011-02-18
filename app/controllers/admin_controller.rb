@@ -36,4 +36,18 @@ class AdminController < ApplicationController
   def view_all_models
     @models = Node.all
   end
+
+  def become_user
+    user_to_become = Person.find(params[:id])
+
+    if user_to_become.administrator?
+      flash[:notice] = "Sorry, but you cannot become an administrator."
+      redirect_to :back
+    else
+      session[:person_id] = user_to_become.id
+      flash[:notice] = "You are now logged in as '#{user_to_become.fullname}'."
+      redirect_to :controller => :account, :action => :mypage
+    end
+  end
+
 end
