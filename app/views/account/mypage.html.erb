@@ -22,7 +22,7 @@
       <% end %>
     </ul>
     <% end %>
-    <!-- Time spent in viewed-models: <%= distance_of_time_in_words(Time.now, start_time) -%> -->
+    <!-- Time spent in viewed-models: <%= Time.now - start_time-%> -->
   </div>
 
   <div id="downloaded-models" class="news-box">
@@ -37,7 +37,7 @@
       <% end %>
     </ul>
     <% end %>
-    <!-- Time spent in downloaded-models: <%= distance_of_time_in_words(Time.now, start_time) -%> -->
+    <!-- Time spent in downloaded-models: <%= Time.now - start_time-%> -->
   </div>
 
   <div id="applied-tag" class="news-box">
@@ -55,7 +55,7 @@
       <% end %>
     </ul>
     <% end %>
-    <!-- Time spent in applied_tag: <%= distance_of_time_in_words(Time.now, start_time) -%> -->
+    <!-- Time spent in applied_tag: <%= Time.now - start_time-%> -->
   </div>
 
   <div id="recommended" class="news-box">
@@ -70,7 +70,7 @@
       <% end %>
     </ul>
     <% end %>
-    <!-- Time spent in recommended: <%= distance_of_time_in_words(Time.now, start_time) -%> -->
+    <!-- Time spent in recommended: <%= Time.now - start_time-%> -->
   </div>
 </div>
 
@@ -94,7 +94,7 @@
       <% end %>
     </ul>
     <% end %>
-    <!-- Time spent in news-box models: <%= distance_of_time_in_words(Time.now, start_time) -%> -->
+    <!-- Time spent in news-box models: <%= Time.now - start_time-%> -->
   </div>
 
   <div class="news-box">
@@ -114,7 +114,7 @@
       <% end %>
     </ul>
     <% end %>
-    <!-- Time spent in news-box tags: <%= distance_of_time_in_words(Time.now, start_time) -%> -->
+    <!-- Time spent in news-box tags: <%= Time.now - start_time-%> -->
   </div>
 
   <div class="news-box">
@@ -140,7 +140,7 @@
       </li>
       <% end %>
     </ul>
-    <!-- Time spent in news-box help: <%= distance_of_time_in_words(Time.now, start_time) -%> -->
+    <!-- Time spent in news-box help: <%= Time.now - start_time-%> -->
     <% end %>
   </div>
 </div>
