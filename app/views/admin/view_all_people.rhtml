@@ -14,7 +14,6 @@
       <th>first_name</th>
       <th>last_name</th>
       <th>email_address</th>
-      <th>password</th>
       <th>administrator?</th>
       <th>Most recent action</th>
       <th>See actions</th>
@@ -31,7 +30,6 @@
       <td><%= person.first_name %></td>
       <td><%= person.last_name %></td>
       <td><%= mail_to person.email_address %></td>
-      <td><%= person.password %></td>
       <td><%= "yes" if person.administrator? %></td>
       <td>
         <% if person.latest_action_time %>
