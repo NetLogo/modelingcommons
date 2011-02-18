@@ -35,11 +35,11 @@ class Person < ActiveRecord::Base
   after_validation_on_update :encrypt_updated_password
 
   def nodes
-    node_versions.map { |nv| nv.node_id}.uniq.map{ |node_id| Node.find(node_id)}
+    Node.find(node_versions.map { |nv| nv.node_id})
   end
 
   def node_versions
-    NodeVersion.all(:conditions => { :person_id => id})
+    NodeVersion.fields(:id, :person_id, :description).all(:conditions => { :person_id => id})
   end
 
   def attachments
