@@ -86,6 +86,7 @@ class AccountController < ApplicationController
 
   def mypage
 
+    logger.warn "[AccountController#mypage] #{Time.now} enter"
     if @person.nil? and params[:id].blank?
       redirect_to :controller => :account, :action => :login
       return
@@ -100,13 +101,20 @@ class AccountController < ApplicationController
 
     how_new_is_new = 6.months.ago
 
+    logger.warn "[AccountController#mypage] #{Time.now} before @questions"
     @questions = Posting.unanswered_questions.select { |question| question.created_at >= how_new_is_new }
 
+    logger.warn "[AccountController#mypage] #{Time.now} before @recent_tags"
     @recent_tags = @the_person.tags.select { |tag| tag.created_at >= how_new_is_new}
+
+    logger.warn "[AccountController#mypage] #{Time.now} before @recent_tagged_models"
     @recent_tagged_models = @the_person.tagged_nodes.select { |tagged_node| tagged_node.created_at >= how_new_is_new}
+
+    logger.warn "[AccountController#mypage] #{Time.now} before @tag_events"
     @tag_events = [@recent_tags, @recent_tagged_models].flatten.sort_by { |tag| tag.created_at}.reverse
     @tag_events = @tag_events[0..9] if @tag_events.length > 10
 
+    logger.warn "[AccountController#mypage] #{Time.now} before model updates"
     # Model updates
     @model_events = [ ]
     @group_recent_models = [ ]
@@ -124,6 +132,7 @@ class AccountController < ApplicationController
     @group_recent_models.sort_by {|model| model.updated_at}.reverse
     @group_model_events = @group_recent_models.select { |model| model.group.members.include?(@person)}
 
+    logger.warn "[AccountController#mypage] #{Time.now} before most-viewed models"
     # most-viewed models
     @most_viewed = LoggedAction.find_by_sql("SELECT COUNT(DISTINCT person_id), node_id
                                                 FROM Logged_Actions
@@ -135,6 +144,7 @@ class AccountController < ApplicationController
                                             ORDER BY count DESC
                                                LIMIT 10;").map { |la| [la.node, la.count]}
 
+    logger.warn "[AccountController#mypage] #{Time.now} before most-downloaded models"
     # most-downloaded models
     @most_downloaded = LoggedAction.find_by_sql("SELECT COUNT(DISTINCT person_id), node_id
                                                    FROM Logged_Actions
@@ -146,17 +156,21 @@ class AccountController < ApplicationController
                                                ORDER BY count DESC
                                                   LIMIT 10;").map { |la| [la.node, la.count]}
 
+    logger.warn "[AccountController#mypage] #{Time.now} before most-applied tags"
     # most-applied tags
     @most_popular_tags =
       TaggedNode.count(:group => "tag_id",
                        :order => "count_all DESC",
                        :limit => 10).map { |tag| [Tag.find(tag[0]), tag[1]]}
 
+    logger.warn "[AccountController#mypage] #{Time.now} before most-recommended models"
     # most-recommended models
     @most_recommended_models =
       Recommendation.count(:group => "node_id",
                            :order => "count_all DESC",
                            :limit => 10).map { |node| [Node.find(node[0]), node[1]]}
+
+    logger.warn "[AccountController#mypage] #{Time.now} exit"
   end
 
   def mygroups
