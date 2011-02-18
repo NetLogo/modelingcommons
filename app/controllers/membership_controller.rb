@@ -88,11 +88,11 @@ class MembershipController < ApplicationController
         logger.warn "Ignoring person ID '#{person_id}', who was already invited go group '#{group.id}'."
 
       else
-        # Make them pending
+        # Invite them to the group
         membership = Membership.create(:person_id => person_id,
                                        :group => group,
                                        :is_administrator => false,
-                                       :status => 'invited')
+                                       :status => 'approved')
 
         # Send them e-mail
         Notifications.deliver_invited_to_group(Person.find(person_id), membership)
