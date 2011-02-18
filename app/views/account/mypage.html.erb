@@ -11,7 +11,7 @@
 
 <div id="right-news-box">
   <div id="viewed-models" class="news-box">
-  <!-- viewed-models start: <%= Time.now -%> -->
+    <% start_time = Time.now %>
     <h2>Most-viewed models</h2>
     <% if @most_viewed.empty? %>
     <p>No statistics on most-viewed models</p>
@@ -22,11 +22,11 @@
       <% end %>
     </ul>
     <% end %>
-  <!-- viewed-models end: <%= Time.now -%> -->
+    <!-- Time spent in viewed-models: <%= distance_of_time_in_words(Time.now, start_time) -%> -->
   </div>
 
   <div id="downloaded-models" class="news-box">
-  <!-- downloaded-models end: <%= Time.now -%> -->
+    <% start_time = Time.now %>
     <h2>Most-downloaded models</h2>
     <% if @most_downloaded.empty? %>
     <p>No statistics on most-downloaded models</p>
@@ -37,11 +37,11 @@
       <% end %>
     </ul>
     <% end %>
-  <!-- downloaded-models end: <%= Time.now -%> -->
+    <!-- Time spent in downloaded-models: <%= distance_of_time_in_words(Time.now, start_time) -%> -->
   </div>
 
   <div id="applied-tag" class="news-box">
-  <!-- applied-tag start: <%= Time.now -%> -->
+    <% start_time = Time.now %>
     <h2>Most popular tags</h2>
     <% if @most_downloaded.empty? %>
     <p>No statistics on most-popular tags</p>
@@ -55,11 +55,11 @@
       <% end %>
     </ul>
     <% end %>
-  <!-- applied-tag end: <%= Time.now -%> -->
+    <!-- Time spent in applied_tag: <%= distance_of_time_in_words(Time.now, start_time) -%> -->
   </div>
 
   <div id="recommended" class="news-box">
-  <!-- recommended start: <%= Time.now -%> -->
+    <% start_time = Time.now %>
     <h2>Most-recommended models</h2>
     <% if @most_recommended_models.empty? %>
     <p>No model recommendations</p>
@@ -70,13 +70,13 @@
       <% end %>
     </ul>
     <% end %>
-  <!-- recommended end: <%= Time.now -%> -->
+    <!-- Time spent in recommended: <%= distance_of_time_in_words(Time.now, start_time) -%> -->
   </div>
 </div>
 
 <div id="left-news-box">
   <div class="news-box">
-  <!-- news-box models start: <%= Time.now -%> -->
+    <% start_time = Time.now %>
     <% if @person == @the_person %>
     <h2>Recent activity in <%= link_to 'your models', :controller => :account, :action => :models, :id => @the_person.id -%>
       <%= link_to "(All of your models)", :controller => :account, :action => :models, :id => @the_person.id -%></h2>
@@ -94,11 +94,11 @@
       <% end %>
     </ul>
     <% end %>
-  <!-- news-box models end: <%= Time.now -%> -->
+    <!-- Time spent in news-box models: <%= distance_of_time_in_words(Time.now, start_time) -%> -->
   </div>
 
   <div class="news-box">
-  <!-- news-box tags start: <%= Time.now -%> -->
+    <% start_time = Time.now %>
     <% if @person == @the_person %>
     <h2>Recent activity in <%= link_to "your tags", :controller => :account, :action => :tags -%> </h2>
     <% else %>
@@ -114,7 +114,7 @@
       <% end %>
     </ul>
     <% end %>
-  <!-- news-box tags end: <%= Time.now -%> -->
+    <!-- Time spent in news-box tags: <%= distance_of_time_in_words(Time.now, start_time) -%> -->
   </div>
 
   <div class="news-box">
@@ -140,7 +140,7 @@
       </li>
       <% end %>
     </ul>
-    <!-- news-box help end: <%= Time.now -%> -->
+    <!-- Time spent in news-box help: <%= distance_of_time_in_words(Time.now, start_time) -%> -->
     <% end %>
   </div>
 </div>
