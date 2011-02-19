@@ -35,7 +35,7 @@ class Person < ActiveRecord::Base
   after_validation_on_update :encrypt_updated_password
 
   def nodes
-    Node.find(node_versions.map { |nv| nv.node_id})
+    Node.find(NodeVersion.fields(:node_id).all(:conditions => {:person_id => id}).map {|nv| nv.node_id})
   end
 
   def node_versions
