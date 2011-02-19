@@ -25,6 +25,8 @@ class BrowseController < ApplicationController
   end
 
   def display_preview
+    expires_in 12.hours
+
     if @model.preview.blank?
       send_file("#{RAILS_ROOT}/public/images/1x1.png",
                 :type => 'image/png',
