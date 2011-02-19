@@ -37,7 +37,7 @@ class Node < ActiveRecord::Base
 
   def node_versions
     # NodeVersion.all(:conditions => {:node => id}, :order => :created_at.desc)
-    NodeVersion.fields(:id, :node_id, :person_id, :description).all(:conditions => { :node_id => id}, :order => :created_at.desc)
+    NodeVersion.fields(:id, :node_id, :person_id, :description, :created_at, :updated_at).all(:conditions => { :node_id => id}, :order => :created_at.desc)
   end
 
   def current_version
