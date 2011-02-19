@@ -71,7 +71,7 @@ class Node < ActiveRecord::Base
   end
 
   def person
-    current_version.person
+    current_version.person unless current_version.nil?
   end
 
   def most_recent_author
