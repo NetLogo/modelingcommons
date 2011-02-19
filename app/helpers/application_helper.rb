@@ -52,7 +52,9 @@ module ApplicationHelper
   end
 
   def person_link(person)
-    if person == @person
+    if person.nil?
+      "(No person)"
+    elsif person == @person
       link_to('You', :controller => :account, :action => :mypage, :id => person.id)
     else
       link_to(person.fullname, :controller => :account, :action => :mypage, :id => person.id)
