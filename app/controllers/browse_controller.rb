@@ -2,6 +2,8 @@
 
 class BrowseController < ApplicationController
 
+  caches_page :display_preview
+
   prepend_before_filter :log_one_action, :except => [:display_preview]
   prepend_before_filter :get_model_from_id_param, :except => [:index, :list_models, :list_recent_models, :search, :news, :one_node, :view_random_model, :about]
 
@@ -25,14 +27,12 @@ class BrowseController < ApplicationController
   end
 
   def display_preview
-    expires_in 12.hours
-
     if @model.preview.blank?
-      send_file("#{RAILS_ROOT}/public/images/1x1.png",
-                :type => 'image/png',
-                :disposition => 'inline')
+      expires_in 5.minutes
+      render :text => "", :layout => false
     else
-      send_data(@model.preview.contents.to_s, :type => 'image/png', :disposition => 'inline')
+      expires_in 12.hours
+      render @model.preview.contents, :type => 'image/png', :disposition => 'inline', :layout => false
     end
   end
 
