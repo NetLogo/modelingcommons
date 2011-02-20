@@ -9,7 +9,7 @@ class BrowseController < ApplicationController
   before_filter :check_visibility_permissions, :only => [:one_model, :model_contents, :one_applet ]
 
   def list_models
-    @models = Node.all(:order => "name ASC").select {|model| model.visible_to_user?(@person)}
+    @models = Node.all(:order => "name ASC", :include => :tags).select {|model| model.visible_to_user?(@person)}
   end
 
   def list_recent_models

@@ -41,7 +41,7 @@ class Node < ActiveRecord::Base
   end
 
   def current_version
-    node_versions.empty? ? nil : node_versions.first
+    node_versions.empty? ? nil : NodeVersion.first(:conditions => { :node_id => id}, :order => :created_at.desc)
   end
 
   # Create methods for the different attachment types
