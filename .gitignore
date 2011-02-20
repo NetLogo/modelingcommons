@@ -12,3 +12,4 @@ mkmf.log
 nohup.out
 rerun.txt
 public/sitemap.xml
+public/browse/*

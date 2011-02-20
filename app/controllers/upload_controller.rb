@@ -65,6 +65,8 @@ class UploadController < ApplicationController
                                         :filename => model_name + '.png',
                                         :type => 'preview',
                                         :contents => params[:new_model][:uploaded_preview].read)
+        expire_page :action => :display_preview, :id => @model.id
+
         if !attachment.save
           flash[:notice] = "Error creating a new preview object; it was not saved."
           redirect_to :back
