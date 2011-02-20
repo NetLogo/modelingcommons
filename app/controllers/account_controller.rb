@@ -118,7 +118,7 @@ class AccountController < ApplicationController
     @model_events = [ ]
     @group_recent_models = [ ]
 
-    @the_person.models.each_with_index do |model, index|
+    @the_person.models.sort_by {|model| model.updated_at}.reverse.each_with_index do |model, index|
       break if index > 30
 
       if model.updated_at >= how_new_is_new
@@ -127,8 +127,6 @@ class AccountController < ApplicationController
       end
     end
 
-    @model_events = @model_events.sort_by {|model| model.updated_at}.reverse
-    @group_recent_models.sort_by {|model| model.updated_at}.reverse
     @group_model_events = @group_recent_models.select { |model| model.group.members.include?(@person)}
 
     logger.warn "[AccountController#mypage] #{Time.now} before most-viewed models"
