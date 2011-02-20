@@ -13,7 +13,7 @@
   </thead>
   <tbody>
 
-    <% model_list.sort_by {|n| n.name }.each do |model| %>
+    <% model_list.each do |model| %>
 
     <tr class="<%= cycle('even', 'odd') -%>">
       <td>
