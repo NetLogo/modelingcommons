@@ -16,8 +16,9 @@ module ApplicationHelper
       output << "#{model_link(item.node)} was tagged #{link_to(item.tag.name, :controller => :tags, :action => :one_tag, :id => item.tag.id)} by #{link_to_item_person}, #{time_since_update} ago."
 
     elsif item.is_a?(Node)
-      next unless item.node_versions
-      original_node_author = item.node_versions.sort_by { |nv| nv.updated_at}.reverse.first.person
+      original_node_author = 
+        NodeVersion.fields(:person_id).all(:conditions => {:node_id => 1042},
+                                           :order => :created_at.desc).first.person
       this_user_did_it = true if original_node_author == @person
 
       output << "#{model_link(item)} was updated by #{person_link(original_node_author)} #{time_since_update} ago."
