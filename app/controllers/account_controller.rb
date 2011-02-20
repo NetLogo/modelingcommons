@@ -95,8 +95,7 @@ class AccountController < ApplicationController
     if params[:id].blank?
       @the_person = @person
     else
-      @the_person = Person.find(params[:id].to_i,
-                                :include => [:postings, :tags, :tagged_nodes, :nodes])
+      @the_person = Person.find(params[:id].to_i, :include => [:postings, :tags, :tagged_nodes])
     end
 
     how_new_is_new = 6.months.ago
