@@ -39,7 +39,7 @@ class Person < ActiveRecord::Base
   end
 
   def node_versions
-    NodeVersion.fields(:id, :node_id, :person_id, :description, :created_at, :updated_at).all(:conditions => { :person_id => id})
+    NodeVersion.fields(:id, :node_id, :person_id, :description, :created_at, :updated_at).all(:conditions => { :person_id => id}, :order => :updated_at)
   end
 
   def attachments

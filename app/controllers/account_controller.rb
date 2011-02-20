@@ -118,7 +118,7 @@ class AccountController < ApplicationController
     @model_events = [ ]
     @group_recent_models = [ ]
 
-    @the_person.models.sort_by {|model| model.updated_at}.reverse.each_with_index do |model, index|
+    @the_person.models.reverse.each_with_index do |model, index|
       break if index > 30
 
       if model.updated_at >= how_new_is_new
