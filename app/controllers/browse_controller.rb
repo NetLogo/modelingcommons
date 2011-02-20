@@ -32,7 +32,7 @@ class BrowseController < ApplicationController
       render :text => "", :layout => false
     else
       expires_in 12.hours
-      render @model.preview.contents, :type => 'image/png', :disposition => 'inline', :layout => false
+      render :text => @model.preview.contents, :type => 'image/png', :disposition => 'inline', :layout => false
     end
   end
 
