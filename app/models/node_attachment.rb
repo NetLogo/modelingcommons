@@ -10,6 +10,8 @@ class NodeAttachment
   key :type, String,  :index => true
   key :contents, Binary
   timestamps!
+  ensure_index :created_at
+  ensure_index :updated_at 
 
   validates_presence_of :node_id
   validates_presence_of :person_id

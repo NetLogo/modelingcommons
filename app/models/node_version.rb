@@ -15,6 +15,8 @@ class NodeVersion
   key :procedures_keyword_index, Array, :index => true
 
   timestamps!
+  ensure_index :created_at
+  ensure_index :updated_at 
 
   validates_presence_of :node_id
   validates_presence_of :person_id
