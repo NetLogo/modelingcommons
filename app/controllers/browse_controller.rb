@@ -64,7 +64,7 @@ class BrowseController < ApplicationController
 
   def follow
     @new_things = [ ]
-    how_recent = 6.months.ago
+    how_recent = 2.weeks.ago
 
     @new_things +=
       @node.node_versions.select { |node_version| node_version.created_at >= how_recent }.map{ |node_version| node_version.new_thing }

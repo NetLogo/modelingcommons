@@ -98,7 +98,7 @@ class AccountController < ApplicationController
       @the_person = Person.find(params[:id].to_i, :include => [:postings, :tags, :tagged_nodes])
     end
 
-    how_new_is_new = 6.months.ago
+    how_new_is_new = 2.weeks.ago
 
     logger.warn "[AccountController#mypage] #{Time.now} before @questions"
     @questions = Posting.unanswered_questions.select { |question| question.created_at >= how_new_is_new }
@@ -136,7 +136,7 @@ class AccountController < ApplicationController
                                                WHERE controller = 'browse'
                                                  AND action = 'one_model'
                                                  AND node_id IS NOT NULL
-                                                 AND logged_at >= NOW() - interval '3 months'
+                                                 AND logged_at >= NOW() - interval '2 weeks'
                                             GROUP BY node_id
                                             ORDER BY count DESC
                                                LIMIT 10;").map { |la| [la.node, la.count]}
@@ -148,7 +148,7 @@ class AccountController < ApplicationController
                                                   WHERE controller = 'browse'
                                                     AND action = 'download_model'
                                                     AND node_id IS NOT NULL
-                                                    AND logged_at >= NOW() - interval '3 months'
+                                                    AND logged_at >= NOW() - interval '2 weeks'
                                                GROUP BY node_id
                                                ORDER BY count DESC
                                                   LIMIT 10;").map { |la| [la.node, la.count]}
