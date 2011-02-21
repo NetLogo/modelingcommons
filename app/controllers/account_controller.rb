@@ -140,6 +140,7 @@ class AccountController < ApplicationController
                                             GROUP BY node_id
                                             ORDER BY count DESC
                                                LIMIT 10;").map { |la| [la.node, la.count]}
+    @most_viewed = @most_viewed.select {|model_array| model_array[0].visible_to_user?(@person)}
 
     logger.warn "[AccountController#mypage] #{Time.now} before most-downloaded models"
     # most-downloaded models
@@ -152,6 +153,8 @@ class AccountController < ApplicationController
                                                GROUP BY node_id
                                                ORDER BY count DESC
                                                   LIMIT 10;").map { |la| [la.node, la.count]}
+    @most_downloaded = @most_downloaded.select {|model_array| model_array[0].visible_to_user?(@person)}
+
 
     logger.warn "[AccountController#mypage] #{Time.now} before most-applied tags"
     # most-applied tags
