@@ -34,7 +34,7 @@ class BrowseController < ApplicationController
   def display_preview
     if @model.preview.blank?
       expires_in 5.minutes
-      render :text => "", :layout => false
+      redirect_to "/public/images/1x1.png"
     else
       expires_in 12.hours
       render :text => @model.preview.contents, :type => 'image/png', :disposition => 'inline', :layout => false
