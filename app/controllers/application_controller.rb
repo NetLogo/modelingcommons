@@ -13,9 +13,7 @@ class ApplicationController < ActionController::Base
 
   def get_person
     person_id = session[:person_id]
-    @person = Person.find(person_id)
-  rescue
-    @person = nil
+    @person = Person.find_by_id(person_id, :include => {:memberships => :group})
   end
 
   def require_login
