@@ -11,8 +11,13 @@ class BrowseController < ApplicationController
   before_filter :check_visibility_permissions, :only => [:one_model, :model_contents, :one_applet ]
 
   def list_models
-    @models = Node.all(:order => "name ASC", :include => [:tags, :visibility, :changeability]).select {|model| model.visible_to_user?(@person)}
+    logger.warn "[BrowseController#list_models] #{Time.now} before getting @models"
+    @models = Node.all(:order => "name ASC", :include => [:tags, :visibility, :changeability])
+    logger.warn "[BrowseController#list_models] #{Time.now} before filtering @models"
+    @models = @models.select {|model| model.visible_to_user?(@person)}
+    logger.warn "[BrowseController#list_models] #{Time.now} after filtering @models"
   end
+
 
   def list_recent_models
     @models = Node.all(:order => "updated_at DESC", :limit => 100).select {|model| model.visible_to_user?(@person)}[0..19]
