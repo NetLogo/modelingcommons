@@ -100,14 +100,8 @@ class Node < ActiveRecord::Base
 
   def netlogo_version_for_applet
     applet_directory = "#{RAILS_ROOT}/public/applet/"
-    version = netlogo_version
-
-    [version,
-     version.gsub(/^(\d+\.\d+).*/, '\1'),
-     Dir.entries(applet_directory).grep(/^\d+\.\d+$/).sort.last].each do |version|
-
-      return version if File.exists?("#{applet_directory}/#{version}")
-    end
+    version = netlogo_version.gsub(/^(\d+\.\d+).*/, '\1')
+    File.exists?("#{applet_directory}/#{version}")
   end
 
   def applet_class
