@@ -48,7 +48,7 @@ class BrowseController < ApplicationController
   def model_contents
     logger.warn "[BrowseController#model_contents] session: #{session.to_yaml}"
     logger.warn "[BrowseController#model_contents] cookies: #{cookies.to_yaml}"
-    logger.warn "[BrowseController#model_contents] cookies: #{request.env['HTTP_REFERER']}"
+    logger.warn "[BrowseController#model_contents] env: #{request.env.to_yaml}"
 
     send_data @model.contents
   end
