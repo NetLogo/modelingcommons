@@ -8,7 +8,7 @@ class BrowseController < ApplicationController
   prepend_before_filter :get_model_from_id_param, :except => [:index, :list_models, :list_recent_models, :search, :news, :one_node, :view_random_model, :about]
 
   before_filter :require_login, :only => [:set_permissions]
-  before_filter :check_visibility_permissions, :only => [:one_model, :model_contents, :one_applet ]
+  before_filter :check_visibility_permissions, :only => [:one_model, :one_applet ]
 
   def list_models
     logger.warn "[BrowseController#list_models] #{Time.now} before getting @models"
@@ -46,6 +46,9 @@ class BrowseController < ApplicationController
   end
 
   def model_contents
+    logger.warn "[BrowseController#model_contents] session: #{session.to_yaml}"
+    logger.warn "[BrowseController#model_contents] cookies: #{cookies.to_yaml}"
+    logger.warn "[BrowseController#model_contents] cookies: #{request.to_yaml}"
     send_data @model.contents
   end
 
