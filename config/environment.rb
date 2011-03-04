@@ -47,10 +47,9 @@ Rails::Initializer.run do |config|
   # no regular words or you'll be exposed to dictionary attacks.
   config.action_controller.session = {
     :key => '_nlcommons_session',
-    :secret      => 'efb755e46296661a3606b089381576ded95b9c8ae7697770963a5782b85fa009d0f98f8a2856d8b334d1224790e7cda374c7cc4c6f7058bade4b00f667175ae3'
+    :secret      => 'efb755e46296661a3606b089381576ded95b9c8ae7697770963a5782b85fa009d0f98f8a2856d8b334d1224790e7cda374c7cc4c6f7058bade4b00f667175ae3',
+    :expire_after => 1.month
   }
-
-  ActionController::Base.session_options[:session_expires] = 1.month.from_now
 
   # Use the database for sessions instead of the cookie-based default,
   # which shouldn't be used to store highly confidential information
