@@ -17,7 +17,7 @@ module ApplicationHelper
 
     elsif item.is_a?(Node)
       original_node_author = 
-        NodeVersion.fields(:person_id).all(:conditions => {:node_id => 1042},
+        NodeVersion.fields(:person_id).all(:conditions => {:node_id => item.id},
                                            :order => :created_at.desc).first.person
       this_user_did_it = true if original_node_author == @person
 
