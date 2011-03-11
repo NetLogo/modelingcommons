@@ -101,13 +101,13 @@ class AccountController < ApplicationController
     how_new_is_new = 2.weeks.ago
 
     logger.warn "[AccountController#mypage] #{Time.now} before @questions"
-    @questions = Posting.unanswered_questions.select { |question| question.created_at >= how_new_is_new }
+    @questions = Posting.unanswered_questions.select { |question| question.node.visible_to_user?(@person) and question.created_at >= how_new_is_new }
 
     logger.warn "[AccountController#mypage] #{Time.now} before @recent_tags"
     @recent_tags = @the_person.tags.select { |tag| tag.created_at >= how_new_is_new}
 
     logger.warn "[AccountController#mypage] #{Time.now} before @recent_tagged_models"
-    @recent_tagged_models = @the_person.tagged_nodes.select { |tagged_node| tagged_node.created_at >= how_new_is_new}
+    @recent_tagged_models = @the_person.tagged_nodes.select { |tagged_node| tagged_node.node.visible_to_user?(@person) and tagged_node.created_at >= how_new_is_new}
 
     logger.warn "[AccountController#mypage] #{Time.now} before @tag_events"
     @tag_events = [@recent_tags, @recent_tagged_models].flatten.sort_by { |tag| tag.created_at}.reverse

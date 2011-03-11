@@ -1,4 +1,8 @@
 <div>
+  <% if @model.author_visible? %>
+  <p>Comments are disabled for private models.</p>
+  <% else %>
+
   <% if @model.postings.empty? %>
   <p>No comments so far!  Please <%= link_to("log in to", :controller => :account, :action => :login) unless @person -%> start the conversation about this model.</p>
   <% end %>
@@ -47,5 +51,6 @@
   </table>
   <% end %>
 
+  <% end %>
   <% end %>
 </div>
