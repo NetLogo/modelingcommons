@@ -295,6 +295,18 @@ class Node < ActiveRecord::Base
     changeability.is_group?
   end
 
+  def world_visible?
+    visibility.is_anyone?
+  end
+
+  def author_visible?
+    visibility.is_owner?
+  end
+
+  def group_visible?
+    visibility.is_group?
+  end
+
   def cannot_be_run_as_applet?
     return true if name =~ /3D/
     return true if procedures_tab =~ /hubnet-/
