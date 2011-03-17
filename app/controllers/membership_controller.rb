@@ -163,7 +163,7 @@ class MembershipController < ApplicationController
   end
 
   def invite
-    @potential_invitees = Person.phone_book.map {|person| [person.phonebook_name, person.id]}
+    @potential_invitees = Person.phone_book.map {|person| [person.fullname, person.id]}
     render :layout => 'plain'
   end
 

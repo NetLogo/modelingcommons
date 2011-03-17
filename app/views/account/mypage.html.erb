@@ -27,7 +27,7 @@
 
   <div id="downloaded-models" class="news-box">
     <% start_time = Time.now %>
-    <h2>Most-downloaded models</h2>
+    <h2>Most-downloaded models <span class="h2-explanation">(in the last 2 weeks)</span></h2>
     <% if @most_downloaded.empty? %>
     <p>No statistics on most-downloaded models</p>
     <% else %>
@@ -42,7 +42,7 @@
 
   <div id="applied-tag" class="news-box">
     <% start_time = Time.now %>
-    <h2>Most popular tags</h2>
+    <h2>Most popular tags <span class="h2-explanation">(in the last 2 weeks)</span></h2>
     <% if @most_downloaded.empty? %>
     <p>No statistics on most-popular tags</p>
     <% else %>
@@ -60,7 +60,7 @@
 
   <div id="recommended" class="news-box">
     <% start_time = Time.now %>
-    <h2>Most-recommended models</h2>
+    <h2>Most-recommended models <span class="h2-explanation">(in the last 2 weeks)</span></h2>
     <% if @most_recommended_models.empty? %>
     <p>No model recommendations</p>
     <% else %>

@@ -84,6 +84,10 @@ h2 {
     font-size: 17px;
 }
 
+.h2-explanation {
+    font-size: 13px;
+}
+
 h3, #menu-bar {
     font-size: 15px;
 }
