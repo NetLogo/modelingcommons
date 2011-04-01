@@ -139,7 +139,7 @@ class AccountController < ApplicationController
                                                  AND logged_at >= NOW() - interval '2 weeks'
                                             GROUP BY node_id
                                             ORDER BY count DESC
-                                               LIMIT 10;").map { |la| [la.node, la.count]}
+                                               LIMIT 10;").map { |la| [la.node, la.count]}.reject {|la| la[1] == 0}
     @most_viewed = @most_viewed.select {|model_array| model_array[0].visible_to_user?(@person)}
 
     logger.warn "[AccountController#mypage] #{Time.now} before most-downloaded models"
@@ -152,7 +152,7 @@ class AccountController < ApplicationController
                                                     AND logged_at >= NOW() - interval '2 weeks'
                                                GROUP BY node_id
                                                ORDER BY count DESC
-                                                  LIMIT 10;").map { |la| [la.node, la.count]}
+                                                  LIMIT 10;").map { |la| [la.node, la.count]}.reject {|la| la[1] == 0}
     @most_downloaded = @most_downloaded.select {|model_array| model_array[0].visible_to_user?(@person)}
 
 
