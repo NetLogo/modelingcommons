@@ -23,6 +23,7 @@ namespace :deploy do
   end
 end
 
+set :deploy_via, :export
 
 namespace :rake do
  desc "Generate a sitemap on a remote server."
