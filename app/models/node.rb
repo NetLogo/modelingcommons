@@ -122,20 +122,26 @@ class Node < ActiveRecord::Base
   end
 
   def info_tab_html
-    text = info_tab
+    if netlogo_version.to_i >= 5
+      logger.warn "[Node#info_tab_html] NetLogo 5!  Using textile"
+      RedCloth.new(info_tab).to_html
+    else
+      logger.warn "[Node#info_tab_html] Old version!  Using old info-tab parser"
+      text = info_tab
 
-    # Handle headlines
-    text.gsub! /([-_.?A-Z ]+)\n--+/ do
-      "<h3>#{$1}</h3>"
+      # Handle headlines
+      text.gsub! /([-_.?A-Z ]+)\n--+/ do
+        "<h3>#{$1}</h3>"
+      end
+
+      # Handle URLs
+      text.gsub! /(http:\/\/[-\/_.~\w]+\w)/ do
+        "<a target=\"_blank\" href=\"#{$1}\">#{$1}</a>"
+      end
+
+      # Handle newlines
+      text.gsub!("\n", "</p>\n<p>")
     end
-
-    # Handle URLs
-    text.gsub! /(http:\/\/[-\/_.~\w]+\w)/ do
-      "<a target=\"_blank\" href=\"#{$1}\">#{$1}</a>"
-    end
-
-    # Handle newlines
-    text.gsub!("\n", "</p>\n<p>")
   end
 
   def procedures_tab()
