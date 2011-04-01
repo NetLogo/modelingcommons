@@ -23,6 +23,8 @@ class Notifications < ActionMailer::Base
     @recipients = person.email_address
     @bcc = 'reuven@lerner.co.il'
     @subject = "Welcome to the NetLogo Modeling Commons!"
+    @subject = "[TESTING] #{@subject}" if Rails.env == 'development'
+
     @body[:person] = person
     logger.warn "Cleartext password = '#{cleartext_password}'"
     @body[:cleartext_password] = cleartext_password
@@ -33,6 +35,7 @@ class Notifications < ActionMailer::Base
     @recipients = person.email_address
     @body[:person] = person
     @subject = 'Your new password'
+    @subject = "[TESTING] #{@subject}" if Rails.env == 'development'
   end
 
   def password_reminder(person, new_password)
@@ -41,6 +44,7 @@ class Notifications < ActionMailer::Base
     @body[:person] = person
     @body[:new_password] = new_password
     @subject = 'Your password'
+    @subject = "[TESTING] #{@subject}" if Rails.env == 'development'
   end
 
   def changed_password(person)
@@ -48,12 +52,14 @@ class Notifications < ActionMailer::Base
     @recipients = person.email_address
     @body[:person] = person
     @subject = 'Your new password'
+    @subject = "[TESTING] #{@subject}" if Rails.env == 'development'
   end
 
   def modified_model(people, node)
     standard_settings
     @recipients = node.people
     @subject = 'Model update'
+    @subject = "[TESTING] #{@subject}" if Rails.env == 'development'
     @body[:nlmodel] = node
   end
 
@@ -61,6 +67,7 @@ class Notifications < ActionMailer::Base
     standard_settings
     @recipients = people.map{|person| person.email_address}
     @subject = 'Tag was applied'
+    @subject = "[TESTING] #{@subject}" if Rails.env == 'development'
     @body[:tag] = tag
   end
 
@@ -68,6 +75,7 @@ class Notifications < ActionMailer::Base
     standard_settings
     @recipients = people.map{|person| person.email_address}
     @subject = 'Updated discussion'
+    @subject = "[TESTING] #{@subject}" if Rails.env == 'development'
     @body[:nlmodel] = nlmodel
   end
 
@@ -75,6 +83,7 @@ class Notifications < ActionMailer::Base
     standard_settings
     @recipients = person.email_address
     @subject = 'Group invitation from the NetLogo Modeling Commons'
+    @subject = "[TESTING] #{@subject}" if Rails.env == 'development'
     @body[:membership] = membership
   end
 
@@ -83,6 +92,7 @@ class Notifications < ActionMailer::Base
     @recipients = friend_email_address
     @cc = sender.email_address
     @subject = 'View an interesting NetLogo model'
+    @subject = "[TESTING] #{@subject}" if Rails.env == 'development'
     @body[:node] = node
     @body[:sender] = sender
   end
@@ -92,6 +102,7 @@ class Notifications < ActionMailer::Base
     @recipients = recommender.email_address
     @bcc = people.map{|person| person.email_address}
     @subject = "Recommendation for the '#{model.name}' model in the NetLogo Modeling Commons"
+    @subject = "[TESTING] #{@subject}" if Rails.env == 'development'
     @body[:nlmodel] = model
     @body[:recommender] = recommender
   end
