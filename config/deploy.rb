@@ -1,3 +1,5 @@
+require 'capistrano/ext/multistage'
+
 set :application, "NetLogo Modeling Commons"
 
 default_run_options[:pty] = true
@@ -11,8 +13,8 @@ role :db, "main.lerner.co.il", :primary => true
 role :app, "main.lerner.co.il"
 role :web, "main.lerner.co.il"
 
-set :deploy_to, "/var/www/www.modelingcommons.org/www/"
-set :deploy_via, :export
+set :stages, %w(staging production)
+set :default_stage, "staging"
 
 namespace :deploy do
   desc "Restart Application"
