@@ -81,7 +81,7 @@
 <div id="left-news-box">
   <div class="news-box">
     <% start_time = Time.now %>
-    <h2>Recent activity in all models</h2>
+    <h2>Models activity <span class="h2-explanation">(in the last 2 weeks)</span></h2>
 
     <% if @all_model_events.empty? %>
     <p>No recent activity</p>
@@ -89,7 +89,7 @@
     <ul>
       <% @all_model_events.each do |model| %>
       <% if model.created_at == model.updated_at %>
-      <li><%= model_link(model) -%> was added to the system.</li>
+      <li><%= "#{model_link(model)} was created by #{person_link(model.people.first)} #{distance_of_time_in_words(Time.now, item.created_at)} ago."</li>
       <% else %>
       <li><%= whats_new_text(model) %></li>
       <% end %>
