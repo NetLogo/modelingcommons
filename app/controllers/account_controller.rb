@@ -113,7 +113,11 @@ class AccountController < ApplicationController
     @tag_events = [@recent_tags, @recent_tagged_models].flatten.sort_by { |tag| tag.created_at}.reverse
     @tag_events = @tag_events[0..9] if @tag_events.length > 10
 
-    logger.warn "[AccountController#mypage] #{Time.now} before model updates"
+    logger.warn "[AccountController#mypage] #{Time.now} before all model updates"
+    @all_model_events = Node.all(:order => 'updated_at DESC', 
+                                 :limit => 30).select { |node| node.visible_to_user?(@person) and node.updated_at >= how_new_is_new}
+
+    logger.warn "[AccountController#mypage] #{Time.now} before user/group model updates"
     # Model updates
     @model_events = [ ]
     @group_recent_models = [ ]

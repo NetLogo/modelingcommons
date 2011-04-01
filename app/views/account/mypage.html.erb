@@ -81,6 +81,25 @@
 <div id="left-news-box">
   <div class="news-box">
     <% start_time = Time.now %>
+    <h2>Recent activity in all models</h2>
+
+    <% if @all_model_events.empty? %>
+    <p>No recent activity</p>
+    <% else %>
+    <ul>
+      <% @all_model_events.each do |model| %>
+      <% if model.created_at == model.updated_at %>
+      <li><%= model_link(model) -%> was added to the system.</li>
+      <% else %>
+      <li><%= whats_new_text(model) %></li>
+      <% end %>
+    </ul>
+    <% end %>
+    <!-- Time spent in news-box all-models: <%= Time.now - start_time-%> -->
+  </div>
+
+  <div class="news-box">
+    <% start_time = Time.now %>
     <% if @person == @the_person %>
     <h2>Recent activity in <%= link_to 'your models', :controller => :account, :action => :models, :id => @the_person.id -%>
       <%= link_to "(All of your models)", :controller => :account, :action => :models, :id => @the_person.id -%></h2>
