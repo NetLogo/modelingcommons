@@ -135,7 +135,7 @@ class AccountController < ApplicationController
 
     logger.warn "[AccountController#mypage] #{Time.now} before most-viewed models"
     # most-viewed models
-    @most_viewed = LoggedAction.find_by_sql("SELECT COUNT(DISTINCT person_id), node_id
+    @most_viewed = LoggedAction.find_by_sql("SELECT COUNT(DISTINCT ip_address), node_id
                                                 FROM Logged_Actions
                                                WHERE controller = 'browse'
                                                  AND action = 'one_model'
@@ -148,7 +148,7 @@ class AccountController < ApplicationController
 
     logger.warn "[AccountController#mypage] #{Time.now} before most-downloaded models"
     # most-downloaded models
-    @most_downloaded = LoggedAction.find_by_sql("SELECT COUNT(DISTINCT person_id), node_id
+    @most_downloaded = LoggedAction.find_by_sql("SELECT COUNT(DISTINCT ip_address), node_id
                                                    FROM Logged_Actions
                                                   WHERE controller = 'browse'
                                                     AND action = 'download_model'
