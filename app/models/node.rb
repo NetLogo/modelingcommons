@@ -1,5 +1,7 @@
 # Model for an individual node in our graph
 
+require 'redcloth'
+
 class Node < ActiveRecord::Base
   acts_as_tree :order => "name"
 
