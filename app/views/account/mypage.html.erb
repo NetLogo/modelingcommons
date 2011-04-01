@@ -89,7 +89,7 @@
     <ul>
       <% @all_model_events.each do |model| %>
       <% if model.created_at == model.updated_at %>
-      <li><%= "#{model_link(model)} was created by #{person_link(model.people.first)} #{distance_of_time_in_words(Time.now, item.created_at)} ago."</li>
+      <li><%= "#{model_link(model)} was created by #{person_link(model.people.first)} #{distance_of_time_in_words(Time.now, item.created_at)} ago." -%></li>
       <% else %>
       <li><%= whats_new_text(model) %></li>
       <% end %>
