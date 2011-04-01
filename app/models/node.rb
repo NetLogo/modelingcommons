@@ -1,6 +1,6 @@
 # Model for an individual node in our graph
 
-require 'redcloth'
+require 'bluecloth'
 
 class Node < ActiveRecord::Base
   acts_as_tree :order => "name"
@@ -124,7 +124,7 @@ class Node < ActiveRecord::Base
   def info_tab_html
     if netlogo_version.to_i >= 5
       logger.warn "[Node#info_tab_html] NetLogo 5!  Using textile"
-      RedCloth.new(info_tab).to_html
+      BlueCloth.new(info_tab).to_html
     else
       logger.warn "[Node#info_tab_html] Old version!  Using old info-tab parser"
       text = info_tab

@@ -19,7 +19,7 @@ Rails::Initializer.run do |config|
   config.gem 'validates_email'
   config.gem 'will_paginate', :version => '~> 2.3.11', :source => 'http://gemcutter.org'
   config.gem 'GraphvizR', :lib => 'graphviz_r'
-  config.gem 'RedCloth'
+  config.gem 'BlueCloth'
 
   # Settings in config/environments/* take precedence over those specified here.
   # Application configuration should go into files in config/initializers
