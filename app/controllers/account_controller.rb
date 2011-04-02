@@ -134,6 +134,18 @@ class AccountController < ApplicationController
     @group_model_events = @group_recent_models.select { |model| model.group.members.include?(@person)}
 
     logger.warn "[AccountController#mypage] #{Time.now} before most-viewed models"
+
+    # all-time most-viewed models
+    @all_time_most_viewed = LoggedAction.find_by_sql("SELECT COUNT(DISTINCT ip_address), node_id
+                                                FROM Logged_Actions
+                                               WHERE controller = 'browse'
+                                                 AND action = 'one_model'
+                                                 AND node_id IS NOT NULL
+                                            GROUP BY node_id
+                                            ORDER BY count DESC
+                                               LIMIT 10;").map { |la| [la.node, la.count]}
+    @all_time_most_viewed = @all_time_most_viewed.select {|model_array| model_array[0].visible_to_user?(@person)}
+
     # most-viewed models
     @most_viewed = LoggedAction.find_by_sql("SELECT COUNT(DISTINCT ip_address), node_id
                                                 FROM Logged_Actions
