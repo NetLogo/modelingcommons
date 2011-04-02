@@ -12,22 +12,6 @@
 <div id="right-news-box">
   <div id="viewed-models" class="news-box">
     <% start_time = Time.now %>
-    <h2>Most-viewed models <span class="h2-explanation">(in the last 2 weeks)</span></h2>
-    <% if @most_viewed.empty? %>
-    <p>No statistics on most-viewed models</p>
-    <% else %>
-    <ul>
-      <% @most_viewed.each do |model| %>
-      <% next if model[1].to_i.zero? %>
-      <li><%= model_link(model[0]) %> (<%= pluralize(number_with_delimiter(model[1]), "time", "times") -%>)</li>
-      <% end %>
-    </ul>
-    <% end %>
-    <!-- Time spent in viewed-models: <%= Time.now - start_time-%> -->
-  </div>
-
-  <div id="viewed-models" class="news-box">
-    <% start_time = Time.now %>
     <h2>Most-viewed models <span class="h2-explanation">(of all time)</span></h2>
     <% if @all_time_most_viewed.empty? %>
     <p>No statistics on all-time most-viewed models</p>
@@ -40,6 +24,22 @@
     </ul>
     <% end %>
     <!-- Time spent in all-time viewed-models: <%= Time.now - start_time-%> -->
+  </div>
+
+  <div id="viewed-models" class="news-box">
+    <% start_time = Time.now %>
+    <h2>Most-viewed models <span class="h2-explanation">(in the last 2 weeks)</span></h2>
+    <% if @most_viewed.empty? %>
+    <p>No statistics on most-viewed models</p>
+    <% else %>
+    <ul>
+      <% @most_viewed.each do |model| %>
+      <% next if model[1].to_i.zero? %>
+      <li><%= model_link(model[0]) %> (<%= pluralize(number_with_delimiter(model[1]), "time", "times") -%>)</li>
+      <% end %>
+    </ul>
+    <% end %>
+    <!-- Time spent in viewed-models: <%= Time.now - start_time-%> -->
   </div>
 
   <div id="downloaded-models" class="news-box">
