@@ -23,6 +23,7 @@ class Person < ActiveRecord::Base
   validates_presence_of :first_name
   validates_presence_of :last_name
   validates_presence_of :email_address
+  validates_presence_of :registration_consent, :message => "must be checked"
   validates_email :email_address, :level => 1
   validates_presence_of :password
   validates_uniqueness_of :email_address, :case_sensitive => false

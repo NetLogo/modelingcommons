@@ -42,6 +42,22 @@
     <!-- Time spent in viewed-models: <%= Time.now - start_time-%> -->
   </div>
 
+  <div id="recommended" class="news-box">
+    <% start_time = Time.now %>
+    <h2>Most-recommended models <span class="h2-explanation">(in the last 2 weeks)</span></h2>
+    <% if @most_recommended_models.empty? %>
+    <p>No model recommendations</p>
+    <% else %>
+    <ul>
+      <% @most_recommended_models.each do |m| %>
+      <% next if m[1].to_i.zero? %>
+      <li><%= model_link m[0] %> (<%= pluralize(number_with_delimiter(m[1]), "time", "times") -%>)</li>
+      <% end %>
+    </ul>
+    <% end %>
+    <!-- Time spent in recommended: <%= Time.now - start_time-%> -->
+  </div>
+
   <div id="downloaded-models" class="news-box">
     <% start_time = Time.now %>
     <h2>Most-downloaded models <span class="h2-explanation">(in the last 2 weeks)</span></h2>
@@ -77,21 +93,6 @@
     <!-- Time spent in applied_tag: <%= Time.now - start_time-%> -->
   </div>
 
-  <div id="recommended" class="news-box">
-    <% start_time = Time.now %>
-    <h2>Most-recommended models <span class="h2-explanation">(in the last 2 weeks)</span></h2>
-    <% if @most_recommended_models.empty? %>
-    <p>No model recommendations</p>
-    <% else %>
-    <ul>
-      <% @most_recommended_models.each do |m| %>
-      <% next if m[1].to_i.zero? %>
-      <li><%= model_link m[0] %> (<%= pluralize(number_with_delimiter(m[1]), "time", "times") -%>)</li>
-      <% end %>
-    </ul>
-    <% end %>
-    <!-- Time spent in recommended: <%= Time.now - start_time-%> -->
-  </div>
 </div>
 
 <div id="left-news-box">

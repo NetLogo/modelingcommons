@@ -105,14 +105,22 @@ a img {
 }
 
 
-.panel {
+.panel, .wide-panel {
     border: 3px solid;
     padding: 5px;
-    width: 25%;
     margin-right: 20px;
     float: left;
     -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;}
+    -webkit-border-radius: 10px;
+}
+
+.panel {
+    width: 25%;
+}
+
+.wide-panel {
+    width: 40%;
+}
 
 .panel h2 {
     text-align: center;
