@@ -206,7 +206,11 @@ class AccountController < ApplicationController
     if @person
       new_password = ''
       8.times { new_password << ('a'..'z').to_a.shuffle.first }
-      @person.update_attributes!(:password => new_password)
+
+      # Do this to deal with people who haven't signed the consent form,
+      # so their model won't pass validation
+      encrypted_password = Person.encrypted_password(@person.salt, new_password)
+      @person.update_attribute(:password, encrypted_password)
 
       Notifications.deliver_password_reminder(@person, new_password)
       flash[:notice] = "Your password has been reset.  The new password was sent to your e-mail address."
