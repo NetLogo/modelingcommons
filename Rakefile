@@ -8,10 +8,6 @@ require 'rake/testtask'
 require 'rake/rdoctask'
 require 'tasks/rails'
 
-if ENV['RAILS_ENV'] != 'production'
-#   require 'vendor/gems/jscruggs-metric_fu-1.5.1/lib/metric_fu'
-end
-
 module Rails
   class VendorGemSourceIndex
     def version_for_dir(d)
