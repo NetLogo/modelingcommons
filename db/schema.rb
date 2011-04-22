@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110408060635) do
+ActiveRecord::Schema.define(:version => 20110422104454) do
 
 # Could not dump table "appid" because of following StandardError
 #   Unknown type 'uuid' for column 'ApplicationID'
@@ -139,6 +139,9 @@ ActiveRecord::Schema.define(:version => 20110408060635) do
     t.datetime "avatar_updated_at"
     t.string   "salt"
     t.boolean  "registration_consent", :default => false
+    t.string   "sex"
+    t.date     "birthdate"
+    t.string   "country_name"
   end
 
   add_index "people", ["email_address"], :name => "index_people_on_email_address"
