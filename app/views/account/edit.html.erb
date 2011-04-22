@@ -22,11 +22,11 @@
   </tr>
   <tr>
     <td>Country</td>
-    <td><%= form.select :country_name, country_options_for_select(@person.country_name, ['United States', 'Israel']) %></td>
+    <td><%= form.select :country_name, country_options_for_select(@person.country_name, ['United States', 'Israel']), , { :include_blank => @person.country_name.blank? } %></td>
   </tr>
   <tr>
     <td>Birthdate</td>
-    <td><%= form.date_select :birthdate, :start_year => 1930, :end_year => 2005, :default => @person.birthdate %></td>
+    <td><%= form.date_select :birthdate, :start_year => 1930, :end_year => 2005, :default => @person.birthdate, :include_blank => @person.birthdate.blank? %></td>
   </tr>
   <tr>
     <td><label for="person_password">Password</label></td>
@@ -89,7 +89,7 @@
 	contact Northwestern University graduate student, Reuven Lerner, at
 	<%= mail_to "reuven@lerner.co.il" -%>.</p>
 
-      <p><%= form.check_box :registration_consent -%>I understand and agree to the above.</p>
+      <p><%= form.check_box :registration_consent -%><label for="person_registration_consent">I understand and agree to the above.</label></p>
     </td>
     <% end %>
 
