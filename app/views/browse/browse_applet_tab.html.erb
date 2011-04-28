@@ -2,7 +2,7 @@
   <% if @model.cannot_be_run_as_applet? %>
   <p>Sorry, but this model cannot be viewed as an applet.  You must <%= link_to "download it", :controller => :browse, :action => :download_model, :id => @model.id -%> and run it within NetLogo on your local computer.</p>
   <% else %>
-  <p>Using latest NetLogo from the <%= @model.netlogo_version_for_applet -%> series</p>
+  <p>Written with NetLogo <%= @model.netlogo_version -%></p>
 
   <!-- browse_applet_tab -->
   <applet
