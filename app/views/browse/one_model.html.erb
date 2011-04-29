@@ -25,6 +25,15 @@
 </p>
 <% end %>
 
+<% if @model.parent %>
+<p>Child of model <%= link_to @model.parent.name, :controller => 'browse', :action => 'one_model', :id => @model.parent.id  -%></p>
+<% end %>
+
+<p><% if not @model.children.empty? %>
+Parent of <%= pluralize(@model.children.size, 'model') -%>: <%= @model.children.map {|child| link_to child.name, :controller => 'browse', :action => 'one_model', :id => child.id }.to_sentence %>
+<% end %>
+</p>
+
 <p>
 
 
