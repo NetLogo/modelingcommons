@@ -15,7 +15,7 @@ Rails::Initializer.run do |config|
   config.gem 'hoptoad_notifier'
   config.gem 'mongo_mapper', :version => '0.8.6'
   config.gem 'paperclip', :source => 'http://rubygems.org'
-  config.gem 'plucky'
+  config.gem 'plucky', :version => '0.3.8'
   config.gem 'validates_email'
   config.gem 'will_paginate', :version => '~> 2.3.11', :source => 'http://gemcutter.org'
   config.gem 'GraphvizR', :lib => 'graphviz_r'
