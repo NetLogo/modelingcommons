@@ -113,8 +113,11 @@ class UploadController < ApplicationController
     # attached to the existing node.
 
     if fork == 'child'
+      name_of_new_child = params[:new_version][:name_of_new_child]
+      name_of_new_child = "Child of #{existing_node.name}" if name_of_new_child.blank?
+
       child_node = Node.create(:parent_id => existing_node.id,
-                               :name => "Child of #{existing_node.name}",
+                               :name => name_of_new_child,
                                :group_id => existing_node.group_id,
                                :visibility_id => existing_node.visibility_id,
                                :changeability_id => existing_node.changeability_id)
@@ -138,16 +141,16 @@ class UploadController < ApplicationController
                       :contents => node_version_contents,
                       :description => description)
 
-      begin
-        new_version.save!
-      rescue Exception => e
-        logger.warn "Exception message: '#{e.message}'"
-        logger.warn "Exception backtrace: '#{e.backtrace.inspect}'"
+    begin
+      new_version.save!
+    rescue Exception => e
+      logger.warn "Exception message: '#{e.message}'"
+      logger.warn "Exception backtrace: '#{e.backtrace.inspect}'"
 
-        flash[:notice] = "Error updating the model."
-        redirect_to :back
-        raise ActiveRecord::Rollback, "Call tech support!"
-      end
+      flash[:notice] = "Error updating the model."
+      redirect_to :back
+      raise ActiveRecord::Rollback, "Call tech support!"
+    end
 
     # Notifications.deliver_modified_model(new_version.node.people.reject { |p| p == @person}, new_version.node)
 
