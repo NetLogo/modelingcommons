@@ -120,6 +120,8 @@ class UploadController < ApplicationController
     elsif fork == 'overwrite'
       node_id = existing_node.id
       flash[:notice] << "Added new version to node #{existing_node.id}. "
+    else
+      raise "Unknown option '#{fork}' passed to update_model"
     end
 
     node_version_contents = params[:new_version][:uploaded_body].read

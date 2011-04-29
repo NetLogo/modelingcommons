@@ -5,11 +5,11 @@
 <table>
 
   <tr>
-    <td>Model name</td>
+    <td>Model name (can be anything)</td>
     <td><%= form.text_field :name, :size => 30 %></td>
   </tr>
   <tr>
-    <td>Model file</td>
+    <td>Model file (must end with ".nlogo")</td>
     <td><%= form.file_field :uploaded_body %></td>
   </tr>
   <tr>
@@ -28,6 +28,8 @@
 
 <hr />
 <h2>Optional: Set the permissions</h2>
+
+<p id="permission-group-reminder">To set permissions, you must first choose a group.</p>
 
 <%= render :partial => "browse/permission_selector", :locals => {:person => @person, :model => nil} -%>
 

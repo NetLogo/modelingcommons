@@ -63,9 +63,9 @@ a:hover {
 
 
 #menubar-avatar, #logged-in-as {
- float: left;
- margin-left: 1em;
- }
+    float: left;
+    margin-left: 1em;
+}
 
 #main-menu, h1, h2, h3, #flash-notice, #logged-in-as {
     font-family: Optima, sans-serif;
@@ -200,46 +200,46 @@ div ul.subsection_tabs li.tab a:hover {
 /* DataTables */
 
 .datatable .even {
-  background-color: #abcde0;
+    background-color: #abcde0;
 }
 
 /* ------------------------------------------------------------ */
 
 /* Pagination nested */
 .paginate_disabled_previous, .paginate_enabled_previous, .paginate_disabled_next, .paginate_enabled_next {
-        height: 19px;
-        width: 19px;
-        margin-left: 3px;
-        float: left;
+    height: 19px;
+    width: 19px;
+    margin-left: 3px;
+    float: left;
 }
 
 .paginate_disabled_previous {
-        background-image: url('/images/back_disabled.jpg');
+    background-image: url('/images/back_disabled.jpg');
 }
 
 .paginate_enabled_previous {
-        background-image: url('/images/back_enabled.jpg');
+    background-image: url('/images/back_enabled.jpg');
 }
 
 .paginate_disabled_next {
-        background-image: url('/images/forward_disabled.jpg');
+    background-image: url('/images/forward_disabled.jpg');
 }
 
 .paginate_enabled_next {
-        background-image: url('/images/forward_enabled.jpg');
+    background-image: url('/images/forward_enabled.jpg');
 }
 
 
 .sorting_asc {
-        background: url('../images/sort_asc.jpg') no-repeat center right;
+    background: url('../images/sort_asc.jpg') no-repeat center right;
 }
 
 .sorting_desc {
-        background: url('../images/sort_desc.jpg') no-repeat center right;
+    background: url('../images/sort_desc.jpg') no-repeat center right;
 }
 
 .sorting {
-        background: url('../images/sort_both.jpg') no-repeat center right;
+    background: url('../images/sort_both.jpg') no-repeat center right;
 }
 
 /* Autocomplete */
@@ -255,15 +255,15 @@ ul.jq-ui-autocomplete {
     color: #333;
 }
 ul.jq-ui-autocomplete li {
-  display: block;
-  padding: .3em .5em .3em .3em;
-  overflow: hidden;
-  width: 100%;
+    display: block;
+    padding: .3em .5em .3em .3em;
+    overflow: hidden;
+    width: 100%;
 }
 
 ul.jq-ui-autocomplete li.active {
-  background-color: #3875d7;
-  color: #fff;
+    background-color: #3875d7;
+    color: #fff;
 }
 
 .deleted {
@@ -275,36 +275,40 @@ table#new-person-form tr td {
 }
 
 .fieldWithErrors {
-  padding: 2px;
-  background-color: red;
-  display: table;
+    padding: 2px;
+    background-color: red;
+    display: table;
 }
 
 #errorExplanation {
-  width: 450px;
-  border: 2px solid red;
-  padding: 7px;
-  padding-bottom: 0;
-  margin-bottom: 20px;
-  background-color: #f0f0f0;
+    width: 450px;
+    border: 2px solid red;
+    padding: 7px;
+    padding-bottom: 0;
+    margin-bottom: 20px;
+    background-color: #f0f0f0;
 }
 
 #error_explanation h2 {
-  text-align: left;
-  font-weight: bold;
-  padding: 5px 5px 5px 15px;
-  font-size: 12px;
-  margin: -7px;
-  margin-bottom: 0px;
-  background-color: #c00;
-  color: #fff;
+    text-align: left;
+    font-weight: bold;
+    padding: 5px 5px 5px 15px;
+    font-size: 12px;
+    margin: -7px;
+    margin-bottom: 0px;
+    background-color: #c00;
+    color: #fff;
 }
 
 #error_explanation ul li {
-  font-size: 12px;
-  list-style: square;
+    font-size: 12px;
+    list-style: square;
 }
 
 tr.scaffold-row {
-  border-bottom: 2px solid black;
+    border-bottom: 2px solid black;
+}
+
+#permission-group-reminder {
+    font-style: italic;
 }
