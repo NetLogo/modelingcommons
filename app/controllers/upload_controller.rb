@@ -116,7 +116,7 @@ class UploadController < ApplicationController
       child_node = Node.create(:parent_id => existing_node.id,
                                :name => "Child of #{existing_node.name}",
                                :group_id => existing_node.group_id,
-                               :visibility_id => existing_node.readability_id,
+                               :visibility_id => existing_node.visibility_id,
                                :changeability_id => existing_node.changeability_id)
 
       node_id = child_node.id
