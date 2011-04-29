@@ -84,7 +84,9 @@ $("#model-tabs").ready(
 $("#permission-group-selector").ready(
     function () {
 
-	$('#permission-selections').toggle(false);
+	if ($('#permission-selections').attr('value') == '') {
+	    $('#permission-selections').toggle(false);
+	}
 
 	$('select#group_id').livequery('change', function() {
 					   if ($(this).attr('value') == '')

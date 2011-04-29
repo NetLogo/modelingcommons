@@ -7,9 +7,9 @@
   <%= render :partial => "group_selector", :locals => {:person => @person, :model => @model} -%>
 
   <% if @person and @person.groups.empty? %>
-  <p><%= submit_tag "Set permissions" %></p>
+  <p><%= submit_tag "Set permissions", :id => 'set-permissions-button' %></p>
   <% else %>
-  <p><%= submit_tag "Set permissions and group" %></p>
+  <p><%= submit_tag "Set permissions and group", :id => 'set-permissions-button' %></p>
   <% end %>
 
   <% end %>
