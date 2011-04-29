@@ -49,10 +49,32 @@ $("#model-tabs").ready(function () {
             spinner: '',
             load: function () {
                 $(".complete").autocomplete('/tags/complete_tags', {} );
-             }});
+
+             },
+	    ajaxOptions: {
+		success: function(data, textStatus) { },
+		error: function(xhr, status, index, anchor) {
+		    $(anchor.hash).html("Couldn't load this tab.");
+		},
+		data: {}
+	    }
+			       });
+
+        $('select#group_id').livequery('change', function() {
+                if ($(this).attr('value') == '')
+                {
+		    $('#invite_users_submit_button').attr('disabled', 'disabled');
+                }
+                else
+                {
+		    $('#invite_users_submit_button').removeAttr('disabled');
+                }
+            });
+
     });
 
 
 $("#email_address").ready(function () {
         $("#email_address").focus();
     });
+

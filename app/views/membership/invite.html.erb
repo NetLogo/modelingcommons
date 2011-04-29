@@ -9,12 +9,12 @@
 
   <% else %>
 
-  <% form_tag :controller => "membership", :action => :invite_people do %>
-  <p>Invite people to join the <%= select("group", "id", @person.groups.map {|g| [g.name, g.id]}, :include_blank => true) %> group:</p>
+  <% form_tag({:controller => "membership", :action => :invite_people}, :id => 'group_invite_form' )  do %>
+  <p>Invite people to join the <%= select("group", "id", @person.groups.map {|g| [g.name, g.id]}, :include_blank => true ) %> group:</p>
 
   <p><%= select("invitees", "id", @potential_invitees, {:include_blank => false}, {:size => 15, :multiple => true}) %></p>
 
-  <p><%= submit_tag "Invite users" %></p>
+  <p><%= submit_tag "Invite users", :id => 'invite_users_submit_button', :disabled => 'disabled' %></p>
   <% end %>
 
 
