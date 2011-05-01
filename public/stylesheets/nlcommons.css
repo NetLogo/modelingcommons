@@ -312,3 +312,13 @@ tr.scaffold-row {
 #permission-group-reminder {
     font-style: italic;
 }
+
+/* jQuery validator */
+.error {
+    color: red;
+}
+
+input.error {
+    border: 2px solid red;
+}
+

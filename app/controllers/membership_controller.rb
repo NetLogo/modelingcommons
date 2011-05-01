@@ -125,9 +125,9 @@ class MembershipController < ApplicationController
   def find_action
     if params[:group_name].strip.blank?
       render :text => "You must enter a group name to search.  Please try again."
+      return
     else
       @groups = Group.search('%' + params[:group_name].downcase.strip + '%')
-
       if @groups.empty?
         render :text => "No groups contain '#{params[:group_name]}'. Please try again."
         return

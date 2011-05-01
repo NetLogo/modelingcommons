@@ -6,7 +6,7 @@ class UploadController < ApplicationController
   before_filter :check_changeability_permissions, :only => [:update_model]
 
   def create_model
-    if params[:new_model].blank? or params[:new_model][:name].blank?
+    if params[:new_model].blank? or params[:new_model][:name].blank? or params[:new_model][:uploaded_body].blank?
       flash[:notice] = "Sorry, but you must enter a model name and file."
       redirect_to :action => :new_model
       return

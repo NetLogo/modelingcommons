@@ -1,4 +1,4 @@
-<% form_for :new_person, :url => { :action => :create }, :html => {:multipart => true} do |form| %>
+<% form_for :new_person, :url => { :action => :create }, :html => {:multipart => true, :id => 'new-person-form'} do |form| %>
 <table id="new-person-form">
 
   <tr>
@@ -90,3 +90,27 @@
 <p><%= submit_tag "Register", :class => "submit" %></p>
 
 <% end %>
+
+<script>
+  $("#new-person-form").validate({
+  rules: {
+      'new_person[first_name]': 'required',
+      'new_person[last_name]': 'required',
+      'new_person[email_address]': {
+	  required: true,
+	  email: true },
+      'new_person[sex]': 'required',
+      'new_person[country_name]': 'required',
+      'new_person[birthdate(1i)]': 'required',
+      'new_person[birthdate(2i)]': 'required',
+      'new_person[birthdate(3i)]': 'required',
+
+      'new_person[password]': 'required',
+      'new_person[password_confirmation]': {
+	required: true,
+	equalTo: 'new_person[password]'
+      },
+      'new_person[registration_consent]': 'required'
+   } } );
+</script>
+

@@ -3,7 +3,7 @@
 <div id="login_form" class="panel">
 <h2>Already registered?  Please log in!</h2>
 
-<% form_tag :action => :login_action do %>
+<% form_tag({:action => :login_action}, :id => 'login-form') do %>
 <table>
 
   <tr>
@@ -44,4 +44,13 @@
 <p>Just fill out our <%= link_to "registration", :controller => :account, :action => :new %> form.</p>
 
 </div>
+
+<script>
+  $("#login-form").validate({
+  rules: {
+      password: 'required',
+      email_address: {
+	  required: true,
+	  email: true } } } );
+</script>
 

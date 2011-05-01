@@ -1,6 +1,6 @@
 <% @title = "Edit your profile" %>
 
-<% form_for :person, :url => { :action => :update }, :html => {:multipart => true} do |form| %>
+<% form_for :person, :url => { :action => :update }, :html => {:multipart => true, :id => 'edit-person-form'} do |form| %>
 <table>
 
   <tr>
@@ -29,7 +29,7 @@
     <td><%= form.date_select :birthdate, :start_year => 1930, :end_year => 2005, :default => @person.birthdate, :include_blank => @person.birthdate.blank? %></td>
   </tr>
   <tr>
-    <td><label for="person_password">Password</label></td>
+    <td><label for="person_password">Password (if you want to change it)</label></td>
     <td><%= form.password_field :password, :size => 30, :value => '' %></td>
   </tr>
   <tr>
@@ -99,3 +99,19 @@
 
 </table>
 <% end %>
+
+<script>
+  $("#edit-person-form").validate({
+  rules: {
+      'person[first_name]': 'required',
+      'person[last_name]': 'required',
+      'person[email_address]': {
+	  required: true,
+	  email: true },
+      'person[sex]': 'required',
+      'person[country_name]': 'required',
+      'person[birthdate(1i)]': 'required',
+      'person[birthdate(2i)]': 'required',
+      'person[birthdate(3i)]': 'required'
+   } } );
+</script>
