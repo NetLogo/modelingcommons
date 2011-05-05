@@ -33,7 +33,7 @@
   <% if @person %>
   <h2>Add or update a file</h2>
 
-  <% form_tag({:controller => :file, :action => :create}, {:multipart => true}) do %>
+  <% form_tag({:controller => :file, :action => :create}, {:multipart => true, :id => 'new-file-form'}) do %>
   <table>
     <tr>
       <td>File</td>
@@ -59,3 +59,13 @@
   <% end %>
   <% end %>
 </div>
+
+<script>
+  $("#new-file-form").validate({
+  rules: {
+      'document[type]': 'required',
+      'uploaded_file': 'required',
+      'description': 'required'
+   } } );
+</script>
+
