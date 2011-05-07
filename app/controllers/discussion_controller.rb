@@ -8,21 +8,27 @@ class DiscussionController < ApplicationController
   def create
     params[:new_posting][:person_id] = @person.id
     params[:new_posting][:title] ||= '(No title)'
-    @posting = Posting.create(params[:new_posting])
 
-    respond_to do |format|
+    @posting = Posting.new(params[:new_posting])
 
-      format.html do
-        if @posting.save
-          flash[:notice] = "Thanks for contributing to our discussion!"
-        else
-          flash[:notice] = "Error saving your posting.  Sorry!"
+    if @posting.save
+      respond_to do |format|
+        format.html do
+          flash[:notice] = "Thanks for contributing to our discussion!" 
+          redirect_to :back, :anchor => "discussion"
         end
-
-        redirect_to :back, :anchor => "discussion"
+        format.js 
       end
-      format.js
-    end
+    else
+      respond_to do |format|
+        format.html do
+          flash[:notice] = "Thanks for contributing to our discussion!" 
+          redirect_to :back, :anchor => "discussion"
+        end
+        format.js { render :json => "Error" }
+      end
+    end      
+
   end
 
   def get_posting_id
