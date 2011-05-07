@@ -10,7 +10,13 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    @project = Project.create!(:name => params[:project_name])
+    begin
+      @project = Project.create!(:name => params[:project_name])
+      flash[:notice] = "Error creating project '#{@project.name}'"
+    redirect_to :controller => :account, :action => :mypage
+    rescue Exception => e
+      
+    end
 
     flash[:notice] = "Successfully created the project '#{@project.name}'"
     redirect_to :controller => :account, :action => :mypage
@@ -21,7 +27,7 @@ class ProjectsController < ApplicationController
 
     if @person
       @models_to_add = @person.models.select {|model| !model.projects.member?(@project)}.sort_by{|model| model.name.downcase}.map {|model| [model.name, model.id]}
-      else
+    else
       @models_to_add = []
     end
   end

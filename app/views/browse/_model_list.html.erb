@@ -6,6 +6,7 @@
     <tr>
       <th>Preview</th>
       <th>Model</th>
+      <th>Owners</th>
       <th>Tags</th>
       <th>Group</th>
       <th>Modified</th>
@@ -29,6 +30,19 @@
         <% @render_time[:name] += Time.now - start_time -%>
         <!-- Name render time = <%= Time.now - start_time  -%> -->
       </td>
+
+      <td>
+        <% start_time = Time.now -%>
+        <% if model.people.empty? %>
+        (No owners)
+        <% else %>
+        <%= model.people.map {|p| person_link(p) }.to_sentence -%>
+        <% end %>
+
+        <% @render_time[:tags] += Time.now - start_time -%>
+        <!-- Authors render time = <%= Time.now - start_time  -%> -->
+      </td>
+
       <td>
         <% start_time = Time.now -%>
         <% if model.tags.empty? %>
