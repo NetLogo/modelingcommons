@@ -64,8 +64,10 @@ class Notifications < ActionMailer::Base
   end
 
   def applied_tag(people, tag)
+    STDERR.puts "At start of applied_tag '#{people.inspect}', '#{tag.inspect}'"
     standard_settings
     @recipients = people.map{|person| person.email_address}
+    STDERR.puts "@recipients = '#{@recipients.inspect}'"
     @subject = 'Tag was applied'
     @subject = "[TESTING] #{@subject}" if Rails.env == 'development'
     @body[:tag] = tag
