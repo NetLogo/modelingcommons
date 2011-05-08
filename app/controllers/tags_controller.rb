@@ -27,7 +27,15 @@ class TagsController < ApplicationController
 
       if tn.created_at < 1.minute.ago
         @new_tagged_nodes << tn
-        Notifications.deliver_applied_tag(@node.people.reject { |person| person == @person}, tn.tag)
+
+        notification_recipients = @node.people.reject { |person| person == @person}
+
+        if notification_recipients.empty?
+          logger.warn "No recipients; not sending the notification"
+        else
+          logger.warn "Notification recipients = '#{notification_recipients}'"
+          Notifications.deliver_applied_tag(notification_recipients, tn.tag)
+        end
       end
 
       respond_to do |format|
