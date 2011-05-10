@@ -21,11 +21,13 @@ module ApplicationHelper
                                            :order => :created_at.desc).first.person
       this_user_did_it = true if original_node_author == @person
 
-      updated_or_created = (item.created_at.to_i == item.updated_at.to_i ? 'created' : 'updated')
-                            
-      output << "#{model_link(item)} was #{updated_or_created} by #{person_link(original_node_author)} #{time_since_update} 
+      if item.created_at.to_i == item.updated_at.to_i
+        output << image_tag('/images/new.png')
+        output << "#{model_link(item)} was created by #{person_link(original_node_author)} #{time_since_update} ago."
+      else
+        output << "#{model_link(item)} was updated by #{person_link(original_node_author)} #{time_since_update} ago."
+end
 
-ago."
 
     elsif item.is_a?(Posting)
       question_type = item.is_question? ? 'question' : 'comment'
