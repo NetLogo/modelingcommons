@@ -1,6 +1,6 @@
 <div>
   <h2>Upload a new version</h2>
-  <% form_for(:new_version, :url => { :controller => "upload", :action => :update_model }, :html => {:multipart => true}) do |form| %>
+  <% form_for(:new_version, :url => { :controller => "upload", :action => :update_model }, :html => {:multipart => true, :id => 'upload-model-form'}) do |form| %>
   <table>
     <tr>
       <td><label for="new_version_uploaded_body">Model file</label></td>
@@ -26,3 +26,13 @@
   </table>
   <% end %>
 </div>
+
+<script>
+  $("#upload-model-form").validate({
+  rules: {
+      'fork_overwrite': 'required',
+      'new_version_uploaded_body': 'required',
+      'new_version_description': 'required'
+   } } );
+</script>
+
