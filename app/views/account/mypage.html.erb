@@ -3,7 +3,7 @@
 <% else %>
 <% @title = "Page for #{@the_person.fullname}" %>
 <% @headline_avatar = @the_person.avatar.url(:thumb) %>
-<% if @person.administrator? -%>
+<% if @person and @person.administrator? -%>
 (<%= mail_to @the_person.email_address -%>)
 <% end -%>
 <% end %>
