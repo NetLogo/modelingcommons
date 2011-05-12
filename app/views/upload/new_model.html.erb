@@ -1,6 +1,6 @@
 <% @title = "Upload a NetLogo model" %>
 
-<% form_for(:new_model, :url => { :action => :create_model }, :html => {:multipart => true}) do |form| %>
+<% form_for(:new_model, :url => { :action => :create_model }, :html => {:multipart => true, :id => 'new-model-form'}) do |form| %>
 
 <table>
 
@@ -36,4 +36,12 @@
 <br />
 <%= submit_tag "Upload model", :class => "submit" %>
 <% end %>
+
+<script>
+  $("#new-model-form").validate({
+  rules: {
+      'new_model[name]': 'required',
+      'new_model[uploaded_body]': 'required'
+   } } );
+</script>
 
