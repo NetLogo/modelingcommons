@@ -23,6 +23,6 @@
     <% end %></td>
   <td class="posting-title <%= 'deleted' if posting.deleted_at? -%>"><%= h(posting.title) %></td>
 
-  <td class="posting-body <%= 'deleted' if posting.deleted_at? -%>"><%= posting.body.gsub(/[\r\n]+/, '<br />' %></td>
+  <td class="posting-body <%= 'deleted' if posting.deleted_at? -%>"><%= posting.body.gsub(/[\r\n]+/, '<br />') %></td>
 </tr>
 <% end %>
