@@ -9,6 +9,9 @@ class DiscussionController < ApplicationController
     params[:new_posting][:person_id] = @person.id
     params[:new_posting][:title] ||= '(No title)'
 
+    params[:new_posting][:body].gsub!('<', '&lt;')
+    params[:new_posting][:body].gsub!('>', '&rt;')
+
     @posting = Posting.new(params[:new_posting])
 
     if @posting.save
