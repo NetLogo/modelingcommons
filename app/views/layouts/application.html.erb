@@ -8,11 +8,6 @@
     <%= stylesheet_link_tag 'nlcommons', 'browse', 'jquery.autocomplete', 'ui.everything.css', :cache => false -%>
     <!-- defaults below here -->
     <%= javascript_include_tag 'jquery', 'jquery-ui', 'jquery.livequery', 'jquery.autocomplete', 'jquery.validate.pack.js', 'jquery.dataTables', 'application', :cache => false -%>
-    <!-- ClickTale Top part -->
-    <script type="text/javascript">
-      var WRInitTime=(new Date()).getTime();
-    </script>
-    <!-- ClickTale end of Top part -->
 
   </head>
 
@@ -95,17 +90,6 @@
       var pageTracker = _gat._getTracker("UA-8632808-2");
       pageTracker._trackPageview();
       } catch(err) {}</script>
-
-    <!-- ClickTale Bottom part -->
-    <div id="ClickTaleDiv" style="display: none;"></div>
-    <script type="text/javascript">
-      if(document.location.protocol!='https:')
-      document.write(unescape("%3Cscript src='http://s.clicktale.net/WRb.js' type='text/javascript'%3E%3C/script%3E"));
-    </script>
-    <script type="text/javascript">
-      if(typeof ClickTale=='function') ClickTale(33357,0.9,"www");
-    </script>
-    <!-- ClickTale end of Bottom part -->
 
   </body>
 
