@@ -322,3 +322,7 @@ input.error {
     border: 2px solid red;
 }
 
+div#searchTabs {
+	font-family: inherit;
+}
+

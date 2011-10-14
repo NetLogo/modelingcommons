@@ -43,15 +43,11 @@ $(document).ready(
 	    function () {
 		window.location = $(this).children()[0];
 	    });
+	//Search result tabs
+	//Not done with ajax
+	$("#searchTabs").tabs();
 	
-    });
-
-//Search result tabs
-//Not done with ajax
-$("#searchTabs").ready(function() {
-	$(this).tabs();
-});
-	
+    });	
 
 // Handle tabs for models (and groups, for that matter)
 $("#model-tabs").ready(
