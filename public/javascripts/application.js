@@ -4,17 +4,30 @@
 $(document).ready(
     function () {
 
-	// create the datatable
+	// Create the datatable
 	$(".datatable").dataTable({'aaSorting': [ [1, 'asc']] });
-
-	$('#navbar-search-form-text').click(
-	    function() {
-		if ($(this).attr('value') == 'Search')
+	
+	// Clear 'search' from search input field on focus
+	$('#navbar-search-form-text').focus(function() {
+		if ($(this).val() == 'Search')
 		{
-		    $(this).attr({'value': ''});
+		    $(this).val("");
+		    $(this).removeClass("blank");
 		}
-	    });
-
+	// Restore 'search' on blur
+	}).blur(function() {
+		if($(this).val().length == 0) {
+			$(this).val("Search");
+			$(this).addClass("blank");
+		}
+	});
+	
+	// Clicking anywhere in the navbar for the search field focuses on the search field
+	$("#header_search_form_box").click(function() {
+		$("#navbar-search-form-text").trigger("focus");
+	});
+	// !!!
+	// This does not appear to be used anywhere
 	// Function to handle clicks
 	handle_menu_click = function() {
 
@@ -49,6 +62,9 @@ $(document).ready(
 	
     });	
 
+// !!!
+// Why is the ready handler attached to #model-tabs instead of document?
+// !!!
 // Handle tabs for models (and groups, for that matter)
 $("#model-tabs").ready(
     function () {
