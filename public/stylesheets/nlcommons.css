@@ -4,10 +4,10 @@ body {
     font-size: 15px;
 }
 
-a:hover {
+/*a:hover {
     color: #000;
     background-color: #ff0;
-}
+}*/
 
 #main-menu-div {
     top: 0;
@@ -27,6 +27,7 @@ a:hover {
     border: 1px solid #000;
     float: left;
     height: 2em;
+    line-height: 2em;
     /* width: 7%; */
     width: 6em;
     text-align: center;
@@ -200,6 +201,10 @@ div ul.subsection_tabs li.tab a:hover {
 
 /* ------------------------------------------------------------ */
 /* DataTables */
+.datatable {
+	border-collapse: collapse;
+	font-size: 15px;
+}
 
 .datatable .even {
     background-color: #abcde0;
@@ -231,7 +236,6 @@ div ul.subsection_tabs li.tab a:hover {
     background-image: url('/images/forward_enabled.jpg');
 }
 
-
 .sorting_asc {
     background: url('../images/sort_asc.jpg') no-repeat center right;
 }
@@ -242,6 +246,13 @@ div ul.subsection_tabs li.tab a:hover {
 
 .sorting {
     background: url('../images/sort_both.jpg') no-repeat center right;
+}
+div.foreSortIcon {
+	background: url('../images/sort_both.jpg') no-repeat center right;
+	width: 16px;
+	height: 16px;
+	display: inline-block;
+	float: right;
 }
 
 /* Autocomplete */
@@ -325,6 +336,12 @@ input.error {
 }
 
 div#searchTabs {
-	font-family: inherit;
+	/*font-family: inherit;*/
+	/*background: white;*/
+}
+#searchTabs .highlight-tabs {
+	font-weight: bold;
+	font-size: 100%;
+	
 }
 

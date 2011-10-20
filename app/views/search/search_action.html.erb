@@ -1,11 +1,11 @@
 <% @title = "Search results" %>
 <div id="searchTabs">
 	<ul>
-		<li><a href="#modelName">(<%= @models.size -%>) Model Name</a></li>
-		<li><a href="#authorName">(<%= @author_match_models.size -%>) Author Name</a></li>
-		<li><a href="#tagName">(<%= @tag_match_models.size -%>) Tag Name</a></li>
-		<li><a href="#infoTab">(<%= @info_match_models.size -%>) Info Tab</a></li>
-		<li><a href="#proceduresTab">(<%= @procedures_match_models.size -%>) Procedures Tab</a></li>
+		<li<% if !@models.empty? %> class="highlight-tabs"<% end %>><a href="#modelName">(<%= @models.size -%>) Model Name</a></li>
+		<li<% if !@author_match_models.empty? %> class="highlight-tabs"<% end %>><a href="#authorName">(<%= @author_match_models.size -%>) Author Name</a></li>
+		<li<% if !@tag_match_models.empty? %> class="highlight-tabs"<% end %>><a href="#tagName">(<%= @tag_match_models.size -%>) Tag Name</a></li>
+		<li<% if !@info_match_models.empty? %> class="highlight-tabs"<% end %>><a href="#infoTab">(<%= @info_match_models.size -%>) Info Tab</a></li>
+		<li<% if !@procedures_match_models.empty? %> class="highlight-tabs"<% end %>><a href="#proceduresTab">(<%= @procedures_match_models.size -%>) Procedures Tab</a></li>
 	</ul>
 	<div id="modelName">
 		<% if @models.empty? %>

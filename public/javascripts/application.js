@@ -1,11 +1,47 @@
 // Place your application-specific JavaScript functions and classes here
 // This file is automatically included by javascript_include_tag :defaults
 
-$(document).ready(
-    function () {
+$(document).ready(function () {
 
 	// Create the datatable
-	$(".datatable").dataTable({'aaSorting': [ [1, 'asc']] });
+	$(".datatable").dataTable({
+		'aaSorting': [ [1, 'asc']],
+		"aoColumns": [
+			{
+				"bSortable": false
+			},
+			{
+				"sType": "html"
+			},
+			{
+				"sType": "html"
+			},
+			{
+				"sType": "html"
+			},
+			{
+				"sType": "html"
+			},
+			null
+		],
+		"aoColumnDefs": [
+			{
+				"aTargets": [0], //Preview Column
+				"bSortable": false
+			},
+			{
+				"aTargets": [5], //Date modified column
+				"sType": "numeric",
+				"fnRender": function(data) {
+					return data.aData[5];
+				}
+			},
+			{
+				"aTargets": [2],
+				"sType": "html",
+			}
+		]
+	});
 	
 	// Clear 'search' from search input field on focus
 	$('#navbar-search-form-text').focus(function() {
@@ -26,8 +62,10 @@ $(document).ready(
 	$("#header_search_form_box").click(function() {
 		$("#navbar-search-form-text").trigger("focus");
 	});
+	
 	// !!!
 	// This does not appear to be used anywhere
+	// !!!
 	// Function to handle clicks
 	handle_menu_click = function() {
 
@@ -45,28 +83,76 @@ $(document).ready(
 	}
 
 	$(".empty-on-click").livequery('click', function() {
-					   if ($(this).attr("has_been_clicked_on") != "yes")
-					   {
-					       $(this).attr("value", "");
-					       $(this).attr("has_been_clicked_on", "yes");
-					   }
-				       });
+	   if ($(this).attr("has_been_clicked_on") != "yes")
+	   {
+	       $(this).attr("value", "");
+	       $(this).attr("has_been_clicked_on", "yes");
+	   }
+	});
 
 	$(".menu-option").click(
 	    function () {
 		window.location = $(this).children()[0];
 	    });
+	    
 	//Search result tabs
 	//Not done with ajax
 	$("#searchTabs").tabs();
 	
-    });	
+	// Handle tabs for models (and groups, for that matter)
+	$("#model-tabs").tabs( {
 
-// !!!
-// Why is the ready handler attached to #model-tabs instead of document?
-// !!!
+	   spinner: '',
+	   load: function () {
+	       $(".complete").autocomplete('/tags/complete_tags', {} );
+
+	   },
+	   ajaxOptions: {
+	       success: function(data, textStatus) { },
+	       error: function(xhr, status, index, anchor) {
+		   $(anchor.hash).html("Couldn't load this tab.");
+	       },
+	       data: {}
+	   }
+	});
+
+
+	// Disable inviting people if the group isn't selected
+	$('select#group_id').livequery('change', function() {
+	   if ($(this).attr('value') == '')
+	   {
+	       $('#invite_users_submit_button').attr('disabled', 'disabled');
+	   }
+	   else
+	   {
+	       $('#invite_users_submit_button').removeAttr('disabled');
+	   }
+	});
+				       
+	// Disable setting permissions if no group has been chosen
+	if ($('#permission-selections').attr('value') == '') {
+	    $('#permission-selections').toggle(false);
+	}
+	$('select#group_id').livequery('change', function() {
+	   if ($(this).attr('value') == '')
+	   {
+	       $('#permission-selections').toggle(false);
+	       $('p#permission-group-reminder').toggle(true);
+	   }
+	   else
+	   {
+	       $('#permission-selections').toggle(true);
+	       $('p#permission-group-reminder').toggle(false);
+	   }
+	});
+				       
+	$("#email_address").focus();
+	
+	
+});	
+
 // Handle tabs for models (and groups, for that matter)
-$("#model-tabs").ready(
+/*$("#model-tabs").ready(
     function () {
 	$("#model-tabs").tabs( {
 
@@ -97,10 +183,10 @@ $("#model-tabs").ready(
 				       });
 
     });
-
+*/
 
 // Disable setting permissions if no group has been chosen
-$("#permission-group-selector").ready(
+/*$("#permission-group-selector").ready(
     function () {
 
 	if ($('#permission-selections').attr('value') == '') {
@@ -122,11 +208,11 @@ $("#permission-group-selector").ready(
 
 
     }
-)
+)*/
 
 
-$("#email_address").ready(
+/*$("#email_address").ready(
     function () {
 	$("#email_address").focus();
     });
-
+*/
