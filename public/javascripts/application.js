@@ -22,23 +22,8 @@ $(document).ready(function () {
 			{
 				"sType": "html"
 			},
-			null
-		],
-		"aoColumnDefs": [
 			{
-				"aTargets": [0], //Preview Column
-				"bSortable": false
-			},
-			{
-				"aTargets": [5], //Date modified column
-				"sType": "numeric",
-				"fnRender": function(data) {
-					return data.aData[5];
-				}
-			},
-			{
-				"aTargets": [2],
-				"sType": "html",
+				"sType": "html"
 			}
 		]
 	});
@@ -57,7 +42,6 @@ $(document).ready(function () {
 			$(this).addClass("blank");
 		}
 	});
-	
 	// Clicking anywhere in the navbar for the search field focuses on the search field
 	$("#header_search_form_box").click(function() {
 		$("#navbar-search-form-text").trigger("focus");
@@ -89,7 +73,9 @@ $(document).ready(function () {
 	       $(this).attr("has_been_clicked_on", "yes");
 	   }
 	});
-
+	// !!!
+	// This is clearly the wrong way to do this
+	//!!!
 	$(".menu-option").click(
 	    function () {
 		window.location = $(this).children()[0];
@@ -150,69 +136,3 @@ $(document).ready(function () {
 	
 	
 });	
-
-// Handle tabs for models (and groups, for that matter)
-/*$("#model-tabs").ready(
-    function () {
-	$("#model-tabs").tabs( {
-
-				   spinner: '',
-				   load: function () {
-				       $(".complete").autocomplete('/tags/complete_tags', {} );
-
-				   },
-				   ajaxOptions: {
-				       success: function(data, textStatus) { },
-				       error: function(xhr, status, index, anchor) {
-					   $(anchor.hash).html("Couldn't load this tab.");
-				       },
-				       data: {}
-				   }
-			       });
-
-	// Disable inviting people if the group isn't selected
-	$('select#group_id').livequery('change', function() {
-					   if ($(this).attr('value') == '')
-					   {
-					       $('#invite_users_submit_button').attr('disabled', 'disabled');
-					   }
-					   else
-					   {
-					       $('#invite_users_submit_button').removeAttr('disabled');
-					   }
-				       });
-
-    });
-*/
-
-// Disable setting permissions if no group has been chosen
-/*$("#permission-group-selector").ready(
-    function () {
-
-	if ($('#permission-selections').attr('value') == '') {
-	    $('#permission-selections').toggle(false);
-	}
-
-	$('select#group_id').livequery('change', function() {
-					   if ($(this).attr('value') == '')
-					   {
-					       $('#permission-selections').toggle(false);
-					       $('p#permission-group-reminder').toggle(true);
-					   }
-					   else
-					   {
-					       $('#permission-selections').toggle(true);
-					       $('p#permission-group-reminder').toggle(false);
-					   }
-				       });
-
-
-    }
-)*/
-
-
-/*$("#email_address").ready(
-    function () {
-	$("#email_address").focus();
-    });
-*/

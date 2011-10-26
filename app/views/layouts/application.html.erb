@@ -10,7 +10,6 @@
     <%= javascript_include_tag 'jquery', 'jquery-ui', 'jquery.livequery', 'jquery.autocomplete', 'jquery.validate.pack.js', 'jquery.dataTables', 'application', :cache => false -%>
 
   </head>
-
   <body>
     <div id="main-menu-div">
       <ul id="main-menu">
@@ -58,7 +57,7 @@
       <% end %>
       <% end %>
     </div>
-
+	
     <% if flash[:notice] -%>
     <div id="flash-notice"><%= flash[:notice] -%></div>
     <script type="text/javascript">
@@ -80,8 +79,6 @@
       <% end -%>
     </h1>
     <%= yield :layout %>
-
-
   </body>
 
 </html>
