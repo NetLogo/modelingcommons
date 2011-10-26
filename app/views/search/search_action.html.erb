@@ -1,41 +1,56 @@
 <% @title = "Search results" %>
-
-<% if @models.empty? %>
-<h2>No matches in model names.</h2>
-<% else %>
-<h2><%= @models.size -%> matched '<%= @original_search_term %>' in the model name:</h2>
-<%= render :partial => "/browse/model_list", :object => @models %>
-<br />
-<% end %>
-
-<% if @author_match_models.empty? %>
-<h2>No matches in author names.</h2>
-<% else %>
-<h2><%= @author_match_models.size -%> matched '<%= @original_search_term %>' in the author's name:</h2>
-<%= render :partial => "/browse/model_list", :object => @author_match_models %>
-<br />
-<% end %>
-
-<% if @tag_match_models.empty? %>
-<h2>No matches in tag names.</h2>
-<% else %>
-<h2><%= @tag_match_models.size -%> matched '<%= @original_search_term %>' in one or more tags:</h2>
-<%= render :partial => "/browse/model_list", :object => @tag_match_models %>
-<br />
-<% end %>
-
-<% if @info_match_models.empty? %>
-<h2>No matches in info tabs.</h2>
-<% else %>
-<h2><%= @info_match_models.size -%> matched '<%= @original_search_term %>' in the info tab:</h2>
-<%= render :partial => "/browse/model_list", :object => @info_match_models %>
-<br />
-<% end %>
-
-<% if @procedures_match_models.empty? %>
-<h2>No matches in procedures.</h2>
-<% else %>
-<h2><%= @procedures_match_models.size -%> matched with '<%= @original_search_term %>' in the procedures tab:</h2>
-<%= render :partial => "/browse/model_list", :object => @procedures_match_models %>
-<br />
-<% end %>
+<div id="searchTabs">
+	<ul>
+		<li<% if !@models.empty? %> class="highlight-tabs"<% end %>><a href="#modelName">(<%= @models.size -%>) Model Name</a></li>
+		<li<% if !@author_match_models.empty? %> class="highlight-tabs"<% end %>><a href="#authorName">(<%= @author_match_models.size -%>) Author Name</a></li>
+		<li<% if !@tag_match_models.empty? %> class="highlight-tabs"<% end %>><a href="#tagName">(<%= @tag_match_models.size -%>) Tag Name</a></li>
+		<li<% if !@info_match_models.empty? %> class="highlight-tabs"<% end %>><a href="#infoTab">(<%= @info_match_models.size -%>) Info Tab</a></li>
+		<li<% if !@procedures_match_models.empty? %> class="highlight-tabs"<% end %>><a href="#proceduresTab">(<%= @procedures_match_models.size -%>) Procedures Tab</a></li>
+	</ul>
+	<div id="modelName">
+		<% if @models.empty? %>
+		<h2>No matches in model names.</h2>
+		<% else %>
+		<h2><%= @models.size -%> matched '<%= @original_search_term %>' in the model name:</h2>
+		<%= render :partial => "/browse/model_list", :object => @models %>
+		<br />
+		<% end %>
+	</div>
+	<div id="authorName">
+		<% if @author_match_models.empty? %>
+		<h2>No matches in author names.</h2>
+		<% else %>
+		<h2><%= @author_match_models.size -%> matched '<%= @original_search_term %>' in the author's name:</h2>
+		<%= render :partial => "/browse/model_list", :object => @author_match_models %>
+		<br />
+		<% end %>
+	</div>
+	<div id="tagName">
+		<% if @tag_match_models.empty? %>
+		<h2>No matches in tag names.</h2>
+		<% else %>
+		<h2><%= @tag_match_models.size -%> matched '<%= @original_search_term %>' in one or more tags:</h2>
+		<%= render :partial => "/browse/model_list", :object => @tag_match_models %>
+		<br />
+		<% end %>
+	</div>
+	<div id="infoTab">
+		<% if @info_match_models.empty? %>
+		<h2>No matches in info tabs.</h2>
+		<% else %>
+		<h2><%= @info_match_models.size -%> matched '<%= @original_search_term %>' in the info tab:</h2>
+		<%= render :partial => "/browse/model_list", :object => @info_match_models %>
+		<br />
+		<% end %>
+	</div>
+	<div id="proceduresTab">
+		<% if @procedures_match_models.empty? %>
+		<h2>No matches in procedures.</h2>
+		<% else %>
+		<h2><%= @procedures_match_models.size -%> matched with '<%= @original_search_term %>' in the procedures tab:</h2>
+		<%= render :partial => "/browse/model_list", :object => @procedures_match_models %>
+		<br />
+		<% end %>
+	</div>
+</div>
+	
