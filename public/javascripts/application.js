@@ -1,23 +1,23 @@
 // Place your application-specific JavaScript functions and classes here
 // This file is automatically included by javascript_include_tag :defaults
 
-//Datatable numeric html sort functions
-jQuery.fn.dataTableExt.oSort['num-first-comment-asc']  = function(a,b) {
-	var x = a.replace(/<!--/,"").replace(/-->.*/, "" );
-	var y = b.replace(/<!--/,"").replace( /-->.*/, "" );
+// Datatable sort for date modified column
+// Numerical sort where the number to sort by is enclosed in the first span tag with class "hidden_elapsed_time"
+jQuery.fn.dataTableExt.oSort['num-first-span-asc']  = function(a,b) {
+	var x = a.replace(/<span class="hidden_elapsed_time">/,"").replace(/<\/span>.*/, "" );
+	var y = b.replace(/<span class="hidden_elapsed_time">/,"").replace(/<\/span>.*/, "" );
 	x = parseFloat( x );
 	y = parseFloat( y );
 	return ((x < y) ? -1 : ((x > y) ?  1 : 0));
 };
 
-jQuery.fn.dataTableExt.oSort['num-first-comment-desc'] = function(a,b) {
-	var x = a.replace(/<!--/,"").replace(/-->.*/, "" );
-	var y = b.replace(/<!--/,"").replace( /-->.*/, "" );
+jQuery.fn.dataTableExt.oSort['num-first-span-desc'] = function(a,b) {
+	var x = a.replace(/<span class="hidden_elapsed_time">/,"").replace(/<\/span>.*/, "" );
+	var y = b.replace(/<span class="hidden_elapsed_time">/,"").replace(/<\/span>.*/, "" );
 	x = parseFloat( x );
 	y = parseFloat( y );
 	return ((x < y) ?  1 : ((x > y) ? -1 : 0));
 };
-
 
 $(document).ready(function () {
 
@@ -41,7 +41,7 @@ $(document).ready(function () {
 				"sType": "html"
 			},
 			{
-				"sType": "num-first-comment"
+				"sType": "num-first-span"
 			}
 		]
 	});
@@ -65,25 +65,6 @@ $(document).ready(function () {
 		$("#navbar-search-form-text").trigger("focus");
 	});
 	
-	// !!!
-	// This does not appear to be used anywhere
-	// !!!
-	// Function to handle clicks
-	handle_menu_click = function() {
-
-	    if (this.hash == '')
-	    {
-		return false;
-	    }
-
-	    $('.one-model-div').hide();     // Hide all of the divs
-	    $('a').removeClass('current');  // Remove "current" class
-
-	    $(this).addClass('current');
-	    $(this.hash).show(); // Show the one for what was clicked on
-	    return false;
-	}
-
 	$(".empty-on-click").livequery('click', function() {
 	   if ($(this).attr("has_been_clicked_on") != "yes")
 	   {
@@ -91,16 +72,17 @@ $(document).ready(function () {
 	       $(this).attr("has_been_clicked_on", "yes");
 	   }
 	});
+	
 	// !!!
 	// This is clearly the wrong way to do this
-	//!!!
+	// !!!
 	$(".menu-option").click(
 	    function () {
 		window.location = $(this).children()[0];
 	    });
 	    
-	//Search result tabs
-	//Not done with ajax
+	// Search result tabs
+	// Not done with ajax
 	$("#searchTabs").tabs();
 	
 	// Handle tabs for models (and groups, for that matter)
@@ -109,7 +91,6 @@ $(document).ready(function () {
 	   spinner: '',
 	   load: function () {
 	       $(".complete").autocomplete('/tags/complete_tags', {} );
-
 	   },
 	   ajaxOptions: {
 	       success: function(data, textStatus) { },

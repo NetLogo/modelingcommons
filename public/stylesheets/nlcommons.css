@@ -209,7 +209,9 @@ div ul.subsection_tabs li.tab a:hover {
 .datatable .even {
     background-color: #abcde0;
 }
-
+.datatable span.hidden_elapsed_time {
+	display: none;
+}
 /* ------------------------------------------------------------ */
 
 /* Pagination nested */
