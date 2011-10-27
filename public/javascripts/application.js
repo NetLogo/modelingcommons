@@ -1,6 +1,24 @@
 // Place your application-specific JavaScript functions and classes here
 // This file is automatically included by javascript_include_tag :defaults
 
+//Datatable numeric html sort functions
+jQuery.fn.dataTableExt.oSort['num-first-comment-asc']  = function(a,b) {
+	var x = a.replace(/<!--/,"").replace(/-->.*/, "" );
+	var y = b.replace(/<!--/,"").replace( /-->.*/, "" );
+	x = parseFloat( x );
+	y = parseFloat( y );
+	return ((x < y) ? -1 : ((x > y) ?  1 : 0));
+};
+
+jQuery.fn.dataTableExt.oSort['num-first-comment-desc'] = function(a,b) {
+	var x = a.replace(/<!--/,"").replace(/-->.*/, "" );
+	var y = b.replace(/<!--/,"").replace( /-->.*/, "" );
+	x = parseFloat( x );
+	y = parseFloat( y );
+	return ((x < y) ?  1 : ((x > y) ? -1 : 0));
+};
+
+
 $(document).ready(function () {
 
 	// Create the datatable
@@ -23,7 +41,7 @@ $(document).ready(function () {
 				"sType": "html"
 			},
 			{
-				"sType": "html"
+				"sType": "num-first-comment"
 			}
 		]
 	});
