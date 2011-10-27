@@ -1,4 +1,4 @@
-*~
+	*~
 log/*
 tmp/*
 public/modelzips/*zip
@@ -13,3 +13,4 @@ nohup.out
 rerun.txt
 public/sitemap.xml
 public/browse/*
+*~
