@@ -1,6 +1,6 @@
 <% @render_time = Hash.new(0) %>
 
-<table class="<%= model_list.length > 10 ? 'datatable' : '' -%>" border="1">
+<table class="datatable" border="1">
 
   <thead>
     <tr>
@@ -66,6 +66,7 @@
       </td>
       <td>
         <% start_time = Time.now -%>
+        <span class="hidden_elapsed_time"><%= Time.now-model.updated_at %></span>
         <%= distance_of_time_in_words(Time.now, model.updated_at) %> ago
         <% @render_time[:last_modified] += Time.now - start_time -%>
         <!-- Last modified render time = <%= Time.now - start_time  -%> -->

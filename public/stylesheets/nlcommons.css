@@ -4,10 +4,10 @@ body {
     font-size: 15px;
 }
 
-a:hover {
+/*a:hover {
     color: #000;
     background-color: #ff0;
-}
+}*/
 
 #main-menu-div {
     top: 0;
@@ -27,6 +27,7 @@ a:hover {
     border: 1px solid #000;
     float: left;
     height: 2em;
+    line-height: 2em;
     /* width: 7%; */
     width: 6em;
     text-align: center;
@@ -200,11 +201,17 @@ div ul.subsection_tabs li.tab a:hover {
 
 /* ------------------------------------------------------------ */
 /* DataTables */
+.datatable {
+	border-collapse: collapse;
+	font-size: 15px;
+}
 
 .datatable .even {
     background-color: #abcde0;
 }
-
+.datatable span.hidden_elapsed_time {
+	display: none;
+}
 /* ------------------------------------------------------------ */
 
 /* Pagination nested */
@@ -231,7 +238,6 @@ div ul.subsection_tabs li.tab a:hover {
     background-image: url('/images/forward_enabled.jpg');
 }
 
-
 .sorting_asc {
     background: url('../images/sort_asc.jpg') no-repeat center right;
 }
@@ -242,6 +248,13 @@ div ul.subsection_tabs li.tab a:hover {
 
 .sorting {
     background: url('../images/sort_both.jpg') no-repeat center right;
+}
+div.foreSortIcon {
+	background: url('../images/sort_both.jpg') no-repeat center right;
+	width: 16px;
+	height: 16px;
+	display: inline-block;
+	float: right;
 }
 
 /* Autocomplete */
@@ -324,3 +337,65 @@ input.error {
     border: 2px solid red;
 }
 
+div#searchTabs {
+	/*font-family: inherit;*/
+	/*background: white;*/
+}
+#searchTabs .highlight-tabs {
+	font-weight: bold;
+	font-size: 100%;
+	
+}
+
+div.main-menu-new {
+	width: 100%;
+	height: 35px;
+	margin-bottom: 5px;
+	background-color: red;
+	float:left;
+	
+}
+div.main-menu-new ul {
+	list-style-type: none;
+	padding: 0px;
+	margin: 0px;
+	float:left;
+	
+}
+div.main-menu-new ul li {
+	display: inline-block;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	line-height: 20px;
+	height: 20px;
+	vertical-align: middle;
+	float:left;
+	font-size: 16px;
+	font-family: optima;
+	font-weight: bold;
+	background-color: blue;
+}
+div.main-menu-new ul li.selected {
+	padding-bottom: 18px;
+}
+div.main-menu-new ul.left {
+	float:left;
+	
+}
+div.main-menu-new ul.left li {
+	margin-right: 1px;
+}
+div.main-menu-new ul.right li {
+	margin-left: 1px;
+}
+
+div.main-menu-new ul.right {
+	float:right;
+}
+div.main-menu-new ul li img {
+	height: 20px;
+	margin-right: 5px;
+	vertical-align: top;
+}
