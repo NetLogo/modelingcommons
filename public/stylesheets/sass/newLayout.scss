@@ -1,0 +1,203 @@
+$blueprint-grid-margin: 0px;
+$blueprint-grid-width: 40px;
+@import "blueprint/reset";
+@import "blueprint/grid";
+@import "compass/css3";
+$tab-corner-radius: 8px;
+body {
+  background-color: blue;
+}
+button {
+  line-height: 16px;
+  div.ui-icon {
+      vertical-align: top;
+      display: inline-block;
+    }
+}
+.container {
+  @include container;
+  background-color: white;
+  @include box-shadow(0 0 15px 10px gray);
+}
+.header {
+  @include column(24);
+  background-color: green;
+  .banner {
+    @include column(10);
+    background-color: purple;
+    height: 100px;
+    h1 {
+      font-size: 40px;
+      margin-left: 20px;
+    }
+    h2 {
+      font-size: 20px;
+      margin-top: 5px;
+      margin-left: 5px;
+    }
+  }
+  .login {
+    @include column(10, true);
+    @include push(4);
+    background-color: orange;
+    img {
+      height: 13px;
+      float: middle;
+      margin: 2px;
+    }
+  }
+  $nav-height: 40px;
+  .navigation {
+    
+    @include column(19);
+    background-color: red;
+    li {
+      $padding: 5px;
+      list-style: none;
+      float: left;
+      padding: $padding;
+      line-height: $nav-height - 2*$padding;
+      background-color: gray;
+      @include border-top-left-radius($tab-corner-radius);
+      @include border-top-right-radius($tab-corner-radius);
+      margin-right: 2px;
+      min-width: 80px;
+      text-align: center;
+    }
+    height: $nav-height;
+    line-height: $nav-height;
+  }
+  .search {
+    @include column(5, last);
+    background-color: yellow;
+    height: $nav-height;
+    line-height: $nav-height;
+    vertical-align: bottom;
+    text-align: right;
+    
+    input {
+      vertical-align: bottom;
+      width: 150px;
+      margin: 5px;
+      
+    }
+  }
+}
+.content {
+  .padding {
+    padding: 5px;
+  }
+  @include column(20);
+  background-color: white;
+  .content-title {
+    h1 {
+      font-size: 30px;
+    }
+    padding-bottom: 5px;
+  }
+  div.left-right {
+    width: 100%;
+    display: table;
+    div.left {
+      display: table-cell;
+      text-align: left;
+    }
+    div.right {
+      display: table-cell;
+      text-align: right;
+    }
+  }
+  
+  .tabs {
+    @include border-radius($tab-corner-radius);
+    overflow: hidden;
+    border:1px solid black;
+    .tabBar {
+      $tab-height: 40px;
+      background-color: red;
+      $padding: 5px;
+      height: $tab-height;
+      
+      li {
+        float: left;
+        line-height: $tab-height - 2*$padding;
+        padding: $padding;
+        list-style: none;
+        background-color: gray;
+        @include border-bottom-left-radius($tab-corner-radius);
+        @include border-bottom-right-radius($tab-corner-radius);
+        margin-right: 2px;
+        min-width: 80px;
+       text-align: center;
+      }
+    }
+  }
+  table {
+    border: 1px solid black;
+    @include border-radius($tab-corner-radius);
+    overflow: hidden;
+    thead tr {
+      height: 20px;
+      background-color: blue;
+      color: white;
+      th {
+        border-bottom: 1px solid black;
+        font-size: 20px;
+      }
+    }
+    tbody td {
+      padding: 2px;
+      line-height: 20px;
+      img {
+        height: 20px;
+        vertical-align: top;
+      }
+    }
+    tbody tr:nth-child(even) {
+      background-color: gray;
+    }
+    div.ui-icon {
+      display: inline-block;
+    }
+  }
+    
+}
+.sidebar {
+  @include column(4, true);
+  background-color: gray;
+  div.sideItem {
+    overflow: hidden;
+    h1 {
+      background-color: blue;
+      text-align: center;
+      padding-top: 5px;
+      font-size: 20px;
+      border-bottom: 1px solid black;
+      color: white;
+    }
+    li {
+      $height: 20px;
+      line-height:20px;
+      list-style: none;
+      img {
+        height: $height;
+        width: $height;
+        vertical-align: top;
+        padding-right: 5px;
+      }
+      a {
+        width: 100%;
+        height: 100%;
+        display: inline-block;
+      }
+      margin: 5px;
+    }
+    margin: 5px;
+    background-color: orange;
+    @include border-radius($tab-corner-radius);
+  }
+}
+.footer {
+  @include column(24);
+  background-color: green;
+}
