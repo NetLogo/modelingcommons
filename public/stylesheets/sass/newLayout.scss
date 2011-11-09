@@ -13,6 +13,10 @@ button {
       vertical-align: top;
       display: inline-block;
     }
+  @include border-radius(5px);
+  border: 0px;
+  @include background(linear-gradient())
+  
 }
 .container {
   @include container;
@@ -21,6 +25,10 @@ button {
 }
 .header {
   @include column(24);
+  @include border-bottom-left-radius($tab-corner-radius);
+  @include border-bottom-right-radius($tab-corner-radius);
+  @include box-shadow(0 0 10px 2px gray);
+  overflow: hidden;
   background-color: green;
   .banner {
     @include column(10);
@@ -51,18 +59,43 @@ button {
     
     @include column(19);
     background-color: red;
+    $a-color: black;
+    a {
+      color: $a-color;
+      font-size: 20px;
+      padding-left: 5px;
+      padding-right: 5px;
+      border-right: 2px solid black;
+    }
+    a:visited {
+      color: $a-color;
+    }
+    a:active {
+      color: $a-color;
+    }
+    li:last-child a{
+      border-right: 0px solid black;
+    }
+    ul {
+      line-height: normal;
+      display: inline-block;
+    }
+    ul:last-child {
+      margin-left: 40px;
+    }
     li {
-      $padding: 5px;
       list-style: none;
-      float: left;
-      padding: $padding;
-      line-height: $nav-height - 2*$padding;
-      background-color: gray;
-      @include border-top-left-radius($tab-corner-radius);
-      @include border-top-right-radius($tab-corner-radius);
-      margin-right: 2px;
-      min-width: 80px;
-      text-align: center;
+      line-height: normal;
+      display: inline-block;
+      height: 40px;
+      line-height: 40px;
+      height: $nav-height;
+    }
+    li:hover  {
+      @include background(radial-gradient(center 115% ,30px 30px, white, rgba(0, 0, 0, 0)));
+    }
+    li a {
+      text-decoration: none;
     }
     height: $nav-height;
     line-height: $nav-height;
@@ -72,7 +105,6 @@ button {
     background-color: yellow;
     height: $nav-height;
     line-height: $nav-height;
-    vertical-align: bottom;
     text-align: right;
     
     input {
@@ -88,7 +120,6 @@ button {
     padding: 5px;
   }
   @include column(20);
-  background-color: white;
   .content-title {
     h1 {
       font-size: 30px;
@@ -164,8 +195,8 @@ button {
 }
 .sidebar {
   @include column(4, true);
-  background-color: gray;
   div.sideItem {
+    @include box-shadow(0 0 10px 2px gray);
     overflow: hidden;
     h1 {
       background-color: blue;

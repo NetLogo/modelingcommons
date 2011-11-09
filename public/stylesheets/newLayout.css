@@ -65,6 +65,13 @@ body {
 /* line 10, sass/newLayout.scss */
 button {
   line-height: 16px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -o-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -khtml-border-radius: 5px;
+  border-radius: 5px;
+  border: 0px;
 }
 /* line 12, sass/newLayout.scss */
 button div.ui-icon {
@@ -72,7 +79,7 @@ button div.ui-icon {
   display: inline-block;
 }
 
-/* line 17, sass/newLayout.scss */
+/* line 20, sass/newLayout.scss */
 .container {
   width: 960px;
   margin: 0 auto;
@@ -85,19 +92,36 @@ button div.ui-icon {
   box-shadow: 0 0 15px 10px gray;
 }
 
-/* line 22, sass/newLayout.scss */
+/* line 25, sass/newLayout.scss */
 .header {
   display: inline;
   float: left;
   margin-right: 0px;
   width: 960px;
+  -moz-border-radius-bottomleft: 8px;
+  -webkit-border-bottom-left-radius: 8px;
+  -o-border-bottom-left-radius: 8px;
+  -ms-border-bottom-left-radius: 8px;
+  -khtml-border-bottom-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  -moz-border-radius-bottomright: 8px;
+  -webkit-border-bottom-right-radius: 8px;
+  -o-border-bottom-right-radius: 8px;
+  -ms-border-bottom-right-radius: 8px;
+  -khtml-border-bottom-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  -moz-box-shadow: 0 0 10px 2px gray;
+  -webkit-box-shadow: 0 0 10px 2px gray;
+  -o-box-shadow: 0 0 10px 2px gray;
+  box-shadow: 0 0 10px 2px gray;
+  overflow: hidden;
   background-color: green;
 }
 /* line 147, ../../../../../.rvm/gems/ruby-1.8.7-p352/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
 * html .header {
   overflow-x: hidden;
 }
-/* line 25, sass/newLayout.scss */
+/* line 32, sass/newLayout.scss */
 .header .banner {
   display: inline;
   float: left;
@@ -110,18 +134,18 @@ button div.ui-icon {
 * html .header .banner {
   overflow-x: hidden;
 }
-/* line 29, sass/newLayout.scss */
+/* line 36, sass/newLayout.scss */
 .header .banner h1 {
   font-size: 40px;
   margin-left: 20px;
 }
-/* line 33, sass/newLayout.scss */
+/* line 40, sass/newLayout.scss */
 .header .banner h2 {
   font-size: 20px;
   margin-top: 5px;
   margin-left: 5px;
 }
-/* line 39, sass/newLayout.scss */
+/* line 46, sass/newLayout.scss */
 .header .login {
   display: inline;
   float: left;
@@ -137,13 +161,13 @@ button div.ui-icon {
 * html .header .login {
   overflow-x: hidden;
 }
-/* line 43, sass/newLayout.scss */
+/* line 50, sass/newLayout.scss */
 .header .login img {
   height: 13px;
   float: middle;
   margin: 2px;
 }
-/* line 50, sass/newLayout.scss */
+/* line 57, sass/newLayout.scss */
 .header .navigation {
   display: inline;
   float: left;
@@ -157,30 +181,58 @@ button div.ui-icon {
 * html .header .navigation {
   overflow-x: hidden;
 }
-/* line 54, sass/newLayout.scss */
+/* line 62, sass/newLayout.scss */
+.header .navigation a {
+  color: black;
+  font-size: 20px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-right: 2px solid black;
+}
+/* line 69, sass/newLayout.scss */
+.header .navigation a:visited {
+  color: black;
+}
+/* line 72, sass/newLayout.scss */
+.header .navigation a:active {
+  color: black;
+}
+/* line 75, sass/newLayout.scss */
+.header .navigation li:last-child a {
+  border-right: 0px solid black;
+}
+/* line 78, sass/newLayout.scss */
+.header .navigation ul {
+  line-height: normal;
+  display: inline-block;
+}
+/* line 82, sass/newLayout.scss */
+.header .navigation ul:last-child {
+  margin-left: 40px;
+}
+/* line 85, sass/newLayout.scss */
 .header .navigation li {
   list-style: none;
-  float: left;
-  padding: 5px;
-  line-height: 30px;
-  background-color: gray;
-  -moz-border-radius-topleft: 8px;
-  -webkit-border-top-left-radius: 8px;
-  -o-border-top-left-radius: 8px;
-  -ms-border-top-left-radius: 8px;
-  -khtml-border-top-left-radius: 8px;
-  border-top-left-radius: 8px;
-  -moz-border-radius-topright: 8px;
-  -webkit-border-top-right-radius: 8px;
-  -o-border-top-right-radius: 8px;
-  -ms-border-top-right-radius: 8px;
-  -khtml-border-top-right-radius: 8px;
-  border-top-right-radius: 8px;
-  margin-right: 2px;
-  min-width: 80px;
-  text-align: center;
+  line-height: normal;
+  display: inline-block;
+  height: 40px;
+  line-height: 40px;
+  height: 40px;
 }
-/* line 70, sass/newLayout.scss */
+/* line 93, sass/newLayout.scss */
+.header .navigation li:hover {
+  background: -webkit-gradient(radial, center 115%, 0, center 115%, 100, color-stop(0%, #ffffff), color-stop(100%, rgba(0, 0, 0, 0)));
+  background: -webkit-radial-gradient(center 115%, 30px 30px, #ffffff, rgba(0, 0, 0, 0));
+  background: -moz-radial-gradient(center 115%, 30px 30px, #ffffff, rgba(0, 0, 0, 0));
+  background: -o-radial-gradient(center 115%, 30px 30px, #ffffff, rgba(0, 0, 0, 0));
+  background: -ms-radial-gradient(center 115%, 30px 30px, #ffffff, rgba(0, 0, 0, 0));
+  background: radial-gradient(center 115%, 30px 30px, #ffffff, rgba(0, 0, 0, 0));
+}
+/* line 96, sass/newLayout.scss */
+.header .navigation li a {
+  text-decoration: none;
+}
+/* line 102, sass/newLayout.scss */
 .header .search {
   display: inline;
   float: left;
@@ -189,29 +241,27 @@ button div.ui-icon {
   background-color: yellow;
   height: 40px;
   line-height: 40px;
-  vertical-align: bottom;
   text-align: right;
 }
 /* line 147, ../../../../../.rvm/gems/ruby-1.8.7-p352/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
 * html .header .search {
   overflow-x: hidden;
 }
-/* line 78, sass/newLayout.scss */
+/* line 109, sass/newLayout.scss */
 .header .search input {
   vertical-align: bottom;
   width: 150px;
   margin: 5px;
 }
 
-/* line 86, sass/newLayout.scss */
+/* line 117, sass/newLayout.scss */
 .content {
   display: inline;
   float: left;
   margin-right: 0px;
   width: 800px;
-  background-color: white;
 }
-/* line 87, sass/newLayout.scss */
+/* line 118, sass/newLayout.scss */
 .content .padding {
   padding: 5px;
 }
@@ -219,30 +269,30 @@ button div.ui-icon {
 * html .content {
   overflow-x: hidden;
 }
-/* line 92, sass/newLayout.scss */
+/* line 122, sass/newLayout.scss */
 .content .content-title {
   padding-bottom: 5px;
 }
-/* line 93, sass/newLayout.scss */
+/* line 123, sass/newLayout.scss */
 .content .content-title h1 {
   font-size: 30px;
 }
-/* line 98, sass/newLayout.scss */
+/* line 128, sass/newLayout.scss */
 .content div.left-right {
   width: 100%;
   display: table;
 }
-/* line 101, sass/newLayout.scss */
+/* line 131, sass/newLayout.scss */
 .content div.left-right div.left {
   display: table-cell;
   text-align: left;
 }
-/* line 105, sass/newLayout.scss */
+/* line 135, sass/newLayout.scss */
 .content div.left-right div.right {
   display: table-cell;
   text-align: right;
 }
-/* line 111, sass/newLayout.scss */
+/* line 141, sass/newLayout.scss */
 .content .tabs {
   -moz-border-radius: 8px;
   -webkit-border-radius: 8px;
@@ -253,12 +303,12 @@ button div.ui-icon {
   overflow: hidden;
   border: 1px solid black;
 }
-/* line 115, sass/newLayout.scss */
+/* line 145, sass/newLayout.scss */
 .content .tabs .tabBar {
   background-color: red;
   height: 40px;
 }
-/* line 121, sass/newLayout.scss */
+/* line 151, sass/newLayout.scss */
 .content .tabs .tabBar li {
   float: left;
   line-height: 30px;
@@ -281,7 +331,7 @@ button div.ui-icon {
   min-width: 80px;
   text-align: center;
 }
-/* line 135, sass/newLayout.scss */
+/* line 165, sass/newLayout.scss */
 .content table {
   border: 1px solid black;
   -moz-border-radius: 8px;
@@ -292,50 +342,53 @@ button div.ui-icon {
   border-radius: 8px;
   overflow: hidden;
 }
-/* line 139, sass/newLayout.scss */
+/* line 169, sass/newLayout.scss */
 .content table thead tr {
   height: 20px;
   background-color: blue;
   color: white;
 }
-/* line 143, sass/newLayout.scss */
+/* line 173, sass/newLayout.scss */
 .content table thead tr th {
   border-bottom: 1px solid black;
   font-size: 20px;
 }
-/* line 148, sass/newLayout.scss */
+/* line 178, sass/newLayout.scss */
 .content table tbody td {
   padding: 2px;
   line-height: 20px;
 }
-/* line 151, sass/newLayout.scss */
+/* line 181, sass/newLayout.scss */
 .content table tbody td img {
   height: 20px;
   vertical-align: top;
 }
-/* line 156, sass/newLayout.scss */
+/* line 186, sass/newLayout.scss */
 .content table tbody tr:nth-child(even) {
   background-color: gray;
 }
-/* line 159, sass/newLayout.scss */
+/* line 189, sass/newLayout.scss */
 .content table div.ui-icon {
   display: inline-block;
 }
 
-/* line 165, sass/newLayout.scss */
+/* line 195, sass/newLayout.scss */
 .sidebar {
   display: inline;
   float: left;
   margin-right: 0;
   width: 160px;
-  background-color: gray;
 }
 /* line 147, ../../../../../.rvm/gems/ruby-1.8.7-p352/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
 * html .sidebar {
   overflow-x: hidden;
 }
-/* line 168, sass/newLayout.scss */
+/* line 197, sass/newLayout.scss */
 .sidebar div.sideItem {
+  -moz-box-shadow: 0 0 10px 2px gray;
+  -webkit-box-shadow: 0 0 10px 2px gray;
+  -o-box-shadow: 0 0 10px 2px gray;
+  box-shadow: 0 0 10px 2px gray;
   overflow: hidden;
   margin: 5px;
   background-color: orange;
@@ -346,7 +399,7 @@ button div.ui-icon {
   -khtml-border-radius: 8px;
   border-radius: 8px;
 }
-/* line 170, sass/newLayout.scss */
+/* line 200, sass/newLayout.scss */
 .sidebar div.sideItem h1 {
   background-color: blue;
   text-align: center;
@@ -355,27 +408,27 @@ button div.ui-icon {
   border-bottom: 1px solid black;
   color: white;
 }
-/* line 178, sass/newLayout.scss */
+/* line 208, sass/newLayout.scss */
 .sidebar div.sideItem li {
   line-height: 20px;
   list-style: none;
   margin: 5px;
 }
-/* line 182, sass/newLayout.scss */
+/* line 212, sass/newLayout.scss */
 .sidebar div.sideItem li img {
   height: 20px;
   width: 20px;
   vertical-align: top;
   padding-right: 5px;
 }
-/* line 188, sass/newLayout.scss */
+/* line 218, sass/newLayout.scss */
 .sidebar div.sideItem li a {
   width: 100%;
   height: 100%;
   display: inline-block;
 }
 
-/* line 200, sass/newLayout.scss */
+/* line 230, sass/newLayout.scss */
 .footer {
   display: inline;
   float: left;
