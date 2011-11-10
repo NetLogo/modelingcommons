@@ -3,27 +3,65 @@ $blueprint-grid-width: 40px;
 @import "blueprint/reset";
 @import "blueprint/grid";
 @import "compass/css3";
+
+@mixin sans-font() {
+  font-family: 'Arial', sans-serif;
+}
+@mixin serif-font() {
+  font-family: default;
+}
+@mixin clickable($color) {
+  $box-shadow-lighten: 10%;
+  $hover-darken: 10%;
+  $active-darken: 20%;
+  @include sans-font();
+  cursor: pointer;
+  border: 1px solid darken($color, 20%);
+  @include background(linear-gradient($color 35%, darken($color, 10%) 45%, $color 85%));
+  @include box-shadow(0px 0px 1px 1px lighten($color, $box-shadow-lighten) inset);
+  &:hover {
+    @include background(linear-gradient(darken($color, $hover-darken) 35%, darken($color, $hover-darken + 10%) 45%, darken($color, $hover-darken) 85%));
+    @include box-shadow(0px 0px 1px 1px lighten($color, $box-shadow-lighten - $hover-darken) inset);
+  }
+  &:active {
+    
+    @include box-shadow(-1px 5px 6px 3px darken($color, 40%) inset);
+    @include background(linear-gradient(darken($color, $active-darken) 35%, darken($color, $active-darken + 10%) 45%, darken($color, $active-darken) 85%));
+    /*border: 1px solid darken($button-color, 40%);*/
+  }
+}
+
 $tab-corner-radius: 8px;
+$input-radius: 5px;
 body {
   background-color: blue;
 }
 button {
-  line-height: 16px;
+  @include clickable(hsl(111, 40%, 65%));
+  $button-color: hsl(111, 40%, 65%);
+  font-size: 15px;
+  line-height: 18px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 6px;
+  padding-right: 6px;
+  margin: 2px;
   div.ui-icon {
+      margin-top: 1px;
+      margin-bottom: 1px;
       vertical-align: top;
       display: inline-block;
     }
-  @include border-radius(5px);
-  border: 0px;
-  @include background(linear-gradient())
-  
+  @include border-radius($input-radius);
 }
+  
 .container {
   @include container;
   background-color: white;
   @include box-shadow(0 0 15px 10px gray);
 }
 .header {
+  @include sans-font();
   @include column(24);
   @include border-bottom-left-radius($tab-corner-radius);
   @include border-bottom-right-radius($tab-corner-radius);
@@ -47,7 +85,7 @@ button {
   .login {
     @include column(10, true);
     @include push(4);
-    background-color: orange;
+    @include serif-font();
     img {
       height: 13px;
       float: middle;
@@ -58,9 +96,9 @@ button {
   .navigation {
     
     @include column(19);
-    background-color: red;
     $a-color: black;
     a {
+      @include text-shadow(gray, 2px, 2px, 3px);
       color: $a-color;
       font-size: 20px;
       padding-left: 5px;
@@ -102,7 +140,6 @@ button {
   }
   .search {
     @include column(5, last);
-    background-color: yellow;
     height: $nav-height;
     line-height: $nav-height;
     text-align: right;
@@ -123,6 +160,7 @@ button {
   .content-title {
     h1 {
       font-size: 30px;
+      @include sans-font();
     }
     padding-bottom: 5px;
   }
@@ -150,16 +188,37 @@ button {
       height: $tab-height;
       
       li {
+        @include clickable(#6398F2);
+        @include sans-font();
+        $tab-color: gray;
+        background-color: $tab-color;
         float: left;
-        line-height: $tab-height - 2*$padding;
+        $line-height: $tab-height - 2*$padding - 2px;
+        line-height: $line-height;
         padding: $padding;
         list-style: none;
-        background-color: gray;
         @include border-bottom-left-radius($tab-corner-radius);
         @include border-bottom-right-radius($tab-corner-radius);
         margin-right: 2px;
         min-width: 80px;
-       text-align: center;
+        text-align: center;
+        .num-results {
+          @include background(radial-gradient(25% 25%, red, darken(red, 20%)));
+          $radius: 10px;
+          color: white;
+          font-size: 12px;
+          line-height: $radius*2;
+          width: $radius*2;
+          height: $radius*2;
+          @include border-radius($radius*2);
+          border: 1px solid white;
+          margin-right: 4px;
+          display: inline-block;
+          vertical-align: top;
+          margin-top: 3px;
+          margin-bottom: 3px;
+          
+        }
       }
     }
   }
@@ -168,12 +227,19 @@ button {
     @include border-radius($tab-corner-radius);
     overflow: hidden;
     thead tr {
+
+      @include sans-font();
       height: 20px;
       background-color: blue;
       color: white;
       th {
+        @include clickable(#6398F2);
+        @include border-top-right-radius(5px);
+        @include border-top-left-radius(5px);
         border-bottom: 1px solid black;
         font-size: 20px;
+        padding: 2px;
+        
       }
     }
     tbody td {
@@ -197,8 +263,10 @@ button {
   @include column(4, true);
   div.sideItem {
     @include box-shadow(0 0 10px 2px gray);
+    
     overflow: hidden;
     h1 {
+      @include sans-font();
       background-color: blue;
       text-align: center;
       padding-top: 5px;
@@ -231,4 +299,18 @@ button {
 .footer {
   @include column(24);
   background-color: green;
+}
+input {
+  $color: rgb(50%, 50%, 50%); 
+  @include sans-font();
+  line-height: 18px;
+  @include border-radius($input-radius);
+  border: 1px solid $color;
+  padding: 2px;
+  margin: 2px;
+  font-size: 15px;
+  @include box-shadow(-1px 1px 4px 1px lighten($color, 20%) inset);
+  &:focus {
+    outline-style: none;
+  }
 }
