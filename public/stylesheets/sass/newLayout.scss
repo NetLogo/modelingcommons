@@ -8,7 +8,7 @@ $blueprint-grid-width: 40px;
   font-family: 'Arial', sans-serif;
 }
 @mixin serif-font() {
-  font-family: default;
+  font-family: 'Times';
 }
 @mixin clickable($color) {
   $box-shadow-lighten: 10%;
@@ -31,14 +31,19 @@ $blueprint-grid-width: 40px;
   }
 }
 
+$nav-color: #04346C;
+$nav-text-color: white;
+$header-color: #6899D3;
+$text-highlight: #FF5C00;
 $tab-corner-radius: 8px;
 $input-radius: 5px;
+$button-color: #FFB540;
 body {
-  background-color: blue;
+  background-color: #F5F3E9;
+  @include serif-font();
 }
 button {
-  @include clickable(hsl(111, 40%, 65%));
-  $button-color: hsl(111, 40%, 65%);
+  @include clickable($header-color);
   font-size: 15px;
   line-height: 18px;
   padding-top: 2px;
@@ -59,6 +64,8 @@ button {
   @include container;
   background-color: white;
   @include box-shadow(0 0 15px 10px gray);
+  @include border-bottom-right-radius($tab-corner-radius);
+  @include border-bottom-left-radius($tab-corner-radius);
 }
 .header {
   @include sans-font();
@@ -67,14 +74,18 @@ button {
   @include border-bottom-right-radius($tab-corner-radius);
   @include box-shadow(0 0 10px 2px gray);
   overflow: hidden;
-  background-color: green;
+  background-color: lighten($header-color, 10%);
   .banner {
+    background-image: url('banner.png');
+    cursor: pointer;
     @include column(10);
-    background-color: purple;
     height: 100px;
+    color: white;
+    @include text-shadow($text-highlight, 3px, 3px, 5px);
     h1 {
       font-size: 40px;
-      margin-left: 20px;
+      margin-left: 17px;
+      font-weight: bold;
     }
     h2 {
       font-size: 20px;
@@ -83,33 +94,55 @@ button {
     }
   }
   .login {
-    @include column(10, true);
-    @include push(4);
+    line-height: 26px;
+    height: 26px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    background-color: $nav-color;
+    vertical-align: top;
+    color: $nav-text-color;
+    padding-left: 10px;
+    @include border-bottom-left-radius($tab-corner-radius);
+    @include column(11, true);
+    @include push(3);
     @include serif-font();
     img {
-      height: 13px;
-      float: middle;
-      margin: 2px;
+      height: 26px;
+      width: 26px;
+      margin-left: 4px;
+      margin-right: 4px;
+      float: top;
+    }
+    a {
+      color: $nav-text-color;
+      vertical-align: top;
+    }
+    a:visited {
+      color: $nav-text-color;
+    }
+    a:active {
+      color: red;
     }
   }
   $nav-height: 40px;
+
   .navigation {
-    
+    background-color: $nav-color;
     @include column(19);
     $a-color: black;
     a {
-      @include text-shadow(gray, 2px, 2px, 3px);
-      color: $a-color;
+      @include text-shadow($text-highlight, 2px, 2px, 3px);
+      color: $nav-text-color;
       font-size: 20px;
       padding-left: 5px;
       padding-right: 5px;
-      border-right: 2px solid black;
+      border-right: 2px solid $nav-text-color;
     }
     a:visited {
-      color: $a-color;
+      color: $nav-text-color;
     }
     a:active {
-      color: $a-color;
+      color: $nav-text-color;
     }
     li:last-child a{
       border-right: 0px solid black;
@@ -139,6 +172,7 @@ button {
     line-height: $nav-height;
   }
   .search {
+    background-color: $nav-color;
     @include column(5, last);
     height: $nav-height;
     line-height: $nav-height;
@@ -183,15 +217,13 @@ button {
     border:1px solid black;
     .tabBar {
       $tab-height: 40px;
-      background-color: red;
       $padding: 5px;
       height: $tab-height;
       
       li {
-        @include clickable(#6398F2);
+        @include clickable(lighten($header-color, 0%));
         @include sans-font();
-        $tab-color: gray;
-        background-color: $tab-color;
+        color: black;
         float: left;
         $line-height: $tab-height - 2*$padding - 2px;
         line-height: $line-height;
@@ -199,7 +231,7 @@ button {
         list-style: none;
         @include border-bottom-left-radius($tab-corner-radius);
         @include border-bottom-right-radius($tab-corner-radius);
-        margin-right: 2px;
+        //margin-right: 2px;
         min-width: 80px;
         text-align: center;
         .num-results {
@@ -219,42 +251,56 @@ button {
           margin-bottom: 3px;
           
         }
-      }
+      } 
     }
+    .tabContent {
+        margin-left: 5px;
+        margin-right: 5px;
+      }
   }
   table {
-    border: 1px solid black;
+    border-bottom: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
     @include border-radius($tab-corner-radius);
     overflow: hidden;
     thead tr {
 
       @include sans-font();
-      height: 20px;
       background-color: blue;
-      color: white;
       th {
-        @include clickable(#6398F2);
+        @include clickable($header-color);
         @include border-top-right-radius(5px);
         @include border-top-left-radius(5px);
-        border-bottom: 1px solid black;
-        font-size: 20px;
+        font-size: 15px;
         padding: 2px;
-        
+        line-height: 20px;
+        div.ui-icon {
+          margin-top: 2px;
+          margin-bottom: 2px;
+        }
       }
     }
     tbody td {
       padding: 2px;
       line-height: 20px;
+      /*border-right: 1px solid gray;
+      &:last-child {
+        border-right: 0px solid gray;
+      }*/
       img {
         height: 20px;
         vertical-align: top;
+        padding-right: 4px;
       }
+      
     }
     tbody tr:nth-child(even) {
-      background-color: gray;
+      background-color: lighten($header-color, 30%);
     }
     div.ui-icon {
       display: inline-block;
+      vertical-align: top;
     }
   }
     
@@ -263,26 +309,33 @@ button {
   @include column(4, true);
   div.sideItem {
     @include box-shadow(0 0 10px 2px gray);
-    
     overflow: hidden;
     h1 {
       @include sans-font();
-      background-color: blue;
+      @include text-shadow($text-highlight, 2px, 2px, 3px);
+      background-color: $nav-color;
       text-align: center;
       padding-top: 5px;
+      padding-bottom: 2px;
       font-size: 20px;
-      border-bottom: 1px solid black;
       color: white;
     }
     li {
       $height: 20px;
       line-height:20px;
       list-style: none;
-      img {
+      div {
+        display: inline-block;
         height: $height;
         width: $height;
         vertical-align: top;
         padding-right: 5px;
+        img {
+          height: $height;
+          width: $height;
+          vertical-align: top;
+        }
+        
       }
       a {
         width: 100%;
@@ -292,7 +345,7 @@ button {
       margin: 5px;
     }
     margin: 5px;
-    background-color: orange;
+    background-color: lighten($header-color, 10%);
     @include border-radius($tab-corner-radius);
   }
 }
@@ -302,7 +355,7 @@ button {
 }
 input {
   $color: rgb(50%, 50%, 50%); 
-  @include sans-font();
+  @include serif-font();
   line-height: 18px;
   @include border-radius($input-radius);
   border: 1px solid $color;
@@ -312,5 +365,14 @@ input {
   @include box-shadow(-1px 1px 4px 1px lighten($color, 20%) inset);
   &:focus {
     outline-style: none;
+    @include box-shadow(-1px 1px 4px 2px darken($color, 5%) inset);
+    border: 1px solid darken($color, 10%);
   }
+}
+.topButtons, .bottomButtons {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+select {
+  
 }
