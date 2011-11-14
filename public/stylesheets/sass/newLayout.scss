@@ -10,10 +10,12 @@ $blueprint-grid-width: 40px;
 @mixin serif-font() {
   font-family: 'Times';
 }
-@mixin clickable($color) {
+@mixin clickable($color, $text-color: black) {
   $box-shadow-lighten: 10%;
   $hover-darken: 10%;
   $active-darken: 20%;
+  $disabled-color: desaturate($color, 90%);
+  color: $text-color;
   @include sans-font();
   cursor: pointer;
   border: 1px solid darken($color, 20%);
@@ -29,6 +31,36 @@ $blueprint-grid-width: 40px;
     @include background(linear-gradient(darken($color, $active-darken) 35%, darken($color, $active-darken + 10%) 45%, darken($color, $active-darken) 85%));
     /*border: 1px solid darken($button-color, 40%);*/
   }
+  &.selected {
+    @include box-shadow(-1px 5px 6px 2px darken($color, 40%) inset);
+    @include background(linear-gradient(darken($color, 10%) 35%, darken($color, 20%) 45%, darken($color, 10%) 85%));
+    
+  }
+  &.selected:hover {
+    @include box-shadow(-1px 5px 6px 2px darken($color, 40%) inset);
+    @include background(linear-gradient(darken($color, 15%) 35%, darken($color, 25%) 45%, darken($color, 15%) 85%));
+    
+  }
+  &.selected:active {
+    @include box-shadow(-1px 5px 6px 3px darken($color, 40%) inset);
+    @include background(linear-gradient(darken($color, $active-darken) 35%, darken($color, $active-darken + 10%) 45%, darken($color, $active-darken) 85%));
+    
+  }
+  &.disabled, &[disabled] {
+    
+    @include background(linear-gradient($disabled-color 35%, darken($disabled-color, 5%) 45%, $disabled-color 85%));
+    @include box-shadow(0px 0px 1px 1px lighten($disabled-color, $box-shadow-lighten) inset);
+    border: 1px solid darken($disabled-color, 10%);
+    color: lighten(desaturate($text-color, 90%), 25%);
+    cursor: default;
+  }
+  &.disabled.selected {
+    @include box-shadow(-1px 5px 6px 2px darken($disabled-color, 40%) inset);
+    @include background(linear-gradient(darken($disabled-color, 10%) 35%, darken($disabled-color, 15%) 45%, darken($disabled-color, 10%) 85%));
+    
+  }
+
+  
 }
 
 $nav-color: #04346C;
@@ -78,10 +110,10 @@ button {
   .banner {
     background-image: url('banner.png');
     cursor: pointer;
-    @include column(10);
+    @include column(12);
     height: 100px;
     color: white;
-    @include text-shadow($text-highlight, 3px, 3px, 5px);
+    @include text-shadow(/*$text-highlight*/$nav-color, 3px, 3px, 5px);
     h1 {
       font-size: 40px;
       margin-left: 17px;
@@ -104,7 +136,7 @@ button {
     padding-left: 10px;
     @include border-bottom-left-radius($tab-corner-radius);
     @include column(11, true);
-    @include push(3);
+    @include push(1);
     @include serif-font();
     img {
       height: 26px;
@@ -131,12 +163,16 @@ button {
     @include column(19);
     $a-color: black;
     a {
-      @include text-shadow($text-highlight, 2px, 2px, 3px);
+      //@include text-shadow($text-highlight, 2px, 2px, 3px);
       color: $nav-text-color;
       font-size: 20px;
-      padding-left: 5px;
-      padding-right: 5px;
-      border-right: 2px solid $nav-text-color;
+
+      @include border-radius(5px);
+      padding-top: 4px;
+      padding-bottom: 4px;
+      padding-left: 7px;
+      padding-right: 7px;
+      text-decoration: none;
     }
     a:visited {
       color: $nav-text-color;
@@ -144,8 +180,13 @@ button {
     a:active {
       color: $nav-text-color;
     }
-    li:last-child a{
-      border-right: 0px solid black;
+    a:hover {
+      background-color: lighten($nav-color, 10%);
+      @include box-shadow(0px 0px 1px 1px darken($nav-color, 10%) inset);
+    }
+    a:active {
+      background-color: lighten($nav-color, 5%);
+      @include box-shadow(-1px 1px 3px 2px darken($nav-color, 10%) inset);
     }
     ul {
       line-height: normal;
@@ -161,12 +202,14 @@ button {
       height: 40px;
       line-height: 40px;
       height: $nav-height;
+      margin-left: 1px;
+      margin-right: 1px;
     }
-    li:hover  {
-      @include background(radial-gradient(center 115% ,30px 30px, white, rgba(0, 0, 0, 0)));
+    li:hover a {
+      
     }
     li a {
-      text-decoration: none;
+      
     }
     height: $nav-height;
     line-height: $nav-height;
@@ -259,6 +302,7 @@ button {
       }
   }
   table {
+    width: 100%;
     border-bottom: 1px solid black;
     border-left: 1px solid black;
     border-right: 1px solid black;
@@ -272,8 +316,12 @@ button {
         @include clickable($header-color);
         @include border-top-right-radius(5px);
         @include border-top-left-radius(5px);
+        text-align: center;
         font-size: 15px;
-        padding: 2px;
+        padding-left: 4px;
+        padding-right: 4px;
+        padding-top: 2px;
+        padding-bottom: 2px;
         line-height: 20px;
         div.ui-icon {
           margin-top: 2px;
@@ -312,7 +360,7 @@ button {
     overflow: hidden;
     h1 {
       @include sans-font();
-      @include text-shadow($text-highlight, 2px, 2px, 3px);
+      //@include text-shadow($text-highlight, 2px, 2px, 3px);
       background-color: $nav-color;
       text-align: center;
       padding-top: 5px;
@@ -354,7 +402,8 @@ button {
   background-color: green;
 }
 input {
-  $color: rgb(50%, 50%, 50%); 
+  $color: rgb(50%, 50%, 50%);
+  color: $color; 
   @include serif-font();
   line-height: 18px;
   @include border-radius($input-radius);
@@ -367,6 +416,7 @@ input {
     outline-style: none;
     @include box-shadow(-1px 1px 4px 2px darken($color, 5%) inset);
     border: 1px solid darken($color, 10%);
+    color: black;
   }
 }
 .topButtons, .bottomButtons {
