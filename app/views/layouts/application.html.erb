@@ -11,6 +11,60 @@
 
   </head>
   <body>
+  	<div class="container">
+  		<div class="header">
+				<div class="banner">
+					<h2>NetLogo</h2>
+					<h1>Modeling Commons</h1>
+				</div>
+				<div class="login">
+					<div class="login_container">
+					<% if @person %>
+					Hello <%= link_to @person.fullname, :controller => :account, :action => :mypage -%><%= person_image(@person) %>
+					 | <%= link_to_unless_current "Edit personal details", :controller => :account, :action => :edit, :id => @person.id %>
+					<% if @person.administrator %> | <%= link_to_unless_current "Admin", :controller => :admin, :action => :index %><% end %>
+					 | <%= link_to_unless_current "Logout", :controller => :account, :action => :logout %>
+					<% else %>
+					
+      					<%= link_to "Login", :controller => :account, :action => :login -%>
+      				
+					<% end %> 
+					</div>
+				</div>
+				<div class="navigation">
+					<ul>
+						<li>
+							<% if @person %>
+							<%= link_to "Profile", :controller => :account, :action => :mypage %></li><li>	
+							<% else %>
+							<%= link_to "Home", :controller => :account, :action => :mypage %></li><li>	
+							<% end %>			
+							<%= link_to "List models", :controller => :browse, :action => :list_models %></li><li>
+							<% if @person %>
+							<%= link_to "Projects", :controller => :projects, :action => :index %></li><li>
+							<%= link_to "Groups", :controller => :account, :action => :groups %></li><li>
+							<%= link_to "Tags", :controller => :account, :action => :tags, :id => @person.id  %></li><li>
+							<% end %>
+							<%= link_to "Help", :controller => :help, :action => :index  %></li>
+					</ul>
+					<ul>
+						<% if @person %>
+						<li>
+							<a href="#">Add Model</a></li>	
+						<% end %>
+					</ul>
+					
+					
+				</div>
+				<div class="search">
+					<div></div>
+					<% form_tag(url_for(:controller => :search, :action => :search_action), { :id => "model_search_form"}) do %>
+          			<%= text_field_tag :search_term, nil, {:id => 'model_search	', :placeholder => 'Search Models'} -%>
+          			<input style="display: none;" type="submit" value="Search!" />
+          			<% end %>
+				</div>
+			</div>
+			<!--
     <div id="main-menu-div">
       <ul id="main-menu">
         <li class="menu-option"><%= link_to "Home", :controller => :account, :action => :mypage %></li>
@@ -57,7 +111,8 @@
       <% end %>
       <% end %>
     </div>
-	
+	-->
+	<div class="content">
     <% if flash[:notice] -%>
     <div id="flash-notice"><%= flash[:notice] -%></div>
     <script type="text/javascript">
@@ -66,7 +121,7 @@
       });
     </script>
     <% end -%>
-
+	<div class="padding">
     <h1 id="main-title">
       <% if @headline_avatar -%>
       <%= image_tag @headline_avatar -%>
@@ -78,7 +133,10 @@
       <%= @headline -%>
       <% end -%>
     </h1>
+    </div>
     <%= yield :layout %>
+    </div>
+    </div>
   </body>
 
 </html>
