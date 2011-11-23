@@ -1,0 +1,10 @@
+@import "all";
+
+.tabs_panel {
+  @extend .panel;
+  ul {
+    padding-left: inherit;
+  }
+  padding: 0px;
+  overflow: hidden;
+}

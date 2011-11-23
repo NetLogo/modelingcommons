@@ -2,17 +2,11 @@
           "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
-    <% @env_title = (Rails.env == 'production' ? '' :  '[DEVELOPMENT/STAGING SERVER]' ) %> 
-    <title><%= @env_title -%>NetLogo Modeling Commons -- <%= @title %></title>
-
-    <%= stylesheet_link_tag 'nlcommons', 'browse', 'jquery.autocomplete', 'ui.everything.css', :cache => false -%>
-    <!-- defaults below here -->
-    <%= javascript_include_tag 'jquery', 'jquery-ui', 'jquery.livequery', 'jquery.autocomplete', 'jquery.validate.pack.js', 'jquery.dataTables', 'application', 'jquery.timeago', :cache => false -%>
-
+  	<%= render :partial => "layouts/head" -%>
   </head>
   <body>
   	<div class="container">
-  		<%= render :partial => "layouts/header" -%>
+  		<%= render :partial => "layouts/page_header" -%>
 		<div class="content">
 		    <% if flash[:notice] -%>
 		    <div id="flash-notice"><%= flash[:notice] -%></div>

@@ -2,13 +2,8 @@
           "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
-    <% @env_title = (Rails.env == 'production' ? '' :  '[DEVELOPMENT/STAGING SERVER]' ) %> 
-    <title><%= @env_title -%>NetLogo Modeling Commons -- <%= @title %></title>
-
-    <%= stylesheet_link_tag 'nlcommons', 'browse', 'jquery.autocomplete', 'ui.everything.css', :cache => true -%>
-    <%= javascript_include_tag 'jquery', 'jquery-ui', 'jquery.livequery', 'jquery.autocomplete', 'jquery.validate.pack.js', 'jquery.dataTables', 'application', :cache => false -%>
+    <%= render :partial => "layouts/head" -%>
   </head>
-
   <body>
     <!-- action: <%= params[:action] -%> -->
     <% if params['tab'].blank? %>

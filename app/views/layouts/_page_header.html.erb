@@ -37,7 +37,7 @@
 					<ul>
 						<% if @person %>
 						<li>
-							<a href="#">Add Model</a></li>	
+							<%= link_to "Add model", :controller => :upload, :action => :new_model %></li>	
 						<% end %>
 					</ul>
 					
