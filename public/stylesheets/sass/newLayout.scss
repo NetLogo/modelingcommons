@@ -4,14 +4,7 @@ $blueprint-grid-width: 40px;
 @import "blueprint/grid";
 @import "compass/css3";
 @import "clickable";
-
-@mixin sans-font() {
-  font-family: 'Arial', sans-serif;
-}
-@mixin serif-font() {
-  font-family: 'Times';
-}
-
+@import "font";
 
 $nav-color: #04346C;
 $nav-text-color: white;

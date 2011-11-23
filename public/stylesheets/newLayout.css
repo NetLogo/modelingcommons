@@ -57,13 +57,13 @@ a img {
   border: none;
 }
 
-/* line 23, sass/newLayout.scss */
+/* line 16, sass/newLayout.scss */
 body {
   background-color: #F5F3E9;
   font-family: 'Times';
 }
 
-/* line 27, sass/newLayout.scss */
+/* line 20, sass/newLayout.scss */
 button {
   color: black;
   font-family: arial;
@@ -93,7 +93,7 @@ button {
   -khtml-border-radius: 5px;
   border-radius: 5px;
 }
-/* line 12, sass/_clickable.scss */
+/* line 16, sass/_clickable.scss */
 button:hover {
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #417ec7), color-stop(45%, #3066a5), color-stop(85%, #417ec7));
   background: -webkit-linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
@@ -106,7 +106,7 @@ button:hover {
   -o-box-shadow: 0px 0px 1px 1px #6899d3 inset;
   box-shadow: 0px 0px 1px 1px #6899d3 inset;
 }
-/* line 16, sass/_clickable.scss */
+/* line 23, sass/_clickable.scss */
 button:active {
   -moz-box-shadow: -1px 5px 6px 3px #193556 inset;
   -webkit-box-shadow: -1px 5px 6px 3px #193556 inset;
@@ -120,8 +120,8 @@ button:active {
   background: linear-gradient(#3066a5 35%, #254d7d 45%, #3066a5 85%);
   /*border: 1px solid darken($button-color, 40%);*/
 }
-/* line 23, sass/_clickable.scss */
-button.disabled, button[disabled] {
+/* line 32, sass/_clickable.scss */
+button[disabled] {
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #9e9e9e), color-stop(45%, #919191), color-stop(85%, #9e9e9e));
   background: -webkit-linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
   background: -moz-linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
@@ -136,8 +136,8 @@ button.disabled, button[disabled] {
   color: #404040;
   cursor: default;
 }
-/* line 31, sass/_clickable.scss */
-button.selected, button.ui-tabs-selected {
+/* line 42, sass/_clickable.scss */
+button.selected {
   -moz-box-shadow: -1px 5px 6px 2px #193556 inset;
   -webkit-box-shadow: -1px 5px 6px 2px #193556 inset;
   -o-box-shadow: -1px 5px 6px 2px #193556 inset;
@@ -149,8 +149,8 @@ button.selected, button.ui-tabs-selected {
   background: -ms-linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
   background: linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
 }
-/* line 36, sass/_clickable.scss */
-button.selected:hover, button.ui-tabs-selected:hover {
+/* line 51, sass/_clickable.scss */
+button.selected:hover {
   -moz-box-shadow: -1px 5px 6px 2px #193556 inset;
   -webkit-box-shadow: -1px 5px 6px 2px #193556 inset;
   -o-box-shadow: -1px 5px 6px 2px #193556 inset;
@@ -162,8 +162,8 @@ button.selected:hover, button.ui-tabs-selected:hover {
   background: -ms-linear-gradient(#3672b9 35%, #2a5991 45%, #3672b9 85%);
   background: linear-gradient(#3672b9 35%, #2a5991 45%, #3672b9 85%);
 }
-/* line 41, sass/_clickable.scss */
-button.selected:active, button.ui-tabs-selected:active {
+/* line 60, sass/_clickable.scss */
+button.selected:active {
   -moz-box-shadow: -1px 5px 6px 3px #193556 inset;
   -webkit-box-shadow: -1px 5px 6px 3px #193556 inset;
   -o-box-shadow: -1px 5px 6px 3px #193556 inset;
@@ -175,8 +175,8 @@ button.selected:active, button.ui-tabs-selected:active {
   background: -ms-linear-gradient(#3066a5 35%, #254d7d 45%, #3066a5 85%);
   background: linear-gradient(#3066a5 35%, #254d7d 45%, #3066a5 85%);
 }
-/* line 46, sass/_clickable.scss */
-button.disabled.selected, button.disabled.ui-tabs-selected {
+/* line 68, sass/_clickable.scss */
+button.selected[disabled] {
   -moz-box-shadow: -1px 5px 6px 2px #383838 inset;
   -webkit-box-shadow: -1px 5px 6px 2px #383838 inset;
   -o-box-shadow: -1px 5px 6px 2px #383838 inset;
@@ -188,7 +188,7 @@ button.disabled.selected, button.disabled.ui-tabs-selected {
   background: -ms-linear-gradient(#848484 35%, #777777 45%, #848484 85%);
   background: linear-gradient(#848484 35%, #777777 45%, #848484 85%);
 }
-/* line 36, sass/newLayout.scss */
+/* line 29, sass/newLayout.scss */
 button div.ui-icon {
   margin-top: 1px;
   margin-bottom: 1px;
@@ -196,7 +196,7 @@ button div.ui-icon {
   display: inline-block;
 }
 
-/* line 45, sass/newLayout.scss */
+/* line 38, sass/newLayout.scss */
 .container {
   width: 960px;
   margin: 0 auto;
@@ -221,7 +221,7 @@ button div.ui-icon {
   border-bottom-left-radius: 8px;
 }
 
-/* line 52, sass/newLayout.scss */
+/* line 45, sass/newLayout.scss */
 .header {
   font-family: 'Arial', sans-serif;
   display: inline;
@@ -251,7 +251,7 @@ button div.ui-icon {
 * html .header {
   overflow-x: hidden;
 }
-/* line 60, sass/newLayout.scss */
+/* line 53, sass/newLayout.scss */
 .header .banner {
   background-image: url("banner.png");
   cursor: pointer;
@@ -267,19 +267,19 @@ button div.ui-icon {
 * html .header .banner {
   overflow-x: hidden;
 }
-/* line 67, sass/newLayout.scss */
+/* line 60, sass/newLayout.scss */
 .header .banner h1 {
   font-size: 40px;
   margin-left: 17px;
   font-weight: bold;
 }
-/* line 72, sass/newLayout.scss */
+/* line 65, sass/newLayout.scss */
 .header .banner h2 {
   font-size: 20px;
   margin-top: 5px;
   margin-left: 5px;
 }
-/* line 78, sass/newLayout.scss */
+/* line 71, sass/newLayout.scss */
 .header .login {
   line-height: 26px;
   height: 26px;
@@ -309,7 +309,7 @@ button div.ui-icon {
 * html .header .login {
   overflow-x: hidden;
 }
-/* line 91, sass/newLayout.scss */
+/* line 84, sass/newLayout.scss */
 .header .login img {
   height: 26px;
   width: 26px;
@@ -317,20 +317,20 @@ button div.ui-icon {
   margin-right: 4px;
   float: top;
 }
-/* line 98, sass/newLayout.scss */
+/* line 91, sass/newLayout.scss */
 .header .login a {
   color: white;
   vertical-align: top;
 }
-/* line 102, sass/newLayout.scss */
+/* line 95, sass/newLayout.scss */
 .header .login a:visited {
   color: white;
 }
-/* line 105, sass/newLayout.scss */
+/* line 98, sass/newLayout.scss */
 .header .login a:active {
   color: red;
 }
-/* line 111, sass/newLayout.scss */
+/* line 104, sass/newLayout.scss */
 .header .navigation {
   background-color: #04346c;
   display: inline;
@@ -344,7 +344,7 @@ button div.ui-icon {
 * html .header .navigation {
   overflow-x: hidden;
 }
-/* line 115, sass/newLayout.scss */
+/* line 108, sass/newLayout.scss */
 .header .navigation a {
   color: white;
   font-size: 20px;
@@ -360,15 +360,15 @@ button div.ui-icon {
   padding-right: 7px;
   text-decoration: none;
 }
-/* line 127, sass/newLayout.scss */
+/* line 120, sass/newLayout.scss */
 .header .navigation a:visited {
   color: white;
 }
-/* line 130, sass/newLayout.scss */
+/* line 123, sass/newLayout.scss */
 .header .navigation a:active {
   color: white;
 }
-/* line 133, sass/newLayout.scss */
+/* line 126, sass/newLayout.scss */
 .header .navigation a:hover {
   background-color: #064c9d;
   -moz-box-shadow: 0px 0px 1px 1px #021c3b inset;
@@ -376,7 +376,7 @@ button div.ui-icon {
   -o-box-shadow: 0px 0px 1px 1px #021c3b inset;
   box-shadow: 0px 0px 1px 1px #021c3b inset;
 }
-/* line 137, sass/newLayout.scss */
+/* line 130, sass/newLayout.scss */
 .header .navigation a:active {
   background-color: #054085;
   -moz-box-shadow: -1px 1px 3px 2px #021c3b inset;
@@ -384,16 +384,16 @@ button div.ui-icon {
   -o-box-shadow: -1px 1px 3px 2px #021c3b inset;
   box-shadow: -1px 1px 3px 2px #021c3b inset;
 }
-/* line 141, sass/newLayout.scss */
+/* line 134, sass/newLayout.scss */
 .header .navigation ul {
   line-height: normal;
   display: inline-block;
 }
-/* line 145, sass/newLayout.scss */
+/* line 138, sass/newLayout.scss */
 .header .navigation ul:last-child {
   margin-left: 40px;
 }
-/* line 148, sass/newLayout.scss */
+/* line 141, sass/newLayout.scss */
 .header .navigation li {
   list-style: none;
   line-height: normal;
@@ -404,7 +404,7 @@ button div.ui-icon {
   margin-left: 1px;
   margin-right: 1px;
 }
-/* line 167, sass/newLayout.scss */
+/* line 160, sass/newLayout.scss */
 .header .search {
   background-color: #04346c;
   display: inline;
@@ -419,21 +419,21 @@ button div.ui-icon {
 * html .header .search {
   overflow-x: hidden;
 }
-/* line 174, sass/newLayout.scss */
+/* line 167, sass/newLayout.scss */
 .header .search input {
   vertical-align: bottom;
   width: 150px;
   margin: 5px;
 }
 
-/* line 181, sass/newLayout.scss */
+/* line 174, sass/newLayout.scss */
 .content {
   display: inline;
   float: left;
   margin-right: 0px;
   width: 800px;
 }
-/* line 182, sass/newLayout.scss */
+/* line 175, sass/newLayout.scss */
 .content .padding {
   padding: 5px;
 }
@@ -441,31 +441,31 @@ button div.ui-icon {
 * html .content {
   overflow-x: hidden;
 }
-/* line 186, sass/newLayout.scss */
+/* line 179, sass/newLayout.scss */
 .content .content-title {
   padding-bottom: 5px;
 }
-/* line 187, sass/newLayout.scss */
+/* line 180, sass/newLayout.scss */
 .content .content-title h1 {
   font-size: 30px;
   font-family: 'Arial', sans-serif;
 }
-/* line 193, sass/newLayout.scss */
+/* line 186, sass/newLayout.scss */
 .content div.left-right {
   width: 100%;
   display: table;
 }
-/* line 196, sass/newLayout.scss */
+/* line 189, sass/newLayout.scss */
 .content div.left-right div.left {
   display: table-cell;
   text-align: left;
 }
-/* line 200, sass/newLayout.scss */
+/* line 193, sass/newLayout.scss */
 .content div.left-right div.right {
   display: table-cell;
   text-align: right;
 }
-/* line 206, sass/newLayout.scss */
+/* line 199, sass/newLayout.scss */
 .content .tabs {
   -moz-border-radius: 8px;
   -webkit-border-radius: 8px;
@@ -476,11 +476,11 @@ button div.ui-icon {
   overflow: hidden;
   border: 1px solid black;
 }
-/* line 210, sass/newLayout.scss */
+/* line 203, sass/newLayout.scss */
 .content .tabs .tabBar {
   height: 40px;
 }
-/* line 215, sass/newLayout.scss */
+/* line 208, sass/newLayout.scss */
 .content .tabs .tabBar li {
   color: black;
   font-family: arial;
@@ -517,7 +517,7 @@ button div.ui-icon {
   min-width: 80px;
   text-align: center;
 }
-/* line 12, sass/_clickable.scss */
+/* line 16, sass/_clickable.scss */
 .content .tabs .tabBar li:hover {
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #417ec7), color-stop(45%, #3066a5), color-stop(85%, #417ec7));
   background: -webkit-linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
@@ -530,7 +530,7 @@ button div.ui-icon {
   -o-box-shadow: 0px 0px 1px 1px #6899d3 inset;
   box-shadow: 0px 0px 1px 1px #6899d3 inset;
 }
-/* line 16, sass/_clickable.scss */
+/* line 23, sass/_clickable.scss */
 .content .tabs .tabBar li:active {
   -moz-box-shadow: -1px 5px 6px 3px #193556 inset;
   -webkit-box-shadow: -1px 5px 6px 3px #193556 inset;
@@ -544,8 +544,8 @@ button div.ui-icon {
   background: linear-gradient(#3066a5 35%, #254d7d 45%, #3066a5 85%);
   /*border: 1px solid darken($button-color, 40%);*/
 }
-/* line 23, sass/_clickable.scss */
-.content .tabs .tabBar li.disabled, .content .tabs .tabBar li[disabled] {
+/* line 32, sass/_clickable.scss */
+.content .tabs .tabBar li[disabled] {
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #9e9e9e), color-stop(45%, #919191), color-stop(85%, #9e9e9e));
   background: -webkit-linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
   background: -moz-linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
@@ -560,8 +560,8 @@ button div.ui-icon {
   color: #404040;
   cursor: default;
 }
-/* line 31, sass/_clickable.scss */
-.content .tabs .tabBar li.selected, .content .tabs .tabBar li.ui-tabs-selected {
+/* line 42, sass/_clickable.scss */
+.content .tabs .tabBar li.selected {
   -moz-box-shadow: -1px 5px 6px 2px #193556 inset;
   -webkit-box-shadow: -1px 5px 6px 2px #193556 inset;
   -o-box-shadow: -1px 5px 6px 2px #193556 inset;
@@ -573,8 +573,8 @@ button div.ui-icon {
   background: -ms-linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
   background: linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
 }
-/* line 36, sass/_clickable.scss */
-.content .tabs .tabBar li.selected:hover, .content .tabs .tabBar li.ui-tabs-selected:hover {
+/* line 51, sass/_clickable.scss */
+.content .tabs .tabBar li.selected:hover {
   -moz-box-shadow: -1px 5px 6px 2px #193556 inset;
   -webkit-box-shadow: -1px 5px 6px 2px #193556 inset;
   -o-box-shadow: -1px 5px 6px 2px #193556 inset;
@@ -586,8 +586,8 @@ button div.ui-icon {
   background: -ms-linear-gradient(#3672b9 35%, #2a5991 45%, #3672b9 85%);
   background: linear-gradient(#3672b9 35%, #2a5991 45%, #3672b9 85%);
 }
-/* line 41, sass/_clickable.scss */
-.content .tabs .tabBar li.selected:active, .content .tabs .tabBar li.ui-tabs-selected:active {
+/* line 60, sass/_clickable.scss */
+.content .tabs .tabBar li.selected:active {
   -moz-box-shadow: -1px 5px 6px 3px #193556 inset;
   -webkit-box-shadow: -1px 5px 6px 3px #193556 inset;
   -o-box-shadow: -1px 5px 6px 3px #193556 inset;
@@ -599,8 +599,8 @@ button div.ui-icon {
   background: -ms-linear-gradient(#3066a5 35%, #254d7d 45%, #3066a5 85%);
   background: linear-gradient(#3066a5 35%, #254d7d 45%, #3066a5 85%);
 }
-/* line 46, sass/_clickable.scss */
-.content .tabs .tabBar li.disabled.selected, .content .tabs .tabBar li.disabled.ui-tabs-selected {
+/* line 68, sass/_clickable.scss */
+.content .tabs .tabBar li.selected[disabled] {
   -moz-box-shadow: -1px 5px 6px 2px #383838 inset;
   -webkit-box-shadow: -1px 5px 6px 2px #383838 inset;
   -o-box-shadow: -1px 5px 6px 2px #383838 inset;
@@ -612,7 +612,7 @@ button div.ui-icon {
   background: -ms-linear-gradient(#848484 35%, #777777 45%, #848484 85%);
   background: linear-gradient(#848484 35%, #777777 45%, #848484 85%);
 }
-/* line 229, sass/newLayout.scss */
+/* line 222, sass/newLayout.scss */
 .content .tabs .tabBar li .num-results {
   background: -webkit-gradient(radial, 25% 25%, 0, 25% 25%, 100, color-stop(0%, #ff0000), color-stop(100%, #990000));
   background: -webkit-radial-gradient(25% 25%, #ff0000, #990000);
@@ -638,12 +638,12 @@ button div.ui-icon {
   margin-top: 3px;
   margin-bottom: 3px;
 }
-/* line 248, sass/newLayout.scss */
+/* line 241, sass/newLayout.scss */
 .content .tabs .tabContent {
   margin-left: 5px;
   margin-right: 5px;
 }
-/* line 253, sass/newLayout.scss */
+/* line 246, sass/newLayout.scss */
 .content table {
   width: 100%;
   border-bottom: 1px solid black;
@@ -657,12 +657,12 @@ button div.ui-icon {
   border-radius: 8px;
   overflow: hidden;
 }
-/* line 260, sass/newLayout.scss */
+/* line 253, sass/newLayout.scss */
 .content table thead tr {
   font-family: 'Arial', sans-serif;
   background-color: blue;
 }
-/* line 264, sass/newLayout.scss */
+/* line 257, sass/newLayout.scss */
 .content table thead tr th {
   color: black;
   font-family: arial;
@@ -698,7 +698,7 @@ button div.ui-icon {
   padding-bottom: 2px;
   line-height: 20px;
 }
-/* line 12, sass/_clickable.scss */
+/* line 16, sass/_clickable.scss */
 .content table thead tr th:hover {
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #417ec7), color-stop(45%, #3066a5), color-stop(85%, #417ec7));
   background: -webkit-linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
@@ -711,7 +711,7 @@ button div.ui-icon {
   -o-box-shadow: 0px 0px 1px 1px #6899d3 inset;
   box-shadow: 0px 0px 1px 1px #6899d3 inset;
 }
-/* line 16, sass/_clickable.scss */
+/* line 23, sass/_clickable.scss */
 .content table thead tr th:active {
   -moz-box-shadow: -1px 5px 6px 3px #193556 inset;
   -webkit-box-shadow: -1px 5px 6px 3px #193556 inset;
@@ -725,8 +725,8 @@ button div.ui-icon {
   background: linear-gradient(#3066a5 35%, #254d7d 45%, #3066a5 85%);
   /*border: 1px solid darken($button-color, 40%);*/
 }
-/* line 23, sass/_clickable.scss */
-.content table thead tr th.disabled, .content table thead tr th[disabled] {
+/* line 32, sass/_clickable.scss */
+.content table thead tr th[disabled] {
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #9e9e9e), color-stop(45%, #919191), color-stop(85%, #9e9e9e));
   background: -webkit-linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
   background: -moz-linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
@@ -741,8 +741,8 @@ button div.ui-icon {
   color: #404040;
   cursor: default;
 }
-/* line 31, sass/_clickable.scss */
-.content table thead tr th.selected, .content table thead tr th.ui-tabs-selected {
+/* line 42, sass/_clickable.scss */
+.content table thead tr th.selected {
   -moz-box-shadow: -1px 5px 6px 2px #193556 inset;
   -webkit-box-shadow: -1px 5px 6px 2px #193556 inset;
   -o-box-shadow: -1px 5px 6px 2px #193556 inset;
@@ -754,8 +754,8 @@ button div.ui-icon {
   background: -ms-linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
   background: linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
 }
-/* line 36, sass/_clickable.scss */
-.content table thead tr th.selected:hover, .content table thead tr th.ui-tabs-selected:hover {
+/* line 51, sass/_clickable.scss */
+.content table thead tr th.selected:hover {
   -moz-box-shadow: -1px 5px 6px 2px #193556 inset;
   -webkit-box-shadow: -1px 5px 6px 2px #193556 inset;
   -o-box-shadow: -1px 5px 6px 2px #193556 inset;
@@ -767,8 +767,8 @@ button div.ui-icon {
   background: -ms-linear-gradient(#3672b9 35%, #2a5991 45%, #3672b9 85%);
   background: linear-gradient(#3672b9 35%, #2a5991 45%, #3672b9 85%);
 }
-/* line 41, sass/_clickable.scss */
-.content table thead tr th.selected:active, .content table thead tr th.ui-tabs-selected:active {
+/* line 60, sass/_clickable.scss */
+.content table thead tr th.selected:active {
   -moz-box-shadow: -1px 5px 6px 3px #193556 inset;
   -webkit-box-shadow: -1px 5px 6px 3px #193556 inset;
   -o-box-shadow: -1px 5px 6px 3px #193556 inset;
@@ -780,8 +780,8 @@ button div.ui-icon {
   background: -ms-linear-gradient(#3066a5 35%, #254d7d 45%, #3066a5 85%);
   background: linear-gradient(#3066a5 35%, #254d7d 45%, #3066a5 85%);
 }
-/* line 46, sass/_clickable.scss */
-.content table thead tr th.disabled.selected, .content table thead tr th.disabled.ui-tabs-selected {
+/* line 68, sass/_clickable.scss */
+.content table thead tr th.selected[disabled] {
   -moz-box-shadow: -1px 5px 6px 2px #383838 inset;
   -webkit-box-shadow: -1px 5px 6px 2px #383838 inset;
   -o-box-shadow: -1px 5px 6px 2px #383838 inset;
@@ -793,12 +793,12 @@ button div.ui-icon {
   background: -ms-linear-gradient(#848484 35%, #777777 45%, #848484 85%);
   background: linear-gradient(#848484 35%, #777777 45%, #848484 85%);
 }
-/* line 275, sass/newLayout.scss */
+/* line 268, sass/newLayout.scss */
 .content table thead tr th div.ui-icon {
   margin-top: 2px;
   margin-bottom: 2px;
 }
-/* line 281, sass/newLayout.scss */
+/* line 274, sass/newLayout.scss */
 .content table tbody td {
   padding: 2px;
   line-height: 20px;
@@ -807,23 +807,23 @@ button div.ui-icon {
     border-right: 0px solid gray;
   }*/
 }
-/* line 288, sass/newLayout.scss */
+/* line 281, sass/newLayout.scss */
 .content table tbody td img {
   height: 20px;
   vertical-align: top;
   padding-right: 4px;
 }
-/* line 295, sass/newLayout.scss */
+/* line 288, sass/newLayout.scss */
 .content table tbody tr:nth-child(even) {
   background-color: #dee9f6;
 }
-/* line 298, sass/newLayout.scss */
+/* line 291, sass/newLayout.scss */
 .content table div.ui-icon {
   display: inline-block;
   vertical-align: top;
 }
 
-/* line 305, sass/newLayout.scss */
+/* line 298, sass/newLayout.scss */
 .sidebar {
   display: inline;
   float: left;
@@ -834,7 +834,7 @@ button div.ui-icon {
 * html .sidebar {
   overflow-x: hidden;
 }
-/* line 307, sass/newLayout.scss */
+/* line 300, sass/newLayout.scss */
 .sidebar div.sideItem {
   -moz-box-shadow: 0 0 10px 2px gray;
   -webkit-box-shadow: 0 0 10px 2px gray;
@@ -850,7 +850,7 @@ button div.ui-icon {
   -khtml-border-radius: 8px;
   border-radius: 8px;
 }
-/* line 310, sass/newLayout.scss */
+/* line 303, sass/newLayout.scss */
 .sidebar div.sideItem h1 {
   font-family: 'Arial', sans-serif;
   background-color: #04346c;
@@ -860,13 +860,13 @@ button div.ui-icon {
   font-size: 20px;
   color: white;
 }
-/* line 320, sass/newLayout.scss */
+/* line 313, sass/newLayout.scss */
 .sidebar div.sideItem li {
   line-height: 20px;
   list-style: none;
   margin: 5px;
 }
-/* line 324, sass/newLayout.scss */
+/* line 317, sass/newLayout.scss */
 .sidebar div.sideItem li div {
   display: inline-block;
   height: 20px;
@@ -874,20 +874,20 @@ button div.ui-icon {
   vertical-align: top;
   padding-right: 5px;
 }
-/* line 330, sass/newLayout.scss */
+/* line 323, sass/newLayout.scss */
 .sidebar div.sideItem li div img {
   height: 20px;
   width: 20px;
   vertical-align: top;
 }
-/* line 337, sass/newLayout.scss */
+/* line 330, sass/newLayout.scss */
 .sidebar div.sideItem li a {
   width: 100%;
   height: 100%;
   display: inline-block;
 }
 
-/* line 349, sass/newLayout.scss */
+/* line 342, sass/newLayout.scss */
 .footer {
   display: inline;
   float: left;
@@ -900,7 +900,7 @@ button div.ui-icon {
   overflow-x: hidden;
 }
 
-/* line 353, sass/newLayout.scss */
+/* line 346, sass/newLayout.scss */
 input {
   color: #7f7f7f;
   font-family: 'Times';
@@ -920,7 +920,7 @@ input {
   -o-box-shadow: -1px 1px 4px 1px #b2b2b2 inset;
   box-shadow: -1px 1px 4px 1px #b2b2b2 inset;
 }
-/* line 364, sass/newLayout.scss */
+/* line 357, sass/newLayout.scss */
 input:focus {
   outline-style: none;
   -moz-box-shadow: -1px 1px 4px 2px #727272 inset;
@@ -931,7 +931,7 @@ input:focus {
   color: black;
 }
 
-/* line 371, sass/newLayout.scss */
+/* line 364, sass/newLayout.scss */
 .topButtons, .bottomButtons {
   padding-top: 5px;
   padding-bottom: 5px;

@@ -13,7 +13,7 @@
 <% end %>
 
 <div id="left-news-box">
-  <div class="news-box">
+  <div class="panel">
     <% start_time = Time.now %>
     <h2>Models activity <span class="h2-explanation">(in the last 2 weeks)</span></h2>
 
@@ -33,7 +33,7 @@
     <!-- Time spent in news-box all-models: <%= Time.now - start_time-%> -->
   </div>
 
-  <div class="news-box">
+  <div class="panel">
     <% start_time = Time.now %>
     <% if @person == @the_person %>
     <h2>Recent activity in <%= link_to 'your models', :controller => :account, :action => :models, :id => @the_person.id -%>
@@ -55,7 +55,7 @@
     <!-- Time spent in news-box models: <%= Time.now - start_time-%> -->
   </div>
 
-  <div class="news-box">
+  <div class="panel">
     <% start_time = Time.now %>
     <% if @person == @the_person %>
     <h2>Recent activity in <%= link_to "your tags", :controller => :account, :action => :tags -%> </h2>
@@ -75,7 +75,7 @@
     <!-- Time spent in news-box tags: <%= Time.now - start_time-%> -->
   </div>
 
-  <div class="news-box">
+  <div class="panel">
     <h2>Recent requests for help</h2>
     <% if @questions.empty? %>
     <p>No questions to display</p>
@@ -104,7 +104,7 @@
 </div>
 
 <div id="right-news-box">
-  <div id="viewed-models" class="news-box">
+  <div id="viewed-models" class="panel">
     <% start_time = Time.now %>
     <h2>Most-viewed models <span class="h2-explanation">(of all time)</span></h2>
     <% if @all_time_most_viewed.empty? %>
@@ -120,7 +120,7 @@
     <!-- Time spent in all-time viewed-models: <%= Time.now - start_time-%> -->
   </div>
 
-  <div id="viewed-models" class="news-box">
+  <div id="viewed-models" class="panel">
     <% start_time = Time.now %>
     <h2>Most-viewed models <span class="h2-explanation">(in the last 2 weeks)</span></h2>
     <% if @most_viewed.empty? %>
@@ -136,7 +136,7 @@
     <!-- Time spent in viewed-models: <%= Time.now - start_time-%> -->
   </div>
 
-  <div id="recommended" class="news-box">
+  <div id="recommended" class="panel">
     <% start_time = Time.now %>
     <h2>Most-recommended models <span class="h2-explanation">(in the last 2 weeks)</span></h2>
     <% if @most_recommended_models.empty? %>
@@ -152,7 +152,7 @@
     <!-- Time spent in recommended: <%= Time.now - start_time-%> -->
   </div>
 
-  <div id="downloaded-models" class="news-box">
+  <div id="downloaded-models" class="panel">
     <% start_time = Time.now %>
     <h2>Most-downloaded models <span class="h2-explanation">(in the last 2 weeks)</span></h2>
     <% if @most_downloaded.empty? %>
@@ -168,7 +168,7 @@
     <!-- Time spent in downloaded-models: <%= Time.now - start_time-%> -->
   </div>
 
-  <div id="applied-tag" class="news-box">
+  <div id="applied-tag" class="panel">
     <% start_time = Time.now %>
     <h2>Most popular tags <span class="h2-explanation">(in the last 2 weeks)</span></h2>
     <% if @most_downloaded.empty? %>

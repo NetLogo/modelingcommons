@@ -1,0 +1,112 @@
+/* line 2, sass/test.scss */
+div {
+  color: black;
+  font-family: arial;
+  cursor: pointer;
+  border: 1px solid #d98500;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #ffb540), color-stop(45%, #ffa10d), color-stop(85%, #ffb540));
+  background: -webkit-linear-gradient(#ffb540 35%, #ffa10d 45%, #ffb540 85%);
+  background: -moz-linear-gradient(#ffb540 35%, #ffa10d 45%, #ffb540 85%);
+  background: -o-linear-gradient(#ffb540 35%, #ffa10d 45%, #ffb540 85%);
+  background: -ms-linear-gradient(#ffb540 35%, #ffa10d 45%, #ffb540 85%);
+  background: linear-gradient(#ffb540 35%, #ffa10d 45%, #ffb540 85%);
+  -moz-box-shadow: 0px 0px 1px 1px #ffc973 inset;
+  -webkit-box-shadow: 0px 0px 1px 1px #ffc973 inset;
+  -o-box-shadow: 0px 0px 1px 1px #ffc973 inset;
+  box-shadow: 0px 0px 1px 1px #ffc973 inset;
+}
+/* line 16, sass/_clickable.scss */
+div:hover {
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #ffa10d), color-stop(45%, #d98500), color-stop(85%, #ffa10d));
+  background: -webkit-linear-gradient(#ffa10d 35%, #d98500 45%, #ffa10d 85%);
+  background: -moz-linear-gradient(#ffa10d 35%, #d98500 45%, #ffa10d 85%);
+  background: -o-linear-gradient(#ffa10d 35%, #d98500 45%, #ffa10d 85%);
+  background: -ms-linear-gradient(#ffa10d 35%, #d98500 45%, #ffa10d 85%);
+  background: linear-gradient(#ffa10d 35%, #d98500 45%, #ffa10d 85%);
+  -moz-box-shadow: 0px 0px 1px 1px #ffb540 inset;
+  -webkit-box-shadow: 0px 0px 1px 1px #ffb540 inset;
+  -o-box-shadow: 0px 0px 1px 1px #ffb540 inset;
+  box-shadow: 0px 0px 1px 1px #ffb540 inset;
+}
+/* line 23, sass/_clickable.scss */
+div:active {
+  -moz-box-shadow: -1px 5px 6px 3px #734600 inset;
+  -webkit-box-shadow: -1px 5px 6px 3px #734600 inset;
+  -o-box-shadow: -1px 5px 6px 3px #734600 inset;
+  box-shadow: -1px 5px 6px 3px #734600 inset;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #d98500), color-stop(45%, #a66600), color-stop(85%, #d98500));
+  background: -webkit-linear-gradient(#d98500 35%, #a66600 45%, #d98500 85%);
+  background: -moz-linear-gradient(#d98500 35%, #a66600 45%, #d98500 85%);
+  background: -o-linear-gradient(#d98500 35%, #a66600 45%, #d98500 85%);
+  background: -ms-linear-gradient(#d98500 35%, #a66600 45%, #d98500 85%);
+  background: linear-gradient(#d98500 35%, #a66600 45%, #d98500 85%);
+  /*border: 1px solid darken($button-color, 40%);*/
+}
+/* line 32, sass/_clickable.scss */
+div[disabled] {
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #a9a296), color-stop(45%, #9e9588), color-stop(85%, #a9a296));
+  background: -webkit-linear-gradient(#a9a296 35%, #9e9588 45%, #a9a296 85%);
+  background: -moz-linear-gradient(#a9a296 35%, #9e9588 45%, #a9a296 85%);
+  background: -o-linear-gradient(#a9a296 35%, #9e9588 45%, #a9a296 85%);
+  background: -ms-linear-gradient(#a9a296 35%, #9e9588 45%, #a9a296 85%);
+  background: linear-gradient(#a9a296 35%, #9e9588 45%, #a9a296 85%);
+  -moz-box-shadow: 0px 0px 1px 1px #c0bbb2 inset;
+  -webkit-box-shadow: 0px 0px 1px 1px #c0bbb2 inset;
+  -o-box-shadow: 0px 0px 1px 1px #c0bbb2 inset;
+  box-shadow: 0px 0px 1px 1px #c0bbb2 inset;
+  border: 1px solid #92897a;
+  color: #404040;
+  cursor: default;
+}
+/* line 42, sass/_clickable.scss */
+div.selected {
+  -moz-box-shadow: -1px 5px 6px 2px #734600 inset;
+  -webkit-box-shadow: -1px 5px 6px 2px #734600 inset;
+  -o-box-shadow: -1px 5px 6px 2px #734600 inset;
+  box-shadow: -1px 5px 6px 2px #734600 inset;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #ffa10d), color-stop(45%, #d98500), color-stop(85%, #ffa10d));
+  background: -webkit-linear-gradient(#ffa10d 35%, #d98500 45%, #ffa10d 85%);
+  background: -moz-linear-gradient(#ffa10d 35%, #d98500 45%, #ffa10d 85%);
+  background: -o-linear-gradient(#ffa10d 35%, #d98500 45%, #ffa10d 85%);
+  background: -ms-linear-gradient(#ffa10d 35%, #d98500 45%, #ffa10d 85%);
+  background: linear-gradient(#ffa10d 35%, #d98500 45%, #ffa10d 85%);
+}
+/* line 51, sass/_clickable.scss */
+div.selected:hover {
+  -moz-box-shadow: -1px 5px 6px 2px #734600 inset;
+  -webkit-box-shadow: -1px 5px 6px 2px #734600 inset;
+  -o-box-shadow: -1px 5px 6px 2px #734600 inset;
+  box-shadow: -1px 5px 6px 2px #734600 inset;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #f39500), color-stop(45%, #c07500), color-stop(85%, #f39500));
+  background: -webkit-linear-gradient(#f39500 35%, #c07500 45%, #f39500 85%);
+  background: -moz-linear-gradient(#f39500 35%, #c07500 45%, #f39500 85%);
+  background: -o-linear-gradient(#f39500 35%, #c07500 45%, #f39500 85%);
+  background: -ms-linear-gradient(#f39500 35%, #c07500 45%, #f39500 85%);
+  background: linear-gradient(#f39500 35%, #c07500 45%, #f39500 85%);
+}
+/* line 60, sass/_clickable.scss */
+div.selected:active {
+  -moz-box-shadow: -1px 5px 6px 3px #734600 inset;
+  -webkit-box-shadow: -1px 5px 6px 3px #734600 inset;
+  -o-box-shadow: -1px 5px 6px 3px #734600 inset;
+  box-shadow: -1px 5px 6px 3px #734600 inset;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #d98500), color-stop(45%, #a66600), color-stop(85%, #d98500));
+  background: -webkit-linear-gradient(#d98500 35%, #a66600 45%, #d98500 85%);
+  background: -moz-linear-gradient(#d98500 35%, #a66600 45%, #d98500 85%);
+  background: -o-linear-gradient(#d98500 35%, #a66600 45%, #d98500 85%);
+  background: -ms-linear-gradient(#d98500 35%, #a66600 45%, #d98500 85%);
+  background: linear-gradient(#d98500 35%, #a66600 45%, #d98500 85%);
+}
+/* line 68, sass/_clickable.scss */
+div.selected[disabled] {
+  -moz-box-shadow: -1px 5px 6px 2px #3f3b34 inset;
+  -webkit-box-shadow: -1px 5px 6px 2px #3f3b34 inset;
+  -o-box-shadow: -1px 5px 6px 2px #3f3b34 inset;
+  box-shadow: -1px 5px 6px 2px #3f3b34 inset;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #92897a), color-stop(45%, #857c6d), color-stop(85%, #92897a));
+  background: -webkit-linear-gradient(#92897a 35%, #857c6d 45%, #92897a 85%);
+  background: -moz-linear-gradient(#92897a 35%, #857c6d 45%, #92897a 85%);
+  background: -o-linear-gradient(#92897a 35%, #857c6d 45%, #92897a 85%);
+  background: -ms-linear-gradient(#92897a 35%, #857c6d 45%, #92897a 85%);
+  background: linear-gradient(#92897a 35%, #857c6d 45%, #92897a 85%);
+}

@@ -1,48 +1,44 @@
 <% @title = "Welcome to the Modeling Commons!" %>
 
-<div id="login_form" class="panel">
-<h2>Already registered?  Please log in!</h2>
-
-<% form_tag({:action => :login_action}, :id => 'login-form') do %>
-<table>
-
-  <tr>
-    <td>E-mail address</td>
-    <td><%= text_field_tag :email_address %></td>
-  </tr>
-  <tr>
-    <td>Password</td>
-    <td><%= password_field_tag :password %></td>
-  </tr>
-
-  <tr>
-    <td colspan="2"><%= submit_tag "Login", :class => "submit", :id => "submit" %></td>
-  </tr>
-
-
-</table>
-<% end %>
-
-<p>Don't remember your password?  We can <%= link_to "reset it", :controller => :account, :action => :reset_password -%>.</p>
-
+<div id="register_new_user">
+	<div class="panel">
+	<h2>Want to share and participate?</h2>
+	<p>Just fill out our <%= link_to "registration", :controller => :account, :action => :new %> form.</p>
+	</div>
 </div>
 
-<div id="new_user_list" class="panel">
-<h2>Just visiting?  Welcome!</h2>
-
-<ul>
-    <li><%= link_to "Show all models", :controller => :browse, :action => :list_models -%></li>
-    <li><%= link_to "Show recent models", :controller => :browse, :action => :list_recent_models -%></li>
-    <li><%= link_to "View a random model", :controller => :browse, :action => :view_random_model -%></li>
-    <li><%= render :partial => "search/search_form" -%></li>
-</ul>
-
+<div id="login_exisiting_user">
+	<div class="panel">
+		<h2>Already registered?  Please log in!</h2>
+		<% form_tag({:action => :login_action}, :id => 'login-form') do %>
+		<table>
+			<tr>
+				<td>E-mail address</td>
+				<td><%= text_field_tag :email_address %></td>
+			</tr>
+			<tr>
+				<td>Password</td>
+				<td><%= password_field_tag :password %></td>
+			</tr>
+			<tr>
+				<td colspan="2"><%= submit_tag "Login", :class => "submit", :id => "submit" %></td>
+			</tr>
+		</table>
+		<% end %>
+		<p>Don't remember your password?  We can <%= link_to "reset it", :controller => :account, :action => :reset_password -%>.</p>
+	</div>
 </div>
 
-<div id="new_user_list" class="wide-panel">
-<h2>Want to share and participate?</h2>
-<p>Just fill out our <%= link_to "registration", :controller => :account, :action => :new %> form.</p>
-
+<div id="just_visiting">
+	<div class="panel">
+	<h2>Just visiting?  Welcome!</h2>
+	<ul>
+	    <li><%= link_to "Show all models", :controller => :browse, :action => :list_models -%></li>
+	    <li><%= link_to "Show recent models", :controller => :browse, :action => :list_recent_models -%></li>
+	    <li><%= link_to "View a random model", :controller => :browse, :action => :view_random_model -%></li>
+	    <li><%= render :partial => "search/search_form" -%></li>
+	</ul>
+	</div>
 </div>
 
 <script>

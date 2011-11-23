@@ -1,0 +1,6 @@
+@mixin sans-font() {
+  font-family: 'Arial', sans-serif;
+}
+@mixin serif-font() {
+  font-family: 'Times';
+}

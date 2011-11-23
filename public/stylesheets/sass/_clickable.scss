@@ -1,52 +1,75 @@
-@mixin clickable($color, $text-color: black) {
+@import "compass/css3";
+
+@mixin clickable($background-color: #FFB540, $text-color: black, $hover: ':hover', $active: ':active', $selected: '.selected', $disabled: '[disabled]') {
   $box-shadow-lighten: 10%;
   $hover-darken: 10%;
   $active-darken: 20%;
-  $disabled-color: desaturate($color, 90%);
+  $disabled-color: desaturate($background-color, 90%);
   color: $text-color;
   font-family: arial;
   cursor: pointer;
-  border: 1px solid darken($color, 20%);
-  @include background(linear-gradient($color 35%, darken($color, 10%) 45%, $color 85%));
-  @include box-shadow(0px 0px 1px 1px lighten($color, $box-shadow-lighten) inset);
-  &:hover {
-    @include background(linear-gradient(darken($color, $hover-darken) 35%, darken($color, $hover-darken + 10%) 45%, darken($color, $hover-darken) 85%));
-    @include box-shadow(0px 0px 1px 1px lighten($color, $box-shadow-lighten - $hover-darken) inset);
-  }
-  &:active {
-    
-    @include box-shadow(-1px 5px 6px 3px darken($color, 40%) inset);
-    @include background(linear-gradient(darken($color, $active-darken) 35%, darken($color, $active-darken + 10%) 45%, darken($color, $active-darken) 85%));
-    /*border: 1px solid darken($button-color, 40%);*/
+  border: 1px solid darken($background-color, 20%);
+  @include background(linear-gradient($background-color 35%, darken($background-color, 10%) 45%, $background-color 85%));
+  @include box-shadow(0px 0px 1px 1px lighten($background-color, $box-shadow-lighten) inset);
+  
+  @each $hover-item in $hover {
+    &#{$hover-item} {
+      @include background(linear-gradient(darken($background-color, $hover-darken) 35%, darken($background-color, $hover-darken + 10%) 45%, darken($background-color, $hover-darken) 85%));
+      @include box-shadow(0px 0px 1px 1px lighten($background-color, $box-shadow-lighten - $hover-darken) inset);
+    }
   }
   
-  &.disabled, &[disabled] {
-    
-    @include background(linear-gradient($disabled-color 35%, darken($disabled-color, 5%) 45%, $disabled-color 85%));
-    @include box-shadow(0px 0px 1px 1px lighten($disabled-color, $box-shadow-lighten) inset);
-    border: 1px solid darken($disabled-color, 10%);
-    color: lighten(desaturate($text-color, 90%), 25%);
-    cursor: default;
+  @each $active-item in $active {
+    &#{$active-item} {
+      
+      @include box-shadow(-1px 5px 6px 3px darken($background-color, 40%) inset);
+      @include background(linear-gradient(darken($background-color, $active-darken) 35%, darken($background-color, $active-darken + 10%) 45%, darken($background-color, $active-darken) 85%));
+      /*border: 1px solid darken($button-color, 40%);*/
+    }
   }
-  &.selected, &.ui-tabs-selected {
-    @include box-shadow(-1px 5px 6px 2px darken($color, 40%) inset);
-    @include background(linear-gradient(darken($color, 10%) 35%, darken($color, 20%) 45%, darken($color, 10%) 85%));
-    
+  
+  @each $disabled-item in $disabled {
+    &#{$disabled-item} {
+      @include background(linear-gradient($disabled-color 35%, darken($disabled-color, 5%) 45%, $disabled-color 85%));
+      @include box-shadow(0px 0px 1px 1px lighten($disabled-color, $box-shadow-lighten) inset);
+      border: 1px solid darken($disabled-color, 10%);
+      color: lighten(desaturate($text-color, 90%), 25%);
+      cursor: default;
+    }
   }
-  &.selected:hover, &.ui-tabs-selected:hover {
-    @include box-shadow(-1px 5px 6px 2px darken($color, 40%) inset);
-    @include background(linear-gradient(darken($color, 15%) 35%, darken($color, 25%) 45%, darken($color, 15%) 85%));
-    
+  
+  @each $selected-item in $selected {
+    &#{$selected-item} {
+      @include box-shadow(-1px 5px 6px 2px darken($background-color, 40%) inset);
+      @include background(linear-gradient(darken($background-color, 10%) 35%, darken($background-color, 20%) 45%, darken($background-color, 10%) 85%));
+      
+    }
   }
-  &.selected:active, &.ui-tabs-selected:active {
-    @include box-shadow(-1px 5px 6px 3px darken($color, 40%) inset);
-    @include background(linear-gradient(darken($color, $active-darken) 35%, darken($color, $active-darken + 10%) 45%, darken($color, $active-darken) 85%));
-    
+  
+  @each $selected-item in $selected {
+    @each $hover-item in $hover {
+      &#{$selected-item}#{$hover-item} {
+      @include box-shadow(-1px 5px 6px 2px darken($background-color, 40%) inset);
+      @include background(linear-gradient(darken($background-color, 15%) 35%, darken($background-color, 25%) 45%, darken($background-color, 15%) 85%));
+      }
+    }
   }
-  &.disabled.selected, &.disabled.ui-tabs-selected {
-    @include box-shadow(-1px 5px 6px 2px darken($disabled-color, 40%) inset);
-    @include background(linear-gradient(darken($disabled-color, 10%) 35%, darken($disabled-color, 15%) 45%, darken($disabled-color, 10%) 85%));
-    
+  
+  @each $selected-item in $selected {
+    @each $active-item in $active {
+      &#{$selected-item}#{$active-item} {
+        @include box-shadow(-1px 5px 6px 3px darken($background-color, 40%) inset);
+        @include background(linear-gradient(darken($background-color, $active-darken) 35%, darken($background-color, $active-darken + 10%) 45%, darken($background-color, $active-darken) 85%));
+      }
+    }
+  }
+  @each $selected-item in $selected {
+    @each $disabled-item in $disabled {
+      &#{$selected-item}#{$disabled-item} {
+        @include box-shadow(-1px 5px 6px 2px darken($disabled-color, 40%) inset);
+        @include background(linear-gradient(darken($disabled-color, 10%) 35%, darken($disabled-color, 15%) 45%, darken($disabled-color, 10%) 85%));    
+      }
+    }
   } 
 }
 

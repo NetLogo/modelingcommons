@@ -1,5 +1,5 @@
 <% @title = 'List of models' %>
-
+<div class="panel">
 <% if @person %>
 <p><%= link_to "Upload a new model", :controller => :upload, :action => :new_model -%></p>
 <% end %>
@@ -16,3 +16,4 @@
 
 <%= render :partial => "model_list", :object => @models %>
 <% end %>
+</div>

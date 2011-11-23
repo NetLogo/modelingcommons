@@ -1,5 +1,6 @@
 @import "compass/css3";
 @import "clickable";
+@import "font";
 
 /* Accordion
 ----------------------------------*/
@@ -153,14 +154,17 @@
 .ui-slider-vertical .ui-slider-range-min { bottom: 0; }
 .ui-slider-vertical .ui-slider-range-max { top: 0; }/* Tabs
 ----------------------------------*/
+$tab-height: 40px;
+$padding: 5px;
 .ui-tabs { zoom: 1}
-.ui-tabs .ui-tabs-nav { list-style: none; position: relative; /*padding: .2em .2em 0;*/ }
-.ui-tabs .ui-tabs-nav li { position: relative; float: left; /*border-bottom-width: 0 !important; margin: 0 .2em -1px 0;*/ padding: 0; @include clickable(#6899D3); @include border-bottom-left-radius(8px);@include border-bottom-right-radius(8px);}
-.ui-tabs .ui-tabs-nav li a { float: left; text-decoration: none; /*padding: .5em 1em; */}
+.ui-tabs .ui-tabs-nav { list-style: none; ; /*padding: .2em .2em 0;*/ }
+.ui-tabs .ui-tabs-nav li { float: left;  padding: 0px; text-align: center;font-size: 16px; @include sans-font();/*border-bottom-width: 0 !important; margin: 0 .2em -1px 0; padding: 0;*/ @include clickable($background-color: #6899D3, $selected: '.ui-tabs-selected'); @include border-bottom-left-radius(8px);@include border-bottom-right-radius(8px);}
+.ui-tabs .ui-tabs-nav li:first-child {@include border-top-left-radius(5px);}
+.ui-tabs .ui-tabs-nav li a { /*float: left;*/ display: inline-block; min-width: 80px; line-height: $tab-height - 2*$padding - 2px; padding: $padding; text-decoration: none; color: black;/*padding: .5em 1em; */}
 .ui-tabs .ui-tabs-nav li.ui-tabs-selected { /*padding-bottom: 1px; border-bottom-width: 0; */}
-.ui-tabs .ui-tabs-nav li.ui-tabs-selected a, .ui-tabs .ui-tabs-nav li.ui-state-disabled a, .ui-tabs .ui-tabs-nav li.ui-state-processing a { cursor: text; }
+.ui-tabs .ui-tabs-nav li.ui-tabs-selected a, .ui-tabs .ui-tabs-nav li.ui-state-disabled a, .ui-tabs .ui-tabs-nav li.ui-state-processing a { /*cursor: text;*/ }
 .ui-tabs .ui-tabs-nav li a, .ui-tabs.ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-selected a { cursor: pointer; } /* first selector in group seems obsolete, but required to overcome bug in Opera applying cursor: text overall if defined elsewhere... */
-.ui-tabs .ui-tabs-panel { /*padding: 1em 1.4em;*/ display: block; border-width: 0; background: none; }
+.ui-tabs .ui-tabs-panel { /*padding: 1em 1.4em;*/ display: block; border-width: 0; background: none; margin: 4px;}
 .ui-tabs .ui-tabs-hide { display: none !important; }
 
 
@@ -175,8 +179,8 @@
 /* Component containers
 ----------------------------------*/
 .ui-widget { font-family: Optima,Verdana,Arial,sans-serif; font-size: 0.8em; }
-.ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button { font-family: Optima,Verdana,Arial,sans-serif; font-size: 0.9em; }
-.ui-widget-content { border: 4px solid black;  color: #222222; color: inherit; font-family: inherit}
+.ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button { /*font-family: Optima,Verdana,Arial,sans-serif; font-size: 0.9em; */}
+.ui-widget-content { color: #222222; color: inherit; font-family: inherit}
 .ui-widget-header { /*border: 1px solid #aaaaaa; background: #cccccc url(/stylesheets/themes/nlcommons/images/ui-bg_highlight-soft_75_cccccc_1x100.png) 50% 50% repeat-x; color: #222222; font-weight: bold; */}
 .ui-widget-header a { color: #222222; }
 

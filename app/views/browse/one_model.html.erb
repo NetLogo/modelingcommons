@@ -1,73 +1,57 @@
 <% @title = @model.name %>
-
-<p><%= link_to image_tag("download.png", :height => 40, :width => 40, :border=>0, :alt => "Download the '#{@model.name}' model", :title => "Download the '#{@model.name}' model"), :controller => :browse, :action => :download_model, :id => @model.id   %> <%= link_to "Download this model", :controller => "browse", :action => "download_model", :id => @model.id -%> &bull;
-
-  By:
-  <%= @model.people.map {|person| person_link(person)}.join(", ") -%>
-  &bull;
-  <%= model_visibility(@model) %>
-  &bull;
-  <%= model_changeability(@model) %>
-
-  <% if @model.author?(@person) -%>
-  &bull;
-  <%= link_to "Rename this model", :controller => :browse, :action => :rename_model, :id => @model.id %>
-  <% end %>
-</p>
-
-<div id="preview-image-div">
-  <%= render :partial => "preview_image", :locals => {:model => @model} -%>
-</div>
-
-<% if !@model.projects.empty? %>
-<p>
-  Part of project '<%= link_to @model.projects.first.name, :controller => :projects, :action => :show, :id => @model.projects.first.id -%>'
-</p>
-<% end %>
-
-<% if @model.parent %>
-<p>Child of model <%= link_to @model.parent.name, :controller => 'browse', :action => 'one_model', :id => @model.parent.id  -%></p>
-<% end %>
-
-<p><% if not @model.children.empty? %>
-Parent of <%= pluralize(@model.children.size, 'model') -%>: <%= @model.children.map {|child| link_to child.name, :controller => 'browse', :action => 'one_model', :id => child.id }.to_sentence %>
-<% end %>
-</p>
-
-<p>
-
-
-
-
-<!--   <div id="model-atom-feed" id="atom-feed-link"><%= link_to image_tag("feed.png", :id => 'atom-image', :alt => "Follow '#{@model.name}' in your feed reader", :title => "Follow '#{@model.name}' in your feed reader"), :controller => :browse, :action => :follow, :id => @model.id, :format => :atom -%><%= link_to "Follow #{@model.name}", {:controller => :browse, :action => :follow, :id => @model.id, :format => :atom}, {:id => 'atom-feed'} %></div> -->
-  <!-- AddThis Button BEGIN -->
-  <a class="addthis_button" href="http://addthis.com/bookmark.php?v=250&amp;username=reuvenmlerner"><img src="http://s7.addthis.com/static/btn/v2/lg-share-en.gif" width="125" height="16" alt="Bookmark and Share" style="border:0"/></a><script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#username=reuvenmlerner"></script>
-  <!-- AddThis Button END -->
-
-  &bull;
-  <% if @person %>
-  <% if @model.recommendations.select {|r| r.person_id == @person.id}.empty? %>
-  <%= link_to image_tag("thumb.jpeg", :id => 'thumbs-up-image', :height => 30, :width => 30, :alt => "Recommend '#{@model.name}' to other users", :title => "Recommend '#{@model.name}' to other users"), :controller => :recommend, :action => :add_recommendation, :id => @model.id -%>
-  <%= link_to "Recommend", :controller => :recommend, :action => :add_recommendation, :id => @model.id %>
-  <% end %>
-
-  <% if !@model.recommendations.empty? %>
-  (<%= link_to pluralize(@model.recommendations.length, "recommendation"), :controller => :recommend, :action => :show_recommendations, :id => @model.id -%> to date)
-  <% end %>
-
-  &bull;
-
-  <% if !@model.spam_warnings.empty? %>
-  <%= pluralize(@model.spam_warnings.length, "person") %> marked it as spam
-  <% end %>
-
-  <% if !@person.spam_warning(@model) %>
-  <%= link_to "Report as spam", :controller => :possible_spam, :action => :mark_as_spam, :id => @model.id %>
-  <% end %>
-  <% end %>
-</p>
-
-<div id="model-tabs">
+	<!--Preview-->
+	<div id="model_preview">
+		<%= render :partial => "preview_image", :locals => {:model => @model} -%>
+	</div>
+	<div id="model_info">
+		<!--Info-->
+		<div id="general_info">
+				By <%= @model.people.map {|person| person_link(person)}.join(", ") -%> 
+				 | 
+			  	<%= model_visibility(@model) %>
+			  	 | 
+			  	<%= model_changeability(@model) %>
+		</div>
+		<div id="family_info">
+			<% if !@model.projects.empty? %>
+			Part of project '<%= link_to @model.projects.first.name, :controller => :projects, :action => :show, :id => @model.projects.first.id -%>'
+			<% end %>
+			
+			<% if @model.parent %>
+			Child of model <%= link_to @model.parent.name, :controller => 'browse', :action => 'one_model', :id => @model.parent.id  -%>
+			<% end %>
+			
+			<% if not @model.children.empty? %>
+			Parent of <%= pluralize(@model.children.size, 'model') -%>: <%= @model.children.map {|child| link_to child.name, :controller => 'browse', :action => 'one_model', :id => child.id }.to_sentence %>
+			<% end %>
+		</div>
+		<div id="actions">
+			<%= link_to image_tag("download.png", :class => "inline_image", :alt => "Download the '#{@model.name}' model", :title => "Download the '#{@model.name}' model"), :controller => "browse", :action => "download_model", :id => @model.id -%><%= link_to "Download this model", :controller => "browse", :action => "download_model", :id => @model.id -%>
+			<% if @person %>
+			<% if @model.recommendations.select {|r| r.person_id == @person.id}.empty? %>
+			 | 
+			<%= link_to image_tag("thumb.jpeg", :class => "inline_image", :alt => "Recommend '#{@model.name}' to other users", :title => "Recommend '#{@model.name}' to other users"), :controller => :recommend, :action => :add_recommendation, :id => @model.id -%><%= link_to "Recommend", :controller => :recommend, :action => :add_recommendation, :id => @model.id %>
+			<% end %>
+			<% if !@model.recommendations.empty? %>
+			(<%= link_to pluralize(@model.recommendations.length, "recommendation"), :controller => :recommend, :action => :show_recommendations, :id => @model.id -%> to date)
+			<% end %>
+			
+			<% if !@person.spam_warning(@model) %>
+			 | 
+			<%= link_to "Report as spam", :controller => :possible_spam, :action => :mark_as_spam, :id => @model.id %>
+			<% if !@model.spam_warnings.empty? %>
+			(<%= pluralize(@model.spam_warnings.length, "person") %> marked it as spam)
+			<% end %>
+			<% end %>
+			<% end %>
+			 | 
+			<!--   <div id="model-atom-feed" id="atom-feed-link"><%= link_to image_tag("feed.png", :id => 'atom-image', :alt => "Follow '#{@model.name}' in your feed reader", :title => "Follow '#{@model.name}' in your feed reader"), :controller => :browse, :action => :follow, :id => @model.id, :format => :atom -%><%= link_to "Follow #{@model.name}", {:controller => :browse, :action => :follow, :id => @model.id, :format => :atom}, {:id => 'atom-feed'} %></div> -->
+			<!-- AddThis Button BEGIN -->
+			<a class="addthis_button" href="http://addthis.com/bookmark.php?v=250&amp;username=reuvenmlerner"><img src="http://s7.addthis.com/static/btn/v2/lg-share-en.gif" width="125" height="16" alt="Bookmark and Share" style="border:0"/></a><script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#username=reuvenmlerner"></script>
+			<!-- AddThis Button END -->
+		</div>
+	</div>
+<div id="model-tabs" class="tabs_panel">
   <ul>
     <li><a href="<%= url_for :controller => :browse, :action => :browse_discuss_tab, :id => @model.id , :tab => 'true' -%>" title="discuss"><span>Discuss</span></a></li>
     <li><a href="<%= url_for :controller => :browse, :action => :browse_applet_tab, :id => @model.id , :tab => 'true' -%>" title="run"><span>Run</span></a></li>
