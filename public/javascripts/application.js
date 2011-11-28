@@ -115,32 +115,40 @@ jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
 $(document).ready(function () {
 
 	// Create the datatable
-	$(".datatable").dataTable({
+	$(".model_list_datatable").dataTable({
 		'aaSorting': [ [1, 'asc']],
+		"bAutoWidth": false,
 		"aoColumns": [
-			/*{
-				"bSortable": false
-			},*/
 			{
-				"sType": "html"
+				//Model
+				"sType": "html",
+				"sWidth": "38%"
 			},
 			{
-				"sType": "html"
+				//Owners
+				"sType": "html",
+				"sWidth": "15%"
 			},
 			{
-				"sType": "html"
+				//Tags
+				"sType": "html",
+				"sWidth": "20%"
 			},
 			{
-				"sType": "html"
+				//Group
+				"sType": "html",
+				"sWidth": "15%"
 			},
 			{
-				"sType": "num-first-span"
+				//Modified
+				"sType": "num-first-span",
+				"sWidth": "12%"
 			}
 		],
 		"sDom": '<"left-right top"<"left"p><"right"ilf>>t<"left-right bottom"<"left"p><"right">>',
 		"sPaginationType": "two_button_full_text"
 	});
-	
+	$(".dataTables_filter input").attr("placeholder", "Search Results");
 	// Clear 'search' from search input field on focus
 	$('#navbar-search-form-text').focus(function() {
 		if ($(this).val() == 'Search')
@@ -178,7 +186,13 @@ $(document).ready(function () {
 	    
 	// Search result tabs
 	// Not done with ajax
-	$("#searchTabs").tabs();
+	var disabledTabsList = [];
+	$("#search_tabs ul li").each(function(index, element) {
+		if($(element).hasClass("empty")) {
+			disabledTabsList.push(index);
+		}
+	});
+	$("#search_tabs").tabs({disabled: disabledTabsList});
 	
 	// Handle tabs for models (and groups, for that matter)
 	$("#model-tabs").tabs( {

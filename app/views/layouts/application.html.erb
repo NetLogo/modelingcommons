@@ -16,8 +16,8 @@
 		      });
 		    </script>
 		    <% end -%>
-			<div class="global_padding">
-			    <h1 id="main-title">
+		    <div class="title">
+				<h1 id="main-title">
 			      <% if @headline_avatar -%>
 			      <%= image_tag @headline_avatar -%>
 			      <% end -%>
@@ -29,7 +29,7 @@
 			      <% end -%>
 			    </h1>
 		    </div>
-		    <div class="global_padding">
+		    <div class="padded_content">
 		    	<%= yield :layout %>
 		    </div>
 	    </div>

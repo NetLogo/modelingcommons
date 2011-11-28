@@ -60,13 +60,13 @@ a img {
 /* line 16, sass/newLayout.scss */
 body {
   background-color: #F5F3E9;
-  font-family: 'Times';
+  font-family: 'Georgia', 'Times', serif;
 }
 
 /* line 20, sass/newLayout.scss */
 button {
   color: black;
-  font-family: arial;
+  font-family: 'Muli', 'Arial', sans-serif;
   cursor: pointer;
   border: 1px solid #3066a5;
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #6899d3), color-stop(45%, #417ec7), color-stop(85%, #6899d3));
@@ -93,7 +93,7 @@ button {
   -khtml-border-radius: 5px;
   border-radius: 5px;
 }
-/* line 16, sass/_clickable.scss */
+/* line 17, sass/_clickable.scss */
 button:hover {
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #417ec7), color-stop(45%, #3066a5), color-stop(85%, #417ec7));
   background: -webkit-linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
@@ -106,7 +106,7 @@ button:hover {
   -o-box-shadow: 0px 0px 1px 1px #6899d3 inset;
   box-shadow: 0px 0px 1px 1px #6899d3 inset;
 }
-/* line 23, sass/_clickable.scss */
+/* line 24, sass/_clickable.scss */
 button:active {
   -moz-box-shadow: -1px 5px 6px 3px #193556 inset;
   -webkit-box-shadow: -1px 5px 6px 3px #193556 inset;
@@ -120,7 +120,7 @@ button:active {
   background: linear-gradient(#3066a5 35%, #254d7d 45%, #3066a5 85%);
   /*border: 1px solid darken($button-color, 40%);*/
 }
-/* line 32, sass/_clickable.scss */
+/* line 33, sass/_clickable.scss */
 button[disabled] {
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #9e9e9e), color-stop(45%, #919191), color-stop(85%, #9e9e9e));
   background: -webkit-linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
@@ -133,10 +133,11 @@ button[disabled] {
   -o-box-shadow: 0px 0px 1px 1px #b7b7b7 inset;
   box-shadow: 0px 0px 1px 1px #b7b7b7 inset;
   border: 1px solid #848484;
-  color: #404040;
+  color: black;
   cursor: default;
+  opacity: .5;
 }
-/* line 42, sass/_clickable.scss */
+/* line 44, sass/_clickable.scss */
 button.selected {
   -moz-box-shadow: -1px 5px 6px 2px #193556 inset;
   -webkit-box-shadow: -1px 5px 6px 2px #193556 inset;
@@ -149,7 +150,7 @@ button.selected {
   background: -ms-linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
   background: linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
 }
-/* line 51, sass/_clickable.scss */
+/* line 53, sass/_clickable.scss */
 button.selected:hover {
   -moz-box-shadow: -1px 5px 6px 2px #193556 inset;
   -webkit-box-shadow: -1px 5px 6px 2px #193556 inset;
@@ -162,7 +163,7 @@ button.selected:hover {
   background: -ms-linear-gradient(#3672b9 35%, #2a5991 45%, #3672b9 85%);
   background: linear-gradient(#3672b9 35%, #2a5991 45%, #3672b9 85%);
 }
-/* line 60, sass/_clickable.scss */
+/* line 62, sass/_clickable.scss */
 button.selected:active {
   -moz-box-shadow: -1px 5px 6px 3px #193556 inset;
   -webkit-box-shadow: -1px 5px 6px 3px #193556 inset;
@@ -175,7 +176,7 @@ button.selected:active {
   background: -ms-linear-gradient(#3066a5 35%, #254d7d 45%, #3066a5 85%);
   background: linear-gradient(#3066a5 35%, #254d7d 45%, #3066a5 85%);
 }
-/* line 68, sass/_clickable.scss */
+/* line 70, sass/_clickable.scss */
 button.selected[disabled] {
   -moz-box-shadow: -1px 5px 6px 2px #383838 inset;
   -webkit-box-shadow: -1px 5px 6px 2px #383838 inset;
@@ -223,7 +224,7 @@ button div.ui-icon {
 
 /* line 45, sass/newLayout.scss */
 .header {
-  font-family: 'Arial', sans-serif;
+  font-family: 'Muli', 'Arial', sans-serif;
   display: inline;
   float: left;
   margin-right: 0px;
@@ -303,7 +304,7 @@ button div.ui-icon {
   float: left;
   position: relative;
   margin: 0 -40px 1.5em 40px;
-  font-family: 'Times';
+  font-family: 'Georgia', 'Times', serif;
 }
 /* line 147, ../../../../../.rvm/gems/ruby-1.8.7-p352/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
 * html .header .login {
@@ -448,7 +449,7 @@ button div.ui-icon {
 /* line 180, sass/newLayout.scss */
 .content .content-title h1 {
   font-size: 30px;
-  font-family: 'Arial', sans-serif;
+  font-family: 'Muli', 'Arial', sans-serif;
 }
 /* line 186, sass/newLayout.scss */
 .content div.left-right {
@@ -483,7 +484,7 @@ button div.ui-icon {
 /* line 208, sass/newLayout.scss */
 .content .tabs .tabBar li {
   color: black;
-  font-family: arial;
+  font-family: 'Muli', 'Arial', sans-serif;
   cursor: pointer;
   border: 1px solid #3066a5;
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #6899d3), color-stop(45%, #417ec7), color-stop(85%, #6899d3));
@@ -496,7 +497,7 @@ button div.ui-icon {
   -webkit-box-shadow: 0px 0px 1px 1px #8fb4df inset;
   -o-box-shadow: 0px 0px 1px 1px #8fb4df inset;
   box-shadow: 0px 0px 1px 1px #8fb4df inset;
-  font-family: 'Arial', sans-serif;
+  font-family: 'Muli', 'Arial', sans-serif;
   color: black;
   float: left;
   line-height: 28px;
@@ -517,7 +518,7 @@ button div.ui-icon {
   min-width: 80px;
   text-align: center;
 }
-/* line 16, sass/_clickable.scss */
+/* line 17, sass/_clickable.scss */
 .content .tabs .tabBar li:hover {
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #417ec7), color-stop(45%, #3066a5), color-stop(85%, #417ec7));
   background: -webkit-linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
@@ -530,7 +531,7 @@ button div.ui-icon {
   -o-box-shadow: 0px 0px 1px 1px #6899d3 inset;
   box-shadow: 0px 0px 1px 1px #6899d3 inset;
 }
-/* line 23, sass/_clickable.scss */
+/* line 24, sass/_clickable.scss */
 .content .tabs .tabBar li:active {
   -moz-box-shadow: -1px 5px 6px 3px #193556 inset;
   -webkit-box-shadow: -1px 5px 6px 3px #193556 inset;
@@ -544,7 +545,7 @@ button div.ui-icon {
   background: linear-gradient(#3066a5 35%, #254d7d 45%, #3066a5 85%);
   /*border: 1px solid darken($button-color, 40%);*/
 }
-/* line 32, sass/_clickable.scss */
+/* line 33, sass/_clickable.scss */
 .content .tabs .tabBar li[disabled] {
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #9e9e9e), color-stop(45%, #919191), color-stop(85%, #9e9e9e));
   background: -webkit-linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
@@ -557,10 +558,11 @@ button div.ui-icon {
   -o-box-shadow: 0px 0px 1px 1px #b7b7b7 inset;
   box-shadow: 0px 0px 1px 1px #b7b7b7 inset;
   border: 1px solid #848484;
-  color: #404040;
+  color: black;
   cursor: default;
+  opacity: .5;
 }
-/* line 42, sass/_clickable.scss */
+/* line 44, sass/_clickable.scss */
 .content .tabs .tabBar li.selected {
   -moz-box-shadow: -1px 5px 6px 2px #193556 inset;
   -webkit-box-shadow: -1px 5px 6px 2px #193556 inset;
@@ -573,7 +575,7 @@ button div.ui-icon {
   background: -ms-linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
   background: linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
 }
-/* line 51, sass/_clickable.scss */
+/* line 53, sass/_clickable.scss */
 .content .tabs .tabBar li.selected:hover {
   -moz-box-shadow: -1px 5px 6px 2px #193556 inset;
   -webkit-box-shadow: -1px 5px 6px 2px #193556 inset;
@@ -586,7 +588,7 @@ button div.ui-icon {
   background: -ms-linear-gradient(#3672b9 35%, #2a5991 45%, #3672b9 85%);
   background: linear-gradient(#3672b9 35%, #2a5991 45%, #3672b9 85%);
 }
-/* line 60, sass/_clickable.scss */
+/* line 62, sass/_clickable.scss */
 .content .tabs .tabBar li.selected:active {
   -moz-box-shadow: -1px 5px 6px 3px #193556 inset;
   -webkit-box-shadow: -1px 5px 6px 3px #193556 inset;
@@ -599,7 +601,7 @@ button div.ui-icon {
   background: -ms-linear-gradient(#3066a5 35%, #254d7d 45%, #3066a5 85%);
   background: linear-gradient(#3066a5 35%, #254d7d 45%, #3066a5 85%);
 }
-/* line 68, sass/_clickable.scss */
+/* line 70, sass/_clickable.scss */
 .content .tabs .tabBar li.selected[disabled] {
   -moz-box-shadow: -1px 5px 6px 2px #383838 inset;
   -webkit-box-shadow: -1px 5px 6px 2px #383838 inset;
@@ -659,13 +661,13 @@ button div.ui-icon {
 }
 /* line 253, sass/newLayout.scss */
 .content table thead tr {
-  font-family: 'Arial', sans-serif;
+  font-family: 'Muli', 'Arial', sans-serif;
   background-color: blue;
 }
 /* line 257, sass/newLayout.scss */
 .content table thead tr th {
   color: black;
-  font-family: arial;
+  font-family: 'Muli', 'Arial', sans-serif;
   cursor: pointer;
   border: 1px solid #3066a5;
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #6899d3), color-stop(45%, #417ec7), color-stop(85%, #6899d3));
@@ -698,7 +700,7 @@ button div.ui-icon {
   padding-bottom: 2px;
   line-height: 20px;
 }
-/* line 16, sass/_clickable.scss */
+/* line 17, sass/_clickable.scss */
 .content table thead tr th:hover {
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #417ec7), color-stop(45%, #3066a5), color-stop(85%, #417ec7));
   background: -webkit-linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
@@ -711,7 +713,7 @@ button div.ui-icon {
   -o-box-shadow: 0px 0px 1px 1px #6899d3 inset;
   box-shadow: 0px 0px 1px 1px #6899d3 inset;
 }
-/* line 23, sass/_clickable.scss */
+/* line 24, sass/_clickable.scss */
 .content table thead tr th:active {
   -moz-box-shadow: -1px 5px 6px 3px #193556 inset;
   -webkit-box-shadow: -1px 5px 6px 3px #193556 inset;
@@ -725,7 +727,7 @@ button div.ui-icon {
   background: linear-gradient(#3066a5 35%, #254d7d 45%, #3066a5 85%);
   /*border: 1px solid darken($button-color, 40%);*/
 }
-/* line 32, sass/_clickable.scss */
+/* line 33, sass/_clickable.scss */
 .content table thead tr th[disabled] {
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #9e9e9e), color-stop(45%, #919191), color-stop(85%, #9e9e9e));
   background: -webkit-linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
@@ -738,10 +740,11 @@ button div.ui-icon {
   -o-box-shadow: 0px 0px 1px 1px #b7b7b7 inset;
   box-shadow: 0px 0px 1px 1px #b7b7b7 inset;
   border: 1px solid #848484;
-  color: #404040;
+  color: black;
   cursor: default;
+  opacity: .5;
 }
-/* line 42, sass/_clickable.scss */
+/* line 44, sass/_clickable.scss */
 .content table thead tr th.selected {
   -moz-box-shadow: -1px 5px 6px 2px #193556 inset;
   -webkit-box-shadow: -1px 5px 6px 2px #193556 inset;
@@ -754,7 +757,7 @@ button div.ui-icon {
   background: -ms-linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
   background: linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
 }
-/* line 51, sass/_clickable.scss */
+/* line 53, sass/_clickable.scss */
 .content table thead tr th.selected:hover {
   -moz-box-shadow: -1px 5px 6px 2px #193556 inset;
   -webkit-box-shadow: -1px 5px 6px 2px #193556 inset;
@@ -767,7 +770,7 @@ button div.ui-icon {
   background: -ms-linear-gradient(#3672b9 35%, #2a5991 45%, #3672b9 85%);
   background: linear-gradient(#3672b9 35%, #2a5991 45%, #3672b9 85%);
 }
-/* line 60, sass/_clickable.scss */
+/* line 62, sass/_clickable.scss */
 .content table thead tr th.selected:active {
   -moz-box-shadow: -1px 5px 6px 3px #193556 inset;
   -webkit-box-shadow: -1px 5px 6px 3px #193556 inset;
@@ -780,7 +783,7 @@ button div.ui-icon {
   background: -ms-linear-gradient(#3066a5 35%, #254d7d 45%, #3066a5 85%);
   background: linear-gradient(#3066a5 35%, #254d7d 45%, #3066a5 85%);
 }
-/* line 68, sass/_clickable.scss */
+/* line 70, sass/_clickable.scss */
 .content table thead tr th.selected[disabled] {
   -moz-box-shadow: -1px 5px 6px 2px #383838 inset;
   -webkit-box-shadow: -1px 5px 6px 2px #383838 inset;
@@ -852,7 +855,7 @@ button div.ui-icon {
 }
 /* line 303, sass/newLayout.scss */
 .sidebar div.sideItem h1 {
-  font-family: 'Arial', sans-serif;
+  font-family: 'Muli', 'Arial', sans-serif;
   background-color: #04346c;
   text-align: center;
   padding-top: 5px;
@@ -903,7 +906,7 @@ button div.ui-icon {
 /* line 346, sass/newLayout.scss */
 input {
   color: #7f7f7f;
-  font-family: 'Times';
+  font-family: 'Georgia', 'Times', serif;
   line-height: 18px;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;

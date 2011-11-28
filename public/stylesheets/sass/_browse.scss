@@ -1,10 +1,16 @@
+@import "font";
+
+/*
+ * This appears to have been used by _model_tab.html.erb, which has been replaced by one_model.html.erb
+ */
+/*
 .main-div {
     position: absolute;
     margin: 2px;
     top: 100px;
     width: 60%;
     left: 10px;
-}
+}*/
 
 /*.ui-corner-all {
     clear: both;
@@ -17,18 +23,29 @@
     margin-right: 20px;
 }*/
 
+
+/*
+ * Used by browse_preview_tab.html.erb 
+ * Which appears to be unused, as it is not a one_model tab
+ */
+
+/*
 img#big-preview-image  {
     width: 400px;
     height: 400px;
     float: left;
 }
+*/
 
 .model-tab, .group-tabs {
-    border: 1px solid;
     background: #fff;
     padding: 10px;
 }
 
+/* 
+ * Procedures Tab
+ * Code coloring
+ */
 .proc-to, .proc-end {
     color: #b3b;
 }
@@ -42,6 +59,10 @@ img#big-preview-image  {
     background-color: #ff0;
 }
 
+/* 
+ * This seems to be used for the add tag part of the edit model page
+ */
+
 .one-model-div {
     background-color: #fff;
     display: none;
@@ -53,11 +74,14 @@ img#big-preview-image  {
     display: block;
     clear: left;
 }
-
+/*
+ * This is used nowhere
+ */
+/*
 #menu-div {
-    font-family: Optima, sans-serif;
+    @include sans-font();
 }
-
+*/
 #discussion tr td {
     border: 1px solid;
     padding: 5px;

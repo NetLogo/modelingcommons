@@ -1,35 +1,14 @@
 $nav-color: #04346C;
 $nav-text-color: white;
-$header-color: lighten(#6899D3, 0%);
+$header-color: lighten(#6899D3, 10%);
 $text-highlight: #FF5C00;
 $tab-corner-radius: 8px;
 $input-radius: 5px;
 $button-color: #FFB540;
 $error-color: red;
 
-.global_padding {
+
+@mixin global_padding {
   margin: 4px;
 }
 
-div.left-right {
-    width: 100%;
-    display: table;
-    div.left {
-      display: table-cell;
-      text-align: left;
-    }
-    div.right {
-      display: table-cell;
-      text-align: right;
-    }
-}
-
-.panel {
-  @extend .global_padding;
-  border: 3px solid black;
-  @include border-radius(8px);
-  padding: 4px;
-  ul {
-      padding-left: 40px;
-  }
-}
