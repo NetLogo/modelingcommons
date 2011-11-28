@@ -197,6 +197,10 @@ body {
   ul {
       padding-left: 40px;
   }
+  h1, h2, h3 {
+    margin-top: 16px;
+    margin-bottom: 6px;
+  }
 }
 
 
@@ -237,6 +241,28 @@ body {
     @include global_padding;
   }
 }
+
+.posting-title {
+    font-weight: bold;
+}
+
+applet {
+    float: left;
+}
+
+/* 
+ * Code Highlighting 
+ * Proc is procedure
+ */
+.proc-to, .proc-end {
+    color: #b3b;
+}
+
+.proc-comment {
+    color: #282;
+    font-style: italic;
+}
+
 
 
 /* 
@@ -435,7 +461,6 @@ button, input[type=button], input[type=submit] {
     thead tr {
 
       @include sans-font();
-      background-color: blue;
       th {
         @include clickable($background-color: $header-color, $selected: '.sorting_asc' '.sorting_desc');
         @include border-top-right-radius(5px);
@@ -485,11 +510,24 @@ button, input[type=button], input[type=submit] {
     }
 }
 
-table {
+table.simple_table {
   border-collapse: collapse;
   img {
     vertical-align: middle;
   }
+  th {
+    font-weight: bold;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+  td {
+    border: 1px solid;
+    padding: 5px;
+  }
+}
+
+.highlight {
+    background-color: #ff0;
 }
 
 

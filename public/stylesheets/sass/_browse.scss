@@ -36,28 +36,18 @@ img#big-preview-image  {
     float: left;
 }
 */
-
+/* 
+ * Not used anywhere
+ */
+/*
 .model-tab, .group-tabs {
     background: #fff;
     padding: 10px;
 }
+*/
 
-/* 
- * Procedures Tab
- * Code coloring
- */
-.proc-to, .proc-end {
-    color: #b3b;
-}
 
-.proc-comment {
-    color: #282;
-    font-style: italic;
-}
 
-.highlight {
-    background-color: #ff0;
-}
 
 /* 
  * This seems to be used for the add tag part of the edit model page
@@ -82,20 +72,15 @@ img#big-preview-image  {
     @include sans-font();
 }
 */
-#discussion tr td {
-    border: 1px solid;
-    padding: 5px;
-}
 
-.posting-title {
-    font-weight: bold;
-}
 
-applet {
-    float: left;
-}
+/* 
+ * This doesn't seem to be used anywhere
+ */
 
+/*
 #activity {
     margin-left: 10px;
     float: left;
 }
+*/
