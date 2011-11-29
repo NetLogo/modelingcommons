@@ -1,33 +1,43 @@
+<!-- This partial is the actual table that contains the list of models.-->
 <% @render_time = Hash.new(0) %>
 
-<table class="datatable" border="1">
+<table class="model_list_datatable dataTables" border="1">
 
   <thead>
     <tr>
-      <th>Preview</th>
-      <th>Model</th>
-      <th>Owners</th>
-      <th>Tags</th>
-      <th>Group</th>
-      <th>Modified</th>
+      <!--<th>Preview</th>-->
+      <th><div class="ui-icon"></div>Model</th>
+      <th><div class="ui-icon"></div>Owners</th>
+      <th><div class="ui-icon"></div>Tags</th>
+      <th><div class="ui-icon"></div>Group</th>
+      <th><div class="ui-icon"></div>Modified</th>
     </tr>
   </thead>
   <tbody>
 
     <% model_list.each do |model| %>
 
-    <tr class="<%= cycle('even', 'odd') -%>">
-      <td>
+    <tr>
+      <!--<td>
         <% start_time = Time.now -%>
         <img src="/browse/display_preview/<%= model.id %>" width="30" height="30" alt="Preview of model '<%= model.name -%>'" />
-        <% @render_time[:preview] += Time.now - start_time -%>
+        <% @render_time[:preview] += Time.now - start_time -%>-->
         <!-- Preview render time = <%= Time.now - start_time  -%> -->
-      </td>
+      <!--</td>-->
       <td>
         <% start_time = Time.now -%>
         <!-- <%= model.name -%> -->
-        <%= link_to model.name, :controller => "browse", :action => "one_model", :id => model.id %>
+        <table>
+        	<tr>
+        		<td><img src="/browse/display_preview/<%= model.id %>" width="30" height="30" alt="Preview of model '<%= model.name -%>'" /></td>
+        		<td><%= link_to model.name, :controller => "browse", :action => "one_model", :id => model.id %></td>
+        	</tr>
+        </table>
+        <!--<div class="preview"></div>
+  		<div class="cell-content"></div>-->
+        
         <% @render_time[:name] += Time.now - start_time -%>
+        <!-- Preview render time = <%= Time.now - start_time  -%> -->
         <!-- Name render time = <%= Time.now - start_time  -%> -->
       </td>
 

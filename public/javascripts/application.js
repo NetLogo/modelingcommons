@@ -19,33 +19,136 @@ jQuery.fn.dataTableExt.oSort['num-first-span-desc'] = function(a,b) {
 	return ((x < y) ?  1 : ((x > y) ? -1 : 0));
 };
 
+jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
+	
+	"fnInit": function ( oSettings, nPaging, fnCallbackDraw )
+	{
+		var nPrevious, nNext, nPreviousInner, nNextInner;
+		
+		nPrevious = document.createElement( 'button' );
+		nNext = document.createElement( 'button' );
+		
+		nPreviousInner = document.createElement('div');
+		nPreviousInner.className = 'ui-icon';
+		nPrevious.appendChild(nPreviousInner);
+		
+		nPreviousInner = document.createTextNode('Previous');
+		nPrevious.appendChild(nPreviousInner);
+		
+		nNextInner = document.createTextNode('Next');
+		nNext.appendChild(nNextInner);
+		
+		nNextInner = document.createElement('div');
+		nNextInner.className = 'ui-icon';
+		nNext.appendChild(nNextInner);
+		
+		nPrevious.className = oSettings.oClasses.sPagePrevDisabled;
+		nNext.className = oSettings.oClasses.sPageNextDisabled;
+		
+		nPrevious.title = oSettings.oLanguage.oPaginate.sPrevious;
+		nNext.title = oSettings.oLanguage.oPaginate.sNext;
+		
+		nPaging.appendChild( nPrevious );
+		nPaging.appendChild( nNext );
+		
+		$(nPrevious).bind( 'click.DT', function() {
+			if ( oSettings.oApi._fnPageChange( oSettings, "previous" ) )
+			{
+				/* Only draw when the page has actually changed */
+				fnCallbackDraw( oSettings );
+			}
+		} );
+		
+		$(nNext).bind( 'click.DT', function() {
+			if ( oSettings.oApi._fnPageChange( oSettings, "next" ) )
+			{
+				fnCallbackDraw( oSettings );
+			}
+		} );
+		
+		/* Take the brutal approach to cancelling text selection */
+		$(nPrevious).bind( 'selectstart.DT', function () { return false; } );
+		$(nNext).bind( 'selectstart.DT', function () { return false; } );
+		
+		/* ID the first elements only */
+		if ( oSettings.sTableId !== '' && typeof oSettings.aanFeatures.p == "undefined" )
+		{
+			nPaging.setAttribute( 'id', oSettings.sTableId+'_paginate' );
+			nPrevious.setAttribute( 'id', oSettings.sTableId+'_previous' );
+			nNext.setAttribute( 'id', oSettings.sTableId+'_next' );
+		}
+	},
+	
+	/*
+	 * Function: oPagination.two_button.fnUpdate
+	 * Purpose:  Update the two button pagination at the end of the draw
+	 * Returns:  -
+	 * Inputs:   object:oSettings - dataTables settings object
+	 *           function:fnCallbackDraw - draw function to call on page change
+	 */
+	"fnUpdate": function ( oSettings, fnCallbackDraw )
+	{
+		if ( !oSettings.aanFeatures.p )
+		{
+			return;
+		}
+		
+		/* Loop over each instance of the pager */
+		var an = oSettings.aanFeatures.p;
+		for ( var i=0, iLen=an.length ; i<iLen ; i++ )
+		{
+			if ( an[i].childNodes.length !== 0 )
+			{
+				an[i].childNodes[0].className = 
+					( oSettings._iDisplayStart === 0 ) ? 
+					oSettings.oClasses.sPagePrevDisabled : oSettings.oClasses.sPagePrevEnabled;
+				
+				an[i].childNodes[1].className = 
+					( oSettings.fnDisplayEnd() == oSettings.fnRecordsDisplay() ) ? 
+					oSettings.oClasses.sPageNextDisabled : oSettings.oClasses.sPageNextEnabled;
+			}
+		}
+	}
+};
+ 
+
 $(document).ready(function () {
 
 	// Create the datatable
-	$(".datatable").dataTable({
+	$(".model_list_datatable").dataTable({
 		'aaSorting': [ [1, 'asc']],
+		"bAutoWidth": false,
 		"aoColumns": [
 			{
-				"bSortable": false
+				//Model
+				"sType": "html",
+				"sWidth": "38%"
 			},
 			{
-				"sType": "html"
+				//Owners
+				"sType": "html",
+				"sWidth": "15%"
 			},
 			{
-				"sType": "html"
+				//Tags
+				"sType": "html",
+				"sWidth": "20%"
 			},
 			{
-				"sType": "html"
+				//Group
+				"sType": "html",
+				"sWidth": "15%"
 			},
 			{
-				"sType": "html"
-			},
-			{
-				"sType": "num-first-span"
+				//Modified
+				"sType": "num-first-span",
+				"sWidth": "12%"
 			}
-		]
+		],
+		"sDom": '<"left-right top"<"left"p><"right"ilf>>t<"left-right bottom"<"left"p><"right">>',
+		"sPaginationType": "two_button_full_text"
 	});
-	
+	$(".dataTables_filter input").attr("placeholder", "Search Results");
 	// Clear 'search' from search input field on focus
 	$('#navbar-search-form-text').focus(function() {
 		if ($(this).val() == 'Search')
@@ -83,7 +186,13 @@ $(document).ready(function () {
 	    
 	// Search result tabs
 	// Not done with ajax
-	$("#searchTabs").tabs();
+	var disabledTabsList = [];
+	$("#search_tabs ul li").each(function(index, element) {
+		if($(element).hasClass("empty")) {
+			disabledTabsList.push(index);
+		}
+	});
+	$("#search_tabs").tabs({disabled: disabledTabsList});
 	
 	// Handle tabs for models (and groups, for that matter)
 	$("#model-tabs").tabs( {

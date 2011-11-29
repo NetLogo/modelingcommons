@@ -2,83 +2,38 @@
           "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
-    <% @env_title = (Rails.env == 'production' ? '' :  '[DEVELOPMENT/STAGING SERVER]' ) %> 
-    <title><%= @env_title -%>NetLogo Modeling Commons -- <%= @title %></title>
-
-    <%= stylesheet_link_tag 'nlcommons', 'browse', 'jquery.autocomplete', 'ui.everything.css', :cache => false -%>
-    <!-- defaults below here -->
-    <%= javascript_include_tag 'jquery', 'jquery-ui', 'jquery.livequery', 'jquery.autocomplete', 'jquery.validate.pack.js', 'jquery.dataTables', 'application', 'jquery.timeago', :cache => false -%>
-
+  	<%= render :partial => "layouts/head" -%>
   </head>
   <body>
-    <div id="main-menu-div">
-      <ul id="main-menu">
-        <li class="menu-option"><%= link_to "Home", :controller => :account, :action => :mypage %></li>
-        <li class="menu-option"><%= link_to "List models", :controller => :browse, :action => :list_models %></li>
-        <% if @person %>
-        <li class="menu-option"><%= link_to "Add model", :controller => :upload, :action => :new_model %></li>
-        <li class="menu-option"><%= link_to "Projects", :controller => :projects, :action => :index %></li>
-        <li class="menu-option"><%= link_to "Groups", :controller => :account, :action => :groups %></li>
-        <li class="menu-option"><%= link_to "Tags", :controller => :account, :action => :tags, :id => @person.id  %></li>
-        <% end %>
-        <li class="menu-option"><%= link_to "Help", :controller => :help, :action => :index  %></li>
-        <li id="header_search_form_box">
-
-          <% form_tag(url_for(:controller => :search, :action => :search_action), { :id => "navbar-search-form"}) do %>
-          <%= text_field_tag :search_term, 'Search', {:size => 5, :id => 'navbar-search-form-text', :class => 'blank'} -%>
-          <input style="display: none;" type="submit" value="Search!" />
-
-          <% end %>
-
-        </li>
-
-      </ul>
+  	<div class="container">
+  		<%= render :partial => "layouts/page_header" -%>
+		<div class="content">
+		    <% if flash[:notice] -%>
+		    <div id="flash-notice"><%= flash[:notice] -%></div>
+		    <script type="text/javascript">
+		      $(document).ready(function() {
+		      $('#flash-notice').fadeOut(2500);
+		      });
+		    </script>
+		    <% end -%>
+		    <div class="title">
+				<h1 id="main-title">
+			      <% if @headline_avatar -%>
+			      <%= image_tag @headline_avatar -%>
+			      <% end -%>
+			
+			      <% if @headline.blank? -%>
+			      <%= @title -%>
+			      <% else -%>
+			      <%= @headline -%>
+			      <% end -%>
+			    </h1>
+		    </div>
+		    <div class="padded_content">
+		    	<%= yield :layout %>
+		    </div>
+	    </div>
     </div>
-
-    <% if @person %>
-    <div id="menubar-avatar">
-      <%= person_image(@person) %>
-    </div>
-    <% end %>
-
-    <div id="logged-in-as">
-      <% if @person %>
-      Logged in as <%= link_to @person.fullname, :controller => :account, :action => :mypage -%>
-      <br />
-      <%= link_to_unless_current "Edit personal details", :controller => :account, :action => :edit, :id => @person.id %> &bull;
-      <%= link_to_unless_current "Logout", :controller => :account, :action => :logout %>
-
-      <% if @person.administrator %>
-      &bull; <%= link_to_unless_current "Admin", :controller => :admin, :action => :index %>
-      <% end %>
-      <% else %>
-      <% if params[:action] != 'login' %>
-      <p><%= link_to "Log into the Modeling Commons", :controller => :account, :action => :login -%></p>
-      <% end %>
-      <% end %>
-    </div>
-	
-    <% if flash[:notice] -%>
-    <div id="flash-notice"><%= flash[:notice] -%></div>
-    <script type="text/javascript">
-      $(document).ready(function() {
-      $('#flash-notice').fadeOut(2500);
-      });
-    </script>
-    <% end -%>
-
-    <h1 id="main-title">
-      <% if @headline_avatar -%>
-      <%= image_tag @headline_avatar -%>
-      <% end -%>
-
-      <% if @headline.blank? -%>
-      <%= @title -%>
-      <% else -%>
-      <%= @headline -%>
-      <% end -%>
-    </h1>
-    <%= yield :layout %>
   </body>
 
 </html>

@@ -46,6 +46,7 @@ class AccountController < ApplicationController
   end
 
   def login
+    render :layout => 'application_nomargin'
   end
 
   def login_action
@@ -186,6 +187,7 @@ class AccountController < ApplicationController
                            :limit => 10).map { |node| [Node.find(node[0]), node[1]]}
 
     logger.warn "[AccountController#mypage] #{Time.now} exit"
+    render :layout => 'application_nomargin'
   end
 
   def mygroups
@@ -252,6 +254,10 @@ class AccountController < ApplicationController
 
   def models
     @the_person = Person.find(params[:id])
+    render :layout => 'application_nomargin'
+  end
+  def groups
+    render :layout => 'application_nomargin'
   end
 
 end

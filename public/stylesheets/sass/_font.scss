@@ -1,0 +1,8 @@
+$default-font-size: 14px;
+@mixin sans-font() {
+  //font-family: 'Optima', 'Arial', sans-serif;
+  font-family: 'Muli', 'Arial', sans-serif;
+}
+@mixin serif-font() {
+  font-family: 'Georgia', 'Times', serif;
+}

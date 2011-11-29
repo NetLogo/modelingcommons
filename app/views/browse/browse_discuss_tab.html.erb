@@ -7,7 +7,7 @@
   <p>No comments so far!  Please <%= link_to("log in to", :controller => :account, :action => :login) unless @person -%> start the conversation about this model.</p>
   <% end %>
 
-  <table id="discussion">
+  <table id="discussion" class="simple_table">
     <% if @model.postings.empty? %>
     <tr>
       <th></th>

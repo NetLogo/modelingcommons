@@ -4,5 +4,6 @@
 <% @title = "Models belonging to #{@the_person.fullname}" %>
 <% @headline_avatar = @the_person.avatar.url(:thumb) %>
 <% end %>
-
+<div class="panel">
 <%= render :partial => "browse/model_list", :object => @the_person.models %>
+</div>

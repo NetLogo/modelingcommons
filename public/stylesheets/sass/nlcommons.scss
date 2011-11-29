@@ -1,0 +1,928 @@
+$blueprint-grid-margin: 0px;
+$blueprint-grid-width: 40px;
+@import "blueprint/reset";
+@import "blueprint/grid";
+@import "compass/css3";
+@import "clickable";
+@import "ui.everything";
+@import "browse";
+@import "font";
+@import "all";
+
+/* 
+ * Overall Page Layout
+ */
+/* 
+ * Page background color
+ * Global styling, such as default font family and color
+ */
+body {
+    background-color: #F5F3E9;
+    @include serif-font();
+    font-size: $default-font-size;
+}
+
+/* 
+ * Center page container
+ * Blueprint column container
+ */
+.container {
+  @include container;
+  background-color: white;
+  @include box-shadow(0 0 15px 10px gray);
+  @include border-bottom-right-radius($tab-corner-radius);
+  @include border-bottom-left-radius($tab-corner-radius);
+  margin-bottom: 200px;
+}
+
+/* 
+ * Page header, at the top of all pages
+ */
+.header {
+  @include sans-font();
+  @include column(24);
+  @include border-bottom-left-radius($tab-corner-radius);
+  @include border-bottom-right-radius($tab-corner-radius);
+  @include box-shadow(0 0 10px 2px gray);
+  overflow: hidden;
+  background-color: /*lighten($header-color, 10%);*/$header-color;
+  .banner {
+    background-image: url('banner.png');
+    cursor: pointer;
+    @include column(12);
+    height: 100px;
+    color: white;
+    @include text-shadow(/*$text-highlight*/$nav-color, 3px, 3px, 5px);
+    h1 {
+      font-size: 40px;
+      margin-left: 17px;
+      font-weight: bold;
+    }
+    h2 {
+      font-size: 20px;
+      margin-top: 5px;
+      margin-left: 5px;
+    }
+    a {
+      width: 100%;
+      height: 100%;
+      color: inherit;
+      text-decoration: none;
+      display: inline-block;
+    }
+  }
+  .login {
+    .login_container {
+      font-size: $default-font-size;
+      padding-right: 10px;
+      padding-left: 4px;
+      display: inline-block;
+      background-color: $nav-color;
+      color: $nav-text-color;
+      line-height: 26px;
+      height: 26px;
+      padding-top: 2px;
+      padding-bottom: 2px;
+      @include border-bottom-left-radius($tab-corner-radius);
+      img {
+        height: 26px;
+        width: 26px;
+        margin-left: 4px;
+        margin-right: 4px;
+        vertical-align: top;
+      }
+      a {
+        color: $nav-text-color;
+        vertical-align: top;
+      }
+      a:visited {
+        color: $nav-text-color;
+      }
+      a:active {
+        color: red;
+      }
+    }
+    //background-color: red;
+    height: 30px;
+
+    
+    vertical-align: top;
+    
+    text-align: right;
+    
+    @include column(12, true);
+    @include serif-font();
+    
+  }
+  $nav-height: 40px;
+
+  .navigation {
+    background-color: $nav-color;
+    @include column(19);
+    $a-color: black;
+    a {
+      //@include text-shadow($text-highlight, 2px, 2px, 3px);
+      color: $nav-text-color;
+      font-size: 20px;
+
+      @include border-radius(5px);
+      padding-top: 4px;
+      padding-bottom: 4px;
+      padding-left: 7px;
+      padding-right: 7px;
+      text-decoration: none;
+    }
+    a:visited {
+      color: $nav-text-color;
+    }
+    a:active {
+      color: $nav-text-color;
+    }
+    a:hover {
+      background-color: lighten($nav-color, 10%);
+      @include box-shadow(0px 0px 1px 1px darken($nav-color, 10%) inset);
+    }
+    a:active {
+      background-color: lighten($nav-color, 5%);
+      @include box-shadow(-1px 1px 3px 2px darken($nav-color, 10%) inset);
+    }
+    ul {
+      line-height: normal;
+      display: inline-block;
+    }
+    ul:last-child {
+      margin-left: 40px;
+    }
+    li {
+      list-style: none;
+      line-height: normal;
+      display: inline-block;
+      height: 40px;
+      line-height: 40px;
+      height: $nav-height;
+      margin-left: 1px;
+      margin-right: 1px;
+    }
+    li:hover a {
+      
+    }
+    li a {
+      
+    }
+    height: $nav-height;
+    line-height: $nav-height;
+  }
+  .search {
+    background-color: $nav-color;
+    @include column(5, last);
+    height: $nav-height;
+    line-height: $nav-height;
+    text-align: right;
+    form {
+      margin-top: 6px;
+      margin-right: 2px;
+      display: inline-block;
+    }
+  }
+}
+
+.content {
+  @include column(24);
+  .title {
+    @include global_padding;
+  }
+  .padded_content {
+    @include global_padding;
+  }
+  ul {
+      padding-left: 40px;
+  }
+  h1, h2, h3 {
+    margin-top: 16px;
+    margin-bottom: 6px;
+  }
+}
+
+
+
+
+/* 
+ * Page-specific styling
+ */
+
+/* 
+ * Model Page
+ */
+#model_preview {
+  @include column(4);
+  #preview-image {
+    width: 152px;
+    height: 152px;
+    line-height: 152px;
+    vertical-align: middle;
+    text-align: center;
+    @include global_padding;
+    display: inline-block;
+    background-color: hsl(0%, 0%, 85%);
+  }
+  
+  height: 160px;
+}
+#model_info {
+  @include column(20, true);
+  height: 160px;
+  img.inline_image {
+    height: 20px;
+    vertical-align: middle;
+  }  
+  div {
+    height: 49px;
+    line-height: 49px;
+    @include global_padding;
+  }
+}
+
+.posting-title {
+    font-weight: bold;
+}
+
+applet {
+    float: left;
+}
+
+/* 
+ * Code Highlighting 
+ * Proc is procedure
+ */
+.proc-to, .proc-end {
+    color: #b3b;
+}
+
+.proc-comment {
+    color: #282;
+    font-style: italic;
+}
+
+
+
+/* 
+ * Login Page (Front Page)
+ */
+div#register_new_user {
+  @include column(24);
+}
+div#login_exisiting_user {
+  @include column(12);
+  table td{
+    
+  }
+}
+div#just_visiting {
+  @include column(12, true);
+}
+
+/* 
+ * User Page (Front Page) 
+ */
+#left-news-box {
+  @include column(12);
+}
+#right-news-box {
+  @include column(12, true);
+}
+
+
+/* 
+ * Search Results Page 
+ */
+#search_tabs {
+  .num-results {
+    @include background(radial-gradient(25% 25%, red, darken(red, 20%)));
+    $radius: 10px;
+    color: white;
+    font-size: 12px;
+    line-height: $radius*2;
+    width: $radius*2;
+    height: $radius*2;
+    @include border-radius($radius*2);
+    border: 1px solid white;
+    margin-right: 4px;
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    &.empty {
+      @include background(radial-gradient(25% 25%, desaturate(red, 90%), desaturate(darken(red, 20%), 90%)));
+    }  
+  }
+}
+
+
+
+
+/*
+ * Globally useful styling
+ */ 
+
+div.left-right {
+    width: 100%;
+    display: table;
+    div.left {
+      display: table-cell;
+      text-align: left;
+    }
+    div.right {
+      display: table-cell;
+      text-align: right;
+    }
+}
+
+.panel {
+  @include global_padding;
+  border: 3px solid black;
+  @include border-radius(8px);
+  padding: 4px;
+}
+
+.tabs_panel {
+  @extend .panel;
+  &>ul {
+    /* 
+     * Setting padding-left to inherit cancels the .content wide setting of 40px left padding for ul
+     */
+    padding-left: inherit;
+  }
+  padding: 0px;
+  overflow: hidden;
+}
+/* 
+ * Text Input Field
+ */
+input[type=text], input[type=password] {
+  $color: rgb(50%, 50%, 50%);
+  //color: $color; 
+  @include serif-font();
+  line-height: 18px;
+  @include border-radius($input-radius);
+  border: 1px solid $color;
+  padding: 2px;
+  margin: 2px;
+  font-size: $default-font-size;
+  @include box-shadow(-1px 1px 4px 1px lighten($color, 20%) inset);
+  &.error {
+    color: $error-color;
+    border-color: $error-color;
+    @include box-shadow(-1px 1px 4px 1px lighten($error-color, 20%) inset);
+  }
+  &:focus {
+    outline-style: none;
+    @include box-shadow(-1px 1px 4px 2px darken($color, 5%) inset);
+    border: 1px solid darken($color, 10%);
+  }
+  &:focus.error {
+    border-color: $error-color;
+    @include box-shadow(-1px 1px 4px 2px darken($error-color, 5%) inset);
+  }
+}
+
+/*
+ * Buttons
+ */
+button, input[type=button], input[type=submit] {
+  @include clickable($background-color: $header-color);
+  font-size: 15px;
+  line-height: 18px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 6px;
+  padding-right: 6px;
+  margin: 2px;
+  div.ui-icon {
+      margin-top: 1px;
+      margin-bottom: 1px;
+      vertical-align: top;
+      display: inline-block;
+    }
+  @include border-radius($input-radius);
+}
+
+.error {
+  color: $error-color;
+}
+
+/*
+ * DataTables Styling
+ */
+.dataTables_wrapper {
+    div.ui-icon {
+      display: inline-block;
+      vertical-align: top;
+    }
+    .dataTables_paginate {
+      button {
+        @include clickable($background-color: $header-color, $disabled: '.paginate_disabled_previous' '.paginate_disabled_next');
+      }
+      
+      .paginate_disabled_previous, .paginate_enabled_previous {
+        div.ui-icon {
+          @extend .ui-icon-triangle-1-w; 
+        }
+      }
+      .paginate_disabled_next, .paginate_enabled_next {
+        div.ui-icon {
+          @extend .ui-icon-triangle-1-e; 
+        }
+      }
+    }
+    .dataTables_info, .dataTables_length, .dataTables_filter {
+      display: inline-block;
+      margin-left: 10px;
+      font-size: 15px;
+    }
+    .top, .bottom, .datatable {
+      margin-top: 4px;
+      margin-bottom: 4px;
+    }
+}
+
+
+.dataTables {
+  width: 100%;
+  border-bottom: 1px solid black;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  font-size: $default-font-size;
+  border-collapse: separate;
+  //border-bottom: 1px solid black;
+  //border-left: 1px solid black;
+  //border-right: 1px solid black;
+  @include border-radius($tab-corner-radius);
+  overflow: hidden;
+    thead tr {
+
+      @include sans-font();
+      th {
+        @include clickable($background-color: $header-color, $selected: '.sorting_asc' '.sorting_desc');
+        @include border-top-right-radius(5px);
+        @include border-top-left-radius(5px);
+        text-align: center;
+        font-size: 15px;
+        padding-left: 4px;
+        padding-right: 4px;
+        padding-top: 2px;
+        padding-bottom: 2px;
+        line-height: 20px;
+        div.ui-icon {
+          margin-top: 2px;
+          margin-bottom: 2px;
+        }
+        &.sorting_asc div.ui-icon {
+          @extend .ui-icon-triangle-1-n;
+        }
+        &.sorting_desc div.ui-icon {
+          @extend .ui-icon-triangle-1-s;
+        }
+        &.sorting div.ui-icon {
+          @extend .ui-icon-triangle-2-n-s;
+        }
+      }
+    }
+    tbody td {
+      /*border-right: 1px solid gray;
+      &:last-child {
+        border-right: 0px solid gray;
+      }*/
+      img {
+        //height: 20px;
+        vertical-align: top;
+        padding-left: 4px;
+        padding-right: 4px;
+        //padding-top: 5px;
+        //padding-bottom: 5px;
+      }
+      
+    }
+    tbody tr:nth-child(even) {
+      background-color: lighten($header-color, 30%);
+    }
+    span.hidden_elapsed_time {
+      display: none;
+    }
+}
+
+table.simple_table {
+  border-collapse: collapse;
+  img {
+    vertical-align: middle;
+  }
+  th {
+    font-weight: bold;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+  td {
+    border: 1px solid;
+    padding: 5px;
+  }
+}
+
+.highlight {
+    background-color: #ff0;
+}
+
+
+/* 
+ * Legacy Styling
+ * All of this should probably be updated
+ */
+
+
+
+/* 
+ * Old Menu
+ */
+
+/*
+#main-menu-div {
+    top: 0;
+    margin-top: -1em;
+    margin-bottom: 2em;
+}
+
+#main-menu {
+    list-style-type: none;
+    margin-left: -3em;
+}
+
+#main-menu li {
+    background-color: #3e2;
+    color: #fff;
+
+    border: 1px solid #000;
+    float: left;
+    height: 2em;
+    line-height: 2em;
+    // width: 7%; 
+    width: 6em;
+    text-align: center;
+    vertical-align: middle;
+}
+
+#main-menu li:hover, #main-menu li:hover a {
+    color: #3e2;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+#main-menu li a {
+    text-decoration: none;
+}
+*/
+#flash-notice {
+    z-index: 10;
+    position: absolute;
+    top: 10%;
+    left: 20%;
+    width: 50%;
+    background: #000;
+    color: #FFF;
+    border: 2px solid #F00;
+    padding: 2em;
+}
+
+/* 
+ * Old Search Field
+ */
+/*
+#navbar-search-form {
+    display: inline;
+}
+
+#navbar-search-form-text.blank {
+  color: #666;
+}
+*/
+
+#menubar-avatar, #logged-in-as {
+    float: left;
+    margin-left: 1em;
+}
+
+#main-menu, h1, h2, h3, #flash-notice, #logged-in-as {
+    @include sans-font();
+    font-weight: bold;
+}
+
+h1, #flash-notice {
+    clear: both;
+}
+
+h1, #flash-notice {
+    font-size: 21px;
+}
+
+h2 {
+    font-size: 17px;
+}
+
+.h2-explanation {
+    font-size: 13px;
+}
+
+h3, #menu-bar {
+    font-size: 15px;
+}
+
+#person-atom-feed {
+    position: absolute;
+    top: 3.5em;
+    left: 20em;
+}
+
+a img {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+
+/*.panel, .wide-panel {
+    border: 3px solid;
+    padding: 5px;
+    margin-right: 20px;
+    float: left;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+}
+
+.panel {
+    width: 25%;
+}
+
+.wide-panel {
+    width: 40%;
+}
+
+.panel h2 {
+    text-align: center;
+}
+
+.panel table tr td {
+    padding-bottom: 5px;
+}
+
+.panel table tr td input[type="submit"] {
+    margin-left: 50%;
+}*/
+
+
+/*
+ * Old Tabs
+ */
+
+/*
+div ul.subsection_tabs {
+    clear: both;
+    height: 10px;
+    list-style: none;
+    margin-left: -3em;
+}
+
+#model_tabs ul.subsection_tabs, #group_tabs ul.subsection_tabs {
+    margin-left: 10px;
+}
+
+div ul.subsection_tabs li.tab {
+    float: left;
+    margin-right: 7px;
+    text-align: center;
+    border: 2px solid 000;
+}
+
+div ul.subsection_tabs li.tab a {
+    background-color: #fff;
+    color: #666;
+    display: block;
+    @include sans-font();
+    height: 20px;
+    text-decoration: none;
+    width: 80px;
+}
+
+div ul.subsection_tabs li.tab a.active {
+    color: #f00;
+    background-color: #ddd;
+}
+
+div ul.subsection_tabs li.tab a:hover {
+    color: #fff;
+    background-color: #666;
+}*/
+
+/*#left-news-box, #right-news-box {
+    position: absolute;
+    top: 8.5em;
+    width: 45%;
+}
+
+#left-news-box {
+    left: 1em;
+}
+
+#right-news-box {
+    left: 50%;
+}
+
+#left-news-box, #right-news-box {
+}*/
+
+/*.news-box {
+    margin-left: 4px;
+    margin-right: 4px;
+    border: 2px solid #f00;
+    background-color: #fff;
+    margin-bottom: 2em;
+    ul {
+      padding-left: 40px;
+      margin-top: 15px;
+      margin-bottom: 15px;
+    }
+}*/
+
+
+/* 
+ * Old DataTables
+ */
+
+/* Pagination nested */
+/*.paginate_disabled_previous, .paginate_enabled_previous, .paginate_disabled_next, .paginate_enabled_next {
+    height: 19px;
+    width: 19px;
+    margin-left: 3px;
+    float: left;
+}
+
+.paginate_disabled_previous {
+    background-image: url('/images/back_disabled.jpg');
+}
+
+.paginate_enabled_previous {
+    background-image: url('/images/back_enabled.jpg');
+}
+
+.paginate_disabled_next {
+    background-image: url('/images/forward_disabled.jpg');
+}
+
+.paginate_enabled_next {
+    background-image: url('/images/forward_enabled.jpg');
+}
+
+.sorting_asc {
+    background: url('../images/sort_asc.jpg') no-repeat center right;
+}
+
+.sorting_desc {
+    background: url('../images/sort_desc.jpg') no-repeat center right;
+}
+
+.sorting {
+    background: url('../images/sort_both.jpg') no-repeat center right;
+}*/
+div.foreSortIcon {
+  background: url('../images/sort_both.jpg') no-repeat center right;
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  float: right;
+}
+
+/* Autocomplete */
+ul.jq-ui-autocomplete {
+    position: absolute;
+    overflow: hidden;
+    background-color: #fff;
+    border: 1px solid #aaa;
+    margin: 0px;
+    padding: 0;
+    list-style: none;
+    font: normal .75em/.75em Verdana, Arial, sans-serif;
+    color: #333;
+}
+ul.jq-ui-autocomplete li {
+    display: block;
+    padding: .3em .5em .3em .3em;
+    overflow: hidden;
+    width: 100%;
+}
+
+ul.jq-ui-autocomplete li.active {
+    background-color: #3875d7;
+    color: #fff;
+}
+
+.deleted {
+    text-decoration: line-through;
+}
+
+table#new-person-form tr td {
+    width: 10em;
+}
+
+.fieldWithErrors {
+    padding: 2px;
+    background-color: red;
+    display: table;
+}
+
+#errorExplanation {
+    width: 450px;
+    border: 2px solid red;
+    padding: 7px;
+    padding-bottom: 0;
+    margin-bottom: 20px;
+    background-color: #f0f0f0;
+}
+
+#error_explanation h2 {
+    text-align: left;
+    font-weight: bold;
+    padding: 5px 5px 5px 15px;
+    font-size: 12px;
+    margin: -7px;
+    margin-bottom: 0px;
+    background-color: #c00;
+    color: #fff;
+}
+
+#error_explanation ul li {
+    font-size: 12px;
+    list-style: square;
+}
+
+tr.scaffold-row {
+    border-bottom: 2px solid black;
+}
+
+#permission-group-reminder {
+    font-style: italic;
+}
+
+/* 
+ * Old (New?) Menu
+ */
+/*
+div.main-menu-new {
+  width: 100%;
+  height: 35px;
+  margin-bottom: 5px;
+  background-color: red;
+  float:left;
+  
+}
+div.main-menu-new ul {
+  list-style-type: none;
+  padding: 0px;
+  margin: 0px;
+  float:left;
+  
+}
+div.main-menu-new ul li {
+  display: inline-block;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  line-height: 20px;
+  height: 20px;
+  vertical-align: middle;
+  float:left;
+  font-size: 16px;
+  @include sans-font();
+  font-weight: bold;
+  background-color: blue;
+}
+div.main-menu-new ul li.selected {
+  padding-bottom: 18px;
+}
+div.main-menu-new ul.left {
+  float:left;
+  
+}
+div.main-menu-new ul.left li {
+  margin-right: 1px;
+}
+div.main-menu-new ul.right li {
+  margin-left: 1px;
+}
+
+div.main-menu-new ul.right {
+  float:right;
+}
+div.main-menu-new ul li img {
+  height: 20px;
+  margin-right: 5px;
+  vertical-align: top;
+}
+*/
+

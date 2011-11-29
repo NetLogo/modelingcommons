@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+  	<%= render :partial => "layouts/head" -%>
+  </head>
+  <body>
+  	<div class="container">
+  		<%= render :partial => "layouts/page_header" -%>
+		<div class="content">
+		    <% if flash[:notice] -%>
+		    <div id="flash-notice"><%= flash[:notice] -%></div>
+		    <script type="text/javascript">
+		      $(document).ready(function() {
+		      $('#flash-notice').fadeOut(2500);
+		      });
+		    </script>
+		    <% end -%>
+			<div class="title">
+			    <h1 id="main-title">
+			      <% if @headline_avatar -%>
+			      <%= image_tag @headline_avatar -%>
+			      <% end -%>
+			
+			      <% if @headline.blank? -%>
+			      <%= @title -%>
+			      <% else -%>
+			      <%= @headline -%>
+			      <% end -%>
+			    </h1>
+		    </div>
+		    <%= yield :layout %>
+	    </div>
+    </div>
+  </body>
+
+</html>

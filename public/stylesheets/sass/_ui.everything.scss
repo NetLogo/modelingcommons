@@ -1,3 +1,8 @@
+@import "compass/css3";
+@import "clickable";
+@import "font";
+@import "all";
+
 /* Accordion
 ----------------------------------*/
 .ui-accordion .ui-accordion-header { cursor: pointer; position: relative; margin-top: 1px; zoom: 1; }
@@ -150,14 +155,17 @@
 .ui-slider-vertical .ui-slider-range-min { bottom: 0; }
 .ui-slider-vertical .ui-slider-range-max { top: 0; }/* Tabs
 ----------------------------------*/
-.ui-tabs { padding: .2em; zoom: 1; }
-.ui-tabs .ui-tabs-nav { list-style: none; position: relative; padding: .2em .2em 0; }
-.ui-tabs .ui-tabs-nav li { position: relative; float: left; border-bottom-width: 0 !important; margin: 0 .2em -1px 0; padding: 0; }
-.ui-tabs .ui-tabs-nav li a { float: left; text-decoration: none; padding: .5em 1em; }
-.ui-tabs .ui-tabs-nav li.ui-tabs-selected { padding-bottom: 1px; border-bottom-width: 0; }
-.ui-tabs .ui-tabs-nav li.ui-tabs-selected a, .ui-tabs .ui-tabs-nav li.ui-state-disabled a, .ui-tabs .ui-tabs-nav li.ui-state-processing a { cursor: text; }
+$tab-height: 40px;
+$padding: 5px;
+.ui-tabs { zoom: 1}
+.ui-tabs .ui-tabs-nav { list-style: none; ; /*padding: .2em .2em 0;*/ }
+.ui-tabs .ui-tabs-nav li { float: left;  padding: 0px; text-align: center;font-size: 16px; @include sans-font();/*border-bottom-width: 0 !important; margin: 0 .2em -1px 0; padding: 0;*/ @include clickable($background-color: $header-color, $selected: '.ui-tabs-selected', $disabled: '.empty'); @include border-bottom-left-radius(8px);@include border-bottom-right-radius(8px);}
+.ui-tabs .ui-tabs-nav li:first-child {@include border-top-left-radius(5px);}
+.ui-tabs .ui-tabs-nav li a { /*float: left;*/ display: inline-block; min-width: 80px; line-height: $tab-height - 2*$padding - 2px; padding: $padding; text-decoration: none; color: black;/*padding: .5em 1em; */}
+.ui-tabs .ui-tabs-nav li.ui-tabs-selected { /*padding-bottom: 1px; border-bottom-width: 0; */}
+.ui-tabs .ui-tabs-nav li.ui-tabs-selected a, .ui-tabs .ui-tabs-nav li.ui-state-disabled a, .ui-tabs .ui-tabs-nav li.ui-state-processing a { /*cursor: default; */}
 .ui-tabs .ui-tabs-nav li a, .ui-tabs.ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-selected a { cursor: pointer; } /* first selector in group seems obsolete, but required to overcome bug in Opera applying cursor: text overall if defined elsewhere... */
-.ui-tabs .ui-tabs-panel { padding: 1em 1.4em; display: block; border-width: 0; background: none; }
+.ui-tabs .ui-tabs-panel { /*padding: 1em 1.4em;*/ display: block; border-width: 0; background: none; margin: 4px;}
 .ui-tabs .ui-tabs-hide { display: none !important; }
 
 
@@ -171,16 +179,10 @@
 
 /* Component containers
 ----------------------------------*/
-.ui-widget { font-family: Optima,Verdana,Arial,sans-serif; font-size: 0.8em; }
-.ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button { font-family: Optima,Verdana,Arial,sans-serif; font-size: 0.9em; }
-.ui-widget-content { border: 1px solid #aaaaaa; background: #abcdef; color: #222222; }
-/* !!! Added By Ben !!! */
-.ui-widget-content {
-	color: inherit;
-	font-family: inherit;
-}
-/*.ui-widget-content a { color: #222222; } */
-.ui-widget-header { border: 1px solid #aaaaaa; background: #cccccc url(/stylesheets/themes/nlcommons/images/ui-bg_highlight-soft_75_cccccc_1x100.png) 50% 50% repeat-x; color: #222222; font-weight: bold; }
+.ui-widget { /*font-family: Optima,Verdana,Arial,sans-serif;*/ /*font-size: 0.8em;*/font-size: $default-font-size; }
+.ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button { /*font-family: Optima,Verdana,Arial,sans-serif; font-size: 0.9em; */}
+.ui-widget-content { color: #222222; color: inherit; font-family: inherit}
+.ui-widget-header { /*border: 1px solid #aaaaaa; background: #cccccc url(/stylesheets/themes/nlcommons/images/ui-bg_highlight-soft_75_cccccc_1x100.png) 50% 50% repeat-x; color: #222222; font-weight: bold; */}
 .ui-widget-header a { color: #222222; }
 
 /* Interaction states
@@ -199,7 +201,7 @@
 .ui-state-error, .ui-widget-content .ui-state-error {border: 1px solid #cd0a0a; background: #fef1ec url(/stylesheets/themes/nlcommons/images/ui-bg_glass_95_fef1ec_1x400.png) 50% 50% repeat-x; color: #cd0a0a; }
 .ui-state-error a, .ui-widget-content .ui-state-error a { color: #cd0a0a; }
 .ui-state-error-text, .ui-widget-content .ui-state-error-text { color: #cd0a0a; }
-.ui-state-disabled, .ui-widget-content .ui-state-disabled { opacity: .35; filter:Alpha(Opacity=35); background-image: none; }
+.ui-state-disabled, .ui-widget-content .ui-state-disabled { /*opacity: .35; filter:Alpha(Opacity=35); background-image: none; */}
 .ui-priority-primary, .ui-widget-content .ui-priority-primary { font-weight: bold; }
 .ui-priority-secondary, .ui-widget-content .ui-priority-secondary { opacity: .7; filter:Alpha(Opacity=70); font-weight: normal; }
 
@@ -396,7 +398,7 @@
 ----------------------------------*/
 
 /* Corner radius */
-.ui-corner-tl { -moz-border-radius-topleft: 4px; -webkit-border-top-left-radius: 4px; }
+/*.ui-corner-tl { -moz-border-radius-topleft: 4px; -webkit-border-top-left-radius: 4px; }
 .ui-corner-tr { -moz-border-radius-topright: 4px; -webkit-border-top-right-radius: 4px; }
 .ui-corner-bl { -moz-border-radius-bottomleft: 4px; -webkit-border-bottom-left-radius: 4px; }
 .ui-corner-br { -moz-border-radius-bottomright: 4px; -webkit-border-bottom-right-radius: 4px; }
@@ -404,7 +406,7 @@
 .ui-corner-bottom { -moz-border-radius-bottomleft: 4px; -webkit-border-bottom-left-radius: 4px; -moz-border-radius-bottomright: 4px; -webkit-border-bottom-right-radius: 4px; }
 .ui-corner-right {  -moz-border-radius-topright: 4px; -webkit-border-top-right-radius: 4px; -moz-border-radius-bottomright: 4px; -webkit-border-bottom-right-radius: 4px; }
 .ui-corner-left { -moz-border-radius-topleft: 4px; -webkit-border-top-left-radius: 4px; -moz-border-radius-bottomleft: 4px; -webkit-border-bottom-left-radius: 4px; }
-.ui-corner-all { -moz-border-radius: 4px; -webkit-border-radius: 4px; }
+.ui-corner-all { @include border-radius(8px); }*/
 
 /* Overlays */
 .ui-widget-overlay { background: #aaaaaa url(/stylesheets/themes/nlcommons/images/ui-bg_flat_0_aaaaaa_40x100.png) 50% 50% repeat-x; opacity: .30;filter:Alpha(Opacity=30); }

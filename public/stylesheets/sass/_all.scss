@@ -1,0 +1,14 @@
+$nav-color: #04346C;
+$nav-text-color: white;
+$header-color: lighten(#6899D3, 10%);
+$text-highlight: #FF5C00;
+$tab-corner-radius: 8px;
+$input-radius: 5px;
+$button-color: #FFB540;
+$error-color: red;
+
+
+@mixin global_padding {
+  margin: 4px;
+}
+

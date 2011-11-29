@@ -1,46 +1,57 @@
+@import "font";
+
+/*
+ * This appears to have been used by _model_tab.html.erb, which has been replaced by one_model.html.erb
+ */
+/*
 .main-div {
     position: absolute;
     margin: 2px;
     top: 100px;
     width: 60%;
     left: 10px;
-}
+}*/
 
-.ui-corner-all {
+/*.ui-corner-all {
     clear: both;
-}
+}*/
 
-img#preview-image  {
+/*img#preview-image  {
     width: 70px;
     height: 70px;
     float: left;
     margin-right: 20px;
-}
+}*/
 
+
+/*
+ * Used by browse_preview_tab.html.erb 
+ * Which appears to be unused, as it is not a one_model tab
+ */
+
+/*
 img#big-preview-image  {
     width: 400px;
     height: 400px;
     float: left;
 }
-
+*/
+/* 
+ * Not used anywhere
+ */
+/*
 .model-tab, .group-tabs {
-    border: 1px solid;
     background: #fff;
     padding: 10px;
 }
+*/
 
-.proc-to, .proc-end {
-    color: #b3b;
-}
 
-.proc-comment {
-    color: #282;
-    font-style: italic;
-}
 
-.highlight {
-    background-color: #ff0;
-}
+
+/* 
+ * This seems to be used for the add tag part of the edit model page
+ */
 
 .one-model-div {
     background-color: #fff;
@@ -53,25 +64,23 @@ img#big-preview-image  {
     display: block;
     clear: left;
 }
-
+/*
+ * This is used nowhere
+ */
+/*
 #menu-div {
-    font-family: Optima, sans-serif;
+    @include sans-font();
 }
+*/
 
-#discussion tr td {
-    border: 1px solid;
-    padding: 5px;
-}
 
-.posting-title {
-    font-weight: bold;
-}
+/* 
+ * This doesn't seem to be used anywhere
+ */
 
-applet {
-    float: left;
-}
-
+/*
 #activity {
     margin-left: 10px;
     float: left;
 }
+*/
