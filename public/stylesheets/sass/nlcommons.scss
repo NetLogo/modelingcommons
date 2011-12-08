@@ -80,7 +80,7 @@ body {
       background-color: $nav-color;
       color: $nav-text-color;
       line-height: 26px;
-      height: 26px;
+      height: 52px;
       padding-top: 2px;
       padding-bottom: 2px;
       @include border-bottom-left-radius($tab-corner-radius);
@@ -103,7 +103,7 @@ body {
       }
     }
     //background-color: red;
-    height: 30px;
+      
 
     
     vertical-align: top;
@@ -113,6 +113,25 @@ body {
     @include column(12, true);
     @include serif-font();
     
+    .flash_notice {
+      display: inline-block;
+      background-color: $error-color;
+      @include border-bottom-left-radius($tab-corner-radius);
+      @include border-top-left-radius($tab-corner-radius);
+      height: 25px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      width: 400px;
+      position: relative;
+      left: 400px;
+      overflow: hidden;
+      line-height: 25px;
+      font-size: 20px;
+      color: white;
+      text-align: center;
+      @include sans-font();
+      
+    }
   }
   $nav-height: 40px;
 
@@ -362,7 +381,7 @@ input[type=text], input[type=password] {
   $color: rgb(50%, 50%, 50%);
   //color: $color; 
   @include serif-font();
-  line-height: 18px;
+  line-height: 16px;
   @include border-radius($input-radius);
   border: 1px solid $color;
   padding: 2px;
@@ -375,13 +394,12 @@ input[type=text], input[type=password] {
     @include box-shadow(-1px 1px 4px 1px lighten($error-color, 20%) inset);
   }
   &:focus {
-    outline-style: none;
-    @include box-shadow(-1px 1px 4px 2px darken($color, 5%) inset);
-    border: 1px solid darken($color, 10%);
+    outline-style: auto;
+    //@include box-shadow(-1px 1px 4px 2px darken($color, 5%) inset);
+    //border: 1px solid darken($color, 10%);
   }
   &:focus.error {
-    border-color: $error-color;
-    @include box-shadow(-1px 1px 4px 2px darken($error-color, 5%) inset);
+    outline-color: red;
   }
 }
 
@@ -390,8 +408,8 @@ input[type=text], input[type=password] {
  */
 button, input[type=button], input[type=submit] {
   @include clickable($background-color: $header-color);
-  font-size: 15px;
-  line-height: 18px;
+  font-size: $default-font-size;
+  line-height: 16px;
   padding-top: 2px;
   padding-bottom: 2px;
   padding-left: 6px;
@@ -538,46 +556,7 @@ table.simple_table {
 
 
 
-/* 
- * Old Menu
- */
 
-/*
-#main-menu-div {
-    top: 0;
-    margin-top: -1em;
-    margin-bottom: 2em;
-}
-
-#main-menu {
-    list-style-type: none;
-    margin-left: -3em;
-}
-
-#main-menu li {
-    background-color: #3e2;
-    color: #fff;
-
-    border: 1px solid #000;
-    float: left;
-    height: 2em;
-    line-height: 2em;
-    // width: 7%; 
-    width: 6em;
-    text-align: center;
-    vertical-align: middle;
-}
-
-#main-menu li:hover, #main-menu li:hover a {
-    color: #3e2;
-    background-color: #fff;
-    cursor: pointer;
-}
-
-#main-menu li a {
-    text-decoration: none;
-}
-*/
 #flash-notice {
     z-index: 10;
     position: absolute;
@@ -589,19 +568,6 @@ table.simple_table {
     border: 2px solid #F00;
     padding: 2em;
 }
-
-/* 
- * Old Search Field
- */
-/*
-#navbar-search-form {
-    display: inline;
-}
-
-#navbar-search-form-text.blank {
-  color: #666;
-}
-*/
 
 #menubar-avatar, #logged-in-as {
     float: left;

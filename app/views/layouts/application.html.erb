@@ -8,14 +8,6 @@
   	<div class="container">
   		<%= render :partial => "layouts/page_header" -%>
 		<div class="content">
-		    <% if flash[:notice] -%>
-		    <div id="flash-notice"><%= flash[:notice] -%></div>
-		    <script type="text/javascript">
-		      $(document).ready(function() {
-		      $('#flash-notice').fadeOut(2500);
-		      });
-		    </script>
-		    <% end -%>
 		    <div class="title">
 				<h1 id="main-title">
 			      <% if @headline_avatar -%>
