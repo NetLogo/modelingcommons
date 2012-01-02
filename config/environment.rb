@@ -21,7 +21,7 @@ Rails::Initializer.run do |config|
   config.gem 'GraphvizR', :lib => 'graphviz_r'
   config.gem 'BlueCloth', :lib => 'bluecloth'
   config.gem "compass", :version => ">= 0.11.5"
-  config.gem 'zip'
+  # config.gem 'zip'
   # config.gem 'difflcs'
   # config.gem 'hpricot'
 
