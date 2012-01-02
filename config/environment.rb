@@ -22,8 +22,8 @@ Rails::Initializer.run do |config|
   config.gem 'BlueCloth', :lib => 'bluecloth'
   config.gem "compass", :version => ">= 0.11.5"
   config.gem 'zip'
-  config.gem 'difflcs'
-  config.gem 'hpricot'
+  # config.gem 'difflcs'
+  # config.gem 'hpricot'
 
   # Settings in config/environments/* take precedence over those specified here.
   # Application configuration should go into files in config/initializers
