@@ -187,7 +187,7 @@ class Node < ActiveRecord::Base
     width = 0
     height = 0
 
-    contents.each do |line|
+    contents.each_line do |line|
 
       # Handle dividers
       if line =~ /\@\#\$\#\@\#\$\#\@/

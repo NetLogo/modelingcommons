@@ -76,10 +76,18 @@ end
 require "will_paginate"
 require 'validates_email'
 
+Encoding.default_external = Encoding::UTF_8
+Encoding.default_internal = Encoding::UTF_8
+
 # Handle the creation of new processes by Phusion Passenger
 if defined?(PhusionPassenger)
   PhusionPassenger.on_event(:starting_worker_process) do |forked|
     # if using older than 0.6.5 of MM then you want database instead of connection
-    MongoMapper.connection.connect_to_master if forked
+
+    STDERR.puts MongoMapper.connection.class
+    STDERR.puts MongoMapper.connection
+    STDERR.puts MongoMapper.connection.methods
+
+    # MongoMapper.connection.connect_to_server if forked
   end
 end
