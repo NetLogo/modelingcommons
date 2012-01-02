@@ -76,8 +76,10 @@ end
 require "will_paginate"
 require 'validates_email'
 
-Encoding.default_external = Encoding::UTF_8
-Encoding.default_internal = Encoding::UTF_8
+if RUBY_VERSION == "1.9.2"
+  Encoding.default_external = Encoding::UTF_8
+  Encoding.default_internal = Encoding::UTF_8
+end
 
 # Handle the creation of new processes by Phusion Passenger
 if defined?(PhusionPassenger)
