@@ -11,14 +11,14 @@
 			flash_element.text(queue[0]);
 			flash_element.animate(
 				{
-					left: "0px"
+					right: "0px"
 				},
 				600
 			).delay(
 				5000
 			).animate(
 				{
-					left: width + "px"
+					right: "-" + width + "px"
 				},
 				{
 					duration: 600,
@@ -43,6 +43,8 @@
 		
 	}
 })(jQuery);
+
+
 // Datatable sort for date modified column
 // Numerical sort where the number to sort by is enclosed in the first span tag with class "hidden_elapsed_time"
 jQuery.fn.dataTableExt.oSort['num-first-span-asc']  = function(a,b) {
@@ -211,6 +213,7 @@ $(document).ready(function () {
 	// Search result tabs
 	// Not done with ajax
 	
+	
 	//Disable tabs with no search results
 	var disabledTabsList = [];
 	$("#search_tabs ul li").each(function(index, element) {
@@ -236,6 +239,10 @@ $(document).ready(function () {
 	       data: {}
 	   }
 	});
+	
+	//Non-ajax tabs!!
+	$(".complete").autocomplete('/tags/complete_tags', {} );
+	$("#model_tabs").tabs();
 
 
 	// Disable inviting people if the group isn't selected
@@ -266,6 +273,8 @@ $(document).ready(function () {
 	       $('p#permission-group-reminder').toggle(false);
 	   }
 	});
+	
+	
 	//Validate header login form
 	$("#header_login").validate({
 		rules: {
@@ -276,17 +285,17 @@ $(document).ready(function () {
 			}
 		},
 		messages: {
-			password: "Enter password",
+			password: "Password Required",
 			email_address: {
-				required: "Enter email address",
-				email: "Invalid email address"
+				required: "Email Required",
+				email: "Invalid Email Address"
 			}
 		},
-		onkeyup: false,
-		onclick: false,
-		onfocusout: false,
+		//onkeyup: false,
+		//onclick: false,
+		//onfocusout: false,
 		errorPlacement: function(error, element) {
-			$().flash_notice(error.text());
+			element.parents("tr").next("tr").children("td").eq(element.parents("td").index()).append(error);
 		},
 		
 		
@@ -297,8 +306,12 @@ $(document).ready(function () {
 			$(this).submit();
 		}
 	});
-	$('#header_login_submit').click(function(e) {
-		$(this).parent().submit();
+	$('#header_login button').click(function(e) {
+		$(this).parents('form').submit();
+	});
+	$("#model_click_to_load").click(function(e) {
+		$(this).css("display", "none");
+		$("#model_applet").css("display", "block");
 	});
 });
 

@@ -5,7 +5,10 @@
   <p>Written with NetLogo <%= @model.netlogo_version -%></p>
 
   <!-- browse_applet_tab -->
-  <applet
+  <div id="model_click_to_load" style="width: <%= @model.dimensions[:width] -%>px; height: <%= @model.dimensions[:height] -%>px; line-height: <%= @model.dimensions[:height] -%>px;" >
+  	Click to Load Model
+  </div>
+  <applet id="model_applet"
      code="<%= @model.applet_class -%>"
      align="bottom"
      width="<%= @model.dimensions[:width] -%>" height="<%= @model.dimensions[:height] -%>"

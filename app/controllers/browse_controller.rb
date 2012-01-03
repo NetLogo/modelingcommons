@@ -96,6 +96,7 @@ class BrowseController < ApplicationController
   end
 
   # Define methods for tabs
+  # !!! These are no longer used !!!
   ['preview', 'applet', 'info', 'procedures', 'discuss', 'files', 'history', 'tags',
    'family', 'upload', 'permissions'].each do |tab_name|
     define_method("browse_#{tab_name}_tab".to_sym) do

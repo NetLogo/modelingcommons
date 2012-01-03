@@ -45,6 +45,7 @@ body {
   @include border-bottom-right-radius($tab-corner-radius);
   @include box-shadow(0 0 10px 2px gray);
   overflow: hidden;
+  position: relative;
   background-color: /*lighten($header-color, 10%);*/$header-color;
   .banner {
     background-image: url('banner.png');
@@ -80,7 +81,7 @@ body {
       background-color: $nav-color;
       color: $nav-text-color;
       line-height: 26px;
-      height: 52px;
+      
       padding-top: 2px;
       padding-bottom: 2px;
       @include border-bottom-left-radius($tab-corner-radius);
@@ -114,16 +115,16 @@ body {
     @include serif-font();
     
     .flash_notice {
+      top:66px;
+      right:-400px;
       display: inline-block;
       background-color: $error-color;
       @include border-bottom-left-radius($tab-corner-radius);
       @include border-top-left-radius($tab-corner-radius);
       height: 25px;
-      margin-top: 10px;
-      margin-bottom: 10px;
       width: 400px;
-      position: relative;
-      left: 400px;
+      position: absolute;
+      //left: 400px;
       overflow: hidden;
       line-height: 25px;
       font-size: 20px;
@@ -265,8 +266,22 @@ body {
     font-weight: bold;
 }
 
-applet {
-    float: left;
+#model_click_to_load {
+    background-color: hsl(0%, 0%, 85%);
+    display: block;
+    cursor: pointer;
+    text-align: center;
+    font-size: 24px;
+    @include sans-font();
+    
+}
+#model_applet {
+    display: none;
+}
+.ui-tabs #browse_applet.ui-tabs-hide {
+  position: absolute;
+  left: -10000px;
+  display: block;
 }
 
 /* 
