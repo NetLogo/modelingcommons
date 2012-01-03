@@ -86,10 +86,10 @@ if defined?(PhusionPassenger)
   PhusionPassenger.on_event(:starting_worker_process) do |forked|
     # if using older than 0.6.5 of MM then you want database instead of connection
 
-    STDERR.puts MongoMapper.connection.class
-    STDERR.puts MongoMapper.connection
-    STDERR.puts MongoMapper.connection.methods
+    # STDERR.puts MongoMapper.connection.class
+    # STDERR.puts MongoMapper.connection
+    # STDERR.puts MongoMapper.connection.methods
 
-    # MongoMapper.connection.connect_to_server if forked
+    MongoMapper.connection.connect_to_server if forked
   end
 end
