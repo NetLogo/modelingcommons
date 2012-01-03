@@ -81,15 +81,13 @@ if RUBY_VERSION == "1.9.2"
   Encoding.default_internal = Encoding::UTF_8
 end
 
-# Handle the creation of new processes by Phusion Passenger
-if defined?(PhusionPassenger)
-  PhusionPassenger.on_event(:starting_worker_process) do |forked|
-    # if using older than 0.6.5 of MM then you want database instead of connection
+# # Handle the creation of new processes by Phusion Passenger
+# if defined?(PhusionPassenger)
+#   PhusionPassenger.on_event(:starting_worker_process) do |forked|
+#     STDERR.puts "MongoMapper.connection.class: '#{MongoMapper.connection.class}'"
+#     STDERR.puts "MongoMapper.connection: '#{MongoMapper.connection}'"
+#     STDERR.puts "MongoMapper.connection.methods: '#{MongoMapper.connection.methods}'"
 
-    # STDERR.puts MongoMapper.connection.class
-    # STDERR.puts MongoMapper.connection
-    # STDERR.puts MongoMapper.connection.methods
-
-    MongoMapper.connection.connect_to_server if forked
-  end
-end
+#     MongoMapper.connection.connect_to_master if forked
+#   end
+# end
