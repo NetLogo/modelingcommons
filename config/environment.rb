@@ -11,7 +11,6 @@ RAILS_GEM_VERSION = '2.3.14' unless defined? RAILS_GEM_VERSION
 require File.join(File.dirname(__FILE__), 'boot')
 
 Rails::Initializer.run do |config|
-  config.gem "newrelic_rpm"
   config.gem 'hoptoad_notifier'
   config.gem 'mongo_mapper', :version => '0.8.6'
   config.gem 'paperclip', :source => 'http://rubygems.org'
