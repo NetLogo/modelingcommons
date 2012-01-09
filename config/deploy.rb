@@ -9,9 +9,9 @@ set :scm_passphrase, "" #This is your custom users password
 set :user, "deploy"
 set :branch, 'master'
 
-role :db, "main.lerner.co.il", "modeling.tech.northwestern.edu", :primary => true
-role :app, "main.lerner.co.il", "modeling.tech.northwestern.edu"
-role :web, "main.lerner.co.il", "modeling.tech.northwestern.edu"
+role :db, "modeling.tech.northwestern.edu", :primary => true
+role :app, "modeling.tech.northwestern.edu"
+role :web, "modeling.tech.northwestern.edu"
 
 set :stages, %w(staging production)
 set :default_stage, "staging"
