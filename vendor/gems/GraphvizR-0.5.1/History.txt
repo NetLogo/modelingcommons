@@ -1,0 +1,43 @@
+== 0.5.1 / 2007-03-19
+
+* support left aligned text in record nodes
+
+== 0.5.0 / 2007-03-11
+
+* remove all deprecated code
+* refactoring totally 
+* preserve the original order of creation of nodes and edges
+
+== 0.4.0 / 2007-02-26
+
+* default attributes for edge can be specified
+* specify consective edges in one line
+* speciry node rank
+
+== 0.3.2 / 2007-02-21
+
+* add rdoc comments
+
+== 0.3.1 / 2007-02-19
+
+* fixed a bug
+
+== 0.3.0 / 2007-02-17
+
+* rdot view template for rails
+
+== 0.2.0 / 2007-02-16
+
+* rails plugin
+
+== 0.1.0 / 2007-02-15
+
+* some feature is added
+  * undirected graph is available
+  * generate more sophisticated dot file
+
+== 0.0.1 / 2007-02-11
+
+* 1 major enhancement
+  * Birthday!
+
