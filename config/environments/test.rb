@@ -17,11 +17,3 @@ config.action_controller.perform_caching             = false
 # The :test delivery method accumulates sent emails in the
 # ActionMailer::Base.deliveries array.
 config.action_mailer.delivery_method = :test
-
-# config.gem "thoughtbot-shoulda", :lib => "shoulda", :source => "http://gems.github.com"
-# config.gem 'capybara',         :lib => false, :version => '>=0.3.5' 
-# config.gem 'cucumber'
-# config.gem 'cucumber-rails',   :lib => false, :version => '>=0.3.2' 
-# config.gem 'database_cleaner', :lib => false, :version => '>=0.5.0' 
-# # config.gem 'ruby-debug'
-# config.gem 'rspec', :lib => false, :version => "1.3.1"

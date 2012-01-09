@@ -11,7 +11,6 @@ RAILS_GEM_VERSION = '2.3.14' unless defined? RAILS_GEM_VERSION
 require File.join(File.dirname(__FILE__), 'boot')
 
 Rails::Initializer.run do |config|
-  config.gem 'hoptoad_notifier'
   config.gem 'mongo_mapper', :version => '0.8.6'
   config.gem 'paperclip', :source => 'http://rubygems.org'
   config.gem 'plucky', :version => '0.3.8'
@@ -19,7 +18,7 @@ Rails::Initializer.run do |config|
   config.gem 'will_paginate', :version => '~> 2.3.11', :source => 'http://gemcutter.org'
   config.gem 'GraphvizR', :lib => 'graphviz_r'
   config.gem 'BlueCloth', :lib => 'bluecloth'
-  config.gem "compass", :version => ">= 0.11.5"
+  config.gem "compass", :version => " 0.11.7"
   # config.gem 'zip'
   # config.gem 'difflcs'
   # config.gem 'hpricot'
