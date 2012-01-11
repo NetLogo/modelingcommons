@@ -1,3 +1,4 @@
+# -*-ruby-*-
 require 'find'
 
 namespace :netlogo do
@@ -8,7 +9,7 @@ namespace :netlogo do
     MODEL_LOCATIONS = ENV['MODEL_LOCATIONS']
 
     if MODEL_LOCATIONS.blank?
-      puts "Did not find any value for model locations! Exiting."
+      puts "Did not find any value for model locations in the MODEL_LOCATIONS environment variable! Exiting."
       exit
     end
     puts "Model locations = '#{MODEL_LOCATIONS}'"
@@ -24,7 +25,7 @@ namespace :netlogo do
     ccl_group = Group.find_or_create_by_name('CCL')
 
     # Get appropriate tags
-    ccl_tag = Tag.find_or_create_by_name('CCL', :person_id => mc_user.id)
+    ccl_tag = Tag.find_or_create_by_name('ccl', :person_id => mc_user.id)
     community_models_tag = Tag.find_or_create_by_name('community models', :person_id => mc_user.id)
 
     # Add any nodes we find
@@ -62,19 +63,27 @@ namespace :netlogo do
                                   :group => ccl_group, :changeability => PermissionSetting.group)
 
               # Add ccl tag to this model
-              puts "\tAdding CCL tag, ID '#{ccl_tag}'"
+              puts "\tAdding CCL tag, ID '#{ccl_tag.id}' for node_id '#{node.id}', person_id '#{mc_user.id}'"
               TaggedNode.create!(:node_id => node.id, :tag_id => ccl_tag.id, :person_id => mc_user.id, :comment => '')
 
               # Add community models tag to this model
               if path =~ /community model/
-              puts "\tAdding community models tag, ID '#{community_models_tag.id}'"
+                puts "\tAdding community models tag, ID '#{community_models_tag.id}'"
                 TaggedNode.create!(:node_id => node.id, :tag_id => community_models_tag.id, :person_id => mc_user.id, :comment => '')
               end
 
+              file_contents = File.open(path).read
+
+              puts "\t\tAbout to check node.contents"
+              if node and node.contents == file_contents
+                puts "\t\tNot adding a new version -- current one is identical"
+                next
+              end
+              
               new_version = NodeVersion.create!(:node_id => node.id,
                                                 :person_id => mc_user.id,
-                                                :contents => File.open(path).read,
-                                                :description => 'Updated from NetLogo 4.1')
+                                                :contents => file_contents,
+                                                :description => 'Updated from NetLogo 5.0')
             rescue => e
               puts "\t\t*** Error trying to save a new version of the new node '#{node.name}', ID '#{node.id}': '#{e.inspect}'"
               puts "\t\t\t#{node.inspect}"
@@ -141,13 +150,18 @@ namespace :netlogo do
         if suffix == '.png'
 
           if matching_nodes.empty?
-            # Create a new node, if necessary
             puts "\t\tNo matching node found.  What the heck?"
 
           elsif matching_nodes.length == 1
             matching_node = matching_nodes.first
             # Add a new version to an existing node
             puts "\t\tFound a matching node.  Creating a new attachment, of type preview."
+
+            file_contents = File.open(path).read
+            if node.preview.contents == file_contents
+              puts "\t\tNot adding a new version -- current one is identical"
+              next
+            end
 
             begin
               new_version =
@@ -156,7 +170,7 @@ namespace :netlogo do
                                                     :description => "Preview for '#{filename}'",
                                                     :filename => filename + '.png',
                                                     :type => 'preview',
-                                                    :contents => File.open(path).read)
+                                                    :contents => file_contents)
             rescue => e
               puts "\t\t*** Error trying to create a attachment to node '#{matching_node.name}', ID '#{matching_node.id}'"
               next
