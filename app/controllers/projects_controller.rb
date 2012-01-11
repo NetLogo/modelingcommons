@@ -10,12 +10,12 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    @project = Project.new(:name => params[:project_name])
+    @project = Project.find_or_create_by_name(:name => params[:project_name])
 
     if @project.save
-      flash[:notice] = "Successfully created the project '#{@project.name}'"
+      flash[:notice] = "Successfully created project '#{@project.name}'"
     else
-      flash[:notice] = "Error creating project '#{@project.name}'"
+      flash[:notice] = "Could not create the project '#{@project.name}'"
     end
 
     redirect_to :controller => :account, :action => :mypage

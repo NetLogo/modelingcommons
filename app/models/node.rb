@@ -318,7 +318,8 @@ class Node < ActiveRecord::Base
   def cannot_be_run_as_applet?
     return true if name =~ /3D/
     return true if procedures_tab =~ /hubnet-/
-    return true if procedures_tab =~ /file-open/
+    return true if procedures_tab =~ /file-/
+    return true if procedures_tab =~ /extensions/
   end
 
   def self.search(search_term, person)
