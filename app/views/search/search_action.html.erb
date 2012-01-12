@@ -5,7 +5,7 @@
 		<li<% if @author_match_models.empty? %> class="empty"<% end %>><a href="#authorName"><div class="num-results<% if @author_match_models.empty? %> empty<% end %>"><%= @author_match_models.size -%></div>Author Name</a></li>
 		<li<% if @tag_match_models.empty? %> class="empty"<% end %>><a href="#tagName"><div class="num-results<% if @tag_match_models.empty? %> empty<% end %>"><%= @tag_match_models.size -%></div>Tag Name</a></li>
 		<li<% if @info_match_models.empty? %> class="empty"<% end %>><a href="#infoTab"><div class="num-results<% if @info_match_models.empty? %> empty<% end %>"><%= @info_match_models.size -%></div>Info Tab</a></li>
-		<li<% if @procedures_match_models.empty? %> class="empty"<% end %>><a href="#proceduresTab"><div class="num-results<% if @procedures_match_models.empty? %> empty<% end %>"><%= @procedures_match_models.size -%></div>Procedures Tab</a></li>
+		<li<% if @procedures_match_models.empty? %> class="empty"<% end %>><a href="#proceduresTab"><div class="num-results<% if @procedures_match_models.empty? %> empty<% end %>"><%= @procedures_match_models.size -%></div>Code Tab</a></li>
 	</ul>
 	<div id="modelName">
 		<% if @models.empty? %>

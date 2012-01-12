@@ -34,7 +34,7 @@ class Notifications < ActionMailer::Base
     standard_settings
     @recipients = person.email_address
     @body[:person] = person
-    @subject = 'Your new password'
+    @subject = 'Modeling Commons: Your new password'
     @subject = "[TESTING] #{@subject}" if Rails.env == 'development'
   end
 
@@ -43,7 +43,7 @@ class Notifications < ActionMailer::Base
     @recipients = person.email_address
     @body[:person] = person
     @body[:new_password] = new_password
-    @subject = 'Your password'
+    @subject = 'Modeling Commons: Your password'
     @subject = "[TESTING] #{@subject}" if Rails.env == 'development'
   end
 
@@ -58,7 +58,7 @@ class Notifications < ActionMailer::Base
   def modified_model(people, node)
     standard_settings
     @recipients = node.people
-    @subject = 'Model update'
+    @subject = 'Modeling Commons: Model update'
     @subject = "[TESTING] #{@subject}" if Rails.env == 'development'
     @body[:nlmodel] = node
   end
@@ -68,7 +68,7 @@ class Notifications < ActionMailer::Base
     standard_settings
     @recipients = people.map{|person| person.email_address}
     STDERR.puts "@recipients = '#{@recipients.inspect}'"
-    @subject = 'Tag was applied'
+    @subject = 'Modeling Commons: Tag was applied'
     @subject = "[TESTING] #{@subject}" if Rails.env == 'development'
     @body[:tag] = tag
   end
