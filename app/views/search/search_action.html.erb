@@ -47,7 +47,7 @@
 		<% if @procedures_match_models.empty? %>
 		<h2>No matches in procedures.</h2>
 		<% else %>
-		<h2><%= @procedures_match_models.size -%> matched with '<%= @original_search_term %>' in the procedures tab:</h2>
+		<h2><%= @procedures_match_models.size -%> matched with '<%= @original_search_term %>' in the code tab:</h2>
 		<%= render :partial => "/browse/model_list", :object => @procedures_match_models %>
 		<br />
 		<% end %>
