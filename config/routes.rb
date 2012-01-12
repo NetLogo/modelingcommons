@@ -16,7 +16,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.connect '', :controller => "account", :action => "mypage"
 
-  map.connect '/browse/model_contents/:filename', :controller => 'browse', :action => 'model_contents'
+  # map.connect '/browse/model_contents/:filename', :controller => 'browse', :action => 'model_contents'
 
   # Allow downloading Web Service WSDL as a file with an extension
   # instead of a file named 'wsdl'
