@@ -284,6 +284,7 @@ body {
   display: block;
 }
 
+
 /* 
  * Code Highlighting 
  * Proc is procedure
@@ -491,56 +492,58 @@ button, input[type=button], input[type=submit] {
   //border-right: 1px solid black;
   @include border-radius($tab-corner-radius);
   overflow: hidden;
-    thead tr {
-
-      @include sans-font();
-      th {
-        @include clickable($background-color: $header-color, $selected: '.sorting_asc' '.sorting_desc');
-        @include border-top-right-radius(5px);
-        @include border-top-left-radius(5px);
-        text-align: center;
-        font-size: 15px;
-        padding-left: 4px;
-        padding-right: 4px;
-        padding-top: 2px;
-        padding-bottom: 2px;
-        line-height: 20px;
-        div.ui-icon {
-          margin-top: 2px;
-          margin-bottom: 2px;
-        }
-        &.sorting_asc div.ui-icon {
-          @extend .ui-icon-triangle-1-n;
-        }
-        &.sorting_desc div.ui-icon {
-          @extend .ui-icon-triangle-1-s;
-        }
-        &.sorting div.ui-icon {
-          @extend .ui-icon-triangle-2-n-s;
-        }
+  &>thead tr {
+    @include sans-font();
+    th {
+      @include clickable($background-color: $header-color, $selected: '.sorting_asc' '.sorting_desc');
+      @include border-top-right-radius(5px);
+      @include border-top-left-radius(5px);
+      text-align: center;
+      font-size: 15px;
+      padding-left: 4px;
+      padding-right: 4px;
+      padding-top: 2px;
+      padding-bottom: 2px;
+      line-height: 20px;
+      div.ui-icon {
+        margin-top: 2px;
+        margin-bottom: 2px;
+      }
+      &.sorting_asc div.ui-icon {
+        @extend .ui-icon-triangle-1-n;
+      }
+      &.sorting_desc div.ui-icon {
+        @extend .ui-icon-triangle-1-s;
+      }
+      &.sorting div.ui-icon {
+        @extend .ui-icon-triangle-2-n-s;
       }
     }
-    tbody td {
-      /*border-right: 1px solid gray;
-      &:last-child {
-        border-right: 0px solid gray;
-      }*/
-      img {
-        //height: 20px;
-        vertical-align: top;
-        padding-left: 4px;
-        padding-right: 4px;
-        //padding-top: 5px;
-        //padding-bottom: 5px;
-      }
-      
+  }
+  &>tbody {
+    tr:nth-child(even) {
+      background-color: lighten($header-color, 20%);
     }
-    tbody tr:nth-child(even) {
-      background-color: lighten($header-color, 30%);
+  }
+  span.hidden_elapsed_time {
+    display: none;
+  }
+}
+table.model_list_datatable table {
+  td {
+    height: 30px;
+    &:first-child {
+      padding-left: 4px;
+      padding-right: 4px;
+      width: 30px;
+      min-width: 30px;
     }
-    span.hidden_elapsed_time {
-      display: none;
+    img {
+      vertical-align: top;
+      width: 30px; 
+      height: 30px;
     }
+  }
 }
 
 table.simple_table {

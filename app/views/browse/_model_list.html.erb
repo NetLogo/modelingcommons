@@ -18,23 +18,16 @@
     <% model_list.each do |model| %>
 
     <tr>
-      <!--<td>
-        <% start_time = Time.now -%>
-        <img src="/browse/display_preview/<%= model.id %>" width="30" height="30" alt="Preview of model '<%= model.name -%>'" />
-        <% @render_time[:preview] += Time.now - start_time -%>-->
-        <!-- Preview render time = <%= Time.now - start_time  -%> -->
-      <!--</td>-->
       <td>
         <% start_time = Time.now -%>
         <!-- <%= model.name -%> -->
+        
         <table>
         	<tr>
-        		<td><img src="/browse/display_preview/<%= model.id %>" width="30" height="30" alt="Preview of model '<%= model.name -%>'" /></td>
+        		<td><% if !model.preview.blank? %><img src="/browse/display_preview/<%= model.id %>" alt="Preview of model '<%= model.name -%>'" /><% end %></td>
         		<td><%= link_to model.name, :controller => "browse", :action => "one_model", :id => model.id %></td>
         	</tr>
         </table>
-        <!--<div class="preview"></div>
-  		<div class="cell-content"></div>-->
         
         <% @render_time[:name] += Time.now - start_time -%>
         <!-- Preview render time = <%= Time.now - start_time  -%> -->
