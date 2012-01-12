@@ -28,7 +28,7 @@ def setup
   @community_models_tag = Tag.find_or_create_by_name('community models', :person_id => @mc_user.id)
 end
 
-if skip_directory?(directory_name)
+def skip_directory?(directory_name)
   true if File.basename(path) == '.' or 
     File.basename(path) == '..' or 
     File.basename(path) == 'under development'
