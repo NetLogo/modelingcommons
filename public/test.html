@@ -2,12 +2,29 @@
 <html>
 	<head>
 		<title>Test Page</title>
+		<style>
+			body {
+				background-color: blue;
+			}
+			.spriteContainer {
+				display: block;
+				position: relative;
+				height: 100px;
+				width: 100px;
+				overflow: hidden;
+				background-color: white;
+			}
+			.spriteContainer img {
+				position: absolute;
+				top: -40px;
+				left: -40px;
+				
+			}
+		</style>
 	</head>
 	<body>
-		<form method="post">
-			<input type="text" id="email_address" name="email_address" placeholder="Email Address" />
-		</form>
-		<!--<script src="javascripts/jquery.js"></script>-->
-		<!--<script src="javascripts/jquery.validate.pack.js"></script>-->
+		<a class="spriteContainer">
+			<img src="sprite.png" />
+		</a>
 	</body>
 </html>

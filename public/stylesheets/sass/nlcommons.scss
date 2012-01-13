@@ -563,9 +563,128 @@ table.simple_table {
 }
 
 .highlight {
-    background-color: #ff0;
+    display: block;
+    //background-color: #ff0;
+    border: 3px solid yellow;
 }
 
+
+.activity {
+  width: 660px;
+  float: left;
+  .post {
+    a {
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    padding: 4px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid black;
+    overflow: auto;
+    
+    //line-height: 80px;
+    .main_image {
+      vertical-align: top;
+      display: inline-block;
+      width: 80px;
+      height: 80px;
+      img {
+        width: 100%;
+      }
+      padding-right: 12px;
+    }
+    .post_content {
+      vertical-align: top;
+      display: inline-block;
+      .post_person {
+        line-height: 30px;
+        font-size: 16px;
+        img {
+          vertical-align: top;
+          height: 30px;
+          width: 30px;
+          padding-left: 5px;
+          padding-right: 5px;
+        }
+        
+      }
+      .post_item {
+       font-size: 30px;
+        
+      }
+      .post_date {
+        font-size: 16px;
+      }
+      .post_more {
+        font-size: 10px;
+        
+      }
+    }
+  }
+}
+
+.sidebar {
+  a {
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  width: 300px;
+  float: left;
+  .side_list {
+    
+    @include box-shadow(0 0 10px 2px gray);
+    overflow: hidden;
+    h1 {
+      @include sans-font();
+      //@include text-shadow($text-highlight, 2px, 2px, 3px);
+      background-color: $nav-color;
+      text-align: center;
+      padding-top: 5px;
+      padding-bottom: 2px;
+      font-size: 20px;
+      color: white;
+      margin: 0px;
+    }
+    margin: 5px;
+    background-color: lighten($header-color, 10%);
+    @include border-radius($tab-corner-radius);
+    .side_post {
+      
+      padding: 4px;
+      .side_image {
+        width: 50px;
+        height: 50px;
+        display: inline-block;
+        img {
+          width: 100%;
+        }
+        vertical-align:top;
+      }
+      .side_content {
+        
+        display: inline-block;
+        vertical-align: top;
+        .side_person {
+          font-size: 11px;
+        }
+        .side_item {
+          font-size: 15px;
+        }
+        .side_views {
+          font-size: 11px;
+        }
+      }
+    }
+    .side_more {
+      text-align: center;
+    }
+  }
+}
 
 /* 
  * Legacy Styling
@@ -617,11 +736,11 @@ h3, #menu-bar {
     font-size: 15px;
 }
 
-#person-atom-feed {
+/*#person-atom-feed {
     position: absolute;
     top: 3.5em;
     left: 20em;
-}
+}*/
 
 a img {
     border: 0;

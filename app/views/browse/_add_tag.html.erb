@@ -1,5 +1,5 @@
 <div class="file">
-    <%= text_field_tag 'new_tag[]',  'Tag name', {:class => 'complete empty-on-click', :size => 40} %>
-    <%= text_field_tag 'new_comment[]', "(Optional) comment about why this tag is relevant to this model", {:size => 60, :class => 'empty-on-click'} %>
+    <%= text_field_tag 'new_tag[]', "", {:class => 'complete', :size => 40, :placeholder => "Tag name"} %>
+    <%= text_field_tag 'new_comment[]', "", {:size => 65, :class => '', :placeholder => "(Optional) comment about why this tag is relevant to this model"} %>
     <%= link_to_function "Remove this tag", "$(this).parent().remove()" %>
 </div>

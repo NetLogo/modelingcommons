@@ -194,13 +194,13 @@ $(document).ready(function () {
 	});
 	$(".dataTables_filter input").attr("placeholder", "Search Results");
 	
-	$(".empty-on-click").livequery('click', function() {
+	/*$(".empty-on-click").livequery('click', function() {
 	   if ($(this).attr("has_been_clicked_on") != "yes")
 	   {
 	       $(this).attr("value", "");
 	       $(this).attr("has_been_clicked_on", "yes");
 	   }
-	});
+	});*/
 	
 	// !!!
 	// This is clearly the wrong way to do this
