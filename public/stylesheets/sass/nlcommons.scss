@@ -45,6 +45,7 @@ body {
   @include border-bottom-right-radius($tab-corner-radius);
   @include box-shadow(0 0 10px 2px gray);
   overflow: hidden;
+  position: relative;
   background-color: /*lighten($header-color, 10%);*/$header-color;
   .banner {
     background-image: url('banner.png');
@@ -80,7 +81,7 @@ body {
       background-color: $nav-color;
       color: $nav-text-color;
       line-height: 26px;
-      height: 52px;
+      
       padding-top: 2px;
       padding-bottom: 2px;
       @include border-bottom-left-radius($tab-corner-radius);
@@ -114,16 +115,16 @@ body {
     @include serif-font();
     
     .flash_notice {
+      top:66px;
+      right:-400px;
       display: inline-block;
       background-color: $error-color;
       @include border-bottom-left-radius($tab-corner-radius);
       @include border-top-left-radius($tab-corner-radius);
       height: 25px;
-      margin-top: 10px;
-      margin-bottom: 10px;
       width: 400px;
-      position: relative;
-      left: 400px;
+      position: absolute;
+      //left: 400px;
       overflow: hidden;
       line-height: 25px;
       font-size: 20px;
@@ -265,9 +266,24 @@ body {
     font-weight: bold;
 }
 
-applet {
-    float: left;
+#model_click_to_load {
+    background-color: hsl(0%, 0%, 85%);
+    display: block;
+    cursor: pointer;
+    text-align: center;
+    font-size: 24px;
+    @include sans-font();
+    
 }
+#model_applet {
+    display: none;
+}
+.ui-tabs #browse_applet.ui-tabs-hide {
+  position: absolute;
+  left: -10000px;
+  display: block;
+}
+
 
 /* 
  * Code Highlighting 
@@ -476,56 +492,58 @@ button, input[type=button], input[type=submit] {
   //border-right: 1px solid black;
   @include border-radius($tab-corner-radius);
   overflow: hidden;
-    thead tr {
-
-      @include sans-font();
-      th {
-        @include clickable($background-color: $header-color, $selected: '.sorting_asc' '.sorting_desc');
-        @include border-top-right-radius(5px);
-        @include border-top-left-radius(5px);
-        text-align: center;
-        font-size: 15px;
-        padding-left: 4px;
-        padding-right: 4px;
-        padding-top: 2px;
-        padding-bottom: 2px;
-        line-height: 20px;
-        div.ui-icon {
-          margin-top: 2px;
-          margin-bottom: 2px;
-        }
-        &.sorting_asc div.ui-icon {
-          @extend .ui-icon-triangle-1-n;
-        }
-        &.sorting_desc div.ui-icon {
-          @extend .ui-icon-triangle-1-s;
-        }
-        &.sorting div.ui-icon {
-          @extend .ui-icon-triangle-2-n-s;
-        }
+  &>thead tr {
+    @include sans-font();
+    th {
+      @include clickable($background-color: $header-color, $selected: '.sorting_asc' '.sorting_desc');
+      @include border-top-right-radius(5px);
+      @include border-top-left-radius(5px);
+      text-align: center;
+      font-size: 15px;
+      padding-left: 4px;
+      padding-right: 4px;
+      padding-top: 2px;
+      padding-bottom: 2px;
+      line-height: 20px;
+      div.ui-icon {
+        margin-top: 2px;
+        margin-bottom: 2px;
+      }
+      &.sorting_asc div.ui-icon {
+        @extend .ui-icon-triangle-1-n;
+      }
+      &.sorting_desc div.ui-icon {
+        @extend .ui-icon-triangle-1-s;
+      }
+      &.sorting div.ui-icon {
+        @extend .ui-icon-triangle-2-n-s;
       }
     }
-    tbody td {
-      /*border-right: 1px solid gray;
-      &:last-child {
-        border-right: 0px solid gray;
-      }*/
-      img {
-        //height: 20px;
-        vertical-align: top;
-        padding-left: 4px;
-        padding-right: 4px;
-        //padding-top: 5px;
-        //padding-bottom: 5px;
-      }
-      
+  }
+  &>tbody {
+    tr:nth-child(even) {
+      background-color: lighten($header-color, 20%);
     }
-    tbody tr:nth-child(even) {
-      background-color: lighten($header-color, 30%);
+  }
+  span.hidden_elapsed_time {
+    display: none;
+  }
+}
+table.model_list_datatable table {
+  td {
+    height: 30px;
+    &:first-child {
+      padding-left: 4px;
+      padding-right: 4px;
+      width: 30px;
+      min-width: 30px;
     }
-    span.hidden_elapsed_time {
-      display: none;
+    img {
+      vertical-align: top;
+      width: 30px; 
+      height: 30px;
     }
+  }
 }
 
 table.simple_table {
@@ -548,6 +566,123 @@ table.simple_table {
     background-color: #ff0;
 }
 
+
+.activity {
+  width: 660px;
+  float: left;
+  .post {
+    a {
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    padding: 4px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid black;
+    overflow: auto;
+    
+    //line-height: 80px;
+    .main_image {
+      vertical-align: top;
+      display: inline-block;
+      width: 80px;
+      height: 80px;
+      img {
+        width: 100%;
+      }
+      padding-right: 12px;
+    }
+    .post_content {
+      vertical-align: top;
+      display: inline-block;
+      .post_person {
+        line-height: 30px;
+        font-size: 16px;
+        img {
+          vertical-align: top;
+          height: 30px;
+          width: 30px;
+          padding-left: 5px;
+          padding-right: 5px;
+        }
+        
+      }
+      .post_item {
+       font-size: 30px;
+        
+      }
+      .post_date {
+        font-size: 16px;
+      }
+      .post_more {
+        font-size: 10px;
+        
+      }
+    }
+  }
+}
+
+.sidebar {
+  a {
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  width: 300px;
+  float: left;
+  .side_list {
+    
+    @include box-shadow(0 0 10px 2px gray);
+    overflow: hidden;
+    h1 {
+      @include sans-font();
+      //@include text-shadow($text-highlight, 2px, 2px, 3px);
+      background-color: $nav-color;
+      text-align: center;
+      padding-top: 5px;
+      padding-bottom: 2px;
+      font-size: 20px;
+      color: white;
+      margin: 0px;
+    }
+    margin: 5px;
+    background-color: lighten($header-color, 10%);
+    @include border-radius($tab-corner-radius);
+    .side_post {
+      
+      padding: 4px;
+      .side_image {
+        width: 50px;
+        height: 50px;
+        display: inline-block;
+        img {
+          width: 100%;
+        }
+        vertical-align:top;
+      }
+      .side_content {
+        
+        display: inline-block;
+        vertical-align: top;
+        .side_person {
+          font-size: 11px;
+        }
+        .side_item {
+          font-size: 15px;
+        }
+        .side_views {
+          font-size: 11px;
+        }
+      }
+    }
+    .side_more {
+      text-align: center;
+    }
+  }
+}
 
 /* 
  * Legacy Styling
@@ -599,11 +734,11 @@ h3, #menu-bar {
     font-size: 15px;
 }
 
-#person-atom-feed {
+/*#person-atom-feed {
     position: absolute;
     top: 3.5em;
     left: 20em;
-}
+}*/
 
 a img {
     border: 0;

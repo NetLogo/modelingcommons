@@ -51,7 +51,7 @@
 			<!-- AddThis Button END -->
 		</div>
 	</div>
-<div id="model-tabs" class="tabs_panel">
+<!--<div id="model-tabs" class="tabs_panel">
   <ul>
     <li><a href="<%= url_for :controller => :browse, :action => :browse_discuss_tab, :id => @model.id , :tab => 'true' -%>" title="discuss"><span>Discuss</span></a></li>
     <li><a href="<%= url_for :controller => :browse, :action => :browse_applet_tab, :id => @model.id , :tab => 'true' -%>" title="run"><span>Run</span></a></li>
@@ -70,4 +70,57 @@
     <% end %>
     <% end %>
   </ul>
+</div>-->
+
+<div id="model_tabs" class="tabs_panel">
+	<ul>
+		<li><a href="#browse_discuss">Discuss</a></li>
+		<li><a href="#browse_applet">Run</a></li>
+		<li><a href="#browse_info">Info</a></li>
+		<li><a href="#browse_procedures">Procedures</a></li>
+		<li><a href="#browse_history">History</a></li>
+		<li><a href="#browse_tags">Tags</a></li>
+		<li><a href="#browse_files">Files</a></li>
+		<li><a href="#browse_family">Family</a></li>
+		<% if @person %>
+	    <li><a href="#browse_upload_tab">Upload</a></li>
+	    <% if @model.people.include?(@person) %>
+	    <li><a href="#browse_permissions_tab">Permissions</a></li>
+	    <% end %>
+	    <% end %>
+	</ul>
+	<div id="browse_discuss">
+		<%= render :partial => "/browse/browse_discuss_tab" %>
+	</div>
+	<div id="browse_applet">
+		<%= render :partial => "/browse/browse_applet_tab" %>
+	</div>
+	<div id="browse_info">
+		<%= render :partial => "/browse/browse_info_tab" %>
+	</div>
+	<div id="browse_procedures">
+		<%= render :partial => "/browse/browse_procedures_tab" %>
+	</div>
+	<div id="browse_history">
+		<%= render :partial => "/browse/browse_history_tab" %>
+	</div>
+	<div id="browse_tags">
+		<%= render :partial => "/browse/browse_tags_tab" %>
+	</div>
+	<div id="browse_files">
+		<%= render :partial => "/browse/browse_files_tab" %>
+	</div>
+	<div id="browse_family">
+		<%= render :partial => "/browse/browse_family_tab" %>
+	</div>
+	<% if @person %>
+	<div id="browse_upload_tab">
+		<%= render :partial => "/browse/browse_upload_tab" %>
+	</div>
+	<% if @model.people.include?(@person) %>
+	<div id="browse_permissions_tab">
+		<%= render :partial => "/browse/browse_permissions_tab" %>
+	</div>
+	<% end %>
+	<% end %>
 </div>

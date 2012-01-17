@@ -4,6 +4,9 @@ class AccountController < ApplicationController
 
   before_filter :require_login, :only => [:edit, :update, :logout, :tags, :mygroups]
 
+  def new_front_page
+     render :layout => 'application_nomargin'
+  end
   def new
     @new_person = Person.new
   end

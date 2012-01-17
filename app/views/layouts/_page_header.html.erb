@@ -11,18 +11,26 @@
       | <%= link_to_unless_current "Logout", :controller => :account, :action => :logout %>
       <% else %>
       <% form_tag(url_for(:controller => :account, :action => :login_action), :id => "header_login") do %>
-      
       <table>
 	<tr>
-	  <td><%= text_field_tag :email_address, nil, :placeholder => "Email Address" %><%= password_field_tag :password, nil, :placeholder => "Password" %><a href="#" id="header_login_submit">Login</a></td>
+	  <td colspan="3" style="text-align: left"><%= link_to "Register to share and participate", :controller => :account, :action => :new %> | <%= link_to "Forgot Password", :controller => :account, :action => :reset_password -%></td>
 	</tr>
 	<tr>
-	  <td><a href="#">Forgot your password</a> | <a href="#">Register as a new user</a></td>
+	  <td><%= text_field_tag :email_address, nil, :placeholder => "Email Address" %></td>
+	  <td><%= password_field_tag :password, nil, :placeholder => "Password" %></td>
+	  <td><button>Login</button></td>
+	</tr>
+	<tr>
+	  <td></td>
+	  <td></td>
+	  <td></td>
 	</tr>
       </table>
+      
       <% end %>	
       <% end %> 
     </div>
+    
     <div class="flash_notice">
       
     </div>
