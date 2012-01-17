@@ -48,7 +48,7 @@ class HistoryController < ApplicationController
 
     if earlier_version == later_version
       flash[:notice] = "You cannot compare a version with itself!"
-      redirect_to :back
+      redirect_to :controller => :browse, :action => :one_model, :id => @model.id, :anchor => 'browse_history'
       return
     end
 

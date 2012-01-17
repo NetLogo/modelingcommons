@@ -820,7 +820,7 @@ a img {
   box-shadow: 0px 0px 1px 1px #8fb4df inset;
 }
 /* line 24, sass/_clickable.scss */
-.ui-tabs .ui-tabs-nav li:active {
+.ui-tabs .ui-tabs-nav li:active:hover {
   -moz-box-shadow: -1px 5px 6px 3px #254d7d inset;
   -webkit-box-shadow: -1px 5px 6px 3px #254d7d inset;
   -o-box-shadow: -1px 5px 6px 3px #254d7d inset;
@@ -877,7 +877,7 @@ a img {
   background: linear-gradient(#548ccd 35%, #3672b9 45%, #548ccd 85%);
 }
 /* line 62, sass/_clickable.scss */
-.ui-tabs .ui-tabs-nav li.ui-tabs-selected:active {
+.ui-tabs .ui-tabs-nav li.ui-tabs-selected:active:hover {
   -moz-box-shadow: -1px 5px 6px 3px #254d7d inset;
   -webkit-box-shadow: -1px 5px 6px 3px #254d7d inset;
   -o-box-shadow: -1px 5px 6px 3px #254d7d inset;

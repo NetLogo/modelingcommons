@@ -159,7 +159,7 @@ $tab-height: 40px;
 $padding: 5px;
 .ui-tabs { zoom: 1}
 .ui-tabs .ui-tabs-nav { list-style: none; ; /*padding: .2em .2em 0;*/ }
-.ui-tabs .ui-tabs-nav li { float: left;  padding: 0px; text-align: center;font-size: 16px; @include sans-font();/*border-bottom-width: 0 !important; margin: 0 .2em -1px 0; padding: 0;*/ @include clickable($background-color: $header-color, $selected: '.ui-tabs-selected', $disabled: '.empty'); @include border-bottom-left-radius(8px);@include border-bottom-right-radius(8px);}
+.ui-tabs .ui-tabs-nav li { float: left;  padding: 0px; text-align: center;font-size: 16px; @include sans-font();/*border-bottom-width: 0 !important; margin: 0 .2em -1px 0; padding: 0;*/ @include clickable($background-color: $header-color, $selected: '.ui-tabs-selected', $disabled: '.empty', $active: ':active:hover'); @include border-bottom-left-radius(8px);@include border-bottom-right-radius(8px);}
 .ui-tabs .ui-tabs-nav li:first-child {@include border-top-left-radius(5px);}
 .ui-tabs .ui-tabs-nav li a { /*float: left;*/ display: inline-block; min-width: 80px; line-height: $tab-height - 2*$padding - 2px; padding: $padding; text-decoration: none; color: black;/*padding: .5em 1em; */}
 .ui-tabs .ui-tabs-nav li.ui-tabs-selected { /*padding-bottom: 1px; border-bottom-width: 0; */}

@@ -225,7 +225,7 @@ $(document).ready(function () {
 	
 	
 	// Handle tabs for models (and groups, for that matter)
-	$("#model-tabs").tabs( {
+	$("#group_tabs").tabs( {
 
 	   spinner: '',
 	   load: function () {
@@ -240,9 +240,25 @@ $(document).ready(function () {
 	   }
 	});
 	
-	//Non-ajax tabs!!
 	$(".complete").autocomplete('/tags/complete_tags', {} );
-	$("#model_tabs").tabs();
+	//Non-ajax tabs!!
+	var tab_index = 0;
+	if(window.location.hash.indexOf("tab_") != -1) {
+		var tab_id = window.location.hash.substring(window.location.hash.indexOf("tab_") + 4);
+		//$().flash_notice(tab_id);
+		$("#model_tabs>div").each(function(index, element) {
+			if(tab_id == element.id) {
+				tab_index = index;
+			}
+		});
+		
+	}
+	$("#model_tabs").tabs({
+		selected: tab_index, 
+		show: function(event, ui) {
+			window.location.hash = "tab_" + ui.panel.id;
+		}
+	});
 
 
 	// Disable inviting people if the group isn't selected
