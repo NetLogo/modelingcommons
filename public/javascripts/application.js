@@ -1,6 +1,48 @@
 // Place your application-specific JavaScript functions and classes here
 // This file is automatically included by javascript_include_tag :defaults
 
+(function($) {
+	var queue = [];
+	var flash_element, width;
+	var running = false;
+	var display_next = function() {
+		if(queue.length >= 1) {
+			running = true;
+			flash_element.text(queue[0]);
+			flash_element.animate(
+				{
+					left: "0px"
+				},
+				600
+			).delay(
+				5000
+			).animate(
+				{
+					left: width + "px"
+				},
+				{
+					duration: 600,
+					complete: function() {
+						queue.shift();
+						display_next();
+					}
+				}
+			);
+		} else {
+			running = false;
+		}
+	}
+	$.fn.flash_notice = function(text) {
+		flash_element = $(".flash_notice");
+		width = flash_element.innerWidth();
+		queue.push(text);
+		if(!running) {
+			display_next();
+		}
+		
+		
+	}
+})(jQuery);
 // Datatable sort for date modified column
 // Numerical sort where the number to sort by is enclosed in the first span tag with class "hidden_elapsed_time"
 jQuery.fn.dataTableExt.oSort['num-first-span-asc']  = function(a,b) {
@@ -112,8 +154,8 @@ jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
 };
  
 
+//Model list dataTable
 $(document).ready(function () {
-
 	// Create the datatable
 	$(".model_list_datatable").dataTable({
 		'aaSorting': [ [1, 'asc']],
@@ -149,24 +191,6 @@ $(document).ready(function () {
 		"sPaginationType": "two_button_full_text"
 	});
 	$(".dataTables_filter input").attr("placeholder", "Search Results");
-	// Clear 'search' from search input field on focus
-	$('#navbar-search-form-text').focus(function() {
-		if ($(this).val() == 'Search')
-		{
-		    $(this).val("");
-		    $(this).removeClass("blank");
-		}
-	// Restore 'search' on blur
-	}).blur(function() {
-		if($(this).val().length == 0) {
-			$(this).val("Search");
-			$(this).addClass("blank");
-		}
-	});
-	// Clicking anywhere in the navbar for the search field focuses on the search field
-	$("#header_search_form_box").click(function() {
-		$("#navbar-search-form-text").trigger("focus");
-	});
 	
 	$(".empty-on-click").livequery('click', function() {
 	   if ($(this).attr("has_been_clicked_on") != "yes")
@@ -186,6 +210,8 @@ $(document).ready(function () {
 	    
 	// Search result tabs
 	// Not done with ajax
+	
+	//Disable tabs with no search results
 	var disabledTabsList = [];
 	$("#search_tabs ul li").each(function(index, element) {
 		if($(element).hasClass("empty")) {
@@ -193,6 +219,7 @@ $(document).ready(function () {
 		}
 	});
 	$("#search_tabs").tabs({disabled: disabledTabsList});
+	
 	
 	// Handle tabs for models (and groups, for that matter)
 	$("#model-tabs").tabs( {
@@ -239,8 +266,40 @@ $(document).ready(function () {
 	       $('p#permission-group-reminder').toggle(false);
 	   }
 	});
-				       
-	$("#email_address").focus();
+	//Validate header login form
+	$("#header_login").validate({
+		rules: {
+			password: "required",
+			email_address: {
+				required: true,
+				email: true
+			}
+		},
+		messages: {
+			password: "Enter password",
+			email_address: {
+				required: "Enter email address",
+				email: "Invalid email address"
+			}
+		},
+		onkeyup: false,
+		onclick: false,
+		onfocusout: false,
+		errorPlacement: function(error, element) {
+			$().flash_notice(error.text());
+		},
+		
+		
+	});
 	
-	
-});	
+	$('#header_login').keypress(function(e) {
+		if(e.keyCode == 13) {
+			$(this).submit();
+		}
+	});
+	$('#header_login_submit').click(function(e) {
+		$(this).parent().submit();
+	});
+});
+
+
