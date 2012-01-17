@@ -45,7 +45,6 @@ body {
   @include border-bottom-right-radius($tab-corner-radius);
   @include box-shadow(0 0 10px 2px gray);
   overflow: hidden;
-  position: relative;
   background-color: /*lighten($header-color, 10%);*/$header-color;
   .banner {
     background-image: url('banner.png');
@@ -73,6 +72,7 @@ body {
     }
   }
   .login {
+    position: relative;
     .login_container {
       font-size: $default-font-size;
       padding-right: 10px;

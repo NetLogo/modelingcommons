@@ -2177,14 +2177,13 @@ body {
   -o-box-shadow: 0 0 10px 2px gray;
   box-shadow: 0 0 10px 2px gray;
   overflow: hidden;
-  position: relative;
   background-color: #8fb4df;
 }
 /* line 147, ../../../../../.rvm/gems/ruby-1.8.7-p352/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
 * html .header {
   overflow-x: hidden;
 }
-/* line 50, sass/nlcommons.scss */
+/* line 49, sass/nlcommons.scss */
 .header .banner {
   background-image: url("banner.png");
   cursor: pointer;
@@ -2200,19 +2199,19 @@ body {
 * html .header .banner {
   overflow-x: hidden;
 }
-/* line 57, sass/nlcommons.scss */
+/* line 56, sass/nlcommons.scss */
 .header .banner h1 {
   font-size: 40px;
   margin-left: 17px;
   font-weight: bold;
 }
-/* line 62, sass/nlcommons.scss */
+/* line 61, sass/nlcommons.scss */
 .header .banner h2 {
   font-size: 20px;
   margin-top: 5px;
   margin-left: 5px;
 }
-/* line 67, sass/nlcommons.scss */
+/* line 66, sass/nlcommons.scss */
 .header .banner a {
   width: 100%;
   height: 100%;
@@ -2220,8 +2219,9 @@ body {
   text-decoration: none;
   display: inline-block;
 }
-/* line 75, sass/nlcommons.scss */
+/* line 74, sass/nlcommons.scss */
 .header .login {
+  position: relative;
   vertical-align: top;
   text-align: right;
   display: inline;
