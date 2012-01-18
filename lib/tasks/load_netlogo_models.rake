@@ -141,7 +141,7 @@ namespace :netlogo do
             nv = NodeVersion.new(:node_id => matching_node.id,
                                  :person_id => @mc_user.id,
                                  :contents => model_contents,
-                                 :description => 'Updated to NetLogo 5.0RC7')
+                                 :description => 'Updated to NetLogo 5.0')
           if nv.save
             puts "\t\t\tSuccessfully saved a new node_version"
           else
