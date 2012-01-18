@@ -19,9 +19,18 @@ def get_mc_user
   end
 end
 
+def get_uri_user
+  @uri_user = Person.find_by_email_address("uri@northwestern.edu")
+  if @uri_user.nil?
+    puts "Did not find any user for Uri Wilensky! Exiting."
+    exit
+  end
+end
+
 def setup
   get_model_locations
   get_mc_user
+  get_uri_user
 
   @ccl_group = Group.find_or_create_by_name('CCL')
   @ccl_tag = Tag.find_or_create_by_name('ccl', :person_id => @mc_user.id)
@@ -54,7 +63,7 @@ namespace :netlogo do
       puts "\t\tsuffix = '#{suffix}'\n"
 
       # Get matches, and handle accordingly
-      matching_nodes = Node.all(:conditions => { :name => filename} ).select { |n| n.people.member?(@mc_user)}
+      matching_nodes = Node.all(:conditions => { :name => filename} ).select { |n| n.people.member?(@mc_user) or n.people.member?(@uri_user) }
 
       if suffix == '.nlogo'
 
