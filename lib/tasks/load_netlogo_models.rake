@@ -105,18 +105,21 @@ namespace :netlogo do
 
         elsif matching_nodes.length == 1
           matching_node = matching_nodes.first
+          model_contents = File.open(path).read
 
           # Add a new version to an existing node
 
           puts "\t\tAbout to check node.contents"
-          if matching_node and matching_node.contents == file_contents
+          puts "\t\t\tmatching_node.contents.length = '#{matching_node.contents.length}'"
+          puts "\t\t\tmodel_contents.length = '#{model_contents.length}'"
+
+          if matching_node.contents == model_contents
             puts "\t\tNot adding a new version -- current one is identical"
             next
           else
             puts "\t\tFound a matching node. Creating a new node_version for this node."
           end
           
-          model_contents = File.open(path).read
 
           if model_contents.blank?
             puts "\t\t\tNo content the model in file '#{path}'!"
@@ -185,26 +188,31 @@ namespace :netlogo do
 
           elsif matching_nodes.length == 1
             matching_node = matching_nodes.first
-            # Add a new version to an existing node
+            file_contents = File.open(path).read
+
             puts "\t\tFound a matching node. Creating a new attachment, of type preview."
 
-            file_contents = File.open(path).read
-            if node.preview.contents == file_contents
-              puts "\t\tNot adding a new version -- current one is identical"
-              next
+            if matching_node.preview
+              puts "\t\tThere is already a preview; checking if it is identical."
+              if matching_node.preview.contents == file_contents
+                puts "\t\tNot adding a new version -- current one is identical"
+                next
+              end
+
+              puts "\t\t\tNo existing preview attachment, so we must create one"
             end
 
-            begin
-              new_version =
-                attachment = NodeAttachment.create!(:node_id => matching_node.id,
-                                                    :person_id => @mc_user.id,
-                                                    :description => "Preview for '#{filename}'",
-                                                    :filename => filename + '.png',
-                                                    :type => 'preview',
-                                                    :contents => file_contents)
-            rescue => e
+            new_version =
+              attachment = NodeAttachment.new(:node_id => matching_node.id,
+                                              :person_id => @mc_user.id,
+                                              :description => "Preview for '#{filename}'",
+                                              :filename => filename + '.png',
+                                              :type => 'preview',
+                                              :contents => file_contents)
+            if new_version.save
+              puts "\t\t\tSuccessfully saved a new preview"
+            else
               puts "\t\t*** Error trying to create a attachment to node '#{matching_node.name}', ID '#{matching_node.id}'"
-              next
             end
 
           elsif suffix == '.nlogo'
