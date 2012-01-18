@@ -29,9 +29,9 @@ def setup
 end
 
 def skip_directory?(directory_name)
-  true if File.basename(path) == '.' or 
-    File.basename(path) == '..' or 
-    File.basename(path) == 'under development'
+  true if File.basename(directory_name) == '.' or 
+    File.basename(directory_name) == '..' or 
+    File.basename(directory_name) == 'under development'
 end
 
 namespace :netlogo do
@@ -43,16 +43,18 @@ namespace :netlogo do
 
     Find.find(@model_locations) do |path|
 
+      puts "\n"
+      puts "\tpath = '#{path}'"
       Find.prune and next if skip_directory?(path)
 
       filename = File.basename(path).slice(/^[^.]+/)
-      puts "\tfilename = '#{filename}'"
+      puts "\t\tfilename = '#{filename}'"
 
       suffix = path.slice(/\.\w+$/)
-      puts "\tsuffix = '#{suffix}'"
+      puts "\t\tsuffix = '#{suffix}'\n"
 
       # Get matches, and handle accordingly
-      matching_nodes = Node.all(:conditions => { :name => filename} ).select { |n| n.people.member?(mc_user)}
+      matching_nodes = Node.all(:conditions => { :name => filename} ).select { |n| n.people.member?(@mc_user)}
 
       if suffix == '.nlogo'
 
@@ -61,52 +63,79 @@ namespace :netlogo do
           # Create a new node, if necessary
           puts "\t\tNo matching node found. We will need to create a new one."
 
-          begin
-            node = Node.create!(:parent_id => nil, :name => filename,
-                                :group => ccl_group, :changeability => PermissionSetting.group)
+          node = Node.new(:parent_id => nil, :name => filename,
+                          :group => ccl_group, :changeability => PermissionSetting.group)
 
-            # Add ccl tag to this model
-            puts "\tAdding CCL tag, ID '#{ccl_tag.id}' for node_id '#{node.id}', person_id '#{mc_user.id}'"
-            TaggedNode.create!(:node_id => node.id, :tag_id => ccl_tag.id, :person_id => mc_user.id, :comment => '')
+          if !node.save
+            puts "\t\t*** Error trying to save a new node."
+            puts "\t\t\t#{node.errors.inspect}"
+          end
 
-            # Add community models tag to this model
-            if path =~ /community model/
-              puts "\tAdding community models tag, ID '#{community_models_tag.id}'"
-              TaggedNode.create!(:node_id => node.id, :tag_id => community_models_tag.id, :person_id => mc_user.id, :comment => '')
+          # Add ccl tag to this model
+          puts "\tAdding CCL tag, ID '#{ccl_tag.id}' for node_id '#{node.id}', person_id '#{mc_user.id}'"
+          tn = TaggedNode.new(:node_id => node.id, :tag_id => ccl_tag.id, :person_id => mc_user.id, :comment => '')
+          
+          if !tn.save
+            puts "\t\t*** Error trying to save a new tagged node."
+            puts "\t\t\t#{tn.errors.inspect}"
+          end
+
+          # Add community models tag to this model
+          if path =~ /community model/
+            puts "\tAdding community models tag, ID '#{community_models_tag.id}'"
+            tn = TaggedNode.new(:node_id => node.id, :tag_id => community_models_tag.id, :person_id => mc_user.id, :comment => '')
+            if !tn.save
+              puts "\t\t*** Error trying to save a new tagged node."
+              puts "\t\t\t#{tn.errors.inspect}"
             end
+          end
 
-            file_contents = File.open(path).read
+          file_contents = File.open(path).read
 
-            puts "\t\tAbout to check node.contents"
-            if node and node.contents == file_contents
-              puts "\t\tNot adding a new version -- current one is identical"
-              next
-            end
-            
-            new_version = NodeVersion.create!(:node_id => node.id,
-                                              :person_id => mc_user.id,
-                                              :contents => file_contents,
-                                              :description => 'Updated from NetLogo 5.0')
-          rescue => e
+          new_version = NodeVersion.new(:node_id => node.id,
+                                        :person_id => @mc_user.id,
+                                        :contents => file_contents,
+                                        :description => 'Updated from NetLogo 5.0')
+
+          if !new_version.save
             puts "\t\t*** Error trying to save a new version of the new node '#{node.name}', ID '#{node.id}': '#{e.inspect}'"
             puts "\t\t\t#{node.inspect}"
           end
+
 
         elsif matching_nodes.length == 1
           matching_node = matching_nodes.first
 
           # Add a new version to an existing node
-          puts "\t\tFound a matching node. Creating a new node_version for this node."
 
-          begin
-            new_version =
-              NodeVersion.create!(:node_id => matching_node.id,
-                                  :person_id => mc_user.id,
-                                  :contents => File.open(path).read,
-                                  :description => 'Updated from NetLogo 4.1')
-          rescue => e
+          puts "\t\tAbout to check node.contents"
+          if matching_node and matching_node.contents == file_contents
+            puts "\t\tNot adding a new version -- current one is identical"
+            next
+          else
+            puts "\t\tFound a matching node. Creating a new node_version for this node."
+          end
+          
+          model_contents = File.open(path).read
+
+          if model_contents.blank?
+            puts "\t\t\tNo content the model in file '#{path}'!"
+            next
+          else
+            puts "\t\t\tModel is '#{model_contents.length}' characters long."
+          end
+
+          new_version =
+            nv = NodeVersion.new(:node_id => matching_node.id,
+                                 :person_id => @mc_user.id,
+                                 :contents => model_contents,
+                                 :description => 'Updated to NetLogo 5.0RC7')
+          if nv.save
+            puts "\t\t\tSuccessfully saved a new node_version"
+          else
             puts "\t\t*** Error trying to create a new version of existing node '#{matching_node.name}', ID '#{matching_node.id}': '#{e.inspect}'"
             next
+
           end
 
         else
@@ -147,7 +176,7 @@ namespace :netlogo do
         puts "\tsuffix = '#{suffix}'"
 
         # Get matches, and handle accordingly
-        matching_nodes = Node.all(:conditions => { :name => filename} ).select { |n| n.people.member?(mc_user)}
+        matching_nodes = Node.all(:conditions => { :name => filename} ).select { |n| n.people.member?(@mc_user)}
 
         if suffix == '.png'
 
@@ -168,7 +197,7 @@ namespace :netlogo do
             begin
               new_version =
                 attachment = NodeAttachment.create!(:node_id => matching_node.id,
-                                                    :person_id => mc_user.id,
+                                                    :person_id => @mc_user.id,
                                                     :description => "Preview for '#{filename}'",
                                                     :filename => filename + '.png',
                                                     :type => 'preview',
