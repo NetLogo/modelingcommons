@@ -81,8 +81,8 @@ namespace :netlogo do
           end
 
           # Add ccl tag to this model
-          puts "\tAdding CCL tag, ID '#{@ccl_tag.id}' for node_id '#{node.id}', person_id '#{mc_user.id}'"
-          tn = TaggedNode.new(:node_id => node.id, :tag_id => @ccl_tag.id, :person_id => mc_user.id, :comment => '')
+          puts "\tAdding CCL tag, ID '#{@ccl_tag.id}' for node_id '#{node.id}', person_id '#{@mc_user.id}'"
+          tn = TaggedNode.new(:node_id => node.id, :tag_id => @ccl_tag.id, :person_id => @mc_user.id, :comment => '')
           
           if !tn.save
             puts "\t\t*** Error trying to save a new tagged node."
@@ -92,7 +92,7 @@ namespace :netlogo do
           # Add community models tag to this model
           if path =~ /community model/
             puts "\tAdding community models tag, ID '#{community_models_tag.id}'"
-            tn = TaggedNode.new(:node_id => node.id, :tag_id => community_models_tag.id, :person_id => mc_user.id, :comment => '')
+            tn = TaggedNode.new(:node_id => node.id, :tag_id => community_models_tag.id, :person_id => @mc_user.id, :comment => '')
             if !tn.save
               puts "\t\t*** Error trying to save a new tagged node."
               puts "\t\t\t#{tn.errors.inspect}"
