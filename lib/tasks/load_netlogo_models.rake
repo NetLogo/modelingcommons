@@ -73,7 +73,7 @@ namespace :netlogo do
           puts "\t\tNo matching node found. We will need to create a new one."
 
           node = Node.new(:parent_id => nil, :name => filename,
-                          :group => ccl_group, :changeability => PermissionSetting.group)
+                          :group => @ccl_group, :changeability => PermissionSetting.group)
 
           if !node.save
             puts "\t\t*** Error trying to save a new node."
