@@ -10,7 +10,7 @@
 
 <h2>Members of the <%= @group.name %> group:</h2>
 
-<ul>
+<ul class="grouplist">
   <% @group.people.sort_by {|p| p.last_name + p.first_name}.each do |person| %>
   <li><%= person_image(person) %>&nbsp;<%= person_link(person) -%>
     <% if @group.is_administrator?(person) %>

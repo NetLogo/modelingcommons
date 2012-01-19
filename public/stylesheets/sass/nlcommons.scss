@@ -355,8 +355,30 @@ div#just_visiting {
   }
 }
 
+/*
+ * One Group Page
+ */
+
+.grouplist {
+  img {
+    height: 30px;
+    vertical-align: middle;
+    
+  }
+  li {
+    margin-top: 4px;
+    margin-bototm: 4px;
+  }
+  
+}
 
 
+/*
+ * Admin view all actions
+ */
+.actions_table_container {
+  overflow: scroll;
+}
 
 /*
  * Globally useful styling
@@ -629,6 +651,9 @@ table.simple_table {
     }
   }
 }
+
+
+
 
 .sidebar {
   a {
