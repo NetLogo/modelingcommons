@@ -216,12 +216,19 @@ $(document).ready(function () {
 	
 	//Disable tabs with no search results
 	var disabledTabsList = [];
-	$("#search_tabs ul li").each(function(index, element) {
+	$("#search_tabs>ul>li").each(function(index, element) {
 		if($(element).hasClass("empty")) {
 			disabledTabsList.push(index);
 		}
 	});
-	$("#search_tabs").tabs({disabled: disabledTabsList});
+	if($("#search_tabs>ul>li").length == $("#search_tabs>ul>li.empty").length) {
+		$("#search_tabs").tabs({disabled: disabledTabsList, selected: -1});
+		$("#ifEmpty").css("display", "inline");
+	} else {
+		$("#search_tabs").tabs({disabled: disabledTabsList});
+		
+	}
+	
 	
 	
 	// Handle tabs for models (and groups, for that matter)
@@ -241,11 +248,13 @@ $(document).ready(function () {
 	});
 	
 	$(".complete").autocomplete('/tags/complete_tags', {} );
+	
 	//Non-ajax tabs!!
+	
+	//Checks URL hash to see if the user wants to go to a specific tab
 	var tab_index = 0;
 	if(window.location.hash.indexOf("tab_") != -1) {
 		var tab_id = window.location.hash.substring(window.location.hash.indexOf("tab_") + 4);
-		//$().flash_notice(tab_id);
 		$("#model_tabs>div").each(function(index, element) {
 			if(tab_id == element.id) {
 				tab_index = index;
@@ -312,9 +321,7 @@ $(document).ready(function () {
 		//onfocusout: false,
 		errorPlacement: function(error, element) {
 			element.parents("tr").next("tr").children("td").eq(element.parents("td").index()).append(error);
-		},
-		
-		
+		}
 	});
 	
 	$('#header_login').keypress(function(e) {
@@ -328,6 +335,11 @@ $(document).ready(function () {
 	$("#model_click_to_load").click(function(e) {
 		$(this).css("display", "none");
 		$("#model_applet").css("display", "block");
+	});
+	$("#header_login").bind('focus', function(e) {
+		$().flash_notice("Focus");
+	}).bind('blur', function(e) {
+		$().flash_notice("Blur"); 
 	});
 });
 

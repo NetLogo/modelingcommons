@@ -137,7 +137,24 @@ button[disabled] {
   cursor: default;
   opacity: .5;
 }
-/* line 44, sass/_clickable.scss */
+/* line 42, sass/_clickable.scss */
+button[disabled]:active {
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #9e9e9e), color-stop(45%, #919191), color-stop(85%, #9e9e9e));
+  background: -webkit-linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
+  background: -moz-linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
+  background: -o-linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
+  background: -ms-linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
+  background: linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
+  -moz-box-shadow: 0px 0px 1px 1px #b7b7b7 inset;
+  -webkit-box-shadow: 0px 0px 1px 1px #b7b7b7 inset;
+  -o-box-shadow: 0px 0px 1px 1px #b7b7b7 inset;
+  box-shadow: 0px 0px 1px 1px #b7b7b7 inset;
+  border: 1px solid #848484;
+  color: black;
+  cursor: default;
+  opacity: .5;
+}
+/* line 55, sass/_clickable.scss */
 button.selected {
   -moz-box-shadow: -1px 5px 6px 2px #193556 inset;
   -webkit-box-shadow: -1px 5px 6px 2px #193556 inset;
@@ -150,7 +167,7 @@ button.selected {
   background: -ms-linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
   background: linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
 }
-/* line 53, sass/_clickable.scss */
+/* line 64, sass/_clickable.scss */
 button.selected:hover {
   -moz-box-shadow: -1px 5px 6px 2px #193556 inset;
   -webkit-box-shadow: -1px 5px 6px 2px #193556 inset;
@@ -163,7 +180,7 @@ button.selected:hover {
   background: -ms-linear-gradient(#3672b9 35%, #2a5991 45%, #3672b9 85%);
   background: linear-gradient(#3672b9 35%, #2a5991 45%, #3672b9 85%);
 }
-/* line 62, sass/_clickable.scss */
+/* line 73, sass/_clickable.scss */
 button.selected:active {
   -moz-box-shadow: -1px 5px 6px 3px #193556 inset;
   -webkit-box-shadow: -1px 5px 6px 3px #193556 inset;
@@ -176,7 +193,7 @@ button.selected:active {
   background: -ms-linear-gradient(#3066a5 35%, #254d7d 45%, #3066a5 85%);
   background: linear-gradient(#3066a5 35%, #254d7d 45%, #3066a5 85%);
 }
-/* line 70, sass/_clickable.scss */
+/* line 81, sass/_clickable.scss */
 button.selected[disabled] {
   -moz-box-shadow: -1px 5px 6px 2px #383838 inset;
   -webkit-box-shadow: -1px 5px 6px 2px #383838 inset;
@@ -562,7 +579,24 @@ button div.ui-icon {
   cursor: default;
   opacity: .5;
 }
-/* line 44, sass/_clickable.scss */
+/* line 42, sass/_clickable.scss */
+.content .tabs .tabBar li[disabled]:active {
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #9e9e9e), color-stop(45%, #919191), color-stop(85%, #9e9e9e));
+  background: -webkit-linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
+  background: -moz-linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
+  background: -o-linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
+  background: -ms-linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
+  background: linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
+  -moz-box-shadow: 0px 0px 1px 1px #b7b7b7 inset;
+  -webkit-box-shadow: 0px 0px 1px 1px #b7b7b7 inset;
+  -o-box-shadow: 0px 0px 1px 1px #b7b7b7 inset;
+  box-shadow: 0px 0px 1px 1px #b7b7b7 inset;
+  border: 1px solid #848484;
+  color: black;
+  cursor: default;
+  opacity: .5;
+}
+/* line 55, sass/_clickable.scss */
 .content .tabs .tabBar li.selected {
   -moz-box-shadow: -1px 5px 6px 2px #193556 inset;
   -webkit-box-shadow: -1px 5px 6px 2px #193556 inset;
@@ -575,7 +609,7 @@ button div.ui-icon {
   background: -ms-linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
   background: linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
 }
-/* line 53, sass/_clickable.scss */
+/* line 64, sass/_clickable.scss */
 .content .tabs .tabBar li.selected:hover {
   -moz-box-shadow: -1px 5px 6px 2px #193556 inset;
   -webkit-box-shadow: -1px 5px 6px 2px #193556 inset;
@@ -588,7 +622,7 @@ button div.ui-icon {
   background: -ms-linear-gradient(#3672b9 35%, #2a5991 45%, #3672b9 85%);
   background: linear-gradient(#3672b9 35%, #2a5991 45%, #3672b9 85%);
 }
-/* line 62, sass/_clickable.scss */
+/* line 73, sass/_clickable.scss */
 .content .tabs .tabBar li.selected:active {
   -moz-box-shadow: -1px 5px 6px 3px #193556 inset;
   -webkit-box-shadow: -1px 5px 6px 3px #193556 inset;
@@ -601,7 +635,7 @@ button div.ui-icon {
   background: -ms-linear-gradient(#3066a5 35%, #254d7d 45%, #3066a5 85%);
   background: linear-gradient(#3066a5 35%, #254d7d 45%, #3066a5 85%);
 }
-/* line 70, sass/_clickable.scss */
+/* line 81, sass/_clickable.scss */
 .content .tabs .tabBar li.selected[disabled] {
   -moz-box-shadow: -1px 5px 6px 2px #383838 inset;
   -webkit-box-shadow: -1px 5px 6px 2px #383838 inset;
@@ -744,7 +778,24 @@ button div.ui-icon {
   cursor: default;
   opacity: .5;
 }
-/* line 44, sass/_clickable.scss */
+/* line 42, sass/_clickable.scss */
+.content table thead tr th[disabled]:active {
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #9e9e9e), color-stop(45%, #919191), color-stop(85%, #9e9e9e));
+  background: -webkit-linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
+  background: -moz-linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
+  background: -o-linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
+  background: -ms-linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
+  background: linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
+  -moz-box-shadow: 0px 0px 1px 1px #b7b7b7 inset;
+  -webkit-box-shadow: 0px 0px 1px 1px #b7b7b7 inset;
+  -o-box-shadow: 0px 0px 1px 1px #b7b7b7 inset;
+  box-shadow: 0px 0px 1px 1px #b7b7b7 inset;
+  border: 1px solid #848484;
+  color: black;
+  cursor: default;
+  opacity: .5;
+}
+/* line 55, sass/_clickable.scss */
 .content table thead tr th.selected {
   -moz-box-shadow: -1px 5px 6px 2px #193556 inset;
   -webkit-box-shadow: -1px 5px 6px 2px #193556 inset;
@@ -757,7 +808,7 @@ button div.ui-icon {
   background: -ms-linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
   background: linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
 }
-/* line 53, sass/_clickable.scss */
+/* line 64, sass/_clickable.scss */
 .content table thead tr th.selected:hover {
   -moz-box-shadow: -1px 5px 6px 2px #193556 inset;
   -webkit-box-shadow: -1px 5px 6px 2px #193556 inset;
@@ -770,7 +821,7 @@ button div.ui-icon {
   background: -ms-linear-gradient(#3672b9 35%, #2a5991 45%, #3672b9 85%);
   background: linear-gradient(#3672b9 35%, #2a5991 45%, #3672b9 85%);
 }
-/* line 62, sass/_clickable.scss */
+/* line 73, sass/_clickable.scss */
 .content table thead tr th.selected:active {
   -moz-box-shadow: -1px 5px 6px 3px #193556 inset;
   -webkit-box-shadow: -1px 5px 6px 3px #193556 inset;
@@ -783,7 +834,7 @@ button div.ui-icon {
   background: -ms-linear-gradient(#3066a5 35%, #254d7d 45%, #3066a5 85%);
   background: linear-gradient(#3066a5 35%, #254d7d 45%, #3066a5 85%);
 }
-/* line 70, sass/_clickable.scss */
+/* line 81, sass/_clickable.scss */
 .content table thead tr th.selected[disabled] {
   -moz-box-shadow: -1px 5px 6px 2px #383838 inset;
   -webkit-box-shadow: -1px 5px 6px 2px #383838 inset;

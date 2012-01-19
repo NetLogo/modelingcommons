@@ -7,6 +7,9 @@
 		<li<% if @info_match_models.empty? %> class="empty"<% end %>><a href="#infoTab"><div class="num-results<% if @info_match_models.empty? %> empty<% end %>"><%= @info_match_models.size -%></div>Info Tab</a></li>
 		<li<% if @procedures_match_models.empty? %> class="empty"<% end %>><a href="#proceduresTab"><div class="num-results<% if @procedures_match_models.empty? %> empty<% end %>"><%= @procedures_match_models.size -%></div>Procedures Tab</a></li>
 	</ul>
+	<span id="ifEmpty" style="display: none;">
+		<h2>No matches for '<%= @original_search_term %>'</h2>
+	</span>
 	<div id="modelName">
 		<% if @models.empty? %>
 		<h2>No matches in model names.</h2>
@@ -52,5 +55,6 @@
 		<br />
 		<% end %>
 	</div>
+	
 </div>
 	

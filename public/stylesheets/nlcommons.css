@@ -765,20 +765,18 @@ a img {
   zoom: 1;
 }
 
-/* line 161, sass/_ui.everything.scss */
+/* line 163, sass/_ui.everything.scss */
 .ui-tabs .ui-tabs-nav {
   list-style: none;
-  /*padding: .2em .2em 0;*/
 }
 
-/* line 162, sass/_ui.everything.scss */
+/* line 166, sass/_ui.everything.scss */
 .ui-tabs .ui-tabs-nav li {
   float: left;
   padding: 0px;
   text-align: center;
   font-size: 16px;
   font-family: 'Muli', 'Arial', sans-serif;
-  /*border-bottom-width: 0 !important; margin: 0 .2em -1px 0; padding: 0;*/
   color: black;
   font-family: 'Muli', 'Arial', sans-serif;
   cursor: pointer;
@@ -850,7 +848,24 @@ a img {
   cursor: default;
   opacity: .5;
 }
-/* line 44, sass/_clickable.scss */
+/* line 42, sass/_clickable.scss */
+.ui-tabs .ui-tabs-nav li.empty:active:hover {
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #b7b7b7), color-stop(45%, #aaaaaa), color-stop(85%, #b7b7b7));
+  background: -webkit-linear-gradient(#b7b7b7 35%, #aaaaaa 45%, #b7b7b7 85%);
+  background: -moz-linear-gradient(#b7b7b7 35%, #aaaaaa 45%, #b7b7b7 85%);
+  background: -o-linear-gradient(#b7b7b7 35%, #aaaaaa 45%, #b7b7b7 85%);
+  background: -ms-linear-gradient(#b7b7b7 35%, #aaaaaa 45%, #b7b7b7 85%);
+  background: linear-gradient(#b7b7b7 35%, #aaaaaa 45%, #b7b7b7 85%);
+  -moz-box-shadow: 0px 0px 1px 1px #d1d1d1 inset;
+  -webkit-box-shadow: 0px 0px 1px 1px #d1d1d1 inset;
+  -o-box-shadow: 0px 0px 1px 1px #d1d1d1 inset;
+  box-shadow: 0px 0px 1px 1px #d1d1d1 inset;
+  border: 1px solid #9e9e9e;
+  color: black;
+  cursor: default;
+  opacity: .5;
+}
+/* line 55, sass/_clickable.scss */
 .ui-tabs .ui-tabs-nav li.ui-tabs-selected {
   -moz-box-shadow: -1px 5px 6px 2px #254d7d inset;
   -webkit-box-shadow: -1px 5px 6px 2px #254d7d inset;
@@ -863,7 +878,7 @@ a img {
   background: -ms-linear-gradient(#6899d3 35%, #417ec7 45%, #6899d3 85%);
   background: linear-gradient(#6899d3 35%, #417ec7 45%, #6899d3 85%);
 }
-/* line 53, sass/_clickable.scss */
+/* line 64, sass/_clickable.scss */
 .ui-tabs .ui-tabs-nav li.ui-tabs-selected:hover {
   -moz-box-shadow: -1px 5px 6px 2px #254d7d inset;
   -webkit-box-shadow: -1px 5px 6px 2px #254d7d inset;
@@ -876,7 +891,7 @@ a img {
   background: -ms-linear-gradient(#548ccd 35%, #3672b9 45%, #548ccd 85%);
   background: linear-gradient(#548ccd 35%, #3672b9 45%, #548ccd 85%);
 }
-/* line 62, sass/_clickable.scss */
+/* line 73, sass/_clickable.scss */
 .ui-tabs .ui-tabs-nav li.ui-tabs-selected:active:hover {
   -moz-box-shadow: -1px 5px 6px 3px #254d7d inset;
   -webkit-box-shadow: -1px 5px 6px 3px #254d7d inset;
@@ -889,7 +904,7 @@ a img {
   background: -ms-linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
   background: linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
 }
-/* line 70, sass/_clickable.scss */
+/* line 81, sass/_clickable.scss */
 .ui-tabs .ui-tabs-nav li.ui-tabs-selected.empty {
   -moz-box-shadow: -1px 5px 6px 2px #515151 inset;
   -webkit-box-shadow: -1px 5px 6px 2px #515151 inset;
@@ -903,7 +918,7 @@ a img {
   background: linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
 }
 
-/* line 163, sass/_ui.everything.scss */
+/* line 174, sass/_ui.everything.scss */
 .ui-tabs .ui-tabs-nav li:first-child {
   -moz-border-radius-topleft: 5px;
   -webkit-border-top-left-radius: 5px;
@@ -913,44 +928,36 @@ a img {
   border-top-left-radius: 5px;
 }
 
-/* line 164, sass/_ui.everything.scss */
+/* line 177, sass/_ui.everything.scss */
 .ui-tabs .ui-tabs-nav li a {
-  /*float: left;*/
   display: inline-block;
   min-width: 80px;
   line-height: 28px;
   padding: 5px;
   text-decoration: none;
   color: black;
-  /*padding: .5em 1em; */
 }
 
-/* line 165, sass/_ui.everything.scss */
-.ui-tabs .ui-tabs-nav li.ui-tabs-selected {
-  /*padding-bottom: 1px; border-bottom-width: 0; */
+/* line 186, sass/_ui.everything.scss */
+.ui-tabs .ui-tabs-nav li.ui-state-disabled a, .ui-tabs .ui-tabs-nav li.ui-state-processing a {
+  cursor: default;
 }
 
-/* line 166, sass/_ui.everything.scss */
-.ui-tabs .ui-tabs-nav li.ui-tabs-selected a, .ui-tabs .ui-tabs-nav li.ui-state-disabled a, .ui-tabs .ui-tabs-nav li.ui-state-processing a {
-  /*cursor: default; */
-}
-
-/* line 167, sass/_ui.everything.scss */
+/* line 189, sass/_ui.everything.scss */
 .ui-tabs .ui-tabs-nav li a, .ui-tabs.ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-selected a {
   cursor: pointer;
 }
 
 /* first selector in group seems obsolete, but required to overcome bug in Opera applying cursor: text overall if defined elsewhere... */
-/* line 168, sass/_ui.everything.scss */
+/* line 192, sass/_ui.everything.scss */
 .ui-tabs .ui-tabs-panel {
-  /*padding: 1em 1.4em;*/
   display: block;
   border-width: 0;
   background: none;
   margin: 4px;
 }
 
-/* line 169, sass/_ui.everything.scss */
+/* line 195, sass/_ui.everything.scss */
 .ui-tabs .ui-tabs-hide {
   display: none !important;
 }
@@ -963,38 +970,38 @@ a img {
 */
 /* Component containers
 ----------------------------------*/
-/* line 182, sass/_ui.everything.scss */
+/* line 210, sass/_ui.everything.scss */
 .ui-widget {
   /*font-family: Optima,Verdana,Arial,sans-serif;*/
   /*font-size: 0.8em;*/
   font-size: 14px;
 }
 
-/* line 183, sass/_ui.everything.scss */
+/* line 211, sass/_ui.everything.scss */
 .ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button {
   /*font-family: Optima,Verdana,Arial,sans-serif; font-size: 0.9em; */
 }
 
-/* line 184, sass/_ui.everything.scss */
+/* line 212, sass/_ui.everything.scss */
 .ui-widget-content {
   color: #222222;
   color: inherit;
   font-family: inherit;
 }
 
-/* line 185, sass/_ui.everything.scss */
+/* line 213, sass/_ui.everything.scss */
 .ui-widget-header {
   /*border: 1px solid #aaaaaa; background: #cccccc url(/stylesheets/themes/nlcommons/images/ui-bg_highlight-soft_75_cccccc_1x100.png) 50% 50% repeat-x; color: #222222; font-weight: bold; */
 }
 
-/* line 186, sass/_ui.everything.scss */
+/* line 214, sass/_ui.everything.scss */
 .ui-widget-header a {
   color: #222222;
 }
 
 /* Interaction states
 ----------------------------------*/
-/* line 190, sass/_ui.everything.scss */
+/* line 218, sass/_ui.everything.scss */
 .ui-state-default, .ui-widget-content .ui-state-default {
   border: 1px solid #d3d3d3;
   background: #e6e6e6 url(/stylesheets/themes/nlcommons/images/ui-bg_glass_75_e6e6e6_1x400.png) 50% 50% repeat-x;
@@ -1003,14 +1010,14 @@ a img {
   outline: none;
 }
 
-/* line 191, sass/_ui.everything.scss */
+/* line 219, sass/_ui.everything.scss */
 .ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited {
   color: #555555;
   text-decoration: none;
   outline: none;
 }
 
-/* line 192, sass/_ui.everything.scss */
+/* line 220, sass/_ui.everything.scss */
 .ui-state-hover, .ui-widget-content .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus {
   border: 1px solid #999999;
   background: #dadada url(/stylesheets/themes/nlcommons/images/ui-bg_glass_75_dadada_1x400.png) 50% 50% repeat-x;
@@ -1019,14 +1026,14 @@ a img {
   outline: none;
 }
 
-/* line 193, sass/_ui.everything.scss */
+/* line 221, sass/_ui.everything.scss */
 .ui-state-hover a, .ui-state-hover a:hover {
   color: #212121;
   text-decoration: none;
   outline: none;
 }
 
-/* line 194, sass/_ui.everything.scss */
+/* line 222, sass/_ui.everything.scss */
 .ui-state-active, .ui-widget-content .ui-state-active {
   border: 1px solid #aaaaaa;
   background: #abcdef;
@@ -1035,7 +1042,7 @@ a img {
   outline: none;
 }
 
-/* line 195, sass/_ui.everything.scss */
+/* line 223, sass/_ui.everything.scss */
 .ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited {
   color: #212121;
   outline: none;
@@ -1044,46 +1051,46 @@ a img {
 
 /* Interaction Cues
 ----------------------------------*/
-/* line 199, sass/_ui.everything.scss */
+/* line 227, sass/_ui.everything.scss */
 .ui-state-highlight, .ui-widget-content .ui-state-highlight {
   border: 1px solid #fcefa1;
   background: #fbf9ee url(/stylesheets/themes/nlcommons/images/ui-bg_glass_55_fbf9ee_1x400.png) 50% 50% repeat-x;
   color: #363636;
 }
 
-/* line 200, sass/_ui.everything.scss */
+/* line 228, sass/_ui.everything.scss */
 .ui-state-highlight a, .ui-widget-content .ui-state-highlight a {
   color: #363636;
 }
 
-/* line 201, sass/_ui.everything.scss */
+/* line 229, sass/_ui.everything.scss */
 .ui-state-error, .ui-widget-content .ui-state-error {
   border: 1px solid #cd0a0a;
   background: #fef1ec url(/stylesheets/themes/nlcommons/images/ui-bg_glass_95_fef1ec_1x400.png) 50% 50% repeat-x;
   color: #cd0a0a;
 }
 
-/* line 202, sass/_ui.everything.scss */
+/* line 230, sass/_ui.everything.scss */
 .ui-state-error a, .ui-widget-content .ui-state-error a {
   color: #cd0a0a;
 }
 
-/* line 203, sass/_ui.everything.scss */
+/* line 231, sass/_ui.everything.scss */
 .ui-state-error-text, .ui-widget-content .ui-state-error-text {
   color: #cd0a0a;
 }
 
-/* line 204, sass/_ui.everything.scss */
+/* line 232, sass/_ui.everything.scss */
 .ui-state-disabled, .ui-widget-content .ui-state-disabled {
   /*opacity: .35; filter:Alpha(Opacity=35); background-image: none; */
 }
 
-/* line 205, sass/_ui.everything.scss */
+/* line 233, sass/_ui.everything.scss */
 .ui-priority-primary, .ui-widget-content .ui-priority-primary {
   font-weight: bold;
 }
 
-/* line 206, sass/_ui.everything.scss */
+/* line 234, sass/_ui.everything.scss */
 .ui-priority-secondary, .ui-widget-content .ui-priority-secondary {
   opacity: .7;
   filter: Alpha(Opacity=70);
@@ -1093,910 +1100,910 @@ a img {
 /* Icons
 ----------------------------------*/
 /* states and images */
-/* line 212, sass/_ui.everything.scss */
+/* line 240, sass/_ui.everything.scss */
 .ui-icon {
   width: 16px;
   height: 16px;
   background-image: url(/stylesheets/themes/nlcommons/images/ui-icons_222222_256x240.png);
 }
 
-/* line 213, sass/_ui.everything.scss */
+/* line 241, sass/_ui.everything.scss */
 .ui-widget-content .ui-icon {
   background-image: url(/stylesheets/themes/nlcommons/images/ui-icons_222222_256x240.png);
 }
 
-/* line 214, sass/_ui.everything.scss */
+/* line 242, sass/_ui.everything.scss */
 .ui-widget-header .ui-icon {
   background-image: url(/stylesheets/themes/nlcommons/images/ui-icons_222222_256x240.png);
 }
 
-/* line 215, sass/_ui.everything.scss */
+/* line 243, sass/_ui.everything.scss */
 .ui-state-default .ui-icon {
   background-image: url(/stylesheets/themes/nlcommons/images/ui-icons_888888_256x240.png);
 }
 
-/* line 216, sass/_ui.everything.scss */
+/* line 244, sass/_ui.everything.scss */
 .ui-state-hover .ui-icon, .ui-state-focus .ui-icon {
   background-image: url(/stylesheets/themes/nlcommons/images/ui-icons_454545_256x240.png);
 }
 
-/* line 217, sass/_ui.everything.scss */
+/* line 245, sass/_ui.everything.scss */
 .ui-state-active .ui-icon {
   background-image: url(/stylesheets/themes/nlcommons/images/ui-icons_454545_256x240.png);
 }
 
-/* line 218, sass/_ui.everything.scss */
+/* line 246, sass/_ui.everything.scss */
 .ui-state-highlight .ui-icon {
   background-image: url(/stylesheets/themes/nlcommons/images/ui-icons_2e83ff_256x240.png);
 }
 
-/* line 219, sass/_ui.everything.scss */
+/* line 247, sass/_ui.everything.scss */
 .ui-state-error .ui-icon, .ui-state-error-text .ui-icon {
   background-image: url(/stylesheets/themes/nlcommons/images/ui-icons_cd0a0a_256x240.png);
 }
 
 /* positioning */
-/* line 222, sass/_ui.everything.scss */
+/* line 250, sass/_ui.everything.scss */
 .ui-icon-carat-1-n {
   background-position: 0 0;
 }
 
-/* line 223, sass/_ui.everything.scss */
+/* line 251, sass/_ui.everything.scss */
 .ui-icon-carat-1-ne {
   background-position: -16px 0;
 }
 
-/* line 224, sass/_ui.everything.scss */
+/* line 252, sass/_ui.everything.scss */
 .ui-icon-carat-1-e {
   background-position: -32px 0;
 }
 
-/* line 225, sass/_ui.everything.scss */
+/* line 253, sass/_ui.everything.scss */
 .ui-icon-carat-1-se {
   background-position: -48px 0;
 }
 
-/* line 226, sass/_ui.everything.scss */
+/* line 254, sass/_ui.everything.scss */
 .ui-icon-carat-1-s {
   background-position: -64px 0;
 }
 
-/* line 227, sass/_ui.everything.scss */
+/* line 255, sass/_ui.everything.scss */
 .ui-icon-carat-1-sw {
   background-position: -80px 0;
 }
 
-/* line 228, sass/_ui.everything.scss */
+/* line 256, sass/_ui.everything.scss */
 .ui-icon-carat-1-w {
   background-position: -96px 0;
 }
 
-/* line 229, sass/_ui.everything.scss */
+/* line 257, sass/_ui.everything.scss */
 .ui-icon-carat-1-nw {
   background-position: -112px 0;
 }
 
-/* line 230, sass/_ui.everything.scss */
+/* line 258, sass/_ui.everything.scss */
 .ui-icon-carat-2-n-s {
   background-position: -128px 0;
 }
 
-/* line 231, sass/_ui.everything.scss */
+/* line 259, sass/_ui.everything.scss */
 .ui-icon-carat-2-e-w {
   background-position: -144px 0;
 }
 
-/* line 232, sass/_ui.everything.scss */
+/* line 260, sass/_ui.everything.scss */
 .ui-icon-triangle-1-n, .dataTables > thead tr th.sorting_asc div.ui-icon {
   background-position: 0 -16px;
 }
 
-/* line 233, sass/_ui.everything.scss */
+/* line 261, sass/_ui.everything.scss */
 .ui-icon-triangle-1-ne {
   background-position: -16px -16px;
 }
 
-/* line 234, sass/_ui.everything.scss */
+/* line 262, sass/_ui.everything.scss */
 .ui-icon-triangle-1-e, .dataTables_wrapper .dataTables_paginate .paginate_disabled_next div.ui-icon, .dataTables_wrapper .dataTables_paginate .paginate_enabled_next div.ui-icon {
   background-position: -32px -16px;
 }
 
-/* line 235, sass/_ui.everything.scss */
+/* line 263, sass/_ui.everything.scss */
 .ui-icon-triangle-1-se {
   background-position: -48px -16px;
 }
 
-/* line 236, sass/_ui.everything.scss */
+/* line 264, sass/_ui.everything.scss */
 .ui-icon-triangle-1-s, .dataTables > thead tr th.sorting_desc div.ui-icon {
   background-position: -64px -16px;
 }
 
-/* line 237, sass/_ui.everything.scss */
+/* line 265, sass/_ui.everything.scss */
 .ui-icon-triangle-1-sw {
   background-position: -80px -16px;
 }
 
-/* line 238, sass/_ui.everything.scss */
+/* line 266, sass/_ui.everything.scss */
 .ui-icon-triangle-1-w, .dataTables_wrapper .dataTables_paginate .paginate_disabled_previous div.ui-icon, .dataTables_wrapper .dataTables_paginate .paginate_enabled_previous div.ui-icon {
   background-position: -96px -16px;
 }
 
-/* line 239, sass/_ui.everything.scss */
+/* line 267, sass/_ui.everything.scss */
 .ui-icon-triangle-1-nw {
   background-position: -112px -16px;
 }
 
-/* line 240, sass/_ui.everything.scss */
+/* line 268, sass/_ui.everything.scss */
 .ui-icon-triangle-2-n-s, .dataTables > thead tr th.sorting div.ui-icon {
   background-position: -128px -16px;
 }
 
-/* line 241, sass/_ui.everything.scss */
+/* line 269, sass/_ui.everything.scss */
 .ui-icon-triangle-2-e-w {
   background-position: -144px -16px;
 }
 
-/* line 242, sass/_ui.everything.scss */
+/* line 270, sass/_ui.everything.scss */
 .ui-icon-arrow-1-n {
   background-position: 0 -32px;
 }
 
-/* line 243, sass/_ui.everything.scss */
+/* line 271, sass/_ui.everything.scss */
 .ui-icon-arrow-1-ne {
   background-position: -16px -32px;
 }
 
-/* line 244, sass/_ui.everything.scss */
+/* line 272, sass/_ui.everything.scss */
 .ui-icon-arrow-1-e {
   background-position: -32px -32px;
 }
 
-/* line 245, sass/_ui.everything.scss */
+/* line 273, sass/_ui.everything.scss */
 .ui-icon-arrow-1-se {
   background-position: -48px -32px;
 }
 
-/* line 246, sass/_ui.everything.scss */
+/* line 274, sass/_ui.everything.scss */
 .ui-icon-arrow-1-s {
   background-position: -64px -32px;
 }
 
-/* line 247, sass/_ui.everything.scss */
+/* line 275, sass/_ui.everything.scss */
 .ui-icon-arrow-1-sw {
   background-position: -80px -32px;
 }
 
-/* line 248, sass/_ui.everything.scss */
+/* line 276, sass/_ui.everything.scss */
 .ui-icon-arrow-1-w {
   background-position: -96px -32px;
 }
 
-/* line 249, sass/_ui.everything.scss */
+/* line 277, sass/_ui.everything.scss */
 .ui-icon-arrow-1-nw {
   background-position: -112px -32px;
 }
 
-/* line 250, sass/_ui.everything.scss */
+/* line 278, sass/_ui.everything.scss */
 .ui-icon-arrow-2-n-s {
   background-position: -128px -32px;
 }
 
-/* line 251, sass/_ui.everything.scss */
+/* line 279, sass/_ui.everything.scss */
 .ui-icon-arrow-2-ne-sw {
   background-position: -144px -32px;
 }
 
-/* line 252, sass/_ui.everything.scss */
+/* line 280, sass/_ui.everything.scss */
 .ui-icon-arrow-2-e-w {
   background-position: -160px -32px;
 }
 
-/* line 253, sass/_ui.everything.scss */
+/* line 281, sass/_ui.everything.scss */
 .ui-icon-arrow-2-se-nw {
   background-position: -176px -32px;
 }
 
-/* line 254, sass/_ui.everything.scss */
+/* line 282, sass/_ui.everything.scss */
 .ui-icon-arrowstop-1-n {
   background-position: -192px -32px;
 }
 
-/* line 255, sass/_ui.everything.scss */
+/* line 283, sass/_ui.everything.scss */
 .ui-icon-arrowstop-1-e {
   background-position: -208px -32px;
 }
 
-/* line 256, sass/_ui.everything.scss */
+/* line 284, sass/_ui.everything.scss */
 .ui-icon-arrowstop-1-s {
   background-position: -224px -32px;
 }
 
-/* line 257, sass/_ui.everything.scss */
+/* line 285, sass/_ui.everything.scss */
 .ui-icon-arrowstop-1-w {
   background-position: -240px -32px;
 }
 
-/* line 258, sass/_ui.everything.scss */
+/* line 286, sass/_ui.everything.scss */
 .ui-icon-arrowthick-1-n {
   background-position: 0 -48px;
 }
 
-/* line 259, sass/_ui.everything.scss */
+/* line 287, sass/_ui.everything.scss */
 .ui-icon-arrowthick-1-ne {
   background-position: -16px -48px;
 }
 
-/* line 260, sass/_ui.everything.scss */
+/* line 288, sass/_ui.everything.scss */
 .ui-icon-arrowthick-1-e {
   background-position: -32px -48px;
 }
 
-/* line 261, sass/_ui.everything.scss */
+/* line 289, sass/_ui.everything.scss */
 .ui-icon-arrowthick-1-se {
   background-position: -48px -48px;
 }
 
-/* line 262, sass/_ui.everything.scss */
+/* line 290, sass/_ui.everything.scss */
 .ui-icon-arrowthick-1-s {
   background-position: -64px -48px;
 }
 
-/* line 263, sass/_ui.everything.scss */
+/* line 291, sass/_ui.everything.scss */
 .ui-icon-arrowthick-1-sw {
   background-position: -80px -48px;
 }
 
-/* line 264, sass/_ui.everything.scss */
+/* line 292, sass/_ui.everything.scss */
 .ui-icon-arrowthick-1-w {
   background-position: -96px -48px;
 }
 
-/* line 265, sass/_ui.everything.scss */
+/* line 293, sass/_ui.everything.scss */
 .ui-icon-arrowthick-1-nw {
   background-position: -112px -48px;
 }
 
-/* line 266, sass/_ui.everything.scss */
+/* line 294, sass/_ui.everything.scss */
 .ui-icon-arrowthick-2-n-s {
   background-position: -128px -48px;
 }
 
-/* line 267, sass/_ui.everything.scss */
+/* line 295, sass/_ui.everything.scss */
 .ui-icon-arrowthick-2-ne-sw {
   background-position: -144px -48px;
 }
 
-/* line 268, sass/_ui.everything.scss */
+/* line 296, sass/_ui.everything.scss */
 .ui-icon-arrowthick-2-e-w {
   background-position: -160px -48px;
 }
 
-/* line 269, sass/_ui.everything.scss */
+/* line 297, sass/_ui.everything.scss */
 .ui-icon-arrowthick-2-se-nw {
   background-position: -176px -48px;
 }
 
-/* line 270, sass/_ui.everything.scss */
+/* line 298, sass/_ui.everything.scss */
 .ui-icon-arrowthickstop-1-n {
   background-position: -192px -48px;
 }
 
-/* line 271, sass/_ui.everything.scss */
+/* line 299, sass/_ui.everything.scss */
 .ui-icon-arrowthickstop-1-e {
   background-position: -208px -48px;
 }
 
-/* line 272, sass/_ui.everything.scss */
+/* line 300, sass/_ui.everything.scss */
 .ui-icon-arrowthickstop-1-s {
   background-position: -224px -48px;
 }
 
-/* line 273, sass/_ui.everything.scss */
+/* line 301, sass/_ui.everything.scss */
 .ui-icon-arrowthickstop-1-w {
   background-position: -240px -48px;
 }
 
-/* line 274, sass/_ui.everything.scss */
+/* line 302, sass/_ui.everything.scss */
 .ui-icon-arrowreturnthick-1-w {
   background-position: 0 -64px;
 }
 
-/* line 275, sass/_ui.everything.scss */
+/* line 303, sass/_ui.everything.scss */
 .ui-icon-arrowreturnthick-1-n {
   background-position: -16px -64px;
 }
 
-/* line 276, sass/_ui.everything.scss */
+/* line 304, sass/_ui.everything.scss */
 .ui-icon-arrowreturnthick-1-e {
   background-position: -32px -64px;
 }
 
-/* line 277, sass/_ui.everything.scss */
+/* line 305, sass/_ui.everything.scss */
 .ui-icon-arrowreturnthick-1-s {
   background-position: -48px -64px;
 }
 
-/* line 278, sass/_ui.everything.scss */
+/* line 306, sass/_ui.everything.scss */
 .ui-icon-arrowreturn-1-w {
   background-position: -64px -64px;
 }
 
-/* line 279, sass/_ui.everything.scss */
+/* line 307, sass/_ui.everything.scss */
 .ui-icon-arrowreturn-1-n {
   background-position: -80px -64px;
 }
 
-/* line 280, sass/_ui.everything.scss */
+/* line 308, sass/_ui.everything.scss */
 .ui-icon-arrowreturn-1-e {
   background-position: -96px -64px;
 }
 
-/* line 281, sass/_ui.everything.scss */
+/* line 309, sass/_ui.everything.scss */
 .ui-icon-arrowreturn-1-s {
   background-position: -112px -64px;
 }
 
-/* line 282, sass/_ui.everything.scss */
+/* line 310, sass/_ui.everything.scss */
 .ui-icon-arrowrefresh-1-w {
   background-position: -128px -64px;
 }
 
-/* line 283, sass/_ui.everything.scss */
+/* line 311, sass/_ui.everything.scss */
 .ui-icon-arrowrefresh-1-n {
   background-position: -144px -64px;
 }
 
-/* line 284, sass/_ui.everything.scss */
+/* line 312, sass/_ui.everything.scss */
 .ui-icon-arrowrefresh-1-e {
   background-position: -160px -64px;
 }
 
-/* line 285, sass/_ui.everything.scss */
+/* line 313, sass/_ui.everything.scss */
 .ui-icon-arrowrefresh-1-s {
   background-position: -176px -64px;
 }
 
-/* line 286, sass/_ui.everything.scss */
+/* line 314, sass/_ui.everything.scss */
 .ui-icon-arrow-4 {
   background-position: 0 -80px;
 }
 
-/* line 287, sass/_ui.everything.scss */
+/* line 315, sass/_ui.everything.scss */
 .ui-icon-arrow-4-diag {
   background-position: -16px -80px;
 }
 
-/* line 288, sass/_ui.everything.scss */
+/* line 316, sass/_ui.everything.scss */
 .ui-icon-extlink {
   background-position: -32px -80px;
 }
 
-/* line 289, sass/_ui.everything.scss */
+/* line 317, sass/_ui.everything.scss */
 .ui-icon-newwin {
   background-position: -48px -80px;
 }
 
-/* line 290, sass/_ui.everything.scss */
+/* line 318, sass/_ui.everything.scss */
 .ui-icon-refresh {
   background-position: -64px -80px;
 }
 
-/* line 291, sass/_ui.everything.scss */
+/* line 319, sass/_ui.everything.scss */
 .ui-icon-shuffle {
   background-position: -80px -80px;
 }
 
-/* line 292, sass/_ui.everything.scss */
+/* line 320, sass/_ui.everything.scss */
 .ui-icon-transfer-e-w {
   background-position: -96px -80px;
 }
 
-/* line 293, sass/_ui.everything.scss */
+/* line 321, sass/_ui.everything.scss */
 .ui-icon-transferthick-e-w {
   background-position: -112px -80px;
 }
 
-/* line 294, sass/_ui.everything.scss */
+/* line 322, sass/_ui.everything.scss */
 .ui-icon-folder-collapsed {
   background-position: 0 -96px;
 }
 
-/* line 295, sass/_ui.everything.scss */
+/* line 323, sass/_ui.everything.scss */
 .ui-icon-folder-open {
   background-position: -16px -96px;
 }
 
-/* line 296, sass/_ui.everything.scss */
+/* line 324, sass/_ui.everything.scss */
 .ui-icon-document {
   background-position: -32px -96px;
 }
 
-/* line 297, sass/_ui.everything.scss */
+/* line 325, sass/_ui.everything.scss */
 .ui-icon-document-b {
   background-position: -48px -96px;
 }
 
-/* line 298, sass/_ui.everything.scss */
+/* line 326, sass/_ui.everything.scss */
 .ui-icon-note {
   background-position: -64px -96px;
 }
 
-/* line 299, sass/_ui.everything.scss */
+/* line 327, sass/_ui.everything.scss */
 .ui-icon-mail-closed {
   background-position: -80px -96px;
 }
 
-/* line 300, sass/_ui.everything.scss */
+/* line 328, sass/_ui.everything.scss */
 .ui-icon-mail-open {
   background-position: -96px -96px;
 }
 
-/* line 301, sass/_ui.everything.scss */
+/* line 329, sass/_ui.everything.scss */
 .ui-icon-suitcase {
   background-position: -112px -96px;
 }
 
-/* line 302, sass/_ui.everything.scss */
+/* line 330, sass/_ui.everything.scss */
 .ui-icon-comment {
   background-position: -128px -96px;
 }
 
-/* line 303, sass/_ui.everything.scss */
+/* line 331, sass/_ui.everything.scss */
 .ui-icon-person {
   background-position: -144px -96px;
 }
 
-/* line 304, sass/_ui.everything.scss */
+/* line 332, sass/_ui.everything.scss */
 .ui-icon-print {
   background-position: -160px -96px;
 }
 
-/* line 305, sass/_ui.everything.scss */
+/* line 333, sass/_ui.everything.scss */
 .ui-icon-trash {
   background-position: -176px -96px;
 }
 
-/* line 306, sass/_ui.everything.scss */
+/* line 334, sass/_ui.everything.scss */
 .ui-icon-locked {
   background-position: -192px -96px;
 }
 
-/* line 307, sass/_ui.everything.scss */
+/* line 335, sass/_ui.everything.scss */
 .ui-icon-unlocked {
   background-position: -208px -96px;
 }
 
-/* line 308, sass/_ui.everything.scss */
+/* line 336, sass/_ui.everything.scss */
 .ui-icon-bookmark {
   background-position: -224px -96px;
 }
 
-/* line 309, sass/_ui.everything.scss */
+/* line 337, sass/_ui.everything.scss */
 .ui-icon-tag {
   background-position: -240px -96px;
 }
 
-/* line 310, sass/_ui.everything.scss */
+/* line 338, sass/_ui.everything.scss */
 .ui-icon-home {
   background-position: 0 -112px;
 }
 
-/* line 311, sass/_ui.everything.scss */
+/* line 339, sass/_ui.everything.scss */
 .ui-icon-flag {
   background-position: -16px -112px;
 }
 
-/* line 312, sass/_ui.everything.scss */
+/* line 340, sass/_ui.everything.scss */
 .ui-icon-calendar {
   background-position: -32px -112px;
 }
 
-/* line 313, sass/_ui.everything.scss */
+/* line 341, sass/_ui.everything.scss */
 .ui-icon-cart {
   background-position: -48px -112px;
 }
 
-/* line 314, sass/_ui.everything.scss */
+/* line 342, sass/_ui.everything.scss */
 .ui-icon-pencil {
   background-position: -64px -112px;
 }
 
-/* line 315, sass/_ui.everything.scss */
+/* line 343, sass/_ui.everything.scss */
 .ui-icon-clock {
   background-position: -80px -112px;
 }
 
-/* line 316, sass/_ui.everything.scss */
+/* line 344, sass/_ui.everything.scss */
 .ui-icon-disk {
   background-position: -96px -112px;
 }
 
-/* line 317, sass/_ui.everything.scss */
+/* line 345, sass/_ui.everything.scss */
 .ui-icon-calculator {
   background-position: -112px -112px;
 }
 
-/* line 318, sass/_ui.everything.scss */
+/* line 346, sass/_ui.everything.scss */
 .ui-icon-zoomin {
   background-position: -128px -112px;
 }
 
-/* line 319, sass/_ui.everything.scss */
+/* line 347, sass/_ui.everything.scss */
 .ui-icon-zoomout {
   background-position: -144px -112px;
 }
 
-/* line 320, sass/_ui.everything.scss */
+/* line 348, sass/_ui.everything.scss */
 .ui-icon-search {
   background-position: -160px -112px;
 }
 
-/* line 321, sass/_ui.everything.scss */
+/* line 349, sass/_ui.everything.scss */
 .ui-icon-wrench {
   background-position: -176px -112px;
 }
 
-/* line 322, sass/_ui.everything.scss */
+/* line 350, sass/_ui.everything.scss */
 .ui-icon-gear {
   background-position: -192px -112px;
 }
 
-/* line 323, sass/_ui.everything.scss */
+/* line 351, sass/_ui.everything.scss */
 .ui-icon-heart {
   background-position: -208px -112px;
 }
 
-/* line 324, sass/_ui.everything.scss */
+/* line 352, sass/_ui.everything.scss */
 .ui-icon-star {
   background-position: -224px -112px;
 }
 
-/* line 325, sass/_ui.everything.scss */
+/* line 353, sass/_ui.everything.scss */
 .ui-icon-link {
   background-position: -240px -112px;
 }
 
-/* line 326, sass/_ui.everything.scss */
+/* line 354, sass/_ui.everything.scss */
 .ui-icon-cancel {
   background-position: 0 -128px;
 }
 
-/* line 327, sass/_ui.everything.scss */
+/* line 355, sass/_ui.everything.scss */
 .ui-icon-plus {
   background-position: -16px -128px;
 }
 
-/* line 328, sass/_ui.everything.scss */
+/* line 356, sass/_ui.everything.scss */
 .ui-icon-plusthick {
   background-position: -32px -128px;
 }
 
-/* line 329, sass/_ui.everything.scss */
+/* line 357, sass/_ui.everything.scss */
 .ui-icon-minus {
   background-position: -48px -128px;
 }
 
-/* line 330, sass/_ui.everything.scss */
+/* line 358, sass/_ui.everything.scss */
 .ui-icon-minusthick {
   background-position: -64px -128px;
 }
 
-/* line 331, sass/_ui.everything.scss */
+/* line 359, sass/_ui.everything.scss */
 .ui-icon-close {
   background-position: -80px -128px;
 }
 
-/* line 332, sass/_ui.everything.scss */
+/* line 360, sass/_ui.everything.scss */
 .ui-icon-closethick {
   background-position: -96px -128px;
 }
 
-/* line 333, sass/_ui.everything.scss */
+/* line 361, sass/_ui.everything.scss */
 .ui-icon-key {
   background-position: -112px -128px;
 }
 
-/* line 334, sass/_ui.everything.scss */
+/* line 362, sass/_ui.everything.scss */
 .ui-icon-lightbulb {
   background-position: -128px -128px;
 }
 
-/* line 335, sass/_ui.everything.scss */
+/* line 363, sass/_ui.everything.scss */
 .ui-icon-scissors {
   background-position: -144px -128px;
 }
 
-/* line 336, sass/_ui.everything.scss */
+/* line 364, sass/_ui.everything.scss */
 .ui-icon-clipboard {
   background-position: -160px -128px;
 }
 
-/* line 337, sass/_ui.everything.scss */
+/* line 365, sass/_ui.everything.scss */
 .ui-icon-copy {
   background-position: -176px -128px;
 }
 
-/* line 338, sass/_ui.everything.scss */
+/* line 366, sass/_ui.everything.scss */
 .ui-icon-contact {
   background-position: -192px -128px;
 }
 
-/* line 339, sass/_ui.everything.scss */
+/* line 367, sass/_ui.everything.scss */
 .ui-icon-image {
   background-position: -208px -128px;
 }
 
-/* line 340, sass/_ui.everything.scss */
+/* line 368, sass/_ui.everything.scss */
 .ui-icon-video {
   background-position: -224px -128px;
 }
 
-/* line 341, sass/_ui.everything.scss */
+/* line 369, sass/_ui.everything.scss */
 .ui-icon-script {
   background-position: -240px -128px;
 }
 
-/* line 342, sass/_ui.everything.scss */
+/* line 370, sass/_ui.everything.scss */
 .ui-icon-alert {
   background-position: 0 -144px;
 }
 
-/* line 343, sass/_ui.everything.scss */
+/* line 371, sass/_ui.everything.scss */
 .ui-icon-info {
   background-position: -16px -144px;
 }
 
-/* line 344, sass/_ui.everything.scss */
+/* line 372, sass/_ui.everything.scss */
 .ui-icon-notice {
   background-position: -32px -144px;
 }
 
-/* line 345, sass/_ui.everything.scss */
+/* line 373, sass/_ui.everything.scss */
 .ui-icon-help {
   background-position: -48px -144px;
 }
 
-/* line 346, sass/_ui.everything.scss */
+/* line 374, sass/_ui.everything.scss */
 .ui-icon-check {
   background-position: -64px -144px;
 }
 
-/* line 347, sass/_ui.everything.scss */
+/* line 375, sass/_ui.everything.scss */
 .ui-icon-bullet {
   background-position: -80px -144px;
 }
 
-/* line 348, sass/_ui.everything.scss */
+/* line 376, sass/_ui.everything.scss */
 .ui-icon-radio-off {
   background-position: -96px -144px;
 }
 
-/* line 349, sass/_ui.everything.scss */
+/* line 377, sass/_ui.everything.scss */
 .ui-icon-radio-on {
   background-position: -112px -144px;
 }
 
-/* line 350, sass/_ui.everything.scss */
+/* line 378, sass/_ui.everything.scss */
 .ui-icon-pin-w {
   background-position: -128px -144px;
 }
 
-/* line 351, sass/_ui.everything.scss */
+/* line 379, sass/_ui.everything.scss */
 .ui-icon-pin-s {
   background-position: -144px -144px;
 }
 
-/* line 352, sass/_ui.everything.scss */
+/* line 380, sass/_ui.everything.scss */
 .ui-icon-play {
   background-position: 0 -160px;
 }
 
-/* line 353, sass/_ui.everything.scss */
+/* line 381, sass/_ui.everything.scss */
 .ui-icon-pause {
   background-position: -16px -160px;
 }
 
-/* line 354, sass/_ui.everything.scss */
+/* line 382, sass/_ui.everything.scss */
 .ui-icon-seek-next {
   background-position: -32px -160px;
 }
 
-/* line 355, sass/_ui.everything.scss */
+/* line 383, sass/_ui.everything.scss */
 .ui-icon-seek-prev {
   background-position: -48px -160px;
 }
 
-/* line 356, sass/_ui.everything.scss */
+/* line 384, sass/_ui.everything.scss */
 .ui-icon-seek-end {
   background-position: -64px -160px;
 }
 
-/* line 357, sass/_ui.everything.scss */
+/* line 385, sass/_ui.everything.scss */
 .ui-icon-seek-first {
   background-position: -80px -160px;
 }
 
-/* line 358, sass/_ui.everything.scss */
+/* line 386, sass/_ui.everything.scss */
 .ui-icon-stop {
   background-position: -96px -160px;
 }
 
-/* line 359, sass/_ui.everything.scss */
+/* line 387, sass/_ui.everything.scss */
 .ui-icon-eject {
   background-position: -112px -160px;
 }
 
-/* line 360, sass/_ui.everything.scss */
+/* line 388, sass/_ui.everything.scss */
 .ui-icon-volume-off {
   background-position: -128px -160px;
 }
 
-/* line 361, sass/_ui.everything.scss */
+/* line 389, sass/_ui.everything.scss */
 .ui-icon-volume-on {
   background-position: -144px -160px;
 }
 
-/* line 362, sass/_ui.everything.scss */
+/* line 390, sass/_ui.everything.scss */
 .ui-icon-power {
   background-position: 0 -176px;
 }
 
-/* line 363, sass/_ui.everything.scss */
+/* line 391, sass/_ui.everything.scss */
 .ui-icon-signal-diag {
   background-position: -16px -176px;
 }
 
-/* line 364, sass/_ui.everything.scss */
+/* line 392, sass/_ui.everything.scss */
 .ui-icon-signal {
   background-position: -32px -176px;
 }
 
-/* line 365, sass/_ui.everything.scss */
+/* line 393, sass/_ui.everything.scss */
 .ui-icon-battery-0 {
   background-position: -48px -176px;
 }
 
-/* line 366, sass/_ui.everything.scss */
+/* line 394, sass/_ui.everything.scss */
 .ui-icon-battery-1 {
   background-position: -64px -176px;
 }
 
-/* line 367, sass/_ui.everything.scss */
+/* line 395, sass/_ui.everything.scss */
 .ui-icon-battery-2 {
   background-position: -80px -176px;
 }
 
-/* line 368, sass/_ui.everything.scss */
+/* line 396, sass/_ui.everything.scss */
 .ui-icon-battery-3 {
   background-position: -96px -176px;
 }
 
-/* line 369, sass/_ui.everything.scss */
+/* line 397, sass/_ui.everything.scss */
 .ui-icon-circle-plus {
   background-position: 0 -192px;
 }
 
-/* line 370, sass/_ui.everything.scss */
+/* line 398, sass/_ui.everything.scss */
 .ui-icon-circle-minus {
   background-position: -16px -192px;
 }
 
-/* line 371, sass/_ui.everything.scss */
+/* line 399, sass/_ui.everything.scss */
 .ui-icon-circle-close {
   background-position: -32px -192px;
 }
 
-/* line 372, sass/_ui.everything.scss */
+/* line 400, sass/_ui.everything.scss */
 .ui-icon-circle-triangle-e {
   background-position: -48px -192px;
 }
 
-/* line 373, sass/_ui.everything.scss */
+/* line 401, sass/_ui.everything.scss */
 .ui-icon-circle-triangle-s {
   background-position: -64px -192px;
 }
 
-/* line 374, sass/_ui.everything.scss */
+/* line 402, sass/_ui.everything.scss */
 .ui-icon-circle-triangle-w {
   background-position: -80px -192px;
 }
 
-/* line 375, sass/_ui.everything.scss */
+/* line 403, sass/_ui.everything.scss */
 .ui-icon-circle-triangle-n {
   background-position: -96px -192px;
 }
 
-/* line 376, sass/_ui.everything.scss */
+/* line 404, sass/_ui.everything.scss */
 .ui-icon-circle-arrow-e {
   background-position: -112px -192px;
 }
 
-/* line 377, sass/_ui.everything.scss */
+/* line 405, sass/_ui.everything.scss */
 .ui-icon-circle-arrow-s {
   background-position: -128px -192px;
 }
 
-/* line 378, sass/_ui.everything.scss */
+/* line 406, sass/_ui.everything.scss */
 .ui-icon-circle-arrow-w {
   background-position: -144px -192px;
 }
 
-/* line 379, sass/_ui.everything.scss */
+/* line 407, sass/_ui.everything.scss */
 .ui-icon-circle-arrow-n {
   background-position: -160px -192px;
 }
 
-/* line 380, sass/_ui.everything.scss */
+/* line 408, sass/_ui.everything.scss */
 .ui-icon-circle-zoomin {
   background-position: -176px -192px;
 }
 
-/* line 381, sass/_ui.everything.scss */
+/* line 409, sass/_ui.everything.scss */
 .ui-icon-circle-zoomout {
   background-position: -192px -192px;
 }
 
-/* line 382, sass/_ui.everything.scss */
+/* line 410, sass/_ui.everything.scss */
 .ui-icon-circle-check {
   background-position: -208px -192px;
 }
 
-/* line 383, sass/_ui.everything.scss */
+/* line 411, sass/_ui.everything.scss */
 .ui-icon-circlesmall-plus {
   background-position: 0 -208px;
 }
 
-/* line 384, sass/_ui.everything.scss */
+/* line 412, sass/_ui.everything.scss */
 .ui-icon-circlesmall-minus {
   background-position: -16px -208px;
 }
 
-/* line 385, sass/_ui.everything.scss */
+/* line 413, sass/_ui.everything.scss */
 .ui-icon-circlesmall-close {
   background-position: -32px -208px;
 }
 
-/* line 386, sass/_ui.everything.scss */
+/* line 414, sass/_ui.everything.scss */
 .ui-icon-squaresmall-plus {
   background-position: -48px -208px;
 }
 
-/* line 387, sass/_ui.everything.scss */
+/* line 415, sass/_ui.everything.scss */
 .ui-icon-squaresmall-minus {
   background-position: -64px -208px;
 }
 
-/* line 388, sass/_ui.everything.scss */
+/* line 416, sass/_ui.everything.scss */
 .ui-icon-squaresmall-close {
   background-position: -80px -208px;
 }
 
-/* line 389, sass/_ui.everything.scss */
+/* line 417, sass/_ui.everything.scss */
 .ui-icon-grip-dotted-vertical {
   background-position: 0 -224px;
 }
 
-/* line 390, sass/_ui.everything.scss */
+/* line 418, sass/_ui.everything.scss */
 .ui-icon-grip-dotted-horizontal {
   background-position: -16px -224px;
 }
 
-/* line 391, sass/_ui.everything.scss */
+/* line 419, sass/_ui.everything.scss */
 .ui-icon-grip-solid-vertical {
   background-position: -32px -224px;
 }
 
-/* line 392, sass/_ui.everything.scss */
+/* line 420, sass/_ui.everything.scss */
 .ui-icon-grip-solid-horizontal {
   background-position: -48px -224px;
 }
 
-/* line 393, sass/_ui.everything.scss */
+/* line 421, sass/_ui.everything.scss */
 .ui-icon-gripsmall-diagonal-se {
   background-position: -64px -224px;
 }
 
-/* line 394, sass/_ui.everything.scss */
+/* line 422, sass/_ui.everything.scss */
 .ui-icon-grip-diagonal-se {
   background-position: -80px -224px;
 }
@@ -2014,14 +2021,14 @@ a img {
 .ui-corner-left { -moz-border-radius-topleft: 4px; -webkit-border-top-left-radius: 4px; -moz-border-radius-bottomleft: 4px; -webkit-border-bottom-left-radius: 4px; }
 .ui-corner-all { @include border-radius(8px); }*/
 /* Overlays */
-/* line 412, sass/_ui.everything.scss */
+/* line 440, sass/_ui.everything.scss */
 .ui-widget-overlay {
   background: #aaaaaa url(/stylesheets/themes/nlcommons/images/ui-bg_flat_0_aaaaaa_40x100.png) 50% 50% repeat-x;
   opacity: .30;
   filter: Alpha(Opacity=30);
 }
 
-/* line 413, sass/_ui.everything.scss */
+/* line 441, sass/_ui.everything.scss */
 .ui-widget-shadow {
   margin: -8px 0 0 -8px;
   padding: 8px;
@@ -2425,6 +2432,10 @@ body {
   margin-top: 16px;
   margin-bottom: 6px;
 }
+/* line 224, sass/nlcommons.scss */
+.content p {
+  margin-bottom: 10px;
+}
 
 /* 
  * Page-specific styling
@@ -2432,7 +2443,7 @@ body {
 /* 
  * Model Page
  */
-/* line 236, sass/nlcommons.scss */
+/* line 239, sass/nlcommons.scss */
 #model_preview {
   display: inline;
   float: left;
@@ -2444,7 +2455,7 @@ body {
 * html #model_preview {
   overflow-x: hidden;
 }
-/* line 238, sass/nlcommons.scss */
+/* line 241, sass/nlcommons.scss */
 #model_preview #preview-image {
   width: 152px;
   height: 152px;
@@ -2456,7 +2467,7 @@ body {
   background-color: #d9d9d9;
 }
 
-/* line 251, sass/nlcommons.scss */
+/* line 254, sass/nlcommons.scss */
 #model_info {
   display: inline;
   float: left;
@@ -2468,24 +2479,24 @@ body {
 * html #model_info {
   overflow-x: hidden;
 }
-/* line 254, sass/nlcommons.scss */
+/* line 257, sass/nlcommons.scss */
 #model_info img.inline_image {
   height: 20px;
   vertical-align: middle;
 }
-/* line 258, sass/nlcommons.scss */
+/* line 261, sass/nlcommons.scss */
 #model_info div {
   height: 49px;
   line-height: 49px;
   margin: 4px;
 }
 
-/* line 265, sass/nlcommons.scss */
+/* line 268, sass/nlcommons.scss */
 .posting-title {
   font-weight: bold;
 }
 
-/* line 269, sass/nlcommons.scss */
+/* line 272, sass/nlcommons.scss */
 #model_click_to_load {
   background-color: #d9d9d9;
   display: block;
@@ -2495,12 +2506,12 @@ body {
   font-family: 'Muli', 'Arial', sans-serif;
 }
 
-/* line 278, sass/nlcommons.scss */
+/* line 281, sass/nlcommons.scss */
 #model_applet {
   display: none;
 }
 
-/* line 281, sass/nlcommons.scss */
+/* line 284, sass/nlcommons.scss */
 .ui-tabs #browse_applet.ui-tabs-hide {
   position: absolute;
   left: -10000px;
@@ -2511,12 +2522,12 @@ body {
  * Code Highlighting 
  * Proc is procedure
  */
-/* line 292, sass/nlcommons.scss */
+/* line 295, sass/nlcommons.scss */
 .proc-to, .proc-end {
   color: #b3b;
 }
 
-/* line 296, sass/nlcommons.scss */
+/* line 299, sass/nlcommons.scss */
 .proc-comment {
   color: #282;
   font-style: italic;
@@ -2525,7 +2536,7 @@ body {
 /* 
  * Login Page (Front Page)
  */
-/* line 306, sass/nlcommons.scss */
+/* line 309, sass/nlcommons.scss */
 div#register_new_user {
   display: inline;
   float: left;
@@ -2537,7 +2548,7 @@ div#register_new_user {
   overflow-x: hidden;
 }
 
-/* line 309, sass/nlcommons.scss */
+/* line 312, sass/nlcommons.scss */
 div#login_exisiting_user {
   display: inline;
   float: left;
@@ -2549,7 +2560,7 @@ div#login_exisiting_user {
   overflow-x: hidden;
 }
 
-/* line 315, sass/nlcommons.scss */
+/* line 318, sass/nlcommons.scss */
 div#just_visiting {
   display: inline;
   float: left;
@@ -2564,7 +2575,7 @@ div#just_visiting {
 /* 
  * User Page (Front Page) 
  */
-/* line 322, sass/nlcommons.scss */
+/* line 325, sass/nlcommons.scss */
 #left-news-box {
   display: inline;
   float: left;
@@ -2576,7 +2587,7 @@ div#just_visiting {
   overflow-x: hidden;
 }
 
-/* line 325, sass/nlcommons.scss */
+/* line 328, sass/nlcommons.scss */
 #right-news-box {
   display: inline;
   float: left;
@@ -2591,7 +2602,7 @@ div#just_visiting {
 /* 
  * Search Results Page 
  */
-/* line 334, sass/nlcommons.scss */
+/* line 337, sass/nlcommons.scss */
 #search_tabs .num-results {
   background: -webkit-gradient(radial, 25% 25%, 0, 25% 25%, 100, color-stop(0%, #ff0000), color-stop(100%, #990000));
   background: -webkit-radial-gradient(25% 25%, #ff0000, #990000);
@@ -2617,7 +2628,7 @@ div#just_visiting {
   margin-top: 3px;
   margin-bottom: 3px;
 }
-/* line 349, sass/nlcommons.scss */
+/* line 352, sass/nlcommons.scss */
 #search_tabs .num-results.empty {
   background: -webkit-gradient(radial, 25% 25%, 0, 25% 25%, 100, color-stop(0%, #8c7373), color-stop(100%, #544545));
   background: -webkit-radial-gradient(25% 25%, #8c7373, #544545);
@@ -2630,23 +2641,23 @@ div#just_visiting {
 /*
  * Globally useful styling
  */
-/* line 362, sass/nlcommons.scss */
+/* line 365, sass/nlcommons.scss */
 div.left-right {
   width: 100%;
   display: table;
 }
-/* line 365, sass/nlcommons.scss */
+/* line 368, sass/nlcommons.scss */
 div.left-right div.left {
   display: table-cell;
   text-align: left;
 }
-/* line 369, sass/nlcommons.scss */
+/* line 372, sass/nlcommons.scss */
 div.left-right div.right {
   display: table-cell;
   text-align: right;
 }
 
-/* line 375, sass/nlcommons.scss */
+/* line 378, sass/nlcommons.scss */
 .panel, .tabs_panel {
   margin: 4px;
   border: 3px solid black;
@@ -2659,12 +2670,12 @@ div.left-right div.right {
   padding: 4px;
 }
 
-/* line 382, sass/nlcommons.scss */
+/* line 385, sass/nlcommons.scss */
 .tabs_panel {
   padding: 0px;
   overflow: hidden;
 }
-/* line 384, sass/nlcommons.scss */
+/* line 387, sass/nlcommons.scss */
 .tabs_panel > ul {
   /* 
    * Setting padding-left to inherit cancels the .content wide setting of 40px left padding for ul
@@ -2675,7 +2686,7 @@ div.left-right div.right {
 /* 
  * Text Input Field
  */
-/* line 396, sass/nlcommons.scss */
+/* line 399, sass/nlcommons.scss */
 input[type=text], input[type=password] {
   font-family: 'Georgia', 'Times', serif;
   line-height: 16px;
@@ -2694,7 +2705,7 @@ input[type=text], input[type=password] {
   -o-box-shadow: -1px 1px 4px 1px #b2b2b2 inset;
   box-shadow: -1px 1px 4px 1px #b2b2b2 inset;
 }
-/* line 407, sass/nlcommons.scss */
+/* line 410, sass/nlcommons.scss */
 input[type=text].error, input[type=password].error {
   color: red;
   border-color: red;
@@ -2703,11 +2714,11 @@ input[type=text].error, input[type=password].error {
   -o-box-shadow: -1px 1px 4px 1px #ff6666 inset;
   box-shadow: -1px 1px 4px 1px #ff6666 inset;
 }
-/* line 412, sass/nlcommons.scss */
+/* line 415, sass/nlcommons.scss */
 input[type=text]:focus, input[type=password]:focus {
   outline-style: auto;
 }
-/* line 417, sass/nlcommons.scss */
+/* line 420, sass/nlcommons.scss */
 input[type=text]:focus.error, input[type=password]:focus.error {
   outline-color: red;
 }
@@ -2715,7 +2726,7 @@ input[type=text]:focus.error, input[type=password]:focus.error {
 /*
  * Buttons
  */
-/* line 425, sass/nlcommons.scss */
+/* line 428, sass/nlcommons.scss */
 button, input[type=button], input[type=submit] {
   color: black;
   font-family: 'Muli', 'Arial', sans-serif;
@@ -2789,7 +2800,24 @@ button[disabled], input[type=button][disabled], input[type=submit][disabled] {
   cursor: default;
   opacity: .5;
 }
-/* line 44, sass/_clickable.scss */
+/* line 42, sass/_clickable.scss */
+button[disabled]:active, input[type=button][disabled]:active, input[type=submit][disabled]:active {
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #b7b7b7), color-stop(45%, #aaaaaa), color-stop(85%, #b7b7b7));
+  background: -webkit-linear-gradient(#b7b7b7 35%, #aaaaaa 45%, #b7b7b7 85%);
+  background: -moz-linear-gradient(#b7b7b7 35%, #aaaaaa 45%, #b7b7b7 85%);
+  background: -o-linear-gradient(#b7b7b7 35%, #aaaaaa 45%, #b7b7b7 85%);
+  background: -ms-linear-gradient(#b7b7b7 35%, #aaaaaa 45%, #b7b7b7 85%);
+  background: linear-gradient(#b7b7b7 35%, #aaaaaa 45%, #b7b7b7 85%);
+  -moz-box-shadow: 0px 0px 1px 1px #d1d1d1 inset;
+  -webkit-box-shadow: 0px 0px 1px 1px #d1d1d1 inset;
+  -o-box-shadow: 0px 0px 1px 1px #d1d1d1 inset;
+  box-shadow: 0px 0px 1px 1px #d1d1d1 inset;
+  border: 1px solid #9e9e9e;
+  color: black;
+  cursor: default;
+  opacity: .5;
+}
+/* line 55, sass/_clickable.scss */
 button.selected, input[type=button].selected, input[type=submit].selected {
   -moz-box-shadow: -1px 5px 6px 2px #254d7d inset;
   -webkit-box-shadow: -1px 5px 6px 2px #254d7d inset;
@@ -2802,7 +2830,7 @@ button.selected, input[type=button].selected, input[type=submit].selected {
   background: -ms-linear-gradient(#6899d3 35%, #417ec7 45%, #6899d3 85%);
   background: linear-gradient(#6899d3 35%, #417ec7 45%, #6899d3 85%);
 }
-/* line 53, sass/_clickable.scss */
+/* line 64, sass/_clickable.scss */
 button.selected:hover, input[type=button].selected:hover, input[type=submit].selected:hover {
   -moz-box-shadow: -1px 5px 6px 2px #254d7d inset;
   -webkit-box-shadow: -1px 5px 6px 2px #254d7d inset;
@@ -2815,7 +2843,7 @@ button.selected:hover, input[type=button].selected:hover, input[type=submit].sel
   background: -ms-linear-gradient(#548ccd 35%, #3672b9 45%, #548ccd 85%);
   background: linear-gradient(#548ccd 35%, #3672b9 45%, #548ccd 85%);
 }
-/* line 62, sass/_clickable.scss */
+/* line 73, sass/_clickable.scss */
 button.selected:active, input[type=button].selected:active, input[type=submit].selected:active {
   -moz-box-shadow: -1px 5px 6px 3px #254d7d inset;
   -webkit-box-shadow: -1px 5px 6px 3px #254d7d inset;
@@ -2828,7 +2856,7 @@ button.selected:active, input[type=button].selected:active, input[type=submit].s
   background: -ms-linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
   background: linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
 }
-/* line 70, sass/_clickable.scss */
+/* line 81, sass/_clickable.scss */
 button.selected[disabled], input[type=button].selected[disabled], input[type=submit].selected[disabled] {
   -moz-box-shadow: -1px 5px 6px 2px #515151 inset;
   -webkit-box-shadow: -1px 5px 6px 2px #515151 inset;
@@ -2841,7 +2869,7 @@ button.selected[disabled], input[type=button].selected[disabled], input[type=sub
   background: -ms-linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
   background: linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
 }
-/* line 434, sass/nlcommons.scss */
+/* line 437, sass/nlcommons.scss */
 button div.ui-icon, input[type=button] div.ui-icon, input[type=submit] div.ui-icon {
   margin-top: 1px;
   margin-bottom: 1px;
@@ -2849,7 +2877,7 @@ button div.ui-icon, input[type=button] div.ui-icon, input[type=submit] div.ui-ic
   display: inline-block;
 }
 
-/* line 443, sass/nlcommons.scss */
+/* line 446, sass/nlcommons.scss */
 .error {
   color: red;
 }
@@ -2857,12 +2885,12 @@ button div.ui-icon, input[type=button] div.ui-icon, input[type=submit] div.ui-ic
 /*
  * DataTables Styling
  */
-/* line 451, sass/nlcommons.scss */
+/* line 454, sass/nlcommons.scss */
 .dataTables_wrapper div.ui-icon {
   display: inline-block;
   vertical-align: top;
 }
-/* line 456, sass/nlcommons.scss */
+/* line 459, sass/nlcommons.scss */
 .dataTables_wrapper .dataTables_paginate button {
   color: black;
   font-family: 'Muli', 'Arial', sans-serif;
@@ -2923,6 +2951,23 @@ button div.ui-icon, input[type=button] div.ui-icon, input[type=submit] div.ui-ic
   cursor: default;
   opacity: .5;
 }
+/* line 42, sass/_clickable.scss */
+.dataTables_wrapper .dataTables_paginate button.paginate_disabled_previous:active {
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #b7b7b7), color-stop(45%, #aaaaaa), color-stop(85%, #b7b7b7));
+  background: -webkit-linear-gradient(#b7b7b7 35%, #aaaaaa 45%, #b7b7b7 85%);
+  background: -moz-linear-gradient(#b7b7b7 35%, #aaaaaa 45%, #b7b7b7 85%);
+  background: -o-linear-gradient(#b7b7b7 35%, #aaaaaa 45%, #b7b7b7 85%);
+  background: -ms-linear-gradient(#b7b7b7 35%, #aaaaaa 45%, #b7b7b7 85%);
+  background: linear-gradient(#b7b7b7 35%, #aaaaaa 45%, #b7b7b7 85%);
+  -moz-box-shadow: 0px 0px 1px 1px #d1d1d1 inset;
+  -webkit-box-shadow: 0px 0px 1px 1px #d1d1d1 inset;
+  -o-box-shadow: 0px 0px 1px 1px #d1d1d1 inset;
+  box-shadow: 0px 0px 1px 1px #d1d1d1 inset;
+  border: 1px solid #9e9e9e;
+  color: black;
+  cursor: default;
+  opacity: .5;
+}
 /* line 33, sass/_clickable.scss */
 .dataTables_wrapper .dataTables_paginate button.paginate_disabled_next {
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #b7b7b7), color-stop(45%, #aaaaaa), color-stop(85%, #b7b7b7));
@@ -2940,7 +2985,24 @@ button div.ui-icon, input[type=button] div.ui-icon, input[type=submit] div.ui-ic
   cursor: default;
   opacity: .5;
 }
-/* line 44, sass/_clickable.scss */
+/* line 42, sass/_clickable.scss */
+.dataTables_wrapper .dataTables_paginate button.paginate_disabled_next:active {
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #b7b7b7), color-stop(45%, #aaaaaa), color-stop(85%, #b7b7b7));
+  background: -webkit-linear-gradient(#b7b7b7 35%, #aaaaaa 45%, #b7b7b7 85%);
+  background: -moz-linear-gradient(#b7b7b7 35%, #aaaaaa 45%, #b7b7b7 85%);
+  background: -o-linear-gradient(#b7b7b7 35%, #aaaaaa 45%, #b7b7b7 85%);
+  background: -ms-linear-gradient(#b7b7b7 35%, #aaaaaa 45%, #b7b7b7 85%);
+  background: linear-gradient(#b7b7b7 35%, #aaaaaa 45%, #b7b7b7 85%);
+  -moz-box-shadow: 0px 0px 1px 1px #d1d1d1 inset;
+  -webkit-box-shadow: 0px 0px 1px 1px #d1d1d1 inset;
+  -o-box-shadow: 0px 0px 1px 1px #d1d1d1 inset;
+  box-shadow: 0px 0px 1px 1px #d1d1d1 inset;
+  border: 1px solid #9e9e9e;
+  color: black;
+  cursor: default;
+  opacity: .5;
+}
+/* line 55, sass/_clickable.scss */
 .dataTables_wrapper .dataTables_paginate button.selected {
   -moz-box-shadow: -1px 5px 6px 2px #254d7d inset;
   -webkit-box-shadow: -1px 5px 6px 2px #254d7d inset;
@@ -2953,7 +3015,7 @@ button div.ui-icon, input[type=button] div.ui-icon, input[type=submit] div.ui-ic
   background: -ms-linear-gradient(#6899d3 35%, #417ec7 45%, #6899d3 85%);
   background: linear-gradient(#6899d3 35%, #417ec7 45%, #6899d3 85%);
 }
-/* line 53, sass/_clickable.scss */
+/* line 64, sass/_clickable.scss */
 .dataTables_wrapper .dataTables_paginate button.selected:hover {
   -moz-box-shadow: -1px 5px 6px 2px #254d7d inset;
   -webkit-box-shadow: -1px 5px 6px 2px #254d7d inset;
@@ -2966,7 +3028,7 @@ button div.ui-icon, input[type=button] div.ui-icon, input[type=submit] div.ui-ic
   background: -ms-linear-gradient(#548ccd 35%, #3672b9 45%, #548ccd 85%);
   background: linear-gradient(#548ccd 35%, #3672b9 45%, #548ccd 85%);
 }
-/* line 62, sass/_clickable.scss */
+/* line 73, sass/_clickable.scss */
 .dataTables_wrapper .dataTables_paginate button.selected:active {
   -moz-box-shadow: -1px 5px 6px 3px #254d7d inset;
   -webkit-box-shadow: -1px 5px 6px 3px #254d7d inset;
@@ -2979,7 +3041,7 @@ button div.ui-icon, input[type=button] div.ui-icon, input[type=submit] div.ui-ic
   background: -ms-linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
   background: linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
 }
-/* line 70, sass/_clickable.scss */
+/* line 81, sass/_clickable.scss */
 .dataTables_wrapper .dataTables_paginate button.selected.paginate_disabled_previous {
   -moz-box-shadow: -1px 5px 6px 2px #515151 inset;
   -webkit-box-shadow: -1px 5px 6px 2px #515151 inset;
@@ -2992,7 +3054,7 @@ button div.ui-icon, input[type=button] div.ui-icon, input[type=submit] div.ui-ic
   background: -ms-linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
   background: linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
 }
-/* line 70, sass/_clickable.scss */
+/* line 81, sass/_clickable.scss */
 .dataTables_wrapper .dataTables_paginate button.selected.paginate_disabled_next {
   -moz-box-shadow: -1px 5px 6px 2px #515151 inset;
   -webkit-box-shadow: -1px 5px 6px 2px #515151 inset;
@@ -3005,19 +3067,19 @@ button div.ui-icon, input[type=button] div.ui-icon, input[type=submit] div.ui-ic
   background: -ms-linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
   background: linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
 }
-/* line 471, sass/nlcommons.scss */
+/* line 474, sass/nlcommons.scss */
 .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter {
   display: inline-block;
   margin-left: 10px;
   font-size: 15px;
 }
-/* line 476, sass/nlcommons.scss */
+/* line 479, sass/nlcommons.scss */
 .dataTables_wrapper .top, .dataTables_wrapper .bottom, .dataTables_wrapper .datatable {
   margin-top: 4px;
   margin-bottom: 4px;
 }
 
-/* line 483, sass/nlcommons.scss */
+/* line 486, sass/nlcommons.scss */
 .dataTables {
   width: 100%;
   border-bottom: 1px solid black;
@@ -3033,11 +3095,11 @@ button div.ui-icon, input[type=button] div.ui-icon, input[type=submit] div.ui-ic
   border-radius: 8px;
   overflow: hidden;
 }
-/* line 495, sass/nlcommons.scss */
+/* line 498, sass/nlcommons.scss */
 .dataTables > thead tr {
   font-family: 'Muli', 'Arial', sans-serif;
 }
-/* line 497, sass/nlcommons.scss */
+/* line 500, sass/nlcommons.scss */
 .dataTables > thead tr th {
   color: black;
   font-family: 'Muli', 'Arial', sans-serif;
@@ -3117,7 +3179,24 @@ button div.ui-icon, input[type=button] div.ui-icon, input[type=submit] div.ui-ic
   cursor: default;
   opacity: .5;
 }
-/* line 44, sass/_clickable.scss */
+/* line 42, sass/_clickable.scss */
+.dataTables > thead tr th[disabled]:active {
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #b7b7b7), color-stop(45%, #aaaaaa), color-stop(85%, #b7b7b7));
+  background: -webkit-linear-gradient(#b7b7b7 35%, #aaaaaa 45%, #b7b7b7 85%);
+  background: -moz-linear-gradient(#b7b7b7 35%, #aaaaaa 45%, #b7b7b7 85%);
+  background: -o-linear-gradient(#b7b7b7 35%, #aaaaaa 45%, #b7b7b7 85%);
+  background: -ms-linear-gradient(#b7b7b7 35%, #aaaaaa 45%, #b7b7b7 85%);
+  background: linear-gradient(#b7b7b7 35%, #aaaaaa 45%, #b7b7b7 85%);
+  -moz-box-shadow: 0px 0px 1px 1px #d1d1d1 inset;
+  -webkit-box-shadow: 0px 0px 1px 1px #d1d1d1 inset;
+  -o-box-shadow: 0px 0px 1px 1px #d1d1d1 inset;
+  box-shadow: 0px 0px 1px 1px #d1d1d1 inset;
+  border: 1px solid #9e9e9e;
+  color: black;
+  cursor: default;
+  opacity: .5;
+}
+/* line 55, sass/_clickable.scss */
 .dataTables > thead tr th.sorting_asc {
   -moz-box-shadow: -1px 5px 6px 2px #254d7d inset;
   -webkit-box-shadow: -1px 5px 6px 2px #254d7d inset;
@@ -3130,7 +3209,7 @@ button div.ui-icon, input[type=button] div.ui-icon, input[type=submit] div.ui-ic
   background: -ms-linear-gradient(#6899d3 35%, #417ec7 45%, #6899d3 85%);
   background: linear-gradient(#6899d3 35%, #417ec7 45%, #6899d3 85%);
 }
-/* line 44, sass/_clickable.scss */
+/* line 55, sass/_clickable.scss */
 .dataTables > thead tr th.sorting_desc {
   -moz-box-shadow: -1px 5px 6px 2px #254d7d inset;
   -webkit-box-shadow: -1px 5px 6px 2px #254d7d inset;
@@ -3143,7 +3222,7 @@ button div.ui-icon, input[type=button] div.ui-icon, input[type=submit] div.ui-ic
   background: -ms-linear-gradient(#6899d3 35%, #417ec7 45%, #6899d3 85%);
   background: linear-gradient(#6899d3 35%, #417ec7 45%, #6899d3 85%);
 }
-/* line 53, sass/_clickable.scss */
+/* line 64, sass/_clickable.scss */
 .dataTables > thead tr th.sorting_asc:hover {
   -moz-box-shadow: -1px 5px 6px 2px #254d7d inset;
   -webkit-box-shadow: -1px 5px 6px 2px #254d7d inset;
@@ -3156,7 +3235,7 @@ button div.ui-icon, input[type=button] div.ui-icon, input[type=submit] div.ui-ic
   background: -ms-linear-gradient(#548ccd 35%, #3672b9 45%, #548ccd 85%);
   background: linear-gradient(#548ccd 35%, #3672b9 45%, #548ccd 85%);
 }
-/* line 53, sass/_clickable.scss */
+/* line 64, sass/_clickable.scss */
 .dataTables > thead tr th.sorting_desc:hover {
   -moz-box-shadow: -1px 5px 6px 2px #254d7d inset;
   -webkit-box-shadow: -1px 5px 6px 2px #254d7d inset;
@@ -3169,7 +3248,7 @@ button div.ui-icon, input[type=button] div.ui-icon, input[type=submit] div.ui-ic
   background: -ms-linear-gradient(#548ccd 35%, #3672b9 45%, #548ccd 85%);
   background: linear-gradient(#548ccd 35%, #3672b9 45%, #548ccd 85%);
 }
-/* line 62, sass/_clickable.scss */
+/* line 73, sass/_clickable.scss */
 .dataTables > thead tr th.sorting_asc:active {
   -moz-box-shadow: -1px 5px 6px 3px #254d7d inset;
   -webkit-box-shadow: -1px 5px 6px 3px #254d7d inset;
@@ -3182,7 +3261,7 @@ button div.ui-icon, input[type=button] div.ui-icon, input[type=submit] div.ui-ic
   background: -ms-linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
   background: linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
 }
-/* line 62, sass/_clickable.scss */
+/* line 73, sass/_clickable.scss */
 .dataTables > thead tr th.sorting_desc:active {
   -moz-box-shadow: -1px 5px 6px 3px #254d7d inset;
   -webkit-box-shadow: -1px 5px 6px 3px #254d7d inset;
@@ -3195,7 +3274,7 @@ button div.ui-icon, input[type=button] div.ui-icon, input[type=submit] div.ui-ic
   background: -ms-linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
   background: linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
 }
-/* line 70, sass/_clickable.scss */
+/* line 81, sass/_clickable.scss */
 .dataTables > thead tr th.sorting_asc[disabled] {
   -moz-box-shadow: -1px 5px 6px 2px #515151 inset;
   -webkit-box-shadow: -1px 5px 6px 2px #515151 inset;
@@ -3208,7 +3287,7 @@ button div.ui-icon, input[type=button] div.ui-icon, input[type=submit] div.ui-ic
   background: -ms-linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
   background: linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
 }
-/* line 70, sass/_clickable.scss */
+/* line 81, sass/_clickable.scss */
 .dataTables > thead tr th.sorting_desc[disabled] {
   -moz-box-shadow: -1px 5px 6px 2px #515151 inset;
   -webkit-box-shadow: -1px 5px 6px 2px #515151 inset;
@@ -3221,69 +3300,73 @@ button div.ui-icon, input[type=button] div.ui-icon, input[type=submit] div.ui-ic
   background: -ms-linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
   background: linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
 }
-/* line 508, sass/nlcommons.scss */
+/* line 511, sass/nlcommons.scss */
 .dataTables > thead tr th div.ui-icon {
   margin-top: 2px;
   margin-bottom: 2px;
 }
-/* line 524, sass/nlcommons.scss */
+/* line 527, sass/nlcommons.scss */
 .dataTables > tbody tr:nth-child(even) {
   background-color: #dee9f6;
 }
-/* line 528, sass/nlcommons.scss */
+/* line 530, sass/nlcommons.scss */
+.dataTables > tbody td {
+  padding: 3px;
+}
+/* line 534, sass/nlcommons.scss */
 .dataTables span.hidden_elapsed_time {
   display: none;
 }
 
-/* line 533, sass/nlcommons.scss */
+/* line 539, sass/nlcommons.scss */
 table.model_list_datatable table td {
   height: 30px;
 }
-/* line 535, sass/nlcommons.scss */
+/* line 541, sass/nlcommons.scss */
 table.model_list_datatable table td:first-child {
   padding-left: 4px;
   padding-right: 4px;
   width: 30px;
   min-width: 30px;
 }
-/* line 541, sass/nlcommons.scss */
+/* line 547, sass/nlcommons.scss */
 table.model_list_datatable table td img {
   vertical-align: top;
   width: 30px;
   height: 30px;
 }
 
-/* line 549, sass/nlcommons.scss */
+/* line 555, sass/nlcommons.scss */
 table.simple_table {
   border-collapse: collapse;
 }
-/* line 551, sass/nlcommons.scss */
+/* line 557, sass/nlcommons.scss */
 table.simple_table img {
   vertical-align: middle;
 }
-/* line 554, sass/nlcommons.scss */
+/* line 560, sass/nlcommons.scss */
 table.simple_table th {
   font-weight: bold;
   padding-left: 5px;
   padding-right: 5px;
 }
-/* line 559, sass/nlcommons.scss */
+/* line 565, sass/nlcommons.scss */
 table.simple_table td {
   border: 1px solid;
   padding: 5px;
 }
 
-/* line 565, sass/nlcommons.scss */
+/* line 571, sass/nlcommons.scss */
 .highlight {
   background-color: #ff0;
 }
 
-/* line 570, sass/nlcommons.scss */
+/* line 576, sass/nlcommons.scss */
 .activity {
   width: 660px;
   float: left;
 }
-/* line 573, sass/nlcommons.scss */
+/* line 579, sass/nlcommons.scss */
 .activity .post {
   padding: 4px;
   margin-top: 10px;
@@ -3291,15 +3374,15 @@ table.simple_table td {
   border-bottom: 1px solid black;
   overflow: auto;
 }
-/* line 574, sass/nlcommons.scss */
+/* line 580, sass/nlcommons.scss */
 .activity .post a {
   text-decoration: none;
 }
-/* line 576, sass/nlcommons.scss */
+/* line 582, sass/nlcommons.scss */
 .activity .post a:hover {
   text-decoration: underline;
 }
-/* line 587, sass/nlcommons.scss */
+/* line 593, sass/nlcommons.scss */
 .activity .post .main_image {
   vertical-align: top;
   display: inline-block;
@@ -3307,21 +3390,21 @@ table.simple_table td {
   height: 80px;
   padding-right: 12px;
 }
-/* line 592, sass/nlcommons.scss */
+/* line 598, sass/nlcommons.scss */
 .activity .post .main_image img {
   width: 100%;
 }
-/* line 597, sass/nlcommons.scss */
+/* line 603, sass/nlcommons.scss */
 .activity .post .post_content {
   vertical-align: top;
   display: inline-block;
 }
-/* line 600, sass/nlcommons.scss */
+/* line 606, sass/nlcommons.scss */
 .activity .post .post_content .post_person {
   line-height: 30px;
   font-size: 16px;
 }
-/* line 603, sass/nlcommons.scss */
+/* line 609, sass/nlcommons.scss */
 .activity .post .post_content .post_person img {
   vertical-align: top;
   height: 30px;
@@ -3329,33 +3412,33 @@ table.simple_table td {
   padding-left: 5px;
   padding-right: 5px;
 }
-/* line 612, sass/nlcommons.scss */
+/* line 618, sass/nlcommons.scss */
 .activity .post .post_content .post_item {
   font-size: 30px;
 }
-/* line 616, sass/nlcommons.scss */
+/* line 622, sass/nlcommons.scss */
 .activity .post .post_content .post_date {
   font-size: 16px;
 }
-/* line 619, sass/nlcommons.scss */
+/* line 625, sass/nlcommons.scss */
 .activity .post .post_content .post_more {
   font-size: 10px;
 }
 
-/* line 627, sass/nlcommons.scss */
+/* line 633, sass/nlcommons.scss */
 .sidebar {
   width: 300px;
   float: left;
 }
-/* line 628, sass/nlcommons.scss */
+/* line 634, sass/nlcommons.scss */
 .sidebar a {
   text-decoration: none;
 }
-/* line 630, sass/nlcommons.scss */
+/* line 636, sass/nlcommons.scss */
 .sidebar a:hover {
   text-decoration: underline;
 }
-/* line 636, sass/nlcommons.scss */
+/* line 642, sass/nlcommons.scss */
 .sidebar .side_list {
   -moz-box-shadow: 0 0 10px 2px gray;
   -webkit-box-shadow: 0 0 10px 2px gray;
@@ -3371,7 +3454,7 @@ table.simple_table td {
   -khtml-border-radius: 8px;
   border-radius: 8px;
 }
-/* line 640, sass/nlcommons.scss */
+/* line 646, sass/nlcommons.scss */
 .sidebar .side_list h1 {
   font-family: 'Muli', 'Arial', sans-serif;
   background-color: #04346c;
@@ -3382,39 +3465,39 @@ table.simple_table td {
   color: white;
   margin: 0px;
 }
-/* line 654, sass/nlcommons.scss */
+/* line 660, sass/nlcommons.scss */
 .sidebar .side_list .side_post {
   padding: 4px;
 }
-/* line 657, sass/nlcommons.scss */
+/* line 663, sass/nlcommons.scss */
 .sidebar .side_list .side_post .side_image {
   width: 50px;
   height: 50px;
   display: inline-block;
   vertical-align: top;
 }
-/* line 661, sass/nlcommons.scss */
+/* line 667, sass/nlcommons.scss */
 .sidebar .side_list .side_post .side_image img {
   width: 100%;
 }
-/* line 666, sass/nlcommons.scss */
+/* line 672, sass/nlcommons.scss */
 .sidebar .side_list .side_post .side_content {
   display: inline-block;
   vertical-align: top;
 }
-/* line 670, sass/nlcommons.scss */
+/* line 676, sass/nlcommons.scss */
 .sidebar .side_list .side_post .side_content .side_person {
   font-size: 11px;
 }
-/* line 673, sass/nlcommons.scss */
+/* line 679, sass/nlcommons.scss */
 .sidebar .side_list .side_post .side_content .side_item {
   font-size: 15px;
 }
-/* line 676, sass/nlcommons.scss */
+/* line 682, sass/nlcommons.scss */
 .sidebar .side_list .side_post .side_content .side_views {
   font-size: 11px;
 }
-/* line 681, sass/nlcommons.scss */
+/* line 687, sass/nlcommons.scss */
 .sidebar .side_list .side_more {
   text-align: center;
 }
@@ -3423,7 +3506,7 @@ table.simple_table td {
  * Legacy Styling
  * All of this should probably be updated
  */
-/* line 695, sass/nlcommons.scss */
+/* line 701, sass/nlcommons.scss */
 #flash-notice {
   z-index: 10;
   position: absolute;
@@ -3436,39 +3519,39 @@ table.simple_table td {
   padding: 2em;
 }
 
-/* line 707, sass/nlcommons.scss */
+/* line 713, sass/nlcommons.scss */
 #menubar-avatar, #logged-in-as {
   float: left;
   margin-left: 1em;
 }
 
-/* line 712, sass/nlcommons.scss */
+/* line 718, sass/nlcommons.scss */
 #main-menu, h1, h2, h3, #flash-notice, #logged-in-as {
   font-family: 'Muli', 'Arial', sans-serif;
   font-weight: bold;
 }
 
-/* line 717, sass/nlcommons.scss */
+/* line 723, sass/nlcommons.scss */
 h1, #flash-notice {
   clear: both;
 }
 
-/* line 721, sass/nlcommons.scss */
+/* line 727, sass/nlcommons.scss */
 h1, #flash-notice {
   font-size: 21px;
 }
 
-/* line 725, sass/nlcommons.scss */
+/* line 731, sass/nlcommons.scss */
 h2 {
   font-size: 17px;
 }
 
-/* line 729, sass/nlcommons.scss */
+/* line 735, sass/nlcommons.scss */
 .h2-explanation {
   font-size: 13px;
 }
 
-/* line 733, sass/nlcommons.scss */
+/* line 739, sass/nlcommons.scss */
 h3, #menu-bar {
   font-size: 15px;
 }
@@ -3478,7 +3561,7 @@ h3, #menu-bar {
     top: 3.5em;
     left: 20em;
 }*/
-/* line 743, sass/nlcommons.scss */
+/* line 749, sass/nlcommons.scss */
 a img {
   border: 0;
   margin: 0;
@@ -3620,7 +3703,7 @@ div ul.subsection_tabs li.tab a:hover {
 .sorting {
     background: url('../images/sort_both.jpg') no-repeat center right;
 }*/
-/* line 893, sass/nlcommons.scss */
+/* line 899, sass/nlcommons.scss */
 div.foreSortIcon {
   background: url("../images/sort_both.jpg") no-repeat center right;
   width: 16px;
@@ -3630,7 +3713,7 @@ div.foreSortIcon {
 }
 
 /* Autocomplete */
-/* line 902, sass/nlcommons.scss */
+/* line 908, sass/nlcommons.scss */
 ul.jq-ui-autocomplete {
   position: absolute;
   overflow: hidden;
@@ -3643,7 +3726,7 @@ ul.jq-ui-autocomplete {
   color: #333;
 }
 
-/* line 913, sass/nlcommons.scss */
+/* line 919, sass/nlcommons.scss */
 ul.jq-ui-autocomplete li {
   display: block;
   padding: .3em .5em .3em .3em;
@@ -3651,30 +3734,30 @@ ul.jq-ui-autocomplete li {
   width: 100%;
 }
 
-/* line 920, sass/nlcommons.scss */
+/* line 926, sass/nlcommons.scss */
 ul.jq-ui-autocomplete li.active {
   background-color: #3875d7;
   color: #fff;
 }
 
-/* line 925, sass/nlcommons.scss */
+/* line 931, sass/nlcommons.scss */
 .deleted {
   text-decoration: line-through;
 }
 
-/* line 929, sass/nlcommons.scss */
+/* line 935, sass/nlcommons.scss */
 table#new-person-form tr td {
   width: 10em;
 }
 
-/* line 933, sass/nlcommons.scss */
+/* line 939, sass/nlcommons.scss */
 .fieldWithErrors {
   padding: 2px;
   background-color: red;
   display: table;
 }
 
-/* line 939, sass/nlcommons.scss */
+/* line 945, sass/nlcommons.scss */
 #errorExplanation {
   width: 450px;
   border: 2px solid red;
@@ -3684,7 +3767,7 @@ table#new-person-form tr td {
   background-color: #f0f0f0;
 }
 
-/* line 948, sass/nlcommons.scss */
+/* line 954, sass/nlcommons.scss */
 #error_explanation h2 {
   text-align: left;
   font-weight: bold;
@@ -3696,18 +3779,18 @@ table#new-person-form tr td {
   color: #fff;
 }
 
-/* line 959, sass/nlcommons.scss */
+/* line 965, sass/nlcommons.scss */
 #error_explanation ul li {
   font-size: 12px;
   list-style: square;
 }
 
-/* line 964, sass/nlcommons.scss */
+/* line 970, sass/nlcommons.scss */
 tr.scaffold-row {
   border-bottom: 2px solid black;
 }
 
-/* line 968, sass/nlcommons.scss */
+/* line 974, sass/nlcommons.scss */
 #permission-group-reminder {
   font-style: italic;
 }

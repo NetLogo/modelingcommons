@@ -38,6 +38,17 @@
       cursor: default;
       opacity: .5;
     }
+    @each $active-item in $active {
+      &#{$disabled-item}#{$active-item} {
+        @include background(linear-gradient($disabled-color 35%, darken($disabled-color, 5%) 45%, $disabled-color 85%));
+        @include box-shadow(0px 0px 1px 1px lighten($disabled-color, $box-shadow-lighten) inset);
+        border: 1px solid darken($disabled-color, 10%);
+        color: desaturate($text-color, 90%);
+        cursor: default;
+        opacity: .5;
+      }
+    }
+    
   }
   
   @each $selected-item in $selected {

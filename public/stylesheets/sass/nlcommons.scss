@@ -221,6 +221,9 @@ body {
     margin-top: 16px;
     margin-bottom: 6px;
   }
+  p {
+    margin-bottom: 10px;
+  }
 }
 
 
@@ -523,6 +526,9 @@ button, input[type=button], input[type=submit] {
   &>tbody {
     tr:nth-child(even) {
       background-color: lighten($header-color, 20%);
+    }
+    td {
+      padding: 3px;
     }
   }
   span.hidden_elapsed_time {
