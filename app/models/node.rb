@@ -320,6 +320,7 @@ class Node < ActiveRecord::Base
     return true if procedures_tab =~ /hubnet-/
     return true if procedures_tab =~ /file-/
     return true if procedures_tab =~ /extensions/
+    return true if procedures_tab =~ /import-/
   end
 
   def self.search(search_term, person)
