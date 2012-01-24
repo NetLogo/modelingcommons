@@ -58,7 +58,7 @@ class ApplicationController < ActionController::Base
       session_yaml = '(Cannot dump session.to_yaml)'
     end
 
-    safe_params = params
+    safe_params = params.dup
     safe_params.delete('password') 
     safe_params.delete('password_confirmation') 
 
