@@ -341,6 +341,73 @@ $(document).ready(function () {
 	}).bind('blur', function(e) {
 		$().flash_notice("Blur"); 
 	});
+	
+	var select_no_group_enable = function(enable) {
+		if(enable) {
+			$('#group_select option[value=""]').removeAttr('disabled');
+		} else {
+			$('#group_select option[value=""]').attr('disabled', 'disabled');
+		}
+	}
+	var group_permissions_enable = function(enable) {
+		if(enable) {
+			$('#read_permission_select option[value="g"]').removeAttr("disabled");
+			$('#write_permission_select option[value="g"]').removeAttr("disabled");
+		} else {
+			$('#read_permission_select option[value="g"]').attr("disabled", "disabled");
+			$('#write_permission_select option[value="g"]').attr("disabled", "disabled");
+		}
+	}
+	var submitPermissionChange = function() {
+		var form = $("#group_permission_form");
+		
+		$.ajax({
+			url: form.attr("action"), 
+			type: "post", 
+			data: form.serialize(), 
+			success: function(data, textStatus, jqXHR) {
+				data;
+				$().flash_notice(data.message);
+			},
+			error: function(jqXHR, textStatus, errorThrown) {
+				$().flash_notice(textStatus + ": " + errorThrown);
+			}, 
+			dataType: "json"
+		})
+	};
+	//One model permissions/group selectors behavior
+	if($('#group_select option:selected').attr('value') == "") {
+		group_permissions_enable(false);
+	}
+	if($('#read_permission_select option:selected').attr('value') == 'g' || $('#write_permission_select option:selected').attr('value') == 'g') {
+		select_no_group_enable(false);
+	}
+	
+	$('#group_select').bind('change', function(e) {
+		if(e.currentTarget.value == "") {
+			group_permissions_enable(false);
+		} else {
+			group_permissions_enable(true);
+		}
+		submitPermissionChange();
+	});
+	$('#read_permission_select').bind('change', function(e) {
+		if(e.currentTarget.value != "g" && $('#write_permission_select option:selected').attr('value') != 'g') {
+			select_no_group_enable(true);
+		} else {
+			select_no_group_enable(false);
+		}
+		submitPermissionChange();
+	});
+	$('#write_permission_select').bind('change', function(e) {
+		if(e.currentTarget.value != "g" && $('#read_permission_select option:selected').attr('value') != 'g') {
+			select_no_group_enable(true);
+		} else {
+			select_no_group_enable(false);
+		}
+		submitPermissionChange();
+	});
+	
 });
 
 

@@ -1,7 +1,7 @@
 module BrowseHelper
 
   def model_visibility(model)
-    output = "Visible by #{model.visibility.name}"
+    output = "Visible to #{model.visibility.name}"
 
     if model.group_visible?
       output += " (#{group_link(model.group)})"

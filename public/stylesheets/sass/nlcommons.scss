@@ -306,18 +306,21 @@ body {
 /* 
  * Login Page (Front Page)
  */
-div#register_new_user {
-  @include column(24);
+
+div#just_visiting {
+  @include column(12);
 }
-div#login_exisiting_user {
+
+div#register_new_user {
+  @include column(12, true);
+}
+/*div#login_exisiting_user {
   @include column(12);
   table td{
     
   }
-}
-div#just_visiting {
-  @include column(12, true);
-}
+}*/
+
 
 /* 
  * User Page (Front Page) 

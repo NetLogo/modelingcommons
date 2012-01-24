@@ -57,15 +57,19 @@ class BrowseController < ApplicationController
 
   def set_permissions
     if params[:read_permission].blank? or params[:write_permission].blank?
-      flash[:notice] = 'Both read and write permissions must be specified.'
+      #flash[:notice] = 'Both read and write permissions must be specified.'
+      @set_permission_result = {:message => 'Both read and write permissions must be specified.' } 
     elsif (params[:read_permission] == 'g' or params[:write_permission] == 'g') and params[:group_id].blank?
-      flash[:notice] = 'You can only set group permissions if you also set a group.'
+      #flash[:notice] = 'You can only set group permissions if you also set a group.'
+      @set_permission_result = {:message => 'You can only set group permissions if you also set a group.' } 
     else
       @model.update_attributes(:visibility => PermissionSetting.find_by_short_form(params[:read_permission]),
                                :changeability => PermissionSetting.find_by_short_form(params[:write_permission]),
                                :group_id => params[:group_id])
-      flash[:notice] = 'Successfully set permissions.'
+      #flash[:notice] = 'Successfully set permissions.'
+      @set_permission_result = {:message => 'Successfully set permissions.' }
     end
+    render :json => @set_permission_result
   end
 
   def follow
