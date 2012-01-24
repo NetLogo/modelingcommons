@@ -407,7 +407,6 @@ $(document).ready(function () {
 		}
 		submitPermissionChange();
 	});
-	
 });
 
 

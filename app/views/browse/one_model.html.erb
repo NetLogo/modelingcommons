@@ -112,9 +112,9 @@
 		<li><a href="#browse_family">Family</a></li>
 		<% if @person %>
 	    <li><a href="#browse_upload_tab">Upload</a></li>
-	    <% if @model.people.include?(@person) %>
+	    <!--<% if @model.people.include?(@person) %>
 	    <li><a href="#browse_permissions_tab">Permissions</a></li>
-	    <% end %>
+	    <% end %>-->
 	    <% end %>
 	</ul>
 	<div id="browse_discuss">
@@ -145,10 +145,10 @@
 	<div id="browse_upload_tab">
 		<%= render :partial => "/browse/browse_upload_tab" %>
 	</div>
-	<% if @model.people.include?(@person) %>
+	<!--<% if @model.people.include?(@person) %>
 	<div id="browse_permissions_tab">
 		<%= render :partial => "/browse/browse_permissions_tab" %>
-	</div>
+	</div>-->
 	<% end %>
 	<% end %>
 </div>

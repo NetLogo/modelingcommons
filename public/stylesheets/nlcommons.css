@@ -2282,8 +2282,8 @@ body {
 }
 /* line 117, sass/nlcommons.scss */
 .header .login .flash_notice {
-  top: 66px;
-  right: -400px;
+  top: 58px;
+  right: -500px;
   display: inline-block;
   background-color: red;
   -moz-border-radius-bottomleft: 8px;
@@ -2298,12 +2298,13 @@ body {
   -ms-border-top-left-radius: 8px;
   -khtml-border-top-left-radius: 8px;
   border-top-left-radius: 8px;
-  height: 25px;
-  width: 400px;
+  max-height: 40px;
+  min-height: 20px;
+  width: 500px;
   position: absolute;
   overflow: hidden;
-  line-height: 25px;
-  font-size: 20px;
+  line-height: 20px;
+  font-size: 17px;
   color: white;
   text-align: center;
   font-family: 'Muli', 'Arial', sans-serif;

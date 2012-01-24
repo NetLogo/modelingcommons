@@ -104,7 +104,7 @@ body {
       }
     }
     //background-color: red;
-      
+    
 
     
     vertical-align: top;
@@ -115,19 +115,19 @@ body {
     @include serif-font();
     
     .flash_notice {
-      top:66px;
-      right:-400px;
+      top:58px;
+      right:-500px;
       display: inline-block;
       background-color: $error-color;
       @include border-bottom-left-radius($tab-corner-radius);
       @include border-top-left-radius($tab-corner-radius);
-      height: 25px;
-      width: 400px;
+      max-height: 40px;
+      min-height: 20px;
+      width: 500px;
       position: absolute;
-      //left: 400px;
       overflow: hidden;
-      line-height: 25px;
-      font-size: 20px;
+      line-height: 20px;
+      font-size: 17px;
       color: white;
       text-align: center;
       @include sans-font();
