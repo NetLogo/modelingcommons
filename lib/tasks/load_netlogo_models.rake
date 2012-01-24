@@ -82,7 +82,7 @@ namespace :netlogo do
 
           # Add ccl tag to this model
           puts "\tAdding CCL tag, ID '#{@ccl_tag.id}' for node_id '#{node.id}', person_id '#{@mc_user.id}'"
-          tn = TaggedNode.new(:node_id => node.id, :tag_id => @ccl_tag.id, :person_id => @mc_user.id, :comment => '')
+          tn = TaggedNode.new(:node_id => node.id, :tag_id => @ccl_tag.id, :person_id => @uri_user.id, :comment => '')
           
           if !tn.save
             puts "\t\t*** Error trying to save a new tagged node."
@@ -92,7 +92,7 @@ namespace :netlogo do
           # Add community models tag to this model
           if path =~ /community model/
             puts "\tAdding community models tag, ID '#{community_models_tag.id}'"
-            tn = TaggedNode.new(:node_id => node.id, :tag_id => community_models_tag.id, :person_id => @mc_user.id, :comment => '')
+            tn = TaggedNode.new(:node_id => node.id, :tag_id => community_models_tag.id, :person_id => @uri_user.id, :comment => '')
             if !tn.save
               puts "\t\t*** Error trying to save a new tagged node."
               puts "\t\t\t#{tn.errors.inspect}"
@@ -102,7 +102,7 @@ namespace :netlogo do
           file_contents = File.open(path).read
 
           new_version = NodeVersion.new(:node_id => node.id,
-                                        :person_id => @mc_user.id,
+                                        :person_id => @uri_user.id,
                                         :contents => file_contents,
                                         :description => 'Updated from NetLogo 5.0')
 
@@ -139,7 +139,7 @@ namespace :netlogo do
 
           new_version =
             nv = NodeVersion.new(:node_id => matching_node.id,
-                                 :person_id => @mc_user.id,
+                                 :person_id => @uri_user.id,
                                  :contents => model_contents,
                                  :description => 'Updated to NetLogo 5.0')
           if nv.save
@@ -213,7 +213,7 @@ namespace :netlogo do
 
             new_version =
               attachment = NodeAttachment.new(:node_id => matching_node.id,
-                                              :person_id => @mc_user.id,
+                                              :person_id => @uri_user.id,
                                               :description => "Preview for '#{filename}'",
                                               :filename => filename + '.png',
                                               :type => 'preview',
