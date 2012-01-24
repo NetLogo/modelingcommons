@@ -1,0 +1,87 @@
+--- !ruby/object:Gem::Specification 
+name: BlueCloth
+version: !ruby/object:Gem::Version 
+  hash: 21
+  prerelease: 
+  segments: 
+  - 1
+  - 0
+  - 1
+  version: 1.0.1
+platform: ruby
+authors: 
+- Michael Granger
+autorequire: bluecloth
+bindir: bin
+cert_chain: []
+
+date: 2009-07-15 00:00:00 Z
+dependencies: []
+
+description: 
+email: ged@FaerieMUD.org
+executables: []
+
+extensions: []
+
+extra_rdoc_files: []
+
+files: 
+- utils.rb
+- tests/bctestcase.rb
+- tests/data/antsugar.txt
+- tests/data/hr-dos.txt
+- tests/data/ml-announce.txt
+- tests/data/re-overflow.txt
+- tests/data/re-overflow2.txt
+- tests/00_Class.tests.rb
+- tests/05_Markdown.tests.rb
+- tests/10_Bug.tests.rb
+- tests/15_Contrib.tests.rb
+- test.rb
+- README
+- CHANGES
+- LICENSE
+- lib/bluecloth.rb
+- install.rb
+- bin/bluecloth
+homepage: http://deveiate.org/projects/BlueCloth
+licenses: []
+
+post_install_message: 
+rdoc_options: []
+
+require_paths: 
+- lib
+required_ruby_version: !ruby/object:Gem::Requirement 
+  none: false
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      hash: 3
+      segments: 
+      - 0
+      version: "0"
+required_rubygems_version: !ruby/object:Gem::Requirement 
+  none: false
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      hash: 3
+      segments: 
+      - 0
+      version: "0"
+requirements: 
+- strscan
+- logger
+rubyforge_project: deveiate
+rubygems_version: 1.8.15
+signing_key: 
+specification_version: 3
+summary: BlueCloth is a Ruby implementation of Markdown, a text-to-HTML conversion tool for web writers. Markdown allows you to write using an easy-to-read, easy-to-write plain text format, then convert it to structurally valid XHTML (or HTML).
+test_files: 
+- tests/00_Class.tests.rb
+- tests/05_Markdown.tests.rb
+- tests/10_Bug.tests.rb
+- tests/15_Contrib.tests.rb
+has_rdoc: 

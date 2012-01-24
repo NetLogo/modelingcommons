@@ -58,6 +58,10 @@ class ApplicationController < ActionController::Base
       session_yaml = '(Cannot dump session.to_yaml)'
     end
 
+    safe_params = params
+    safe_params.delete('password') 
+    safe_params.delete('password_confirmation') 
+
     LoggedAction.create(:person_id => person_id,
                         :controller => params[:controller],
                         :action => params[:action],
@@ -66,7 +70,7 @@ class ApplicationController < ActionController::Base
                         :ip_address => ip_address,
                         :browser_info => browser_info,
                         :url => request.request_uri,
-                        :params => params.to_yaml,
+                        :params => safe_params.to_yaml,
                         :session => session_yaml,
                         :cookies => cookies.to_yaml,
                         :flash => flash.to_yaml,

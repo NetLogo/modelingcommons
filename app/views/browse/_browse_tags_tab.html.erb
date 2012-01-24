@@ -1,35 +1,33 @@
 <div>
-	<h2>Existing tags:</h2>
-	<% if @model.tagged_nodes.empty? -%>
-	<p>No tags have been defined for this model</p>
-	<% else -%>
-	<table id="existing_tags" class="simple_table">
-		<thead>
-			<tr>
-				<th>
-					Tag Name
-				</th>
-				<th>
-					Comment
-				</th>
-				<th>
-					Tagged By
-				</th>
-				<th>
-					Date Tagged
-				</th>
-				<% if @person and (@person.administrator? or @person == tm.person) -%>
-				<th>
-					Remove
-				</th>
-				<% end %>
-			</tr>
-		</thead>
-		<tbody>
-			<%= render :partial => "tags/one_tag", :collection => @model.tagged_nodes.sort_by {|tn| tn.updated_at}, :as => :tm -%>
-		</tbody>
-	</table>
-	<% end -%>
+  <h2>Existing tags:</h2>
+  <% if @model.tagged_nodes.empty? -%>
+  <p>No tags have been defined for this model</p>
+  <% else -%>
+  <table id="existing_tags" class="simple_table">
+    <thead>
+      <tr>
+	<th>
+	  Tag Name
+	</th>
+	<th>
+	  Comment
+	</th>
+	<th>
+	  Tagged By
+	</th>
+	<th>
+	  Date Tagged
+	</th>
+	<th>
+	  &nbsp;
+	</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render :partial => "tags/one_tag", :collection => @model.tagged_nodes.sort_by {|tn| tn.updated_at}, :as => :tm -%>
+    </tbody>
+  </table>
+  <% end -%>
   <% if @person %>
   <div id="add_tags">
     <h2>Add one or more tags:</h2>

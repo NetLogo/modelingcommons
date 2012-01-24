@@ -5,7 +5,7 @@ class BrowseController < ApplicationController
   caches_page :display_preview
 
   prepend_before_filter :log_one_action, :except => [:display_preview]
-  prepend_before_filter :get_model_from_id_param, :except => [:index, :list_models, :list_recent_models, :search, :news, :one_node, :view_random_model, :about]
+  prepend_before_filter :get_model_from_id_param, :except => [:index, :list_models, :list_recent_models, :search, :news, :one_node, :view_random_model, :about, :model_contents]
 
   before_filter :require_login, :only => [:set_permissions]
   before_filter :check_visibility_permissions, :only => [:one_model, :one_applet ]
@@ -48,11 +48,13 @@ class BrowseController < ApplicationController
   end
 
   def model_contents
-    logger.warn "[BrowseController#model_contents] session: #{session.to_yaml}"
-    logger.warn "[BrowseController#model_contents] cookies: #{cookies.to_yaml}"
-    logger.warn "[BrowseController#model_contents] env: #{request.env.inspect}"
-
-    send_data @model.contents
+    if params[:id].present?
+      @model = Node.find(params[:id]) if params[:id].present?
+      send_data @model.contents
+    else
+      logger.warn "[BrowseController#model_contents] Error requesting contents of model ID '#{params[:id]}'"
+      render :text => "Error sending contents of model ID '#{params[:id]}'"
+    end
   end
 
   def set_permissions

@@ -38,6 +38,7 @@ test: &TEST
   password: nlcommons
   host: localhost
   port: 5432
+  encoding: UTF8
 
 production:
   adapter: postgresql
@@ -46,6 +47,7 @@ production:
   password: nlcommons
   host: localhost
   port: 5432
+  encoding: UTF8
 
 # Nothing to report here
 

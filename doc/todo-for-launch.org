@@ -1,0 +1,14 @@
+* Models
+** Remove models from the "community models" page, or make them private
+** Remove "under development"
+** Remove "little things"
+** Get extensions to work (or add a note indicating that they don't)
+** Get external files to work (or add a note indicating that they don't)
+
+* Tags
+
+** Remove joke tags, comments
+** Add "CCL" tag to models that don't have it
+
+* Groups
+** Create CCL groups, as per 

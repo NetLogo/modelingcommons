@@ -1,0 +1,117 @@
+--- !ruby/object:Gem::Specification 
+name: will_paginate
+version: !ruby/object:Gem::Version 
+  hash: 35
+  prerelease: 
+  segments: 
+  - 2
+  - 3
+  - 16
+  version: 2.3.16
+platform: ruby
+authors: 
+- "Mislav Marohni\xC4\x87"
+- PJ Hyett
+autorequire: 
+bindir: bin
+cert_chain: []
+
+date: 2011-08-09 00:00:00 Z
+dependencies: []
+
+description: will_paginate provides a simple API for Active Record pagination and rendering of pagination links in Rails templates.
+email: mislav.marohnic@gmail.com
+executables: []
+
+extensions: []
+
+extra_rdoc_files: 
+- README.md
+- LICENSE
+- CHANGELOG.rdoc
+files: 
+- Rakefile
+- lib/will_paginate/array.rb
+- lib/will_paginate/collection.rb
+- lib/will_paginate/core_ext.rb
+- lib/will_paginate/finder.rb
+- lib/will_paginate/i18n.rb
+- lib/will_paginate/locale/en.yml
+- lib/will_paginate/named_scope.rb
+- lib/will_paginate/named_scope_patch.rb
+- lib/will_paginate/per_page.rb
+- lib/will_paginate/version.rb
+- lib/will_paginate/view_helpers.rb
+- lib/will_paginate.rb
+- test/ci.rb
+- test/collection_test.rb
+- test/console
+- test/database.yml
+- test/finder_test.rb
+- test/fixtures/admin.rb
+- test/fixtures/developer.rb
+- test/fixtures/developers_projects.yml
+- test/fixtures/project.rb
+- test/fixtures/projects.yml
+- test/fixtures/replies.yml
+- test/fixtures/reply.rb
+- test/fixtures/schema.rb
+- test/fixtures/topic.rb
+- test/fixtures/topics.yml
+- test/fixtures/user.rb
+- test/fixtures/users.yml
+- test/gemfiles/Gemfile.1.2
+- test/gemfiles/Gemfile.1.2.lock
+- test/gemfiles/Gemfile.2.0
+- test/gemfiles/Gemfile.2.0.lock
+- test/gemfiles/Gemfile.2.1
+- test/gemfiles/Gemfile.2.1.lock
+- test/gemfiles/Gemfile.2.2
+- test/gemfiles/Gemfile.2.2.lock
+- test/helper.rb
+- test/lib/activerecord_test_case.rb
+- test/lib/activerecord_test_connector.rb
+- test/lib/load_fixtures.rb
+- test/lib/view_test_process.rb
+- test/view_test.rb
+- README.md
+- LICENSE
+- CHANGELOG.rdoc
+homepage: https://github.com/mislav/will_paginate/wiki
+licenses: []
+
+post_install_message: 
+rdoc_options: 
+- --main
+- README.md
+- --charset=UTF-8
+require_paths: 
+- lib
+required_ruby_version: !ruby/object:Gem::Requirement 
+  none: false
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      hash: 3
+      segments: 
+      - 0
+      version: "0"
+required_rubygems_version: !ruby/object:Gem::Requirement 
+  none: false
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      hash: 3
+      segments: 
+      - 0
+      version: "0"
+requirements: []
+
+rubyforge_project: 
+rubygems_version: 1.8.15
+signing_key: 
+specification_version: 3
+summary: Easy pagination for Rails
+test_files: []
+
+has_rdoc: 

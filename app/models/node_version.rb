@@ -1,8 +1,5 @@
 # Model for storing versions of nodes.
 
-# Note that this version (currently only in the "mongo" branch) uses
-# MongoDB and MongoMapper, rather than ActiveRecord.
-
 class NodeVersion
   include MongoMapper::Document
 

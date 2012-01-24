@@ -93,7 +93,7 @@ class Node < ActiveRecord::Base
   # ------------------------------------------------------------
 
   def contents
-    @contents ||= current_version.contents
+    @contents ||= (current_version ? current_version.contents : nil)
   end
 
   def netlogo_version
@@ -187,7 +187,7 @@ class Node < ActiveRecord::Base
     width = 0
     height = 0
 
-    contents.each do |line|
+    contents.each_line do |line|
 
       # Handle dividers
       if line =~ /\@\#\$\#\@\#\$\#\@/
@@ -318,6 +318,8 @@ class Node < ActiveRecord::Base
   def cannot_be_run_as_applet?
     return true if name =~ /3D/
     return true if procedures_tab =~ /hubnet-/
+    return true if procedures_tab =~ /file-/
+    return true if procedures_tab =~ /extensions/
   end
 
   def self.search(search_term, person)
