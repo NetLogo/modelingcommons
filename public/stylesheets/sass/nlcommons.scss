@@ -254,10 +254,12 @@ body {
 #model_info {
   @include column(20, true);
   height: 160px;
+  img {
+    vertical-align: middle;
+  }
   img.inline_image {
     height: 20px;
-    vertical-align: middle;
-  }  
+  } 
   div {
     height: 49px;
     line-height: 49px;

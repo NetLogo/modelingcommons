@@ -74,12 +74,15 @@
 			<% end %>
 		</div>
 		<div id="actions">
-			<%= link_to image_tag("download.png", :class => "inline_image", :alt => "Download the '#{@model.name}' model", :title => "Download the '#{@model.name}' model"), :controller => "browse", :action => "download_model", :id => @model.id -%><%= link_to "Download this model", :controller => "browse", :action => "download_model", :id => @model.id -%>
+			<%= link_to image_tag("download.png", :class => "inline_image", :alt => "Download the '#{@model.name}' model", :title => "Download the '#{@model.name}' model"), :controller => "browse", :action => "download_model", :id => @model.id -%><%= link_to "Download this model", :controller => "browse", :action => "download_model", :id => @model.id -%> 
+			<% if @person or !@model.recommendations.empty? %> | <% end %> 
 			<% if @person %>
 			<% if @model.recommendations.select {|r| r.person_id == @person.id}.empty? %>
-			 | 
 			<%= link_to image_tag("thumb.jpeg", :class => "inline_image", :alt => "Recommend '#{@model.name}' to other users", :title => "Recommend '#{@model.name}' to other users"), :controller => :recommend, :action => :add_recommendation, :id => @model.id -%><%= link_to "Recommend", :controller => :recommend, :action => :add_recommendation, :id => @model.id %>
+			<% else %>
+			<%= person_link(@person) %> recommended this model
 			<% end %>
+			
 			<% if !@model.recommendations.empty? %>
 			(<%= link_to pluralize(@model.recommendations.length, "recommendation"), :controller => :recommend, :action => :show_recommendations, :id => @model.id -%> to date)
 			<% end %>
