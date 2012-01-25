@@ -6,21 +6,23 @@
   <table id="existing_tags" class="simple_table">
     <thead>
       <tr>
-	<th>
-	  Tag Name
-	</th>
-	<th>
-	  Comment
-	</th>
-	<th>
-	  Tagged By
-	</th>
-	<th>
-	  Date Tagged
-	</th>
-	<th>
-	  &nbsp;
-	</th>
+		<th>
+		  Tag Name
+		</th>
+		<th>
+		  Comment
+		</th>
+		<th>
+		  Tagged By
+		</th>
+		<th>
+		  Date Tagged
+		</th>
+		<% if is_administrator() %>
+		<th>
+		  Remove Tag
+		</th>
+		<% end %>
       </tr>
     </thead>
     <tbody>
