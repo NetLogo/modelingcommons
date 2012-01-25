@@ -193,7 +193,8 @@ $padding: 5px;
   display: block; border-width: 0; background: none; margin: 4px;
 }
 .ui-tabs .ui-tabs-hide {
-  display: none !important;
+  display: none /*!important*/
+ ;
 }
 
 
