@@ -19,4 +19,12 @@ module BrowseHelper
 
     output
   end
+  def model_group(model)
+    if model.group
+      output = "Model group " + group_link(model.group);
+    else 
+      output = "No model group"
+    end
+    output
+  end
 end

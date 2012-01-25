@@ -160,7 +160,7 @@ jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
 $(document).ready(function () {
 	// Create the datatable
 	$(".model_list_datatable").dataTable({
-		'aaSorting': [ [1, 'asc']],
+		'aaSorting': [ [0, 'asc']],
 		"bAutoWidth": false,
 		"aoColumns": [
 			{
@@ -216,17 +216,26 @@ $(document).ready(function () {
 	
 	//Disable tabs with no search results
 	var disabledTabsList = [];
+	var selectedSearchTab = -1;
 	$("#search_tabs>ul>li").each(function(index, element) {
 		if($(element).hasClass("empty")) {
 			disabledTabsList.push(index);
+			
+		} else if(selectedSearchTab == -1) {
+			selectedSearchTab = index;
 		}
 	});
 	if($("#search_tabs>ul>li").length == $("#search_tabs>ul>li.empty").length) {
-		$("#search_tabs").tabs({disabled: disabledTabsList, selected: -1});
+		$("#search_tabs").tabs({
+			disabled: disabledTabsList,
+			 selected: -1
+		});
 		$("#ifEmpty").css("display", "inline");
 	} else {
-		$("#search_tabs").tabs({disabled: disabledTabsList});
-		
+		$("#search_tabs").tabs({
+			disabled: disabledTabsList,
+			selected: selectedSearchTab
+		});
 	}
 	
 	
@@ -249,7 +258,7 @@ $(document).ready(function () {
 	
 	$(".complete").autocomplete('/tags/complete_tags', {} );
 	
-	//Non-ajax tabs!!
+	//Non-ajax tabs for models
 	
 	//Checks URL hash to see if the user wants to go to a specific tab
 	var tab_index = 0;

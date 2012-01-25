@@ -89,9 +89,5 @@ ago."
   def discuss_link(node, text)
     link_to(text, :controller => :browse, :action => :one_model, :id => node.id, :anchor => 'discuss')
   end
-  
-  def is_administrator()
-    @person and (@person.administrator? or @person == tm.person)
-  end
 
 end

@@ -50,7 +50,7 @@
 			  	 	</select>
 			  	<% else %>
 			  	<%if model_group_id != 0 %>
-			  	 | Model group <%= @model.group.name %>
+			  	 | <%= model_group(@model) %>
 			  	 <% end %>
 			  	  | <%= model_visibility(@model) %> | <%= model_changeability(@model) %>
 			  	
