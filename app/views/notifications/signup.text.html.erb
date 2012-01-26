@@ -3,7 +3,7 @@
     <h1>Welcome, <%= @person.first_name %>!</h1>
 
     <p>You have successfully registered with the
-    <%= link_to "NetLogo Modeling Commons", :host => 'modelingcommons.org', :controller => "browse" %>.</p>
+    <%= link_to "NetLogo Modeling Commons", "http://modelingcommons.org"  -%>.</p>
 
     <p>Your e-mail address (which is used to log in) is
     '<%= @person.email_address %>'.</p>

@@ -5,10 +5,39 @@
 ** Get extensions to work (or add a note indicating that they don't)
 ** Get external files to work (or add a note indicating that they don't)
 
+
 * Tags
 
 ** Remove joke tags, comments
 ** Add "CCL" tag to models that don't have it
 
+
 * Groups
-** Create CCL groups, as per 
+** Create CCL groups, as per Uri's e-mail message
+
+** Group invitation e-mail should allow people to opt out/remove themselves
+** Projects -- maybe you shouldn't be able to see them if they only contain models you cannot see.  Or maybe they should have permissions!
+** Create a group, adds a member... gives you a list of registered users, in a big box.  No search field. Maybe we can have a search box there to type a name in?  Or order it alphabetally?
+** Download project
+
+** Text-based documentation
+
+** Highlight screencasts more
+** 
+
+
+** Uri listed models... he got some "no owners, no tags"
+** "A bad model" appears in everyone's "most viewed/downloaded" list!
+** Most uploading/contributing people
+** Model owner should know about discussions, questions
+** "What Uri has done" when you go to Uri's page...
+** One-sentence explanation of 
+
+* Notifications
+** Figure out BCC on model-update notifications
+
+** white-on-red
+
+** Let users turn off of notifications
+
+* Other
