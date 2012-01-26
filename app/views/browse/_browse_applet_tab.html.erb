@@ -5,9 +5,10 @@
   <p>Written with NetLogo <%= @model.netlogo_version -%></p>
 
   <!-- browse_applet_tab -->
-  <div id="model_click_to_load" style="width: <%= @model.dimensions[:width] -%>px; height: <%= @model.dimensions[:height] -%>px; line-height: <%= @model.dimensions[:height] -%>px;" >
+  <div id="model_click_to_load"  >
   	Click to Run Model
   </div>
+  <div id="model_container" class="model_container">
   <applet id="model_applet"
      code="<%= @model.applet_class -%>"
      align="bottom"
@@ -16,6 +17,7 @@
      archive="/applet/<%= @model.netlogo_version_for_applet -%>/NetLogoLite.jar" >
     <param name="DefaultModel" value="<%= url_for :controller => :browse, :action => :model_contents, :id => @model.id -%>"></param>
   </applet>
+ </div>
   <% end %>
 
   <!-- Add model HTML file, if there is one -->

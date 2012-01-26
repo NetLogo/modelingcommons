@@ -202,13 +202,6 @@ $(document).ready(function () {
 	   }
 	});*/
 	
-	// !!!
-	// This is clearly the wrong way to do this
-	// !!!
-	$(".menu-option").click(
-	    function () {
-		window.location = $(this).children()[0];
-	    });
 	    
 	// Search result tabs
 	// Not done with ajax
@@ -341,9 +334,34 @@ $(document).ready(function () {
 	$('#header_login button').click(function(e) {
 		$(this).parents('form').submit();
 	});
+	
+	//Model click to load
 	$("#model_click_to_load").click(function(e) {
-		$(this).css("display", "none");
-		$("#model_applet").css("display", "block");
+		
+		var tab = $("div#browse_applet");
+		var applet = $("#model_applet");
+		var clickToLoad = $(this);
+		var body = $("body");
+		var container = $("#model_container");
+		
+		if(applet.innerWidth() > tab.innerWidth()) {
+			clickToLoad.css("visibility", "hidden");
+			clickToLoad.css("height", (applet.innerHeight() + 10) + "px");
+			applet.css("display", "block");
+			container.addClass("wide_model");
+			container.css("top", (tab.offset().top + 24) + "px");
+			if(applet.innerWidth() < body.outerWidth()) {
+				container.css("left", ((body.outerWidth() - container.outerWidth())/2) + "px");
+			} else {
+				container.css("left", "0px");
+			}
+			
+			applet.before($("div#browse_applet p").detach());
+		} else {
+			$(this).css("display", "none");
+			$("#model_applet").css("display", "block");
+		}
+		
 	});
 	$("#header_login").bind('focus', function(e) {
 		$().flash_notice("Focus");

@@ -84,7 +84,7 @@
 			<% end %>
 			
 			<% if !@model.recommendations.empty? %>
-			(<%= link_to pluralize(@model.recommendations.length, "recommendation"), :controller => :recommend, :action => :show_recommendations, :id => @model.id -%> to date)
+			(<%= link_to pluralize(@model.recommendations.length, "recommendation"), :controller => :recommend, :action => :show_recommendations, :id => @model.id -%>)
 			<% end %>
 			
 			<% if !@person.spam_warning(@model) %>
