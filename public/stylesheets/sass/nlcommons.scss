@@ -71,66 +71,103 @@ body {
       display: inline-block;
     }
   }
-  .login {
+  .login_flash {
+    
     position: relative;
+    
     .login_container {
-      font-size: $default-font-size;
-      padding-right: 10px;
-      padding-left: 4px;
-      display: inline-block;
-      background-color: $nav-color;
-      color: $nav-text-color;
-      line-height: 26px;
-      
-      padding-top: 2px;
-      padding-bottom: 2px;
-      @include border-bottom-left-radius($tab-corner-radius);
-      img {
-        height: 26px;
-        width: 26px;
-        margin-left: 4px;
-        margin-right: 4px;
-        vertical-align: top;
-      }
-      a {
+      display: table-row;
+      text-align: right;
+      .login {
+        font-size: $default-font-size;
+        padding-right: 10px;
+        padding-left: 4px;
+        background-color: $nav-color;
         color: $nav-text-color;
-        vertical-align: top;
-      }
-      a:visited {
-        color: $nav-text-color;
-      }
-      a:active {
-        color: red;
+        line-height: 26px;
+        display: inline-block;
+        padding-top: 2px;
+        padding-bottom: 2px;
+        @include border-bottom-left-radius($tab-corner-radius);
+        img {
+          height: 26px;
+          width: 26px;
+          margin-left: 4px;
+          margin-right: 4px;
+          vertical-align: top;
+        }
+        a {
+          color: $nav-text-color;
+          vertical-align: top;
+        }
+        a:visited {
+          color: $nav-text-color;
+        }
+        a:active {
+          color: red;
+        }
       }
     }
-    //background-color: red;
-    
-
-    
-    vertical-align: top;
-    
-    text-align: right;
-    
+    .flash_container {
+      display: table-row;
+      height: 100%;
+      &>div {
+        display: table-cell;
+        vertical-align: middle;
+        #flash_notice {
+          display:inline-block;
+          background-color: $error-color;
+          @include border-bottom-left-radius($tab-corner-radius);
+          @include border-top-left-radius($tab-corner-radius);
+          width: 100%;
+          line-height: 20px;
+          font-size: 16px;
+          color: white;
+          text-align: center;
+          overflow: hidden;
+          max-height: 40px;
+          min-height: 20px;
+          width: 480px;
+          position: relative;
+          right: -480px;
+          @include sans-font();
+        }
+      }
+    }
     @include column(12, true);
     @include serif-font();
-    
-    .flash_notice {
-      top:58px;
-      right:-500px;
-      display: inline-block;
-      background-color: $error-color;
-      @include border-bottom-left-radius($tab-corner-radius);
-      @include border-top-left-radius($tab-corner-radius);
-      max-height: 40px;
-      min-height: 20px;
-      width: 500px;
-      position: absolute;
-      overflow: hidden;
-      line-height: 20px;
-      font-size: 17px;
-      color: white;
-      text-align: center;
-      @include sans-font();
+    height: 100px;
+    display: table;
+  }
+  div.tableTest {
+    //display: table;
+    @include column(12, true);
+    height: 100px;
+    background-color: blue;
+    display: table;
+    &>div {
+      display: table-row;
+      height: 40px;
+    }
+    .top {
+      background-color: green;
+    }
+    .bottom {
+      &>div {
+        display: table-cell;
+        background-color: blue;
+       vertical-align: middle;
+        &>div {
+          background-color: red;
+          display:inline-block;
+          width: 100%;
+          border-radius: 10px;
+          position: relative;
+          right: -450px;
+        }
+      }
+      height: 100%;
+      background-color: red;
       
     }
   }

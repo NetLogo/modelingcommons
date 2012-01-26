@@ -2,38 +2,44 @@
   <div class="banner">
     <%= link_to "<h2>NetLogo</h2><h1>Modeling Commons</h2>", :controller => :account, :action => :mypage %>
   </div>
-  <div class="login">
+  <div class="login_flash">
     <div class="login_container">
-      <% if @person %>
-      Hello <%= link_to @person.fullname, :controller => :account, :action => :mypage -%><%= person_image(@person) %>
-      | <%= link_to_unless_current "Edit personal details", :controller => :account, :action => :edit, :id => @person.id %>
-      <% if @person.administrator %> | <%= link_to_unless_current "Admin", :controller => :admin, :action => :index %><% end %>
-      | <%= link_to_unless_current "Logout", :controller => :account, :action => :logout %>
-      <% else %>
-      <% form_tag(url_for(:controller => :account, :action => :login_action), :id => "header_login") do %>
-      <table>
-	<tr>
-	  <td colspan="3" style="text-align: left"><%= link_to "Register to share and participate", :controller => :account, :action => :new %> | <%= link_to "Forgot Password", :controller => :account, :action => :reset_password -%></td>
-	</tr>
-	<tr>
-	  <td><%= text_field_tag :email_address, nil, :placeholder => "Email Address" %></td>
-	  <td><%= password_field_tag :password, nil, :placeholder => "Password" %></td>
-	  <td><button>Login</button></td>
-	</tr>
-	<tr>
-	  <td></td>
-	  <td></td>
-	  <td></td>
-	</tr>
-      </table>
-      
-      <% end %>	
-      <% end %> 
+    	<div class="login">
+	      <% if @person %>
+	      Hello <%= link_to @person.fullname, :controller => :account, :action => :mypage -%><%= person_image(@person) %>
+	      | <%= link_to_unless_current "Edit personal details", :controller => :account, :action => :edit, :id => @person.id %>
+	      <% if @person.administrator %> | <%= link_to_unless_current "Admin", :controller => :admin, :action => :index %><% end %>
+	      | <%= link_to_unless_current "Logout", :controller => :account, :action => :logout %>
+	      <% else %>
+	      <% form_tag(url_for(:controller => :account, :action => :login_action), :id => "header_login") do %>
+	      <table>
+		<tr>
+		  <td colspan="3" style="text-align: left"><%= link_to "Register to share and participate", :controller => :account, :action => :new %> | <%= link_to "Forgot Password", :controller => :account, :action => :reset_password -%></td>
+		</tr>
+		<tr>
+		  <td><%= text_field_tag :email_address, nil, :placeholder => "Email Address" %></td>
+		  <td><%= password_field_tag :password, nil, :placeholder => "Password" %></td>
+		  <td><button>Login</button></td>
+		</tr>
+		<tr>
+		  <td></td>
+		  <td></td>
+		  <td></td>
+		</tr>
+	      </table>
+	      
+	      <% end %>	
+	      <% end %>	
+      </div> 
+    </div>
+    <div class="flash_container">
+    	<div>
+    		<div id="flash_notice">
+    			
+    		</div>
+    	</div>
     </div>
     
-    <div class="flash_notice">
-      
-    </div>
     <% if flash[:notice] -%>
     <script>
       $(document).ready(function() {
@@ -41,12 +47,13 @@
       });
     </script>
     <% end -%>
+    
   </div>
   <div class="navigation">
     <ul>
       <li>
 	<% if @person %>
-	<%= link_to "Profile", :controller => :account, :action => :mypage %></li><li>	
+	<%= link_to "Profile", {:controller => :account, :action => :mypage}, {:title => ""} %></li><li>	
 	<% else %>
 	<%= link_to "Home", :controller => :account, :action => :mypage %></li><li>	
 	<% end %>			

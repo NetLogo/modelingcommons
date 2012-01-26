@@ -33,7 +33,7 @@
 		}
 	}
 	$.fn.flash_notice = function(text) {
-		flash_element = $(".flash_notice");
+		flash_element = $("#flash_notice");
 		width = flash_element.innerWidth();
 		queue.push(text);
 		if(!running) {
