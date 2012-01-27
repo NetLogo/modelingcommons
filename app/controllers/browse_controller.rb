@@ -137,7 +137,7 @@ class BrowseController < ApplicationController
   end
 
   def extension
-    send_file "#{RAILS_ROOT}/public/extensions/#{params[:dirname]}/#{params[:extensionname]}.jar"
+    send_file "#{RAILS_ROOT}/public/extensions/#{params[:dirname]}/#{params[:extensionname]}.#{params[:format]}"
   end
 
 end
