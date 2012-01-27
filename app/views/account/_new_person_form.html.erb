@@ -23,7 +23,7 @@
     <td><%= form.select :country_name, country_options_for_select(nil, ['United States', 'Israel']) %></td>
   </tr>
   <tr>
-    <td>Birthdate</td>
+    <td>Birthdate (optional)</td>
     <td><%= form.date_select :birthdate, :start_year => 1930, :end_year => 2005, :include_blank => true %></td>
   </tr>
 
@@ -101,9 +101,6 @@
 	  email: true },
       'new_person[sex]': 'required',
       'new_person[country_name]': 'required',
-      'new_person[birthdate(1i)]': 'required',
-      'new_person[birthdate(2i)]': 'required',
-      'new_person[birthdate(3i)]': 'required',
 
       'new_person[password]': 'required',
       'new_person[password_confirmation]': {
