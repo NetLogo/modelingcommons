@@ -187,7 +187,7 @@ class AccountController < ApplicationController
     @most_recommended_models =
       Recommendation.count(:group => "node_id",
                            :order => "count_all DESC",
-                           :limit => 10).map { |node| [Node.find(node[0]), node[1]]}
+                           :limit => 10).map { |node| [Node.find(node[0]), node[1]]}.select { |node_array| node_array[0].visible_to_user?(@person) }
 
     logger.warn "[AccountController#mypage] #{Time.now} exit"
     render :layout => 'application_nomargin'
