@@ -90,7 +90,7 @@ class AccountController < ApplicationController
   def mypage
 
     logger.warn "[AccountController#mypage] #{Time.now} enter"
-    redirect_to :controller => :account, :action => :login if (@person.nil? and params[:id].blank?)
+    return redirect_to :controller => :account, :action => :login if (@person.nil? and params[:id].blank?)
 
     if params[:id].blank?
       @the_person = @person
