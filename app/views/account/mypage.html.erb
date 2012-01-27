@@ -48,6 +48,7 @@
     <% else %>
     <ul>
       <% @model_events.each do |model| %>
+      <% next unless model.visible_to_user?(@person) %>
       <li><%= whats_new_text(model) %></li>
       <% end %>
     </ul>
