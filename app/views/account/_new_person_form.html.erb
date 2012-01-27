@@ -43,6 +43,8 @@
 
 </table>
 
+<br />
+
 <p>You are registering for the Modeling Commons, a research project
   from the Center for Connected Learning and Computer-Based Modeling at
   Northwestern University, Evanston IL, USA.</p>
@@ -85,7 +87,7 @@
   contact Northwestern University graduate student, Reuven Lerner, at
   <%= mail_to "reuven@lerner.co.il" -%>.</p>
 
-<p><%= form.check_box :registration_consent -%><label for="new_person_registration_consent">I understand and agree to the above.</label></p>
+<h2><%= form.check_box :registration_consent -%><label for="new_person_registration_consent">I understand and agree to the above.</label></h2>
 
 <p><%= submit_tag "Register", :class => "submit" %></p>
 
@@ -101,13 +103,11 @@
 	  email: true },
       'new_person[sex]': 'required',
       'new_person[country_name]': 'required',
-
       'new_person[password]': 'required',
       'new_person[password_confirmation]': {
 	required: true,
 	equalTo: '#new_person_password'
-      },
-      'new_person[registration_consent]': 'checked'
+      }
    } } );
 </script>
 
