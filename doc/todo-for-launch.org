@@ -1,10 +1,10 @@
 * Models
-** Remove models from the "community models" page, or make them private
-** Remove "under development"
-** Remove "little things"
 ** Get extensions to work (or add a note indicating that they don't)
 ** Get external files to work (or add a note indicating that they don't)
 
+** Remove models from the "community models" page, or make them private
+** Remove "under development"
+** Remove "little things"
 
 * Tags
 
@@ -27,12 +27,9 @@
 
 
 ** Uri listed models... he got some "no owners, no tags"
-** "A bad model" appears in everyone's "most viewed/downloaded" list!
 ** Most uploading/contributing people
 ** Model owner should know about discussions, questions
 ** "What Uri has done" when you go to Uri's page...
-** One-sentence explanation of 
-
 * Notifications
 ** Figure out BCC on model-update notifications
 
@@ -40,4 +37,4 @@
 
 ** Let users turn off of notifications
 
-* Other
+** make birthdate optional
