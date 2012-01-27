@@ -90,10 +90,7 @@ class AccountController < ApplicationController
   def mypage
 
     logger.warn "[AccountController#mypage] #{Time.now} enter"
-    if @person.nil? and params[:id].blank?
-      redirect_to :controller => :account, :action => :login
-      return
-    end
+    redirect_to :controller => :account, :action => :login if (@person.nil? and params[:id].blank?)
 
     if params[:id].blank?
       @the_person = @person
@@ -135,43 +132,21 @@ class AccountController < ApplicationController
     end
 
     @group_model_events = @group_recent_models.select { |model| model.group.members.include?(@person)}
+    @model_events = @model_events.select { |model| model.visible_to_user?(@person)}
 
     logger.warn "[AccountController#mypage] #{Time.now} before most-viewed models"
 
     # all-time most-viewed models
-    @all_time_most_viewed = LoggedAction.find_by_sql("SELECT COUNT(DISTINCT ip_address), node_id
-                                                FROM Logged_Actions
-                                               WHERE controller = 'browse'
-                                                 AND action = 'one_model'
-                                                 AND node_id IS NOT NULL
-                                            GROUP BY node_id
-                                            ORDER BY count DESC
-                                               LIMIT 10;").map { |la| [la.node, la.count]}
+    @all_time_most_viewed = Node.all_time_most_viewed.map { |la| [la.node, la.count]}
     @all_time_most_viewed = @all_time_most_viewed.select {|model_array| model_array[0].visible_to_user?(@person)}
 
     # most-viewed models
-    @most_viewed = LoggedAction.find_by_sql("SELECT COUNT(DISTINCT ip_address), node_id
-                                                FROM Logged_Actions
-                                               WHERE controller = 'browse'
-                                                 AND action = 'one_model'
-                                                 AND node_id IS NOT NULL
-                                                 AND logged_at >= NOW() - interval '2 weeks'
-                                            GROUP BY node_id
-                                            ORDER BY count DESC
-                                               LIMIT 10;").map { |la| [la.node, la.count]}
+    @most_viewed = Node.most_viewed.map { |la| [la.node, la.count]}
     @most_viewed = @most_viewed.select {|model_array| model_array[0].visible_to_user?(@person)}
 
     logger.warn "[AccountController#mypage] #{Time.now} before most-downloaded models"
     # most-downloaded models
-    @most_downloaded = LoggedAction.find_by_sql("SELECT COUNT(DISTINCT ip_address), node_id
-                                                   FROM Logged_Actions
-                                                  WHERE controller = 'browse'
-                                                    AND action = 'download_model'
-                                                    AND node_id IS NOT NULL
-                                                    AND logged_at >= NOW() - interval '2 weeks'
-                                               GROUP BY node_id
-                                               ORDER BY count DESC
-                                                  LIMIT 10;").map { |la| [la.node, la.count]}
+    @most_downloaded = Node.most_downloaded.map { |la| [la.node, la.count]}
     @most_downloaded = @most_downloaded.select {|model_array| model_array[0].visible_to_user?(@person)}
 
 
