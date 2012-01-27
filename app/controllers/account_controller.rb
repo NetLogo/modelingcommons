@@ -138,16 +138,16 @@ class AccountController < ApplicationController
 
     # all-time most-viewed models
     @all_time_most_viewed = Node.all_time_most_viewed.map { |la| [la.node, la.count]}
-    @all_time_most_viewed = @all_time_most_viewed.select {|model_array| model_array[0].visible_to_user?(@person)}
+    @all_time_most_viewed = @all_time_most_viewed.select {|model_array| model_array[0].visible_to_user?(@person)}[0..9]
 
     # most-viewed models
     @most_viewed = Node.most_viewed.map { |la| [la.node, la.count]}
-    @most_viewed = @most_viewed.select {|model_array| model_array[0].visible_to_user?(@person)}
+    @most_viewed = @most_viewed.select {|model_array| model_array[0].visible_to_user?(@person)}[0..9]
 
     logger.warn "[AccountController#mypage] #{Time.now} before most-downloaded models"
     # most-downloaded models
     @most_downloaded = Node.most_downloaded.map { |la| [la.node, la.count]}
-    @most_downloaded = @most_downloaded.select {|model_array| model_array[0].visible_to_user?(@person)}
+    @most_downloaded = @most_downloaded.select {|model_array| model_array[0].visible_to_user?(@person)}[0..9]
 
 
     logger.warn "[AccountController#mypage] #{Time.now} before most-applied tags"
