@@ -19,4 +19,8 @@ class Tag < ActiveRecord::Base
     all(:conditions => [ "position( ? in lower(name) ) > 0 ", term])
   end
 
+  def to_s
+    name
+  end
+
 end

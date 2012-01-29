@@ -1,5 +1,3 @@
-** Remove community models, or make them private
-** Remove "under development"
 ** Remove joke tags, comments
 ** Alphabetize project list!
 ** Related models in the info tab -- make those hyperlinks?
