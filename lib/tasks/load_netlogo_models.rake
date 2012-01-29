@@ -137,18 +137,23 @@ namespace :netlogo do
             puts "\t\t\tModel is '#{model_contents.length}' characters long."
           end
 
-          new_version =
-            nv = NodeVersion.new(:node_id => matching_node.id,
-                                 :person_id => @uri_user.id,
-                                 :contents => model_contents,
-                                 :description => 'Updated to NetLogo 5.0')
-          if nv.save
-            puts "\t\t\tSuccessfully saved a new node_version"
-          else
-            puts "\t\t*** Error trying to create a new version of existing node '#{matching_node.name}', ID '#{matching_node.id}': '#{e.inspect}'"
-            next
+          begin
+            new_version =
+              nv = NodeVersion.new(:node_id => matching_node.id,
+                                   :person_id => @uri_user.id,
+                                   :contents => model_contents,
+                                   :description => 'Updated to NetLogo 5.0')
+            if nv.save
+              puts "\t\t\tSuccessfully saved a new node_version"
+            else
+              puts "\t\t*** Error trying to create a new version of existing node '#{matching_node.name}', ID '#{matching_node.id}': '#{e.inspect}'"
+              next
 
+            end
+          rescue
+            puts "\t\t\t Error saving!  Ignoring this node version"
           end
+
 
         else
           # Too many to choose from -- aborting!
