@@ -1,5 +1,8 @@
 <% @title = 'Projects' %>
 
+<p><%= link_to "Create a new project", :controller => :projects, :action => :new -%></p>
+<br />
+
 <% if @projects.empty? %>
 <p><i>No projects have been created.</i></p>
 <% else %>
@@ -14,5 +17,5 @@
 </ul>
 <% end %>
 
+<br />
 <p><%= link_to "Create a new project", :controller => :projects, :action => :new -%></p>
-
