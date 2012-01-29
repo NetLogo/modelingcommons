@@ -106,14 +106,20 @@ namespace :netlogo do
           file_contents = File.open(path).read
 
           puts "\tCreating a new NodeVersion"
-          new_version = NodeVersion.new(:node_id => node.id,
-                                        :person_id => @uri_user.id,
-                                        :contents => file_contents,
-                                        :description => 'Updated from NetLogo 5.0')
 
-          if !new_version.save
-            puts "\t\t*** Error trying to save a new version of the new node '#{node.name}', ID '#{node.id}': '#{e.inspect}'"
-            puts "\t\t\t#{node.inspect}"
+          begin
+            new_version = NodeVersion.new(:node_id => node.id,
+                                          :person_id => @uri_user.id,
+                                          :contents => file_contents,
+                                          :description => 'Updated from NetLogo 5.0')
+
+            if !new_version.save
+              puts "\t\t*** Error trying to save a new version of the new node '#{node.name}', ID '#{node.id}': '#{e.inspect}'"
+              puts "\t\t\t#{node.inspect}"
+            end
+          rescue Exception => e
+            puts "\t\t\tError saving this model: #{e.message}"
+            next
           end
 
 
