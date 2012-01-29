@@ -2,6 +2,8 @@
 
 class ProjectsController < ApplicationController
 
+  default_scope :order => 'name ASC'
+
   def index
     @projects = Project.all
   end

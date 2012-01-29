@@ -1,40 +1,36 @@
-* Models
+** Remove community models, or make them private
+** Remove "under development"
+** Remove joke tags, comments
+** Alphabetize project list!
+** Related models in the info tab -- make those hyperlinks?
+** List all unanswered questions, answered questions
+** Reparent models?  
+** Add a page to the CCL wiki, for bug reports and such
+** Create a group, adds a member... gives you a list of registered users, in a big box.  No search field. Maybe we can have a search box there to type a name in?  Or order it alphabetally?
+** Create CCL groups, as per Uri's e-mail message
+
+** Update screencasts, and highlight them
+** Projects need owners, much like groups
+** Download an entire project
+
 ** Get extensions to work (or add a note indicating that they don't)
 ** Get external files to work (or add a note indicating that they don't)
 
-** Remove models from the "community models" page, or make them private
-** Remove "under development"
-** Remove "little things"
-
-* Tags
-
-** Remove joke tags, comments
-** Add "CCL" tag to models that don't have it
-
-
-* Groups
-** Create CCL groups, as per Uri's e-mail message
-
 ** Group invitation e-mail should allow people to opt out/remove themselves
-** Projects -- maybe you shouldn't be able to see them if they only contain models you cannot see.  Or maybe they should have permissions!
-** Create a group, adds a member... gives you a list of registered users, in a big box.  No search field. Maybe we can have a search box there to type a name in?  Or order it alphabetally?
-** Download project
-
 ** Text-based documentation
 
-** Highlight screencasts more
-** 
-
-
-** Uri listed models... he got some "no owners, no tags"
 ** Most uploading/contributing people
 ** Model owner should know about discussions, questions
 ** "What Uri has done" when you go to Uri's page...
-* Notifications
+
 ** Figure out BCC on model-update notifications
 
 ** white-on-red
 
+** Permissions for question
 ** Let users turn off of notifications
 
-** make birthdate optional
+** Search through discussion
+** When someone responds to a posting, do all previous posters get e-mail updates?  I think so, but double check
+** Projects -- change the project listing to be paginated, with the user's projects at the top
+** From the one-model page, you should be able to add a model to a project
