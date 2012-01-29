@@ -1,3 +1,4 @@
+** Remove "community models"
 ** Remove joke tags, comments
 ** Alphabetize project list!
 ** Related models in the info tab -- make those hyperlinks?
