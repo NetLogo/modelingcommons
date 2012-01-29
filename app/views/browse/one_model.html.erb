@@ -12,11 +12,6 @@
     By <%= @model.people.map {|person| person_link(person)}.join(", ") -%> 
     <% model_visibility_letter = @model.visibility.short_form %>
     <% model_changeability_letter = @model.changeability.short_form %>
-    <% if @model and @model.group %>
-    <% model_group_id = @model.group.id %>
-    <% else %>
-    <% model_group_id = 0 %>
-    <% end %>
 
     <% if @model.people.include?(@person) %>
     
@@ -24,7 +19,7 @@
     <% @options_for_select = [['No group', nil]] -%>
     <% @person.groups.each {|g| @options_for_select << [g.name, g.id] } -%>
 						       
-						       | Model group <%= select_tag("group_id", options_for_select(@options_for_select, model_group_id), :id => "group_select") %>
+						       | Model group <%= select_tag("group_id", options_for_select(@options_for_select, (@model.group ? @model.group.id : 0), :id => "group_select") %>
        <% end %>
        
        | Visible to <select name="read_permission" id="read_permission_select">
@@ -42,13 +37,14 @@
 	 <option value="u" <% if model_visibility_letter ==  'u'%>selected="selected"<% end %>>you only</option>
        </select>
        <% else %>
-       <%if model_group_id != 0 %>
-       | Model group <%= @model.group.name %>
-       <% end %>
+
+	   <% if @model.group %>
+	   | Model group <%= @model.group.name %>
+	   <% end %>
+
        | <%= model_visibility(@model) %> | <%= model_changeability(@model) %>
-       
        <% end %>
-       
+
        <% end %>
        
        
