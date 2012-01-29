@@ -7,4 +7,6 @@ class Project < ActiveRecord::Base
   has_many :node_projects
   has_many :nodes, :through => :node_projects
 
+  default_scope :order => 'lower(name) ASC'
+
 end
