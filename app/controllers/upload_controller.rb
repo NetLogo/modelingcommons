@@ -124,8 +124,7 @@ class UploadController < ApplicationController
       flash[:notice] << "Added a new child to this model. "
     elsif fork == 'overwrite'
 
-
-      check_changeability_permissions
+      return unless check_changeability_permissions
 
       node_id = existing_node.id
       flash[:notice] << "Added new version to node #{existing_node.id}. "
