@@ -53,22 +53,22 @@
     <ul>
       <li>
 	<% if @person %>
-	<%= link_to "Profile", {:controller => :account, :action => :mypage}, {:title => ""} %></li><li>	
+	<%= link_to "Profile", {:controller => :account, :action => :mypage}, {:title => "See recent activity in your models and tags"} %></li><li>	
 	<% else %>
-	<%= link_to "Home", :controller => :account, :action => :mypage %></li><li>	
+	<%= link_to "Home", {:controller => :account, :action => :mypage}, {:title => "Register for the modeling commons to see a personalized home page"} %></li><li>	
 	<% end %>			
-	<%= link_to "List models", :controller => :browse, :action => :list_models %></li><li>
+	<%= link_to "List models", {:controller => :browse, :action => :list_models}, {:title => "List all the models on the modeling commons"} %></li><li>
 	<% if @person %>
-	<%= link_to "Projects", :controller => :projects, :action => :index %></li><li>
-	<%= link_to "Groups", :controller => :account, :action => :groups %></li><li>
-	<%= link_to "Tags", :controller => :account, :action => :tags, :id => @person.id  %></li><li>
+	<%= link_to "Projects", {:controller => :projects, :action => :index}, {:title => "Group multiple models into a project"} %></li><li>
+	<%= link_to "Groups", {:controller => :account, :action => :groups}, {:title => "Allow a group of people to change models"} %></li><li>
+	<%= link_to "Tags", {:controller => :account, :action => :tags, :id => @person.id},{:title => "Tag a model by category"}  %></li><li>
 	<% end %>
-	<%= link_to "Help", :controller => :help, :action => :index  %></li>
+	<%= link_to "Help", {:controller => :help, :action => :index}, {:title => "Get help and information about the modeling commons"} %></li>
     </ul>
     <ul>
       <% if @person %>
       <li>
-	<%= link_to "Add model", :controller => :upload, :action => :new_model %></li>	
+	<%= link_to "Add model", {:controller => :upload, :action => :new_model}, {:title => "Upload a new model"} %></li>	
       <% end %>
     </ul>
     

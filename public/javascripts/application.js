@@ -343,7 +343,6 @@ $(document).ready(function () {
 		var clickToLoad = $(this);
 		var body = $("body");
 		var container = $("#model_container");
-		
 		if(applet.innerWidth() > tab.innerWidth()) {
 			clickToLoad.css("visibility", "hidden");
 			clickToLoad.css("height", (applet.innerHeight() + 10) + "px");
@@ -358,8 +357,8 @@ $(document).ready(function () {
 			
 			applet.before($("div#browse_applet p").detach());
 		} else {
-			$(this).css("display", "none");
-			$("#model_applet").css("display", "block");
+			clickToLoad.css("display", "none");
+			applet.css("display", "block");
 		}
 		
 	});
