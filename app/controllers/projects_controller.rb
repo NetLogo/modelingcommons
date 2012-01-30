@@ -10,7 +10,8 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    @project = Project.find_or_create_by_name(:name => params[:project_name])
+    @project = Project.find_or_create_by_name(:name => params[:project_name],
+                                              :person => @person)
 
     if @project.save
       flash[:notice] = "Successfully created project '#{@project.name}'"

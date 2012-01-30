@@ -10,6 +10,7 @@ class Person < ActiveRecord::Base
   has_many :recommendations
   has_many :email_recommendations
   has_many :spam_warnings
+  has_many :projects
 
   has_many :memberships
   has_many :groups, :through => :memberships, :order => "lower(name) ASC"

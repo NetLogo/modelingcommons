@@ -9,19 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110422104454) do
-
-# Could not dump table "appid" because of following StandardError
-#   Unknown type 'uuid' for column 'ApplicationID'
-
-# Could not dump table "application" because of following StandardError
-#   Unknown type 'uuid' for column 'ID'
-
-# Could not dump table "binaryattachment" because of following StandardError
-#   Unknown type 'uuid' for column 'ID'
-
-# Could not dump table "datatype" because of following StandardError
-#   Unknown type 'uuid' for column 'ID'
+ActiveRecord::Schema.define(:version => 20120130001501) do
 
   create_table "email_recommendations", :force => true do |t|
     t.integer  "person_id"
@@ -33,9 +21,6 @@ ActiveRecord::Schema.define(:version => 20110422104454) do
 
   add_index "email_recommendations", ["node_id"], :name => "index_email_recommendations_on_node_id"
   add_index "email_recommendations", ["person_id"], :name => "index_email_recommendations_on_person_id"
-
-# Could not dump table "execution" because of following StandardError
-#   Unknown type 'uuid' for column 'ID'
 
   create_table "groups", :force => true do |t|
     t.string   "name"
@@ -63,7 +48,11 @@ ActiveRecord::Schema.define(:version => 20110422104454) do
   add_index "logged_actions", ["action"], :name => "index_logged_actions_on_action"
   add_index "logged_actions", ["controller"], :name => "index_logged_actions_on_controller"
   add_index "logged_actions", ["ip_address"], :name => "index_logged_actions_on_ip_address"
+  add_index "logged_actions", ["logged_at"], :name => "logged_actions_logged_at"
   add_index "logged_actions", ["node_id"], :name => "index_logged_actions_on_node_id"
+  add_index "logged_actions", ["node_id"], :name => "logged_actions_not_null_node_id_idx"
+  add_index "logged_actions", ["node_id"], :name => "logged_actions_null_node_id_idx"
+  add_index "logged_actions", ["node_id"], :name => "node_id_not_null"
   add_index "logged_actions", ["person_id"], :name => "index_logged_actions_on_person_id"
   add_index "logged_actions", ["referrer"], :name => "index_logged_actions_on_referrer"
   add_index "logged_actions", ["url"], :name => "index_logged_actions_on_url"
@@ -80,11 +69,6 @@ ActiveRecord::Schema.define(:version => 20110422104454) do
   add_index "memberships", ["group_id"], :name => "index_memberships_on_group_id"
   add_index "memberships", ["person_id", "group_id"], :name => "index_memberships_on_person_id_and_group_id", :unique => true
   add_index "memberships", ["person_id"], :name => "index_memberships_on_person_id"
-
-  create_table "my_secret_table", :id => false, :force => true do |t|
-    t.integer "id",      :null => false
-    t.text    "myvalue"
-  end
 
   create_table "news_items", :force => true do |t|
     t.string   "title"
@@ -201,7 +185,16 @@ ActiveRecord::Schema.define(:version => 20110422104454) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "person_id"
+    t.integer  "group_id"
+    t.integer  "visibility_id"
+    t.integer  "changeability_id"
   end
+
+  add_index "projects", ["changeability_id"], :name => "index_projects_on_changeability_id"
+  add_index "projects", ["group_id"], :name => "index_projects_on_group_id"
+  add_index "projects", ["person_id"], :name => "index_projects_on_person_id"
+  add_index "projects", ["visibility_id"], :name => "index_projects_on_visibility_id"
 
   create_table "recommendations", :force => true do |t|
     t.integer  "node_id"
@@ -263,21 +256,6 @@ ActiveRecord::Schema.define(:version => 20110422104454) do
   create_table "test_tsquery", :id => false, :force => true do |t|
     t.text "txtkeyword"
     t.text "txtsample"
-  end
-
-  create_table "user_snapshot", :id => false, :force => true do |t|
-    t.integer  "id"
-    t.string   "email_address"
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "password"
-    t.boolean  "administrator"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.text     "avatar_file_name"
-    t.string   "avatar_content_type"
-    t.integer  "avatar_file_size"
-    t.datetime "avatar_updated_at"
   end
 
 end

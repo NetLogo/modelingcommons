@@ -3,19 +3,26 @@
 <% if @project.nodes.empty? %>
 <p><i>No models in this project.</i></p>
 <% else %>
-<p><%= pluralize(@project.nodes.size, "model") -%> in this project:</p>
+
+<p>The project is owned by <%= person_link(@project.person) -%>, and contains <%= pluralize(@project.nodes.size, "model") -%>:</p>
 <ul>
   <% @project.nodes.each do |node| -%>
-  <li><%= link_to node.name, :controller => :browse, :action => :one_node, :id => node.id  -%> (<%= link_to 'remove from project', :controller => :projects, :action => :remove_model, :id => @project.id, :model_id => node.id -%>)</li>
+  <li><%= link_to node.name, :controller => :browse, :action => :one_node, :id => node.id  -%> 
+    <% if @project.person == @person %>
+    (<%= link_to 'remove from project', :controller => :projects, :action => :remove_model, :id => @project.id, :model_id => node.id -%>)
+    <% end %>
+  </li>
   <% end %>
 </ul>
 <% end %>
 
+<% if @project.person == @person %>
 <% if !@models_to_add.empty? %>
 <% form_tag :controller => :projects, :action => :add_model do  %>
 <%= hidden_field_tag :project_id, @project.id -%>
 Add one of your models to this project:
 <%= select_tag :model_id, options_for_select(@models_to_add)  %>
 <%= submit_tag "Add model" %>
+<% end %>
 <% end %>
 <% end %>

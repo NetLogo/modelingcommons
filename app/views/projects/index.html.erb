@@ -11,6 +11,7 @@
   <% @projects.each do |project| %>
   <li>
     <%= link_to project.name, :controller => :projects, :action => :show, :id => project.id -%>
+    (owned by <%= person_link(project.person) -%> )
     (<%= pluralize(project.nodes.count, "model") -%>)
   </li>
   <% end %>
