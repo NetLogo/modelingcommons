@@ -18,6 +18,7 @@
   <p>None</p>
   <% else %>
   <% @tag.nodes.uniq.each do |model| %>
+  <% next unless model.visible_to_user?(@person) %>
   <li><%= link_to model.name, :controller => "browse", :action => "one_model", :id => model.id %></li>
   <% end %>
   <% end %>
@@ -29,7 +30,10 @@
   <p>None</p>
   <% else %>
   <% @tag.tagged_nodes.sort_by {|t| t.updated_at}.each do |tm| %>
-  <li><%= link_to tm.node.name, :controller => "browse", :action => "one_model", :id => tm.node_id %> (<%= tm.comment %>), by <%= link_to tm.person.fullname, :controller => :account, :action => :mypage, :id => tm.person.id %> <%= distance_of_time_in_words(Time.now, tm.updated_at) -%> ago </li>
+  <% next unless tm.node.visible_to_user?(@person) %>
+  <li><%= link_to tm.node.name, :controller => "browse", :action => "one_model", :id => tm.node_id %> 
+  <%= " (#{tm.comment}), " if tm.comment.present? %>
+  by <%= link_to tm.person.fullname, :controller => :account, :action => :mypage, :id => tm.person.id %> <%= distance_of_time_in_words(Time.now, tm.updated_at) -%> ago </li>
   <% end %>
   <% end %>
 </ul>

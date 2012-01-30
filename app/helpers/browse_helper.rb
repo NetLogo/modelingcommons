@@ -3,7 +3,7 @@ module BrowseHelper
   def model_visibility(model)
     output = "Visible to #{model.visibility.name}"
 
-    if model.group_visible?
+    if model.group and model.group_visible?
       output += " (#{group_link(model.group)})"
     end
 
@@ -13,7 +13,7 @@ module BrowseHelper
   def model_changeability(model)
     output = "Changeable by #{model.changeability.name}"
 
-    if model.group_changeable?
+    if model.group and model.group_changeable?
       output += " (#{group_link(model.group)})"
     end
 

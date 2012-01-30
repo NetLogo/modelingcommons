@@ -90,10 +90,7 @@ class AccountController < ApplicationController
   def mypage
 
     logger.warn "[AccountController#mypage] #{Time.now} enter"
-    if @person.nil? and params[:id].blank?
-      redirect_to :controller => :account, :action => :login
-      return
-    end
+    return redirect_to :controller => :account, :action => :login if (@person.nil? and params[:id].blank?)
 
     if params[:id].blank?
       @the_person = @person
@@ -135,44 +132,22 @@ class AccountController < ApplicationController
     end
 
     @group_model_events = @group_recent_models.select { |model| model.group.members.include?(@person)}
+    @model_events = @model_events.select { |model| model.visible_to_user?(@person)}
 
     logger.warn "[AccountController#mypage] #{Time.now} before most-viewed models"
 
     # all-time most-viewed models
-    @all_time_most_viewed = LoggedAction.find_by_sql("SELECT COUNT(DISTINCT ip_address), node_id
-                                                FROM Logged_Actions
-                                               WHERE controller = 'browse'
-                                                 AND action = 'one_model'
-                                                 AND node_id IS NOT NULL
-                                            GROUP BY node_id
-                                            ORDER BY count DESC
-                                               LIMIT 10;").map { |la| [la.node, la.count]}
-    @all_time_most_viewed = @all_time_most_viewed.select {|model_array| model_array[0].visible_to_user?(@person)}
+    @all_time_most_viewed = Node.all_time_most_viewed.map { |la| [la.node, la.count]}
+    @all_time_most_viewed = @all_time_most_viewed.select {|model_array| model_array[0].visible_to_user?(@person)}[0..9]
 
     # most-viewed models
-    @most_viewed = LoggedAction.find_by_sql("SELECT COUNT(DISTINCT ip_address), node_id
-                                                FROM Logged_Actions
-                                               WHERE controller = 'browse'
-                                                 AND action = 'one_model'
-                                                 AND node_id IS NOT NULL
-                                                 AND logged_at >= NOW() - interval '2 weeks'
-                                            GROUP BY node_id
-                                            ORDER BY count DESC
-                                               LIMIT 10;").map { |la| [la.node, la.count]}
-    @most_viewed = @most_viewed.select {|model_array| model_array[0].visible_to_user?(@person)}
+    @most_viewed = Node.most_viewed.map { |la| [la.node, la.count]}
+    @most_viewed = @most_viewed.select {|model_array| model_array[0].visible_to_user?(@person)}[0..9]
 
     logger.warn "[AccountController#mypage] #{Time.now} before most-downloaded models"
     # most-downloaded models
-    @most_downloaded = LoggedAction.find_by_sql("SELECT COUNT(DISTINCT ip_address), node_id
-                                                   FROM Logged_Actions
-                                                  WHERE controller = 'browse'
-                                                    AND action = 'download_model'
-                                                    AND node_id IS NOT NULL
-                                                    AND logged_at >= NOW() - interval '2 weeks'
-                                               GROUP BY node_id
-                                               ORDER BY count DESC
-                                                  LIMIT 10;").map { |la| [la.node, la.count]}
-    @most_downloaded = @most_downloaded.select {|model_array| model_array[0].visible_to_user?(@person)}
+    @most_downloaded = Node.most_downloaded.map { |la| [la.node, la.count]}
+    @most_downloaded = @most_downloaded.select {|model_array| model_array[0].visible_to_user?(@person)}[0..9]
 
 
     logger.warn "[AccountController#mypage] #{Time.now} before most-applied tags"
@@ -180,14 +155,14 @@ class AccountController < ApplicationController
     @most_popular_tags =
       TaggedNode.count(:group => "tag_id",
                        :order => "count_all DESC",
-                       :limit => 10).map { |tag| [Tag.find(tag[0]), tag[1]]}
+                       :limit => 20).map { |tag| [Tag.find(tag[0]), tag[1]]}
 
     logger.warn "[AccountController#mypage] #{Time.now} before most-recommended models"
     # most-recommended models
     @most_recommended_models =
       Recommendation.count(:group => "node_id",
                            :order => "count_all DESC",
-                           :limit => 10).map { |node| [Node.find(node[0]), node[1]]}
+                           :limit => 20).map { |node| [Node.find(node[0]), node[1]]}.select { |node_array| node_array[0].visible_to_user?(@person) }
 
     logger.warn "[AccountController#mypage] #{Time.now} exit"
     render :layout => 'application_nomargin'

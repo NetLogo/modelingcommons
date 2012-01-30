@@ -1,30 +1,46 @@
 <% @title = @model.name %>
-	<!--Preview-->
-	<div id="model_preview">
-		<%= render :partial => "preview_image", :locals => {:model => @model} -%>
-	</div>
-	<div id="model_info">
-		<!--Info-->
-		<div id="general_info">
-			<% form_tag(url_for( :controller => :browse, :action => :set_permissions), :id => "group_permission_form") do %>
-				<%= hidden_field_tag 'id', @model.id %>
-				
-				By <%= @model.people.map {|person| person_link(person)}.join(", ") -%> 
-				<!-- | 
-			  	<%= model_visibility(@model) %>
-			  	 | 
-			  	<%= model_changeability(@model) %>
-			  -->
-		        <% model_visibility_letter = @model.visibility.short_form %>
-		        <% model_changeability_letter = @model.changeability.short_form %>
-		        <% if @model and @model.group %>
-				<% model_group_id = @model.group.id %>
-				<% else %>
-				<% model_group_id = 0 %>
-				<% end %>
-				
-				
+<!--Preview-->
+<div id="model_preview">
+  <%= render :partial => "preview_image", :locals => {:model => @model} -%>
+</div>
+<div id="model_info">
+  <!--Info-->
+  <div id="general_info">
+    <% form_tag(url_for( :controller => :browse, :action => :set_permissions), :id => "group_permission_form") do %>
+    <%= hidden_field_tag 'id', @model.id %>
+    
+    By <%= @model.people.map {|person| person_link(person)}.join(", ") -%> 
+    <% model_visibility_letter = @model.visibility.short_form %>
+    <% model_changeability_letter = @model.changeability.short_form %>
 
+    <% if @model.people.include?(@person) %>
+    
+    <% if @person and !@person.groups.empty? %>
+    <% @options_for_select = [['No group', nil]] -%>
+    <% @person.groups.each {|g| @options_for_select << [g.name, g.id] } -%>
+						       
+						       | Model group <%= select_tag("group_id", options_for_select(@options_for_select, (@model.group ? @model.group.id : 0)), :id => "group_select") %>
+       <% end %>
+       
+       | Visible to <select name="read_permission" id="read_permission_select">
+	 <option value="a" <% if model_visibility_letter ==  'a'%>selected="selected"<% end %>>everyone</option>
+	 <% if @person and !@person.groups.empty? %>
+	 <option value="g" <% if model_visibility_letter ==  'g'%>selected="selected"<% end %>>group members only</option>
+	 <% end %>
+	 <option value="u" <% if model_visibility_letter ==  'u'%>selected="selected"<% end %>>you only</option>
+       </select>
+       | Changable by <select name="write_permission" id="write_permission_select">
+	 <option value="a" <% if model_visibility_letter ==  'a'%>selected="selected"<% end %>>everyone</option>
+	 <% if @person and !@person.groups.empty? %>
+	 <option value="g" <% if model_visibility_letter ==  'g'%>selected="selected"<% end %>>group members only</option>
+	 <% end %>
+	 <option value="u" <% if model_visibility_letter ==  'u'%>selected="selected"<% end %>>you only</option>
+       </select>
+       <% else %>
+
+	   <% if @model.group %>
+	   | Model group <%= @model.group.name %>
+	   <% end %>
 			  	<% if @model.people.include?(@person) %>
 			  	
 			  	<% if @person and !@person.groups.empty? %>
@@ -104,54 +120,54 @@
 	</div>
 
 <div id="model_tabs" class="tabs_panel">
-	<ul>
-		<li><a href="#browse_discuss">Discuss</a></li>
-		<li><a href="#browse_applet">Run</a></li>
-		<li><a href="#browse_info">Info</a></li>
-		<li><a href="#browse_procedures">Code</a></li>
-		<li><a href="#browse_history">History</a></li>
-		<li><a href="#browse_tags">Tags</a></li>
-		<li><a href="#browse_files">Files</a></li>
-		<li><a href="#browse_family">Family</a></li>
-		<% if @person %>
-	    <li><a href="#browse_upload_tab">Upload</a></li>
-	    <!--<% if @model.people.include?(@person) %>
-	    <li><a href="#browse_permissions_tab">Permissions</a></li>
-	    <% end %>-->
-	    <% end %>
-	</ul>
-	<div id="browse_discuss">
-		<%= render :partial => "/browse/browse_discuss_tab" %>
-	</div>
-	<div id="browse_applet">
-		<%= render :partial => "/browse/browse_applet_tab" %>
-	</div>
-	<div id="browse_info">
-		<%= render :partial => "/browse/browse_info_tab" %>
-	</div>
-	<div id="browse_procedures">
-		<%= render :partial => "/browse/browse_procedures_tab" %>
-	</div>
-	<div id="browse_history">
-		<%= render :partial => "/browse/browse_history_tab" %>
-	</div>
-	<div id="browse_tags">
-		<%= render :partial => "/browse/browse_tags_tab" %>
-	</div>
-	<div id="browse_files">
-		<%= render :partial => "/browse/browse_files_tab" %>
-	</div>
-	<div id="browse_family">
-		<%= render :partial => "/browse/browse_family_tab" %>
-	</div>
-	<% if @person %>
-	<div id="browse_upload_tab">
-		<%= render :partial => "/browse/browse_upload_tab" %>
-	</div>
-	<!--<% if @model.people.include?(@person) %>
-	<div id="browse_permissions_tab">
-		<%= render :partial => "/browse/browse_permissions_tab" %>
-	</div>-->
-	<% end %>
-	<% end %>
+  <ul>
+    <li><a href="#browse_discuss">Discuss</a></li>
+    <li><a href="#browse_applet">Run</a></li>
+    <li><a href="#browse_info">Info</a></li>
+    <li><a href="#browse_procedures">Code</a></li>
+    <li><a href="#browse_history">History</a></li>
+    <li><a href="#browse_tags">Tags</a></li>
+    <li><a href="#browse_files">Files</a></li>
+    <li><a href="#browse_family">Family</a></li>
+    <% if @person %>
+    <li><a href="#browse_upload_tab">Upload</a></li>
+    <!--<% if @model.people.include?(@person) %>
+	<li><a href="#browse_permissions_tab">Permissions</a></li>
+	<% end %>-->
+    <% end %>
+  </ul>
+  <div id="browse_discuss">
+    <%= render :partial => "/browse/browse_discuss_tab" %>
+  </div>
+  <div id="browse_applet">
+    <%= render :partial => "/browse/browse_applet_tab" %>
+  </div>
+  <div id="browse_info">
+    <%= render :partial => "/browse/browse_info_tab" %>
+  </div>
+  <div id="browse_procedures">
+    <%= render :partial => "/browse/browse_procedures_tab" %>
+  </div>
+  <div id="browse_history">
+    <%= render :partial => "/browse/browse_history_tab" %>
+  </div>
+  <div id="browse_tags">
+    <%= render :partial => "/browse/browse_tags_tab" %>
+  </div>
+  <div id="browse_files">
+    <%= render :partial => "/browse/browse_files_tab" %>
+  </div>
+  <div id="browse_family">
+    <%= render :partial => "/browse/browse_family_tab" %>
+  </div>
+  <% if @person %>
+  <div id="browse_upload_tab">
+    <%= render :partial => "/browse/browse_upload_tab" %>
+  </div>
+  <!--<% if @model.people.include?(@person) %>
+      <div id="browse_permissions_tab">
+	<%= render :partial => "/browse/browse_permissions_tab" %>
+      </div>-->
+  <% end %>
+  <% end %>
 </div>

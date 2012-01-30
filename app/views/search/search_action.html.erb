@@ -1,4 +1,5 @@
-<% @title = "Search results" %>
+<% @title = "Search results for '#{params[:search_term]}'" %>
+
 <div id="search_tabs" class="tabs_panel">
 	<ul>
 		<li<% if @models.empty? %> class="empty"<% end %>><a href="#modelName"><div class="num-results<% if @models.empty? %> empty<% end %>"><%= @models.size -%></div> Model Name</a></li>

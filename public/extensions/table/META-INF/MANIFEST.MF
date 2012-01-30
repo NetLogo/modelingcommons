@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Created-By: 1.6.0_30 (Apple Inc.)
+NetLogo-Extension-API-Version: 5.0
+Class-Manager: org.nlogo.extensions.table.TableExtension
+Extension-Name: table
+

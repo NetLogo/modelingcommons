@@ -47,5 +47,8 @@ class Group < ActiveRecord::Base
     first(:conditions => { :id => group_id })
   end
 
+  def to_s
+    name
+  end
 
 end

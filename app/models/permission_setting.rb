@@ -33,4 +33,8 @@ class PermissionSetting < ActiveRecord::Base
     find_by_short_form('g')
   end
 
+  def to_s
+    name
+  end
+
 end

@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Extension-Name: sound
+Class-Manager: org.nlogo.extensions.sound.SoundExtension
+NetLogo-Extension-API-Version: 5.0

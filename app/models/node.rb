@@ -121,26 +121,37 @@ class Node < ActiveRecord::Base
     current_version.info_tab || "Info tab is empty."
   end
 
+  def markup_info_tab
+    logger.warn "[Node#info_tab_html] Old version!  Using old info-tab parser"
+    text = info_tab
+
+    # Handle headlines
+    text.gsub! /([-_.?A-Z ]+)\n--+/ do
+      "<h3>#{$1}</h3>"
+    end
+
+    # Handle URLs
+    text.gsub! /(http:\/\/[-\/_.~%\w]+\w)/ do
+      "<a target=\"_blank\" href=\"#{$1}\">#{$1}</a>"
+    end
+
+    # Handle newlines
+    text.gsub!("\n", "</p>\n<p>")
+  end
+
+  def bluecloth_info_tab
+    logger.warn "[Node#info_tab_html] NetLogo 5!  Using textile"
+    BlueCloth.new(info_tab).to_html
+  rescue
+    logger.warn "[Node#info_tab_html] NetLogo 5!  Error with Bluecloth... using standard markup..."
+    markup_info_tab
+  end
+
   def info_tab_html
     if netlogo_version.to_i >= 5
-      logger.warn "[Node#info_tab_html] NetLogo 5!  Using textile"
-      BlueCloth.new(info_tab).to_html
+      bluecloth_info_tab
     else
-      logger.warn "[Node#info_tab_html] Old version!  Using old info-tab parser"
-      text = info_tab
-
-      # Handle headlines
-      text.gsub! /([-_.?A-Z ]+)\n--+/ do
-        "<h3>#{$1}</h3>"
-      end
-
-      # Handle URLs
-      text.gsub! /(http:\/\/[-\/_.~\w]+\w)/ do
-        "<a target=\"_blank\" href=\"#{$1}\">#{$1}</a>"
-      end
-
-      # Handle newlines
-      text.gsub!("\n", "</p>\n<p>")
+      markup_info_tab
     end
   end
 
@@ -191,7 +202,7 @@ class Node < ActiveRecord::Base
 
       # Handle dividers
       if line =~ /\@\#\$\#\@\#\$\#\@/
-          dividers = dividers + 1
+        dividers = dividers + 1
 
         if (dividers == 1) and (gotfirstdimens == 0)
           getdimens = 0
@@ -341,6 +352,41 @@ class Node < ActiveRecord::Base
     end
 
     zipfile_name_full_path
+  end
+
+  def self.all_time_most_viewed
+    LoggedAction.find_by_sql("SELECT COUNT(DISTINCT ip_address), node_id
+                                                FROM Logged_Actions
+                                               WHERE controller = 'browse'
+                                                 AND action = 'one_model'
+                                                 AND node_id IS NOT NULL
+                                            GROUP BY node_id
+                                            ORDER BY count DESC
+                                               LIMIT 20;")
+  end
+
+  def self.most_viewed
+    LoggedAction.find_by_sql("SELECT COUNT(DISTINCT ip_address), node_id
+                                                FROM Logged_Actions
+                                               WHERE controller = 'browse'
+                                                 AND action = 'one_model'
+                                                 AND node_id IS NOT NULL
+                                                 AND logged_at >= NOW() - interval '2 weeks'
+                                            GROUP BY node_id
+                                            ORDER BY count DESC
+                                               LIMIT 20;")
+  end
+
+  def self.most_downloaded
+    LoggedAction.find_by_sql("SELECT COUNT(DISTINCT ip_address), node_id
+                                                   FROM Logged_Actions
+                                                  WHERE controller = 'browse'
+                                                    AND action = 'download_model'
+                                                    AND node_id IS NOT NULL
+                                                    AND logged_at >= NOW() - interval '2 weeks'
+                                               GROUP BY node_id
+                                               ORDER BY count DESC
+                                                  LIMIT 20;")
   end
 
 end

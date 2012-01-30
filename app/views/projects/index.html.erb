@@ -1,5 +1,8 @@
 <% @title = 'Projects' %>
 
+<p><%= link_to "Create a new project", :controller => :projects, :action => :new -%></p>
+<br />
+
 <% if @projects.empty? %>
 <p><i>No projects have been created.</i></p>
 <% else %>
@@ -8,11 +11,12 @@
   <% @projects.each do |project| %>
   <li>
     <%= link_to project.name, :controller => :projects, :action => :show, :id => project.id -%>
+    (owned by <%= person_link(project.person) -%> )
     (<%= pluralize(project.nodes.count, "model") -%>)
   </li>
   <% end %>
 </ul>
 <% end %>
 
+<br />
 <p><%= link_to "Create a new project", :controller => :projects, :action => :new -%></p>
-
