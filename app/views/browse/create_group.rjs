@@ -1,3 +1,0 @@
-page[:create_group_status].replace_html "Created the group."
-page[:create_group_status].visual_effect :highlight
-

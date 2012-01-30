@@ -6,49 +6,44 @@
 <div id="model_info">
   <!--Info-->
   <div id="general_info">
-    <% form_tag(url_for( :controller => :browse, :action => :set_permissions), :id => "group_permission_form") do %>
+<% form_tag(url_for( :controller => :browse, :action => :set_permissions), :id => "group_permission_form") do %>
     <%= hidden_field_tag 'id', @model.id %>
     
     By <%= @model.people.map {|person| person_link(person)}.join(", ") -%> 
     <% model_visibility_letter = @model.visibility.short_form %>
     <% model_changeability_letter = @model.changeability.short_form %>
-
+	<% model_group_id = @model.group ? @model.group.id : 0 %>
     <% if @model.people.include?(@person) %>
-    
-    <% if @person and !@person.groups.empty? %>
-    <% @options_for_select = [['No group', nil]] -%>
-    <% @person.groups.each {|g| @options_for_select << [g.name, g.id] } -%>
-						       
-						       | Model group <%= select_tag("group_id", options_for_select(@options_for_select, (@model.group ? @model.group.id : 0)), :id => "group_select") %>
-       <% end %>
+	    <% if @person and !@person.groups.empty? %>
+		    <% @options_for_select = [['No group', nil]] -%>
+		    <% @person.groups.each {|g| @options_for_select << [g.name, g.id] } -%>					       
+			 | Model group <%= select_tag("group_id", options_for_select(@options_for_select, (@model.group ? @model.group.id : 0)), :id => "group_select") %>
+		<% end %>
        
        | Visible to <select name="read_permission" id="read_permission_select">
 	 <option value="a" <% if model_visibility_letter ==  'a'%>selected="selected"<% end %>>everyone</option>
-	 <% if @person and !@person.groups.empty? %>
-	 <option value="g" <% if model_visibility_letter ==  'g'%>selected="selected"<% end %>>group members only</option>
-	 <% end %>
-	 <option value="u" <% if model_visibility_letter ==  'u'%>selected="selected"<% end %>>you only</option>
-       </select>
-       | Changable by <select name="write_permission" id="write_permission_select">
-	 <option value="a" <% if model_visibility_letter ==  'a'%>selected="selected"<% end %>>everyone</option>
-	 <% if @person and !@person.groups.empty? %>
-	 <option value="g" <% if model_visibility_letter ==  'g'%>selected="selected"<% end %>>group members only</option>
-	 <% end %>
-	 <option value="u" <% if model_visibility_letter ==  'u'%>selected="selected"<% end %>>you only</option>
-       </select>
-       <% else %>
-
-	   <% if @model.group %>
-	   | Model group <%= @model.group.name %>
-	   <% end %>
-			  	<% if @model.people.include?(@person) %>
-			  	
-			  	<% if @person and !@person.groups.empty? %>
+		 <% if @person and !@person.groups.empty? %>
+		 	<option value="g" <% if model_visibility_letter ==  'g'%>selected="selected"<% end %>>group members only</option>
+		 <% end %>
+		 <option value="u" <% if model_visibility_letter ==  'u'%>selected="selected"<% end %>>you only</option>
+	       </select>
+	       | Changable by <select name="write_permission" id="write_permission_select">
+		 <option value="a" <% if model_changeability_letter ==  'a'%>selected="selected"<% end %>>everyone</option>
+		 <% if @person and !@person.groups.empty? %>
+		 	<option value="g" <% if model_changeability_letter ==  'g'%>selected="selected"<% end %>>group members only</option>
+		 <% end %>
+		 <option value="u" <% if model_changeability_letter ==  'u'%>selected="selected"<% end %>>you only</option>
+	       </select>
+	<% else %>
+		<% if @model.group %>
+	   		| Model group <%= @model.group.name %>
+	   	<% end %>
+		<% if @model.people.include?(@person) %>
+		  	<% if @person and !@person.groups.empty? %>
 				<% @options_for_select = [['No group', nil]] -%>
 				<% @person.groups.each {|g| @options_for_select << [g.name, g.id] } -%>
-				
 				 | Model group <%= select_tag("group_id", options_for_select(@options_for_select, model_group_id), :id => "group_select") %>
-				<% end %>
+			<% end %>
 				
 			  	 | Visibile to <select name="read_permission" id="read_permission_select">
 			  		<option value="a" <% if model_visibility_letter ==  'a'%>selected="selected"<% end %>>everyone</option>
@@ -64,17 +59,14 @@
 			  		<% end %>
 			  		<option value="u" <% if model_visibility_letter ==  'u'%>selected="selected"<% end %>>you only</option>
 			  	 	</select>
-			  	<% else %>
-			  	<%if model_group_id != 0 %>
-			  	 | <%= model_group(@model) %>
-			  	 <% end %>
-			  	  | <%= model_visibility(@model) %> | <%= model_changeability(@model) %>
-			  	
-			  	<% end %>
-			  	
-			  	<% end %>
-			  	
-			  	
+		<% else %>
+		  	<%if model_group_id != 0 %>
+		  		 | <%= model_group(@model) %>
+			<% end %>
+			 | <%= model_visibility(@model) %> | <%= model_changeability(@model) %>
+		<% end %>
+	<% end %>	
+<% end %>
 		</div>
 		<div id="family_info">
 			<% if !@model.projects.empty? %>
@@ -91,25 +83,26 @@
 		</div>
 		<div id="actions">
 			<%= link_to image_tag("download.png", :class => "inline_image", :alt => "Download the '#{@model.name}' model", :title => "Download the '#{@model.name}' model"), :controller => "browse", :action => "download_model", :id => @model.id -%><%= link_to "Download this model", :controller => "browse", :action => "download_model", :id => @model.id -%> 
-			<% if @person or !@model.recommendations.empty? %> | <% end %> 
+			<% if @person or !@model.recommendations.empty? %>
+				 | 
+			<% end %> 
 			<% if @person %>
-			<% if @model.recommendations.select {|r| r.person_id == @person.id}.empty? %>
-			<%= link_to image_tag("thumb.jpeg", :class => "inline_image", :alt => "Recommend '#{@model.name}' to other users", :title => "Recommend '#{@model.name}' to other users"), :controller => :recommend, :action => :add_recommendation, :id => @model.id -%><%= link_to "Recommend", :controller => :recommend, :action => :add_recommendation, :id => @model.id %>
-			<% else %>
-			<%= person_link(@person) %> recommended this model
-			<% end %>
-			
-			<% if !@model.recommendations.empty? %>
-			(<%= link_to pluralize(@model.recommendations.length, "recommendation"), :controller => :recommend, :action => :show_recommendations, :id => @model.id -%>)
-			<% end %>
-			
-			<% if !@person.spam_warning(@model) %>
-			 | 
-			<%= link_to "Report as spam", :controller => :possible_spam, :action => :mark_as_spam, :id => @model.id %>
-			<% if !@model.spam_warnings.empty? %>
-			(<%= pluralize(@model.spam_warnings.length, "person") %> marked it as spam)
-			<% end %>
-			<% end %>
+				<% if @model.recommendations.select {|r| r.person_id == @person.id}.empty? %>
+					<%= link_to image_tag("thumb.jpeg", :class => "inline_image", :alt => "Recommend '#{@model.name}' to other users", :title => "Recommend '#{@model.name}' to other users"), :controller => :recommend, :action => :add_recommendation, :id => @model.id -%><%= link_to "Recommend", :controller => :recommend, :action => :add_recommendation, :id => @model.id %>
+				<% else %>
+					<%= person_link(@person) %> recommended this model
+				<% end %>
+				<% if !@model.recommendations.empty? %>
+				(<%= link_to pluralize(@model.recommendations.length, "recommendation"), :controller => :recommend, :action => :show_recommendations, :id => @model.id -%>)
+				<% end %>
+				
+				<% if !@person.spam_warning(@model) %>
+					 | 
+					<%= link_to "Report as spam", :controller => :possible_spam, :action => :mark_as_spam, :id => @model.id %>
+					<% if !@model.spam_warnings.empty? %>
+						(<%= pluralize(@model.spam_warnings.length, "person") %> marked it as spam)
+					<% end %>
+				<% end %>
 			<% end %>
 			 | 
 			<!--   <div id="model-atom-feed" id="atom-feed-link"><%= link_to image_tag("feed.png", :id => 'atom-image', :alt => "Follow '#{@model.name}' in your feed reader", :title => "Follow '#{@model.name}' in your feed reader"), :controller => :browse, :action => :follow, :id => @model.id, :format => :atom -%><%= link_to "Follow #{@model.name}", {:controller => :browse, :action => :follow, :id => @model.id, :format => :atom}, {:id => 'atom-feed'} %></div> -->
@@ -130,10 +123,7 @@
     <li><a href="#browse_files">Files</a></li>
     <li><a href="#browse_family">Family</a></li>
     <% if @person %>
-    <li><a href="#browse_upload_tab">Upload</a></li>
-    <!--<% if @model.people.include?(@person) %>
-	<li><a href="#browse_permissions_tab">Permissions</a></li>
-	<% end %>-->
+    	<li><a href="#browse_upload_tab">Upload</a></li>
     <% end %>
   </ul>
   <div id="browse_discuss">
@@ -164,10 +154,5 @@
   <div id="browse_upload_tab">
     <%= render :partial => "/browse/browse_upload_tab" %>
   </div>
-  <!--<% if @model.people.include?(@person) %>
-      <div id="browse_permissions_tab">
-	<%= render :partial => "/browse/browse_permissions_tab" %>
-      </div>-->
-  <% end %>
   <% end %>
 </div>

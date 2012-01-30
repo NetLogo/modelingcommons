@@ -68,8 +68,7 @@ class BrowseController < ApplicationController
       @model.update_attributes(:visibility => PermissionSetting.find_by_short_form(params[:read_permission]),
                                :changeability => PermissionSetting.find_by_short_form(params[:write_permission]),
                                :group_id => params[:group_id])
-      #flash[:notice] = 'Successfully set permissions.'
-      @set_permission_result = {:message => 'Successfully set permissions.' }
+      @set_permission_result = {:message => "Successfully set permissions" }
     end
     render :json => @set_permission_result
   end

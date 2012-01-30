@@ -386,7 +386,7 @@ $(document).ready(function () {
 	}
 	var submitPermissionChange = function() {
 		var form = $("#group_permission_form");
-		
+		console.log(form.serialize());
 		$.ajax({
 			url: form.attr("action"), 
 			type: "post", 
