@@ -1,4 +1,5 @@
 <% @title = @model.name %>
+<div id="preview_info_container">
 <!--Preview-->
 <div id="model_preview">
   <%= render :partial => "preview_image", :locals => {:model => @model} -%>
@@ -6,7 +7,9 @@
 <div id="model_info">
   <!--Info-->
   <div id="general_info">
+<div>  	
 <% form_tag(url_for( :controller => :browse, :action => :set_permissions), :id => "group_permission_form") do %>
+
     <%= hidden_field_tag 'id', @model.id %>
     
     By <%= @model.people.map {|person| person_link(person)}.join(", ") -%> 
@@ -65,10 +68,13 @@
 			<% end %>
 			 | <%= model_visibility(@model) %> | <%= model_changeability(@model) %>
 		<% end %>
-	<% end %>	
+	<% end %>
+	
 <% end %>
+</div>	
 		</div>
 		<div id="family_info">
+			<div>
 			<% if !@model.projects.empty? %>
 			Part of project '<%= link_to @model.projects.first.name, :controller => :projects, :action => :show, :id => @model.projects.first.id -%>'
 			<% end %>
@@ -80,8 +86,10 @@
 			<% if not @model.children.empty? %>
 			Parent of <%= pluralize(@model.children.size, 'model') -%>: <%= @model.children.map {|child| link_to child.name, :controller => 'browse', :action => 'one_model', :id => child.id }.to_sentence %>
 			<% end %>
+			</div>
 		</div>
 		<div id="actions">
+			<div>
 			<%= link_to image_tag("download.png", :class => "inline_image", :alt => "Download the '#{@model.name}' model", :title => "Download the '#{@model.name}' model"), :controller => "browse", :action => "download_model", :id => @model.id -%><%= link_to "Download this model", :controller => "browse", :action => "download_model", :id => @model.id -%> 
 			<% if @person or !@model.recommendations.empty? %>
 				 | 
@@ -109,9 +117,10 @@
 			<!-- AddThis Button BEGIN -->
 			<a class="addthis_button" href="http://addthis.com/bookmark.php?v=250&amp;username=reuvenmlerner"><img src="http://s7.addthis.com/static/btn/v2/lg-share-en.gif" width="125" height="16" alt="Bookmark and Share" style="border:0"/></a><script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#username=reuvenmlerner"></script>
 			<!-- AddThis Button END -->
+			</div>
 		</div>
 	</div>
-
+</div>
 <div id="model_tabs" class="tabs_panel">
   <ul>
     <li><a href="#browse_discuss">Discuss</a></li>
