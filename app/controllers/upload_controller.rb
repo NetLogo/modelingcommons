@@ -95,14 +95,14 @@ class UploadController < ApplicationController
   end
 
   def update_model
+    existing_node = Node.find(params[:new_version][:node_id])
+
     if params[:new_version].blank? or params[:new_version][:name_of_new_child].blank? or params[:new_version][:uploaded_body].blank?
       flash[:notice] = "Sorry, but you must enter a model name and file."
-      redirect_to :action => :back
+      redirect_to :controller => :browse, :action => :one_model, :id => existing_node.id
       return
     end
 
-
-    existing_node = Node.find(params[:new_version][:node_id])
     fork = params[:fork] || 'overwrite'
 
     description = params[:new_version][:description]
