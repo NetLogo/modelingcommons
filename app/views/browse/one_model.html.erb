@@ -38,36 +38,10 @@
 		 <option value="u" <% if model_changeability_letter ==  'u'%>selected="selected"<% end %>>you only</option>
 	       </select>
 	<% else %>
-		<% if @model.group %>
-	   		| Model group <%= @model.group.name %>
-	   	<% end %>
-		<% if @model.people.include?(@person) %>
-		  	<% if @person and !@person.groups.empty? %>
-				<% @options_for_select = [['No group', nil]] -%>
-				<% @person.groups.each {|g| @options_for_select << [g.name, g.id] } -%>
-				 | Model group <%= select_tag("group_id", options_for_select(@options_for_select, model_group_id), :id => "group_select") %>
-			<% end %>
-				
-			  	 | Visibile to <select name="read_permission" id="read_permission_select">
-			  		<option value="a" <% if model_visibility_letter ==  'a'%>selected="selected"<% end %>>everyone</option>
-			  		<% if @person and !@person.groups.empty? %>
-			  		<option value="g" <% if model_visibility_letter ==  'g'%>selected="selected"<% end %>>group members only</option>
-			  		<% end %>
-			  		<option value="u" <% if model_visibility_letter ==  'u'%>selected="selected"<% end %>>you only</option>
-			  	</select>
-			  	 | Changable by <select name="write_permission" id="write_permission_select">
-			  	 	<option value="a" <% if model_visibility_letter ==  'a'%>selected="selected"<% end %>>everyone</option>
-			  		<% if @person and !@person.groups.empty? %>
-			  		<option value="g" <% if model_visibility_letter ==  'g'%>selected="selected"<% end %>>group members only</option>
-			  		<% end %>
-			  		<option value="u" <% if model_visibility_letter ==  'u'%>selected="selected"<% end %>>you only</option>
-			  	 	</select>
-		<% else %>
-		  	<%if model_group_id != 0 %>
-		  		 | <%= model_group(@model) %>
-			<% end %>
-			 | <%= model_visibility(@model) %> | <%= model_changeability(@model) %>
+	  	<%if model_group_id != 0 %>
+	  		 | <%= model_group(@model) %>
 		<% end %>
+		 | <%= model_visibility(@model) %> | <%= model_changeability(@model) %>
 	<% end %>
 	
 <% end %>
