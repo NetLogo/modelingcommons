@@ -100,20 +100,6 @@ class BrowseController < ApplicationController
     redirect_to :controller => :browse, :action => :one_model, :id => models.rand.id
   end
 
-  # Define methods for tabs
-  # !!! These are no longer used !!!
-  ['preview', 'applet', 'info', 'procedures', 'discuss', 'files', 'history', 'tags',
-   'family', 'upload', 'permissions'].each do |tab_name|
-    define_method("browse_#{tab_name}_tab".to_sym) do
-      if @model.nil?
-        flash[:notice] = 'No such model was found.'
-        redirect_to :controller => :account, :action => :login
-      else
-        render :layout => 'browse_tab'
-      end
-    end
-  end
-
   def rename_model
     if !@model.people.member?(@person)
       flash[:notice] = 'You are not allowed to rename this model.'

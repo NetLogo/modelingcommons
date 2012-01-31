@@ -3,7 +3,6 @@
 class UploadController < ApplicationController
 
   before_filter :require_login
-  before_filter :check_changeability_permissions, :only => [:update_model]
 
   def create_model
     if params[:new_model].blank? or params[:new_model][:name].blank? or params[:new_model][:uploaded_body].blank?
@@ -96,7 +95,6 @@ class UploadController < ApplicationController
   end
 
   def update_model
-    # Get the node, and the fork method
     existing_node = Node.find(params[:new_version][:node_id])
     fork = params[:fork] || 'overwrite'
 
@@ -125,6 +123,9 @@ class UploadController < ApplicationController
       node_id = child_node.id
       flash[:notice] << "Added a new child to this model. "
     elsif fork == 'overwrite'
+
+      return unless check_changeability_permissions
+
       node_id = existing_node.id
       flash[:notice] << "Added new version to node #{existing_node.id}. "
     else
