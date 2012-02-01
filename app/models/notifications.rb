@@ -21,7 +21,7 @@ class Notifications < ActionMailer::Base
   def signup(person, cleartext_password)
     standard_settings
     @recipients = person.email_address
-    @bcc = 'reuven@lerner.co.il'
+    @bcc = 'modelingcommons@ccl.northwestern.edu'
     @subject = "Welcome to the NetLogo Modeling Commons!"
     @subject = "[TESTING] #{@subject}" if Rails.env == 'development'
 
