@@ -20,7 +20,10 @@ class DiscussionController < ApplicationController
           flash[:notice] = "Thanks for contributing to our discussion!" 
           redirect_to :back, :anchor => "discussion"
         end
-        format.js 
+        format.json do 
+          @res = {:success => true, :message => 'Comment Added', :html => render_to_string(:partial => 'one_posting.html', :locals => { :posting => @posting})}
+          render :json => @res
+        end
       end
     else
       respond_to do |format|
@@ -28,10 +31,12 @@ class DiscussionController < ApplicationController
           flash[:notice] = "Thanks for contributing to our discussion!" 
           redirect_to :back, :anchor => "discussion"
         end
-        format.js { render :json => "Error" }
+        format.json do 
+          @res = {:sucess => false, :message => 'Error adding comment'}
+          render :json => @res
+        end
       end
     end      
-
   end
 
   def get_posting_id
