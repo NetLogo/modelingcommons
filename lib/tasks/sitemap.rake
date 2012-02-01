@@ -23,17 +23,6 @@ namespace :sitemap do
 
     Node.all.each do |node|
       @pages << "http://modelingcommons.org/browse/one_model/#{node.id}"
-      @pages << "http://modelingcommons.org/browse/one_model/#{node.id}"
-      @pages << "http://modelingcommons.org/browse/browse_preview_tab/#{node.id}?tab=true"
-      @pages << "http://modelingcommons.org/browse/browse_applet_tab/#{node.id}?tab=true"
-      @pages << "http://modelingcommons.org/browse/browse_info_tab/#{node.id}?tab=true"
-      @pages << "http://modelingcommons.org/browse/browse_procedures_tab/#{node.id}?tab=true"
-      @pages << "http://modelingcommons.org/browse/browse_discuss_tab/#{node.id}?tab=true"
-      @pages << "http://modelingcommons.org/browse/browse_history_tab/#{node.id}?tab=true"
-      @pages << "http://modelingcommons.org/browse/browse_tags_tab/#{node.id}?tab=true"
-      @pages << "http://modelingcommons.org/browse/browse_files_tab/#{node.id}?tab=true"
-      @pages << "http://modelingcommons.org/browse/browse_related_tab/#{node.id}?tab=true"
-      @pages << "http://modelingcommons.org/browse/download_model/#{node.id}"
     end
 
     @pages_crawled = @pages
