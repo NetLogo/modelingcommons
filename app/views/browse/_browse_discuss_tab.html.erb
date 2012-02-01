@@ -26,8 +26,7 @@
 	<% if @person %>
 	
 		<hr />
-	
-		<% remote_form_for(:new_posting, :url => { :controller => "discussion", :action => :create }, :html => {:id => 'new-posting-form'}) do |form| %>
+		<% form_for(:new_posting, :url => { :controller => "discussion", :action => :create }, :html => {:id => 'new_discussion_comment'}) do |form| %>
 			<table id="posting-table">
 			<tr>
 			  <td><label for="new_posting_title">Title</label></td>

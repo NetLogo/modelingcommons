@@ -433,6 +433,27 @@ $(document).ready(function () {
 		}
 		submitPermissionChange();
 	});
+	
+	$('#new_discussion_comment').submit(function() {
+		var form = $("#new_discussion_comment");
+		console.log(form.serialize());
+		$.ajax({
+			url: form.attr("action"),
+			dataType: "json",  
+			type: "post", 
+			data: form.serialize(), 
+			success: function(data, textStatus, jqXHR) {
+				$().flash_notice(data.message);
+				if(data.success) {
+					$(data.html).insertAfter($('#discussion tr:last'));
+				}
+			},
+			error: function(jqXHR, textStatus, errorThrown) {
+				$().flash_notice(textStatus + ": " + errorThrown);
+			}, 
+		});
+		return false;
+	});
 });
 
 
