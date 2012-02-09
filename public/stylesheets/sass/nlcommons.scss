@@ -358,6 +358,11 @@ body {
  * Code Highlighting 
  * Proc is procedure
  */
+.procedure_code {
+  font-family: courier, monospace;
+  font-size: 12px;
+}
+
 .proc-to, .proc-end {
     color: #b3b;
 }
