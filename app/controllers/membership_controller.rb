@@ -150,23 +150,6 @@ class MembershipController < ApplicationController
     redirect_to :controller => :account, :action => :mypage
   end
 
-  def new_group
-    render :layout => 'plain'
-  end
-
-  def find_group
-    render :layout => 'plain'
-  end
-
-  def manage_groups
-    render :layout => 'plain'
-  end
-
-  def invite
-    @potential_invitees = Person.phone_book.map {|person| [person.fullname, person.id]}
-    render :layout => 'plain'
-  end
-
   def list_models
     if params[:id].blank?
       @group_ids = @person.groups.map {|group| group.id}.join(',')

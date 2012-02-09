@@ -233,44 +233,32 @@ $(document).ready(function () {
 	
 	
 	
-	// Handle tabs for models (and groups, for that matter)
-	$("#group_tabs").tabs( {
-
-	   spinner: '',
-	   load: function () {
-	       $(".complete").autocomplete('/tags/complete_tags', {} );
-	   },
-	   ajaxOptions: {
-	       success: function(data, textStatus) { },
-	       error: function(xhr, status, index, anchor) {
-		   $(anchor.hash).html("Couldn't load this tab.");
-	       },
-	       data: {}
-	   }
-	});
-	
 	$(".complete").autocomplete('/tags/complete_tags', {} );
 	
-	//Non-ajax tabs for models
-	
-	//Checks URL hash to see if the user wants to go to a specific tab
-	var tab_index = 0;
-	if(window.location.hash.indexOf("tab_") != -1) {
-		var tab_id = window.location.hash.substring(window.location.hash.indexOf("tab_") + 4);
-		$("#model_tabs>div").each(function(index, element) {
-			if(tab_id == element.id) {
-				tab_index = index;
+	//Tab loader loads tabs on the element selected by elementId and switches to the tab selected in the hash
+	var tab_loader = function(elementId) {
+		//Checks URL hash to see if the user wants to go to a specific tab
+		var tab_index = 0;
+		if(window.location.hash.indexOf(elementId + "_") != -1) {
+			var startIndex = window.location.hash.indexOf(elementId + "_") + (elementId + "_").length;
+			var endIndex = window.location.hash.indexOf("&", startIndex);
+			endIndex = endIndex == -1 ? window.location.hash.length : endIndex;
+			var tab_id = window.location.hash.substring(startIndex, endIndex);
+			$("#" + elementId + ">div").each(function(index, element) {
+				if(tab_id == element.id) {
+					tab_index = index;
+				}
+			});
+		}
+		$("#" + elementId).tabs({
+			selected: tab_index, 
+			show: function(event, ui) {
+				window.location.hash = elementId + "_" + ui.panel.id;
 			}
 		});
-		
-	}
-	$("#model_tabs").tabs({
-		selected: tab_index, 
-		show: function(event, ui) {
-			window.location.hash = "tab_" + ui.panel.id;
-		}
-	});
-
+	};
+	tab_loader("model_tabs");
+	tab_loader("group_tabs");
 
 	// Disable inviting people if the group isn't selected
 	$('select#group_id').livequery('change', function() {

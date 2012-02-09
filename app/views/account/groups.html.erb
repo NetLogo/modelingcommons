@@ -2,11 +2,27 @@
 
 <div id="group_tabs" class="tabs_panel">
      <ul>
-         <li><a href="<%= url_for :controller => :account, :action => :mygroups, :tab => 'true' -%>" title="your-groups"><span>Your groups</span></a></li>
-         <li><a href="<%= url_for :controller => :membership, :action => :new_group, :tab => 'true'  -%>" title="create"><span>Create</span></a></li>
-         <li><a href="<%= url_for :controller => :membership, :action => :find, :tab => 'true' -%>" title="find"><span>Find</span></a></li>
-         <li><a href="<%= url_for :controller => :membership, :action => :manage_groups, :tab => 'true' -%>" title="manage"><span>Manage</span></a></li>
-         <li><a href="<%= url_for :controller => :membership, :action => :invite, :tab => 'true' -%>" title="invite"><span>Invite</span></a></li>
+         <li><a href="#my_group">Your group</a></li>
+         <li><a href="#new_group" title="create">Create</a></li>
+         <li><a href="#find_group" title="find">Find</a></li>
+         <li><a href="#manage_group" title="manage">Manage</a></li>
+         <li><a href="#invite_to_group" title="invite">Invite</a></li>
      </ul>
+     <div id="my_group">
+     	<%= render :partial => url_for(:controller => :account, :action => :mygroups) -%>
+     </div>
+     <div id="new_group">
+     	<%= render :partial => url_for(:controller => :membership, :action => :new_group) -%>
+     </div>
+     <div id="find_group">
+     	<%= render :partial => url_for(:controller => :membership, :action => :find) -%>
+     </div>
+     <div id="manage_group">
+     	<%= render :partial => url_for(:controller => :membership, :action => :manage_groups) -%>
+     </div>
+
+	<div id="invite_to_group">
+     	<%= render :partial => url_for(:controller => :membership, :action => :invite), :locals => {:potential_invitees => Person.phone_book.map {|person| [person.fullname, person.id]} } -%>
+    </div>
 </div>
 

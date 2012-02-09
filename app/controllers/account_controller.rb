@@ -168,10 +168,6 @@ class AccountController < ApplicationController
     render :layout => 'application_nomargin'
   end
 
-  def mygroups
-    render :layout => 'plain'
-  end
-
   def reset_password_action
     email_address = params[:email_address].to_s
 
