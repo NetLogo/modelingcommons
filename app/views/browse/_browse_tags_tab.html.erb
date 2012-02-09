@@ -1,9 +1,9 @@
 <div>
   <h2>Existing tags:</h2>
-  <% if @model.tagged_nodes.empty? -%>
-  <p>No tags have been defined for this model</p>
-  <% else -%>
-  <table id="existing_tags" class="simple_table">
+  
+  <p id="no_tags" <% if !@model.tagged_nodes.empty? -%>class="hidden"<% end -%>>No tags have been defined for this model</p>
+  
+  <table id="existing_tags" class="simple_table<% if @model.tagged_nodes.empty? -%> hidden<% end -%>">
     <thead>
       <tr>
 		<th>
@@ -29,11 +29,10 @@
       <%= render :partial => "tags/one_tag", :collection => @model.tagged_nodes.sort_by {|tn| tn.updated_at}, :as => :tm -%>
     </tbody>
   </table>
-  <% end -%>
   <% if @person %>
   <div id="add_tags">
     <h2>Add one or more tags:</h2>
-    <% remote_form_for(:new_tag, :url => {:controller => :tags, :action => :create}) do |form| -%>
+    <% form_for(:new_tag, :url => {:controller => :tags, :action => :create}, :html => {:id => 'add_tag_form'}) do |form| -%>
     <%= hidden_field_tag :node_id, @model.id -%>
     <div id="new_tags">
       <%= render :partial => "add_tag", :locals => {:form => form} -%>

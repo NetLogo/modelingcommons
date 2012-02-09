@@ -12,12 +12,11 @@ class TagsController < ApplicationController
     @node = Node.find(params[:node_id])
 
     @new_tagged_nodes = [ ]
-
+    @html = '';
     params[:new_tag].each_with_index do |tag_name, index|
       next if tag_name.blank? or tag_name == 'tag name'
 
       comment = params[:new_comment][index].strip
-      comment = '' if comment == '(Optional) comment about why this tag is relevant to this model'
 
       tag = Tag.find_or_create_by_name(tag_name.downcase.strip, :person_id => @person.id)
       tn = TaggedNode.find_or_create_by_tag_id_and_person_id_and_node_id(tag.id,
@@ -37,12 +36,18 @@ class TagsController < ApplicationController
           Notifications.deliver_applied_tag(notification_recipients, tn.tag)
         end
       end
-
-      respond_to do |format|
-        format.html { redirect_to :back }
-        format.js
+      @html += render_to_string(:partial => 'one_tag.html', :locals => { :tm => tn})
+    end
+    respond_to do |format|
+      format.html do
+        render :text => @html;
+      end
+      format.json do
+        render :json => {:success => true, :html => @html}
       end
     end
+    
+    
   end
 
   def one_tag
@@ -77,15 +82,12 @@ class TagsController < ApplicationController
   def destroy
     tn = TaggedNode.find(params[:id])
     model = tn.node
-
     if tn.person == @person or @person.administrator?
       tn.destroy
-      flash[:notice] = "Tag '#{tn.tag.name}' removed from the '#{model.name}' model."
+      render :json => {:success => true, :message => "Tag '#{tn.tag.name}' removed from the '#{model.name}' model"}
     else
-      flash[:notice] = "You are not authorized to remove this tag."
+      render :json => {:success => false, :message => "You are not authorized to remove this tag"}
     end
-
-    redirect_to :controller => :browse, :action => :one_model, :id => model.id
   end
 
 end

@@ -454,6 +454,69 @@ $(document).ready(function () {
 		});
 		return false;
 	});
+	
+	
+	
+	var createAJAXFormReturningHTMLHandler = function(callback) {
+		return function(e) {
+			var form = $(this);
+			$.ajax({
+				url: form.attr("action"),
+				dataType: "html",  
+				type: "post", 
+				data: form.serialize(), 
+				success: function(data, textStatus, jqXHR) {
+					callback(data);
+				},
+				error: function(jqXHR, textStatus, errorThrown) {
+					$().flash_notice(textStatus + ": " + errorThrown);
+				}
+			});
+			return false;
+		};
+	};
+	
+	$('#add_tag_form').submit(createAJAXFormReturningHTMLHandler(function(data) {
+		$(data).appendTo("#existing_tags");
+		$('#existing_tags').removeClass('hidden');
+		$('#no_tags').addClass('hidden');
+		$('#new_tags input').each(function(index, element) {
+			element.value = "";
+			
+		});
+		$('#new_tags .file').each(function(index, element) {
+			if(index != 0) {
+				$(element).remove();
+			}
+		});
+	}));
+	
+	$("#existing_tags").on("submit", ".tag_delete_form", function(e) {
+		var form = $(this);
+		$.ajax({
+			url: form.attr("action"),
+			dataType: "json",  
+			type: "post", 
+			data: form.serialize(), 
+			success: function(data, textStatus, jqXHR) {
+				$().flash_notice(data.message);
+				form.parents("tr").remove();
+				if($('#existing_tags tbody tr').length <= 0) {
+					$('#existing_tags').addClass('hidden');
+					$('#no_tags').removeClass('hidden');
+				}
+			},
+			error: function(jqXHR, textStatus, errorThrown) {
+				$().flash_notice(textStatus + ": " + errorThrown);
+			}
+		});
+		return false;
+	});
+	$("#existing_tags").on("click", ".tag_delete_form a", function(e) {
+		$(e.target).parents("form").submit();
+		e.preventDefault();
+	})
+	
 });
 
 

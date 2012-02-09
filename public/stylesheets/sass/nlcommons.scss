@@ -458,6 +458,9 @@ div#register_new_user {
  * Globally useful styling
  */ 
 
+.hidden {
+  display: none;
+}
 div.left-right {
     width: 100%;
     display: table;
