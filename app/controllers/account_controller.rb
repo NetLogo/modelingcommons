@@ -142,6 +142,7 @@ class AccountController < ApplicationController
 
     # most-viewed models
     @most_viewed = Node.most_viewed.map { |la| [la.node, la.count]}
+    @most_viewed.reject! { |model_array| model_array[0].nil? }
     @most_viewed = @most_viewed.select {|model_array| model_array[0].visible_to_user?(@person)}[0..9]
 
     logger.warn "[AccountController#mypage] #{Time.now} before most-downloaded models"
