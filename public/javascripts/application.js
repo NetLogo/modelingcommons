@@ -158,6 +158,88 @@ jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
 
 //Model list dataTable
 $(document).ready(function () {
+	
+	(function() {
+		var getSortCol = function(select) {
+			var sortStr = select.find("option:selected").attr("value");
+			var sort = [[1, 'asc']];
+			if(sortStr == "pn") {
+				
+			} else if(sortStr == "on") {
+				sort = [[2, 'asc']];
+			} else if(sortStr == "mc") {
+				sort = [[3, 'desc']];
+			}
+			return sort;
+			
+		}
+		
+		var table = $("#projects_table").dataTable({
+			"aoColumns": [
+			{
+				"bSortable": false
+			}, 
+			{
+				"sType": "string", 
+				"bVisible": false
+			}, 
+			{
+				"sType": "string", 
+				"bVisible": false
+			}, 
+			{
+				"sType": "numeric", 
+				"bVisible": false
+			}, 
+			{
+				"sType": "string",
+				"bVisible": false, 
+				"bSortable": false
+			}
+			], 
+			'aaSorting': getSortCol($("#project_sort_by")),
+			"sDom": "ft", 
+			"bPaginate": false
+		});
+		
+		$("#project_sort_by").bind('change', function(e) {
+			table.fnSort(getSortCol($(this)));
+		});
+		var showOnlyYou = function(oSettings, aData, iDataIndex ) {
+			if(aData[4].indexOf("true") != -1) {
+				return true;
+			} else {
+				return false;
+			}
+			
+		};
+		$("#project_show_you").bind("change", function(e) {
+			var filters = $.fn.dataTableExt.afnFiltering;
+			if(this.checked) {
+				filters.push(showOnlyYou);
+				table.fnDraw();
+			} else {
+				for(var i=0; i < filters.length; i++) {
+					if(filters[i] == showOnlyYou) {
+						filters.splice(i, 1);
+						table.fnDraw();
+					}
+				}
+			}
+		});
+		$(".project_more button").bind("click", function(e) {
+			
+			var list = $(this).parents(".project").find(".project_model_list");
+			
+			list.toggleClass("hidden");
+			if(list.hasClass("hidden")) {
+				$(this).text($(this).text().replace("Hide", "Show"));
+			} else {
+				$(this).text($(this).text().replace("Show", "Hide"));
+			}
+		})
+	})();
+	
 	// Create the datatable
 	$(".model_list_datatable").dataTable({
 		'aaSorting': [ [0, 'asc']],

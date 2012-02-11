@@ -677,6 +677,69 @@ table.simple_table {
 }
 
 
+#projects_table {
+  width: 100%;
+  .project {
+    a {
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    padding: 4px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid black;
+    overflow: auto;
+    
+    //line-height: 80px;
+    .project_image {
+      vertical-align: top;
+      display: inline-block;
+      width: 80px;
+      height: 80px;
+      img {
+        width: 100%;
+      }
+      padding-right: 12px;
+    }
+    .project_info {
+      vertical-align: top;
+      display: inline-block;
+      .project_person {
+        line-height: 30px;
+        font-size: 16px;
+        img {
+          vertical-align: top;
+          height: 30px;
+          width: 30px;
+          padding-left: 5px;
+          padding-right: 5px;
+        }
+        
+      }
+      .project_name {
+       font-size: 30px;
+        
+      }
+      .project_count {
+        font-size: 16px;
+      }
+      .project_more {
+        font-size: 10px;
+        
+      }
+      .project_model_list {
+        //display: none;
+        img {
+          height: 50px;
+        }
+      }
+    }
+  }
+}
+
+
 .activity {
   width: 660px;
   float: left;

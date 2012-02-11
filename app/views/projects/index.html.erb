@@ -6,16 +6,54 @@
 <% if @projects.empty? %>
 <p><i>No projects have been created.</i></p>
 <% else %>
-
-<ul>
-  <% @projects.each do |project| %>
-  <li>
-    <%= link_to project.name, :controller => :projects, :action => :show, :id => project.id -%>
-    (owned by <%= person_link(project.person) -%> )
-    (<%= pluralize(project.nodes.count, "model") -%>)
-  </li>
-  <% end %>
-</ul>
+Sort by<select id="project_sort_by">
+	<option value="pn">Project Name</option>
+	<option value="on">Owner Name</option>
+	<option value="mc">Model Count</option>
+</select>
+<label for="project_show_you">Show only your projects<input type="checkbox" id="project_show_you" /></label>
+<table id="projects_table">
+	<tbody>
+		<% @projects.each do |project| %>
+		<tr>
+			<td>
+				<div class="project" id="<%= project.id -%>">
+					<div class="project_image">
+						<img src="/images/model.png" />
+					</div>
+					<div class="project_info">
+						<div class="project_person">
+							<%= person_image(project.person) -%><%= person_link(project.person) -%>
+						</div>
+						<div class="project_name">
+							<%= link_to project.name, :controller => :projects, :action => :show, :id => project.id -%>
+						</div>	
+						<div class="project_count">
+							<%= pluralize(project.nodes.count, "model") -%> in project
+						</div>
+						<div class="project_more">
+							<button>Show models</button>
+						</div>
+					</div>
+					<div class="project_model_list hidden">
+					<%= render :partial => "/browse/model_list", :object => project.nodes %>
+					</div>
+				</div>
+			</td>
+			<td><%= project.name -%></td>
+			<td><%= project.person.fullname -%></td>
+			<td><%= project.nodes.count -%></td>
+			<td>
+				<% if project.person == @person %>
+				true
+				<% else %>
+				false
+				<% end %>
+			</td>
+		</tr>
+		<% end %>	
+	</tbody>
+</table>
 <% end %>
 
 <br />
