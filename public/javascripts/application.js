@@ -198,33 +198,18 @@ $(document).ready(function () {
 			}
 			], 
 			'aaSorting': getSortCol($("#project_sort_by")),
-			"sDom": "ft", 
+			"sDom": '<"left-right top"<"left"><"right"f>>t', 
 			"bPaginate": false
 		});
-		
+
 		$("#project_sort_by").bind('change', function(e) {
 			table.fnSort(getSortCol($(this)));
 		});
-		var showOnlyYou = function(oSettings, aData, iDataIndex ) {
-			if(aData[4].indexOf("true") != -1) {
-				return true;
-			} else {
-				return false;
-			}
-			
-		};
 		$("#project_show_you").bind("change", function(e) {
-			var filters = $.fn.dataTableExt.afnFiltering;
 			if(this.checked) {
-				filters.push(showOnlyYou);
-				table.fnDraw();
+				table.fnFilter("true", 4);
 			} else {
-				for(var i=0; i < filters.length; i++) {
-					if(filters[i] == showOnlyYou) {
-						filters.splice(i, 1);
-						table.fnDraw();
-					}
-				}
+				table.fnFilter("", 4);
 			}
 		});
 		$(".project_more button").bind("click", function(e) {
@@ -239,6 +224,9 @@ $(document).ready(function () {
 			}
 		})
 	})();
+	
+	$("#custom_filters").contents().detach().prependTo($("#projects_table_wrapper .top .left"));
+	$("#custom_filters").remove();
 	
 	// Create the datatable
 	$(".model_list_datatable").dataTable({
@@ -456,7 +444,6 @@ $(document).ready(function () {
 	}
 	var submitPermissionChange = function() {
 		var form = $("#group_permission_form");
-		console.log(form.serialize());
 		$.ajax({
 			url: form.attr("action"), 
 			type: "post", 
@@ -506,7 +493,6 @@ $(document).ready(function () {
 	
 	$('#new_discussion_comment').submit(function() {
 		var form = $("#new_discussion_comment");
-		console.log(form.serialize());
 		$.ajax({
 			url: form.attr("action"),
 			dataType: "json",  

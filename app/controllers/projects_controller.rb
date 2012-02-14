@@ -1,9 +1,15 @@
 # Controller to deal witih projects
+require 'RMagick'
 
 class ProjectsController < ApplicationController
 
   def index
     @projects = Project.all
+    if @person
+      @models_to_add = @person.models.select {|model| !model.projects.member?(@project)}.sort_by{|model| model.name.downcase}.map {|model| [model.name, model.id]}
+    else
+      @models_to_add = []
+    end
   end
 
   def new
@@ -63,6 +69,15 @@ class ProjectsController < ApplicationController
     end
 
     redirect_to :controller => :projects, :action => :show, :id => project.id
+  end
+  def image
+    project = Project.find(params[:id])
+    id=project.nodes.fetch(0).id
+    response.headers["Content-type"] = 'image/png'
+    
+    img =  Magick::Image.read(project.nodes.fetch(0).preview.contents)
+    #img = Magick::Image.read(Rails.public_path+'/images/download.png').first;
+    render :text => img.to_blob, :layout => false
   end
 
 end
