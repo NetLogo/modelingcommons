@@ -517,9 +517,9 @@ input[type=text], input[type=password] {
     @include box-shadow(-1px 1px 4px 1px lighten($error-color, 20%) inset);
   }
   &:focus {
-    outline-style: auto;
-    //@include box-shadow(-1px 1px 4px 2px darken($color, 5%) inset);
-    //border: 1px solid darken($color, 10%);
+    outline:none;
+    $input-color: darken($header-color, 10%);
+    @include box-shadow(-1px 1px 4px 1px lighten($color, 20%) inset, 0px 0px 4px 2px $input-color);
   }
   &:focus.error {
     outline-color: red;
