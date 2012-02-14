@@ -3,11 +3,19 @@ $blueprint-grid-width: 40px;
 @import "blueprint/reset";
 @import "blueprint/grid";
 @import "compass/css3";
+@import "compass/css3/pie";
 @import "clickable";
 @import "ui.everything";
 @import "browse";
 @import "font";
 @import "all";
+
+
+$pie-behavior: url("/stylesheets/PIE.htc");
+$pie-base-class: pie-element;
+.pie-element {
+  @include pie-element(relative);
+}
 
 /* 
  * Overall Page Layout
