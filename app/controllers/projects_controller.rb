@@ -74,8 +74,8 @@ class ProjectsController < ApplicationController
     project = Project.find(params[:id])
     id=project.nodes.fetch(0).id
     response.headers["Content-type"] = 'image/png'
-    
-    img =  Magick::Image.read(project.nodes.fetch(0).preview.contents)
+    imgs = project.nodes.fetch(0).preview.contents.to_s
+    img =  Magick::Image.from_blob(imgs).first
     #img = Magick::Image.read(Rails.public_path+'/images/download.png').first;
     render :text => img.to_blob, :layout => false
   end
