@@ -124,5 +124,8 @@ class BrowseController < ApplicationController
   def extension
     send_file "#{RAILS_ROOT}/public/extensions/#{params[:dirname]}/#{params[:extensionname]}.#{params[:format]}"
   end
+  def pie
+    send_file "#{RAILS_ROOT}/public/stylesheets/PIE.htc"
+  end
 
 end
