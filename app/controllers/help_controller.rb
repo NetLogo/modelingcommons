@@ -7,5 +7,4 @@ class HelpController < ApplicationController
 
   def screencasts
   end
-
 end

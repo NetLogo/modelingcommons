@@ -538,6 +538,7 @@ input[type=text], input[type=password] {
  * Buttons
  */
 button, input[type=button], input[type=submit] {
+  @include pie;
   @include clickable($background-color: $header-color);
   font-size: $default-font-size;
   line-height: 16px;
@@ -611,6 +612,7 @@ button, input[type=button], input[type=submit] {
     @include sans-font();
     th {
       @include clickable($background-color: $header-color, $selected: '.sorting_asc' '.sorting_desc');
+      @include pie;
       @include border-top-right-radius(5px);
       @include border-top-left-radius(5px);
       text-align: center;
