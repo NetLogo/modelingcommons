@@ -1,992 +1,117 @@
-/* line 4, ../../vendor/gems/compass-0.11.7/frameworks/blueprint/stylesheets/blueprint/reset/_utilities.scss */
-html {
-  margin: 0;
-  padding: 0;
-  border: 0;
-}
+/*
+Syntax error: Undefined mixin 'pie'.
+        on line 5 of /Users/Ben/documents/nlcommons/public/stylesheets/sass/_clickable.scss, in `pie'
+        from line 5 of /Users/Ben/documents/nlcommons/public/stylesheets/sass/_clickable.scss, in `clickable'
+        from line 21 of /Users/Ben/documents/nlcommons/public/stylesheets/sass/newLayout.scss
 
-/* line 18, ../../vendor/gems/compass-0.11.7/frameworks/blueprint/stylesheets/blueprint/reset/_utilities.scss */
-.bp-reset-element, body, h1, h2, h3, h4, h5, h6, article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, blockquote, q, th, td, caption, table,
-div, span, object, iframe, p,
-pre, a, abbr, acronym, address,
-code, del, dfn, em, img,
-dl, dt, dd, ol, ul, li, fieldset,
-form, label, legend,
-caption, tbody, tfoot, thead, tr {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-weight: inherit;
-  font-style: inherit;
-  font-size: 100%;
-  font-family: inherit;
-  vertical-align: baseline;
-}
+1: $blueprint-grid-margin: 0px;
+2: $blueprint-grid-width: 40px;
+3: @import "blueprint/reset";
+4: @import "blueprint/grid";
+5: @import "compass/css3";
+6: @import "clickable";
+7: @import "font";
+8: 
+9: $nav-color: #04346C;
+10: $nav-text-color: white;
 
-/* line 20, ../../vendor/gems/compass-0.11.7/frameworks/blueprint/stylesheets/blueprint/reset/_utilities.scss */
-article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
-  display: block;
-}
-
-/* line 21, ../../vendor/gems/compass-0.11.7/frameworks/blueprint/stylesheets/blueprint/reset/_utilities.scss */
-blockquote, q {
-  quotes: "" "";
-}
-/* line 67, ../../vendor/gems/compass-0.11.7/frameworks/blueprint/stylesheets/blueprint/reset/_utilities.scss */
-blockquote:before, blockquote:after, q:before, q:after {
-  content: "";
-}
-
-/* line 22, ../../vendor/gems/compass-0.11.7/frameworks/blueprint/stylesheets/blueprint/reset/_utilities.scss */
-th, td, caption {
-  float: none !important;
-  text-align: left;
-  font-weight: normal;
-  vertical-align: middle;
-}
-
-/* line 23, ../../vendor/gems/compass-0.11.7/frameworks/blueprint/stylesheets/blueprint/reset/_utilities.scss */
-table {
-  border-collapse: separate;
-  border-spacing: 0;
-  vertical-align: middle;
-}
-
-/* line 24, ../../vendor/gems/compass-0.11.7/frameworks/blueprint/stylesheets/blueprint/reset/_utilities.scss */
-a img {
-  border: none;
-}
-
-/* line 16, sass/newLayout.scss */
-body {
-  background-color: #F5F3E9;
-  font-family: 'Georgia', 'Times', serif;
-}
-
-/* line 20, sass/newLayout.scss */
-button {
-  color: black;
-  font-family: 'Muli', 'Arial', sans-serif;
-  cursor: pointer;
-  border: 1px solid #3066a5;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #6899d3), color-stop(45%, #417ec7), color-stop(85%, #6899d3));
-  background: -webkit-linear-gradient(#6899d3 35%, #417ec7 45%, #6899d3 85%);
-  background: -moz-linear-gradient(#6899d3 35%, #417ec7 45%, #6899d3 85%);
-  background: -o-linear-gradient(#6899d3 35%, #417ec7 45%, #6899d3 85%);
-  background: -ms-linear-gradient(#6899d3 35%, #417ec7 45%, #6899d3 85%);
-  background: linear-gradient(#6899d3 35%, #417ec7 45%, #6899d3 85%);
-  -moz-box-shadow: 0px 0px 1px 1px #8fb4df inset;
-  -webkit-box-shadow: 0px 0px 1px 1px #8fb4df inset;
-  -o-box-shadow: 0px 0px 1px 1px #8fb4df inset;
-  box-shadow: 0px 0px 1px 1px #8fb4df inset;
-  font-size: 15px;
-  line-height: 18px;
-  padding-top: 2px;
-  padding-bottom: 2px;
-  padding-left: 6px;
-  padding-right: 6px;
-  margin: 2px;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  -o-border-radius: 5px;
-  -ms-border-radius: 5px;
-  -khtml-border-radius: 5px;
-  border-radius: 5px;
-}
-/* line 17, sass/_clickable.scss */
-button:hover {
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #417ec7), color-stop(45%, #3066a5), color-stop(85%, #417ec7));
-  background: -webkit-linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
-  background: -moz-linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
-  background: -o-linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
-  background: -ms-linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
-  background: linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
-  -moz-box-shadow: 0px 0px 1px 1px #6899d3 inset;
-  -webkit-box-shadow: 0px 0px 1px 1px #6899d3 inset;
-  -o-box-shadow: 0px 0px 1px 1px #6899d3 inset;
-  box-shadow: 0px 0px 1px 1px #6899d3 inset;
-}
-/* line 24, sass/_clickable.scss */
-button:active {
-  -moz-box-shadow: -1px 5px 6px 3px #193556 inset;
-  -webkit-box-shadow: -1px 5px 6px 3px #193556 inset;
-  -o-box-shadow: -1px 5px 6px 3px #193556 inset;
-  box-shadow: -1px 5px 6px 3px #193556 inset;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #3066a5), color-stop(45%, #254d7d), color-stop(85%, #3066a5));
-  background: -webkit-linear-gradient(#3066a5 35%, #254d7d 45%, #3066a5 85%);
-  background: -moz-linear-gradient(#3066a5 35%, #254d7d 45%, #3066a5 85%);
-  background: -o-linear-gradient(#3066a5 35%, #254d7d 45%, #3066a5 85%);
-  background: -ms-linear-gradient(#3066a5 35%, #254d7d 45%, #3066a5 85%);
-  background: linear-gradient(#3066a5 35%, #254d7d 45%, #3066a5 85%);
-  /*border: 1px solid darken($button-color, 40%);*/
-}
-/* line 33, sass/_clickable.scss */
-button[disabled] {
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #9e9e9e), color-stop(45%, #919191), color-stop(85%, #9e9e9e));
-  background: -webkit-linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
-  background: -moz-linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
-  background: -o-linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
-  background: -ms-linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
-  background: linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
-  -moz-box-shadow: 0px 0px 1px 1px #b7b7b7 inset;
-  -webkit-box-shadow: 0px 0px 1px 1px #b7b7b7 inset;
-  -o-box-shadow: 0px 0px 1px 1px #b7b7b7 inset;
-  box-shadow: 0px 0px 1px 1px #b7b7b7 inset;
-  border: 1px solid #848484;
-  color: black;
-  cursor: default;
-  opacity: .5;
-}
-/* line 42, sass/_clickable.scss */
-button[disabled]:active {
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #9e9e9e), color-stop(45%, #919191), color-stop(85%, #9e9e9e));
-  background: -webkit-linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
-  background: -moz-linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
-  background: -o-linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
-  background: -ms-linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
-  background: linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
-  -moz-box-shadow: 0px 0px 1px 1px #b7b7b7 inset;
-  -webkit-box-shadow: 0px 0px 1px 1px #b7b7b7 inset;
-  -o-box-shadow: 0px 0px 1px 1px #b7b7b7 inset;
-  box-shadow: 0px 0px 1px 1px #b7b7b7 inset;
-  border: 1px solid #848484;
-  color: black;
-  cursor: default;
-  opacity: .5;
-}
-/* line 55, sass/_clickable.scss */
-button.selected {
-  -moz-box-shadow: -1px 5px 6px 2px #193556 inset;
-  -webkit-box-shadow: -1px 5px 6px 2px #193556 inset;
-  -o-box-shadow: -1px 5px 6px 2px #193556 inset;
-  box-shadow: -1px 5px 6px 2px #193556 inset;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #417ec7), color-stop(45%, #3066a5), color-stop(85%, #417ec7));
-  background: -webkit-linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
-  background: -moz-linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
-  background: -o-linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
-  background: -ms-linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
-  background: linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
-}
-/* line 64, sass/_clickable.scss */
-button.selected:hover {
-  -moz-box-shadow: -1px 5px 6px 2px #193556 inset;
-  -webkit-box-shadow: -1px 5px 6px 2px #193556 inset;
-  -o-box-shadow: -1px 5px 6px 2px #193556 inset;
-  box-shadow: -1px 5px 6px 2px #193556 inset;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #3672b9), color-stop(45%, #2a5991), color-stop(85%, #3672b9));
-  background: -webkit-linear-gradient(#3672b9 35%, #2a5991 45%, #3672b9 85%);
-  background: -moz-linear-gradient(#3672b9 35%, #2a5991 45%, #3672b9 85%);
-  background: -o-linear-gradient(#3672b9 35%, #2a5991 45%, #3672b9 85%);
-  background: -ms-linear-gradient(#3672b9 35%, #2a5991 45%, #3672b9 85%);
-  background: linear-gradient(#3672b9 35%, #2a5991 45%, #3672b9 85%);
-}
-/* line 73, sass/_clickable.scss */
-button.selected:active {
-  -moz-box-shadow: -1px 5px 6px 3px #193556 inset;
-  -webkit-box-shadow: -1px 5px 6px 3px #193556 inset;
-  -o-box-shadow: -1px 5px 6px 3px #193556 inset;
-  box-shadow: -1px 5px 6px 3px #193556 inset;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #3066a5), color-stop(45%, #254d7d), color-stop(85%, #3066a5));
-  background: -webkit-linear-gradient(#3066a5 35%, #254d7d 45%, #3066a5 85%);
-  background: -moz-linear-gradient(#3066a5 35%, #254d7d 45%, #3066a5 85%);
-  background: -o-linear-gradient(#3066a5 35%, #254d7d 45%, #3066a5 85%);
-  background: -ms-linear-gradient(#3066a5 35%, #254d7d 45%, #3066a5 85%);
-  background: linear-gradient(#3066a5 35%, #254d7d 45%, #3066a5 85%);
-}
-/* line 81, sass/_clickable.scss */
-button.selected[disabled] {
-  -moz-box-shadow: -1px 5px 6px 2px #383838 inset;
-  -webkit-box-shadow: -1px 5px 6px 2px #383838 inset;
-  -o-box-shadow: -1px 5px 6px 2px #383838 inset;
-  box-shadow: -1px 5px 6px 2px #383838 inset;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #848484), color-stop(45%, #777777), color-stop(85%, #848484));
-  background: -webkit-linear-gradient(#848484 35%, #777777 45%, #848484 85%);
-  background: -moz-linear-gradient(#848484 35%, #777777 45%, #848484 85%);
-  background: -o-linear-gradient(#848484 35%, #777777 45%, #848484 85%);
-  background: -ms-linear-gradient(#848484 35%, #777777 45%, #848484 85%);
-  background: linear-gradient(#848484 35%, #777777 45%, #848484 85%);
-}
-/* line 29, sass/newLayout.scss */
-button div.ui-icon {
-  margin-top: 1px;
-  margin-bottom: 1px;
-  vertical-align: top;
-  display: inline-block;
-}
-
-/* line 38, sass/newLayout.scss */
-.container {
-  width: 960px;
-  margin: 0 auto;
-  overflow: hidden;
-  *zoom: 1;
-  background-color: white;
-  -moz-box-shadow: 0 0 15px 10px gray;
-  -webkit-box-shadow: 0 0 15px 10px gray;
-  -o-box-shadow: 0 0 15px 10px gray;
-  box-shadow: 0 0 15px 10px gray;
-  -moz-border-radius-bottomright: 8px;
-  -webkit-border-bottom-right-radius: 8px;
-  -o-border-bottom-right-radius: 8px;
-  -ms-border-bottom-right-radius: 8px;
-  -khtml-border-bottom-right-radius: 8px;
-  border-bottom-right-radius: 8px;
-  -moz-border-radius-bottomleft: 8px;
-  -webkit-border-bottom-left-radius: 8px;
-  -o-border-bottom-left-radius: 8px;
-  -ms-border-bottom-left-radius: 8px;
-  -khtml-border-bottom-left-radius: 8px;
-  border-bottom-left-radius: 8px;
-}
-
-/* line 45, sass/newLayout.scss */
-.header {
-  font-family: 'Muli', 'Arial', sans-serif;
-  display: inline;
-  float: left;
-  margin-right: 0px;
-  width: 960px;
-  -moz-border-radius-bottomleft: 8px;
-  -webkit-border-bottom-left-radius: 8px;
-  -o-border-bottom-left-radius: 8px;
-  -ms-border-bottom-left-radius: 8px;
-  -khtml-border-bottom-left-radius: 8px;
-  border-bottom-left-radius: 8px;
-  -moz-border-radius-bottomright: 8px;
-  -webkit-border-bottom-right-radius: 8px;
-  -o-border-bottom-right-radius: 8px;
-  -ms-border-bottom-right-radius: 8px;
-  -khtml-border-bottom-right-radius: 8px;
-  border-bottom-right-radius: 8px;
-  -moz-box-shadow: 0 0 10px 2px gray;
-  -webkit-box-shadow: 0 0 10px 2px gray;
-  -o-box-shadow: 0 0 10px 2px gray;
-  box-shadow: 0 0 10px 2px gray;
-  overflow: hidden;
-  background-color: #8fb4df;
-}
-/* line 147, ../../vendor/gems/compass-0.11.7/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
-* html .header {
-  overflow-x: hidden;
-}
-/* line 53, sass/newLayout.scss */
-.header .banner {
-  background-image: url("banner.png");
-  cursor: pointer;
-  display: inline;
-  float: left;
-  margin-right: 0px;
-  width: 480px;
-  height: 100px;
-  color: white;
-  text-shadow: #04346c 3px 3px 5px;
-}
-/* line 147, ../../vendor/gems/compass-0.11.7/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
-* html .header .banner {
-  overflow-x: hidden;
-}
-/* line 60, sass/newLayout.scss */
-.header .banner h1 {
-  font-size: 40px;
-  margin-left: 17px;
-  font-weight: bold;
-}
-/* line 65, sass/newLayout.scss */
-.header .banner h2 {
-  font-size: 20px;
-  margin-top: 5px;
-  margin-left: 5px;
-}
-/* line 71, sass/newLayout.scss */
-.header .login {
-  line-height: 26px;
-  height: 26px;
-  padding-top: 2px;
-  padding-bottom: 2px;
-  background-color: #04346c;
-  vertical-align: top;
-  color: white;
-  padding-left: 10px;
-  -moz-border-radius-bottomleft: 8px;
-  -webkit-border-bottom-left-radius: 8px;
-  -o-border-bottom-left-radius: 8px;
-  -ms-border-bottom-left-radius: 8px;
-  -khtml-border-bottom-left-radius: 8px;
-  border-bottom-left-radius: 8px;
-  display: inline;
-  float: left;
-  margin-right: 0;
-  width: 440px;
-  display: inline;
-  float: left;
-  position: relative;
-  margin: 0 -40px 1.5em 40px;
-  font-family: 'Georgia', 'Times', serif;
-}
-/* line 147, ../../vendor/gems/compass-0.11.7/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
-* html .header .login {
-  overflow-x: hidden;
-}
-/* line 84, sass/newLayout.scss */
-.header .login img {
-  height: 26px;
-  width: 26px;
-  margin-left: 4px;
-  margin-right: 4px;
-  float: top;
-}
-/* line 91, sass/newLayout.scss */
-.header .login a {
-  color: white;
-  vertical-align: top;
-}
-/* line 95, sass/newLayout.scss */
-.header .login a:visited {
-  color: white;
-}
-/* line 98, sass/newLayout.scss */
-.header .login a:active {
-  color: red;
-}
-/* line 104, sass/newLayout.scss */
-.header .navigation {
-  background-color: #04346c;
-  display: inline;
-  float: left;
-  margin-right: 0px;
-  width: 760px;
-  height: 40px;
-  line-height: 40px;
-}
-/* line 147, ../../vendor/gems/compass-0.11.7/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
-* html .header .navigation {
-  overflow-x: hidden;
-}
-/* line 108, sass/newLayout.scss */
-.header .navigation a {
-  color: white;
-  font-size: 20px;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  -o-border-radius: 5px;
-  -ms-border-radius: 5px;
-  -khtml-border-radius: 5px;
-  border-radius: 5px;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 7px;
-  padding-right: 7px;
-  text-decoration: none;
-}
-/* line 120, sass/newLayout.scss */
-.header .navigation a:visited {
-  color: white;
-}
-/* line 123, sass/newLayout.scss */
-.header .navigation a:active {
-  color: white;
-}
-/* line 126, sass/newLayout.scss */
-.header .navigation a:hover {
-  background-color: #064c9d;
-  -moz-box-shadow: 0px 0px 1px 1px #021c3b inset;
-  -webkit-box-shadow: 0px 0px 1px 1px #021c3b inset;
-  -o-box-shadow: 0px 0px 1px 1px #021c3b inset;
-  box-shadow: 0px 0px 1px 1px #021c3b inset;
-}
-/* line 130, sass/newLayout.scss */
-.header .navigation a:active {
-  background-color: #054085;
-  -moz-box-shadow: -1px 1px 3px 2px #021c3b inset;
-  -webkit-box-shadow: -1px 1px 3px 2px #021c3b inset;
-  -o-box-shadow: -1px 1px 3px 2px #021c3b inset;
-  box-shadow: -1px 1px 3px 2px #021c3b inset;
-}
-/* line 134, sass/newLayout.scss */
-.header .navigation ul {
-  line-height: normal;
-  display: inline-block;
-}
-/* line 138, sass/newLayout.scss */
-.header .navigation ul:last-child {
-  margin-left: 40px;
-}
-/* line 141, sass/newLayout.scss */
-.header .navigation li {
-  list-style: none;
-  line-height: normal;
-  display: inline-block;
-  height: 40px;
-  line-height: 40px;
-  height: 40px;
-  margin-left: 1px;
-  margin-right: 1px;
-}
-/* line 160, sass/newLayout.scss */
-.header .search {
-  background-color: #04346c;
-  display: inline;
-  float: left;
-  margin-right: 0;
-  width: 200px;
-  height: 40px;
-  line-height: 40px;
-  text-align: right;
-}
-/* line 147, ../../vendor/gems/compass-0.11.7/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
-* html .header .search {
-  overflow-x: hidden;
-}
-/* line 167, sass/newLayout.scss */
-.header .search input {
-  vertical-align: bottom;
-  width: 150px;
-  margin: 5px;
-}
-
-/* line 174, sass/newLayout.scss */
-.content {
-  display: inline;
-  float: left;
-  margin-right: 0px;
-  width: 800px;
-}
-/* line 175, sass/newLayout.scss */
-.content .padding {
-  padding: 5px;
-}
-/* line 147, ../../vendor/gems/compass-0.11.7/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
-* html .content {
-  overflow-x: hidden;
-}
-/* line 179, sass/newLayout.scss */
-.content .content-title {
-  padding-bottom: 5px;
-}
-/* line 180, sass/newLayout.scss */
-.content .content-title h1 {
-  font-size: 30px;
-  font-family: 'Muli', 'Arial', sans-serif;
-}
-/* line 186, sass/newLayout.scss */
-.content div.left-right {
-  width: 100%;
-  display: table;
-}
-/* line 189, sass/newLayout.scss */
-.content div.left-right div.left {
-  display: table-cell;
-  text-align: left;
-}
-/* line 193, sass/newLayout.scss */
-.content div.left-right div.right {
-  display: table-cell;
-  text-align: right;
-}
-/* line 199, sass/newLayout.scss */
-.content .tabs {
-  -moz-border-radius: 8px;
-  -webkit-border-radius: 8px;
-  -o-border-radius: 8px;
-  -ms-border-radius: 8px;
-  -khtml-border-radius: 8px;
-  border-radius: 8px;
-  overflow: hidden;
-  border: 1px solid black;
-}
-/* line 203, sass/newLayout.scss */
-.content .tabs .tabBar {
-  height: 40px;
-}
-/* line 208, sass/newLayout.scss */
-.content .tabs .tabBar li {
-  color: black;
-  font-family: 'Muli', 'Arial', sans-serif;
-  cursor: pointer;
-  border: 1px solid #3066a5;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #6899d3), color-stop(45%, #417ec7), color-stop(85%, #6899d3));
-  background: -webkit-linear-gradient(#6899d3 35%, #417ec7 45%, #6899d3 85%);
-  background: -moz-linear-gradient(#6899d3 35%, #417ec7 45%, #6899d3 85%);
-  background: -o-linear-gradient(#6899d3 35%, #417ec7 45%, #6899d3 85%);
-  background: -ms-linear-gradient(#6899d3 35%, #417ec7 45%, #6899d3 85%);
-  background: linear-gradient(#6899d3 35%, #417ec7 45%, #6899d3 85%);
-  -moz-box-shadow: 0px 0px 1px 1px #8fb4df inset;
-  -webkit-box-shadow: 0px 0px 1px 1px #8fb4df inset;
-  -o-box-shadow: 0px 0px 1px 1px #8fb4df inset;
-  box-shadow: 0px 0px 1px 1px #8fb4df inset;
-  font-family: 'Muli', 'Arial', sans-serif;
-  color: black;
-  float: left;
-  line-height: 28px;
-  padding: 5px;
-  list-style: none;
-  -moz-border-radius-bottomleft: 8px;
-  -webkit-border-bottom-left-radius: 8px;
-  -o-border-bottom-left-radius: 8px;
-  -ms-border-bottom-left-radius: 8px;
-  -khtml-border-bottom-left-radius: 8px;
-  border-bottom-left-radius: 8px;
-  -moz-border-radius-bottomright: 8px;
-  -webkit-border-bottom-right-radius: 8px;
-  -o-border-bottom-right-radius: 8px;
-  -ms-border-bottom-right-radius: 8px;
-  -khtml-border-bottom-right-radius: 8px;
-  border-bottom-right-radius: 8px;
-  min-width: 80px;
-  text-align: center;
-}
-/* line 17, sass/_clickable.scss */
-.content .tabs .tabBar li:hover {
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #417ec7), color-stop(45%, #3066a5), color-stop(85%, #417ec7));
-  background: -webkit-linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
-  background: -moz-linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
-  background: -o-linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
-  background: -ms-linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
-  background: linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
-  -moz-box-shadow: 0px 0px 1px 1px #6899d3 inset;
-  -webkit-box-shadow: 0px 0px 1px 1px #6899d3 inset;
-  -o-box-shadow: 0px 0px 1px 1px #6899d3 inset;
-  box-shadow: 0px 0px 1px 1px #6899d3 inset;
-}
-/* line 24, sass/_clickable.scss */
-.content .tabs .tabBar li:active {
-  -moz-box-shadow: -1px 5px 6px 3px #193556 inset;
-  -webkit-box-shadow: -1px 5px 6px 3px #193556 inset;
-  -o-box-shadow: -1px 5px 6px 3px #193556 inset;
-  box-shadow: -1px 5px 6px 3px #193556 inset;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #3066a5), color-stop(45%, #254d7d), color-stop(85%, #3066a5));
-  background: -webkit-linear-gradient(#3066a5 35%, #254d7d 45%, #3066a5 85%);
-  background: -moz-linear-gradient(#3066a5 35%, #254d7d 45%, #3066a5 85%);
-  background: -o-linear-gradient(#3066a5 35%, #254d7d 45%, #3066a5 85%);
-  background: -ms-linear-gradient(#3066a5 35%, #254d7d 45%, #3066a5 85%);
-  background: linear-gradient(#3066a5 35%, #254d7d 45%, #3066a5 85%);
-  /*border: 1px solid darken($button-color, 40%);*/
-}
-/* line 33, sass/_clickable.scss */
-.content .tabs .tabBar li[disabled] {
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #9e9e9e), color-stop(45%, #919191), color-stop(85%, #9e9e9e));
-  background: -webkit-linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
-  background: -moz-linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
-  background: -o-linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
-  background: -ms-linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
-  background: linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
-  -moz-box-shadow: 0px 0px 1px 1px #b7b7b7 inset;
-  -webkit-box-shadow: 0px 0px 1px 1px #b7b7b7 inset;
-  -o-box-shadow: 0px 0px 1px 1px #b7b7b7 inset;
-  box-shadow: 0px 0px 1px 1px #b7b7b7 inset;
-  border: 1px solid #848484;
-  color: black;
-  cursor: default;
-  opacity: .5;
-}
-/* line 42, sass/_clickable.scss */
-.content .tabs .tabBar li[disabled]:active {
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #9e9e9e), color-stop(45%, #919191), color-stop(85%, #9e9e9e));
-  background: -webkit-linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
-  background: -moz-linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
-  background: -o-linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
-  background: -ms-linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
-  background: linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
-  -moz-box-shadow: 0px 0px 1px 1px #b7b7b7 inset;
-  -webkit-box-shadow: 0px 0px 1px 1px #b7b7b7 inset;
-  -o-box-shadow: 0px 0px 1px 1px #b7b7b7 inset;
-  box-shadow: 0px 0px 1px 1px #b7b7b7 inset;
-  border: 1px solid #848484;
-  color: black;
-  cursor: default;
-  opacity: .5;
-}
-/* line 55, sass/_clickable.scss */
-.content .tabs .tabBar li.selected {
-  -moz-box-shadow: -1px 5px 6px 2px #193556 inset;
-  -webkit-box-shadow: -1px 5px 6px 2px #193556 inset;
-  -o-box-shadow: -1px 5px 6px 2px #193556 inset;
-  box-shadow: -1px 5px 6px 2px #193556 inset;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #417ec7), color-stop(45%, #3066a5), color-stop(85%, #417ec7));
-  background: -webkit-linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
-  background: -moz-linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
-  background: -o-linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
-  background: -ms-linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
-  background: linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
-}
-/* line 64, sass/_clickable.scss */
-.content .tabs .tabBar li.selected:hover {
-  -moz-box-shadow: -1px 5px 6px 2px #193556 inset;
-  -webkit-box-shadow: -1px 5px 6px 2px #193556 inset;
-  -o-box-shadow: -1px 5px 6px 2px #193556 inset;
-  box-shadow: -1px 5px 6px 2px #193556 inset;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #3672b9), color-stop(45%, #2a5991), color-stop(85%, #3672b9));
-  background: -webkit-linear-gradient(#3672b9 35%, #2a5991 45%, #3672b9 85%);
-  background: -moz-linear-gradient(#3672b9 35%, #2a5991 45%, #3672b9 85%);
-  background: -o-linear-gradient(#3672b9 35%, #2a5991 45%, #3672b9 85%);
-  background: -ms-linear-gradient(#3672b9 35%, #2a5991 45%, #3672b9 85%);
-  background: linear-gradient(#3672b9 35%, #2a5991 45%, #3672b9 85%);
-}
-/* line 73, sass/_clickable.scss */
-.content .tabs .tabBar li.selected:active {
-  -moz-box-shadow: -1px 5px 6px 3px #193556 inset;
-  -webkit-box-shadow: -1px 5px 6px 3px #193556 inset;
-  -o-box-shadow: -1px 5px 6px 3px #193556 inset;
-  box-shadow: -1px 5px 6px 3px #193556 inset;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #3066a5), color-stop(45%, #254d7d), color-stop(85%, #3066a5));
-  background: -webkit-linear-gradient(#3066a5 35%, #254d7d 45%, #3066a5 85%);
-  background: -moz-linear-gradient(#3066a5 35%, #254d7d 45%, #3066a5 85%);
-  background: -o-linear-gradient(#3066a5 35%, #254d7d 45%, #3066a5 85%);
-  background: -ms-linear-gradient(#3066a5 35%, #254d7d 45%, #3066a5 85%);
-  background: linear-gradient(#3066a5 35%, #254d7d 45%, #3066a5 85%);
-}
-/* line 81, sass/_clickable.scss */
-.content .tabs .tabBar li.selected[disabled] {
-  -moz-box-shadow: -1px 5px 6px 2px #383838 inset;
-  -webkit-box-shadow: -1px 5px 6px 2px #383838 inset;
-  -o-box-shadow: -1px 5px 6px 2px #383838 inset;
-  box-shadow: -1px 5px 6px 2px #383838 inset;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #848484), color-stop(45%, #777777), color-stop(85%, #848484));
-  background: -webkit-linear-gradient(#848484 35%, #777777 45%, #848484 85%);
-  background: -moz-linear-gradient(#848484 35%, #777777 45%, #848484 85%);
-  background: -o-linear-gradient(#848484 35%, #777777 45%, #848484 85%);
-  background: -ms-linear-gradient(#848484 35%, #777777 45%, #848484 85%);
-  background: linear-gradient(#848484 35%, #777777 45%, #848484 85%);
-}
-/* line 222, sass/newLayout.scss */
-.content .tabs .tabBar li .num-results {
-  background: -webkit-gradient(radial, 25% 25%, 0, 25% 25%, 100, color-stop(0%, #ff0000), color-stop(100%, #990000));
-  background: -webkit-radial-gradient(25% 25%, #ff0000, #990000);
-  background: -moz-radial-gradient(25% 25%, #ff0000, #990000);
-  background: -o-radial-gradient(25% 25%, #ff0000, #990000);
-  background: -ms-radial-gradient(25% 25%, #ff0000, #990000);
-  background: radial-gradient(25% 25%, #ff0000, #990000);
-  color: white;
-  font-size: 12px;
-  line-height: 20px;
-  width: 20px;
-  height: 20px;
-  -moz-border-radius: 20px;
-  -webkit-border-radius: 20px;
-  -o-border-radius: 20px;
-  -ms-border-radius: 20px;
-  -khtml-border-radius: 20px;
-  border-radius: 20px;
-  border: 1px solid white;
-  margin-right: 4px;
-  display: inline-block;
-  vertical-align: top;
-  margin-top: 3px;
-  margin-bottom: 3px;
-}
-/* line 241, sass/newLayout.scss */
-.content .tabs .tabContent {
-  margin-left: 5px;
-  margin-right: 5px;
-}
-/* line 246, sass/newLayout.scss */
-.content table {
-  width: 100%;
-  border-bottom: 1px solid black;
-  border-left: 1px solid black;
-  border-right: 1px solid black;
-  -moz-border-radius: 8px;
-  -webkit-border-radius: 8px;
-  -o-border-radius: 8px;
-  -ms-border-radius: 8px;
-  -khtml-border-radius: 8px;
-  border-radius: 8px;
-  overflow: hidden;
-}
-/* line 253, sass/newLayout.scss */
-.content table thead tr {
-  font-family: 'Muli', 'Arial', sans-serif;
-  background-color: blue;
-}
-/* line 257, sass/newLayout.scss */
-.content table thead tr th {
-  color: black;
-  font-family: 'Muli', 'Arial', sans-serif;
-  cursor: pointer;
-  border: 1px solid #3066a5;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #6899d3), color-stop(45%, #417ec7), color-stop(85%, #6899d3));
-  background: -webkit-linear-gradient(#6899d3 35%, #417ec7 45%, #6899d3 85%);
-  background: -moz-linear-gradient(#6899d3 35%, #417ec7 45%, #6899d3 85%);
-  background: -o-linear-gradient(#6899d3 35%, #417ec7 45%, #6899d3 85%);
-  background: -ms-linear-gradient(#6899d3 35%, #417ec7 45%, #6899d3 85%);
-  background: linear-gradient(#6899d3 35%, #417ec7 45%, #6899d3 85%);
-  -moz-box-shadow: 0px 0px 1px 1px #8fb4df inset;
-  -webkit-box-shadow: 0px 0px 1px 1px #8fb4df inset;
-  -o-box-shadow: 0px 0px 1px 1px #8fb4df inset;
-  box-shadow: 0px 0px 1px 1px #8fb4df inset;
-  -moz-border-radius-topright: 5px;
-  -webkit-border-top-right-radius: 5px;
-  -o-border-top-right-radius: 5px;
-  -ms-border-top-right-radius: 5px;
-  -khtml-border-top-right-radius: 5px;
-  border-top-right-radius: 5px;
-  -moz-border-radius-topleft: 5px;
-  -webkit-border-top-left-radius: 5px;
-  -o-border-top-left-radius: 5px;
-  -ms-border-top-left-radius: 5px;
-  -khtml-border-top-left-radius: 5px;
-  border-top-left-radius: 5px;
-  text-align: center;
-  font-size: 15px;
-  padding-left: 4px;
-  padding-right: 4px;
-  padding-top: 2px;
-  padding-bottom: 2px;
-  line-height: 20px;
-}
-/* line 17, sass/_clickable.scss */
-.content table thead tr th:hover {
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #417ec7), color-stop(45%, #3066a5), color-stop(85%, #417ec7));
-  background: -webkit-linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
-  background: -moz-linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
-  background: -o-linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
-  background: -ms-linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
-  background: linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
-  -moz-box-shadow: 0px 0px 1px 1px #6899d3 inset;
-  -webkit-box-shadow: 0px 0px 1px 1px #6899d3 inset;
-  -o-box-shadow: 0px 0px 1px 1px #6899d3 inset;
-  box-shadow: 0px 0px 1px 1px #6899d3 inset;
-}
-/* line 24, sass/_clickable.scss */
-.content table thead tr th:active {
-  -moz-box-shadow: -1px 5px 6px 3px #193556 inset;
-  -webkit-box-shadow: -1px 5px 6px 3px #193556 inset;
-  -o-box-shadow: -1px 5px 6px 3px #193556 inset;
-  box-shadow: -1px 5px 6px 3px #193556 inset;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #3066a5), color-stop(45%, #254d7d), color-stop(85%, #3066a5));
-  background: -webkit-linear-gradient(#3066a5 35%, #254d7d 45%, #3066a5 85%);
-  background: -moz-linear-gradient(#3066a5 35%, #254d7d 45%, #3066a5 85%);
-  background: -o-linear-gradient(#3066a5 35%, #254d7d 45%, #3066a5 85%);
-  background: -ms-linear-gradient(#3066a5 35%, #254d7d 45%, #3066a5 85%);
-  background: linear-gradient(#3066a5 35%, #254d7d 45%, #3066a5 85%);
-  /*border: 1px solid darken($button-color, 40%);*/
-}
-/* line 33, sass/_clickable.scss */
-.content table thead tr th[disabled] {
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #9e9e9e), color-stop(45%, #919191), color-stop(85%, #9e9e9e));
-  background: -webkit-linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
-  background: -moz-linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
-  background: -o-linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
-  background: -ms-linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
-  background: linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
-  -moz-box-shadow: 0px 0px 1px 1px #b7b7b7 inset;
-  -webkit-box-shadow: 0px 0px 1px 1px #b7b7b7 inset;
-  -o-box-shadow: 0px 0px 1px 1px #b7b7b7 inset;
-  box-shadow: 0px 0px 1px 1px #b7b7b7 inset;
-  border: 1px solid #848484;
-  color: black;
-  cursor: default;
-  opacity: .5;
-}
-/* line 42, sass/_clickable.scss */
-.content table thead tr th[disabled]:active {
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #9e9e9e), color-stop(45%, #919191), color-stop(85%, #9e9e9e));
-  background: -webkit-linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
-  background: -moz-linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
-  background: -o-linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
-  background: -ms-linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
-  background: linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
-  -moz-box-shadow: 0px 0px 1px 1px #b7b7b7 inset;
-  -webkit-box-shadow: 0px 0px 1px 1px #b7b7b7 inset;
-  -o-box-shadow: 0px 0px 1px 1px #b7b7b7 inset;
-  box-shadow: 0px 0px 1px 1px #b7b7b7 inset;
-  border: 1px solid #848484;
-  color: black;
-  cursor: default;
-  opacity: .5;
-}
-/* line 55, sass/_clickable.scss */
-.content table thead tr th.selected {
-  -moz-box-shadow: -1px 5px 6px 2px #193556 inset;
-  -webkit-box-shadow: -1px 5px 6px 2px #193556 inset;
-  -o-box-shadow: -1px 5px 6px 2px #193556 inset;
-  box-shadow: -1px 5px 6px 2px #193556 inset;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #417ec7), color-stop(45%, #3066a5), color-stop(85%, #417ec7));
-  background: -webkit-linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
-  background: -moz-linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
-  background: -o-linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
-  background: -ms-linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
-  background: linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
-}
-/* line 64, sass/_clickable.scss */
-.content table thead tr th.selected:hover {
-  -moz-box-shadow: -1px 5px 6px 2px #193556 inset;
-  -webkit-box-shadow: -1px 5px 6px 2px #193556 inset;
-  -o-box-shadow: -1px 5px 6px 2px #193556 inset;
-  box-shadow: -1px 5px 6px 2px #193556 inset;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #3672b9), color-stop(45%, #2a5991), color-stop(85%, #3672b9));
-  background: -webkit-linear-gradient(#3672b9 35%, #2a5991 45%, #3672b9 85%);
-  background: -moz-linear-gradient(#3672b9 35%, #2a5991 45%, #3672b9 85%);
-  background: -o-linear-gradient(#3672b9 35%, #2a5991 45%, #3672b9 85%);
-  background: -ms-linear-gradient(#3672b9 35%, #2a5991 45%, #3672b9 85%);
-  background: linear-gradient(#3672b9 35%, #2a5991 45%, #3672b9 85%);
-}
-/* line 73, sass/_clickable.scss */
-.content table thead tr th.selected:active {
-  -moz-box-shadow: -1px 5px 6px 3px #193556 inset;
-  -webkit-box-shadow: -1px 5px 6px 3px #193556 inset;
-  -o-box-shadow: -1px 5px 6px 3px #193556 inset;
-  box-shadow: -1px 5px 6px 3px #193556 inset;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #3066a5), color-stop(45%, #254d7d), color-stop(85%, #3066a5));
-  background: -webkit-linear-gradient(#3066a5 35%, #254d7d 45%, #3066a5 85%);
-  background: -moz-linear-gradient(#3066a5 35%, #254d7d 45%, #3066a5 85%);
-  background: -o-linear-gradient(#3066a5 35%, #254d7d 45%, #3066a5 85%);
-  background: -ms-linear-gradient(#3066a5 35%, #254d7d 45%, #3066a5 85%);
-  background: linear-gradient(#3066a5 35%, #254d7d 45%, #3066a5 85%);
-}
-/* line 81, sass/_clickable.scss */
-.content table thead tr th.selected[disabled] {
-  -moz-box-shadow: -1px 5px 6px 2px #383838 inset;
-  -webkit-box-shadow: -1px 5px 6px 2px #383838 inset;
-  -o-box-shadow: -1px 5px 6px 2px #383838 inset;
-  box-shadow: -1px 5px 6px 2px #383838 inset;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #848484), color-stop(45%, #777777), color-stop(85%, #848484));
-  background: -webkit-linear-gradient(#848484 35%, #777777 45%, #848484 85%);
-  background: -moz-linear-gradient(#848484 35%, #777777 45%, #848484 85%);
-  background: -o-linear-gradient(#848484 35%, #777777 45%, #848484 85%);
-  background: -ms-linear-gradient(#848484 35%, #777777 45%, #848484 85%);
-  background: linear-gradient(#848484 35%, #777777 45%, #848484 85%);
-}
-/* line 268, sass/newLayout.scss */
-.content table thead tr th div.ui-icon {
-  margin-top: 2px;
-  margin-bottom: 2px;
-}
-/* line 274, sass/newLayout.scss */
-.content table tbody td {
-  padding: 2px;
-  line-height: 20px;
-  /*border-right: 1px solid gray;
-  &:last-child {
-    border-right: 0px solid gray;
-  }*/
-}
-/* line 281, sass/newLayout.scss */
-.content table tbody td img {
-  height: 20px;
-  vertical-align: top;
-  padding-right: 4px;
-}
-/* line 288, sass/newLayout.scss */
-.content table tbody tr:nth-child(even) {
-  background-color: #dee9f6;
-}
-/* line 291, sass/newLayout.scss */
-.content table div.ui-icon {
-  display: inline-block;
-  vertical-align: top;
-}
-
-/* line 298, sass/newLayout.scss */
-.sidebar {
-  display: inline;
-  float: left;
-  margin-right: 0;
-  width: 160px;
-}
-/* line 147, ../../vendor/gems/compass-0.11.7/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
-* html .sidebar {
-  overflow-x: hidden;
-}
-/* line 300, sass/newLayout.scss */
-.sidebar div.sideItem {
-  -moz-box-shadow: 0 0 10px 2px gray;
-  -webkit-box-shadow: 0 0 10px 2px gray;
-  -o-box-shadow: 0 0 10px 2px gray;
-  box-shadow: 0 0 10px 2px gray;
-  overflow: hidden;
-  margin: 5px;
-  background-color: #8fb4df;
-  -moz-border-radius: 8px;
-  -webkit-border-radius: 8px;
-  -o-border-radius: 8px;
-  -ms-border-radius: 8px;
-  -khtml-border-radius: 8px;
-  border-radius: 8px;
-}
-/* line 303, sass/newLayout.scss */
-.sidebar div.sideItem h1 {
-  font-family: 'Muli', 'Arial', sans-serif;
-  background-color: #04346c;
-  text-align: center;
-  padding-top: 5px;
-  padding-bottom: 2px;
-  font-size: 20px;
-  color: white;
-}
-/* line 313, sass/newLayout.scss */
-.sidebar div.sideItem li {
-  line-height: 20px;
-  list-style: none;
-  margin: 5px;
-}
-/* line 317, sass/newLayout.scss */
-.sidebar div.sideItem li div {
-  display: inline-block;
-  height: 20px;
-  width: 20px;
-  vertical-align: top;
-  padding-right: 5px;
-}
-/* line 323, sass/newLayout.scss */
-.sidebar div.sideItem li div img {
-  height: 20px;
-  width: 20px;
-  vertical-align: top;
-}
-/* line 330, sass/newLayout.scss */
-.sidebar div.sideItem li a {
-  width: 100%;
-  height: 100%;
-  display: inline-block;
-}
-
-/* line 342, sass/newLayout.scss */
-.footer {
-  display: inline;
-  float: left;
-  margin-right: 0px;
-  width: 960px;
-  background-color: green;
-}
-/* line 147, ../../vendor/gems/compass-0.11.7/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
-* html .footer {
-  overflow-x: hidden;
-}
-
-/* line 346, sass/newLayout.scss */
-input {
-  color: #7f7f7f;
-  font-family: 'Georgia', 'Times', serif;
-  line-height: 18px;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  -o-border-radius: 5px;
-  -ms-border-radius: 5px;
-  -khtml-border-radius: 5px;
-  border-radius: 5px;
-  border: 1px solid #7f7f7f;
-  padding: 2px;
-  margin: 2px;
-  font-size: 15px;
-  -moz-box-shadow: -1px 1px 4px 1px #b2b2b2 inset;
-  -webkit-box-shadow: -1px 1px 4px 1px #b2b2b2 inset;
-  -o-box-shadow: -1px 1px 4px 1px #b2b2b2 inset;
-  box-shadow: -1px 1px 4px 1px #b2b2b2 inset;
-}
-/* line 357, sass/newLayout.scss */
-input:focus {
-  outline-style: none;
-  -moz-box-shadow: -1px 1px 4px 2px #727272 inset;
-  -webkit-box-shadow: -1px 1px 4px 2px #727272 inset;
-  -o-box-shadow: -1px 1px 4px 2px #727272 inset;
-  box-shadow: -1px 1px 4px 2px #727272 inset;
-  border: 1px solid #666666;
-  color: black;
-}
-
-/* line 364, sass/newLayout.scss */
-.topButtons, .bottomButtons {
-  padding-top: 5px;
-  padding-bottom: 5px;
-}
+Backtrace:
+/Users/Ben/documents/nlcommons/public/stylesheets/sass/_clickable.scss:5:in `pie'
+/Users/Ben/documents/nlcommons/public/stylesheets/sass/_clickable.scss:5:in `clickable'
+/Users/Ben/documents/nlcommons/public/stylesheets/sass/newLayout.scss:21
+/Users/Ben/documents/nlcommons/vendor/gems/sass-3.1.12/lib/sass/../sass/tree/visitors/perform.rb:170:in `visit_mixin'
+/Users/Ben/documents/nlcommons/vendor/gems/sass-3.1.12/lib/sass/../sass/tree/visitors/base.rb:37:in `send'
+/Users/Ben/documents/nlcommons/vendor/gems/sass-3.1.12/lib/sass/../sass/tree/visitors/base.rb:37:in `visit'
+/Users/Ben/documents/nlcommons/vendor/gems/sass-3.1.12/lib/sass/../sass/tree/visitors/perform.rb:18:in `visit'
+/Users/Ben/documents/nlcommons/vendor/gems/sass-3.1.12/lib/sass/../sass/tree/visitors/perform.rb:201:in `visit_mixin'
+/Users/Ben/documents/nlcommons/vendor/gems/sass-3.1.12/lib/sass/../sass/tree/visitors/perform.rb:201:in `map'
+/Users/Ben/documents/nlcommons/vendor/gems/sass-3.1.12/lib/sass/../sass/tree/visitors/perform.rb:201:in `visit_mixin'
+/Users/Ben/documents/nlcommons/vendor/gems/sass-3.1.12/lib/sass/../sass/tree/visitors/perform.rb:39:in `with_environment'
+/Users/Ben/documents/nlcommons/vendor/gems/sass-3.1.12/lib/sass/../sass/tree/visitors/perform.rb:201:in `visit_mixin'
+/Users/Ben/documents/nlcommons/vendor/gems/sass-3.1.12/lib/sass/../sass/tree/visitors/base.rb:37:in `send'
+/Users/Ben/documents/nlcommons/vendor/gems/sass-3.1.12/lib/sass/../sass/tree/visitors/base.rb:37:in `visit'
+/Users/Ben/documents/nlcommons/vendor/gems/sass-3.1.12/lib/sass/../sass/tree/visitors/perform.rb:18:in `visit'
+/Users/Ben/documents/nlcommons/vendor/gems/sass-3.1.12/lib/sass/../sass/tree/visitors/base.rb:53:in `visit_children'
+/Users/Ben/documents/nlcommons/vendor/gems/sass-3.1.12/lib/sass/../sass/tree/visitors/base.rb:53:in `map'
+/Users/Ben/documents/nlcommons/vendor/gems/sass-3.1.12/lib/sass/../sass/tree/visitors/base.rb:53:in `visit_children'
+/Users/Ben/documents/nlcommons/vendor/gems/sass-3.1.12/lib/sass/../sass/tree/visitors/perform.rb:27:in `visit_children'
+/Users/Ben/documents/nlcommons/vendor/gems/sass-3.1.12/lib/sass/../sass/tree/visitors/perform.rb:39:in `with_environment'
+/Users/Ben/documents/nlcommons/vendor/gems/sass-3.1.12/lib/sass/../sass/tree/visitors/perform.rb:26:in `visit_children'
+/Users/Ben/documents/nlcommons/vendor/gems/sass-3.1.12/lib/sass/../sass/tree/visitors/base.rb:37:in `visit'
+/Users/Ben/documents/nlcommons/vendor/gems/sass-3.1.12/lib/sass/../sass/tree/visitors/perform.rb:236:in `visit_rule'
+/Users/Ben/documents/nlcommons/vendor/gems/sass-3.1.12/lib/sass/../sass/tree/visitors/base.rb:37:in `send'
+/Users/Ben/documents/nlcommons/vendor/gems/sass-3.1.12/lib/sass/../sass/tree/visitors/base.rb:37:in `visit'
+/Users/Ben/documents/nlcommons/vendor/gems/sass-3.1.12/lib/sass/../sass/tree/visitors/perform.rb:18:in `visit'
+/Users/Ben/documents/nlcommons/vendor/gems/sass-3.1.12/lib/sass/../sass/tree/visitors/base.rb:53:in `visit_children'
+/Users/Ben/documents/nlcommons/vendor/gems/sass-3.1.12/lib/sass/../sass/tree/visitors/base.rb:53:in `map'
+/Users/Ben/documents/nlcommons/vendor/gems/sass-3.1.12/lib/sass/../sass/tree/visitors/base.rb:53:in `visit_children'
+/Users/Ben/documents/nlcommons/vendor/gems/sass-3.1.12/lib/sass/../sass/tree/visitors/perform.rb:27:in `visit_children'
+/Users/Ben/documents/nlcommons/vendor/gems/sass-3.1.12/lib/sass/../sass/tree/visitors/perform.rb:39:in `with_environment'
+/Users/Ben/documents/nlcommons/vendor/gems/sass-3.1.12/lib/sass/../sass/tree/visitors/perform.rb:26:in `visit_children'
+/Users/Ben/documents/nlcommons/vendor/gems/sass-3.1.12/lib/sass/../sass/tree/visitors/base.rb:37:in `visit'
+/Users/Ben/documents/nlcommons/vendor/gems/sass-3.1.12/lib/sass/../sass/tree/visitors/perform.rb:47:in `visit_root'
+/Users/Ben/documents/nlcommons/vendor/gems/sass-3.1.12/lib/sass/../sass/tree/visitors/base.rb:37:in `send'
+/Users/Ben/documents/nlcommons/vendor/gems/sass-3.1.12/lib/sass/../sass/tree/visitors/base.rb:37:in `visit'
+/Users/Ben/documents/nlcommons/vendor/gems/sass-3.1.12/lib/sass/../sass/tree/visitors/perform.rb:18:in `visit'
+/Users/Ben/documents/nlcommons/vendor/gems/sass-3.1.12/lib/sass/../sass/tree/visitors/perform.rb:7:in `send'
+/Users/Ben/documents/nlcommons/vendor/gems/sass-3.1.12/lib/sass/../sass/tree/visitors/perform.rb:7:in `visit'
+/Users/Ben/documents/nlcommons/vendor/gems/sass-3.1.12/lib/sass/../sass/tree/root_node.rb:20:in `render'
+/Users/Ben/documents/nlcommons/vendor/gems/sass-3.1.12/lib/sass/../sass/engine.rb:300:in `_render'
+/Users/Ben/documents/nlcommons/vendor/gems/sass-3.1.12/lib/sass/../sass/engine.rb:248:in `render'
+/Users/Ben/documents/nlcommons/vendor/gems/sass-3.1.12/lib/sass/../sass/util.rb:297:in `silence_sass_warnings'
+/Users/Ben/documents/nlcommons/vendor/gems/sass-3.1.12/lib/sass/../sass/engine.rb:248:in `render'
+/Users/Ben/documents/nlcommons/vendor/gems/sass-3.1.12/rails/../lib/sass/plugin/compiler.rb:339:in `update_stylesheet'
+/Users/Ben/documents/nlcommons/vendor/gems/sass-3.1.12/rails/../lib/sass/plugin/compiler.rb:202:in `update_stylesheets'
+/Users/Ben/documents/nlcommons/vendor/gems/sass-3.1.12/rails/../lib/sass/plugin/compiler.rb:200:in `each'
+/Users/Ben/documents/nlcommons/vendor/gems/sass-3.1.12/rails/../lib/sass/plugin/compiler.rb:200:in `update_stylesheets'
+/Users/Ben/documents/nlcommons/vendor/gems/sass-3.1.12/rails/../lib/sass/plugin.rb:81:in `update_stylesheets'
+/Users/Ben/documents/nlcommons/vendor/gems/sass-3.1.12/rails/../lib/sass/plugin.rb:54:in `check_for_updates'
+/Users/Ben/documents/nlcommons/vendor/gems/sass-3.1.12/rails/../lib/sass/plugin/rack.rb:51:in `call'
+/Users/Ben/.rvm/gems/ruby-1.8.7-p352/gems/newrelic_rpm-3.2.0/lib/new_relic/rack/browser_monitoring.rb:18:in `call'
+/Users/Ben/.rvm/gems/ruby-1.8.7-p352/gems/newrelic_rpm-3.2.0/lib/new_relic/rack/developer_mode.rb:24:in `call'
+/Users/Ben/documents/nlcommons/vendor/rails/actionpack/lib/action_controller/string_coercion.rb:25:in `call'
+/Users/Ben/documents/nlcommons/vendor/gems/rack-1.1.2/lib/rack/head.rb:9:in `call'
+/Users/Ben/documents/nlcommons/vendor/gems/rack-1.1.2/lib/rack/methodoverride.rb:24:in `call'
+/Users/Ben/documents/nlcommons/vendor/rails/actionpack/lib/action_controller/params_parser.rb:15:in `call'
+/Users/Ben/documents/nlcommons/vendor/rails/actionpack/lib/action_controller/session/abstract_store.rb:177:in `call'
+/Users/Ben/documents/nlcommons/vendor/rails/activerecord/lib/active_record/query_cache.rb:29:in `call'
+/Users/Ben/documents/nlcommons/vendor/rails/activerecord/lib/active_record/connection_adapters/abstract/query_cache.rb:34:in `cache'
+/Users/Ben/documents/nlcommons/vendor/rails/activerecord/lib/active_record/query_cache.rb:9:in `cache'
+/Users/Ben/documents/nlcommons/vendor/rails/activerecord/lib/active_record/query_cache.rb:28:in `call'
+/Users/Ben/documents/nlcommons/vendor/rails/activerecord/lib/active_record/connection_adapters/abstract/connection_pool.rb:361:in `call'
+/Users/Ben/documents/nlcommons/vendor/gems/hoptoad_notifier-2.4.9/lib/hoptoad_notifier/rack.rb:27:in `call'
+/Users/Ben/documents/nlcommons/vendor/rails/actionpack/lib/action_controller/failsafe.rb:26:in `call'
+/Users/Ben/documents/nlcommons/vendor/gems/hoptoad_notifier-2.4.9/lib/hoptoad_notifier/user_informer.rb:12:in `call'
+/Users/Ben/documents/nlcommons/vendor/gems/rack-1.1.2/lib/rack/lock.rb:11:in `call'
+/Users/Ben/documents/nlcommons/vendor/gems/rack-1.1.2/lib/rack/lock.rb:11:in `synchronize'
+/Users/Ben/documents/nlcommons/vendor/gems/rack-1.1.2/lib/rack/lock.rb:11:in `call'
+/Users/Ben/documents/nlcommons/vendor/rails/actionpack/lib/action_controller/dispatcher.rb:114:in `call'
+/Users/Ben/documents/nlcommons/vendor/rails/actionpack/lib/action_controller/reloader.rb:34:in `run'
+/Users/Ben/documents/nlcommons/vendor/rails/actionpack/lib/action_controller/dispatcher.rb:108:in `call'
+/Users/Ben/documents/nlcommons/vendor/rails/railties/lib/rails/rack/static.rb:31:in `call'
+/Users/Ben/documents/nlcommons/vendor/gems/rack-1.1.2/lib/rack/urlmap.rb:47:in `call'
+/Users/Ben/documents/nlcommons/vendor/gems/rack-1.1.2/lib/rack/urlmap.rb:41:in `each'
+/Users/Ben/documents/nlcommons/vendor/gems/rack-1.1.2/lib/rack/urlmap.rb:41:in `call'
+/Users/Ben/documents/nlcommons/vendor/rails/railties/lib/rails/rack/log_tailer.rb:17:in `call'
+/Users/Ben/documents/nlcommons/vendor/gems/rack-1.1.2/lib/rack/content_length.rb:13:in `call'
+/Users/Ben/documents/nlcommons/vendor/gems/rack-1.1.2/lib/rack/handler/webrick.rb:48:in `service'
+/Users/Ben/.rvm/rubies/ruby-1.8.7-p352/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+/Users/Ben/.rvm/rubies/ruby-1.8.7-p352/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+/Users/Ben/.rvm/rubies/ruby-1.8.7-p352/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+/Users/Ben/.rvm/rubies/ruby-1.8.7-p352/lib/ruby/1.8/webrick/server.rb:162:in `start'
+/Users/Ben/.rvm/rubies/ruby-1.8.7-p352/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+/Users/Ben/.rvm/rubies/ruby-1.8.7-p352/lib/ruby/1.8/webrick/server.rb:95:in `start'
+/Users/Ben/.rvm/rubies/ruby-1.8.7-p352/lib/ruby/1.8/webrick/server.rb:92:in `each'
+/Users/Ben/.rvm/rubies/ruby-1.8.7-p352/lib/ruby/1.8/webrick/server.rb:92:in `start'
+/Users/Ben/.rvm/rubies/ruby-1.8.7-p352/lib/ruby/1.8/webrick/server.rb:23:in `start'
+/Users/Ben/.rvm/rubies/ruby-1.8.7-p352/lib/ruby/1.8/webrick/server.rb:82:in `start'
+/Users/Ben/documents/nlcommons/vendor/gems/rack-1.1.2/lib/rack/handler/webrick.rb:14:in `run'
+/Users/Ben/documents/nlcommons/vendor/rails/railties/lib/commands/server.rb:111
+/Users/Ben/.rvm/rubies/ruby-1.8.7-p352/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:29:in `gem_original_require'
+/Users/Ben/.rvm/rubies/ruby-1.8.7-p352/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:29:in `require'
+documents/nlcommons/script/server:3
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Syntax error: Undefined mixin 'pie'.\A         on line 5 of /Users/Ben/documents/nlcommons/public/stylesheets/sass/_clickable.scss, in `pie'\A         from line 5 of /Users/Ben/documents/nlcommons/public/stylesheets/sass/_clickable.scss, in `clickable'\A         from line 21 of /Users/Ben/documents/nlcommons/public/stylesheets/sass/newLayout.scss\A \A 1: $blueprint-grid-margin: 0px;\A 2: $blueprint-grid-width: 40px;\A 3: @import \"blueprint/reset\";\A 4: @import \"blueprint/grid\";\A 5: @import \"compass/css3\";\A 6: @import \"clickable\";\A 7: @import \"font\";\A 8: \A 9: $nav-color: #04346C;\A 10: $nav-text-color: white;"; }

@@ -170,4 +170,5 @@ class ApplicationController < ActionController::Base
                       @recent_tags, @recent_tagged_models].flatten.sort_by {|new_item| new_item.updated_at}.reverse
   end
 
+  
 end

@@ -1,7 +1,6 @@
 # Controller for making help available
 
 class HelpController < ApplicationController
-
   def index
   end
 

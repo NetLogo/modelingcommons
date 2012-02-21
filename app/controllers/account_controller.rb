@@ -234,5 +234,10 @@ class AccountController < ApplicationController
   def groups
     render :layout => 'application_nomargin'
   end
+  def find_people
+    query = params[:query].blank? ? "" : params[:query].downcase
+    count = params[:count].blank? ? 10 : params[:count].to_i
+    render :json => Person.search(query).sort {|a, b| a.fullname.downcase <=> b.fullname.downcase}[0..count].map {|person| {:name => person.fullname, :id => person.id}}
+  end
 
 end

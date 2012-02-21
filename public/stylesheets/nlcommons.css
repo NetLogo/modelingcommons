@@ -777,6 +777,8 @@ a img {
   text-align: center;
   font-size: 16px;
   font-family: 'Muli', 'Arial', sans-serif;
+  behavior: url('/stylesheets/PIE.htc');
+  position: relative;
   color: black;
   font-family: 'Muli', 'Arial', sans-serif;
   cursor: pointer;
@@ -805,7 +807,7 @@ a img {
   -khtml-border-bottom-right-radius: 8px;
   border-bottom-right-radius: 8px;
 }
-/* line 17, sass/_clickable.scss */
+/* line 18, sass/_clickable.scss */
 .ui-tabs .ui-tabs-nav li:hover {
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #6899d3), color-stop(45%, #417ec7), color-stop(85%, #6899d3));
   background: -webkit-linear-gradient(#6899d3 35%, #417ec7 45%, #6899d3 85%);
@@ -819,7 +821,7 @@ a img {
   -o-box-shadow: 0px 0px 1px 1px #8fb4df inset;
   box-shadow: 0px 0px 1px 1px #8fb4df inset;
 }
-/* line 24, sass/_clickable.scss */
+/* line 25, sass/_clickable.scss */
 .ui-tabs .ui-tabs-nav li:active:hover {
   -moz-box-shadow: -1px 5px 6px 3px #254d7d inset;
   -webkit-box-shadow: -1px 5px 6px 3px #254d7d inset;
@@ -834,7 +836,7 @@ a img {
   background: linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
   /*border: 1px solid darken($button-color, 40%);*/
 }
-/* line 33, sass/_clickable.scss */
+/* line 34, sass/_clickable.scss */
 .ui-tabs .ui-tabs-nav li.empty {
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #b7b7b7), color-stop(45%, #aaaaaa), color-stop(85%, #b7b7b7));
   background: -webkit-linear-gradient(#b7b7b7 35%, #aaaaaa 45%, #b7b7b7 85%);
@@ -852,7 +854,7 @@ a img {
   cursor: default;
   opacity: .5;
 }
-/* line 42, sass/_clickable.scss */
+/* line 43, sass/_clickable.scss */
 .ui-tabs .ui-tabs-nav li.empty:active:hover {
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #b7b7b7), color-stop(45%, #aaaaaa), color-stop(85%, #b7b7b7));
   background: -webkit-linear-gradient(#b7b7b7 35%, #aaaaaa 45%, #b7b7b7 85%);
@@ -870,7 +872,7 @@ a img {
   cursor: default;
   opacity: .5;
 }
-/* line 55, sass/_clickable.scss */
+/* line 56, sass/_clickable.scss */
 .ui-tabs .ui-tabs-nav li.ui-tabs-selected {
   -moz-box-shadow: -1px 5px 6px 2px #254d7d inset;
   -webkit-box-shadow: -1px 5px 6px 2px #254d7d inset;
@@ -884,7 +886,7 @@ a img {
   -pie-background: linear-gradient(#6899d3 35%, #417ec7 45%, #6899d3 85%);
   background: linear-gradient(#6899d3 35%, #417ec7 45%, #6899d3 85%);
 }
-/* line 64, sass/_clickable.scss */
+/* line 65, sass/_clickable.scss */
 .ui-tabs .ui-tabs-nav li.ui-tabs-selected:hover {
   -moz-box-shadow: -1px 5px 6px 2px #254d7d inset;
   -webkit-box-shadow: -1px 5px 6px 2px #254d7d inset;
@@ -898,7 +900,7 @@ a img {
   -pie-background: linear-gradient(#548ccd 35%, #3672b9 45%, #548ccd 85%);
   background: linear-gradient(#548ccd 35%, #3672b9 45%, #548ccd 85%);
 }
-/* line 73, sass/_clickable.scss */
+/* line 74, sass/_clickable.scss */
 .ui-tabs .ui-tabs-nav li.ui-tabs-selected:active:hover {
   -moz-box-shadow: -1px 5px 6px 3px #254d7d inset;
   -webkit-box-shadow: -1px 5px 6px 3px #254d7d inset;
@@ -912,7 +914,7 @@ a img {
   -pie-background: linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
   background: linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
 }
-/* line 81, sass/_clickable.scss */
+/* line 82, sass/_clickable.scss */
 .ui-tabs .ui-tabs-nav li.ui-tabs-selected.empty {
   -moz-box-shadow: -1px 5px 6px 2px #515151 inset;
   -webkit-box-shadow: -1px 5px 6px 2px #515151 inset;
@@ -2123,8 +2125,8 @@ img#big-preview-image  {
 }
 */
 /* line 16, sass/nlcommons.scss */
-.pie-element, button, input[type=button], input[type=submit], .dataTables > thead tr th {
-  behavior: url("/stylesheets/PIE.htc");
+.pie-element, .container, .header, .header .login_flash .login_container .login, .header .navigation, .header .search, .panel, .tabs_panel, input[type=text], input[type=password], button, input[type=button], input[type=submit], .dataTables_wrapper .dataTables_paginate button, .dataTables > thead tr th {
+  behavior: url("/browse/pie");
   position: relative;
 }
 
@@ -2135,7 +2137,7 @@ img#big-preview-image  {
  * Page background color
  * Global styling, such as default font family and color
  */
-/* line 27, sass/nlcommons.scss */
+/* line 31, sass/nlcommons.scss */
 body {
   background-color: #F5F3E9;
   font-family: 'Georgia', 'Times', serif;
@@ -2146,7 +2148,7 @@ body {
  * Center page container
  * Blueprint column container
  */
-/* line 37, sass/nlcommons.scss */
+/* line 41, sass/nlcommons.scss */
 .container {
   width: 960px;
   margin: 0 auto;
@@ -2157,43 +2159,31 @@ body {
   -webkit-box-shadow: 0 0 15px 10px gray;
   -o-box-shadow: 0 0 15px 10px gray;
   box-shadow: 0 0 15px 10px gray;
-  -moz-border-radius-bottomright: 8px;
-  -webkit-border-bottom-right-radius: 8px;
-  -o-border-bottom-right-radius: 8px;
-  -ms-border-bottom-right-radius: 8px;
-  -khtml-border-bottom-right-radius: 8px;
-  border-bottom-right-radius: 8px;
-  -moz-border-radius-bottomleft: 8px;
-  -webkit-border-bottom-left-radius: 8px;
-  -o-border-bottom-left-radius: 8px;
-  -ms-border-bottom-left-radius: 8px;
-  -khtml-border-bottom-left-radius: 8px;
-  border-bottom-left-radius: 8px;
+  -moz-border-radius: 0px 0px 8px 8px;
+  -webkit-border-radius: 0px 0px 8px 8px;
+  -o-border-radius: 0px 0px 8px 8px;
+  -ms-border-radius: 0px 0px 8px 8px;
+  -khtml-border-radius: 0px 0px 8px 8px;
+  border-radius: 0px 0px 8px 8px;
   margin-bottom: 200px;
 }
 
 /* 
  * Page header, at the top of all pages
  */
-/* line 49, sass/nlcommons.scss */
+/* line 54, sass/nlcommons.scss */
 .header {
   font-family: 'Muli', 'Arial', sans-serif;
   display: inline;
   float: left;
   margin-right: 0px;
   width: 960px;
-  -moz-border-radius-bottomleft: 8px;
-  -webkit-border-bottom-left-radius: 8px;
-  -o-border-bottom-left-radius: 8px;
-  -ms-border-bottom-left-radius: 8px;
-  -khtml-border-bottom-left-radius: 8px;
-  border-bottom-left-radius: 8px;
-  -moz-border-radius-bottomright: 8px;
-  -webkit-border-bottom-right-radius: 8px;
-  -o-border-bottom-right-radius: 8px;
-  -ms-border-bottom-right-radius: 8px;
-  -khtml-border-bottom-right-radius: 8px;
-  border-bottom-right-radius: 8px;
+  -moz-border-radius: 0px 0px 8px 8px;
+  -webkit-border-radius: 0px 0px 8px 8px;
+  -o-border-radius: 0px 0px 8px 8px;
+  -ms-border-radius: 0px 0px 8px 8px;
+  -khtml-border-radius: 0px 0px 8px 8px;
+  border-radius: 0px 0px 8px 8px;
   -moz-box-shadow: 0 0 10px 2px gray;
   -webkit-box-shadow: 0 0 10px 2px gray;
   -o-box-shadow: 0 0 10px 2px gray;
@@ -2205,9 +2195,10 @@ body {
 * html .header {
   overflow-x: hidden;
 }
-/* line 57, sass/nlcommons.scss */
+/* line 63, sass/nlcommons.scss */
 .header .banner {
   background-image: url("banner.png");
+  background-color: #8fb4df;
   cursor: pointer;
   display: inline;
   float: left;
@@ -2221,19 +2212,24 @@ body {
 * html .header .banner {
   overflow-x: hidden;
 }
-/* line 64, sass/nlcommons.scss */
+/* line 72, sass/nlcommons.scss */
+.header .banner h1, .header .banner h2 {
+  display: inline-block;
+  filter: progid:DXImageTransform.Microsoft.Shadow(color=#04346c, direction=135, strength=5px);
+}
+/* line 76, sass/nlcommons.scss */
 .header .banner h1 {
   font-size: 40px;
   margin-left: 17px;
   font-weight: bold;
 }
-/* line 69, sass/nlcommons.scss */
+/* line 81, sass/nlcommons.scss */
 .header .banner h2 {
   font-size: 20px;
   margin-top: 5px;
   margin-left: 5px;
 }
-/* line 74, sass/nlcommons.scss */
+/* line 86, sass/nlcommons.scss */
 .header .banner a {
   width: 100%;
   height: 100%;
@@ -2241,7 +2237,7 @@ body {
   text-decoration: none;
   display: inline-block;
 }
-/* line 82, sass/nlcommons.scss */
+/* line 94, sass/nlcommons.scss */
 .header .login_flash {
   position: relative;
   display: inline;
@@ -2252,12 +2248,12 @@ body {
   height: 100px;
   display: table;
 }
-/* line 86, sass/nlcommons.scss */
+/* line 98, sass/nlcommons.scss */
 .header .login_flash .login_container {
   display: table-row;
   text-align: right;
 }
-/* line 89, sass/nlcommons.scss */
+/* line 101, sass/nlcommons.scss */
 .header .login_flash .login_container .login {
   font-size: 14px;
   padding-right: 10px;
@@ -2268,14 +2264,14 @@ body {
   display: inline-block;
   padding-top: 2px;
   padding-bottom: 2px;
-  -moz-border-radius-bottomleft: 8px;
-  -webkit-border-bottom-left-radius: 8px;
-  -o-border-bottom-left-radius: 8px;
-  -ms-border-bottom-left-radius: 8px;
-  -khtml-border-bottom-left-radius: 8px;
-  border-bottom-left-radius: 8px;
+  -moz-border-radius: 0px 0px 0px 8px;
+  -webkit-border-radius: 0px 0px 0px 8px;
+  -o-border-radius: 0px 0px 0px 8px;
+  -ms-border-radius: 0px 0px 0px 8px;
+  -khtml-border-radius: 0px 0px 0px 8px;
+  border-radius: 0px 0px 0px 8px;
 }
-/* line 100, sass/nlcommons.scss */
+/* line 112, sass/nlcommons.scss */
 .header .login_flash .login_container .login img {
   height: 26px;
   width: 26px;
@@ -2283,30 +2279,34 @@ body {
   margin-right: 4px;
   vertical-align: top;
 }
-/* line 107, sass/nlcommons.scss */
+/* line 119, sass/nlcommons.scss */
 .header .login_flash .login_container .login a {
   color: white;
   vertical-align: top;
 }
-/* line 111, sass/nlcommons.scss */
+/* line 123, sass/nlcommons.scss */
 .header .login_flash .login_container .login a:visited {
   color: white;
 }
-/* line 114, sass/nlcommons.scss */
+/* line 126, sass/nlcommons.scss */
 .header .login_flash .login_container .login a:active {
   color: red;
 }
-/* line 119, sass/nlcommons.scss */
+/* line 129, sass/nlcommons.scss */
+.header .login_flash .login_container .login .login_error_container {
+  max-height: 18px;
+}
+/* line 135, sass/nlcommons.scss */
 .header .login_flash .flash_container {
   display: table-row;
   height: 100%;
 }
-/* line 122, sass/nlcommons.scss */
+/* line 138, sass/nlcommons.scss */
 .header .login_flash .flash_container > div {
   display: table-cell;
   vertical-align: middle;
 }
-/* line 125, sass/nlcommons.scss */
+/* line 141, sass/nlcommons.scss */
 .header .login_flash .flash_container > div #flash_notice {
   display: inline-block;
   background-color: red;
@@ -2323,13 +2323,13 @@ body {
   -khtml-border-top-left-radius: 8px;
   border-top-left-radius: 8px;
   width: 100%;
-  line-height: 20px;
+  line-height: 18px;
   font-size: 16px;
   color: white;
   text-align: center;
   overflow: hidden;
-  max-height: 40px;
-  min-height: 20px;
+  max-height: 36px;
+  min-height: 18px;
   width: 480px;
   position: relative;
   right: -480px;
@@ -2339,7 +2339,7 @@ body {
 * html .header .login_flash {
   overflow-x: hidden;
 }
-/* line 150, sass/nlcommons.scss */
+/* line 166, sass/nlcommons.scss */
 .header div.tableTest {
   display: inline;
   float: left;
@@ -2353,27 +2353,27 @@ body {
 * html .header div.tableTest {
   overflow-x: hidden;
 }
-/* line 156, sass/nlcommons.scss */
+/* line 172, sass/nlcommons.scss */
 .header div.tableTest > div {
   display: table-row;
   height: 40px;
 }
-/* line 160, sass/nlcommons.scss */
+/* line 176, sass/nlcommons.scss */
 .header div.tableTest .top {
   background-color: green;
 }
-/* line 163, sass/nlcommons.scss */
+/* line 179, sass/nlcommons.scss */
 .header div.tableTest .bottom {
   height: 100%;
   background-color: red;
 }
-/* line 164, sass/nlcommons.scss */
+/* line 180, sass/nlcommons.scss */
 .header div.tableTest .bottom > div {
   display: table-cell;
   background-color: blue;
   vertical-align: middle;
 }
-/* line 168, sass/nlcommons.scss */
+/* line 184, sass/nlcommons.scss */
 .header div.tableTest .bottom > div > div {
   background-color: red;
   display: inline-block;
@@ -2382,8 +2382,14 @@ body {
   position: relative;
   right: -450px;
 }
-/* line 184, sass/nlcommons.scss */
+/* line 200, sass/nlcommons.scss */
 .header .navigation {
+  -moz-border-radius: 0px 0px 0px 8px;
+  -webkit-border-radius: 0px 0px 0px 8px;
+  -o-border-radius: 0px 0px 0px 8px;
+  -ms-border-radius: 0px 0px 0px 8px;
+  -khtml-border-radius: 0px 0px 0px 8px;
+  border-radius: 0px 0px 0px 8px;
   background-color: #04346c;
   display: inline;
   float: left;
@@ -2396,7 +2402,7 @@ body {
 * html .header .navigation {
   overflow-x: hidden;
 }
-/* line 188, sass/nlcommons.scss */
+/* line 205, sass/nlcommons.scss */
 .header .navigation a {
   color: white;
   font-size: 20px;
@@ -2412,15 +2418,15 @@ body {
   padding-right: 7px;
   text-decoration: none;
 }
-/* line 200, sass/nlcommons.scss */
+/* line 217, sass/nlcommons.scss */
 .header .navigation a:visited {
   color: white;
 }
-/* line 203, sass/nlcommons.scss */
+/* line 220, sass/nlcommons.scss */
 .header .navigation a:active {
   color: white;
 }
-/* line 206, sass/nlcommons.scss */
+/* line 223, sass/nlcommons.scss */
 .header .navigation a:hover {
   background-color: #064c9d;
   -moz-box-shadow: 0px 0px 1px 1px #021c3b inset;
@@ -2428,7 +2434,7 @@ body {
   -o-box-shadow: 0px 0px 1px 1px #021c3b inset;
   box-shadow: 0px 0px 1px 1px #021c3b inset;
 }
-/* line 210, sass/nlcommons.scss */
+/* line 227, sass/nlcommons.scss */
 .header .navigation a:active {
   background-color: #054085;
   -moz-box-shadow: -1px 1px 3px 2px #021c3b inset;
@@ -2436,16 +2442,16 @@ body {
   -o-box-shadow: -1px 1px 3px 2px #021c3b inset;
   box-shadow: -1px 1px 3px 2px #021c3b inset;
 }
-/* line 214, sass/nlcommons.scss */
+/* line 231, sass/nlcommons.scss */
 .header .navigation ul {
   line-height: normal;
   display: inline-block;
 }
-/* line 218, sass/nlcommons.scss */
+/* line 235, sass/nlcommons.scss */
 .header .navigation ul:last-child {
   margin-left: 40px;
 }
-/* line 221, sass/nlcommons.scss */
+/* line 238, sass/nlcommons.scss */
 .header .navigation li {
   list-style: none;
   line-height: normal;
@@ -2456,8 +2462,14 @@ body {
   margin-left: 1px;
   margin-right: 1px;
 }
-/* line 240, sass/nlcommons.scss */
+/* line 257, sass/nlcommons.scss */
 .header .search {
+  -moz-border-radius: 0px 0px 8px 0px;
+  -webkit-border-radius: 0px 0px 8px 0px;
+  -o-border-radius: 0px 0px 8px 0px;
+  -ms-border-radius: 0px 0px 8px 0px;
+  -khtml-border-radius: 0px 0px 8px 0px;
+  border-radius: 0px 0px 8px 0px;
   background-color: #04346c;
   display: inline;
   float: left;
@@ -2471,14 +2483,14 @@ body {
 * html .header .search {
   overflow-x: hidden;
 }
-/* line 246, sass/nlcommons.scss */
+/* line 265, sass/nlcommons.scss */
 .header .search form {
   margin-top: 6px;
   margin-right: 2px;
   display: inline-block;
 }
 
-/* line 254, sass/nlcommons.scss */
+/* line 273, sass/nlcommons.scss */
 .content {
   display: inline;
   float: left;
@@ -2489,24 +2501,24 @@ body {
 * html .content {
   overflow-x: hidden;
 }
-/* line 256, sass/nlcommons.scss */
+/* line 275, sass/nlcommons.scss */
 .content .title {
   margin: 4px;
 }
-/* line 259, sass/nlcommons.scss */
+/* line 278, sass/nlcommons.scss */
 .content .padded_content {
   margin: 4px;
 }
-/* line 262, sass/nlcommons.scss */
+/* line 281, sass/nlcommons.scss */
 .content ul {
   padding-left: 40px;
 }
-/* line 265, sass/nlcommons.scss */
+/* line 284, sass/nlcommons.scss */
 .content h1, .content h2, .content h3 {
   margin-top: 16px;
   margin-bottom: 6px;
 }
-/* line 269, sass/nlcommons.scss */
+/* line 288, sass/nlcommons.scss */
 .content p {
   margin-bottom: 10px;
 }
@@ -2517,21 +2529,21 @@ body {
 /* 
  * Model Page
  */
-/* line 285, sass/nlcommons.scss */
+/* line 304, sass/nlcommons.scss */
 #preview_info_container {
   width: 960px;
   height: 160px;
   display: table-row;
   float: left;
 }
-/* line 290, sass/nlcommons.scss */
+/* line 309, sass/nlcommons.scss */
 #preview_info_container > div {
   display: table-cell;
   height: 160px;
   vertical-align: top;
 }
 
-/* line 297, sass/nlcommons.scss */
+/* line 316, sass/nlcommons.scss */
 #model_preview #preview-image {
   width: 152px;
   height: 152px;
@@ -2543,31 +2555,31 @@ body {
   background-color: #d9d9d9;
 }
 
-/* line 309, sass/nlcommons.scss */
+/* line 328, sass/nlcommons.scss */
 #model_info img {
   vertical-align: middle;
 }
-/* line 312, sass/nlcommons.scss */
+/* line 331, sass/nlcommons.scss */
 #model_info img.inline_image {
   height: 20px;
 }
-/* line 315, sass/nlcommons.scss */
+/* line 334, sass/nlcommons.scss */
 #model_info > div {
   height: 53px;
   display: table-row;
 }
-/* line 318, sass/nlcommons.scss */
+/* line 337, sass/nlcommons.scss */
 #model_info > div > div {
   display: table-cell;
   vertical-align: middle;
 }
 
-/* line 326, sass/nlcommons.scss */
+/* line 345, sass/nlcommons.scss */
 .posting-title {
   font-weight: bold;
 }
 
-/* line 330, sass/nlcommons.scss */
+/* line 349, sass/nlcommons.scss */
 #model_click_to_load {
   background-color: #d9d9d9;
   display: block;
@@ -2580,12 +2592,12 @@ body {
   line-height: 500px;
 }
 
-/* line 342, sass/nlcommons.scss */
+/* line 361, sass/nlcommons.scss */
 #model_applet {
   display: none;
 }
 
-/* line 346, sass/nlcommons.scss */
+/* line 365, sass/nlcommons.scss */
 .wide_model {
   position: absolute;
   left: 0px;
@@ -2606,7 +2618,7 @@ body {
   box-shadow: 0 0 15px 10px gray;
 }
 
-/* line 358, sass/nlcommons.scss */
+/* line 377, sass/nlcommons.scss */
 .ui-tabs #browse_applet.ui-tabs-hide {
   position: absolute;
   left: -10000px;
@@ -2617,18 +2629,18 @@ body {
  * Code Highlighting 
  * Proc is procedure
  */
-/* line 369, sass/nlcommons.scss */
+/* line 388, sass/nlcommons.scss */
 .procedure_code {
   font-family: courier, monospace;
   font-size: 12px;
 }
 
-/* line 374, sass/nlcommons.scss */
+/* line 393, sass/nlcommons.scss */
 .proc-to, .proc-end {
   color: #b3b;
 }
 
-/* line 378, sass/nlcommons.scss */
+/* line 397, sass/nlcommons.scss */
 .proc-comment {
   color: #282;
   font-style: italic;
@@ -2637,7 +2649,7 @@ body {
 /* 
  * Login Page (Front Page)
  */
-/* line 389, sass/nlcommons.scss */
+/* line 408, sass/nlcommons.scss */
 div#just_visiting {
   display: inline;
   float: left;
@@ -2649,7 +2661,7 @@ div#just_visiting {
   overflow-x: hidden;
 }
 
-/* line 393, sass/nlcommons.scss */
+/* line 412, sass/nlcommons.scss */
 div#register_new_user {
   display: inline;
   float: left;
@@ -2670,7 +2682,7 @@ div#register_new_user {
 /* 
  * User Page (Front Page) 
  */
-/* line 407, sass/nlcommons.scss */
+/* line 426, sass/nlcommons.scss */
 #left-news-box {
   display: inline;
   float: left;
@@ -2682,7 +2694,7 @@ div#register_new_user {
   overflow-x: hidden;
 }
 
-/* line 410, sass/nlcommons.scss */
+/* line 429, sass/nlcommons.scss */
 #right-news-box {
   display: inline;
   float: left;
@@ -2697,7 +2709,7 @@ div#register_new_user {
 /* 
  * Search Results Page 
  */
-/* line 419, sass/nlcommons.scss */
+/* line 438, sass/nlcommons.scss */
 #search_tabs .num-results {
   background: -webkit-gradient(radial, 25% 25%, 0, 25% 25%, 100, color-stop(0%, #ff0000), color-stop(100%, #990000));
   background: -webkit-radial-gradient(25% 25%, #ff0000, #990000);
@@ -2727,7 +2739,7 @@ div#register_new_user {
   margin-top: 3px;
   margin-bottom: 3px;
 }
-/* line 439, sass/nlcommons.scss */
+/* line 458, sass/nlcommons.scss */
 #search_tabs .num-results.empty {
   background: -webkit-gradient(radial, 25% 25%, 0, 25% 25%, 100, color-stop(0%, #8c7373), color-stop(100%, #544545));
   background: -webkit-radial-gradient(25% 25%, #8c7373, #544545);
@@ -2741,12 +2753,12 @@ div#register_new_user {
 /*
  * One Group Page
  */
-/* line 450, sass/nlcommons.scss */
+/* line 469, sass/nlcommons.scss */
 .grouplist img {
   height: 30px;
   vertical-align: middle;
 }
-/* line 455, sass/nlcommons.scss */
+/* line 474, sass/nlcommons.scss */
 .grouplist li {
   margin-top: 4px;
   margin-bototm: 4px;
@@ -2755,7 +2767,7 @@ div#register_new_user {
 /*
  * Admin view all actions
  */
-/* line 466, sass/nlcommons.scss */
+/* line 485, sass/nlcommons.scss */
 .actions_table_container {
   overflow: scroll;
 }
@@ -2763,28 +2775,28 @@ div#register_new_user {
 /*
  * Globally useful styling
  */
-/* line 474, sass/nlcommons.scss */
+/* line 493, sass/nlcommons.scss */
 .hidden {
   display: none;
 }
 
-/* line 477, sass/nlcommons.scss */
+/* line 496, sass/nlcommons.scss */
 div.left-right {
   width: 100%;
   display: table;
 }
-/* line 480, sass/nlcommons.scss */
+/* line 499, sass/nlcommons.scss */
 div.left-right div.left {
   display: table-cell;
   text-align: left;
 }
-/* line 484, sass/nlcommons.scss */
+/* line 503, sass/nlcommons.scss */
 div.left-right div.right {
   display: table-cell;
   text-align: right;
 }
 
-/* line 490, sass/nlcommons.scss */
+/* line 509, sass/nlcommons.scss */
 .panel, .tabs_panel {
   margin: 4px;
   border: 3px solid black;
@@ -2797,12 +2809,12 @@ div.left-right div.right {
   padding: 4px;
 }
 
-/* line 497, sass/nlcommons.scss */
+/* line 516, sass/nlcommons.scss */
 .tabs_panel {
   padding: 0px;
   overflow: hidden;
 }
-/* line 499, sass/nlcommons.scss */
+/* line 518, sass/nlcommons.scss */
 .tabs_panel > ul {
   /* 
    * Setting padding-left to inherit cancels the .content wide setting of 40px left padding for ul
@@ -2813,7 +2825,7 @@ div.left-right div.right {
 /* 
  * Text Input Field
  */
-/* line 511, sass/nlcommons.scss */
+/* line 530, sass/nlcommons.scss */
 input[type=text], input[type=password] {
   font-family: 'Georgia', 'Times', serif;
   line-height: 16px;
@@ -2832,16 +2844,12 @@ input[type=text], input[type=password] {
   -o-box-shadow: -1px 1px 4px 1px #b2b2b2 inset;
   box-shadow: -1px 1px 4px 1px #b2b2b2 inset;
 }
-/* line 522, sass/nlcommons.scss */
+/* line 542, sass/nlcommons.scss */
 input[type=text].error, input[type=password].error {
   color: red;
   border-color: red;
-  -moz-box-shadow: -1px 1px 4px 1px #ff6666 inset;
-  -webkit-box-shadow: -1px 1px 4px 1px #ff6666 inset;
-  -o-box-shadow: -1px 1px 4px 1px #ff6666 inset;
-  box-shadow: -1px 1px 4px 1px #ff6666 inset;
 }
-/* line 527, sass/nlcommons.scss */
+/* line 548, sass/nlcommons.scss */
 input[type=text]:focus, input[type=password]:focus {
   outline: none;
   -moz-box-shadow: -1px 1px 4px 1px #b2b2b2 inset, 0px 0px 4px 2px #6899d3;
@@ -2849,7 +2857,14 @@ input[type=text]:focus, input[type=password]:focus {
   -o-box-shadow: -1px 1px 4px 1px #b2b2b2 inset, 0px 0px 4px 2px #6899d3;
   box-shadow: -1px 1px 4px 1px #b2b2b2 inset, 0px 0px 4px 2px #6899d3;
 }
-/* line 532, sass/nlcommons.scss */
+/* line 553, sass/nlcommons.scss */
+input[type=text].error:focus, input[type=password].error:focus {
+  -moz-box-shadow: -1px 1px 4px 1px #b2b2b2 inset, 0px 0px 4px 2px #ff6666;
+  -webkit-box-shadow: -1px 1px 4px 1px #b2b2b2 inset, 0px 0px 4px 2px #ff6666;
+  -o-box-shadow: -1px 1px 4px 1px #b2b2b2 inset, 0px 0px 4px 2px #ff6666;
+  box-shadow: -1px 1px 4px 1px #b2b2b2 inset, 0px 0px 4px 2px #ff6666;
+}
+/* line 556, sass/nlcommons.scss */
 input[type=text]:focus.error, input[type=password]:focus.error {
   outline-color: red;
 }
@@ -2857,7 +2872,7 @@ input[type=text]:focus.error, input[type=password]:focus.error {
 /*
  * Buttons
  */
-/* line 540, sass/nlcommons.scss */
+/* line 564, sass/nlcommons.scss */
 button, input[type=button], input[type=submit] {
   color: black;
   font-family: 'Muli', 'Arial', sans-serif;
@@ -2888,7 +2903,7 @@ button, input[type=button], input[type=submit] {
   -khtml-border-radius: 5px;
   border-radius: 5px;
 }
-/* line 17, sass/_clickable.scss */
+/* line 18, sass/_clickable.scss */
 button:hover, input[type=button]:hover, input[type=submit]:hover {
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #6899d3), color-stop(45%, #417ec7), color-stop(85%, #6899d3));
   background: -webkit-linear-gradient(#6899d3 35%, #417ec7 45%, #6899d3 85%);
@@ -2902,7 +2917,7 @@ button:hover, input[type=button]:hover, input[type=submit]:hover {
   -o-box-shadow: 0px 0px 1px 1px #8fb4df inset;
   box-shadow: 0px 0px 1px 1px #8fb4df inset;
 }
-/* line 24, sass/_clickable.scss */
+/* line 25, sass/_clickable.scss */
 button:active, input[type=button]:active, input[type=submit]:active {
   -moz-box-shadow: -1px 5px 6px 3px #254d7d inset;
   -webkit-box-shadow: -1px 5px 6px 3px #254d7d inset;
@@ -2917,7 +2932,7 @@ button:active, input[type=button]:active, input[type=submit]:active {
   background: linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
   /*border: 1px solid darken($button-color, 40%);*/
 }
-/* line 33, sass/_clickable.scss */
+/* line 34, sass/_clickable.scss */
 button[disabled], input[type=button][disabled], input[type=submit][disabled] {
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #b7b7b7), color-stop(45%, #aaaaaa), color-stop(85%, #b7b7b7));
   background: -webkit-linear-gradient(#b7b7b7 35%, #aaaaaa 45%, #b7b7b7 85%);
@@ -2935,7 +2950,7 @@ button[disabled], input[type=button][disabled], input[type=submit][disabled] {
   cursor: default;
   opacity: .5;
 }
-/* line 42, sass/_clickable.scss */
+/* line 43, sass/_clickable.scss */
 button[disabled]:active, input[type=button][disabled]:active, input[type=submit][disabled]:active {
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #b7b7b7), color-stop(45%, #aaaaaa), color-stop(85%, #b7b7b7));
   background: -webkit-linear-gradient(#b7b7b7 35%, #aaaaaa 45%, #b7b7b7 85%);
@@ -2953,7 +2968,7 @@ button[disabled]:active, input[type=button][disabled]:active, input[type=submit]
   cursor: default;
   opacity: .5;
 }
-/* line 55, sass/_clickable.scss */
+/* line 56, sass/_clickable.scss */
 button.selected, input[type=button].selected, input[type=submit].selected {
   -moz-box-shadow: -1px 5px 6px 2px #254d7d inset;
   -webkit-box-shadow: -1px 5px 6px 2px #254d7d inset;
@@ -2967,7 +2982,7 @@ button.selected, input[type=button].selected, input[type=submit].selected {
   -pie-background: linear-gradient(#6899d3 35%, #417ec7 45%, #6899d3 85%);
   background: linear-gradient(#6899d3 35%, #417ec7 45%, #6899d3 85%);
 }
-/* line 64, sass/_clickable.scss */
+/* line 65, sass/_clickable.scss */
 button.selected:hover, input[type=button].selected:hover, input[type=submit].selected:hover {
   -moz-box-shadow: -1px 5px 6px 2px #254d7d inset;
   -webkit-box-shadow: -1px 5px 6px 2px #254d7d inset;
@@ -2981,7 +2996,7 @@ button.selected:hover, input[type=button].selected:hover, input[type=submit].sel
   -pie-background: linear-gradient(#548ccd 35%, #3672b9 45%, #548ccd 85%);
   background: linear-gradient(#548ccd 35%, #3672b9 45%, #548ccd 85%);
 }
-/* line 73, sass/_clickable.scss */
+/* line 74, sass/_clickable.scss */
 button.selected:active, input[type=button].selected:active, input[type=submit].selected:active {
   -moz-box-shadow: -1px 5px 6px 3px #254d7d inset;
   -webkit-box-shadow: -1px 5px 6px 3px #254d7d inset;
@@ -2995,7 +3010,7 @@ button.selected:active, input[type=button].selected:active, input[type=submit].s
   -pie-background: linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
   background: linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
 }
-/* line 81, sass/_clickable.scss */
+/* line 82, sass/_clickable.scss */
 button.selected[disabled], input[type=button].selected[disabled], input[type=submit].selected[disabled] {
   -moz-box-shadow: -1px 5px 6px 2px #515151 inset;
   -webkit-box-shadow: -1px 5px 6px 2px #515151 inset;
@@ -3009,7 +3024,7 @@ button.selected[disabled], input[type=button].selected[disabled], input[type=sub
   -pie-background: linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
   background: linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
 }
-/* line 550, sass/nlcommons.scss */
+/* line 573, sass/nlcommons.scss */
 button div.ui-icon, input[type=button] div.ui-icon, input[type=submit] div.ui-icon {
   margin-top: 1px;
   margin-bottom: 1px;
@@ -3017,7 +3032,7 @@ button div.ui-icon, input[type=button] div.ui-icon, input[type=submit] div.ui-ic
   display: inline-block;
 }
 
-/* line 559, sass/nlcommons.scss */
+/* line 582, sass/nlcommons.scss */
 .error {
   color: red;
 }
@@ -3025,12 +3040,12 @@ button div.ui-icon, input[type=button] div.ui-icon, input[type=submit] div.ui-ic
 /*
  * DataTables Styling
  */
-/* line 567, sass/nlcommons.scss */
+/* line 590, sass/nlcommons.scss */
 .dataTables_wrapper div.ui-icon {
   display: inline-block;
   vertical-align: top;
 }
-/* line 572, sass/nlcommons.scss */
+/* line 595, sass/nlcommons.scss */
 .dataTables_wrapper .dataTables_paginate button {
   color: black;
   font-family: 'Muli', 'Arial', sans-serif;
@@ -3048,7 +3063,7 @@ button div.ui-icon, input[type=button] div.ui-icon, input[type=submit] div.ui-ic
   -o-box-shadow: 0px 0px 1px 1px #b7ceea inset;
   box-shadow: 0px 0px 1px 1px #b7ceea inset;
 }
-/* line 17, sass/_clickable.scss */
+/* line 18, sass/_clickable.scss */
 .dataTables_wrapper .dataTables_paginate button:hover {
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #6899d3), color-stop(45%, #417ec7), color-stop(85%, #6899d3));
   background: -webkit-linear-gradient(#6899d3 35%, #417ec7 45%, #6899d3 85%);
@@ -3062,7 +3077,7 @@ button div.ui-icon, input[type=button] div.ui-icon, input[type=submit] div.ui-ic
   -o-box-shadow: 0px 0px 1px 1px #8fb4df inset;
   box-shadow: 0px 0px 1px 1px #8fb4df inset;
 }
-/* line 24, sass/_clickable.scss */
+/* line 25, sass/_clickable.scss */
 .dataTables_wrapper .dataTables_paginate button:active {
   -moz-box-shadow: -1px 5px 6px 3px #254d7d inset;
   -webkit-box-shadow: -1px 5px 6px 3px #254d7d inset;
@@ -3077,7 +3092,7 @@ button div.ui-icon, input[type=button] div.ui-icon, input[type=submit] div.ui-ic
   background: linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
   /*border: 1px solid darken($button-color, 40%);*/
 }
-/* line 33, sass/_clickable.scss */
+/* line 34, sass/_clickable.scss */
 .dataTables_wrapper .dataTables_paginate button.paginate_disabled_previous {
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #b7b7b7), color-stop(45%, #aaaaaa), color-stop(85%, #b7b7b7));
   background: -webkit-linear-gradient(#b7b7b7 35%, #aaaaaa 45%, #b7b7b7 85%);
@@ -3095,7 +3110,7 @@ button div.ui-icon, input[type=button] div.ui-icon, input[type=submit] div.ui-ic
   cursor: default;
   opacity: .5;
 }
-/* line 42, sass/_clickable.scss */
+/* line 43, sass/_clickable.scss */
 .dataTables_wrapper .dataTables_paginate button.paginate_disabled_previous:active {
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #b7b7b7), color-stop(45%, #aaaaaa), color-stop(85%, #b7b7b7));
   background: -webkit-linear-gradient(#b7b7b7 35%, #aaaaaa 45%, #b7b7b7 85%);
@@ -3113,7 +3128,7 @@ button div.ui-icon, input[type=button] div.ui-icon, input[type=submit] div.ui-ic
   cursor: default;
   opacity: .5;
 }
-/* line 33, sass/_clickable.scss */
+/* line 34, sass/_clickable.scss */
 .dataTables_wrapper .dataTables_paginate button.paginate_disabled_next {
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #b7b7b7), color-stop(45%, #aaaaaa), color-stop(85%, #b7b7b7));
   background: -webkit-linear-gradient(#b7b7b7 35%, #aaaaaa 45%, #b7b7b7 85%);
@@ -3131,7 +3146,7 @@ button div.ui-icon, input[type=button] div.ui-icon, input[type=submit] div.ui-ic
   cursor: default;
   opacity: .5;
 }
-/* line 42, sass/_clickable.scss */
+/* line 43, sass/_clickable.scss */
 .dataTables_wrapper .dataTables_paginate button.paginate_disabled_next:active {
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #b7b7b7), color-stop(45%, #aaaaaa), color-stop(85%, #b7b7b7));
   background: -webkit-linear-gradient(#b7b7b7 35%, #aaaaaa 45%, #b7b7b7 85%);
@@ -3149,7 +3164,7 @@ button div.ui-icon, input[type=button] div.ui-icon, input[type=submit] div.ui-ic
   cursor: default;
   opacity: .5;
 }
-/* line 55, sass/_clickable.scss */
+/* line 56, sass/_clickable.scss */
 .dataTables_wrapper .dataTables_paginate button.selected {
   -moz-box-shadow: -1px 5px 6px 2px #254d7d inset;
   -webkit-box-shadow: -1px 5px 6px 2px #254d7d inset;
@@ -3163,7 +3178,7 @@ button div.ui-icon, input[type=button] div.ui-icon, input[type=submit] div.ui-ic
   -pie-background: linear-gradient(#6899d3 35%, #417ec7 45%, #6899d3 85%);
   background: linear-gradient(#6899d3 35%, #417ec7 45%, #6899d3 85%);
 }
-/* line 64, sass/_clickable.scss */
+/* line 65, sass/_clickable.scss */
 .dataTables_wrapper .dataTables_paginate button.selected:hover {
   -moz-box-shadow: -1px 5px 6px 2px #254d7d inset;
   -webkit-box-shadow: -1px 5px 6px 2px #254d7d inset;
@@ -3177,7 +3192,7 @@ button div.ui-icon, input[type=button] div.ui-icon, input[type=submit] div.ui-ic
   -pie-background: linear-gradient(#548ccd 35%, #3672b9 45%, #548ccd 85%);
   background: linear-gradient(#548ccd 35%, #3672b9 45%, #548ccd 85%);
 }
-/* line 73, sass/_clickable.scss */
+/* line 74, sass/_clickable.scss */
 .dataTables_wrapper .dataTables_paginate button.selected:active {
   -moz-box-shadow: -1px 5px 6px 3px #254d7d inset;
   -webkit-box-shadow: -1px 5px 6px 3px #254d7d inset;
@@ -3191,7 +3206,7 @@ button div.ui-icon, input[type=button] div.ui-icon, input[type=submit] div.ui-ic
   -pie-background: linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
   background: linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
 }
-/* line 81, sass/_clickable.scss */
+/* line 82, sass/_clickable.scss */
 .dataTables_wrapper .dataTables_paginate button.selected.paginate_disabled_previous {
   -moz-box-shadow: -1px 5px 6px 2px #515151 inset;
   -webkit-box-shadow: -1px 5px 6px 2px #515151 inset;
@@ -3205,7 +3220,7 @@ button div.ui-icon, input[type=button] div.ui-icon, input[type=submit] div.ui-ic
   -pie-background: linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
   background: linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
 }
-/* line 81, sass/_clickable.scss */
+/* line 82, sass/_clickable.scss */
 .dataTables_wrapper .dataTables_paginate button.selected.paginate_disabled_next {
   -moz-box-shadow: -1px 5px 6px 2px #515151 inset;
   -webkit-box-shadow: -1px 5px 6px 2px #515151 inset;
@@ -3219,19 +3234,19 @@ button div.ui-icon, input[type=button] div.ui-icon, input[type=submit] div.ui-ic
   -pie-background: linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
   background: linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
 }
-/* line 587, sass/nlcommons.scss */
+/* line 610, sass/nlcommons.scss */
 .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter {
   display: inline-block;
   margin-left: 10px;
   font-size: 15px;
 }
-/* line 592, sass/nlcommons.scss */
+/* line 615, sass/nlcommons.scss */
 .dataTables_wrapper .top, .dataTables_wrapper .bottom, .dataTables_wrapper .datatable {
   margin-top: 4px;
   margin-bottom: 4px;
 }
 
-/* line 599, sass/nlcommons.scss */
+/* line 622, sass/nlcommons.scss */
 .dataTables {
   width: 100%;
   border-bottom: 1px solid black;
@@ -3247,11 +3262,11 @@ button div.ui-icon, input[type=button] div.ui-icon, input[type=submit] div.ui-ic
   border-radius: 8px;
   overflow: hidden;
 }
-/* line 611, sass/nlcommons.scss */
+/* line 634, sass/nlcommons.scss */
 .dataTables > thead tr {
   font-family: 'Muli', 'Arial', sans-serif;
 }
-/* line 613, sass/nlcommons.scss */
+/* line 636, sass/nlcommons.scss */
 .dataTables > thead tr th {
   color: black;
   font-family: 'Muli', 'Arial', sans-serif;
@@ -3288,7 +3303,7 @@ button div.ui-icon, input[type=button] div.ui-icon, input[type=submit] div.ui-ic
   padding-bottom: 2px;
   line-height: 20px;
 }
-/* line 17, sass/_clickable.scss */
+/* line 18, sass/_clickable.scss */
 .dataTables > thead tr th:hover {
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #6899d3), color-stop(45%, #417ec7), color-stop(85%, #6899d3));
   background: -webkit-linear-gradient(#6899d3 35%, #417ec7 45%, #6899d3 85%);
@@ -3302,7 +3317,7 @@ button div.ui-icon, input[type=button] div.ui-icon, input[type=submit] div.ui-ic
   -o-box-shadow: 0px 0px 1px 1px #8fb4df inset;
   box-shadow: 0px 0px 1px 1px #8fb4df inset;
 }
-/* line 24, sass/_clickable.scss */
+/* line 25, sass/_clickable.scss */
 .dataTables > thead tr th:active {
   -moz-box-shadow: -1px 5px 6px 3px #254d7d inset;
   -webkit-box-shadow: -1px 5px 6px 3px #254d7d inset;
@@ -3317,7 +3332,7 @@ button div.ui-icon, input[type=button] div.ui-icon, input[type=submit] div.ui-ic
   background: linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
   /*border: 1px solid darken($button-color, 40%);*/
 }
-/* line 33, sass/_clickable.scss */
+/* line 34, sass/_clickable.scss */
 .dataTables > thead tr th[disabled] {
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #b7b7b7), color-stop(45%, #aaaaaa), color-stop(85%, #b7b7b7));
   background: -webkit-linear-gradient(#b7b7b7 35%, #aaaaaa 45%, #b7b7b7 85%);
@@ -3335,7 +3350,7 @@ button div.ui-icon, input[type=button] div.ui-icon, input[type=submit] div.ui-ic
   cursor: default;
   opacity: .5;
 }
-/* line 42, sass/_clickable.scss */
+/* line 43, sass/_clickable.scss */
 .dataTables > thead tr th[disabled]:active {
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #b7b7b7), color-stop(45%, #aaaaaa), color-stop(85%, #b7b7b7));
   background: -webkit-linear-gradient(#b7b7b7 35%, #aaaaaa 45%, #b7b7b7 85%);
@@ -3353,7 +3368,7 @@ button div.ui-icon, input[type=button] div.ui-icon, input[type=submit] div.ui-ic
   cursor: default;
   opacity: .5;
 }
-/* line 55, sass/_clickable.scss */
+/* line 56, sass/_clickable.scss */
 .dataTables > thead tr th.sorting_asc {
   -moz-box-shadow: -1px 5px 6px 2px #254d7d inset;
   -webkit-box-shadow: -1px 5px 6px 2px #254d7d inset;
@@ -3367,7 +3382,7 @@ button div.ui-icon, input[type=button] div.ui-icon, input[type=submit] div.ui-ic
   -pie-background: linear-gradient(#6899d3 35%, #417ec7 45%, #6899d3 85%);
   background: linear-gradient(#6899d3 35%, #417ec7 45%, #6899d3 85%);
 }
-/* line 55, sass/_clickable.scss */
+/* line 56, sass/_clickable.scss */
 .dataTables > thead tr th.sorting_desc {
   -moz-box-shadow: -1px 5px 6px 2px #254d7d inset;
   -webkit-box-shadow: -1px 5px 6px 2px #254d7d inset;
@@ -3381,7 +3396,7 @@ button div.ui-icon, input[type=button] div.ui-icon, input[type=submit] div.ui-ic
   -pie-background: linear-gradient(#6899d3 35%, #417ec7 45%, #6899d3 85%);
   background: linear-gradient(#6899d3 35%, #417ec7 45%, #6899d3 85%);
 }
-/* line 64, sass/_clickable.scss */
+/* line 65, sass/_clickable.scss */
 .dataTables > thead tr th.sorting_asc:hover {
   -moz-box-shadow: -1px 5px 6px 2px #254d7d inset;
   -webkit-box-shadow: -1px 5px 6px 2px #254d7d inset;
@@ -3395,7 +3410,7 @@ button div.ui-icon, input[type=button] div.ui-icon, input[type=submit] div.ui-ic
   -pie-background: linear-gradient(#548ccd 35%, #3672b9 45%, #548ccd 85%);
   background: linear-gradient(#548ccd 35%, #3672b9 45%, #548ccd 85%);
 }
-/* line 64, sass/_clickable.scss */
+/* line 65, sass/_clickable.scss */
 .dataTables > thead tr th.sorting_desc:hover {
   -moz-box-shadow: -1px 5px 6px 2px #254d7d inset;
   -webkit-box-shadow: -1px 5px 6px 2px #254d7d inset;
@@ -3409,7 +3424,7 @@ button div.ui-icon, input[type=button] div.ui-icon, input[type=submit] div.ui-ic
   -pie-background: linear-gradient(#548ccd 35%, #3672b9 45%, #548ccd 85%);
   background: linear-gradient(#548ccd 35%, #3672b9 45%, #548ccd 85%);
 }
-/* line 73, sass/_clickable.scss */
+/* line 74, sass/_clickable.scss */
 .dataTables > thead tr th.sorting_asc:active {
   -moz-box-shadow: -1px 5px 6px 3px #254d7d inset;
   -webkit-box-shadow: -1px 5px 6px 3px #254d7d inset;
@@ -3423,7 +3438,7 @@ button div.ui-icon, input[type=button] div.ui-icon, input[type=submit] div.ui-ic
   -pie-background: linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
   background: linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
 }
-/* line 73, sass/_clickable.scss */
+/* line 74, sass/_clickable.scss */
 .dataTables > thead tr th.sorting_desc:active {
   -moz-box-shadow: -1px 5px 6px 3px #254d7d inset;
   -webkit-box-shadow: -1px 5px 6px 3px #254d7d inset;
@@ -3437,7 +3452,7 @@ button div.ui-icon, input[type=button] div.ui-icon, input[type=submit] div.ui-ic
   -pie-background: linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
   background: linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
 }
-/* line 81, sass/_clickable.scss */
+/* line 82, sass/_clickable.scss */
 .dataTables > thead tr th.sorting_asc[disabled] {
   -moz-box-shadow: -1px 5px 6px 2px #515151 inset;
   -webkit-box-shadow: -1px 5px 6px 2px #515151 inset;
@@ -3451,7 +3466,7 @@ button div.ui-icon, input[type=button] div.ui-icon, input[type=submit] div.ui-ic
   -pie-background: linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
   background: linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
 }
-/* line 81, sass/_clickable.scss */
+/* line 82, sass/_clickable.scss */
 .dataTables > thead tr th.sorting_desc[disabled] {
   -moz-box-shadow: -1px 5px 6px 2px #515151 inset;
   -webkit-box-shadow: -1px 5px 6px 2px #515151 inset;
@@ -3465,73 +3480,73 @@ button div.ui-icon, input[type=button] div.ui-icon, input[type=submit] div.ui-ic
   -pie-background: linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
   background: linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
 }
-/* line 625, sass/nlcommons.scss */
+/* line 647, sass/nlcommons.scss */
 .dataTables > thead tr th div.ui-icon {
   margin-top: 2px;
   margin-bottom: 2px;
 }
-/* line 641, sass/nlcommons.scss */
+/* line 663, sass/nlcommons.scss */
 .dataTables > tbody tr:nth-child(even) {
   background-color: #dee9f6;
 }
-/* line 644, sass/nlcommons.scss */
+/* line 666, sass/nlcommons.scss */
 .dataTables > tbody td {
   padding: 3px;
 }
-/* line 648, sass/nlcommons.scss */
+/* line 670, sass/nlcommons.scss */
 .dataTables span.hidden_elapsed_time {
   display: none;
 }
 
-/* line 653, sass/nlcommons.scss */
+/* line 675, sass/nlcommons.scss */
 table.model_list_datatable table td {
   height: 30px;
 }
-/* line 655, sass/nlcommons.scss */
+/* line 677, sass/nlcommons.scss */
 table.model_list_datatable table td:first-child {
   padding-left: 4px;
   padding-right: 4px;
   width: 30px;
   min-width: 30px;
 }
-/* line 661, sass/nlcommons.scss */
+/* line 683, sass/nlcommons.scss */
 table.model_list_datatable table td img {
   vertical-align: top;
   width: 30px;
   height: 30px;
 }
 
-/* line 669, sass/nlcommons.scss */
+/* line 691, sass/nlcommons.scss */
 table.simple_table {
   border-collapse: collapse;
 }
-/* line 671, sass/nlcommons.scss */
+/* line 693, sass/nlcommons.scss */
 table.simple_table img {
   vertical-align: middle;
 }
-/* line 674, sass/nlcommons.scss */
+/* line 696, sass/nlcommons.scss */
 table.simple_table th {
   font-weight: bold;
   padding-left: 5px;
   padding-right: 5px;
 }
-/* line 679, sass/nlcommons.scss */
+/* line 701, sass/nlcommons.scss */
 table.simple_table td {
   border: 1px solid;
   padding: 5px;
 }
 
-/* line 685, sass/nlcommons.scss */
+/* line 707, sass/nlcommons.scss */
 .highlight {
   background-color: #ff0;
 }
 
-/* line 690, sass/nlcommons.scss */
+/* line 712, sass/nlcommons.scss */
 .activity {
   width: 660px;
   float: left;
 }
-/* line 693, sass/nlcommons.scss */
+/* line 715, sass/nlcommons.scss */
 .activity .post {
   padding: 4px;
   margin-top: 10px;
@@ -3539,15 +3554,15 @@ table.simple_table td {
   border-bottom: 1px solid black;
   overflow: auto;
 }
-/* line 694, sass/nlcommons.scss */
+/* line 716, sass/nlcommons.scss */
 .activity .post a {
   text-decoration: none;
 }
-/* line 696, sass/nlcommons.scss */
+/* line 718, sass/nlcommons.scss */
 .activity .post a:hover {
   text-decoration: underline;
 }
-/* line 707, sass/nlcommons.scss */
+/* line 729, sass/nlcommons.scss */
 .activity .post .main_image {
   vertical-align: top;
   display: inline-block;
@@ -3555,21 +3570,21 @@ table.simple_table td {
   height: 80px;
   padding-right: 12px;
 }
-/* line 712, sass/nlcommons.scss */
+/* line 734, sass/nlcommons.scss */
 .activity .post .main_image img {
   width: 100%;
 }
-/* line 717, sass/nlcommons.scss */
+/* line 739, sass/nlcommons.scss */
 .activity .post .post_content {
   vertical-align: top;
   display: inline-block;
 }
-/* line 720, sass/nlcommons.scss */
+/* line 742, sass/nlcommons.scss */
 .activity .post .post_content .post_person {
   line-height: 30px;
   font-size: 16px;
 }
-/* line 723, sass/nlcommons.scss */
+/* line 745, sass/nlcommons.scss */
 .activity .post .post_content .post_person img {
   vertical-align: top;
   height: 30px;
@@ -3577,33 +3592,33 @@ table.simple_table td {
   padding-left: 5px;
   padding-right: 5px;
 }
-/* line 732, sass/nlcommons.scss */
+/* line 754, sass/nlcommons.scss */
 .activity .post .post_content .post_item {
   font-size: 30px;
 }
-/* line 736, sass/nlcommons.scss */
+/* line 758, sass/nlcommons.scss */
 .activity .post .post_content .post_date {
   font-size: 16px;
 }
-/* line 739, sass/nlcommons.scss */
+/* line 761, sass/nlcommons.scss */
 .activity .post .post_content .post_more {
   font-size: 10px;
 }
 
-/* line 750, sass/nlcommons.scss */
+/* line 772, sass/nlcommons.scss */
 .sidebar {
   width: 300px;
   float: left;
 }
-/* line 751, sass/nlcommons.scss */
+/* line 773, sass/nlcommons.scss */
 .sidebar a {
   text-decoration: none;
 }
-/* line 753, sass/nlcommons.scss */
+/* line 775, sass/nlcommons.scss */
 .sidebar a:hover {
   text-decoration: underline;
 }
-/* line 759, sass/nlcommons.scss */
+/* line 781, sass/nlcommons.scss */
 .sidebar .side_list {
   -moz-box-shadow: 0 0 10px 2px gray;
   -webkit-box-shadow: 0 0 10px 2px gray;
@@ -3619,7 +3634,7 @@ table.simple_table td {
   -khtml-border-radius: 8px;
   border-radius: 8px;
 }
-/* line 763, sass/nlcommons.scss */
+/* line 785, sass/nlcommons.scss */
 .sidebar .side_list h1 {
   font-family: 'Muli', 'Arial', sans-serif;
   background-color: #04346c;
@@ -3630,39 +3645,39 @@ table.simple_table td {
   color: white;
   margin: 0px;
 }
-/* line 777, sass/nlcommons.scss */
+/* line 799, sass/nlcommons.scss */
 .sidebar .side_list .side_post {
   padding: 4px;
 }
-/* line 780, sass/nlcommons.scss */
+/* line 802, sass/nlcommons.scss */
 .sidebar .side_list .side_post .side_image {
   width: 50px;
   height: 50px;
   display: inline-block;
   vertical-align: top;
 }
-/* line 784, sass/nlcommons.scss */
+/* line 806, sass/nlcommons.scss */
 .sidebar .side_list .side_post .side_image img {
   width: 100%;
 }
-/* line 789, sass/nlcommons.scss */
+/* line 811, sass/nlcommons.scss */
 .sidebar .side_list .side_post .side_content {
   display: inline-block;
   vertical-align: top;
 }
-/* line 793, sass/nlcommons.scss */
+/* line 815, sass/nlcommons.scss */
 .sidebar .side_list .side_post .side_content .side_person {
   font-size: 11px;
 }
-/* line 796, sass/nlcommons.scss */
+/* line 818, sass/nlcommons.scss */
 .sidebar .side_list .side_post .side_content .side_item {
   font-size: 15px;
 }
-/* line 799, sass/nlcommons.scss */
+/* line 821, sass/nlcommons.scss */
 .sidebar .side_list .side_post .side_content .side_views {
   font-size: 11px;
 }
-/* line 804, sass/nlcommons.scss */
+/* line 826, sass/nlcommons.scss */
 .sidebar .side_list .side_more {
   text-align: center;
 }
@@ -3671,39 +3686,39 @@ table.simple_table td {
  * Legacy Styling
  * All of this should probably be updated
  */
-/* line 818, sass/nlcommons.scss */
+/* line 840, sass/nlcommons.scss */
 #menubar-avatar, #logged-in-as {
   float: left;
   margin-left: 1em;
 }
 
-/* line 823, sass/nlcommons.scss */
+/* line 845, sass/nlcommons.scss */
 #main-menu, h1, h2, h3, #flash-notice, #logged-in-as {
   font-family: 'Muli', 'Arial', sans-serif;
   font-weight: bold;
 }
 
-/* line 828, sass/nlcommons.scss */
+/* line 850, sass/nlcommons.scss */
 h1, #flash-notice {
   clear: both;
 }
 
-/* line 832, sass/nlcommons.scss */
+/* line 854, sass/nlcommons.scss */
 h1, #flash-notice {
   font-size: 21px;
 }
 
-/* line 836, sass/nlcommons.scss */
+/* line 858, sass/nlcommons.scss */
 h2 {
   font-size: 17px;
 }
 
-/* line 840, sass/nlcommons.scss */
+/* line 862, sass/nlcommons.scss */
 .h2-explanation {
   font-size: 13px;
 }
 
-/* line 844, sass/nlcommons.scss */
+/* line 866, sass/nlcommons.scss */
 h3, #menu-bar {
   font-size: 15px;
 }
@@ -3713,7 +3728,7 @@ h3, #menu-bar {
     top: 3.5em;
     left: 20em;
 }*/
-/* line 854, sass/nlcommons.scss */
+/* line 876, sass/nlcommons.scss */
 a img {
   border: 0;
   margin: 0;
@@ -3855,7 +3870,7 @@ div ul.subsection_tabs li.tab a:hover {
 .sorting {
     background: url('../images/sort_both.jpg') no-repeat center right;
 }*/
-/* line 1004, sass/nlcommons.scss */
+/* line 1026, sass/nlcommons.scss */
 div.foreSortIcon {
   background: url("../images/sort_both.jpg") no-repeat center right;
   width: 16px;
@@ -3865,7 +3880,7 @@ div.foreSortIcon {
 }
 
 /* Autocomplete */
-/* line 1013, sass/nlcommons.scss */
+/* line 1035, sass/nlcommons.scss */
 ul.jq-ui-autocomplete {
   position: absolute;
   overflow: hidden;
@@ -3878,7 +3893,7 @@ ul.jq-ui-autocomplete {
   color: #333;
 }
 
-/* line 1024, sass/nlcommons.scss */
+/* line 1046, sass/nlcommons.scss */
 ul.jq-ui-autocomplete li {
   display: block;
   padding: .3em .5em .3em .3em;
@@ -3886,30 +3901,30 @@ ul.jq-ui-autocomplete li {
   width: 100%;
 }
 
-/* line 1031, sass/nlcommons.scss */
+/* line 1053, sass/nlcommons.scss */
 ul.jq-ui-autocomplete li.active {
   background-color: #3875d7;
   color: #fff;
 }
 
-/* line 1036, sass/nlcommons.scss */
+/* line 1058, sass/nlcommons.scss */
 .deleted {
   text-decoration: line-through;
 }
 
-/* line 1040, sass/nlcommons.scss */
+/* line 1062, sass/nlcommons.scss */
 table#new-person-form tr td {
   width: 10em;
 }
 
-/* line 1044, sass/nlcommons.scss */
+/* line 1066, sass/nlcommons.scss */
 .fieldWithErrors {
   padding: 2px;
   background-color: red;
   display: table;
 }
 
-/* line 1050, sass/nlcommons.scss */
+/* line 1072, sass/nlcommons.scss */
 #errorExplanation {
   width: 450px;
   border: 2px solid red;
@@ -3919,7 +3934,7 @@ table#new-person-form tr td {
   background-color: #f0f0f0;
 }
 
-/* line 1059, sass/nlcommons.scss */
+/* line 1081, sass/nlcommons.scss */
 #error_explanation h2 {
   text-align: left;
   font-weight: bold;
@@ -3931,18 +3946,18 @@ table#new-person-form tr td {
   color: #fff;
 }
 
-/* line 1070, sass/nlcommons.scss */
+/* line 1092, sass/nlcommons.scss */
 #error_explanation ul li {
   font-size: 12px;
   list-style: square;
 }
 
-/* line 1075, sass/nlcommons.scss */
+/* line 1097, sass/nlcommons.scss */
 tr.scaffold-row {
   border-bottom: 2px solid black;
 }
 
-/* line 1079, sass/nlcommons.scss */
+/* line 1101, sass/nlcommons.scss */
 #permission-group-reminder {
   font-style: italic;
 }

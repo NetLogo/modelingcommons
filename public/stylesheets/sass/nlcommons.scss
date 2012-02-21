@@ -11,10 +11,14 @@ $blueprint-grid-width: 40px;
 @import "all";
 
 
-$pie-behavior: url("/stylesheets/PIE.htc");
+$pie-behavior: url("/browse/pie");
 $pie-base-class: pie-element;
 .pie-element {
   @include pie-element(relative);
+}
+@mixin pie-border-radius($r) {
+  @include border-radius($r);
+  @include pie;
 }
 
 /* 
@@ -38,8 +42,9 @@ body {
   @include container;
   background-color: white;
   @include box-shadow(0 0 15px 10px gray);
-  @include border-bottom-right-radius($tab-corner-radius);
-  @include border-bottom-left-radius($tab-corner-radius);
+  //@include border-bottom-right-radius($tab-corner-radius);
+  //@include border-bottom-left-radius($tab-corner-radius);
+  @include pie-border-radius(0px 0px $tab-corner-radius $tab-corner-radius);
   margin-bottom: 200px;
 }
 
@@ -49,18 +54,25 @@ body {
 .header {
   @include sans-font();
   @include column(24);
-  @include border-bottom-left-radius($tab-corner-radius);
-  @include border-bottom-right-radius($tab-corner-radius);
+  //@include border-bottom-left-radius($tab-corner-radius);
+  //@include border-bottom-right-radius($tab-corner-radius);
+  @include pie-border-radius(0px 0px $tab-corner-radius $tab-corner-radius);
   @include box-shadow(0 0 10px 2px gray);
   overflow: hidden;
   background-color: /*lighten($header-color, 10%);*/$header-color;
   .banner {
+    //background-color: $header-color;
     background-image: url('banner.png');
+    background-color: $header-color;
     cursor: pointer;
     @include column(12);
     height: 100px;
     color: white;
-    @include text-shadow(/*$text-highlight*/$nav-color, 3px, 3px, 5px);
+    @include text-shadow($nav-color, 3px, 3px, 5px);
+    h1, h2 {
+      display: inline-block;
+      filter: progid:DXImageTransform.Microsoft.Shadow(color=#{$nav-color}, direction=135, strength=5px);
+    }
     h1 {
       font-size: 40px;
       margin-left: 17px;
@@ -96,7 +108,7 @@ body {
         display: inline-block;
         padding-top: 2px;
         padding-bottom: 2px;
-        @include border-bottom-left-radius($tab-corner-radius);
+        @include pie-border-radius(0px 0px 0px $tab-corner-radius);
         img {
           height: 26px;
           width: 26px;
@@ -114,6 +126,10 @@ body {
         a:active {
           color: red;
         }
+        .login_error_container {
+          max-height: 18px;
+          
+        }
       }
     }
     .flash_container {
@@ -128,13 +144,13 @@ body {
           @include border-bottom-left-radius($tab-corner-radius);
           @include border-top-left-radius($tab-corner-radius);
           width: 100%;
-          line-height: 20px;
+          line-height: 18px;
           font-size: 16px;
           color: white;
           text-align: center;
           overflow: hidden;
-          max-height: 40px;
-          min-height: 20px;
+          max-height: 36px;
+          min-height: 18px;
           width: 480px;
           position: relative;
           right: -480px;
@@ -182,6 +198,7 @@ body {
   $nav-height: 40px;
 
   .navigation {
+    @include pie-border-radius(0px 0px 0px $tab-corner-radius);
     background-color: $nav-color;
     @include column(19);
     $a-color: black;
@@ -238,6 +255,8 @@ body {
     line-height: $nav-height;
   }
   .search {
+    @include border-radius(0px 0px $tab-corner-radius 0px);
+    @include pie;
     background-color: $nav-color;
     @include column(5, last);
     height: $nav-height;
@@ -490,7 +509,7 @@ div.left-right {
 .panel {
   @include global_padding;
   border: 3px solid black;
-  @include border-radius(8px);
+  @include pie-border-radius(8px);
   padding: 4px;
 }
 
@@ -509,6 +528,7 @@ div.left-right {
  * Text Input Field
  */
 input[type=text], input[type=password] {
+  @include pie;
   $color: rgb(50%, 50%, 50%);
   //color: $color; 
   @include serif-font();
@@ -522,12 +542,16 @@ input[type=text], input[type=password] {
   &.error {
     color: $error-color;
     border-color: $error-color;
-    @include box-shadow(-1px 1px 4px 1px lighten($error-color, 20%) inset);
+    //@include box-shadow(-1px 1px 4px 1px lighten($error-color, 20%) inset);
+    
   }
   &:focus {
     outline:none;
     $input-color: darken($header-color, 10%);
     @include box-shadow(-1px 1px 4px 1px lighten($color, 20%) inset, 0px 0px 4px 2px $input-color);
+  }
+  &.error:focus {
+    @include box-shadow(-1px 1px 4px 1px lighten($color, 20%) inset, 0px 0px 4px 2px lighten($error-color, 20%));
   }
   &:focus.error {
     outline-color: red;
@@ -538,7 +562,6 @@ input[type=text], input[type=password] {
  * Buttons
  */
 button, input[type=button], input[type=submit] {
-  @include pie;
   @include clickable($background-color: $header-color);
   font-size: $default-font-size;
   line-height: 16px;
@@ -612,7 +635,6 @@ button, input[type=button], input[type=submit] {
     @include sans-font();
     th {
       @include clickable($background-color: $header-color, $selected: '.sorting_asc' '.sorting_desc');
-      @include pie;
       @include border-top-right-radius(5px);
       @include border-top-left-radius(5px);
       text-align: center;
