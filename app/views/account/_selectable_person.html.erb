@@ -1,0 +1,10 @@
+<div class="selectable_person">
+	<input type="hidden" id="person_id" name="invitees[id][]" value="<%= person.id -%>">
+	<img src="<%= person.avatar.url(:thumb) -%>"><%= person.fullname -%>
+	<button class="person_add">
+		Add
+	</button>
+	<button class="person_remove">
+		Remove
+	</button>
+</div>

@@ -829,6 +829,33 @@ table.simple_table {
   }
 }
 
+
+/*
+ * Group people selector
+ */
+
+.selectable_person {
+  display: block;
+  background-color: $header-color;
+  padding: 4px;
+  border-radius: 5px;
+  height: 30px;
+  line-height: 30px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  img {
+    vertical-align: top;
+    height: 30px;
+    padding-right: 10px;
+  }
+}
+#selected_people button.person_add {
+  display: none;
+}
+#unselected_people button.person_remove {
+  display: none;
+}
+
 /* 
  * Legacy Styling
  * All of this should probably be updated

@@ -3682,43 +3682,74 @@ table.simple_table td {
   text-align: center;
 }
 
+/*
+ * Group people selector
+ */
+/* line 837, sass/nlcommons.scss */
+.selectable_person {
+  display: block;
+  background-color: #8fb4df;
+  padding: 4px;
+  border-radius: 5px;
+  height: 30px;
+  line-height: 30px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+/* line 846, sass/nlcommons.scss */
+.selectable_person img {
+  vertical-align: top;
+  height: 30px;
+  padding-right: 10px;
+}
+
+/* line 852, sass/nlcommons.scss */
+#selected_people button.person_add {
+  display: none;
+}
+
+/* line 855, sass/nlcommons.scss */
+#unselected_people button.person_remove {
+  display: none;
+}
+
 /* 
  * Legacy Styling
  * All of this should probably be updated
  */
-/* line 840, sass/nlcommons.scss */
+/* line 867, sass/nlcommons.scss */
 #menubar-avatar, #logged-in-as {
   float: left;
   margin-left: 1em;
 }
 
-/* line 845, sass/nlcommons.scss */
+/* line 872, sass/nlcommons.scss */
 #main-menu, h1, h2, h3, #flash-notice, #logged-in-as {
   font-family: 'Muli', 'Arial', sans-serif;
   font-weight: bold;
 }
 
-/* line 850, sass/nlcommons.scss */
+/* line 877, sass/nlcommons.scss */
 h1, #flash-notice {
   clear: both;
 }
 
-/* line 854, sass/nlcommons.scss */
+/* line 881, sass/nlcommons.scss */
 h1, #flash-notice {
   font-size: 21px;
 }
 
-/* line 858, sass/nlcommons.scss */
+/* line 885, sass/nlcommons.scss */
 h2 {
   font-size: 17px;
 }
 
-/* line 862, sass/nlcommons.scss */
+/* line 889, sass/nlcommons.scss */
 .h2-explanation {
   font-size: 13px;
 }
 
-/* line 866, sass/nlcommons.scss */
+/* line 893, sass/nlcommons.scss */
 h3, #menu-bar {
   font-size: 15px;
 }
@@ -3728,7 +3759,7 @@ h3, #menu-bar {
     top: 3.5em;
     left: 20em;
 }*/
-/* line 876, sass/nlcommons.scss */
+/* line 903, sass/nlcommons.scss */
 a img {
   border: 0;
   margin: 0;
@@ -3870,7 +3901,7 @@ div ul.subsection_tabs li.tab a:hover {
 .sorting {
     background: url('../images/sort_both.jpg') no-repeat center right;
 }*/
-/* line 1026, sass/nlcommons.scss */
+/* line 1053, sass/nlcommons.scss */
 div.foreSortIcon {
   background: url("../images/sort_both.jpg") no-repeat center right;
   width: 16px;
@@ -3880,7 +3911,7 @@ div.foreSortIcon {
 }
 
 /* Autocomplete */
-/* line 1035, sass/nlcommons.scss */
+/* line 1062, sass/nlcommons.scss */
 ul.jq-ui-autocomplete {
   position: absolute;
   overflow: hidden;
@@ -3893,7 +3924,7 @@ ul.jq-ui-autocomplete {
   color: #333;
 }
 
-/* line 1046, sass/nlcommons.scss */
+/* line 1073, sass/nlcommons.scss */
 ul.jq-ui-autocomplete li {
   display: block;
   padding: .3em .5em .3em .3em;
@@ -3901,30 +3932,30 @@ ul.jq-ui-autocomplete li {
   width: 100%;
 }
 
-/* line 1053, sass/nlcommons.scss */
+/* line 1080, sass/nlcommons.scss */
 ul.jq-ui-autocomplete li.active {
   background-color: #3875d7;
   color: #fff;
 }
 
-/* line 1058, sass/nlcommons.scss */
+/* line 1085, sass/nlcommons.scss */
 .deleted {
   text-decoration: line-through;
 }
 
-/* line 1062, sass/nlcommons.scss */
+/* line 1089, sass/nlcommons.scss */
 table#new-person-form tr td {
   width: 10em;
 }
 
-/* line 1066, sass/nlcommons.scss */
+/* line 1093, sass/nlcommons.scss */
 .fieldWithErrors {
   padding: 2px;
   background-color: red;
   display: table;
 }
 
-/* line 1072, sass/nlcommons.scss */
+/* line 1099, sass/nlcommons.scss */
 #errorExplanation {
   width: 450px;
   border: 2px solid red;
@@ -3934,7 +3965,7 @@ table#new-person-form tr td {
   background-color: #f0f0f0;
 }
 
-/* line 1081, sass/nlcommons.scss */
+/* line 1108, sass/nlcommons.scss */
 #error_explanation h2 {
   text-align: left;
   font-weight: bold;
@@ -3946,18 +3977,18 @@ table#new-person-form tr td {
   color: #fff;
 }
 
-/* line 1092, sass/nlcommons.scss */
+/* line 1119, sass/nlcommons.scss */
 #error_explanation ul li {
   font-size: 12px;
   list-style: square;
 }
 
-/* line 1097, sass/nlcommons.scss */
+/* line 1124, sass/nlcommons.scss */
 tr.scaffold-row {
   border-bottom: 2px solid black;
 }
 
-/* line 1101, sass/nlcommons.scss */
+/* line 1128, sass/nlcommons.scss */
 #permission-group-reminder {
   font-style: italic;
 }
