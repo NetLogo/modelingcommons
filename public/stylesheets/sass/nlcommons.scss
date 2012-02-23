@@ -24,6 +24,8 @@ $pie-base-class: pie-element;
 /* 
  * Overall Page Layout
  */
+
+
 /* 
  * Page background color
  * Global styling, such as default font family and color
@@ -33,7 +35,6 @@ body {
     @include serif-font();
     font-size: $default-font-size;
 }
-
 /* 
  * Center page container
  * Blueprint column container
@@ -48,8 +49,11 @@ body {
   margin-bottom: 200px;
 }
 
+
+
 /* 
  * Page header, at the top of all pages
+ * layouts/_page_header
  */
 .header {
   @include sans-font();
@@ -207,7 +211,7 @@ body {
       color: $nav-text-color;
       font-size: 20px;
 
-      @include border-radius(5px);
+      @include pie-border-radius(5px);
       padding-top: 4px;
       padding-bottom: 4px;
       padding-left: 7px;
@@ -299,6 +303,7 @@ body {
 
 /* 
  * Model Page
+ * browse/one_model
  */
 
 #preview_info_container {
@@ -384,6 +389,7 @@ body {
 /* 
  * Code Highlighting 
  * Proc is procedure
+ * browse/_browse/procedures_tab
  */
 .procedure_code {
   font-family: courier, monospace;
@@ -403,6 +409,7 @@ body {
 
 /* 
  * Login Page (Front Page)
+ * account/login
  */
 
 div#just_visiting {
@@ -412,16 +419,11 @@ div#just_visiting {
 div#register_new_user {
   @include column(12, true);
 }
-/*div#login_exisiting_user {
-  @include column(12);
-  table td{
-    
-  }
-}*/
 
 
 /* 
  * User Page (Front Page) 
+ * account/mypage
  */
 #left-news-box {
   @include column(12);
@@ -433,6 +435,7 @@ div#register_new_user {
 
 /* 
  * Search Results Page 
+ * search/search_action
  */
 #search_tabs {
   .num-results {
@@ -463,6 +466,7 @@ div#register_new_user {
 
 /*
  * One Group Page
+ * membership/one_group
  */
 
 .grouplist {
@@ -481,9 +485,65 @@ div#register_new_user {
 
 /*
  * Admin view all actions
+ * admin/view_all_people
  */
 .actions_table_container {
   overflow: scroll;
+}
+
+
+
+
+/*
+ * Group people selector
+ * membership/_invite
+ */
+table#people_adder {
+  width: 100%;
+  td {
+    width: 50%;
+    vertical-align: top;
+    &>div {
+      vertical-align: baseline;
+      
+    }
+  }
+}
+
+.selectable_person {
+  $height: 24px;
+  background-color: lighten(black, 90%);
+  padding: 2px;
+  @include pie-border-radius(5px);
+  height: $height;
+  line-height: $height;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  img {
+    vertical-align: top;
+    height: $height;
+    padding-right: 10px;
+  } 
+}
+#selected_people, #unselected_people {
+  padding: 4px;
+  .no_people {
+    text-align: center;
+    font-size: 11px;
+    margin-top: 10px;
+    background-color: lighten(black, 90%);
+  }
+}
+#selected_people button.person_add {
+  display: none;
+}
+#unselected_people button.person_remove {
+  display: none;
+}
+.no_people label {
+  width: 100%;
+  display: inline-block;
+  cursor: pointer;
 }
 
 /*
@@ -830,31 +890,6 @@ table.simple_table {
 }
 
 
-/*
- * Group people selector
- */
-
-.selectable_person {
-  display: block;
-  background-color: $header-color;
-  padding: 4px;
-  border-radius: 5px;
-  height: 30px;
-  line-height: 30px;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  img {
-    vertical-align: top;
-    height: 30px;
-    padding-right: 10px;
-  }
-}
-#selected_people button.person_add {
-  display: none;
-}
-#unselected_people button.person_remove {
-  display: none;
-}
 
 /* 
  * Legacy Styling

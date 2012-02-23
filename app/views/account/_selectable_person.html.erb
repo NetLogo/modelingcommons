@@ -1,10 +1,14 @@
-<div class="selectable_person">
-	<input type="hidden" id="person_id" name="invitees[id][]" value="<%= person.id -%>">
-	<img src="<%= person.avatar.url(:thumb) -%>"><%= person.fullname -%>
-	<button class="person_add">
-		Add
-	</button>
-	<button class="person_remove">
-		Remove
-	</button>
+<div class="selectable_person left-right">
+	<div class="left">
+		<input type="hidden" id="person_id" name="invitees[id][]" value="<%= person.id -%>">
+		<a href="<%= url_for({:controller => :account, :action => :mypage, :id => person.id}) -%>"><img src="<%= person.avatar.url(:thumb) -%>"><%= person.fullname -%></a>
+	</div>
+	<div class="right">
+		<button class="person_add">
+			Add
+		</button>
+		<button class="person_remove">
+			Remove
+		</button>
+	</div>
 </div>

@@ -500,88 +500,91 @@ $(document).ready(function () {
 		});
 		return false;
 	});
-	/*$("#existing_tags").on("click", ".tag_delete_form a", function(e) {
-		$(e.target).parents("form").submit();
-		e.preventDefault();
-	});
-	$("#search_people_to_invite").bind("keypress", function(e) {
-		$.ajax({
-			url: "/account/find_people", 
-			dataType: "json",  
-			type: "post", 
-			data: $.param({
-				query: this.value
-			}), 
-			success: function(data, textStatus, jqXHR) {
-				console.log(data);
-				
-				var separator = $("#invite_people_separator");
-				var list = $("#invite_people_list");
-				separator.nextAll("option:selected").each(function(index, element) {
-					$(element).detach().insertBefore(separator);
-				});
-				separator.nextAll("option").remove();
-				separator.prevAll("option:not(:selected)").remove();
-				
-				for(var c = 0; c < data.length; c++) {
-					list.append('<option value="' + data[c].id + '">' + data[c].name + '</option>');
-				}
-			}
-		})
-	});*/
+	
+	//Person selector for group invitation tab
 	(function() {
 		var selectedList = $("#selected_people");
 		var unselectedList = $("#unselected_people");
 		var groupSelector = $("#group_id");
+		var personSearchInput = $("#search_people_to_invite");
+		
 		groupSelector.bind("change", function(e) {
-			updateSubmitButtonState();
+			updateSelectedListIndicatorState();
 		});
+		
 		var personAdded = function(idToCheck) {
-			
-			return false;
-		}
+			var isAdded = false;
+			selectedList.find(".selectable_person input#person_id").each(function(index, element) {
+				if(parseInt($(element).attr("value")) == idToCheck) {
+					isAdded = true;
+					return false;
+				}
+			});
+			return isAdded;
+		};
 		var submit = $("#submit_selected_people");
-		var updateSubmitButtonState = function() {
+		var updateSelectedListIndicatorState = function() {
 			if(selectedList.children(".selectable_person").length > 0 && groupSelector.children("option:selected").attr("value").length > 0) {
 				submit.removeAttr("disabled");
 			} else {
 				submit.attr("disabled", "disabled");
 			}
-		}
+			if(selectedList.children(".selectable_person").length > 0) {
+				selectedList.find(".no_people").addClass("hidden");
+			} else {
+				selectedList.find(".no_people").removeClass("hidden");
+			}
+		};
+		var updateUnselectedListIndicatorState = function() {
+			if(unselectedList.children(".selectable_person").length > 0) {
+				unselectedList.find(".no_people").addClass("hidden");
+			} else {
+				unselectedList.find(".no_people").removeClass("hidden");
+			}
+		};
 		var clearUnselectedList = function() {
-			console.log(unselectedList.children(".selectable_person").length);
 			unselectedList.children(".selectable_person").remove();
-		}
+		};
 		unselectedList.on("click", "button.person_add", function(e) {
 			$(this).parents(".selectable_person").detach().appendTo(selectedList);
-			updateSubmitButtonState();
+			updateSelectedListIndicatorState();
+			updateUnselectedListIndicatorState();
 			return false;
 		});
 		selectedList.on("click", "button.person_remove", function(e) {
 			console.log("yes");
 			$(this).parents(".selectable_person").detach().appendTo(unselectedList);
-			updateSubmitButtonState();
+			updateSelectedListIndicatorState();
+			updateUnselectedListIndicatorState();
 			return false;
-		})
-		$("#search_people_to_invite").bind("keypress", function(e) {
-			$.ajax({
-				url: "/account/find_people", 
-				dataType: "json",  
-				type: "post", 
-				data: $.param({
-					query: this.value
-				}), 
-				success: function(data, textStatus, jqXHR) {
-					console.log(data);
-					clearUnselectedList();
-					for(var i = 0; i < data.length; i++) {
-						if(!personAdded(data[i].id)) {
-							unselectedList.append(data[i].html);
-						}
-					}
-				}
-			});
 		});
+		var fetchNewPeopleFromInput = function() {
+			if(personSearchInput.attr("value")) {
+				$.ajax({
+					url: unselectedList.parents("form").attr("action"),
+					dataType: "json",  
+					type: "post", 
+					data: $.param({
+						query: personSearchInput.attr("value")
+					}), 
+					success: function(data, textStatus, jqXHR) {
+						clearUnselectedList();
+						for(var i = 0; i < data.length; i++) {
+							if(!personAdded(data[i].id)) {
+								unselectedList.append(data[i].html);
+							}
+						}
+						updateUnselectedListIndicatorState();
+						
+					}
+				});
+			}
+			
+		};
+		personSearchInput.bind("keypress", fetchNewPeopleFromInput);
+		
+		//Call in case the user hit back and left something in the input field
+		fetchNewPeopleFromInput();
 	})();
 	
 	
