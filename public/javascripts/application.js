@@ -453,9 +453,7 @@ $(document).ready(function () {
 				dataType: "html",  
 				type: "post", 
 				data: form.serialize(), 
-				success: function(data, textStatus, jqXHR) {
-					callback(data);
-				},
+				success: callback,
 				error: function(jqXHR, textStatus, errorThrown) {
 					$().flash_notice(textStatus + ": " + errorThrown);
 				}
@@ -464,7 +462,7 @@ $(document).ready(function () {
 		};
 	};
 	
-	$('#add_tag_form').submit(createAJAXFormReturningHTMLHandler(function(data) {
+	$('#add_tag_form').submit(createAJAXFormReturningHTMLHandler(function(data, textStatus, jqXHR) {
 		$(data).appendTo("#existing_tags");
 		$('#existing_tags').removeClass('hidden');
 		$('#no_tags').addClass('hidden');
@@ -478,6 +476,10 @@ $(document).ready(function () {
 			}
 		});
 	}));
+	$("#existing_tags").on("click", ".tag_delete_form a", function(e) {
+		$(this).parents("form").submit();
+		return false;
+	});
 	
 	$("#existing_tags").on("submit", ".tag_delete_form", function(e) {
 		var form = $(this);

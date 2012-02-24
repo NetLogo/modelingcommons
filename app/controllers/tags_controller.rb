@@ -43,7 +43,7 @@ class TagsController < ApplicationController
         render :text => @html;
       end
       format.json do
-        render :json => {:success => true, :html => @html}
+        render :json => {:success => true, :html => @html, :message => '' + params[:new_tag].length + ' tags added'}
       end
     end
     
