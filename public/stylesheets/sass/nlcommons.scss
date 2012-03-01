@@ -45,8 +45,10 @@ body {
   @include box-shadow(0 0 15px 10px gray);
   //@include border-bottom-right-radius($tab-corner-radius);
   //@include border-bottom-left-radius($tab-corner-radius);
-  @include pie-border-radius(0px 0px $tab-corner-radius $tab-corner-radius);
+  @include border-radius(0px 0px $tab-corner-radius $tab-corner-radius);
+  @include pie-element(z-index, 0);
   margin-bottom: 200px;
+  z-index: 0;
 }
 
 
@@ -366,7 +368,6 @@ body {
 #model_applet {
     display: none;
 }
-
 .wide_model {
   position: absolute;
   left:0px;
@@ -592,7 +593,8 @@ div.left-right {
 .panel {
   @include global_padding;
   border: 3px solid black;
-  @include pie-border-radius(8px);
+  @include border-radius(8px);
+  @include pie-element(z-index, 0);
   padding: 4px;
 }
 

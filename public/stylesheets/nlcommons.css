@@ -2125,7 +2125,7 @@ img#big-preview-image  {
 }
 */
 /* line 16, sass/nlcommons.scss */
-.pie-element, .container, .header, .header .login_flash .login_container .login, .header .navigation, .header .navigation a, .header .search, .selectable_person, .panel, .tabs_panel, input[type=text], input[type=password], button, #upload-model-form label.file_label, input[type=button], input[type=submit], .dataTables_wrapper .dataTables_paginate button, .dataTables_wrapper .dataTables_paginate #upload-model-form label.file_label, #upload-model-form .dataTables_wrapper .dataTables_paginate label.file_label, .dataTables > thead tr th {
+.pie-element, .header, .header .login_flash .login_container .login, .header .navigation, .header .navigation a, .header .search, .selectable_person, input[type=text], input[type=password], button, #upload-model-form label.file_label, input[type=button], input[type=submit], .dataTables_wrapper .dataTables_paginate button, .dataTables_wrapper .dataTables_paginate #upload-model-form label.file_label, #upload-model-form .dataTables_wrapper .dataTables_paginate label.file_label, .dataTables > thead tr th {
   behavior: url("/browse/pie");
   position: relative;
 }
@@ -2165,14 +2165,17 @@ body {
   -ms-border-radius: 0px 0px 8px 8px;
   -khtml-border-radius: 0px 0px 8px 8px;
   border-radius: 0px 0px 8px 8px;
+  behavior: url("/browse/pie");
+  z-index: 0;
   margin-bottom: 200px;
+  z-index: 0;
 }
 
 /* 
  * Page header, at the top of all pages
  * layouts/_page_header
  */
-/* line 58, sass/nlcommons.scss */
+/* line 60, sass/nlcommons.scss */
 .header {
   font-family: 'Muli', 'Arial', sans-serif;
   display: inline;
@@ -2196,7 +2199,7 @@ body {
 * html .header {
   overflow-x: hidden;
 }
-/* line 67, sass/nlcommons.scss */
+/* line 69, sass/nlcommons.scss */
 .header .banner {
   background-image: url("banner.png");
   background-color: #8fb4df;
@@ -2213,24 +2216,24 @@ body {
 * html .header .banner {
   overflow-x: hidden;
 }
-/* line 76, sass/nlcommons.scss */
+/* line 78, sass/nlcommons.scss */
 .header .banner h1, .header .banner h2 {
   display: inline-block;
   filter: progid:DXImageTransform.Microsoft.Shadow(color=#04346c, direction=135, strength=5px);
 }
-/* line 80, sass/nlcommons.scss */
+/* line 82, sass/nlcommons.scss */
 .header .banner h1 {
   font-size: 40px;
   margin-left: 17px;
   font-weight: bold;
 }
-/* line 85, sass/nlcommons.scss */
+/* line 87, sass/nlcommons.scss */
 .header .banner h2 {
   font-size: 20px;
   margin-top: 5px;
   margin-left: 5px;
 }
-/* line 90, sass/nlcommons.scss */
+/* line 92, sass/nlcommons.scss */
 .header .banner a {
   width: 100%;
   height: 100%;
@@ -2238,7 +2241,7 @@ body {
   text-decoration: none;
   display: inline-block;
 }
-/* line 98, sass/nlcommons.scss */
+/* line 100, sass/nlcommons.scss */
 .header .login_flash {
   position: relative;
   display: inline;
@@ -2249,12 +2252,12 @@ body {
   height: 100px;
   display: table;
 }
-/* line 102, sass/nlcommons.scss */
+/* line 104, sass/nlcommons.scss */
 .header .login_flash .login_container {
   display: table-row;
   text-align: right;
 }
-/* line 105, sass/nlcommons.scss */
+/* line 107, sass/nlcommons.scss */
 .header .login_flash .login_container .login {
   font-size: 14px;
   padding-right: 10px;
@@ -2272,7 +2275,7 @@ body {
   -khtml-border-radius: 0px 0px 0px 8px;
   border-radius: 0px 0px 0px 8px;
 }
-/* line 116, sass/nlcommons.scss */
+/* line 118, sass/nlcommons.scss */
 .header .login_flash .login_container .login img {
   height: 26px;
   width: 26px;
@@ -2280,34 +2283,34 @@ body {
   margin-right: 4px;
   vertical-align: top;
 }
-/* line 123, sass/nlcommons.scss */
+/* line 125, sass/nlcommons.scss */
 .header .login_flash .login_container .login a {
   color: white;
   vertical-align: top;
 }
-/* line 127, sass/nlcommons.scss */
+/* line 129, sass/nlcommons.scss */
 .header .login_flash .login_container .login a:visited {
   color: white;
 }
-/* line 130, sass/nlcommons.scss */
+/* line 132, sass/nlcommons.scss */
 .header .login_flash .login_container .login a:active {
   color: red;
 }
-/* line 133, sass/nlcommons.scss */
+/* line 135, sass/nlcommons.scss */
 .header .login_flash .login_container .login .login_error_container {
   max-height: 18px;
 }
-/* line 139, sass/nlcommons.scss */
+/* line 141, sass/nlcommons.scss */
 .header .login_flash .flash_container {
   display: table-row;
   height: 100%;
 }
-/* line 142, sass/nlcommons.scss */
+/* line 144, sass/nlcommons.scss */
 .header .login_flash .flash_container > div {
   display: table-cell;
   vertical-align: middle;
 }
-/* line 145, sass/nlcommons.scss */
+/* line 147, sass/nlcommons.scss */
 .header .login_flash .flash_container > div #flash_notice {
   display: inline-block;
   background-color: red;
@@ -2340,7 +2343,7 @@ body {
 * html .header .login_flash {
   overflow-x: hidden;
 }
-/* line 170, sass/nlcommons.scss */
+/* line 172, sass/nlcommons.scss */
 .header div.tableTest {
   display: inline;
   float: left;
@@ -2354,27 +2357,27 @@ body {
 * html .header div.tableTest {
   overflow-x: hidden;
 }
-/* line 176, sass/nlcommons.scss */
+/* line 178, sass/nlcommons.scss */
 .header div.tableTest > div {
   display: table-row;
   height: 40px;
 }
-/* line 180, sass/nlcommons.scss */
+/* line 182, sass/nlcommons.scss */
 .header div.tableTest .top {
   background-color: green;
 }
-/* line 183, sass/nlcommons.scss */
+/* line 185, sass/nlcommons.scss */
 .header div.tableTest .bottom {
   height: 100%;
   background-color: red;
 }
-/* line 184, sass/nlcommons.scss */
+/* line 186, sass/nlcommons.scss */
 .header div.tableTest .bottom > div {
   display: table-cell;
   background-color: blue;
   vertical-align: middle;
 }
-/* line 188, sass/nlcommons.scss */
+/* line 190, sass/nlcommons.scss */
 .header div.tableTest .bottom > div > div {
   background-color: red;
   display: inline-block;
@@ -2383,7 +2386,7 @@ body {
   position: relative;
   right: -450px;
 }
-/* line 204, sass/nlcommons.scss */
+/* line 206, sass/nlcommons.scss */
 .header .navigation {
   -moz-border-radius: 0px 0px 0px 8px;
   -webkit-border-radius: 0px 0px 0px 8px;
@@ -2403,7 +2406,7 @@ body {
 * html .header .navigation {
   overflow-x: hidden;
 }
-/* line 209, sass/nlcommons.scss */
+/* line 211, sass/nlcommons.scss */
 .header .navigation a {
   color: white;
   font-size: 20px;
@@ -2419,15 +2422,15 @@ body {
   padding-right: 7px;
   text-decoration: none;
 }
-/* line 221, sass/nlcommons.scss */
+/* line 223, sass/nlcommons.scss */
 .header .navigation a:visited {
   color: white;
 }
-/* line 224, sass/nlcommons.scss */
+/* line 226, sass/nlcommons.scss */
 .header .navigation a:active {
   color: white;
 }
-/* line 227, sass/nlcommons.scss */
+/* line 229, sass/nlcommons.scss */
 .header .navigation a:hover {
   background-color: #064c9d;
   -moz-box-shadow: 0px 0px 1px 1px #021c3b inset;
@@ -2435,7 +2438,7 @@ body {
   -o-box-shadow: 0px 0px 1px 1px #021c3b inset;
   box-shadow: 0px 0px 1px 1px #021c3b inset;
 }
-/* line 231, sass/nlcommons.scss */
+/* line 233, sass/nlcommons.scss */
 .header .navigation a:active {
   background-color: #054085;
   -moz-box-shadow: -1px 1px 3px 2px #021c3b inset;
@@ -2443,16 +2446,16 @@ body {
   -o-box-shadow: -1px 1px 3px 2px #021c3b inset;
   box-shadow: -1px 1px 3px 2px #021c3b inset;
 }
-/* line 235, sass/nlcommons.scss */
+/* line 237, sass/nlcommons.scss */
 .header .navigation ul {
   line-height: normal;
   display: inline-block;
 }
-/* line 239, sass/nlcommons.scss */
+/* line 241, sass/nlcommons.scss */
 .header .navigation ul:last-child {
   margin-left: 40px;
 }
-/* line 242, sass/nlcommons.scss */
+/* line 244, sass/nlcommons.scss */
 .header .navigation li {
   list-style: none;
   line-height: normal;
@@ -2463,7 +2466,7 @@ body {
   margin-left: 1px;
   margin-right: 1px;
 }
-/* line 261, sass/nlcommons.scss */
+/* line 263, sass/nlcommons.scss */
 .header .search {
   -moz-border-radius: 0px 0px 8px 0px;
   -webkit-border-radius: 0px 0px 8px 0px;
@@ -2484,14 +2487,14 @@ body {
 * html .header .search {
   overflow-x: hidden;
 }
-/* line 269, sass/nlcommons.scss */
+/* line 271, sass/nlcommons.scss */
 .header .search form {
   margin-top: 6px;
   margin-right: 2px;
   display: inline-block;
 }
 
-/* line 277, sass/nlcommons.scss */
+/* line 279, sass/nlcommons.scss */
 .content {
   display: inline;
   float: left;
@@ -2502,24 +2505,24 @@ body {
 * html .content {
   overflow-x: hidden;
 }
-/* line 279, sass/nlcommons.scss */
+/* line 281, sass/nlcommons.scss */
 .content .title {
   margin: 4px;
 }
-/* line 282, sass/nlcommons.scss */
+/* line 284, sass/nlcommons.scss */
 .content .padded_content {
   margin: 4px;
 }
-/* line 285, sass/nlcommons.scss */
+/* line 287, sass/nlcommons.scss */
 .content ul {
   padding-left: 40px;
 }
-/* line 288, sass/nlcommons.scss */
+/* line 290, sass/nlcommons.scss */
 .content h1, .content h2, .content h3 {
   margin-top: 16px;
   margin-bottom: 6px;
 }
-/* line 292, sass/nlcommons.scss */
+/* line 294, sass/nlcommons.scss */
 .content p {
   margin-bottom: 10px;
 }
@@ -2531,21 +2534,21 @@ body {
  * Model Page
  * browse/one_model
  */
-/* line 309, sass/nlcommons.scss */
+/* line 311, sass/nlcommons.scss */
 #preview_info_container {
   width: 960px;
   height: 160px;
   display: table-row;
   float: left;
 }
-/* line 314, sass/nlcommons.scss */
+/* line 316, sass/nlcommons.scss */
 #preview_info_container > div {
   display: table-cell;
   height: 160px;
   vertical-align: top;
 }
 
-/* line 321, sass/nlcommons.scss */
+/* line 323, sass/nlcommons.scss */
 #model_preview #preview-image {
   width: 152px;
   height: 152px;
@@ -2557,31 +2560,31 @@ body {
   background-color: #d9d9d9;
 }
 
-/* line 333, sass/nlcommons.scss */
+/* line 335, sass/nlcommons.scss */
 #model_info img {
   vertical-align: middle;
 }
-/* line 336, sass/nlcommons.scss */
+/* line 338, sass/nlcommons.scss */
 #model_info img.inline_image {
   height: 20px;
 }
-/* line 339, sass/nlcommons.scss */
+/* line 341, sass/nlcommons.scss */
 #model_info > div {
   height: 53px;
   display: table-row;
 }
-/* line 342, sass/nlcommons.scss */
+/* line 344, sass/nlcommons.scss */
 #model_info > div > div {
   display: table-cell;
   vertical-align: middle;
 }
 
-/* line 350, sass/nlcommons.scss */
+/* line 352, sass/nlcommons.scss */
 .posting-title {
   font-weight: bold;
 }
 
-/* line 354, sass/nlcommons.scss */
+/* line 356, sass/nlcommons.scss */
 #model_click_to_load {
   background-color: #d9d9d9;
   display: block;
@@ -2594,12 +2597,12 @@ body {
   line-height: 500px;
 }
 
-/* line 366, sass/nlcommons.scss */
+/* line 368, sass/nlcommons.scss */
 #model_applet {
   display: none;
 }
 
-/* line 370, sass/nlcommons.scss */
+/* line 371, sass/nlcommons.scss */
 .wide_model {
   position: absolute;
   left: 0px;
@@ -2620,20 +2623,20 @@ body {
   box-shadow: 0 0 15px 10px gray;
 }
 
-/* line 382, sass/nlcommons.scss */
+/* line 383, sass/nlcommons.scss */
 .ui-tabs #browse_applet.ui-tabs-hide {
   position: absolute;
   left: -10000px;
   display: block;
 }
 
-/* line 389, sass/nlcommons.scss */
+/* line 390, sass/nlcommons.scss */
 #upload-model-form label.file_label {
   display: inline-block;
   position: relative;
   overflow: hidden;
 }
-/* line 394, sass/nlcommons.scss */
+/* line 395, sass/nlcommons.scss */
 #upload-model-form label.file_label input[type=file] {
   opacity: 0;
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
@@ -2645,7 +2648,7 @@ body {
   width: 100%;
   height: 100%;
 }
-/* line 406, sass/nlcommons.scss */
+/* line 407, sass/nlcommons.scss */
 #upload-model-form td {
   line-height: 26px;
 }
@@ -2655,18 +2658,18 @@ body {
  * Proc is procedure
  * browse/_browse/procedures_tab
  */
-/* line 417, sass/nlcommons.scss */
+/* line 418, sass/nlcommons.scss */
 .procedure_code {
   font-family: courier, monospace;
   font-size: 12px;
 }
 
-/* line 422, sass/nlcommons.scss */
+/* line 423, sass/nlcommons.scss */
 .proc-to, .proc-end {
   color: #b3b;
 }
 
-/* line 426, sass/nlcommons.scss */
+/* line 427, sass/nlcommons.scss */
 .proc-comment {
   color: #282;
   font-style: italic;
@@ -2676,7 +2679,7 @@ body {
  * Login Page (Front Page)
  * account/login
  */
-/* line 438, sass/nlcommons.scss */
+/* line 439, sass/nlcommons.scss */
 div#just_visiting {
   display: inline;
   float: left;
@@ -2688,7 +2691,7 @@ div#just_visiting {
   overflow-x: hidden;
 }
 
-/* line 442, sass/nlcommons.scss */
+/* line 443, sass/nlcommons.scss */
 div#register_new_user {
   display: inline;
   float: left;
@@ -2704,7 +2707,7 @@ div#register_new_user {
  * User Page (Front Page) 
  * account/mypage
  */
-/* line 451, sass/nlcommons.scss */
+/* line 452, sass/nlcommons.scss */
 #left-news-box {
   display: inline;
   float: left;
@@ -2716,7 +2719,7 @@ div#register_new_user {
   overflow-x: hidden;
 }
 
-/* line 454, sass/nlcommons.scss */
+/* line 455, sass/nlcommons.scss */
 #right-news-box {
   display: inline;
   float: left;
@@ -2732,7 +2735,7 @@ div#register_new_user {
  * Search Results Page 
  * search/search_action
  */
-/* line 464, sass/nlcommons.scss */
+/* line 465, sass/nlcommons.scss */
 #search_tabs .num-results {
   background: -webkit-gradient(radial, 25% 25%, 0, 25% 25%, 100, color-stop(0%, #ff0000), color-stop(100%, #990000));
   background: -webkit-radial-gradient(25% 25%, #ff0000, #990000);
@@ -2762,7 +2765,7 @@ div#register_new_user {
   margin-top: 3px;
   margin-bottom: 3px;
 }
-/* line 484, sass/nlcommons.scss */
+/* line 485, sass/nlcommons.scss */
 #search_tabs .num-results.empty {
   background: -webkit-gradient(radial, 25% 25%, 0, 25% 25%, 100, color-stop(0%, #8c7373), color-stop(100%, #544545));
   background: -webkit-radial-gradient(25% 25%, #8c7373, #544545);
@@ -2777,12 +2780,12 @@ div#register_new_user {
  * One Group Page
  * membership/one_group
  */
-/* line 496, sass/nlcommons.scss */
+/* line 497, sass/nlcommons.scss */
 .grouplist img {
   height: 30px;
   vertical-align: middle;
 }
-/* line 501, sass/nlcommons.scss */
+/* line 502, sass/nlcommons.scss */
 .grouplist li {
   margin-top: 4px;
   margin-bototm: 4px;
@@ -2792,7 +2795,7 @@ div#register_new_user {
  * Admin view all actions
  * admin/view_all_people
  */
-/* line 513, sass/nlcommons.scss */
+/* line 514, sass/nlcommons.scss */
 .actions_table_container {
   overflow: scroll;
 }
@@ -2801,21 +2804,21 @@ div#register_new_user {
  * Group people selector
  * membership/_invite
  */
-/* line 524, sass/nlcommons.scss */
+/* line 525, sass/nlcommons.scss */
 table#people_adder {
   width: 100%;
 }
-/* line 526, sass/nlcommons.scss */
+/* line 527, sass/nlcommons.scss */
 table#people_adder td {
   width: 50%;
   vertical-align: top;
 }
-/* line 529, sass/nlcommons.scss */
+/* line 530, sass/nlcommons.scss */
 table#people_adder td > div {
   vertical-align: baseline;
 }
 
-/* line 536, sass/nlcommons.scss */
+/* line 537, sass/nlcommons.scss */
 .selectable_person {
   background-color: #e6e6e6;
   padding: 2px;
@@ -2830,18 +2833,18 @@ table#people_adder td > div {
   margin-top: 5px;
   margin-bottom: 5px;
 }
-/* line 545, sass/nlcommons.scss */
+/* line 546, sass/nlcommons.scss */
 .selectable_person img {
   vertical-align: top;
   height: 24px;
   padding-right: 10px;
 }
 
-/* line 551, sass/nlcommons.scss */
+/* line 552, sass/nlcommons.scss */
 #selected_people, #unselected_people {
   padding: 4px;
 }
-/* line 553, sass/nlcommons.scss */
+/* line 554, sass/nlcommons.scss */
 #selected_people .no_people, #unselected_people .no_people {
   text-align: center;
   font-size: 11px;
@@ -2849,17 +2852,17 @@ table#people_adder td > div {
   background-color: #e6e6e6;
 }
 
-/* line 560, sass/nlcommons.scss */
+/* line 561, sass/nlcommons.scss */
 #selected_people button.person_add, #selected_people #upload-model-form label.person_add.file_label, #upload-model-form #selected_people label.person_add.file_label {
   display: none;
 }
 
-/* line 563, sass/nlcommons.scss */
+/* line 564, sass/nlcommons.scss */
 #unselected_people button.person_remove, #unselected_people #upload-model-form label.person_remove.file_label, #upload-model-form #unselected_people label.person_remove.file_label {
   display: none;
 }
 
-/* line 566, sass/nlcommons.scss */
+/* line 567, sass/nlcommons.scss */
 .no_people label {
   width: 100%;
   display: inline-block;
@@ -2869,28 +2872,28 @@ table#people_adder td > div {
 /*
  * Globally useful styling
  */
-/* line 576, sass/nlcommons.scss */
+/* line 577, sass/nlcommons.scss */
 .hidden {
   display: none;
 }
 
-/* line 579, sass/nlcommons.scss */
+/* line 580, sass/nlcommons.scss */
 div.left-right {
   width: 100%;
   display: table;
 }
-/* line 582, sass/nlcommons.scss */
+/* line 583, sass/nlcommons.scss */
 div.left-right div.left {
   display: table-cell;
   text-align: left;
 }
-/* line 586, sass/nlcommons.scss */
+/* line 587, sass/nlcommons.scss */
 div.left-right div.right {
   display: table-cell;
   text-align: right;
 }
 
-/* line 592, sass/nlcommons.scss */
+/* line 593, sass/nlcommons.scss */
 .panel, .tabs_panel {
   margin: 4px;
   border: 3px solid black;
@@ -2900,15 +2903,17 @@ div.left-right div.right {
   -ms-border-radius: 8px;
   -khtml-border-radius: 8px;
   border-radius: 8px;
+  behavior: url("/browse/pie");
+  z-index: 0;
   padding: 4px;
 }
 
-/* line 599, sass/nlcommons.scss */
+/* line 601, sass/nlcommons.scss */
 .tabs_panel {
   padding: 0px;
   overflow: hidden;
 }
-/* line 601, sass/nlcommons.scss */
+/* line 603, sass/nlcommons.scss */
 .tabs_panel > ul {
   /* 
    * Setting padding-left to inherit cancels the .content wide setting of 40px left padding for ul
@@ -2919,7 +2924,7 @@ div.left-right div.right {
 /* 
  * Text Input Field
  */
-/* line 613, sass/nlcommons.scss */
+/* line 615, sass/nlcommons.scss */
 input[type=text], input[type=password] {
   font-family: 'Georgia', 'Times', serif;
   line-height: 16px;
@@ -2938,12 +2943,12 @@ input[type=text], input[type=password] {
   -o-box-shadow: -1px 1px 4px 1px #b2b2b2 inset;
   box-shadow: -1px 1px 4px 1px #b2b2b2 inset;
 }
-/* line 625, sass/nlcommons.scss */
+/* line 627, sass/nlcommons.scss */
 input[type=text].error, input[type=password].error {
   color: red;
   border-color: red;
 }
-/* line 631, sass/nlcommons.scss */
+/* line 633, sass/nlcommons.scss */
 input[type=text]:focus, input[type=password]:focus {
   outline: none;
   -moz-box-shadow: -1px 1px 4px 1px #b2b2b2 inset, 0px 0px 4px 2px #6899d3;
@@ -2951,14 +2956,14 @@ input[type=text]:focus, input[type=password]:focus {
   -o-box-shadow: -1px 1px 4px 1px #b2b2b2 inset, 0px 0px 4px 2px #6899d3;
   box-shadow: -1px 1px 4px 1px #b2b2b2 inset, 0px 0px 4px 2px #6899d3;
 }
-/* line 636, sass/nlcommons.scss */
+/* line 638, sass/nlcommons.scss */
 input[type=text].error:focus, input[type=password].error:focus {
   -moz-box-shadow: -1px 1px 4px 1px #b2b2b2 inset, 0px 0px 4px 2px #ff6666;
   -webkit-box-shadow: -1px 1px 4px 1px #b2b2b2 inset, 0px 0px 4px 2px #ff6666;
   -o-box-shadow: -1px 1px 4px 1px #b2b2b2 inset, 0px 0px 4px 2px #ff6666;
   box-shadow: -1px 1px 4px 1px #b2b2b2 inset, 0px 0px 4px 2px #ff6666;
 }
-/* line 639, sass/nlcommons.scss */
+/* line 641, sass/nlcommons.scss */
 input[type=text]:focus.error, input[type=password]:focus.error {
   outline-color: red;
 }
@@ -2966,7 +2971,7 @@ input[type=text]:focus.error, input[type=password]:focus.error {
 /*
  * Buttons
  */
-/* line 647, sass/nlcommons.scss */
+/* line 649, sass/nlcommons.scss */
 button, #upload-model-form label.file_label, input[type=button], input[type=submit] {
   color: black;
   font-family: 'Muli', 'Arial', sans-serif;
@@ -3118,7 +3123,7 @@ button.selected[disabled], #upload-model-form label.selected[disabled].file_labe
   -pie-background: linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
   background: linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
 }
-/* line 656, sass/nlcommons.scss */
+/* line 658, sass/nlcommons.scss */
 button div.ui-icon, #upload-model-form label.file_label div.ui-icon, input[type=button] div.ui-icon, input[type=submit] div.ui-icon {
   margin-top: 1px;
   margin-bottom: 1px;
@@ -3126,7 +3131,7 @@ button div.ui-icon, #upload-model-form label.file_label div.ui-icon, input[type=
   display: inline-block;
 }
 
-/* line 665, sass/nlcommons.scss */
+/* line 667, sass/nlcommons.scss */
 .error {
   color: red;
 }
@@ -3134,12 +3139,12 @@ button div.ui-icon, #upload-model-form label.file_label div.ui-icon, input[type=
 /*
  * DataTables Styling
  */
-/* line 673, sass/nlcommons.scss */
+/* line 675, sass/nlcommons.scss */
 .dataTables_wrapper div.ui-icon {
   display: inline-block;
   vertical-align: top;
 }
-/* line 678, sass/nlcommons.scss */
+/* line 680, sass/nlcommons.scss */
 .dataTables_wrapper .dataTables_paginate button, .dataTables_wrapper .dataTables_paginate #upload-model-form label.file_label, #upload-model-form .dataTables_wrapper .dataTables_paginate label.file_label {
   color: black;
   font-family: 'Muli', 'Arial', sans-serif;
@@ -3328,19 +3333,19 @@ button div.ui-icon, #upload-model-form label.file_label div.ui-icon, input[type=
   -pie-background: linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
   background: linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
 }
-/* line 693, sass/nlcommons.scss */
+/* line 695, sass/nlcommons.scss */
 .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter {
   display: inline-block;
   margin-left: 10px;
   font-size: 15px;
 }
-/* line 698, sass/nlcommons.scss */
+/* line 700, sass/nlcommons.scss */
 .dataTables_wrapper .top, .dataTables_wrapper .bottom, .dataTables_wrapper .datatable {
   margin-top: 4px;
   margin-bottom: 4px;
 }
 
-/* line 705, sass/nlcommons.scss */
+/* line 707, sass/nlcommons.scss */
 .dataTables {
   width: 100%;
   border-bottom: 1px solid black;
@@ -3356,11 +3361,11 @@ button div.ui-icon, #upload-model-form label.file_label div.ui-icon, input[type=
   border-radius: 8px;
   overflow: hidden;
 }
-/* line 717, sass/nlcommons.scss */
+/* line 719, sass/nlcommons.scss */
 .dataTables > thead tr {
   font-family: 'Muli', 'Arial', sans-serif;
 }
-/* line 719, sass/nlcommons.scss */
+/* line 721, sass/nlcommons.scss */
 .dataTables > thead tr th {
   color: black;
   font-family: 'Muli', 'Arial', sans-serif;
@@ -3574,73 +3579,73 @@ button div.ui-icon, #upload-model-form label.file_label div.ui-icon, input[type=
   -pie-background: linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
   background: linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
 }
-/* line 730, sass/nlcommons.scss */
+/* line 732, sass/nlcommons.scss */
 .dataTables > thead tr th div.ui-icon {
   margin-top: 2px;
   margin-bottom: 2px;
 }
-/* line 746, sass/nlcommons.scss */
+/* line 748, sass/nlcommons.scss */
 .dataTables > tbody tr:nth-child(even) {
   background-color: #dee9f6;
 }
-/* line 749, sass/nlcommons.scss */
+/* line 751, sass/nlcommons.scss */
 .dataTables > tbody td {
   padding: 3px;
 }
-/* line 753, sass/nlcommons.scss */
+/* line 755, sass/nlcommons.scss */
 .dataTables span.hidden_elapsed_time {
   display: none;
 }
 
-/* line 758, sass/nlcommons.scss */
+/* line 760, sass/nlcommons.scss */
 table.model_list_datatable table td {
   height: 30px;
 }
-/* line 760, sass/nlcommons.scss */
+/* line 762, sass/nlcommons.scss */
 table.model_list_datatable table td:first-child {
   padding-left: 4px;
   padding-right: 4px;
   width: 30px;
   min-width: 30px;
 }
-/* line 766, sass/nlcommons.scss */
+/* line 768, sass/nlcommons.scss */
 table.model_list_datatable table td img {
   vertical-align: top;
   width: 30px;
   height: 30px;
 }
 
-/* line 774, sass/nlcommons.scss */
+/* line 776, sass/nlcommons.scss */
 table.simple_table {
   border-collapse: collapse;
 }
-/* line 776, sass/nlcommons.scss */
+/* line 778, sass/nlcommons.scss */
 table.simple_table img {
   vertical-align: middle;
 }
-/* line 779, sass/nlcommons.scss */
+/* line 781, sass/nlcommons.scss */
 table.simple_table th {
   font-weight: bold;
   padding-left: 5px;
   padding-right: 5px;
 }
-/* line 784, sass/nlcommons.scss */
+/* line 786, sass/nlcommons.scss */
 table.simple_table td {
   border: 1px solid;
   padding: 5px;
 }
 
-/* line 790, sass/nlcommons.scss */
+/* line 792, sass/nlcommons.scss */
 .highlight {
   background-color: #ff0;
 }
 
-/* line 795, sass/nlcommons.scss */
+/* line 797, sass/nlcommons.scss */
 .activity {
   width: 660px;
   float: left;
 }
-/* line 798, sass/nlcommons.scss */
+/* line 800, sass/nlcommons.scss */
 .activity .post {
   padding: 4px;
   margin-top: 10px;
@@ -3648,15 +3653,15 @@ table.simple_table td {
   border-bottom: 1px solid black;
   overflow: auto;
 }
-/* line 799, sass/nlcommons.scss */
+/* line 801, sass/nlcommons.scss */
 .activity .post a {
   text-decoration: none;
 }
-/* line 801, sass/nlcommons.scss */
+/* line 803, sass/nlcommons.scss */
 .activity .post a:hover {
   text-decoration: underline;
 }
-/* line 812, sass/nlcommons.scss */
+/* line 814, sass/nlcommons.scss */
 .activity .post .main_image {
   vertical-align: top;
   display: inline-block;
@@ -3664,21 +3669,21 @@ table.simple_table td {
   height: 80px;
   padding-right: 12px;
 }
-/* line 817, sass/nlcommons.scss */
+/* line 819, sass/nlcommons.scss */
 .activity .post .main_image img {
   width: 100%;
 }
-/* line 822, sass/nlcommons.scss */
+/* line 824, sass/nlcommons.scss */
 .activity .post .post_content {
   vertical-align: top;
   display: inline-block;
 }
-/* line 825, sass/nlcommons.scss */
+/* line 827, sass/nlcommons.scss */
 .activity .post .post_content .post_person {
   line-height: 30px;
   font-size: 16px;
 }
-/* line 828, sass/nlcommons.scss */
+/* line 830, sass/nlcommons.scss */
 .activity .post .post_content .post_person img {
   vertical-align: top;
   height: 30px;
@@ -3686,33 +3691,33 @@ table.simple_table td {
   padding-left: 5px;
   padding-right: 5px;
 }
-/* line 837, sass/nlcommons.scss */
+/* line 839, sass/nlcommons.scss */
 .activity .post .post_content .post_item {
   font-size: 30px;
 }
-/* line 841, sass/nlcommons.scss */
+/* line 843, sass/nlcommons.scss */
 .activity .post .post_content .post_date {
   font-size: 16px;
 }
-/* line 844, sass/nlcommons.scss */
+/* line 846, sass/nlcommons.scss */
 .activity .post .post_content .post_more {
   font-size: 10px;
 }
 
-/* line 855, sass/nlcommons.scss */
+/* line 857, sass/nlcommons.scss */
 .sidebar {
   width: 300px;
   float: left;
 }
-/* line 856, sass/nlcommons.scss */
+/* line 858, sass/nlcommons.scss */
 .sidebar a {
   text-decoration: none;
 }
-/* line 858, sass/nlcommons.scss */
+/* line 860, sass/nlcommons.scss */
 .sidebar a:hover {
   text-decoration: underline;
 }
-/* line 864, sass/nlcommons.scss */
+/* line 866, sass/nlcommons.scss */
 .sidebar .side_list {
   -moz-box-shadow: 0 0 10px 2px gray;
   -webkit-box-shadow: 0 0 10px 2px gray;
@@ -3728,7 +3733,7 @@ table.simple_table td {
   -khtml-border-radius: 8px;
   border-radius: 8px;
 }
-/* line 868, sass/nlcommons.scss */
+/* line 870, sass/nlcommons.scss */
 .sidebar .side_list h1 {
   font-family: 'Muli', 'Arial', sans-serif;
   background-color: #04346c;
@@ -3739,39 +3744,39 @@ table.simple_table td {
   color: white;
   margin: 0px;
 }
-/* line 882, sass/nlcommons.scss */
+/* line 884, sass/nlcommons.scss */
 .sidebar .side_list .side_post {
   padding: 4px;
 }
-/* line 885, sass/nlcommons.scss */
+/* line 887, sass/nlcommons.scss */
 .sidebar .side_list .side_post .side_image {
   width: 50px;
   height: 50px;
   display: inline-block;
   vertical-align: top;
 }
-/* line 889, sass/nlcommons.scss */
+/* line 891, sass/nlcommons.scss */
 .sidebar .side_list .side_post .side_image img {
   width: 100%;
 }
-/* line 894, sass/nlcommons.scss */
+/* line 896, sass/nlcommons.scss */
 .sidebar .side_list .side_post .side_content {
   display: inline-block;
   vertical-align: top;
 }
-/* line 898, sass/nlcommons.scss */
+/* line 900, sass/nlcommons.scss */
 .sidebar .side_list .side_post .side_content .side_person {
   font-size: 11px;
 }
-/* line 901, sass/nlcommons.scss */
+/* line 903, sass/nlcommons.scss */
 .sidebar .side_list .side_post .side_content .side_item {
   font-size: 15px;
 }
-/* line 904, sass/nlcommons.scss */
+/* line 906, sass/nlcommons.scss */
 .sidebar .side_list .side_post .side_content .side_views {
   font-size: 11px;
 }
-/* line 909, sass/nlcommons.scss */
+/* line 911, sass/nlcommons.scss */
 .sidebar .side_list .side_more {
   text-align: center;
 }
@@ -3780,39 +3785,39 @@ table.simple_table td {
  * Legacy Styling
  * All of this should probably be updated
  */
-/* line 925, sass/nlcommons.scss */
+/* line 927, sass/nlcommons.scss */
 #menubar-avatar, #logged-in-as {
   float: left;
   margin-left: 1em;
 }
 
-/* line 930, sass/nlcommons.scss */
+/* line 932, sass/nlcommons.scss */
 #main-menu, h1, h2, h3, #flash-notice, #logged-in-as {
   font-family: 'Muli', 'Arial', sans-serif;
   font-weight: bold;
 }
 
-/* line 935, sass/nlcommons.scss */
+/* line 937, sass/nlcommons.scss */
 h1, #flash-notice {
   clear: both;
 }
 
-/* line 939, sass/nlcommons.scss */
+/* line 941, sass/nlcommons.scss */
 h1, #flash-notice {
   font-size: 21px;
 }
 
-/* line 943, sass/nlcommons.scss */
+/* line 945, sass/nlcommons.scss */
 h2 {
   font-size: 17px;
 }
 
-/* line 947, sass/nlcommons.scss */
+/* line 949, sass/nlcommons.scss */
 .h2-explanation {
   font-size: 13px;
 }
 
-/* line 951, sass/nlcommons.scss */
+/* line 953, sass/nlcommons.scss */
 h3, #menu-bar {
   font-size: 15px;
 }
@@ -3822,7 +3827,7 @@ h3, #menu-bar {
     top: 3.5em;
     left: 20em;
 }*/
-/* line 961, sass/nlcommons.scss */
+/* line 963, sass/nlcommons.scss */
 a img {
   border: 0;
   margin: 0;
@@ -3964,7 +3969,7 @@ div ul.subsection_tabs li.tab a:hover {
 .sorting {
     background: url('../images/sort_both.jpg') no-repeat center right;
 }*/
-/* line 1111, sass/nlcommons.scss */
+/* line 1113, sass/nlcommons.scss */
 div.foreSortIcon {
   background: url("../images/sort_both.jpg") no-repeat center right;
   width: 16px;
@@ -3974,7 +3979,7 @@ div.foreSortIcon {
 }
 
 /* Autocomplete */
-/* line 1120, sass/nlcommons.scss */
+/* line 1122, sass/nlcommons.scss */
 ul.jq-ui-autocomplete {
   position: absolute;
   overflow: hidden;
@@ -3987,7 +3992,7 @@ ul.jq-ui-autocomplete {
   color: #333;
 }
 
-/* line 1131, sass/nlcommons.scss */
+/* line 1133, sass/nlcommons.scss */
 ul.jq-ui-autocomplete li {
   display: block;
   padding: .3em .5em .3em .3em;
@@ -3995,30 +4000,30 @@ ul.jq-ui-autocomplete li {
   width: 100%;
 }
 
-/* line 1138, sass/nlcommons.scss */
+/* line 1140, sass/nlcommons.scss */
 ul.jq-ui-autocomplete li.active {
   background-color: #3875d7;
   color: #fff;
 }
 
-/* line 1143, sass/nlcommons.scss */
+/* line 1145, sass/nlcommons.scss */
 .deleted {
   text-decoration: line-through;
 }
 
-/* line 1147, sass/nlcommons.scss */
+/* line 1149, sass/nlcommons.scss */
 table#new-person-form tr td {
   width: 10em;
 }
 
-/* line 1151, sass/nlcommons.scss */
+/* line 1153, sass/nlcommons.scss */
 .fieldWithErrors {
   padding: 2px;
   background-color: red;
   display: table;
 }
 
-/* line 1157, sass/nlcommons.scss */
+/* line 1159, sass/nlcommons.scss */
 #errorExplanation {
   width: 450px;
   border: 2px solid red;
@@ -4028,7 +4033,7 @@ table#new-person-form tr td {
   background-color: #f0f0f0;
 }
 
-/* line 1166, sass/nlcommons.scss */
+/* line 1168, sass/nlcommons.scss */
 #error_explanation h2 {
   text-align: left;
   font-weight: bold;
@@ -4040,18 +4045,18 @@ table#new-person-form tr td {
   color: #fff;
 }
 
-/* line 1177, sass/nlcommons.scss */
+/* line 1179, sass/nlcommons.scss */
 #error_explanation ul li {
   font-size: 12px;
   list-style: square;
 }
 
-/* line 1182, sass/nlcommons.scss */
+/* line 1184, sass/nlcommons.scss */
 tr.scaffold-row {
   border-bottom: 2px solid black;
 }
 
-/* line 1186, sass/nlcommons.scss */
+/* line 1188, sass/nlcommons.scss */
 #permission-group-reminder {
   font-style: italic;
 }
