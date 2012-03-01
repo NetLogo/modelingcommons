@@ -1,4 +1,5 @@
 @import "compass/css3";
+@import "compass/css3/pie";
 @import "clickable";
 @import "font";
 @import "all";
@@ -168,11 +169,13 @@ $padding: 5px;
   padding: 0px; 
   text-align: center;
   font-size: 16px; 
-  @include sans-font(); 
-  @include clickable($background-color: $header-color, $selected: '.ui-tabs-selected', $disabled: '.empty', $active: ':active:hover'); @include border-bottom-left-radius(8px);@include border-bottom-right-radius(8px);
+  @include sans-font();
+  z-index: 0;
+  @include clickable($background-color: $header-color, $selected: '.ui-tabs-selected', $disabled: '.empty', $active: ':active:hover');
+  @include border-radius(0px 0px 8px 8px);
 }
 .ui-tabs .ui-tabs-nav li:first-child {
-  @include border-top-left-radius(5px);
+  @include border-radius(5px 0px 8px 8px);
 }
 .ui-tabs .ui-tabs-nav li a {
   display: inline-block;
