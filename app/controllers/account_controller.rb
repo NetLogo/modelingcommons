@@ -59,7 +59,7 @@ class AccountController < ApplicationController
       return
     end
 
-    @person = Person.find_by_email_address(params[:email_address].strip.downcase)
+    @person = Person.find_by_email_address(params[:email_address].strip)
     if @person.nil?
       logger.warn "Attempted login with non-existent email_address '#{params[:email_address]}'"
       flash[:notice] = "Sorry, but no user exists with that e-mail address and password.  Please try again."
