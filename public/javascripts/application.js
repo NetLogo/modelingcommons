@@ -158,6 +158,10 @@ jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
 
 //Model list dataTable
 $(document).ready(function () {
+	
+	
+	
+	
 	// Create the datatable
 	$(".model_list_datatable").dataTable({
 		'aaSorting': [ [0, 'asc']],
@@ -587,6 +591,40 @@ $(document).ready(function () {
 		
 		//Call in case the user hit back and left something in the input field
 		fetchNewPeopleFromInput();
+	})();
+	
+	//Update model behavior
+	(function() {
+		var form = $("#upload-model-form");
+		form.validate({
+			rules: {
+				"new_version[uploaded_body]": {
+					"required": true
+				},
+				"new_version[description]": "required", 
+				"new_version[name_of_new_child]": {
+					"required": "#fork_child:checked"
+				}
+			}, 
+			errorPlacement: function(error, element) {
+				element.parents("tr").children("td:last").append(error);
+			}
+		});
+		var fileInput = $("#new_version_uploaded_body");
+		var updateFileName = function() {
+			fileInput.parents("form").find("label.file_name_label").text(fileInput.val().split('\\').pop());
+		};
+		
+		updateFileName();
+		
+		fileInput.bind("change", function(e) {
+			updateFileName();
+			form.validate().element(this);
+		});
+		
+		$("#fork_overwrite").bind("change", function(e) {
+			form.validate().element("#new_version_name_of_new_child");
+		});
 	})();
 	
 	
