@@ -5,21 +5,11 @@ $blueprint-grid-width: 40px;
 @import "compass/css3";
 @import "compass/css3/pie";
 @import "clickable";
-@import "ui.everything";
 @import "browse";
 @import "font";
 @import "all";
+@import "ui.everything";
 
-
-$pie-behavior: url("/browse/pie");
-$pie-base-class: pie-element;
-.pie-element {
-  @include pie-element(relative);
-}
-@mixin pie-border-radius($r) {
-  @include border-radius($r);
-  @include pie;
-}
 
 /* 
  * Overall Page Layout
@@ -39,16 +29,21 @@ body {
  * Center page container
  * Blueprint column container
  */
+.outer_container {
+   @include container;
+   overflow: visible;
+   z-index: 0;
+   position: relative;
+   
+}
 .container {
-  @include container;
+  overflow: hidden;
   background-color: white;
+  display:inline-block;
   @include box-shadow(0 0 15px 10px gray);
-  //@include border-bottom-right-radius($tab-corner-radius);
-  //@include border-bottom-left-radius($tab-corner-radius);
   @include border-radius(0px 0px $tab-corner-radius $tab-corner-radius);
-  @include pie-element(z-index, 0);
+  @include pie-z;
   margin-bottom: 200px;
-  z-index: 0;
 }
 
 
@@ -60,8 +55,6 @@ body {
 .header {
   @include sans-font();
   @include column(24);
-  //@include border-bottom-left-radius($tab-corner-radius);
-  //@include border-bottom-right-radius($tab-corner-radius);
   @include pie-border-radius(0px 0px $tab-corner-radius $tab-corner-radius);
   @include box-shadow(0 0 10px 2px gray);
   overflow: hidden;
@@ -463,6 +456,7 @@ div#register_new_user {
  */
 #search_tabs {
   .num-results {
+    background-color: darken(red, 10%);
     @include background(radial-gradient(25% 25%, red, darken(red, 20%)));
     $radius: 10px;
     $padding: 3px;
@@ -483,6 +477,7 @@ div#register_new_user {
     margin-top: 3px;
     margin-bottom: 3px;
     &.empty {
+      background-color: desaturate(darken(red, 10%), 90%);
       @include background(radial-gradient(25% 25%, desaturate(red, 90%), desaturate(darken(red, 20%), 90%)));
     }  
   }
@@ -594,7 +589,7 @@ div.left-right {
   @include global_padding;
   border: 3px solid black;
   @include border-radius(8px);
-  @include pie-element(z-index, 0);
+  @include pie-z;
   padding: 4px;
 }
 

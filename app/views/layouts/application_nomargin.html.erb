@@ -7,23 +7,25 @@
   	<%= render :partial => "layouts/head" -%>
   </head>
   <body>
-  	<div class="container">
-  		<%= render :partial => "layouts/page_header" -%>
-		<div class="content">
-			<div class="title">
-			    <h1 id="main-title">
-			      <% if @headline_avatar -%>
-			      <%= image_tag @headline_avatar -%>
-			      <% end -%>
-			
-			      <% if @headline.blank? -%>
-			      <%= @title -%>
-			      <% else -%>
-			      <%= @headline -%>
-			      <% end -%>
-			    </h1>
-		    </div>
-		    <%= yield :layout %>
+  	<div class="outer_container">
+	  	<div class="container">
+	  		<%= render :partial => "layouts/page_header" -%>
+			<div class="content">
+				<div class="title">
+				    <h1 id="main-title">
+				      <% if @headline_avatar -%>
+				      <%= image_tag @headline_avatar -%>
+				      <% end -%>
+				
+				      <% if @headline.blank? -%>
+				      <%= @title -%>
+				      <% else -%>
+				      <%= @headline -%>
+				      <% end -%>
+				    </h1>
+			    </div>
+			    <%= yield :layout %>
+		   </div>
 	    </div>
     </div>
   </body>
