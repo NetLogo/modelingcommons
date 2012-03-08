@@ -297,14 +297,21 @@ $(document).ready(function () {
 	//Validate header login form
 	$("#header_login").validate({
 		rules: {
-			password: "required",
+			password: {
+				required: ":not(.placeholder)", 
+			},
 			email_address: {
 				required: true,
 				email: true
 			}
 		},
 		messages: {
-			password: "Password Required",
+			password: {
+				required: function(rules, element) {
+					console.log($(element).parent().children(".placeholder").addClass("error"));
+					return "Password Required"
+				}
+			},
 			email_address: {
 				required: "Email Required",
 				email: "Invalid Email Address"
@@ -312,7 +319,7 @@ $(document).ready(function () {
 		},
 		//onkeyup: false,
 		//onclick: false,
-		//onfocusout: false,
+		onfocusout: false,
 		errorPlacement: function(error, element) {
 			element.parents("tr").next("tr").children("td").eq(element.parents("td").index()).append(error);
 		}
@@ -378,7 +385,6 @@ $(document).ready(function () {
 	}
 	var submitPermissionChange = function() {
 		var form = $("#group_permission_form");
-		console.log(form.serialize());
 		$.ajax({
 			url: form.attr("action"), 
 			type: "post", 
@@ -428,7 +434,6 @@ $(document).ready(function () {
 	
 	$('#new_discussion_comment').submit(function() {
 		var form = $("#new_discussion_comment");
-		console.log(form.serialize());
 		$.ajax({
 			url: form.attr("action"),
 			dataType: "json",  
@@ -558,7 +563,6 @@ $(document).ready(function () {
 			return false;
 		});
 		selectedList.on("click", "button.person_remove", function(e) {
-			console.log("yes");
 			$(this).parents(".selectable_person").detach().appendTo(unselectedList);
 			updateSelectedListIndicatorState();
 			updateUnselectedListIndicatorState();
@@ -631,6 +635,59 @@ $(document).ready(function () {
 		});
 	})();
 	
+	
+	(function() {
+		var test = document.createElement("input");
+		if("placeholder" in test) {
+			return;
+		}
+		
+		$("input[placeholder][type=password]").each(function() {
+			var passwordInput = $(this);
+			passwordInput.addClass("password_placeholder");
+			var textInput = $('<input type="text" />');
+			textInput.attr("placeholder", passwordInput.attr("placeholder"));
+			passwordInput.removeAttr("placeholder");
+			passwordInput.after(textInput);
+			passwordInput.hide();
+			textInput.on("focus", function() {
+				textInput.hide();
+				passwordInput.show();
+				passwordInput.focus();
+			});
+			passwordInput.on("blur", function() {
+				if(passwordInput.val().length == 0) {
+					passwordInput.hide();
+					textInput.show();
+					textInput.blur();
+				}
+			});
+		});
+		
+		
+		var blur = function() {
+			
+			var input = $(this);
+			if(input.val().length == 0) {
+				input.val(input.attr("placeholder"));
+				input.addClass("placeholder");
+			}
+		};
+		var focus = function() {
+			var input = $(this);
+			if(input.hasClass("placeholder")) {
+				input.val("");
+				input.removeClass("placeholder");
+			}
+		};
+		$("[placeholder]").blur(blur).focus(focus).each(blur).parents("form").bind("submit", function() {
+			$(this).find("input.placeholder").val("");
+		});
+		
+		
+		
+		
+	})();
 });
 
 

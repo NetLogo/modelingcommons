@@ -636,6 +636,9 @@ input[type=text], input[type=password] {
   &:focus.error {
     outline-color: red;
   }
+  &.placeholder {
+    color: lighten(black, 60%);
+  }
 }
 
 /*
@@ -657,6 +660,7 @@ button, input[type=button], input[type=submit] {
       display: inline-block;
     }
   @include border-radius($input-radius);
+  
 }
 
 .error {
