@@ -856,8 +856,8 @@ table.simple_table {
       text-decoration: underline;
     }
   }
-  width: $sidebar-width;
-  float: left;
+  //width: $sidebar-width;
+  //float: left;
   .news_list {
     
     @include box-shadow(0 0 10px 2px gray);

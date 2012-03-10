@@ -104,6 +104,41 @@
 </div>
 
 <div id="right-news-box">
+	
+<div class="news">
+    <% start_time = Time.now %>
+    <div class="news_list">
+    	<h1>Most Popular Models</h1>
+    
+    	
+    <% if @all_time_most_viewed.empty? %>
+    <p>No statistics on all-time most-viewed models</p>
+    <% else %>
+      <% @all_time_most_viewed.each do |model| %>
+      <% next if model[1].to_i.zero? %>
+      <div class="news_post">
+      	<div class="news_image">
+      		
+      	</div>
+      	<div class="news_content">
+      		<div class="news_above">
+      			<%= model[0].person.fullname -%>
+      		</div>
+      		<div class="news_item">
+      			<%= model[0].name -%>
+      		</div>
+      		<div class="news_below">
+      			 <%= pluralize(number_with_delimiter(model[1]), "time", "times") -%>
+      		</div>
+      	</div>
+      </div>
+      <% end %>
+      </div>
+    <% end %>
+    <!-- Time spent in all-time viewed-models: <%= Time.now - start_time-%> -->
+  </div>
+
+	
   <div id="viewed-models" class="panel">
     <% start_time = Time.now %>
     <h2>Most-viewed models <span class="h2-explanation">(of all time)</span></h2>
