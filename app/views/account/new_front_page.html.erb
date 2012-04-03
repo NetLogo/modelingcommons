@@ -1,116 +1,119 @@
 <% @title = "Recent Activity" %>
 <div class="activity">
-	<label><input type="checkbox">Show only my activity</label>
-	<div class="post">
-		<div class="main_image">
-			<img src="/images/model.png" />
-		</div>
-		<div class="post_content">
-			<div class="post_person">
-				<a href="#"><img src="/images/person.jpeg">Seth Tisue</a> updated
-			</div>
-			<div class="post_item">
-				<a href="#">Warring States</a>
-			</div>	
-			<div class="post_date">
-				about 1 hour ago
-			</div>
-			<div class="post_more">
-				<a href="#">See more recently updated models</a>
-			</div>
-		</div>
+	<div id="custom_filters">
+		<label><input type="checkbox" id="post_show_you">Show only my activity</label>
 	</div>
-	<div class="post">
-		<div class="main_image">
-			<img src="/images/model.png" />
-		</div>
-		<div class="post_content">
-			<div class="post_person">
-				<a href="#"><img src="/images/person.jpeg">Ben Rafshoon</a> tagged
-			</div>
-			<div class="post_item">
-				<a href="#">Wolf Sheep Predation</a> as <a href="#">Examples</a>
-			</div>	
-			<div class="post_date">
-				2 days ago
-			</div>
-			<div class="post_more">
-				<a href="#">See more recently applied tags that you created</a>
-			</div>
-		</div>
-	</div>
+	<table id="post_table">
+		<% @events.each do |event| %>
+		<% if event[:type] == :model || event[:type] == :tag %>
+		
+			<tr>
+				<td>
+					<div class="post">
+						<div class="main_image">
+							<a href="<%= url_for(:controller => "browse", :action => "one_model", :id => event[:model].id) -%>">
+								<% if !event[:model].previews.nil? and !event[:model].previews.empty? %>
+								<img src="<%= url_for :controller => :browse, :action => :display_preview, :id => event[:model].id %>" />
+								<% end %>
+							</a>
+						</div>
+						<div class="post_content">
+							<div class="left-right">
+								<div class="post_person left">
+									<a href="<%= url_for(:controller => :account, :action => :mypage, :id => event[:actor].id) -%>"><img src="<%= event[:actor].avatar.url -%>"><%= event[:actor].fullname -%></a>
+									<% if event[:type] == :model %>
+										<% if event[:updated] %>
+										updated
+										<% else %>
+										created
+										<% end %>	
+									<% elsif event[:type] == :tag %>
+									tagged
+									<% end %>
+								</div>
+								<div class="post_date right">
+									<%= distance_of_time_in_words(Time.now, event[:model].updated_at) -%> ago
+								</div>
+							</div>
+							
+							<div class="post_model">
+								<a href="<%= url_for(:controller => "browse", :action => "one_model", :id => event[:model].id) -%>"><%= event[:model].name -%></a>
+							</div>
+							<div class="post_comment">
+								 <% if event[:type] == :tag %>
+								 as <a class="tag" href="<%= url_for(:controller => :tags, :action => :one_tag, :id => event[:tagged_node].tag.id) -%>"><%= event[:tagged_node].tag.name -%></a><% if event[:tagged_node].comment.length > 0 %> and commented: 	&quot<%= event[:tagged_node].comment -%>&quot<% end %>
+								 <% elsif event[:type] == :model %>
+								 
+								 	<% 
+								 	if event[:updated]
+								 		versions = event[:model].node_versions
+								 		if versions.length > 1
+								 			%>
+								 			 and commented: &quot<%= versions[0].description -%>&quot
+								 			<%
+								 		end
+								 	end
+								 end %>
+							</div>
+							<div class="post_more">
+								<a href="#">See more recent models</a>
+							</div>
+								
+								
+						</div>
+					</div>
+				</td>
+				<td class="post_date">
+					<%= event[:model].updated_at -%>
+				</td>
+				<td class="post_actor_id">
+					<%= event[:actor].id -%>
+				</td>
+				<td class="post_model_author_id">
+					<%= event[:model].person.id -%>
+				</td>
+				<td class="post_contains_you">
+					<% if event[:actor].id == @person.id or event[:model].people.map {|person| person.id}.include?(@person.id) %>
+					true
+					<% end %>
+				</td>
+			</tr>
+		
+		
+	
+		<% end %>
+		<% end %>
+	</table>
 </div>
 <div class="sidebar">
 	<div class="side_list">
 		<h1>Most Popular Models</h1>
+		<% @all_time_most_viewed.each do |n| 
+			model=n[:node]
+			count=n[:count] 
+		%>
 		<div class="side_post">
 			<div class="side_image">
-				<img src="/images/model.png">
+				<a href="<%= url_for(:controller => "browse", :action => "one_model", :id => model.id) -%>">
+					<% if !model.previews.nil? and !model.previews.empty? %>
+					<img src="<%= url_for :controller => :browse, :action => :display_preview, :id => model.id %>" />
+					<% end %>
+				</a>
 			</div>
 			<div class="side_content">
 				<div class="side_person">
-					<a href="#">Uri Wilensky</a>
+					<a href="<%= url_for(:controller => :account, :action => :mypage, :id => model.person.id) -%>"><%= model.person.fullname -%></a>
 				</div>
 				<div class="side_item">
-					<a href="#">Wolf Sheep Predation</a>
+					<a href="<%= url_for(:controller => "browse", :action => "one_model", :id => model.id) -%>"><%= model.name -%></a>
 				</div>
 				<div class="side_views">
-					Viewed 304 times
+					Viewed <%= pluralize(count, "time", "times") -%>
 				</div>
 				
 			</div>
 		</div>
-		<div class="side_post">
-			<div class="side_image">
-				<img src="/images/model.png">
-			</div>
-			<div class="side_content">
-				<div class="side_person">
-					<a href="#">Uri Wilensky</a>
-				</div>
-				<div class="side_item">
-					<a href="#">Wolf Sheep Predation</a>
-				</div>
-				<div class="side_views">
-					Viewed 304 times
-				</div>
-				
-			</div>
-		</div>
-		<div class="side_post">
-			<div class="side_image">
-				<img src="/images/model.png">
-			</div>
-			<div class="side_content">
-				<div class="side_person">
-					<a href="#">Uri Wilensky</a>
-				</div>
-				<div class="side_item">
-					<a href="#">Wolf Sheep Predation</a>
-				</div>
-				<div class="side_views">
-					Viewed 304 times
-				</div>
-				
-			</div>
-		</div>
-		<div class="side_post">
-			<div class="side_image">
-				<img src="/images/model.png">
-			</div>
-			<div class="side_content">
-				<div class="side_person">
-					<a href="#">Uri Wilensky</a>
-				</div>
-				<div class="side_item">
-					<a href="#">Wolf Sheep Predation</a>
-				</div>
-				<div class="side_views">
-					Viewed 304 times
-				</div>
-				
-			</div>
-		</div>
-		<div class="side_more"><a href="#">See more popular models</a></div>
+		<% end %>
+		<div class="side_more"><a href="<%= url_for(:controller => :browse, :action => :list_models) -%>">See more popular models</a></div>
 	</div>
 </div>

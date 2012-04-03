@@ -873,12 +873,29 @@ table.simple_table {
       color: white;
       margin: 0px;
     }
-    margin: 5px;
+    .news_heading {
+      @include sans-font();
+      //@include text-shadow($text-highlight, 2px, 2px, 3px);
+      background-color: $nav-color;
+      text-align: center;
+      padding-top: 5px;
+      padding-bottom: 2px;
+      font-size: 20px;
+      color: white;
+      margin: 0px;
+      .sub_heading {
+        font-size: 13px;
+      }
+    }
+    margin: 10px 5px;
     background-color: lighten($header-color, 10%);
     @include border-radius($tab-corner-radius);
     .news_post {
+      &.your_news {
+        background-color: rgb(250, 247, 157);
+      }
+      margin: 4px;
       
-      padding: 4px;
       .news_image {
         width: 50px;
         height: 50px;
@@ -912,6 +929,10 @@ table.simple_table {
     }
     .news_more {
       text-align: center;
+      margin: 4px;
+    }
+    .news_empty {
+      margin: 4px;
     }
   }
 }
