@@ -178,6 +178,7 @@ $(document).ready(function () {
 			"aoColumns": [
 			{
 				"bSortable": false
+				
 			}, 
 			{
 				"sType": "string", 

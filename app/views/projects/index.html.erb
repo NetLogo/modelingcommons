@@ -20,42 +20,20 @@ Sort by<select id="project_sort_by">
 		<tr>
 			<td>
 				<div class="project">
+					<h1><%= link_to project.name, :controller => :projects, :action => :show, :id => project.id -%></h1>
 					<div class="project_image">
-						<img src="/images/model.png" />
+						<a href="<%= url_for(:controller => :projects, :action => :show, :id => project.id) -%>"><img src="<%= url_for(:controller => 'projects', :action => 'image', :id => project.id) -%>" /></a>
 					</div>
-					<div class="project_info">
-						<div class="project_person">
-							<%= person_image(project.person) -%><%= person_link(project.person) -%>
-						</div>
-						<div class="project_name">
-							<%= link_to project.name, :controller => :projects, :action => :show, :id => project.id -%>
-						</div>	
-						<div class="project_count">
-							<%= pluralize(project.nodes.count, "model") -%> in project
-						</div>
+					<div class="project_model_list">
+						<% num_projects_to_show = 5%>
+						<% project.nodes[0..(num_projects_to_show - 1)].each do |model| %>
+						<p><%= link_to truncate(model.name, :length => 23, :omission => '...'), :controller => :browse, :action => :one_model, :id => model.id -%></p>
+						<% end %>
+						<% if project.nodes.length > num_projects_to_show %>
+						<p><%= link_to 'And ' << (project.nodes.length - num_projects_to_show).to_s() << ' more', :controller => :projects, :action => :show, :id => project.id -%></p>
+						<% end %>
 					</div>
-					<div class="project_more">
-							<div class="left-right">
-								<div class="left">
-									<button>Show models</button>
-								</div>
-								<div class="right">
-									<% if project.person == @person %>
-									<% if !@models_to_add.empty? %>
-									<% form_tag :controller => :projects, :action => :add_model do  %>
-									<%= hidden_field_tag :project_id, project.id -%>
-									Add one of your models to this project:
-									<%= select_tag :model_id, options_for_select(@models_to_add)  %>
-									<%= submit_tag "Add model" %>
-									<% end %>
-									<% end %>
-									<% end %>
-								</div>
-							</div>
-						</div>
-					<div class="project_model_list hidden">
-					<%= render :partial => "/browse/model_list", :object => project.nodes %>
-					</div>
+					<h2><%= link_to person_image(project.person), :controller => :account, :action => :mypage, :id => project.person.id -%><%= person_link(project.person) -%></h2>
 				</div>
 			</td>
 			<td><%= project.name -%></td>

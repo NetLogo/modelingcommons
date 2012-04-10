@@ -3475,75 +3475,92 @@ table.simple_table td {
 #projects_table {
   width: 100%;
 }
-/* line 682, sass/nlcommons.scss */
+/* line 681, sass/nlcommons.scss */
+#projects_table thead {
+  display: none;
+}
+/* line 685, sass/nlcommons.scss */
+#projects_table tr {
+  display: inline-block;
+  width: 300px;
+  margin: 5px;
+  border: 1px solid black;
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+  -o-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -khtml-border-radius: 8px;
+  border-radius: 8px;
+}
+/* line 691, sass/nlcommons.scss */
+#projects_table tr td {
+  display: block;
+}
+/* line 695, sass/nlcommons.scss */
 #projects_table .project {
   padding: 4px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  border-bottom: 1px solid black;
-  overflow: auto;
 }
-/* line 683, sass/nlcommons.scss */
+/* line 697, sass/nlcommons.scss */
+#projects_table .project h1, #projects_table .project h2, #projects_table .project p {
+  font-family: 'Muli', 'Arial', sans-serif;
+}
+/* line 700, sass/nlcommons.scss */
+#projects_table .project h1 {
+  margin: 4px 0px;
+  text-align: center;
+  font-size: 18px;
+}
+/* line 705, sass/nlcommons.scss */
+#projects_table .project h2 {
+  margin: 4px 0px;
+  font-size: 16px;
+  line-height: 40px;
+}
+/* line 709, sass/nlcommons.scss */
+#projects_table .project h2 img {
+  vertical-align: middle;
+  margin-right: 5px;
+}
+/* line 714, sass/nlcommons.scss */
+#projects_table .project p {
+  margin: 0px;
+  font-size: 14px;
+}
+/* line 718, sass/nlcommons.scss */
 #projects_table .project a {
   text-decoration: none;
 }
-/* line 685, sass/nlcommons.scss */
+/* line 720, sass/nlcommons.scss */
 #projects_table .project a:hover {
   text-decoration: underline;
 }
-/* line 696, sass/nlcommons.scss */
-#projects_table .project .project_image {
-  vertical-align: top;
+/* line 724, sass/nlcommons.scss */
+#projects_table .project .project_model_list {
   display: inline-block;
-  width: 80px;
-  height: 80px;
-  padding-right: 12px;
-}
-/* line 701, sass/nlcommons.scss */
-#projects_table .project .project_image img {
-  width: 100%;
-}
-/* line 706, sass/nlcommons.scss */
-#projects_table .project .project_info {
   vertical-align: top;
-  display: inline-block;
-}
-/* line 709, sass/nlcommons.scss */
-#projects_table .project .project_info .project_person {
-  line-height: 30px;
-  font-size: 16px;
-}
-/* line 712, sass/nlcommons.scss */
-#projects_table .project .project_info .project_person img {
-  vertical-align: top;
-  height: 30px;
-  width: 30px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-/* line 721, sass/nlcommons.scss */
-#projects_table .project .project_info .project_name {
-  font-size: 30px;
-}
-/* line 725, sass/nlcommons.scss */
-#projects_table .project .project_info .project_count {
-  font-size: 16px;
 }
 /* line 728, sass/nlcommons.scss */
-#projects_table .project .project_info .project_more {
-  font-size: 10px;
+#projects_table .project .project_image {
+  margin-bottom: 8px;
+  display: inline-block;
+  vertical-align: top;
 }
-/* line 734, sass/nlcommons.scss */
-#projects_table .project .project_info .project_model_list img {
-  height: 50px;
+/* line 732, sass/nlcommons.scss */
+#projects_table .project .project_image a {
+  display: inline-block;
+}
+/* line 735, sass/nlcommons.scss */
+#projects_table .project .project_image img {
+  width: 120px;
+  height: 120px;
 }
 
-/* line 743, sass/nlcommons.scss */
+/* line 746, sass/nlcommons.scss */
 .activity {
   width: 660px;
   float: left;
 }
-/* line 746, sass/nlcommons.scss */
+/* line 749, sass/nlcommons.scss */
 .activity .post {
   padding: 4px;
   margin-top: 10px;
@@ -3551,15 +3568,15 @@ table.simple_table td {
   border-bottom: 1px solid black;
   overflow: auto;
 }
-/* line 747, sass/nlcommons.scss */
+/* line 750, sass/nlcommons.scss */
 .activity .post a {
   text-decoration: none;
 }
-/* line 749, sass/nlcommons.scss */
+/* line 752, sass/nlcommons.scss */
 .activity .post a:hover {
   text-decoration: underline;
 }
-/* line 760, sass/nlcommons.scss */
+/* line 763, sass/nlcommons.scss */
 .activity .post .main_image {
   vertical-align: top;
   display: inline-block;
@@ -3567,21 +3584,21 @@ table.simple_table td {
   height: 80px;
   padding-right: 12px;
 }
-/* line 765, sass/nlcommons.scss */
+/* line 768, sass/nlcommons.scss */
 .activity .post .main_image img {
   width: 100%;
 }
-/* line 770, sass/nlcommons.scss */
+/* line 773, sass/nlcommons.scss */
 .activity .post .post_content {
   vertical-align: top;
   display: inline-block;
 }
-/* line 773, sass/nlcommons.scss */
+/* line 776, sass/nlcommons.scss */
 .activity .post .post_content .post_person {
   line-height: 30px;
   font-size: 16px;
 }
-/* line 776, sass/nlcommons.scss */
+/* line 779, sass/nlcommons.scss */
 .activity .post .post_content .post_person img {
   vertical-align: top;
   height: 30px;
@@ -3589,33 +3606,33 @@ table.simple_table td {
   padding-left: 5px;
   padding-right: 5px;
 }
-/* line 785, sass/nlcommons.scss */
+/* line 788, sass/nlcommons.scss */
 .activity .post .post_content .post_item {
   font-size: 30px;
 }
-/* line 789, sass/nlcommons.scss */
+/* line 792, sass/nlcommons.scss */
 .activity .post .post_content .post_date {
   font-size: 16px;
 }
-/* line 792, sass/nlcommons.scss */
+/* line 795, sass/nlcommons.scss */
 .activity .post .post_content .post_more {
   font-size: 10px;
 }
 
-/* line 803, sass/nlcommons.scss */
+/* line 806, sass/nlcommons.scss */
 .sidebar {
   width: 300px;
   float: left;
 }
-/* line 804, sass/nlcommons.scss */
+/* line 807, sass/nlcommons.scss */
 .sidebar a {
   text-decoration: none;
 }
-/* line 806, sass/nlcommons.scss */
+/* line 809, sass/nlcommons.scss */
 .sidebar a:hover {
   text-decoration: underline;
 }
-/* line 812, sass/nlcommons.scss */
+/* line 815, sass/nlcommons.scss */
 .sidebar .side_list {
   -moz-box-shadow: 0 0 10px 2px gray;
   -webkit-box-shadow: 0 0 10px 2px gray;
@@ -3631,7 +3648,7 @@ table.simple_table td {
   -khtml-border-radius: 8px;
   border-radius: 8px;
 }
-/* line 816, sass/nlcommons.scss */
+/* line 819, sass/nlcommons.scss */
 .sidebar .side_list h1 {
   font-family: 'Muli', 'Arial', sans-serif;
   background-color: #04346c;
@@ -3642,39 +3659,39 @@ table.simple_table td {
   color: white;
   margin: 0px;
 }
-/* line 830, sass/nlcommons.scss */
+/* line 833, sass/nlcommons.scss */
 .sidebar .side_list .side_post {
   padding: 4px;
 }
-/* line 833, sass/nlcommons.scss */
+/* line 836, sass/nlcommons.scss */
 .sidebar .side_list .side_post .side_image {
   width: 50px;
   height: 50px;
   display: inline-block;
   vertical-align: top;
 }
-/* line 837, sass/nlcommons.scss */
+/* line 840, sass/nlcommons.scss */
 .sidebar .side_list .side_post .side_image img {
   width: 100%;
 }
-/* line 842, sass/nlcommons.scss */
+/* line 845, sass/nlcommons.scss */
 .sidebar .side_list .side_post .side_content {
   display: inline-block;
   vertical-align: top;
 }
-/* line 846, sass/nlcommons.scss */
+/* line 849, sass/nlcommons.scss */
 .sidebar .side_list .side_post .side_content .side_person {
   font-size: 11px;
 }
-/* line 849, sass/nlcommons.scss */
+/* line 852, sass/nlcommons.scss */
 .sidebar .side_list .side_post .side_content .side_item {
   font-size: 15px;
 }
-/* line 852, sass/nlcommons.scss */
+/* line 855, sass/nlcommons.scss */
 .sidebar .side_list .side_post .side_content .side_views {
   font-size: 11px;
 }
-/* line 857, sass/nlcommons.scss */
+/* line 860, sass/nlcommons.scss */
 .sidebar .side_list .side_more {
   text-align: center;
 }
@@ -3683,39 +3700,39 @@ table.simple_table td {
  * Legacy Styling
  * All of this should probably be updated
  */
-/* line 871, sass/nlcommons.scss */
+/* line 874, sass/nlcommons.scss */
 #menubar-avatar, #logged-in-as {
   float: left;
   margin-left: 1em;
 }
 
-/* line 876, sass/nlcommons.scss */
+/* line 879, sass/nlcommons.scss */
 #main-menu, h1, h2, h3, #flash-notice, #logged-in-as {
   font-family: 'Muli', 'Arial', sans-serif;
   font-weight: bold;
 }
 
-/* line 881, sass/nlcommons.scss */
+/* line 884, sass/nlcommons.scss */
 h1, #flash-notice {
   clear: both;
 }
 
-/* line 885, sass/nlcommons.scss */
+/* line 888, sass/nlcommons.scss */
 h1, #flash-notice {
   font-size: 21px;
 }
 
-/* line 889, sass/nlcommons.scss */
+/* line 892, sass/nlcommons.scss */
 h2 {
   font-size: 17px;
 }
 
-/* line 893, sass/nlcommons.scss */
+/* line 896, sass/nlcommons.scss */
 .h2-explanation {
   font-size: 13px;
 }
 
-/* line 897, sass/nlcommons.scss */
+/* line 900, sass/nlcommons.scss */
 h3, #menu-bar {
   font-size: 15px;
 }
@@ -3725,7 +3742,7 @@ h3, #menu-bar {
     top: 3.5em;
     left: 20em;
 }*/
-/* line 907, sass/nlcommons.scss */
+/* line 910, sass/nlcommons.scss */
 a img {
   border: 0;
   margin: 0;
@@ -3867,7 +3884,7 @@ div ul.subsection_tabs li.tab a:hover {
 .sorting {
     background: url('../images/sort_both.jpg') no-repeat center right;
 }*/
-/* line 1057, sass/nlcommons.scss */
+/* line 1060, sass/nlcommons.scss */
 div.foreSortIcon {
   background: url("../images/sort_both.jpg") no-repeat center right;
   width: 16px;
@@ -3877,7 +3894,7 @@ div.foreSortIcon {
 }
 
 /* Autocomplete */
-/* line 1066, sass/nlcommons.scss */
+/* line 1069, sass/nlcommons.scss */
 ul.jq-ui-autocomplete {
   position: absolute;
   overflow: hidden;
@@ -3890,7 +3907,7 @@ ul.jq-ui-autocomplete {
   color: #333;
 }
 
-/* line 1077, sass/nlcommons.scss */
+/* line 1080, sass/nlcommons.scss */
 ul.jq-ui-autocomplete li {
   display: block;
   padding: .3em .5em .3em .3em;
@@ -3898,30 +3915,30 @@ ul.jq-ui-autocomplete li {
   width: 100%;
 }
 
-/* line 1084, sass/nlcommons.scss */
+/* line 1087, sass/nlcommons.scss */
 ul.jq-ui-autocomplete li.active {
   background-color: #3875d7;
   color: #fff;
 }
 
-/* line 1089, sass/nlcommons.scss */
+/* line 1092, sass/nlcommons.scss */
 .deleted {
   text-decoration: line-through;
 }
 
-/* line 1093, sass/nlcommons.scss */
+/* line 1096, sass/nlcommons.scss */
 table#new-person-form tr td {
   width: 10em;
 }
 
-/* line 1097, sass/nlcommons.scss */
+/* line 1100, sass/nlcommons.scss */
 .fieldWithErrors {
   padding: 2px;
   background-color: red;
   display: table;
 }
 
-/* line 1103, sass/nlcommons.scss */
+/* line 1106, sass/nlcommons.scss */
 #errorExplanation {
   width: 450px;
   border: 2px solid red;
@@ -3931,7 +3948,7 @@ table#new-person-form tr td {
   background-color: #f0f0f0;
 }
 
-/* line 1112, sass/nlcommons.scss */
+/* line 1115, sass/nlcommons.scss */
 #error_explanation h2 {
   text-align: left;
   font-weight: bold;
@@ -3943,18 +3960,18 @@ table#new-person-form tr td {
   color: #fff;
 }
 
-/* line 1123, sass/nlcommons.scss */
+/* line 1126, sass/nlcommons.scss */
 #error_explanation ul li {
   font-size: 12px;
   list-style: square;
 }
 
-/* line 1128, sass/nlcommons.scss */
+/* line 1131, sass/nlcommons.scss */
 tr.scaffold-row {
   border-bottom: 2px solid black;
 }
 
-/* line 1132, sass/nlcommons.scss */
+/* line 1135, sass/nlcommons.scss */
 #permission-group-reminder {
   font-style: italic;
 }

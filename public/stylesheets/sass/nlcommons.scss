@@ -678,64 +678,67 @@ table.simple_table {
 
 
 #projects_table {
+  thead {
+    display: none;
+  }
   width: 100%;
+  tr {
+    display:inline-block;
+    width: 300px;
+    margin: 5px;
+    border:1px solid black;
+    @include border-radius(8px);
+    td {
+      display: block;
+    }
+  }
   .project {
+    padding: 4px;
+    h1, h2, p {
+      @include sans-font();
+    }
+    h1 {
+      margin: 4px 0px;
+      text-align: center;
+      font-size: 18px;
+    }
+    h2 {
+      margin: 4px 0px;
+      font-size: 16px;
+      line-height: 40px;
+      img {
+        vertical-align: middle;
+        margin-right: 5px;
+      }
+    }
+    p {
+      margin: 0px;
+      font-size: 14px;
+    }
     a {
       text-decoration: none;
       &:hover {
         text-decoration: underline;
       }
     }
-    padding: 4px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    border-bottom: 1px solid black;
-    overflow: auto;
-    
-    //line-height: 80px;
+    .project_model_list {
+      display: inline-block;
+      vertical-align: top;
+    }
     .project_image {
-      vertical-align: top;
+      margin-bottom: 8px;
       display: inline-block;
-      width: 80px;
-      height: 80px;
+      vertical-align: top;
+      a {
+        display: inline-block;
+      }
       img {
-        width: 100%;
-      }
-      padding-right: 12px;
-    }
-    .project_info {
-      vertical-align: top;
-      display: inline-block;
-      .project_person {
-        line-height: 30px;
-        font-size: 16px;
-        img {
-          vertical-align: top;
-          height: 30px;
-          width: 30px;
-          padding-left: 5px;
-          padding-right: 5px;
-        }
         
-      }
-      .project_name {
-       font-size: 30px;
-        
-      }
-      .project_count {
-        font-size: 16px;
-      }
-      .project_more {
-        font-size: 10px;
-        
-      }
-      .project_model_list {
-        //display: none;
-        img {
-          height: 50px;
-        }
+        width: 120px;
+        height: 120px;
       }
     }
+   
   }
 }
 
