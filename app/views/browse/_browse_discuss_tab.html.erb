@@ -1,4 +1,4 @@
-<div>
+<h1>Comments and Questions</h1>
 <% if @model.author_visible? %>
 	<p>Comments are disabled for private models.</p>
 <% else %>
@@ -13,6 +13,7 @@
 	<% if @person %>
 	
 		<hr />
+		<h1>Post A New Comment</h1>
 		<% form_for(:new_posting, :url => { :controller => "discussion", :action => :create }, :html => {:id => 'new_discussion_comment'}) do |form| %>
 			<table id="posting-table">
 			<tr>
@@ -25,6 +26,7 @@
 			    <%= form.hidden_field :node_id, {:value => @model.id} %></td>
 			</tr>
 			<tr>
+			  
 			  <td colspan="2"><%= form.check_box :is_question %><label for="new_posting_is_question">This is a question that I would like answered</label></td>
 			</tr>
 			
@@ -35,7 +37,7 @@
 		<% end %>
 	<% end %>
 <% end %>
-</div>
+
 
 <script>
   $("#new-posting-form").validate({

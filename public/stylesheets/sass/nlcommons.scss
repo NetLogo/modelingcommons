@@ -397,6 +397,11 @@ $comment-border-width: 1px;
     text-decoration: line-through;
   }
 }
+#posting-table {
+  input[type="text"], textarea {
+    width: 400px;
+  }
+}
 
 /* 
  * Model Page
@@ -725,6 +730,33 @@ input[type=text], input[type=password] {
     color: $error-color;
     border-color: $error-color;
     //@include box-shadow(-1px 1px 4px 1px lighten($error-color, 20%) inset);
+    
+  }
+  &:focus {
+    outline:none;
+    $input-color: darken($header-color, 10%);
+    @include box-shadow(-1px 1px 4px 1px lighten($color, 20%) inset, 0px 0px 4px 2px $input-color);
+  }
+  &.error:focus {
+    @include box-shadow(-1px 1px 4px 1px lighten($color, 20%) inset, 0px 0px 4px 2px lighten($error-color, 20%));
+  }
+  &:focus.error {
+    outline-color: red;
+  }
+}
+textarea {
+  $color: rgb(50%, 50%, 50%);
+  @include pie;
+  @include serif-font();
+  @include border-radius($input-radius);
+  border: 1px solid $color;
+  padding: 2px;
+  margin: 2px;
+  font-size: $default-font-size;
+  @include box-shadow(-1px 1px 4px 1px lighten($color, 20%) inset);
+  &.error {
+    color: $error-color;
+    border-color: $error-color;
     
   }
   &:focus {
