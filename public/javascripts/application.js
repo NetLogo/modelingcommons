@@ -606,9 +606,8 @@ $(document).ready(function () {
 					"required": "#fork_child:checked"
 				}
 			}, 
-			errorPlacement: function(error, element) {
-				element.parents("tr").children("td:last").append(error);
-			}
+			
+
 		});
 		var fileInput = $("#new_version_uploaded_body");
 		var updateFileName = function() {
