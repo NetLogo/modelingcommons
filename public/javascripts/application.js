@@ -438,6 +438,7 @@ $(document).ready(function () {
 				$().flash_notice(data.message);
 				if(data.success) {
 					$(data.html).insertAfter($('#discussion tr:last'));
+					form.find('input:not([type="submit"], [type="button"]), textarea').removeAttr('value').removeAttr('checked');
 				}
 			},
 			error: function(jqXHR, textStatus, errorThrown) {
