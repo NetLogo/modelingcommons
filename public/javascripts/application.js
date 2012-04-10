@@ -614,15 +614,20 @@ $(document).ready(function () {
 		
 		
 		
-		
+		form.find('input[type="file"]').bind("change", function() {
+			form.validate().element(this);
+		})
 		
 		$("#fork_overwrite").bind("change", function(e) {
 			form.validate().element("#new_version_name_of_new_child");
 		});
 	})();
+	
 	styled_file_input();
 });
 
+//Allows styling input type="file" by wrapping the file input in a styled label.  To style, change the file_label
+//class style
 var styled_file_input = (function() {
 	var initialized = false;
 	return function() {
@@ -651,7 +656,6 @@ var styled_file_input = (function() {
 			updateFileName();
 			fileInput.bind("change", function(e) {
 				updateFileName();
-				form.validate().element(this);
 			});
 		})
 		
