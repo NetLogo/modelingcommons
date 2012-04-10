@@ -132,14 +132,14 @@ img#big-preview-image  {
 }
 */
 /* line 23, sass/_all.scss */
-.pie, .ui-tabs .ui-tabs-nav li, .header, .header .login_flash .login_container .login, .header .navigation, .header .navigation a, .header .search, .selectable_person, input[type=text], input[type=password], button, #upload-model-form label.file_label, input[type=button], input[type=submit], .dataTables_wrapper .dataTables_paginate button, .dataTables_wrapper .dataTables_paginate #upload-model-form label.file_label, #upload-model-form .dataTables_wrapper .dataTables_paginate label.file_label, .dataTables > thead tr th {
+.pie, .ui-tabs .ui-tabs-nav li, .header, .header .login_flash .login_container .login, .header .navigation, .header .navigation a, .header .search, .selectable_person, input[type=text], input[type=password], button, label.file_label, input[type=button], input[type=submit], .dataTables_wrapper .dataTables_paginate button, .dataTables_wrapper .dataTables_paginate label.file_label, .dataTables > thead tr th {
   behavior: url("/browse/pie");
   position: relative;
   -pie-poll: false;
 }
 
 /* line 23, sass/_all.scss */
-.pie, .ui-tabs .ui-tabs-nav li, .header, .header .login_flash .login_container .login, .header .navigation, .header .navigation a, .header .search, .selectable_person, input[type=text], input[type=password], button, #upload-model-form label.file_label, input[type=button], input[type=submit], .dataTables_wrapper .dataTables_paginate button, .dataTables_wrapper .dataTables_paginate #upload-model-form label.file_label, #upload-model-form .dataTables_wrapper .dataTables_paginate label.file_label, .dataTables > thead tr th {
+.pie, .ui-tabs .ui-tabs-nav li, .header, .header .login_flash .login_container .login, .header .navigation, .header .navigation a, .header .search, .selectable_person, input[type=text], input[type=password], button, label.file_label, input[type=button], input[type=submit], .dataTables_wrapper .dataTables_paginate button, .dataTables_wrapper .dataTables_paginate label.file_label, .dataTables > thead tr th {
   behavior: url("/browse/pie");
   position: relative;
   -pie-poll: false;
@@ -421,7 +421,7 @@ img#big-preview-image  {
 }
 
 /* line 74, sass/_ui.everything.scss */
-.ui-datepicker .ui-datepicker-buttonpane button, .ui-datepicker .ui-datepicker-buttonpane #upload-model-form label.file_label, #upload-model-form .ui-datepicker .ui-datepicker-buttonpane label.file_label {
+.ui-datepicker .ui-datepicker-buttonpane button, .ui-datepicker .ui-datepicker-buttonpane label.file_label {
   float: right;
   margin: .5em .2em .4em;
   cursor: pointer;
@@ -431,7 +431,7 @@ img#big-preview-image  {
 }
 
 /* line 75, sass/_ui.everything.scss */
-.ui-datepicker .ui-datepicker-buttonpane button.ui-datepicker-current, .ui-datepicker .ui-datepicker-buttonpane #upload-model-form label.ui-datepicker-current.file_label, #upload-model-form .ui-datepicker .ui-datepicker-buttonpane label.ui-datepicker-current.file_label {
+.ui-datepicker .ui-datepicker-buttonpane button.ui-datepicker-current, .ui-datepicker .ui-datepicker-buttonpane label.ui-datepicker-current.file_label {
   float: left;
 }
 
@@ -524,12 +524,12 @@ img#big-preview-image  {
 }
 
 /* line 96, sass/_ui.everything.scss */
-.ui-datepicker-rtl .ui-datepicker-buttonpane button, .ui-datepicker-rtl .ui-datepicker-buttonpane #upload-model-form label.file_label, #upload-model-form .ui-datepicker-rtl .ui-datepicker-buttonpane label.file_label {
+.ui-datepicker-rtl .ui-datepicker-buttonpane button, .ui-datepicker-rtl .ui-datepicker-buttonpane label.file_label {
   float: left;
 }
 
 /* line 97, sass/_ui.everything.scss */
-.ui-datepicker-rtl .ui-datepicker-buttonpane button.ui-datepicker-current, .ui-datepicker-rtl .ui-datepicker-buttonpane #upload-model-form label.ui-datepicker-current.file_label, #upload-model-form .ui-datepicker-rtl .ui-datepicker-buttonpane label.ui-datepicker-current.file_label {
+.ui-datepicker-rtl .ui-datepicker-buttonpane button.ui-datepicker-current, .ui-datepicker-rtl .ui-datepicker-buttonpane label.ui-datepicker-current.file_label {
   float: right;
 }
 
@@ -635,7 +635,7 @@ img#big-preview-image  {
 }
 
 /* line 123, sass/_ui.everything.scss */
-.ui-dialog .ui-dialog-buttonpane button, .ui-dialog .ui-dialog-buttonpane #upload-model-form label.file_label, #upload-model-form .ui-dialog .ui-dialog-buttonpane label.file_label {
+.ui-dialog .ui-dialog-buttonpane button, .ui-dialog .ui-dialog-buttonpane label.file_label {
   float: right;
   margin: .5em .4em .5em 0;
   cursor: pointer;
@@ -1070,7 +1070,7 @@ img#big-preview-image  {
 }
 
 /* line 215, sass/_ui.everything.scss */
-.ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button, .ui-widget #upload-model-form label.file_label, #upload-model-form .ui-widget label.file_label {
+.ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button, .ui-widget label.file_label {
   /*font-family: Optima,Verdana,Arial,sans-serif; font-size: 0.9em; */
 }
 
@@ -2638,24 +2638,6 @@ body {
 }
 
 /* line 383, sass/nlcommons.scss */
-#upload-model-form label.file_label {
-  display: inline-block;
-  position: relative;
-  overflow: hidden;
-}
-/* line 388, sass/nlcommons.scss */
-#upload-model-form label.file_label input[type=file] {
-  opacity: 0;
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  cursor: pointer;
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-/* line 400, sass/nlcommons.scss */
 #upload-model-form td {
   line-height: 26px;
 }
@@ -2665,18 +2647,18 @@ body {
  * Proc is procedure
  * browse/_browse/procedures_tab
  */
-/* line 411, sass/nlcommons.scss */
+/* line 394, sass/nlcommons.scss */
 .procedure_code {
   font-family: courier, monospace;
   font-size: 12px;
 }
 
-/* line 416, sass/nlcommons.scss */
+/* line 399, sass/nlcommons.scss */
 .proc-to, .proc-end {
   color: #b3b;
 }
 
-/* line 420, sass/nlcommons.scss */
+/* line 403, sass/nlcommons.scss */
 .proc-comment {
   color: #282;
   font-style: italic;
@@ -2686,7 +2668,7 @@ body {
  * Login Page (Front Page)
  * account/login
  */
-/* line 432, sass/nlcommons.scss */
+/* line 415, sass/nlcommons.scss */
 div#just_visiting {
   display: inline;
   float: left;
@@ -2698,7 +2680,7 @@ div#just_visiting {
   overflow-x: hidden;
 }
 
-/* line 436, sass/nlcommons.scss */
+/* line 419, sass/nlcommons.scss */
 div#register_new_user {
   display: inline;
   float: left;
@@ -2714,7 +2696,7 @@ div#register_new_user {
  * User Page (Front Page) 
  * account/mypage
  */
-/* line 445, sass/nlcommons.scss */
+/* line 428, sass/nlcommons.scss */
 #left-news-box {
   display: inline;
   float: left;
@@ -2726,7 +2708,7 @@ div#register_new_user {
   overflow-x: hidden;
 }
 
-/* line 448, sass/nlcommons.scss */
+/* line 431, sass/nlcommons.scss */
 #right-news-box {
   display: inline;
   float: left;
@@ -2742,7 +2724,7 @@ div#register_new_user {
  * Search Results Page 
  * search/search_action
  */
-/* line 458, sass/nlcommons.scss */
+/* line 441, sass/nlcommons.scss */
 #search_tabs .num-results {
   background-color: #cc0000;
   background: -webkit-gradient(radial, 25% 25%, 0, 25% 25%, 100, color-stop(0%, #ff0000), color-stop(100%, #990000));
@@ -2773,7 +2755,7 @@ div#register_new_user {
   margin-top: 3px;
   margin-bottom: 3px;
 }
-/* line 479, sass/nlcommons.scss */
+/* line 462, sass/nlcommons.scss */
 #search_tabs .num-results.empty {
   background-color: #705c5c;
   background: -webkit-gradient(radial, 25% 25%, 0, 25% 25%, 100, color-stop(0%, #8c7373), color-stop(100%, #544545));
@@ -2789,12 +2771,12 @@ div#register_new_user {
  * One Group Page
  * membership/one_group
  */
-/* line 492, sass/nlcommons.scss */
+/* line 475, sass/nlcommons.scss */
 .grouplist img {
   height: 30px;
   vertical-align: middle;
 }
-/* line 497, sass/nlcommons.scss */
+/* line 480, sass/nlcommons.scss */
 .grouplist li {
   margin-top: 4px;
   margin-bototm: 4px;
@@ -2804,7 +2786,7 @@ div#register_new_user {
  * Admin view all actions
  * admin/view_all_people
  */
-/* line 509, sass/nlcommons.scss */
+/* line 492, sass/nlcommons.scss */
 .actions_table_container {
   overflow: scroll;
 }
@@ -2813,21 +2795,21 @@ div#register_new_user {
  * Group people selector
  * membership/_invite
  */
-/* line 520, sass/nlcommons.scss */
+/* line 503, sass/nlcommons.scss */
 table#people_adder {
   width: 100%;
 }
-/* line 522, sass/nlcommons.scss */
+/* line 505, sass/nlcommons.scss */
 table#people_adder td {
   width: 50%;
   vertical-align: top;
 }
-/* line 525, sass/nlcommons.scss */
+/* line 508, sass/nlcommons.scss */
 table#people_adder td > div {
   vertical-align: baseline;
 }
 
-/* line 532, sass/nlcommons.scss */
+/* line 515, sass/nlcommons.scss */
 .selectable_person {
   background-color: #e6e6e6;
   padding: 2px;
@@ -2842,18 +2824,18 @@ table#people_adder td > div {
   margin-top: 5px;
   margin-bottom: 5px;
 }
-/* line 541, sass/nlcommons.scss */
+/* line 524, sass/nlcommons.scss */
 .selectable_person img {
   vertical-align: top;
   height: 24px;
   padding-right: 10px;
 }
 
-/* line 547, sass/nlcommons.scss */
+/* line 530, sass/nlcommons.scss */
 #selected_people, #unselected_people {
   padding: 4px;
 }
-/* line 549, sass/nlcommons.scss */
+/* line 532, sass/nlcommons.scss */
 #selected_people .no_people, #unselected_people .no_people {
   text-align: center;
   font-size: 11px;
@@ -2861,17 +2843,17 @@ table#people_adder td > div {
   background-color: #e6e6e6;
 }
 
-/* line 556, sass/nlcommons.scss */
-#selected_people button.person_add, #selected_people #upload-model-form label.person_add.file_label, #upload-model-form #selected_people label.person_add.file_label {
+/* line 539, sass/nlcommons.scss */
+#selected_people button.person_add, #selected_people label.person_add.file_label {
   display: none;
 }
 
-/* line 559, sass/nlcommons.scss */
-#unselected_people button.person_remove, #unselected_people #upload-model-form label.person_remove.file_label, #upload-model-form #unselected_people label.person_remove.file_label {
+/* line 542, sass/nlcommons.scss */
+#unselected_people button.person_remove, #unselected_people label.person_remove.file_label {
   display: none;
 }
 
-/* line 562, sass/nlcommons.scss */
+/* line 545, sass/nlcommons.scss */
 .no_people label {
   width: 100%;
   display: inline-block;
@@ -2881,28 +2863,47 @@ table#people_adder td > div {
 /*
  * Globally useful styling
  */
-/* line 572, sass/nlcommons.scss */
+/* line 556, sass/nlcommons.scss */
+label.file_label {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+}
+/* line 561, sass/nlcommons.scss */
+label.file_label input[type=file] {
+  opacity: 0;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* line 577, sass/nlcommons.scss */
 .hidden {
   display: none;
 }
 
-/* line 575, sass/nlcommons.scss */
+/* line 580, sass/nlcommons.scss */
 div.left-right {
   width: 100%;
   display: table;
 }
-/* line 578, sass/nlcommons.scss */
+/* line 583, sass/nlcommons.scss */
 div.left-right div.left {
   display: table-cell;
   text-align: left;
 }
-/* line 582, sass/nlcommons.scss */
+/* line 587, sass/nlcommons.scss */
 div.left-right div.right {
   display: table-cell;
   text-align: right;
 }
 
-/* line 588, sass/nlcommons.scss */
+/* line 593, sass/nlcommons.scss */
 .panel, .tabs_panel {
   margin: 4px;
   border: 3px solid black;
@@ -2918,12 +2919,12 @@ div.left-right div.right {
   padding: 4px;
 }
 
-/* line 596, sass/nlcommons.scss */
+/* line 601, sass/nlcommons.scss */
 .tabs_panel {
   padding: 0px;
   overflow: hidden;
 }
-/* line 598, sass/nlcommons.scss */
+/* line 603, sass/nlcommons.scss */
 .tabs_panel > ul {
   /* 
    * Setting padding-left to inherit cancels the .content wide setting of 40px left padding for ul
@@ -2934,7 +2935,7 @@ div.left-right div.right {
 /* 
  * Text Input Field
  */
-/* line 610, sass/nlcommons.scss */
+/* line 615, sass/nlcommons.scss */
 input[type=text], input[type=password] {
   font-family: 'Georgia', 'Times', serif;
   line-height: 16px;
@@ -2953,12 +2954,12 @@ input[type=text], input[type=password] {
   -o-box-shadow: -1px 1px 4px 1px #b2b2b2 inset;
   box-shadow: -1px 1px 4px 1px #b2b2b2 inset;
 }
-/* line 622, sass/nlcommons.scss */
+/* line 627, sass/nlcommons.scss */
 input[type=text].error, input[type=password].error {
   color: red;
   border-color: red;
 }
-/* line 628, sass/nlcommons.scss */
+/* line 633, sass/nlcommons.scss */
 input[type=text]:focus, input[type=password]:focus {
   outline: none;
   -moz-box-shadow: -1px 1px 4px 1px #b2b2b2 inset, 0px 0px 4px 2px #6899d3;
@@ -2966,14 +2967,14 @@ input[type=text]:focus, input[type=password]:focus {
   -o-box-shadow: -1px 1px 4px 1px #b2b2b2 inset, 0px 0px 4px 2px #6899d3;
   box-shadow: -1px 1px 4px 1px #b2b2b2 inset, 0px 0px 4px 2px #6899d3;
 }
-/* line 633, sass/nlcommons.scss */
+/* line 638, sass/nlcommons.scss */
 input[type=text].error:focus, input[type=password].error:focus {
   -moz-box-shadow: -1px 1px 4px 1px #b2b2b2 inset, 0px 0px 4px 2px #ff6666;
   -webkit-box-shadow: -1px 1px 4px 1px #b2b2b2 inset, 0px 0px 4px 2px #ff6666;
   -o-box-shadow: -1px 1px 4px 1px #b2b2b2 inset, 0px 0px 4px 2px #ff6666;
   box-shadow: -1px 1px 4px 1px #b2b2b2 inset, 0px 0px 4px 2px #ff6666;
 }
-/* line 636, sass/nlcommons.scss */
+/* line 641, sass/nlcommons.scss */
 input[type=text]:focus.error, input[type=password]:focus.error {
   outline-color: red;
 }
@@ -2981,8 +2982,8 @@ input[type=text]:focus.error, input[type=password]:focus.error {
 /*
  * Buttons
  */
-/* line 644, sass/nlcommons.scss */
-button, #upload-model-form label.file_label, input[type=button], input[type=submit] {
+/* line 649, sass/nlcommons.scss */
+button, label.file_label, input[type=button], input[type=submit] {
   color: black;
   font-family: 'Muli', 'Arial', sans-serif;
   cursor: pointer;
@@ -3013,7 +3014,7 @@ button, #upload-model-form label.file_label, input[type=button], input[type=subm
   border-radius: 5px;
 }
 /* line 18, sass/_clickable.scss */
-button:hover, #upload-model-form label.file_label:hover, input[type=button]:hover, input[type=submit]:hover {
+button:hover, label.file_label:hover, input[type=button]:hover, input[type=submit]:hover {
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #6899d3), color-stop(45%, #417ec7), color-stop(85%, #6899d3));
   background: -webkit-linear-gradient(#6899d3 35%, #417ec7 45%, #6899d3 85%);
   background: -moz-linear-gradient(#6899d3 35%, #417ec7 45%, #6899d3 85%);
@@ -3027,7 +3028,7 @@ button:hover, #upload-model-form label.file_label:hover, input[type=button]:hove
   box-shadow: 0px 0px 1px 1px #8fb4df inset;
 }
 /* line 25, sass/_clickable.scss */
-button:active, #upload-model-form label.file_label:active, input[type=button]:active, input[type=submit]:active {
+button:active, label.file_label:active, input[type=button]:active, input[type=submit]:active {
   -moz-box-shadow: -1px 5px 6px 3px #254d7d inset;
   -webkit-box-shadow: -1px 5px 6px 3px #254d7d inset;
   -o-box-shadow: -1px 5px 6px 3px #254d7d inset;
@@ -3042,7 +3043,7 @@ button:active, #upload-model-form label.file_label:active, input[type=button]:ac
   /*border: 1px solid darken($button-color, 40%);*/
 }
 /* line 34, sass/_clickable.scss */
-button[disabled], #upload-model-form label[disabled].file_label, input[type=button][disabled], input[type=submit][disabled] {
+button[disabled], label[disabled].file_label, input[type=button][disabled], input[type=submit][disabled] {
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #b7b7b7), color-stop(45%, #aaaaaa), color-stop(85%, #b7b7b7));
   background: -webkit-linear-gradient(#b7b7b7 35%, #aaaaaa 45%, #b7b7b7 85%);
   background: -moz-linear-gradient(#b7b7b7 35%, #aaaaaa 45%, #b7b7b7 85%);
@@ -3060,7 +3061,7 @@ button[disabled], #upload-model-form label[disabled].file_label, input[type=butt
   opacity: .5;
 }
 /* line 43, sass/_clickable.scss */
-button[disabled]:active, #upload-model-form label[disabled].file_label:active, input[type=button][disabled]:active, input[type=submit][disabled]:active {
+button[disabled]:active, label[disabled].file_label:active, input[type=button][disabled]:active, input[type=submit][disabled]:active {
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #b7b7b7), color-stop(45%, #aaaaaa), color-stop(85%, #b7b7b7));
   background: -webkit-linear-gradient(#b7b7b7 35%, #aaaaaa 45%, #b7b7b7 85%);
   background: -moz-linear-gradient(#b7b7b7 35%, #aaaaaa 45%, #b7b7b7 85%);
@@ -3078,7 +3079,7 @@ button[disabled]:active, #upload-model-form label[disabled].file_label:active, i
   opacity: .5;
 }
 /* line 56, sass/_clickable.scss */
-button.selected, #upload-model-form label.selected.file_label, input[type=button].selected, input[type=submit].selected {
+button.selected, label.selected.file_label, input[type=button].selected, input[type=submit].selected {
   -moz-box-shadow: -1px 5px 6px 2px #254d7d inset;
   -webkit-box-shadow: -1px 5px 6px 2px #254d7d inset;
   -o-box-shadow: -1px 5px 6px 2px #254d7d inset;
@@ -3092,7 +3093,7 @@ button.selected, #upload-model-form label.selected.file_label, input[type=button
   background: linear-gradient(#6899d3 35%, #417ec7 45%, #6899d3 85%);
 }
 /* line 65, sass/_clickable.scss */
-button.selected:hover, #upload-model-form label.selected.file_label:hover, input[type=button].selected:hover, input[type=submit].selected:hover {
+button.selected:hover, label.selected.file_label:hover, input[type=button].selected:hover, input[type=submit].selected:hover {
   -moz-box-shadow: -1px 5px 6px 2px #254d7d inset;
   -webkit-box-shadow: -1px 5px 6px 2px #254d7d inset;
   -o-box-shadow: -1px 5px 6px 2px #254d7d inset;
@@ -3106,7 +3107,7 @@ button.selected:hover, #upload-model-form label.selected.file_label:hover, input
   background: linear-gradient(#548ccd 35%, #3672b9 45%, #548ccd 85%);
 }
 /* line 74, sass/_clickable.scss */
-button.selected:active, #upload-model-form label.selected.file_label:active, input[type=button].selected:active, input[type=submit].selected:active {
+button.selected:active, label.selected.file_label:active, input[type=button].selected:active, input[type=submit].selected:active {
   -moz-box-shadow: -1px 5px 6px 3px #254d7d inset;
   -webkit-box-shadow: -1px 5px 6px 3px #254d7d inset;
   -o-box-shadow: -1px 5px 6px 3px #254d7d inset;
@@ -3120,7 +3121,7 @@ button.selected:active, #upload-model-form label.selected.file_label:active, inp
   background: linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
 }
 /* line 82, sass/_clickable.scss */
-button.selected[disabled], #upload-model-form label.selected[disabled].file_label, input[type=button].selected[disabled], input[type=submit].selected[disabled] {
+button.selected[disabled], label.selected[disabled].file_label, input[type=button].selected[disabled], input[type=submit].selected[disabled] {
   -moz-box-shadow: -1px 5px 6px 2px #515151 inset;
   -webkit-box-shadow: -1px 5px 6px 2px #515151 inset;
   -o-box-shadow: -1px 5px 6px 2px #515151 inset;
@@ -3133,15 +3134,15 @@ button.selected[disabled], #upload-model-form label.selected[disabled].file_labe
   -pie-background: linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
   background: linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
 }
-/* line 653, sass/nlcommons.scss */
-button div.ui-icon, #upload-model-form label.file_label div.ui-icon, input[type=button] div.ui-icon, input[type=submit] div.ui-icon {
+/* line 658, sass/nlcommons.scss */
+button div.ui-icon, label.file_label div.ui-icon, input[type=button] div.ui-icon, input[type=submit] div.ui-icon {
   margin-top: 1px;
   margin-bottom: 1px;
   vertical-align: top;
   display: inline-block;
 }
 
-/* line 662, sass/nlcommons.scss */
+/* line 667, sass/nlcommons.scss */
 .error {
   color: red;
 }
@@ -3149,13 +3150,13 @@ button div.ui-icon, #upload-model-form label.file_label div.ui-icon, input[type=
 /*
  * DataTables Styling
  */
-/* line 670, sass/nlcommons.scss */
+/* line 675, sass/nlcommons.scss */
 .dataTables_wrapper div.ui-icon {
   display: inline-block;
   vertical-align: top;
 }
-/* line 675, sass/nlcommons.scss */
-.dataTables_wrapper .dataTables_paginate button, .dataTables_wrapper .dataTables_paginate #upload-model-form label.file_label, #upload-model-form .dataTables_wrapper .dataTables_paginate label.file_label {
+/* line 680, sass/nlcommons.scss */
+.dataTables_wrapper .dataTables_paginate button, .dataTables_wrapper .dataTables_paginate label.file_label {
   color: black;
   font-family: 'Muli', 'Arial', sans-serif;
   cursor: pointer;
@@ -3173,7 +3174,7 @@ button div.ui-icon, #upload-model-form label.file_label div.ui-icon, input[type=
   box-shadow: 0px 0px 1px 1px #b7ceea inset;
 }
 /* line 18, sass/_clickable.scss */
-.dataTables_wrapper .dataTables_paginate button:hover, .dataTables_wrapper .dataTables_paginate #upload-model-form label.file_label:hover, #upload-model-form .dataTables_wrapper .dataTables_paginate label.file_label:hover {
+.dataTables_wrapper .dataTables_paginate button:hover, .dataTables_wrapper .dataTables_paginate label.file_label:hover {
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #6899d3), color-stop(45%, #417ec7), color-stop(85%, #6899d3));
   background: -webkit-linear-gradient(#6899d3 35%, #417ec7 45%, #6899d3 85%);
   background: -moz-linear-gradient(#6899d3 35%, #417ec7 45%, #6899d3 85%);
@@ -3187,7 +3188,7 @@ button div.ui-icon, #upload-model-form label.file_label div.ui-icon, input[type=
   box-shadow: 0px 0px 1px 1px #8fb4df inset;
 }
 /* line 25, sass/_clickable.scss */
-.dataTables_wrapper .dataTables_paginate button:active, .dataTables_wrapper .dataTables_paginate #upload-model-form label.file_label:active, #upload-model-form .dataTables_wrapper .dataTables_paginate label.file_label:active {
+.dataTables_wrapper .dataTables_paginate button:active, .dataTables_wrapper .dataTables_paginate label.file_label:active {
   -moz-box-shadow: -1px 5px 6px 3px #254d7d inset;
   -webkit-box-shadow: -1px 5px 6px 3px #254d7d inset;
   -o-box-shadow: -1px 5px 6px 3px #254d7d inset;
@@ -3202,7 +3203,7 @@ button div.ui-icon, #upload-model-form label.file_label div.ui-icon, input[type=
   /*border: 1px solid darken($button-color, 40%);*/
 }
 /* line 34, sass/_clickable.scss */
-.dataTables_wrapper .dataTables_paginate button.paginate_disabled_previous, .dataTables_wrapper .dataTables_paginate #upload-model-form label.paginate_disabled_previous.file_label, #upload-model-form .dataTables_wrapper .dataTables_paginate label.paginate_disabled_previous.file_label {
+.dataTables_wrapper .dataTables_paginate button.paginate_disabled_previous, .dataTables_wrapper .dataTables_paginate label.paginate_disabled_previous.file_label {
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #b7b7b7), color-stop(45%, #aaaaaa), color-stop(85%, #b7b7b7));
   background: -webkit-linear-gradient(#b7b7b7 35%, #aaaaaa 45%, #b7b7b7 85%);
   background: -moz-linear-gradient(#b7b7b7 35%, #aaaaaa 45%, #b7b7b7 85%);
@@ -3220,7 +3221,7 @@ button div.ui-icon, #upload-model-form label.file_label div.ui-icon, input[type=
   opacity: .5;
 }
 /* line 43, sass/_clickable.scss */
-.dataTables_wrapper .dataTables_paginate button.paginate_disabled_previous:active, .dataTables_wrapper .dataTables_paginate #upload-model-form label.paginate_disabled_previous.file_label:active, #upload-model-form .dataTables_wrapper .dataTables_paginate label.paginate_disabled_previous.file_label:active {
+.dataTables_wrapper .dataTables_paginate button.paginate_disabled_previous:active, .dataTables_wrapper .dataTables_paginate label.paginate_disabled_previous.file_label:active {
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #b7b7b7), color-stop(45%, #aaaaaa), color-stop(85%, #b7b7b7));
   background: -webkit-linear-gradient(#b7b7b7 35%, #aaaaaa 45%, #b7b7b7 85%);
   background: -moz-linear-gradient(#b7b7b7 35%, #aaaaaa 45%, #b7b7b7 85%);
@@ -3238,7 +3239,7 @@ button div.ui-icon, #upload-model-form label.file_label div.ui-icon, input[type=
   opacity: .5;
 }
 /* line 34, sass/_clickable.scss */
-.dataTables_wrapper .dataTables_paginate button.paginate_disabled_next, .dataTables_wrapper .dataTables_paginate #upload-model-form label.paginate_disabled_next.file_label, #upload-model-form .dataTables_wrapper .dataTables_paginate label.paginate_disabled_next.file_label {
+.dataTables_wrapper .dataTables_paginate button.paginate_disabled_next, .dataTables_wrapper .dataTables_paginate label.paginate_disabled_next.file_label {
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #b7b7b7), color-stop(45%, #aaaaaa), color-stop(85%, #b7b7b7));
   background: -webkit-linear-gradient(#b7b7b7 35%, #aaaaaa 45%, #b7b7b7 85%);
   background: -moz-linear-gradient(#b7b7b7 35%, #aaaaaa 45%, #b7b7b7 85%);
@@ -3256,7 +3257,7 @@ button div.ui-icon, #upload-model-form label.file_label div.ui-icon, input[type=
   opacity: .5;
 }
 /* line 43, sass/_clickable.scss */
-.dataTables_wrapper .dataTables_paginate button.paginate_disabled_next:active, .dataTables_wrapper .dataTables_paginate #upload-model-form label.paginate_disabled_next.file_label:active, #upload-model-form .dataTables_wrapper .dataTables_paginate label.paginate_disabled_next.file_label:active {
+.dataTables_wrapper .dataTables_paginate button.paginate_disabled_next:active, .dataTables_wrapper .dataTables_paginate label.paginate_disabled_next.file_label:active {
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(35%, #b7b7b7), color-stop(45%, #aaaaaa), color-stop(85%, #b7b7b7));
   background: -webkit-linear-gradient(#b7b7b7 35%, #aaaaaa 45%, #b7b7b7 85%);
   background: -moz-linear-gradient(#b7b7b7 35%, #aaaaaa 45%, #b7b7b7 85%);
@@ -3274,7 +3275,7 @@ button div.ui-icon, #upload-model-form label.file_label div.ui-icon, input[type=
   opacity: .5;
 }
 /* line 56, sass/_clickable.scss */
-.dataTables_wrapper .dataTables_paginate button.selected, .dataTables_wrapper .dataTables_paginate #upload-model-form label.selected.file_label, #upload-model-form .dataTables_wrapper .dataTables_paginate label.selected.file_label {
+.dataTables_wrapper .dataTables_paginate button.selected, .dataTables_wrapper .dataTables_paginate label.selected.file_label {
   -moz-box-shadow: -1px 5px 6px 2px #254d7d inset;
   -webkit-box-shadow: -1px 5px 6px 2px #254d7d inset;
   -o-box-shadow: -1px 5px 6px 2px #254d7d inset;
@@ -3288,7 +3289,7 @@ button div.ui-icon, #upload-model-form label.file_label div.ui-icon, input[type=
   background: linear-gradient(#6899d3 35%, #417ec7 45%, #6899d3 85%);
 }
 /* line 65, sass/_clickable.scss */
-.dataTables_wrapper .dataTables_paginate button.selected:hover, .dataTables_wrapper .dataTables_paginate #upload-model-form label.selected.file_label:hover, #upload-model-form .dataTables_wrapper .dataTables_paginate label.selected.file_label:hover {
+.dataTables_wrapper .dataTables_paginate button.selected:hover, .dataTables_wrapper .dataTables_paginate label.selected.file_label:hover {
   -moz-box-shadow: -1px 5px 6px 2px #254d7d inset;
   -webkit-box-shadow: -1px 5px 6px 2px #254d7d inset;
   -o-box-shadow: -1px 5px 6px 2px #254d7d inset;
@@ -3302,7 +3303,7 @@ button div.ui-icon, #upload-model-form label.file_label div.ui-icon, input[type=
   background: linear-gradient(#548ccd 35%, #3672b9 45%, #548ccd 85%);
 }
 /* line 74, sass/_clickable.scss */
-.dataTables_wrapper .dataTables_paginate button.selected:active, .dataTables_wrapper .dataTables_paginate #upload-model-form label.selected.file_label:active, #upload-model-form .dataTables_wrapper .dataTables_paginate label.selected.file_label:active {
+.dataTables_wrapper .dataTables_paginate button.selected:active, .dataTables_wrapper .dataTables_paginate label.selected.file_label:active {
   -moz-box-shadow: -1px 5px 6px 3px #254d7d inset;
   -webkit-box-shadow: -1px 5px 6px 3px #254d7d inset;
   -o-box-shadow: -1px 5px 6px 3px #254d7d inset;
@@ -3316,7 +3317,7 @@ button div.ui-icon, #upload-model-form label.file_label div.ui-icon, input[type=
   background: linear-gradient(#417ec7 35%, #3066a5 45%, #417ec7 85%);
 }
 /* line 82, sass/_clickable.scss */
-.dataTables_wrapper .dataTables_paginate button.selected.paginate_disabled_previous, .dataTables_wrapper .dataTables_paginate #upload-model-form label.selected.paginate_disabled_previous.file_label, #upload-model-form .dataTables_wrapper .dataTables_paginate label.selected.paginate_disabled_previous.file_label {
+.dataTables_wrapper .dataTables_paginate button.selected.paginate_disabled_previous, .dataTables_wrapper .dataTables_paginate label.selected.paginate_disabled_previous.file_label {
   -moz-box-shadow: -1px 5px 6px 2px #515151 inset;
   -webkit-box-shadow: -1px 5px 6px 2px #515151 inset;
   -o-box-shadow: -1px 5px 6px 2px #515151 inset;
@@ -3330,7 +3331,7 @@ button div.ui-icon, #upload-model-form label.file_label div.ui-icon, input[type=
   background: linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
 }
 /* line 82, sass/_clickable.scss */
-.dataTables_wrapper .dataTables_paginate button.selected.paginate_disabled_next, .dataTables_wrapper .dataTables_paginate #upload-model-form label.selected.paginate_disabled_next.file_label, #upload-model-form .dataTables_wrapper .dataTables_paginate label.selected.paginate_disabled_next.file_label {
+.dataTables_wrapper .dataTables_paginate button.selected.paginate_disabled_next, .dataTables_wrapper .dataTables_paginate label.selected.paginate_disabled_next.file_label {
   -moz-box-shadow: -1px 5px 6px 2px #515151 inset;
   -webkit-box-shadow: -1px 5px 6px 2px #515151 inset;
   -o-box-shadow: -1px 5px 6px 2px #515151 inset;
@@ -3343,19 +3344,19 @@ button div.ui-icon, #upload-model-form label.file_label div.ui-icon, input[type=
   -pie-background: linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
   background: linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
 }
-/* line 690, sass/nlcommons.scss */
+/* line 695, sass/nlcommons.scss */
 .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter {
   display: inline-block;
   margin-left: 10px;
   font-size: 15px;
 }
-/* line 695, sass/nlcommons.scss */
+/* line 700, sass/nlcommons.scss */
 .dataTables_wrapper .top, .dataTables_wrapper .bottom, .dataTables_wrapper .datatable {
   margin-top: 4px;
   margin-bottom: 4px;
 }
 
-/* line 702, sass/nlcommons.scss */
+/* line 707, sass/nlcommons.scss */
 .dataTables {
   width: 100%;
   border-bottom: 1px solid black;
@@ -3371,11 +3372,11 @@ button div.ui-icon, #upload-model-form label.file_label div.ui-icon, input[type=
   border-radius: 8px;
   overflow: hidden;
 }
-/* line 714, sass/nlcommons.scss */
+/* line 719, sass/nlcommons.scss */
 .dataTables > thead tr {
   font-family: 'Muli', 'Arial', sans-serif;
 }
-/* line 716, sass/nlcommons.scss */
+/* line 721, sass/nlcommons.scss */
 .dataTables > thead tr th {
   color: black;
   font-family: 'Muli', 'Arial', sans-serif;
@@ -3589,73 +3590,73 @@ button div.ui-icon, #upload-model-form label.file_label div.ui-icon, input[type=
   -pie-background: linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
   background: linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
 }
-/* line 727, sass/nlcommons.scss */
+/* line 732, sass/nlcommons.scss */
 .dataTables > thead tr th div.ui-icon {
   margin-top: 2px;
   margin-bottom: 2px;
 }
-/* line 743, sass/nlcommons.scss */
+/* line 748, sass/nlcommons.scss */
 .dataTables > tbody tr:nth-child(even) {
   background-color: #dee9f6;
 }
-/* line 746, sass/nlcommons.scss */
+/* line 751, sass/nlcommons.scss */
 .dataTables > tbody td {
   padding: 3px;
 }
-/* line 750, sass/nlcommons.scss */
+/* line 755, sass/nlcommons.scss */
 .dataTables span.hidden_elapsed_time {
   display: none;
 }
 
-/* line 755, sass/nlcommons.scss */
+/* line 760, sass/nlcommons.scss */
 table.model_list_datatable table td {
   height: 30px;
 }
-/* line 757, sass/nlcommons.scss */
+/* line 762, sass/nlcommons.scss */
 table.model_list_datatable table td:first-child {
   padding-left: 4px;
   padding-right: 4px;
   width: 30px;
   min-width: 30px;
 }
-/* line 763, sass/nlcommons.scss */
+/* line 768, sass/nlcommons.scss */
 table.model_list_datatable table td img {
   vertical-align: top;
   width: 30px;
   height: 30px;
 }
 
-/* line 771, sass/nlcommons.scss */
+/* line 776, sass/nlcommons.scss */
 table.simple_table {
   border-collapse: collapse;
 }
-/* line 773, sass/nlcommons.scss */
+/* line 778, sass/nlcommons.scss */
 table.simple_table img {
   vertical-align: middle;
 }
-/* line 776, sass/nlcommons.scss */
+/* line 781, sass/nlcommons.scss */
 table.simple_table th {
   font-weight: bold;
   padding-left: 5px;
   padding-right: 5px;
 }
-/* line 781, sass/nlcommons.scss */
+/* line 786, sass/nlcommons.scss */
 table.simple_table td {
   border: 1px solid;
   padding: 5px;
 }
 
-/* line 787, sass/nlcommons.scss */
+/* line 792, sass/nlcommons.scss */
 .highlight {
   background-color: #ff0;
 }
 
-/* line 792, sass/nlcommons.scss */
+/* line 797, sass/nlcommons.scss */
 .activity {
   width: 660px;
   float: left;
 }
-/* line 795, sass/nlcommons.scss */
+/* line 800, sass/nlcommons.scss */
 .activity .post {
   padding: 4px;
   margin-top: 10px;
@@ -3663,15 +3664,15 @@ table.simple_table td {
   border-bottom: 1px solid black;
   overflow: auto;
 }
-/* line 796, sass/nlcommons.scss */
+/* line 801, sass/nlcommons.scss */
 .activity .post a {
   text-decoration: none;
 }
-/* line 798, sass/nlcommons.scss */
+/* line 803, sass/nlcommons.scss */
 .activity .post a:hover {
   text-decoration: underline;
 }
-/* line 809, sass/nlcommons.scss */
+/* line 814, sass/nlcommons.scss */
 .activity .post .main_image {
   vertical-align: top;
   display: inline-block;
@@ -3679,21 +3680,21 @@ table.simple_table td {
   height: 80px;
   padding-right: 12px;
 }
-/* line 814, sass/nlcommons.scss */
+/* line 819, sass/nlcommons.scss */
 .activity .post .main_image img {
   width: 100%;
 }
-/* line 819, sass/nlcommons.scss */
+/* line 824, sass/nlcommons.scss */
 .activity .post .post_content {
   vertical-align: top;
   display: inline-block;
 }
-/* line 822, sass/nlcommons.scss */
+/* line 827, sass/nlcommons.scss */
 .activity .post .post_content .post_person {
   line-height: 30px;
   font-size: 16px;
 }
-/* line 825, sass/nlcommons.scss */
+/* line 830, sass/nlcommons.scss */
 .activity .post .post_content .post_person img {
   vertical-align: top;
   height: 30px;
@@ -3701,33 +3702,33 @@ table.simple_table td {
   padding-left: 5px;
   padding-right: 5px;
 }
-/* line 834, sass/nlcommons.scss */
+/* line 839, sass/nlcommons.scss */
 .activity .post .post_content .post_item {
   font-size: 30px;
 }
-/* line 838, sass/nlcommons.scss */
+/* line 843, sass/nlcommons.scss */
 .activity .post .post_content .post_date {
   font-size: 16px;
 }
-/* line 841, sass/nlcommons.scss */
+/* line 846, sass/nlcommons.scss */
 .activity .post .post_content .post_more {
   font-size: 10px;
 }
 
-/* line 852, sass/nlcommons.scss */
+/* line 857, sass/nlcommons.scss */
 .sidebar {
   width: 300px;
   float: left;
 }
-/* line 853, sass/nlcommons.scss */
+/* line 858, sass/nlcommons.scss */
 .sidebar a {
   text-decoration: none;
 }
-/* line 855, sass/nlcommons.scss */
+/* line 860, sass/nlcommons.scss */
 .sidebar a:hover {
   text-decoration: underline;
 }
-/* line 861, sass/nlcommons.scss */
+/* line 866, sass/nlcommons.scss */
 .sidebar .side_list {
   -moz-box-shadow: 0 0 10px 2px gray;
   -webkit-box-shadow: 0 0 10px 2px gray;
@@ -3743,7 +3744,7 @@ table.simple_table td {
   -khtml-border-radius: 8px;
   border-radius: 8px;
 }
-/* line 865, sass/nlcommons.scss */
+/* line 870, sass/nlcommons.scss */
 .sidebar .side_list h1 {
   font-family: 'Muli', 'Arial', sans-serif;
   background-color: #04346c;
@@ -3754,39 +3755,39 @@ table.simple_table td {
   color: white;
   margin: 0px;
 }
-/* line 879, sass/nlcommons.scss */
+/* line 884, sass/nlcommons.scss */
 .sidebar .side_list .side_post {
   padding: 4px;
 }
-/* line 882, sass/nlcommons.scss */
+/* line 887, sass/nlcommons.scss */
 .sidebar .side_list .side_post .side_image {
   width: 50px;
   height: 50px;
   display: inline-block;
   vertical-align: top;
 }
-/* line 886, sass/nlcommons.scss */
+/* line 891, sass/nlcommons.scss */
 .sidebar .side_list .side_post .side_image img {
   width: 100%;
 }
-/* line 891, sass/nlcommons.scss */
+/* line 896, sass/nlcommons.scss */
 .sidebar .side_list .side_post .side_content {
   display: inline-block;
   vertical-align: top;
 }
-/* line 895, sass/nlcommons.scss */
+/* line 900, sass/nlcommons.scss */
 .sidebar .side_list .side_post .side_content .side_person {
   font-size: 11px;
 }
-/* line 898, sass/nlcommons.scss */
+/* line 903, sass/nlcommons.scss */
 .sidebar .side_list .side_post .side_content .side_item {
   font-size: 15px;
 }
-/* line 901, sass/nlcommons.scss */
+/* line 906, sass/nlcommons.scss */
 .sidebar .side_list .side_post .side_content .side_views {
   font-size: 11px;
 }
-/* line 906, sass/nlcommons.scss */
+/* line 911, sass/nlcommons.scss */
 .sidebar .side_list .side_more {
   text-align: center;
 }
@@ -3795,39 +3796,39 @@ table.simple_table td {
  * Legacy Styling
  * All of this should probably be updated
  */
-/* line 922, sass/nlcommons.scss */
+/* line 927, sass/nlcommons.scss */
 #menubar-avatar, #logged-in-as {
   float: left;
   margin-left: 1em;
 }
 
-/* line 927, sass/nlcommons.scss */
+/* line 932, sass/nlcommons.scss */
 #main-menu, h1, h2, h3, #flash-notice, #logged-in-as {
   font-family: 'Muli', 'Arial', sans-serif;
   font-weight: bold;
 }
 
-/* line 932, sass/nlcommons.scss */
+/* line 937, sass/nlcommons.scss */
 h1, #flash-notice {
   clear: both;
 }
 
-/* line 936, sass/nlcommons.scss */
+/* line 941, sass/nlcommons.scss */
 h1, #flash-notice {
   font-size: 21px;
 }
 
-/* line 940, sass/nlcommons.scss */
+/* line 945, sass/nlcommons.scss */
 h2 {
   font-size: 17px;
 }
 
-/* line 944, sass/nlcommons.scss */
+/* line 949, sass/nlcommons.scss */
 .h2-explanation {
   font-size: 13px;
 }
 
-/* line 948, sass/nlcommons.scss */
+/* line 953, sass/nlcommons.scss */
 h3, #menu-bar {
   font-size: 15px;
 }
@@ -3837,7 +3838,7 @@ h3, #menu-bar {
     top: 3.5em;
     left: 20em;
 }*/
-/* line 958, sass/nlcommons.scss */
+/* line 963, sass/nlcommons.scss */
 a img {
   border: 0;
   margin: 0;
@@ -3979,7 +3980,7 @@ div ul.subsection_tabs li.tab a:hover {
 .sorting {
     background: url('../images/sort_both.jpg') no-repeat center right;
 }*/
-/* line 1108, sass/nlcommons.scss */
+/* line 1113, sass/nlcommons.scss */
 div.foreSortIcon {
   background: url("../images/sort_both.jpg") no-repeat center right;
   width: 16px;
@@ -3989,7 +3990,7 @@ div.foreSortIcon {
 }
 
 /* Autocomplete */
-/* line 1117, sass/nlcommons.scss */
+/* line 1122, sass/nlcommons.scss */
 ul.jq-ui-autocomplete {
   position: absolute;
   overflow: hidden;
@@ -4002,7 +4003,7 @@ ul.jq-ui-autocomplete {
   color: #333;
 }
 
-/* line 1128, sass/nlcommons.scss */
+/* line 1133, sass/nlcommons.scss */
 ul.jq-ui-autocomplete li {
   display: block;
   padding: .3em .5em .3em .3em;
@@ -4010,30 +4011,30 @@ ul.jq-ui-autocomplete li {
   width: 100%;
 }
 
-/* line 1135, sass/nlcommons.scss */
+/* line 1140, sass/nlcommons.scss */
 ul.jq-ui-autocomplete li.active {
   background-color: #3875d7;
   color: #fff;
 }
 
-/* line 1140, sass/nlcommons.scss */
+/* line 1145, sass/nlcommons.scss */
 .deleted {
   text-decoration: line-through;
 }
 
-/* line 1144, sass/nlcommons.scss */
+/* line 1149, sass/nlcommons.scss */
 table#new-person-form tr td {
   width: 10em;
 }
 
-/* line 1148, sass/nlcommons.scss */
+/* line 1153, sass/nlcommons.scss */
 .fieldWithErrors {
   padding: 2px;
   background-color: red;
   display: table;
 }
 
-/* line 1154, sass/nlcommons.scss */
+/* line 1159, sass/nlcommons.scss */
 #errorExplanation {
   width: 450px;
   border: 2px solid red;
@@ -4043,7 +4044,7 @@ table#new-person-form tr td {
   background-color: #f0f0f0;
 }
 
-/* line 1163, sass/nlcommons.scss */
+/* line 1168, sass/nlcommons.scss */
 #error_explanation h2 {
   text-align: left;
   font-weight: bold;
@@ -4055,18 +4056,18 @@ table#new-person-form tr td {
   color: #fff;
 }
 
-/* line 1174, sass/nlcommons.scss */
+/* line 1179, sass/nlcommons.scss */
 #error_explanation ul li {
   font-size: 12px;
   list-style: square;
 }
 
-/* line 1179, sass/nlcommons.scss */
+/* line 1184, sass/nlcommons.scss */
 tr.scaffold-row {
   border-bottom: 2px solid black;
 }
 
-/* line 1183, sass/nlcommons.scss */
+/* line 1188, sass/nlcommons.scss */
 #permission-group-reminder {
   font-style: italic;
 }

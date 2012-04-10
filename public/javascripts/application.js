@@ -610,27 +610,51 @@ $(document).ready(function () {
 				element.parents("tr").children("td:last").append(error);
 			}
 		});
-		var fileInput = $("#new_version_uploaded_body");
-		var updateFileName = function() {
-			var fileName = fileInput.val();
-			if(fileName) {
-				fileName = fileName.split('\\').pop();
-			}
-			fileInput.parents("form").find("label.file_name_label").text(fileName);
-		};
 		
-		updateFileName();
 		
-		fileInput.bind("change", function(e) {
-			updateFileName();
-			form.validate().element(this);
-		});
+		
+		
+		
 		
 		$("#fork_overwrite").bind("change", function(e) {
 			form.validate().element("#new_version_name_of_new_child");
 		});
 	})();
-	
+	styled_file_input();
 });
 
+var styled_file_input = (function() {
+	var initialized = false;
+	return function() {
+		if(initialized) {
+			return;
+		}
+		initialized = true;
+		$('input[type="file"]').each(function() {
+			var fileInput = $(this);
+			var name = fileInput.attr("name");
+			if($.trim(name).length == 0) {
+				return;
+			}
+			
+			fileInput.wrap('<label for="' + name + '" class="file_label">Choose File</label>')
+			var wrapper = fileInput.parent();
+			var fileNameLabel = $('<label for="' + name + '" class="file_name_label"></label>');
+			fileNameLabel.insertAfter(wrapper);
+			var updateFileName = function() {
+				var fileName = fileInput.val();
+				if(fileName) {
+					fileName = fileName.split('\\').pop();
+				}
+				fileNameLabel.text(fileName);
+			};
+			updateFileName();
+			fileInput.bind("change", function(e) {
+				updateFileName();
+				form.validate().element(this);
+			});
+		})
+		
+	}
+})();
 
