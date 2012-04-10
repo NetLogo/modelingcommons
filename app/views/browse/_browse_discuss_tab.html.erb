@@ -2,26 +2,13 @@
 <% if @model.author_visible? %>
 	<p>Comments are disabled for private models.</p>
 <% else %>
+	<div class="comments_list">
 	<% if @model.postings.empty? %>
 		<p>No comments so far!  Please <%= link_to("log in to", :controller => :account, :action => :login) unless @person -%> start the conversation about this model.</p>
-	<% end %>
-
-	<table id="discussion" class="simple_table">
-	<% if @model.postings.empty? %>
-	    <tr>
-	      <th></th>
-	      <th></th>
-	      <th></th>
-	    </tr>
 	<% else %>
-	    <tr>
-	      <th>User</th>
-	      <th>Title</th>
-	      <th>Message</th>
-	    </tr>
 	    <%= render :partial => "discussion/one_posting", :collection => @model.postings.sort_by {|posting| posting.created_at}, :as => :posting -%>
 	<% end %>
-	</table>
+	</div>
 	
 	<% if @person %>
 	

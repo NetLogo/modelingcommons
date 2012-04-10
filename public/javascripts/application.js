@@ -428,7 +428,6 @@ $(document).ready(function () {
 	
 	$('#new_discussion_comment').submit(function() {
 		var form = $("#new_discussion_comment");
-		console.log(form.serialize());
 		$.ajax({
 			url: form.attr("action"),
 			dataType: "json",  
@@ -437,7 +436,11 @@ $(document).ready(function () {
 			success: function(data, textStatus, jqXHR) {
 				$().flash_notice(data.message);
 				if(data.success) {
-					$(data.html).insertAfter($('#discussion tr:last'));
+					var commentsList = $(".comments_list");
+					if(commentsList.find(".comments").length == 0) {
+						commentsList.empty();
+					}
+					$(data.html).appendTo(commentsList)
 					form.find('input:not([type="submit"], [type="button"]), textarea').removeAttr('value').removeAttr('checked');
 				}
 			},
