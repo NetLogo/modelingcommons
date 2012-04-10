@@ -156,10 +156,9 @@ jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
 };
  
 
-//Model list dataTable
 $(document).ready(function () {
 	
-	
+	//Model list datatable	
 	
 	
 	// Create the datatable
@@ -635,13 +634,25 @@ $(document).ready(function () {
 		});
 	})();
 	
+	ie_placeholder();
 	
-	(function() {
+});
+
+
+//Makes the placeholder attribute work in internet explorer 8, 9
+var ie_placeholder = (function() {
+	//Private static variables:
+	var ie_placeholder_initialized = false;
+	
+	return function() {
+		if(ie_placeholder_initialized) {
+			return;
+		}
+		ie_placeholder_initialized = true;
 		var test = document.createElement("input");
 		if("placeholder" in test) {
 			return;
 		}
-		
 		$("input[placeholder][type=password]").each(function() {
 			var passwordInput = $(this);
 			passwordInput.addClass("password_placeholder");
@@ -666,7 +677,6 @@ $(document).ready(function () {
 		
 		
 		var blur = function() {
-			
 			var input = $(this);
 			if(input.val().length == 0) {
 				input.val(input.attr("placeholder"));
@@ -682,12 +692,10 @@ $(document).ready(function () {
 		};
 		$("[placeholder]").blur(blur).focus(focus).each(blur).parents("form").bind("submit", function() {
 			$(this).find("input.placeholder").val("");
-		});
-		
-		
-		
-		
-	})();
-});
+		});	
+	};
+})();
+
+
 
 
