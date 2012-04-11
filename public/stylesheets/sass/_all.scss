@@ -6,6 +6,7 @@ $tab-corner-radius: 8px;
 $input-radius: 5px;
 $button-color: #FFB540;
 $error-color: red;
+$no-image-color: lighten(black, 80%);
 
 
 @mixin global_padding {

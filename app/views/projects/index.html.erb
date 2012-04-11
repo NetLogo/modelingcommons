@@ -1,8 +1,6 @@
 <% @title = 'Projects' %>
 
 <p><%= link_to "Create a new project", :controller => :projects, :action => :new -%></p>
-<br />
-
 <% if @projects.empty? %>
 <p><i>No projects have been created.</i></p>
 <% else %>
@@ -18,22 +16,26 @@ Sort by<select id="project_sort_by">
 	<tbody>
 		<% @projects.each do |project| %>
 		<tr>
-			<td>
+			<td class="shadowbox">
 				<div class="project">
-					<h1><%= link_to project.name, :controller => :projects, :action => :show, :id => project.id -%></h1>
+					<div class="heading"><%= link_to project.name, :controller => :projects, :action => :show, :id => project.id -%></div>
+					<div class="content">
 					<div class="project_image">
 						<a href="<%= url_for(:controller => :projects, :action => :show, :id => project.id) -%>"><img src="<%= url_for(:controller => 'projects', :action => 'image', :id => project.id) -%>" /></a>
 					</div>
 					<div class="project_model_list">
+						<ul>
 						<% num_projects_to_show = 5%>
 						<% project.nodes[0..(num_projects_to_show - 1)].each do |model| %>
-						<p><%= link_to truncate(model.name, :length => 23, :omission => '...'), :controller => :browse, :action => :one_model, :id => model.id -%></p>
+						<li><%= link_to truncate(model.name, :length => 23, :omission => '...'), :controller => :browse, :action => :one_model, :id => model.id -%></li>
 						<% end %>
+						</ul>
 						<% if project.nodes.length > num_projects_to_show %>
 						<p><%= link_to 'And ' << (project.nodes.length - num_projects_to_show).to_s() << ' more', :controller => :projects, :action => :show, :id => project.id -%></p>
 						<% end %>
 					</div>
 					<h2><%= link_to person_image(project.person), :controller => :account, :action => :mypage, :id => project.person.id -%><%= person_link(project.person) -%></h2>
+					</div>
 				</div>
 			</td>
 			<td><%= project.name -%></td>
@@ -51,6 +53,4 @@ Sort by<select id="project_sort_by">
 	</tbody>
 </table>
 <% end %>
-
-<br />
 <p><%= link_to "Create a new project", :controller => :projects, :action => :new -%></p>
