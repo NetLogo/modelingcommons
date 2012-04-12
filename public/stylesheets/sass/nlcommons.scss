@@ -380,23 +380,6 @@ body {
 }
 
 #upload-model-form { 
-  label.file_label {
-    @extend button;
-    display: inline-block;
-    position: relative;
-    overflow: hidden;
-    input[type=file] {
-      opacity: 0;
-      filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
-      position: absolute;
-      top: 0px;
-      left: 0px;
-      cursor: pointer;
-      display: block;
-      width: 100%;
-      height: 100%;
-    }
-  }
   td {
     line-height: 26px;
   }
@@ -569,6 +552,12 @@ table#people_adder {
  * Globally useful styling
  */ 
 
+
+
+
+
+
+
 .hidden {
   display: none;
 }
@@ -641,7 +630,7 @@ input[type=text], input[type=password] {
 /*
  * Buttons
  */
-button, input[type=button], input[type=submit] {
+button, input[type=button], input[type=submit], label.file_label {
   @include clickable($background-color: $header-color);
   font-size: $default-font-size;
   line-height: 16px;
@@ -658,6 +647,24 @@ button, input[type=button], input[type=submit] {
     }
   @include border-radius($input-radius);
 }
+
+label.file_label {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  input[type=file] {
+    opacity: 0;
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+}
+
 
 .error {
   color: $error-color;
