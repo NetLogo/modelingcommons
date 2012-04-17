@@ -19,7 +19,7 @@ Sort by<select id="project_sort_by">
 			<td class="shadowbox">
 				<div class="project">
 					<div class="heading"><%= link_to project.name, :controller => :projects, :action => :show, :id => project.id -%></div>
-					<div class="content">
+					<div class="contents">
 					<div class="project_image">
 						<a href="<%= url_for(:controller => :projects, :action => :show, :id => project.id) -%>"><img src="<%= url_for(:controller => 'projects', :action => 'image', :id => project.id) -%>" /></a>
 					</div>
@@ -34,7 +34,7 @@ Sort by<select id="project_sort_by">
 						<p><%= link_to 'And ' << (project.nodes.length - num_projects_to_show).to_s() << ' more', :controller => :projects, :action => :show, :id => project.id -%></p>
 						<% end %>
 					</div>
-					<h2><%= link_to person_image(project.person), :controller => :account, :action => :mypage, :id => project.person.id -%><%= person_link(project.person) -%></h2>
+					<h2><%= link_to (person_image(project.person) + project.person.fullname), :controller => :account, :action => :mypage, :id => project.person.id -%></h2>
 					</div>
 				</div>
 			</td>
