@@ -3132,6 +3132,7 @@ label.file_label {
   display: inline-block;
   position: relative;
   overflow: hidden;
+  vertical-align: middle;
 }
 /* line 659, sass/nlcommons.scss */
 label.file_label input[type=file] {
@@ -3146,7 +3147,7 @@ label.file_label input[type=file] {
   height: 100%;
 }
 
-/* line 673, sass/nlcommons.scss */
+/* line 677, sass/nlcommons.scss */
 .error {
   color: red;
 }
@@ -3154,12 +3155,12 @@ label.file_label input[type=file] {
 /*
  * DataTables Styling
  */
-/* line 681, sass/nlcommons.scss */
+/* line 685, sass/nlcommons.scss */
 .dataTables_wrapper div.ui-icon {
   display: inline-block;
   vertical-align: top;
 }
-/* line 686, sass/nlcommons.scss */
+/* line 690, sass/nlcommons.scss */
 .dataTables_wrapper .dataTables_paginate button {
   color: black;
   font-family: 'Muli', 'Arial', sans-serif;
@@ -3348,19 +3349,19 @@ label.file_label input[type=file] {
   -pie-background: linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
   background: linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
 }
-/* line 701, sass/nlcommons.scss */
+/* line 705, sass/nlcommons.scss */
 .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter {
   display: inline-block;
   margin-left: 10px;
   font-size: 15px;
 }
-/* line 706, sass/nlcommons.scss */
+/* line 710, sass/nlcommons.scss */
 .dataTables_wrapper .top, .dataTables_wrapper .bottom, .dataTables_wrapper .datatable {
   margin-top: 4px;
   margin-bottom: 4px;
 }
 
-/* line 713, sass/nlcommons.scss */
+/* line 717, sass/nlcommons.scss */
 .dataTables {
   width: 100%;
   border-bottom: 1px solid black;
@@ -3376,11 +3377,11 @@ label.file_label input[type=file] {
   border-radius: 8px;
   overflow: hidden;
 }
-/* line 725, sass/nlcommons.scss */
+/* line 729, sass/nlcommons.scss */
 .dataTables > thead tr {
   font-family: 'Muli', 'Arial', sans-serif;
 }
-/* line 727, sass/nlcommons.scss */
+/* line 731, sass/nlcommons.scss */
 .dataTables > thead tr th {
   color: black;
   font-family: 'Muli', 'Arial', sans-serif;
@@ -3594,73 +3595,73 @@ label.file_label input[type=file] {
   -pie-background: linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
   background: linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
 }
-/* line 738, sass/nlcommons.scss */
+/* line 742, sass/nlcommons.scss */
 .dataTables > thead tr th div.ui-icon {
   margin-top: 2px;
   margin-bottom: 2px;
 }
-/* line 754, sass/nlcommons.scss */
+/* line 758, sass/nlcommons.scss */
 .dataTables > tbody tr:nth-child(even) {
   background-color: #dee9f6;
 }
-/* line 757, sass/nlcommons.scss */
+/* line 761, sass/nlcommons.scss */
 .dataTables > tbody td {
   padding: 3px;
 }
-/* line 761, sass/nlcommons.scss */
+/* line 765, sass/nlcommons.scss */
 .dataTables span.hidden_elapsed_time {
   display: none;
 }
 
-/* line 766, sass/nlcommons.scss */
+/* line 770, sass/nlcommons.scss */
 table.model_list_datatable table td {
   height: 30px;
 }
-/* line 768, sass/nlcommons.scss */
+/* line 772, sass/nlcommons.scss */
 table.model_list_datatable table td:first-child {
   padding-left: 4px;
   padding-right: 4px;
   width: 30px;
   min-width: 30px;
 }
-/* line 774, sass/nlcommons.scss */
+/* line 778, sass/nlcommons.scss */
 table.model_list_datatable table td img {
   vertical-align: top;
   width: 30px;
   height: 30px;
 }
 
-/* line 782, sass/nlcommons.scss */
+/* line 786, sass/nlcommons.scss */
 table.simple_table {
   border-collapse: collapse;
 }
-/* line 784, sass/nlcommons.scss */
+/* line 788, sass/nlcommons.scss */
 table.simple_table img {
   vertical-align: middle;
 }
-/* line 787, sass/nlcommons.scss */
+/* line 791, sass/nlcommons.scss */
 table.simple_table th {
   font-weight: bold;
   padding-left: 5px;
   padding-right: 5px;
 }
-/* line 792, sass/nlcommons.scss */
+/* line 796, sass/nlcommons.scss */
 table.simple_table td {
   border: 1px solid;
   padding: 5px;
 }
 
-/* line 798, sass/nlcommons.scss */
+/* line 802, sass/nlcommons.scss */
 .highlight {
   background-color: #ff0;
 }
 
-/* line 803, sass/nlcommons.scss */
+/* line 807, sass/nlcommons.scss */
 .activity {
   width: 660px;
   float: left;
 }
-/* line 806, sass/nlcommons.scss */
+/* line 810, sass/nlcommons.scss */
 .activity .post {
   padding: 4px;
   margin-top: 10px;
@@ -3668,15 +3669,15 @@ table.simple_table td {
   border-bottom: 1px solid black;
   overflow: auto;
 }
-/* line 807, sass/nlcommons.scss */
+/* line 811, sass/nlcommons.scss */
 .activity .post a {
   text-decoration: none;
 }
-/* line 809, sass/nlcommons.scss */
+/* line 813, sass/nlcommons.scss */
 .activity .post a:hover {
   text-decoration: underline;
 }
-/* line 820, sass/nlcommons.scss */
+/* line 824, sass/nlcommons.scss */
 .activity .post .main_image {
   vertical-align: top;
   display: inline-block;
@@ -3684,21 +3685,21 @@ table.simple_table td {
   height: 80px;
   padding-right: 12px;
 }
-/* line 825, sass/nlcommons.scss */
+/* line 829, sass/nlcommons.scss */
 .activity .post .main_image img {
   width: 100%;
 }
-/* line 830, sass/nlcommons.scss */
+/* line 834, sass/nlcommons.scss */
 .activity .post .post_content {
   vertical-align: top;
   display: inline-block;
 }
-/* line 833, sass/nlcommons.scss */
+/* line 837, sass/nlcommons.scss */
 .activity .post .post_content .post_person {
   line-height: 30px;
   font-size: 16px;
 }
-/* line 836, sass/nlcommons.scss */
+/* line 840, sass/nlcommons.scss */
 .activity .post .post_content .post_person img {
   vertical-align: top;
   height: 30px;
@@ -3706,33 +3707,33 @@ table.simple_table td {
   padding-left: 5px;
   padding-right: 5px;
 }
-/* line 845, sass/nlcommons.scss */
+/* line 849, sass/nlcommons.scss */
 .activity .post .post_content .post_item {
   font-size: 30px;
 }
-/* line 849, sass/nlcommons.scss */
+/* line 853, sass/nlcommons.scss */
 .activity .post .post_content .post_date {
   font-size: 16px;
 }
-/* line 852, sass/nlcommons.scss */
+/* line 856, sass/nlcommons.scss */
 .activity .post .post_content .post_more {
   font-size: 10px;
 }
 
-/* line 863, sass/nlcommons.scss */
+/* line 867, sass/nlcommons.scss */
 .sidebar {
   width: 300px;
   float: left;
 }
-/* line 864, sass/nlcommons.scss */
+/* line 868, sass/nlcommons.scss */
 .sidebar a {
   text-decoration: none;
 }
-/* line 866, sass/nlcommons.scss */
+/* line 870, sass/nlcommons.scss */
 .sidebar a:hover {
   text-decoration: underline;
 }
-/* line 872, sass/nlcommons.scss */
+/* line 876, sass/nlcommons.scss */
 .sidebar .side_list {
   -moz-box-shadow: 0 0 10px 2px gray;
   -webkit-box-shadow: 0 0 10px 2px gray;
@@ -3748,7 +3749,7 @@ table.simple_table td {
   -khtml-border-radius: 8px;
   border-radius: 8px;
 }
-/* line 876, sass/nlcommons.scss */
+/* line 880, sass/nlcommons.scss */
 .sidebar .side_list h1 {
   font-family: 'Muli', 'Arial', sans-serif;
   background-color: #04346c;
@@ -3759,39 +3760,39 @@ table.simple_table td {
   color: white;
   margin: 0px;
 }
-/* line 890, sass/nlcommons.scss */
+/* line 894, sass/nlcommons.scss */
 .sidebar .side_list .side_post {
   padding: 4px;
 }
-/* line 893, sass/nlcommons.scss */
+/* line 897, sass/nlcommons.scss */
 .sidebar .side_list .side_post .side_image {
   width: 50px;
   height: 50px;
   display: inline-block;
   vertical-align: top;
 }
-/* line 897, sass/nlcommons.scss */
+/* line 901, sass/nlcommons.scss */
 .sidebar .side_list .side_post .side_image img {
   width: 100%;
 }
-/* line 902, sass/nlcommons.scss */
+/* line 906, sass/nlcommons.scss */
 .sidebar .side_list .side_post .side_content {
   display: inline-block;
   vertical-align: top;
 }
-/* line 906, sass/nlcommons.scss */
+/* line 910, sass/nlcommons.scss */
 .sidebar .side_list .side_post .side_content .side_person {
   font-size: 11px;
 }
-/* line 909, sass/nlcommons.scss */
+/* line 913, sass/nlcommons.scss */
 .sidebar .side_list .side_post .side_content .side_item {
   font-size: 15px;
 }
-/* line 912, sass/nlcommons.scss */
+/* line 916, sass/nlcommons.scss */
 .sidebar .side_list .side_post .side_content .side_views {
   font-size: 11px;
 }
-/* line 917, sass/nlcommons.scss */
+/* line 921, sass/nlcommons.scss */
 .sidebar .side_list .side_more {
   text-align: center;
 }
@@ -3800,39 +3801,39 @@ table.simple_table td {
  * Legacy Styling
  * All of this should probably be updated
  */
-/* line 933, sass/nlcommons.scss */
+/* line 937, sass/nlcommons.scss */
 #menubar-avatar, #logged-in-as {
   float: left;
   margin-left: 1em;
 }
 
-/* line 938, sass/nlcommons.scss */
+/* line 942, sass/nlcommons.scss */
 #main-menu, h1, h2, h3, #flash-notice, #logged-in-as {
   font-family: 'Muli', 'Arial', sans-serif;
   font-weight: bold;
 }
 
-/* line 943, sass/nlcommons.scss */
+/* line 947, sass/nlcommons.scss */
 h1, #flash-notice {
   clear: both;
 }
 
-/* line 947, sass/nlcommons.scss */
+/* line 951, sass/nlcommons.scss */
 h1, #flash-notice {
   font-size: 21px;
 }
 
-/* line 951, sass/nlcommons.scss */
+/* line 955, sass/nlcommons.scss */
 h2 {
   font-size: 17px;
 }
 
-/* line 955, sass/nlcommons.scss */
+/* line 959, sass/nlcommons.scss */
 .h2-explanation {
   font-size: 13px;
 }
 
-/* line 959, sass/nlcommons.scss */
+/* line 963, sass/nlcommons.scss */
 h3, #menu-bar {
   font-size: 15px;
 }
@@ -3842,7 +3843,7 @@ h3, #menu-bar {
     top: 3.5em;
     left: 20em;
 }*/
-/* line 969, sass/nlcommons.scss */
+/* line 973, sass/nlcommons.scss */
 a img {
   border: 0;
   margin: 0;
@@ -3984,7 +3985,7 @@ div ul.subsection_tabs li.tab a:hover {
 .sorting {
     background: url('../images/sort_both.jpg') no-repeat center right;
 }*/
-/* line 1119, sass/nlcommons.scss */
+/* line 1123, sass/nlcommons.scss */
 div.foreSortIcon {
   background: url("../images/sort_both.jpg") no-repeat center right;
   width: 16px;
@@ -3994,7 +3995,7 @@ div.foreSortIcon {
 }
 
 /* Autocomplete */
-/* line 1128, sass/nlcommons.scss */
+/* line 1132, sass/nlcommons.scss */
 ul.jq-ui-autocomplete {
   position: absolute;
   overflow: hidden;
@@ -4007,7 +4008,7 @@ ul.jq-ui-autocomplete {
   color: #333;
 }
 
-/* line 1139, sass/nlcommons.scss */
+/* line 1143, sass/nlcommons.scss */
 ul.jq-ui-autocomplete li {
   display: block;
   padding: .3em .5em .3em .3em;
@@ -4015,30 +4016,30 @@ ul.jq-ui-autocomplete li {
   width: 100%;
 }
 
-/* line 1146, sass/nlcommons.scss */
+/* line 1150, sass/nlcommons.scss */
 ul.jq-ui-autocomplete li.active {
   background-color: #3875d7;
   color: #fff;
 }
 
-/* line 1151, sass/nlcommons.scss */
+/* line 1155, sass/nlcommons.scss */
 .deleted {
   text-decoration: line-through;
 }
 
-/* line 1155, sass/nlcommons.scss */
+/* line 1159, sass/nlcommons.scss */
 table#new-person-form tr td {
   width: 10em;
 }
 
-/* line 1159, sass/nlcommons.scss */
+/* line 1163, sass/nlcommons.scss */
 .fieldWithErrors {
   padding: 2px;
   background-color: red;
   display: table;
 }
 
-/* line 1165, sass/nlcommons.scss */
+/* line 1169, sass/nlcommons.scss */
 #errorExplanation {
   width: 450px;
   border: 2px solid red;
@@ -4048,7 +4049,7 @@ table#new-person-form tr td {
   background-color: #f0f0f0;
 }
 
-/* line 1174, sass/nlcommons.scss */
+/* line 1178, sass/nlcommons.scss */
 #error_explanation h2 {
   text-align: left;
   font-weight: bold;
@@ -4060,18 +4061,18 @@ table#new-person-form tr td {
   color: #fff;
 }
 
-/* line 1185, sass/nlcommons.scss */
+/* line 1189, sass/nlcommons.scss */
 #error_explanation ul li {
   font-size: 12px;
   list-style: square;
 }
 
-/* line 1190, sass/nlcommons.scss */
+/* line 1194, sass/nlcommons.scss */
 tr.scaffold-row {
   border-bottom: 2px solid black;
 }
 
-/* line 1194, sass/nlcommons.scss */
+/* line 1198, sass/nlcommons.scss */
 #permission-group-reminder {
   font-style: italic;
 }

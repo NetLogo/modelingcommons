@@ -157,6 +157,8 @@ jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
  
 
 $(document).ready(function () {
+	styled_file_input();
+	
 	
 	//Model list datatable	
 	
@@ -638,12 +640,13 @@ $(document).ready(function () {
 		});
 	})();
 	
-	styled_file_input();
+	
 	ie_placeholder();
 });
 
 //Allows styling input type="file" by wrapping the file input in a styled label.  To style, change the file_label
 //class style
+//Should run before tabs are created
 var styled_file_input = (function() {
 	var initialized = false;
 	return function() {
