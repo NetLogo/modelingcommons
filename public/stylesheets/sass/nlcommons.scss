@@ -608,6 +608,7 @@ div.left-right {
  * Text Input Field
  */
 input[type=text], input[type=password] {
+  &::-webkit-input-placeholder { color:white; }
   @include pie;
   $color: rgb(50%, 50%, 50%);
   //color: $color; 
@@ -645,7 +646,7 @@ input[type=text], input[type=password] {
  * Buttons
  */
 button, input[type=button], input[type=submit] {
-  @include clickable($background-color: $header-color);
+  @include clickable($background-color: $header-color, $active: ':hover:active');
   font-size: $default-font-size;
   line-height: 16px;
   padding-top: 2px;
