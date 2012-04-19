@@ -133,14 +133,14 @@ img#big-preview-image  {
 */
 /* line 22, sass/_all.scss */
 .pie, .ui-tabs .ui-tabs-nav li, .header, .header .login_flash .login_container .login, .header .navigation, .header .navigation a, .header .search, .selectable_person, input[type=text], input[type=password], button, input[type=button], input[type=submit], label.file_label, .dataTables_wrapper .dataTables_paginate button, .dataTables > thead tr th {
-  behavior: url('/stylesheets/PIE.htc');
+  behavior: url("/browse/pie");
   position: relative;
   -pie-poll: false;
 }
 
 /* line 22, sass/_all.scss */
 .pie, .ui-tabs .ui-tabs-nav li, .header, .header .login_flash .login_container .login, .header .navigation, .header .navigation a, .header .search, .selectable_person, input[type=text], input[type=password], button, input[type=button], input[type=submit], label.file_label, .dataTables_wrapper .dataTables_paginate button, .dataTables > thead tr th {
-  behavior: url('/stylesheets/PIE.htc');
+  behavior: url("/browse/pie");
   position: relative;
   -pie-poll: false;
 }
@@ -2172,7 +2172,7 @@ body {
   -ms-border-radius: 0px 0px 8px 8px;
   -khtml-border-radius: 0px 0px 8px 8px;
   border-radius: 0px 0px 8px 8px;
-  behavior: url('/stylesheets/PIE.htc');
+  behavior: url("/browse/pie");
   z-index: z;
   -pie-poll: false;
   margin-bottom: 200px;
@@ -2894,7 +2894,7 @@ div.left-right div.right {
   -ms-border-radius: 8px;
   -khtml-border-radius: 8px;
   border-radius: 8px;
-  behavior: url('/stylesheets/PIE.htc');
+  behavior: url("/browse/pie");
   z-index: z;
   -pie-poll: false;
   padding: 4px;
