@@ -690,7 +690,7 @@ var ie_placeholder = (function() {
 		ie_placeholder_initialized = true;
 		var test = document.createElement("input");
 		if("placeholder" in test) {
-			//return;
+			return;
 		}
 		$("input[placeholder][type=password]").each(function() {
 			var passwordInput = $(this);

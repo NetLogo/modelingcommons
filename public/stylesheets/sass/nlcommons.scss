@@ -597,7 +597,6 @@ div.left-right {
  * Text Input Field
  */
 input[type=text], input[type=password] {
-  &::-webkit-input-placeholder { color:white; }
   @include pie;
   $color: rgb(50%, 50%, 50%);
   //color: $color; 
