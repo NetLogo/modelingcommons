@@ -686,6 +686,9 @@ div.left-right {
     }
 }
 
+.model_link img {
+  height: 30px;
+}
 .panel {
   @include global_padding;
   border: 3px solid black;
