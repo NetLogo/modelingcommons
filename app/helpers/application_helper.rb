@@ -53,8 +53,11 @@ ago."
     end
   end
 
-  def person_image(person)
-    image_tag(person.avatar.url(:thumb))
+  def person_image(person, size=:thumb)
+    if ![:thumb, :medium, :original].include?(size)
+      size=:thumb
+    end
+    image_tag(person.avatar.url(size))
   end
 
   def person_link(person)
@@ -64,6 +67,16 @@ ago."
       link_to('You', :controller => :account, :action => :mypage, :id => person.id)
     else
       link_to(person.fullname, :controller => :account, :action => :mypage, :id => person.id)
+    end
+  end
+  
+  def person_url(person)
+    if person.nil?
+      url_for(:controller => :account, :action => :mypage)
+    elsif person == @person
+      url_for(:controller => :account, :action => :mypage, :id => person.id)
+    else
+      url_for(:controller => :account, :action => :mypage, :id => person.id)
     end
   end
 
@@ -76,18 +89,25 @@ ago."
   end
 
   def model_link(node)
-    if !node.previews.empty?
-      image_tag_output = image_tag("/browse/display_preview/" + node.id.to_s, :width => "30",  :height => "30", :alt => "Preview image")
-    else
-      image_tag_output = ''
-    end
-
-    link_to_output = link_to(node.name, :controller => "browse", :action => "one_model", :id => node.id)
-    "#{image_tag_output} #{link_to_output}"
+    link_to(model_image(node) + node.name, :controller => :browse, :action => :one_model, :id => node.id)
   end
-
+  
+  def model_image(node)
+    if !node.previews.empty?
+      image_tag(url_for(:controller => :browse, :action => :display_preview, :id => node.id), :alt => node.name + " preview image")
+    else
+      ''
+    end
+  end
+  def model_url(node)
+    url_for(:controller => :browse, :action => :one_model, :id => node.id)
+  end
   def discuss_link(node, text)
     link_to(text, :controller => :browse, :action => :one_model, :id => node.id, :anchor => 'discuss')
+  end
+  
+  def project_link(project)
+    link_to(project.name, :controller => :projects, :action => :show, :id => project.id)
   end
 
 end

@@ -322,15 +322,17 @@ body {
     @include global_padding;
     display: inline-block;
     background-color: hsl(0%, 0%, 85%);
+    img {
+      width: 152px;
+      height: 152px;
+    }
   }
 }
 #model_info {
   img {
     vertical-align: middle;
-  }
-  img.inline_image {
     height: 20px;
-  } 
+  }
   &>div {
     height: 53px;
     display: table-row;
@@ -339,6 +341,10 @@ body {
       vertical-align: middle;
       
     }
+  }
+  #actions a {
+    line-height: 20px;
+    display: inline-block;
   }
 }
 
@@ -580,6 +586,9 @@ div.left-right {
   @include border-radius(8px);
   @include pie-z;
   padding: 4px;
+  img {
+    height: 30px;
+  }
 }
 
 .tabs_panel {
