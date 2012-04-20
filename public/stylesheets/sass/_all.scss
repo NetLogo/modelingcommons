@@ -8,7 +8,6 @@ $button-color: #FFB540;
 $error-color: red;
 
 $pie-behavior: url("/browse/pie");
-//$pie-behavior: url("/no");
 $pie-base-class: pie;
 
 @mixin pie-border-radius($r) {

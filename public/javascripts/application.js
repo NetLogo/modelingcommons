@@ -156,10 +156,11 @@ jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
 };
  
 
-//Model list dataTable
 $(document).ready(function () {
+	styled_file_input();
 	
 	
+	//Model list datatable	
 	
 	
 	// Create the datatable
@@ -241,24 +242,37 @@ $(document).ready(function () {
 	
 	//Tab loader loads tabs on the element selected by elementId and switches to the tab selected in the hash
 	var tab_loader = function(elementId) {
+	
 		//Checks URL hash to see if the user wants to go to a specific tab
-		var tab_index = 0;
-		if(window.location.hash.indexOf(elementId + "_") != -1) {
-			var startIndex = window.location.hash.indexOf(elementId + "_") + (elementId + "_").length;
-			var endIndex = window.location.hash.indexOf("&", startIndex);
-			endIndex = endIndex == -1 ? window.location.hash.length : endIndex;
-			var tab_id = window.location.hash.substring(startIndex, endIndex);
-			$("#" + elementId + ">div").each(function(index, element) {
-				if(tab_id == element.id) {
-					tab_index = index;
-				}
-			});
-		}
-		$("#" + elementId).tabs({
-			selected: tab_index, 
+		var getURLTabIndex = function() {
+			var tab_index = 0;
+			if(window.location.hash.indexOf(elementId + "_") != -1) {
+				var startIndex = window.location.hash.indexOf(elementId + "_") + (elementId + "_").length;
+				var endIndex = window.location.hash.indexOf("&", startIndex);
+				endIndex = endIndex == -1 ? window.location.hash.length : endIndex;
+				var tab_id = window.location.hash.substring(startIndex, endIndex);
+				$("#" + elementId + ">div").each(function(index, element) {
+					if(tab_id == element.id) {
+						tab_index = index;
+					}
+				});
+			}
+			return tab_index;
+		};
+		
+		//Create the tabs
+		var tab = $("#" + elementId).tabs({
+			//Select the correct tab
+			selected: getURLTabIndex(),
+			//When the tab changes, update the URL hash 
 			show: function(event, ui) {
 				window.location.hash = elementId + "_" + ui.panel.id;
 			}
+		});
+		
+		//Change tabs on back/forward by monitoring URL hash
+		$(window).bind("hashchange", function() {
+			tab.tabs("select", getURLTabIndex());
 		});
 	};
 	tab_loader("model_tabs");
@@ -297,14 +311,21 @@ $(document).ready(function () {
 	//Validate header login form
 	$("#header_login").validate({
 		rules: {
-			password: "required",
+			password: {
+				required: ":not(.placeholder)", 
+			},
 			email_address: {
 				required: true,
 				email: true
 			}
 		},
 		messages: {
-			password: "Password Required",
+			password: {
+				required: function(rules, element) {
+					console.log($(element).parent().children(".placeholder").addClass("error"));
+					return "Password Required"
+				}
+			},
 			email_address: {
 				required: "Email Required",
 				email: "Invalid Email Address"
@@ -312,7 +333,7 @@ $(document).ready(function () {
 		},
 		//onkeyup: false,
 		//onclick: false,
-		//onfocusout: false,
+		onfocusout: false,
 		errorPlacement: function(error, element) {
 			element.parents("tr").next("tr").children("td").eq(element.parents("td").index()).append(error);
 		}
@@ -378,7 +399,6 @@ $(document).ready(function () {
 	}
 	var submitPermissionChange = function() {
 		var form = $("#group_permission_form");
-		console.log(form.serialize());
 		$.ajax({
 			url: form.attr("action"), 
 			type: "post", 
@@ -562,7 +582,6 @@ $(document).ready(function () {
 			return false;
 		});
 		selectedList.on("click", "button.person_remove", function(e) {
-			console.log("yes");
 			$(this).parents(".selectable_person").detach().appendTo(unselectedList);
 			updateSelectedListIndicatorState();
 			updateUnselectedListIndicatorState();
@@ -610,31 +629,120 @@ $(document).ready(function () {
 					"required": "#fork_child:checked"
 				}
 			}, 
-			errorPlacement: function(error, element) {
-				element.parents("tr").children("td:last").append(error);
-			}
+			
+
 		});
-		var fileInput = $("#new_version_uploaded_body");
-		var updateFileName = function() {
-			var fileName = fileInput.val();
-			if(fileName) {
-				fileName = fileName.split('\\').pop();
-			}
-			fileInput.parents("form").find("label.file_name_label").text(fileName);
-		};
 		
-		updateFileName();
 		
-		fileInput.bind("change", function(e) {
-			updateFileName();
+		
+		
+		form.find('input[type="file"]').bind("change", function() {
 			form.validate().element(this);
-		});
+		})
 		
 		$("#fork_overwrite").bind("change", function(e) {
 			form.validate().element("#new_version_name_of_new_child");
 		});
 	})();
 	
+	
+	ie_placeholder();
 });
+
+//Allows styling input type="file" by wrapping the file input in a styled label.  To style, change the file_label
+//class style
+//Should run before tabs are created
+var styled_file_input = (function() {
+	var initialized = false;
+	return function() {
+		if(initialized) {
+			return;
+		}
+		initialized = true;
+		$('input[type="file"]').each(function() {
+			var fileInput = $(this);
+			var name = fileInput.attr("name");
+			if($.trim(name).length == 0) {
+				return;
+			}
+			
+			fileInput.wrap('<label for="' + name + '" class="file_label">Choose File</label>')
+			var wrapper = fileInput.parent();
+			var fileNameLabel = $('<label for="' + name + '" class="file_name_label"></label>');
+			fileNameLabel.insertAfter(wrapper);
+			var updateFileName = function() {
+				var fileName = fileInput.val();
+				if(fileName) {
+					fileName = fileName.split('\\').pop();
+				}
+				fileNameLabel.text(fileName);
+			};
+			updateFileName();
+			fileInput.bind("change", function(e) {
+				updateFileName();
+			});
+		})
+		
+	}
+})();
+
+//Makes the placeholder attribute work in internet explorer 8, 9
+var ie_placeholder = (function() {
+	//Private static variables:
+	var ie_placeholder_initialized = false;
+	
+	return function() {
+		if(ie_placeholder_initialized) {
+			return;
+		}
+		ie_placeholder_initialized = true;
+		var test = document.createElement("input");
+		if("placeholder" in test) {
+			return;
+		}
+		$("input[placeholder][type=password]").each(function() {
+			var passwordInput = $(this);
+			passwordInput.addClass("password_placeholder");
+			var textInput = $('<input type="text" />');
+			textInput.attr("placeholder", passwordInput.attr("placeholder"));
+			passwordInput.removeAttr("placeholder");
+			passwordInput.after(textInput);
+			passwordInput.hide();
+			textInput.on("focus", function() {
+				textInput.hide();
+				passwordInput.show();
+				passwordInput.focus();
+			});
+			passwordInput.on("blur", function() {
+				if(passwordInput.val().length == 0) {
+					passwordInput.hide();
+					textInput.show();
+					textInput.blur();
+				}
+			});
+		});
+		
+		
+		var blur = function() {
+			var input = $(this);
+			if(input.val().length == 0) {
+				input.val(input.attr("placeholder"));
+				input.addClass("placeholder");
+			}
+		};
+		var focus = function() {
+			var input = $(this);
+			if(input.hasClass("placeholder")) {
+				input.val("");
+				input.removeClass("placeholder");
+			}
+		};
+		$("[placeholder]").blur(blur).focus(focus).each(blur).parents("form").bind("submit", function() {
+			$(this).find("input.placeholder").val("");
+		});	
+	};
+})();
+
+
 
 
