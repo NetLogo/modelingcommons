@@ -89,7 +89,7 @@ ago."
   end
 
   def model_link(node)
-    link_to(model_image(node) + node.name, :controller => :browse, :action => :one_model, :id => node.id)
+    link_to(model_image(node) + node.name, {:controller => :browse, :action => :one_model, :id => node.id}, {:class => 'model_link'})
   end
   
   def model_image(node)

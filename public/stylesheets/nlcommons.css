@@ -2892,6 +2892,11 @@ div.left-right div.right {
 }
 
 /* line 583, sass/nlcommons.scss */
+.model_link img {
+  height: 30px;
+}
+
+/* line 586, sass/nlcommons.scss */
 .panel, .tabs_panel {
   margin: 4px;
   border: 3px solid black;
@@ -2905,10 +2910,6 @@ div.left-right div.right {
   z-index: z;
   -pie-poll: false;
   padding: 4px;
-}
-/* line 589, sass/nlcommons.scss */
-.panel img, .tabs_panel img {
-  height: 30px;
 }
 
 /* line 594, sass/nlcommons.scss */

@@ -580,15 +580,15 @@ div.left-right {
     }
 }
 
+.model_link img {
+  height: 30px;
+}
 .panel {
   @include global_padding;
   border: 3px solid black;
   @include border-radius(8px);
   @include pie-z;
   padding: 4px;
-  img {
-    height: 30px;
-  }
 }
 
 .tabs_panel {
