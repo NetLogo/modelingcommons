@@ -8,8 +8,23 @@ $button-color: #FFB540;
 $error-color: red;
 $no-image-color: lighten(black, 80%);
 
+$pie-behavior: url("/browse/pie");
+$pie-base-class: pie;
+
+@mixin pie-border-radius($r) {
+  @include border-radius($r);
+  @include pie;
+}
 
 @mixin global_padding {
   margin: 4px;
 }
 
+.pie {
+  @include pie-element(relative);
+  -pie-poll: false;
+}
+@mixin pie-z($z: 0) {
+  @include pie-element(z-index, z);
+  -pie-poll: false;
+}

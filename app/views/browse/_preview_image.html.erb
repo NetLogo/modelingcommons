@@ -1,7 +1,9 @@
 <% if @model %>
+	<div id="preview-image">
     <% if @model.previews.nil? or @model.previews.empty? %>
-        <span id="preview-image">No preview image</span>
+        No preview image
     <% else %>
-        <img id="preview-image" src="<%= url_for :controller => :browse, :action => :display_preview, :id => @model.id %>" alt="Preview image for <%= @model.name -%>" title="Preview image for '<%= @model.name -%>' model" />
+        <%= model_image(@model)%>
     <% end %>
+	</div>
 <% end %>

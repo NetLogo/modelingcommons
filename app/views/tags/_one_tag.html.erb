@@ -7,7 +7,7 @@
   <td>
   	<% form_tag({:controller => :tags, :action => :destroy, :id => tm.id}, :class => 'tag_delete_form') do %>
   	<%= hidden_field_tag 'id', tm.id -%>
-    <%= link_to "Remove", :controller => :tags, :action => :destroy, :id => tm.id -%>
+    <a href="#">Remove</a>
     <% end %>
   </td>
   <% end %>

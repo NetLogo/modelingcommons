@@ -4,34 +4,32 @@
   <table>
     <tr>
       <td><label for="new_version_uploaded_body">Model file</label></td>
-      <td><%= form.file_field :uploaded_body %>
-        <%= form.hidden_field :node_id, {:value => @model.id} %></td>
+      <td><%= form.file_field :uploaded_body %><%= form.hidden_field :node_id, {:value => @model.id} %></td>
+      <td></td>
     </tr>
     <tr>
       <td><label for="new_version_description">Short comment</label></td>
       <td><%= form.text_field :description %></td>
+      <td></td>
     </tr>
 
     <tr>
       <td colspan="2">
-        <p><%= radio_button_tag :fork, 'overwrite', {:checked => true} %><label for="fork_overwrite">Replace the existing model</label></p>
-        <p><%= radio_button_tag :fork, 'child' %><label for="fork_child">Upload a new child, to be called</label> <%= form.text_field :name_of_new_child %> </p>
+        <%= radio_button_tag :fork, 'overwrite', {:checked => true} %><label for="fork_overwrite">Replace the existing model</label>
       </td>
+      <td></td>
+    </tr>
+    <tr>
+    	<td><%= radio_button_tag :fork, 'child' %><label for="fork_child">Upload a new child, to be called</label></td>
+    	<td><%= form.text_field :name_of_new_child %></td>
+    	<td></td>
     </tr>
 
     <tr>
       <td colspan="2"><%= submit_tag "Upload model", :class => "submit" %></td>
+      <td></td>
     </tr>
 
   </table>
   <% end %>
 </div>
-
-<script>
-  $("#upload-model-form").validate({
-  rules: {
-      'fork_overwrite': 'required',
-      'new_version_uploaded_body': 'required',
-      'new_version_description': 'required'
-   } } );
-</script>

@@ -2,6 +2,7 @@
 @import "font";
 
 @mixin clickable($background-color: #FFB540, $text-color: black, $hover: ':hover', $active: ':active', $selected: '.selected', $disabled: '[disabled]') {
+  @include pie;
   $box-shadow-lighten: 10%;
   $hover-darken: 10%;
   $active-darken: 20%;

@@ -3,15 +3,19 @@ $blueprint-grid-width: 40px;
 @import "blueprint/reset";
 @import "blueprint/grid";
 @import "compass/css3";
+@import "compass/css3/pie";
 @import "clickable";
-@import "ui.everything";
 @import "browse";
 @import "font";
 @import "all";
+@import "ui.everything";
+
 
 /* 
  * Overall Page Layout
  */
+
+
 /* 
  * Page background color
  * Global styling, such as default font family and color
@@ -21,38 +25,53 @@ body {
     @include serif-font();
     font-size: $default-font-size;
 }
-
 /* 
  * Center page container
  * Blueprint column container
  */
+.outer_container {
+   @include container;
+   overflow: visible;
+   z-index: 0;
+   position: relative;
+   
+}
 .container {
-  @include container;
+  overflow: hidden;
   background-color: white;
+  display:inline-block;
   @include box-shadow(0 0 15px 10px gray);
-  @include border-bottom-right-radius($tab-corner-radius);
-  @include border-bottom-left-radius($tab-corner-radius);
+  @include border-radius(0px 0px $tab-corner-radius $tab-corner-radius);
+  @include pie-z;
   margin-bottom: 200px;
 }
 
+
+
 /* 
  * Page header, at the top of all pages
+ * layouts/_page_header
  */
 .header {
   @include sans-font();
   @include column(24);
-  @include border-bottom-left-radius($tab-corner-radius);
-  @include border-bottom-right-radius($tab-corner-radius);
+  @include pie-border-radius(0px 0px $tab-corner-radius $tab-corner-radius);
   @include box-shadow(0 0 10px 2px gray);
   overflow: hidden;
   background-color: /*lighten($header-color, 10%);*/$header-color;
   .banner {
+    //background-color: $header-color;
     background-image: url('banner.png');
+    background-color: $header-color;
     cursor: pointer;
     @include column(12);
     height: 100px;
     color: white;
-    @include text-shadow(/*$text-highlight*/$nav-color, 3px, 3px, 5px);
+    @include text-shadow($nav-color, 3px, 3px, 5px);
+    h1, h2 {
+      display: inline-block;
+      filter: progid:DXImageTransform.Microsoft.Shadow(color=#{$nav-color}, direction=135, strength=5px);
+    }
     h1 {
       font-size: 40px;
       margin-left: 17px;
@@ -88,7 +107,7 @@ body {
         display: inline-block;
         padding-top: 2px;
         padding-bottom: 2px;
-        @include border-bottom-left-radius($tab-corner-radius);
+        @include pie-border-radius(0px 0px 0px $tab-corner-radius);
         img {
           height: 26px;
           width: 26px;
@@ -106,6 +125,10 @@ body {
         a:active {
           color: red;
         }
+        .login_error_container {
+          max-height: 18px;
+          
+        }
       }
     }
     .flash_container {
@@ -120,13 +143,13 @@ body {
           @include border-bottom-left-radius($tab-corner-radius);
           @include border-top-left-radius($tab-corner-radius);
           width: 100%;
-          line-height: 20px;
+          line-height: 18px;
           font-size: 16px;
           color: white;
           text-align: center;
           overflow: hidden;
-          max-height: 40px;
-          min-height: 20px;
+          max-height: 36px;
+          min-height: 18px;
           width: 480px;
           position: relative;
           right: -480px;
@@ -174,6 +197,7 @@ body {
   $nav-height: 40px;
 
   .navigation {
+    @include pie-border-radius(0px 0px 0px $tab-corner-radius);
     background-color: $nav-color;
     @include column(19);
     $a-color: black;
@@ -182,7 +206,7 @@ body {
       color: $nav-text-color;
       font-size: 20px;
 
-      @include border-radius(5px);
+      @include pie-border-radius(5px);
       padding-top: 4px;
       padding-bottom: 4px;
       padding-left: 7px;
@@ -230,6 +254,8 @@ body {
     line-height: $nav-height;
   }
   .search {
+    @include border-radius(0px 0px $tab-corner-radius 0px);
+    @include pie;
     background-color: $nav-color;
     @include column(5, last);
     height: $nav-height;
@@ -272,6 +298,7 @@ body {
 
 /* 
  * Model Page
+ * browse/one_model
  */
 
 #preview_info_container {
@@ -295,15 +322,17 @@ body {
     @include global_padding;
     display: inline-block;
     background-color: hsl(0%, 0%, 85%);
+    img {
+      width: 152px;
+      height: 152px;
+    }
   }
 }
 #model_info {
   img {
     vertical-align: middle;
-  }
-  img.inline_image {
     height: 20px;
-  } 
+  }
   &>div {
     height: 53px;
     display: table-row;
@@ -312,6 +341,10 @@ body {
       vertical-align: middle;
       
     }
+  }
+  #actions a {
+    line-height: 20px;
+    display: inline-block;
   }
 }
 
@@ -334,7 +367,6 @@ body {
 #model_applet {
     display: none;
 }
-
 .wide_model {
   position: absolute;
   left:0px;
@@ -353,10 +385,17 @@ body {
   display: block;
 }
 
+#upload-model-form { 
+  td {
+    line-height: 26px;
+  }
+}
+
 
 /* 
  * Code Highlighting 
  * Proc is procedure
+ * browse/_browse/procedures_tab
  */
 .procedure_code {
   font-family: courier, monospace;
@@ -376,6 +415,7 @@ body {
 
 /* 
  * Login Page (Front Page)
+ * account/login
  */
 
 div#just_visiting {
@@ -385,16 +425,11 @@ div#just_visiting {
 div#register_new_user {
   @include column(12, true);
 }
-/*div#login_exisiting_user {
-  @include column(12);
-  table td{
-    
-  }
-}*/
 
 
 /* 
  * User Page (Front Page) 
+ * account/mypage
  */
 #left-news-box {
   @include column(12);
@@ -406,9 +441,11 @@ div#register_new_user {
 
 /* 
  * Search Results Page 
+ * search/search_action
  */
 #search_tabs {
   .num-results {
+    background-color: darken(red, 10%);
     @include background(radial-gradient(25% 25%, red, darken(red, 20%)));
     $radius: 10px;
     $padding: 3px;
@@ -429,6 +466,7 @@ div#register_new_user {
     margin-top: 3px;
     margin-bottom: 3px;
     &.empty {
+      background-color: desaturate(darken(red, 10%), 90%);
       @include background(radial-gradient(25% 25%, desaturate(red, 90%), desaturate(darken(red, 20%), 90%)));
     }  
   }
@@ -436,6 +474,7 @@ div#register_new_user {
 
 /*
  * One Group Page
+ * membership/one_group
  */
 
 .grouplist {
@@ -454,14 +493,76 @@ div#register_new_user {
 
 /*
  * Admin view all actions
+ * admin/view_all_people
  */
 .actions_table_container {
   overflow: scroll;
 }
 
+
+
+
+/*
+ * Group people selector
+ * membership/_invite
+ */
+table#people_adder {
+  width: 100%;
+  td {
+    width: 50%;
+    vertical-align: top;
+    &>div {
+      vertical-align: baseline;
+      
+    }
+  }
+}
+
+.selectable_person {
+  $height: 24px;
+  background-color: lighten(black, 90%);
+  padding: 2px;
+  @include pie-border-radius(5px);
+  height: $height;
+  line-height: $height;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  img {
+    vertical-align: top;
+    height: $height;
+    padding-right: 10px;
+  } 
+}
+#selected_people, #unselected_people {
+  padding: 4px;
+  .no_people {
+    text-align: center;
+    font-size: 11px;
+    margin-top: 10px;
+    background-color: lighten(black, 90%);
+  }
+}
+#selected_people button.person_add {
+  display: none;
+}
+#unselected_people button.person_remove {
+  display: none;
+}
+.no_people label {
+  width: 100%;
+  display: inline-block;
+  cursor: pointer;
+}
+
 /*
  * Globally useful styling
  */ 
+
+
+
+
+
+
 
 .hidden {
   display: none;
@@ -511,10 +612,15 @@ div.left-right {
   }
 }
 
+.model_link img {
+  height: 30px;
+}
+
 .panel {
   @include global_padding;
   border: 3px solid black;
   @include border-radius(8px);
+  @include pie-z;
   padding: 4px;
 }
 
@@ -533,6 +639,7 @@ div.left-right {
  * Text Input Field
  */
 input[type=text], input[type=password] {
+  @include pie;
   $color: rgb(50%, 50%, 50%);
   //color: $color; 
   @include serif-font();
@@ -546,23 +653,30 @@ input[type=text], input[type=password] {
   &.error {
     color: $error-color;
     border-color: $error-color;
-    @include box-shadow(-1px 1px 4px 1px lighten($error-color, 20%) inset);
+    //@include box-shadow(-1px 1px 4px 1px lighten($error-color, 20%) inset);
+    
   }
   &:focus {
-    outline-style: auto;
-    //@include box-shadow(-1px 1px 4px 2px darken($color, 5%) inset);
-    //border: 1px solid darken($color, 10%);
+    outline:none;
+    $input-color: darken($header-color, 10%);
+    @include box-shadow(-1px 1px 4px 1px lighten($color, 20%) inset, 0px 0px 4px 2px $input-color);
+  }
+  &.error:focus {
+    @include box-shadow(-1px 1px 4px 1px lighten($color, 20%) inset, 0px 0px 4px 2px lighten($error-color, 20%));
   }
   &:focus.error {
     outline-color: red;
+  }
+  &.placeholder {
+    color: lighten(black, 60%);
   }
 }
 
 /*
  * Buttons
  */
-button, input[type=button], input[type=submit] {
-  @include clickable($background-color: $header-color);
+button, input[type=button], input[type=submit], label.file_label {
+  @include clickable($background-color: $header-color, $active: ':hover:active');
   font-size: $default-font-size;
   line-height: 16px;
   padding-top: 2px;
@@ -577,6 +691,25 @@ button, input[type=button], input[type=submit] {
       display: inline-block;
     }
   @include border-radius($input-radius);
+  
+}
+
+label.file_label {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  input[type=file] {
+    opacity: 0;
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  vertical-align: middle;
 }
 
 .error {
@@ -905,6 +1038,8 @@ table.simple_table {
     }
   }
 }
+
+
 
 /* 
  * Legacy Styling

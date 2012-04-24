@@ -50,27 +50,27 @@
 		<div id="family_info">
 			<div>
 			<% if !@model.projects.empty? %>
-			Part of project '<%= link_to @model.projects.first.name, :controller => :projects, :action => :show, :id => @model.projects.first.id -%>'
+			Part of project '<%= project_link(@model.projects.first) %>'
 			<% end %>
 			
 			<% if @model.parent %>
-			Child of model <%= link_to @model.parent.name, :controller => 'browse', :action => 'one_model', :id => @model.parent.id  -%>
+			Child of model <%= model_link(@model.parent) %>
 			<% end %>
 			
 			<% if not @model.children.empty? %>
-			Parent of <%= pluralize(@model.children.size, 'model') -%>: <%= @model.children.map {|child| link_to child.name, :controller => 'browse', :action => 'one_model', :id => child.id }.to_sentence %>
+			Parent of <%= pluralize(@model.children.size, 'model') -%>: <%= @model.children.map {|child| model_link(child) }.to_sentence %>
 			<% end %>
 			</div>
 		</div>
 		<div id="actions">
 			<div>
-			<%= link_to image_tag("download.png", :class => "inline_image", :alt => "Download the '#{@model.name}' model", :title => "Download the '#{@model.name}' model"), :controller => "browse", :action => "download_model", :id => @model.id -%><%= link_to "Download this model", :controller => "browse", :action => "download_model", :id => @model.id -%> 
+			<%= link_to image_tag("download.png", :class => "inline_image", :alt => "Download the '#{@model.name}' model", :title => "Download the '#{@model.name}' model") + "Download this model", :controller => "browse", :action => "download_model", :id => @model.id -%> 
 			<% if @person or !@model.recommendations.empty? %>
 				 | 
 			<% end %> 
 			<% if @person %>
 				<% if @model.recommendations.select {|r| r.person_id == @person.id}.empty? %>
-					<%= link_to image_tag("thumb.jpeg", :class => "inline_image", :alt => "Recommend '#{@model.name}' to other users", :title => "Recommend '#{@model.name}' to other users"), :controller => :recommend, :action => :add_recommendation, :id => @model.id -%><%= link_to "Recommend", :controller => :recommend, :action => :add_recommendation, :id => @model.id %>
+					<%= link_to image_tag("thumb.jpeg", :class => "inline_image", :alt => "Recommend '#{@model.name}' to other users", :title => "Recommend '#{@model.name}' to other users") + "Recommend", :controller => :recommend, :action => :add_recommendation, :id => @model.id %>
 				<% else %>
 					<%= person_link(@person) %> recommended this model
 				<% end %>
@@ -89,7 +89,7 @@
 			 | 
 			<!--   <div id="model-atom-feed" id="atom-feed-link"><%= link_to image_tag("feed.png", :id => 'atom-image', :alt => "Follow '#{@model.name}' in your feed reader", :title => "Follow '#{@model.name}' in your feed reader"), :controller => :browse, :action => :follow, :id => @model.id, :format => :atom -%><%= link_to "Follow #{@model.name}", {:controller => :browse, :action => :follow, :id => @model.id, :format => :atom}, {:id => 'atom-feed'} %></div> -->
 			<!-- AddThis Button BEGIN -->
-			<a class="addthis_button" href="http://addthis.com/bookmark.php?v=250&amp;username=reuvenmlerner"><img src="http://s7.addthis.com/static/btn/v2/lg-share-en.gif" width="125" height="16" alt="Bookmark and Share" style="border:0"/></a><script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#username=reuvenmlerner"></script>
+			<a class="addthis_button" href="http://addthis.com/bookmark.php?v=250&amp;username=reuvenmlerner"><img src="http://s7.addthis.com/static/btn/v2/lg-share-en.gif" width="125" height="16" alt="Bookmark and Share" style="border:0;height: auto;"/></a><script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#username=reuvenmlerner"></script>
 			<!-- AddThis Button END -->
 			</div>
 		</div>

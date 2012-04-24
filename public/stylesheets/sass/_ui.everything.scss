@@ -1,4 +1,5 @@
 @import "compass/css3";
+@import "compass/css3/pie";
 @import "clickable";
 @import "font";
 @import "all";
@@ -168,11 +169,13 @@ $padding: 5px;
   padding: 0px; 
   text-align: center;
   font-size: 16px; 
-  @include sans-font(); 
-  @include clickable($background-color: $header-color, $selected: '.ui-tabs-selected', $disabled: '.empty', $active: ':active:hover'); @include border-bottom-left-radius(8px);@include border-bottom-right-radius(8px);
+  @include sans-font();
+  z-index: 0;
+  @include clickable($background-color: $header-color, $selected: '.ui-tabs-selected', $disabled: '.empty', $active: ':active:hover');
+  @include border-radius(0px 0px 8px 8px);
 }
 .ui-tabs .ui-tabs-nav li:first-child {
-  @include border-top-left-radius(5px);
+  @include border-radius(5px 0px 8px 8px);
 }
 .ui-tabs .ui-tabs-nav li a {
   display: inline-block;
@@ -216,12 +219,43 @@ $padding: 5px;
 
 /* Interaction states
 ----------------------------------*/
-.ui-state-default, .ui-widget-content .ui-state-default { border: 1px solid #d3d3d3; background: #e6e6e6 url(/stylesheets/themes/nlcommons/images/ui-bg_glass_75_e6e6e6_1x400.png) 50% 50% repeat-x; font-weight: normal; color: #555555; outline: none; }
-.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited { color: #555555; text-decoration: none; outline: none; }
-.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus { border: 1px solid #999999; background: #dadada url(/stylesheets/themes/nlcommons/images/ui-bg_glass_75_dadada_1x400.png) 50% 50% repeat-x; font-weight: normal; color: #212121; outline: none; }
-.ui-state-hover a, .ui-state-hover a:hover { color: #212121; text-decoration: none; outline: none; }
-.ui-state-active, .ui-widget-content .ui-state-active { border: 1px solid #aaaaaa; background: #abcdef; font-weight: normal; color: #212121; outline: none; }
-.ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited { color: #212121; outline: none; text-decoration: none; }
+.ui-state-default, .ui-widget-content .ui-state-default {
+   border: 1px solid #d3d3d3;
+    //background: #e6e6e6 url(/stylesheets/themes/nlcommons/images/ui-bg_glass_75_e6e6e6_1x400.png) 50% 50% repeat-x; 
+    font-weight: normal;
+    color: #555555;
+    outline: none; 
+}
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited {
+   color: #555555;
+   text-decoration: none;
+   outline: none;
+}
+.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus { 
+  border: 1px solid #999999; 
+  //background: #dadada url(/stylesheets/themes/nlcommons/images/ui-bg_glass_75_dadada_1x400.png) 50% 50% repeat-x; 
+  font-weight: normal; 
+  color: #212121; 
+  outline: none; 
+}
+.ui-state-hover a, .ui-state-hover a:hover { 
+  color: #212121; 
+  text-decoration: none; 
+  outline: none;
+}
+.ui-state-active, .ui-widget-content .ui-state-active { 
+  //border: 1px solid #aaaaaa; 
+  background: #abcdef; 
+  font-weight: normal; 
+  color: #212121; 
+  outline: none; 
+}
+  
+.ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited {
+   color: #212121; 
+   outline: none; 
+   text-decoration: none; 
+}
 
 /* Interaction Cues
 ----------------------------------*/

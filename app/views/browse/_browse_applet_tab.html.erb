@@ -2,7 +2,7 @@
   <% if @model.cannot_be_run_as_applet? and @person and !@person.administrator? %>
   <p>Sorry, but this model cannot be viewed as an applet.  You must <%= link_to "download it", :controller => :browse, :action => :download_model, :id => @model.id -%> and run it within NetLogo on your local computer.</p>
   <% else %>
-  <p>Written with NetLogo <%= @model.netlogo_version -%></p>
+  <p>Running model with NetLogo <%= @model.netlogo_version_for_applet -%></p>
 
   <!-- browse_applet_tab -->
   <div id="model_click_to_load"  >
@@ -16,6 +16,7 @@
 
      archive="/applet/<%= @model.netlogo_version_for_applet -%>/NetLogoLite.jar" >
     <param name="DefaultModel" value="<%= url_for :controller => :browse, :action => :model_contents, :id => @model.id -%>"></param>
+    <param name="java_arguments" value="-Djnlp.packEnabled=true"/>
   </applet>
  </div>
   <% end %>

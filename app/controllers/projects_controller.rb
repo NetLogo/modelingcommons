@@ -3,6 +3,8 @@ require 'RMagick'
 
 class ProjectsController < ApplicationController
 
+  before_filter :require_login, :only => [:new, :create, :add_model, :remove_model]
+
   def index
     @projects = Project.all
     if @person

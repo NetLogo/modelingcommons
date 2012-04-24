@@ -156,8 +156,9 @@ jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
 };
  
 
-//Model list dataTable
 $(document).ready(function () {
+	
+	styled_file_input();
 	
 	(function() {
 		var getSortCol = function(select) {
@@ -228,6 +229,12 @@ $(document).ready(function () {
 	
 	$("#custom_filters").contents().detach().prependTo($("#projects_table_wrapper .top .left"));
 	$("#custom_filters").remove();
+	
+	
+	
+	
+	
+	//Model list datatable	
 	
 	// Create the datatable
 	$(".model_list_datatable").dataTable({
@@ -308,24 +315,37 @@ $(document).ready(function () {
 	
 	//Tab loader loads tabs on the element selected by elementId and switches to the tab selected in the hash
 	var tab_loader = function(elementId) {
+	
 		//Checks URL hash to see if the user wants to go to a specific tab
-		var tab_index = 0;
-		if(window.location.hash.indexOf(elementId + "_") != -1) {
-			var startIndex = window.location.hash.indexOf(elementId + "_") + (elementId + "_").length;
-			var endIndex = window.location.hash.indexOf("&", startIndex);
-			endIndex = endIndex == -1 ? window.location.hash.length : endIndex;
-			var tab_id = window.location.hash.substring(startIndex, endIndex);
-			$("#" + elementId + ">div").each(function(index, element) {
-				if(tab_id == element.id) {
-					tab_index = index;
-				}
-			});
-		}
-		$("#" + elementId).tabs({
-			selected: tab_index, 
+		var getURLTabIndex = function() {
+			var tab_index = 0;
+			if(window.location.hash.indexOf(elementId + "_") != -1) {
+				var startIndex = window.location.hash.indexOf(elementId + "_") + (elementId + "_").length;
+				var endIndex = window.location.hash.indexOf("&", startIndex);
+				endIndex = endIndex == -1 ? window.location.hash.length : endIndex;
+				var tab_id = window.location.hash.substring(startIndex, endIndex);
+				$("#" + elementId + ">div").each(function(index, element) {
+					if(tab_id == element.id) {
+						tab_index = index;
+					}
+				});
+			}
+			return tab_index;
+		};
+		
+		//Create the tabs
+		var tab = $("#" + elementId).tabs({
+			//Select the correct tab
+			selected: getURLTabIndex(),
+			//When the tab changes, update the URL hash 
 			show: function(event, ui) {
 				window.location.hash = elementId + "_" + ui.panel.id;
 			}
+		});
+		
+		//Change tabs on back/forward by monitoring URL hash
+		$(window).bind("hashchange", function() {
+			tab.tabs("select", getURLTabIndex());
 		});
 	};
 	tab_loader("model_tabs");
@@ -364,14 +384,21 @@ $(document).ready(function () {
 	//Validate header login form
 	$("#header_login").validate({
 		rules: {
-			password: "required",
+			password: {
+				required: ":not(.placeholder)", 
+			},
 			email_address: {
 				required: true,
 				email: true
 			}
 		},
 		messages: {
-			password: "Password Required",
+			password: {
+				required: function(rules, element) {
+					console.log($(element).parent().children(".placeholder").addClass("error"));
+					return "Password Required"
+				}
+			},
 			email_address: {
 				required: "Email Required",
 				email: "Invalid Email Address"
@@ -379,7 +406,7 @@ $(document).ready(function () {
 		},
 		//onkeyup: false,
 		//onclick: false,
-		//onfocusout: false,
+		onfocusout: false,
 		errorPlacement: function(error, element) {
 			element.parents("tr").next("tr").children("td").eq(element.parents("td").index()).append(error);
 		}
@@ -409,7 +436,7 @@ $(document).ready(function () {
 			container.addClass("wide_model");
 			container.css("top", (tab.offset().top + 24) + "px");
 			if(applet.innerWidth() < body.outerWidth()) {
-				container.css("left", ((body.outerWidth() - container.outerWidth())/2) + "px");
+				container.css("left", ((body.outerWidth() - container.outerWidth())/2 - container.offsetParent().offset().left) + "px");
 			} else {
 				container.css("left", "0px");
 			}
@@ -522,9 +549,7 @@ $(document).ready(function () {
 				dataType: "html",  
 				type: "post", 
 				data: form.serialize(), 
-				success: function(data, textStatus, jqXHR) {
-					callback(data);
-				},
+				success: callback,
 				error: function(jqXHR, textStatus, errorThrown) {
 					$().flash_notice(textStatus + ": " + errorThrown);
 				}
@@ -533,7 +558,7 @@ $(document).ready(function () {
 		};
 	};
 	
-	$('#add_tag_form').submit(createAJAXFormReturningHTMLHandler(function(data) {
+	$('#add_tag_form').submit(createAJAXFormReturningHTMLHandler(function(data, textStatus, jqXHR) {
 		$(data).appendTo("#existing_tags");
 		$('#existing_tags').removeClass('hidden');
 		$('#no_tags').addClass('hidden');
@@ -547,6 +572,10 @@ $(document).ready(function () {
 			}
 		});
 	}));
+	$("#existing_tags").on("click", ".tag_delete_form a", function(e) {
+		$(this).parents("form").submit();
+		return false;
+	});
 	
 	$("#existing_tags").on("submit", ".tag_delete_form", function(e) {
 		var form = $(this);
@@ -569,11 +598,219 @@ $(document).ready(function () {
 		});
 		return false;
 	});
-	$("#existing_tags").on("click", ".tag_delete_form a", function(e) {
-		$(e.target).parents("form").submit();
-		e.preventDefault();
-	})
 	
+	//Person selector for group invitation tab
+	(function() {
+		var selectedList = $("#selected_people");
+		var unselectedList = $("#unselected_people");
+		var groupSelector = $("#group_id");
+		var personSearchInput = $("#search_people_to_invite");
+		
+		groupSelector.bind("change", function(e) {
+			updateSelectedListIndicatorState();
+		});
+		
+		var personAdded = function(idToCheck) {
+			var isAdded = false;
+			selectedList.find(".selectable_person input#person_id").each(function(index, element) {
+				if(parseInt($(element).attr("value")) == idToCheck) {
+					isAdded = true;
+					return false;
+				}
+			});
+			return isAdded;
+		};
+		var submit = $("#submit_selected_people");
+		var updateSelectedListIndicatorState = function() {
+			if(selectedList.children(".selectable_person").length > 0 && groupSelector.children("option:selected").attr("value").length > 0) {
+				submit.removeAttr("disabled");
+			} else {
+				submit.attr("disabled", "disabled");
+			}
+			if(selectedList.children(".selectable_person").length > 0) {
+				selectedList.find(".no_people").addClass("hidden");
+			} else {
+				selectedList.find(".no_people").removeClass("hidden");
+			}
+		};
+		var updateUnselectedListIndicatorState = function() {
+			if(unselectedList.children(".selectable_person").length > 0) {
+				unselectedList.find(".no_people").addClass("hidden");
+			} else {
+				unselectedList.find(".no_people").removeClass("hidden");
+			}
+		};
+		var clearUnselectedList = function() {
+			unselectedList.children(".selectable_person").remove();
+		};
+		unselectedList.on("click", "button.person_add", function(e) {
+			$(this).parents(".selectable_person").detach().appendTo(selectedList);
+			updateSelectedListIndicatorState();
+			updateUnselectedListIndicatorState();
+			return false;
+		});
+		selectedList.on("click", "button.person_remove", function(e) {
+			$(this).parents(".selectable_person").detach().appendTo(unselectedList);
+			updateSelectedListIndicatorState();
+			updateUnselectedListIndicatorState();
+			return false;
+		});
+		var fetchNewPeopleFromInput = function() {
+			if(personSearchInput.attr("value")) {
+				$.ajax({
+					url: unselectedList.parents("form").attr("action"),
+					dataType: "json",  
+					type: "post", 
+					data: $.param({
+						query: personSearchInput.attr("value")
+					}), 
+					success: function(data, textStatus, jqXHR) {
+						clearUnselectedList();
+						for(var i = 0; i < data.length; i++) {
+							if(!personAdded(data[i].id)) {
+								unselectedList.append(data[i].html);
+							}
+						}
+						updateUnselectedListIndicatorState();
+						
+					}
+				});
+			}
+			
+		};
+		personSearchInput.bind("keypress", fetchNewPeopleFromInput);
+		
+		//Call in case the user hit back and left something in the input field
+		fetchNewPeopleFromInput();
+	})();
+	
+	//Update model behavior
+	(function() {
+		var form = $("#upload-model-form");
+		form.validate({
+			rules: {
+				"new_version[uploaded_body]": {
+					"required": true
+				},
+				"new_version[description]": "required", 
+				"new_version[name_of_new_child]": {
+					"required": "#fork_child:checked"
+				}
+			}, 
+			
+
+		});
+		
+		
+		
+		
+		form.find('input[type="file"]').bind("change", function() {
+			form.validate().element(this);
+		})
+		
+		$("#fork_overwrite").bind("change", function(e) {
+			form.validate().element("#new_version_name_of_new_child");
+		});
+	})();
+	
+	
+	ie_placeholder();
 });
+
+//Allows styling input type="file" by wrapping the file input in a styled label.  To style, change the file_label
+//class style
+//Should run before tabs are created
+var styled_file_input = (function() {
+	var initialized = false;
+	return function() {
+		if(initialized) {
+			return;
+		}
+		initialized = true;
+		$('input[type="file"]').each(function() {
+			var fileInput = $(this);
+			var name = fileInput.attr("name");
+			if($.trim(name).length == 0) {
+				return;
+			}
+			
+			fileInput.wrap('<label for="' + name + '" class="file_label">Choose File</label>')
+			var wrapper = fileInput.parent();
+			var fileNameLabel = $('<label for="' + name + '" class="file_name_label"></label>');
+			fileNameLabel.insertAfter(wrapper);
+			var updateFileName = function() {
+				var fileName = fileInput.val();
+				if(fileName) {
+					fileName = fileName.split('\\').pop();
+				}
+				fileNameLabel.text(fileName);
+			};
+			updateFileName();
+			fileInput.bind("change", function(e) {
+				updateFileName();
+			});
+		})
+		
+	}
+})();
+
+//Makes the placeholder attribute work in internet explorer 8, 9
+var ie_placeholder = (function() {
+	//Private static variables:
+	var ie_placeholder_initialized = false;
+	
+	return function() {
+		if(ie_placeholder_initialized) {
+			return;
+		}
+		ie_placeholder_initialized = true;
+		var test = document.createElement("input");
+		if("placeholder" in test) {
+			return;
+		}
+		$("input[placeholder][type=password]").each(function() {
+			var passwordInput = $(this);
+			passwordInput.addClass("password_placeholder");
+			var textInput = $('<input type="text" />');
+			textInput.attr("placeholder", passwordInput.attr("placeholder"));
+			passwordInput.removeAttr("placeholder");
+			passwordInput.after(textInput);
+			passwordInput.hide();
+			textInput.on("focus", function() {
+				textInput.hide();
+				passwordInput.show();
+				passwordInput.focus();
+			});
+			passwordInput.on("blur", function() {
+				if(passwordInput.val().length == 0) {
+					passwordInput.hide();
+					textInput.show();
+					textInput.blur();
+				}
+			});
+		});
+		
+		
+		var blur = function() {
+			var input = $(this);
+			if(input.val().length == 0) {
+				input.val(input.attr("placeholder"));
+				input.addClass("placeholder");
+			}
+		};
+		var focus = function() {
+			var input = $(this);
+			if(input.hasClass("placeholder")) {
+				input.val("");
+				input.removeClass("placeholder");
+			}
+		};
+		$("[placeholder]").blur(blur).focus(focus).each(blur).parents("form").bind("submit", function() {
+			$(this).find("input.placeholder").val("");
+		});	
+	};
+})();
+
+
 
 

@@ -59,7 +59,7 @@ class AccountController < ApplicationController
       return
     end
 
-    @person = Person.find_by_email_address(params[:email_address].strip.downcase)
+    @person = Person.find_by_email_address(params[:email_address].strip)
     if @person.nil?
       logger.warn "Attempted login with non-existent email_address '#{params[:email_address]}'"
       flash[:notice] = "Sorry, but no user exists with that e-mail address and password.  Please try again."
@@ -233,6 +233,17 @@ class AccountController < ApplicationController
   end
   def groups
     render :layout => 'application_nomargin'
+  end
+  def find_people
+    query = params[:query].blank? ? "" : params[:query].downcase
+    count = params[:count].blank? ? 10 : params[:count].to_i
+    render :json => Person.search(query).sort {|a, b| a.fullname.downcase <=> b.fullname.downcase}[0..count-1].map {|person| {:id => person.id, :html => render_to_string(:partial => 'selectable_person', :locals => { :person => person})}}
+  end
+  def get_feed
+    @all_model_events = Node.all(:order => 'updated_at DESC', :limit => 30).select { |node| node.visible_to_user?(@person)}
+    @tag_events = TaggedNode.all(:order => 'updated_at DESC', :limit => 30)
+    #render :json => @all_model_events.map {|model| {:created_at => model.created_at, :author => {:name => model.person.fullname, :id => model.person.id, :url => url_for(:controller => :account, :action => :mypage, :id => model.person.id, :image => model.person.avatar.url(:thumb))}, :name => model.name, :id => model.id}}
+    render :json => @tag_events.map {|tagged| {:nodename => tagged.node.name, :tag_node_id => tagged.id, :node_id => tagged.node.id, :date_tagged => tagged.created_at, :tag_id => tagged.tag.id, :comment => tagged.comment}}
   end
 
 end
