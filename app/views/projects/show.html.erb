@@ -17,10 +17,13 @@
 <% end %>
 <% content_for(:buttons) do %>
 	 <% if @project.person == @person %>
-    (<%= link_to 'remove from project', :controller => :projects, :action => :remove_model, :id => @project.id, :model_id => contents[:model].id -%>)
+    (<%= link_to 'remove from project', :controller => :projects, :action => :remove_model, :id => @project.id, :model_id => @project.id -%>)
     <% end %>
 <% end %>
-<%= render :partial => "browse/model_list", :object => @project.nodes %>
+<% content_for(:but) {
+	"5"
+} %>
+<%= render :partial => "browse/model_list", :object => @project.nodes, :locals => {:buttons => :but} %>
 <% if @project.person == @person %>
 <% if !@models_to_add.empty? %>
 <% form_tag :controller => :projects, :action => :add_model do  %>

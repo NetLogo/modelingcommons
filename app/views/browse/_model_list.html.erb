@@ -23,9 +23,9 @@
         
         <table>
         	<tr>
-        		<td><% if !model.preview.blank? %><img src="/browse/display_preview/<%= model.id %>" alt="Preview of model '<%= model.name -%>'" /><% end %></td>
+        		<td><%= model_image(model) %></td>
         		<td><%= link_to model.name, :controller => "browse", :action => "one_model", :id => model.id %></td>
-        		<td><%= content_for(:buttons, {:model => model}) %></td>
+        		<td><%= content_for(buttons) if defined?(buttons) %></td>
         	</tr>
         </table>
         
