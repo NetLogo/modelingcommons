@@ -299,10 +299,10 @@ body {
 /*
  * New Comments
  */
-$arrow-width: 26px;
-$arrow-height: 26px;
+$arrow-width: 12px;
+$arrow-height: 12px;
 $arrow-top: 10px;
-$comment-border-width: 1px;
+$comment-border-width: 2px;
 .comments {
   margin: 10px 0px 10px 0px;
   @include serif-font();
@@ -311,6 +311,13 @@ $comment-border-width: 1px;
     vertical-align: top;
   }
   td.person {
+    div {
+      @include border-radius(8px);
+      border: $comment-border-width solid black;
+      padding: 4px;
+      @include box-shadow(5px 5px 15px -5px gray);
+      background-color: $header-color;
+    }
     width: 80px;
     text-align: center;
     font-size: 12px;
@@ -320,7 +327,7 @@ $comment-border-width: 1px;
     p {
       @include sans-font();
       margin: 2px 0px 4px 0px;
-      font-size: 11px;
+      font-size: 12px;
       
     }
   }
@@ -374,21 +381,12 @@ $comment-border-width: 1px;
           font-size: 10px;
           margin: 4px 8px 4px 8px;
         }
-        
+        @include box-shadow(5px 5px 15px 0px gray);
         @include border-radius(8px);
       }
       .question {
-          color: rgba(255, 0, 0, .4);
-          font-size: 70px;
-          position: absolute;
-          right: 0px;
-          top: 0px;
-          z-index: 1;
-          font-weight: bold;
-          &.answered {
-            color: rgba(0, 255, 0, .4);
-          }
-        }
+        font-size: .7em;
+      }
       
     }
   }

@@ -2,15 +2,28 @@
 <table class="comments">
 		<tr>
 			<td class="person">
-				<%= person_image(posting.person) %>
+				<div>
+				<a href="<%= person_url(posting.person) %>"><%= person_image(posting.person, :medium) %></a>
 				<p><%= person_link(posting.person) %></p>
+				</div>
 			</td>
 			<td class="comment">
 				
 				<div class="comment_box_container">
 					
 					<div class="comment_box">
-						<h1 class="<%= 'deleted' if posting.deleted_at? -%>"><%= h(posting.title) %></h1>
+						<h1 class="<%= 'deleted' if posting.deleted_at? -%>">
+							<%= h(posting.title) %>
+							<% if posting.is_question? %>
+								<span class="question">
+							  <% if posting.was_answered? %>
+					          	(Answered Question)
+					          <% else %>
+								(Question)
+					          <% end %>
+							</span>
+							<% end %>
+						</h1>
 						<p class="<%= 'deleted' if posting.deleted_at? -%>"><%= posting.body.gsub(/[\r\n]+/, '<br />') %></p>
 						<div class="left-right">
 							<div class="left">
@@ -43,18 +56,6 @@
 						<div class="white">
 						</div>
 					</div>
-					<% if posting.is_question? %>
-					  <% if posting.was_answered? %>
-			          	<div class="question answered">
-							&#10004;
-						</div>
-			          <% else %>
-						<div class="question">
-							?
-						</div>
-			          <% end %>
-					
-					<% end %>
 				</div>
 			</td>
 		</tr>
