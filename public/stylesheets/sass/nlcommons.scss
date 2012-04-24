@@ -313,8 +313,7 @@ $comment-border-width: 2px;
   td.person {
     div {
       @include border-radius(8px);
-      border: $comment-border-width solid black;
-      padding: 4px;
+      //border: $comment-border-width solid black;
       @include box-shadow(5px 5px 15px -5px gray);
       background-color: $header-color;
     }
@@ -323,12 +322,21 @@ $comment-border-width: 2px;
     font-size: 12px;
     img {
       width: 70px;
+      padding: 4px;
     }
     p {
       @include sans-font();
-      margin: 2px 0px 4px 0px;
+      //margin: 2px 0px 4px 0px;
       font-size: 12px;
-      
+      background-color: $nav-color;
+      margin: 0px;
+      border-radius: 0px 0px 8px 8px;
+      padding: 1px 0px;
+      a {
+        color: white;
+        display: block;
+        text-decoration: none;
+      }
     }
   }
   td.comment {
