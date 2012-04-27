@@ -301,7 +301,7 @@ body {
  */
 $arrow-width: 12px;
 $arrow-height: 12px;
-$arrow-top: 10px;
+$arrow-top: 14px;
 $comment-border-width: 2px;
 .comments {
   margin: 10px 0px 10px 0px;
@@ -312,26 +312,23 @@ $comment-border-width: 2px;
   }
   td.person {
     div {
-      @include border-radius(8px);
-      //border: $comment-border-width solid black;
+      @include pie-border-radius(8px 8px 8px 8px);
       @include box-shadow(5px 5px 15px -5px gray);
-      background-color: $header-color;
     }
-    width: 80px;
+    width: 70px;
     text-align: center;
     font-size: 12px;
     img {
       width: 70px;
-      padding: 4px;
+      @include pie-border-radius(8px 8px 0px 0px);
     }
     p {
       @include sans-font();
-      //margin: 2px 0px 4px 0px;
       font-size: 12px;
       background-color: $nav-color;
       margin: 0px;
-      border-radius: 0px 0px 8px 8px;
       padding: 1px 0px;
+      @include pie-border-radius(0px 0px 8px 8px);
       a {
         color: white;
         display: block;
@@ -344,7 +341,6 @@ $comment-border-width: 2px;
       font-size: 0px;
       position: relative;
       div.comment_arrow_container {
-        z-index: 3;
         width: $arrow-width;
         position: absolute;
         top: $arrow-top;
@@ -371,10 +367,10 @@ $comment-border-width: 2px;
         }
       }
       div.comment_box {
-        z-index: 2;
         position: relative;
         margin-left: $arrow-width - $comment-border-width;
         border: $comment-border-width solid black;
+        background-color: white;
         min-height: 50px;
         h1 {
           font-size: 15px;
@@ -382,15 +378,15 @@ $comment-border-width: 2px;
         }
         p {
           font-size: 12px;
-          margin: 0px 8px 4px 8px;
+          margin: 0px 8px 0px 8px;
           @include sans-font();
         }
         h2 {
           font-size: 10px;
-          margin: 4px 8px 4px 8px;
+          margin: 3px 8px 3px 8px;
         }
         @include box-shadow(5px 5px 15px 0px gray);
-        @include border-radius(8px);
+        @include pie-border-radius(8px);
       }
       .question {
         font-size: .7em;
