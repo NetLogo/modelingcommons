@@ -201,7 +201,8 @@ $(document).ready(function () {
 			], 
 			'aaSorting': getSortCol($("#project_sort_by")),
 			"sDom": '<"left-right top"<"left"><"right"f>>t', 
-			"bPaginate": false
+			"bPaginate": false, 
+			"bAutoWidth": false
 		});
 
 		$("#project_sort_by").bind('change', function(e) {

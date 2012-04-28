@@ -805,6 +805,7 @@ label.file_label {
   }
 }
 table.model_list_datatable table {
+  width: 100%;
   td {
     height: 30px;
     &:first-child {
@@ -817,6 +818,9 @@ table.model_list_datatable table {
       vertical-align: top;
       width: 30px; 
       height: 30px;
+    }
+    &.buttons {
+      text-align: right;
     }
   }
 }
@@ -916,6 +920,25 @@ table.simple_table {
       }
     }
    
+  }
+}
+
+#project_page {
+  #project_image {
+    display:inline-block;
+    vertical-align: top;
+    margin-right: 4px;
+  }
+  #project_info {
+    display:inline-block;
+    vertical-align: top;
+    select {
+      max-width: 460px;
+    }
+    p {
+      margin: 0px;
+      line-height: 60px;
+    }
   }
 }
 

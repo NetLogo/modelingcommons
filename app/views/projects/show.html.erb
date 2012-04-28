@@ -1,36 +1,36 @@
-<% @title = "Information about the '#{@project.name}' project" -%>
-
+<% @title = "'#{@project.name}' project" -%>
+<div id="project_page">
+<div id="project_image"><%= project_image(@project) %></div>
+<div id="project_info">
+	<p>The project is owned by <%= person_link(@project.person) -%> and contains <%= pluralize(@project.nodes.size, "model") -%>:</p>
+	<% if @project.person == @person %>
+	<% if !@models_to_add.empty? %>
+	<% form_tag :controller => :projects, :action => :add_model do  %>
+	<p>
+	<%= hidden_field_tag :project_id, @project.id -%>
+	Add one of your models to this project:
+	<%= select_tag :model_id, options_for_select(@models_to_add)  %>
+	<%= submit_tag "Add model" %>
+	</p>
+	<% end %>
+	<% end %>
+	<% end %>
+</div>
 <% if @project.nodes.empty? %>
 <p><i>No models in this project.</i></p>
 <% else %>
 
-<p>The project is owned by <%= person_link(@project.person) -%>, and contains <%= pluralize(@project.nodes.size, "model") -%>:</p>
-<ul>
-  <% @project.nodes.each do |node| -%>
-  <li><%= link_to node.name, :controller => :browse, :action => :one_node, :id => node.id  -%> 
-    <% if @project.person == @person %>
-    (<%= link_to 'remove from project', :controller => :projects, :action => :remove_model, :id => @project.id, :model_id => node.id -%>)
-    <% end %>
-  </li>
-  <% end %>
-</ul>
-<% end %>
-<% content_for(:buttons) do %>
-	 <% if @project.person == @person %>
-    (<%= link_to 'remove from project', :controller => :projects, :action => :remove_model, :id => @project.id, :model_id => @project.id -%>)
-    <% end %>
-<% end %>
-<% content_for(:but) {
-	"5"
+
+
+<% buttons = Proc.new { |model|
+	str = '' 
+	if @project.person == @person
+		str << link_to('<button title="Remove model from project">Remove</button>', :controller => :projects, :action => :remove_model, :id => @project.id, :model_id => model.id)
+	end
+	str
 } %>
-<%= render :partial => "browse/model_list", :object => @project.nodes, :locals => {:buttons => :but} %>
-<% if @project.person == @person %>
-<% if !@models_to_add.empty? %>
-<% form_tag :controller => :projects, :action => :add_model do  %>
-<%= hidden_field_tag :project_id, @project.id -%>
-Add one of your models to this project:
-<%= select_tag :model_id, options_for_select(@models_to_add)  %>
-<%= submit_tag "Add model" %>
+<h1>Models</h1>
+<%= render :partial => "browse/model_list", :object => @project.nodes, :locals => {:buttons => buttons } %>
 <% end %>
-<% end %>
-<% end %>
+</div>
+
