@@ -2,7 +2,7 @@
 <div id="project_page">
 <div id="project_image"><%= project_image(@project) %></div>
 <div id="project_info">
-	<p>The project is owned by <%= person_link(@project.person) -%> and contains <%= pluralize(@project.nodes.size, "model") -%>:</p>
+	<p>The project is owned by <%= person_link(@project.person) -%> and contains <%= pluralize(@project.nodes.size, "model") -%></p>
 	<% if @project.person == @person %>
 	<% if !@models_to_add.empty? %>
 	<% form_tag :controller => :projects, :action => :add_model do  %>

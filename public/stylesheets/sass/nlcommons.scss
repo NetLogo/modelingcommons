@@ -928,6 +928,9 @@ table.simple_table {
     display:inline-block;
     vertical-align: top;
     margin-right: 4px;
+    img {
+      width: 120px;
+    }
   }
   #project_info {
     display:inline-block;
