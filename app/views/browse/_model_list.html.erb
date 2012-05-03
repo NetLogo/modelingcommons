@@ -6,7 +6,7 @@
 
 <% @render_time = Hash.new(0) %>
 
-<table class="model_list_datatable dataTables" border="1">
+<table class="model_list_datatable dataTables" border="1" <%= "title=\"#{title}\"" if defined?(title) %>>
 
   <thead>
     <tr>

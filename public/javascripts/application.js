@@ -204,7 +204,7 @@ $(document).ready(function () {
 			"bPaginate": false, 
 			"bAutoWidth": false
 		});
-
+		table.parents(".dataTables_wrapper").find("input").attr("placeholder", "Search Projects");
 		$("#project_sort_by").bind('change', function(e) {
 			table.fnSort(getSortCol($(this)));
 		});
@@ -233,45 +233,51 @@ $(document).ready(function () {
 	
 	
 	
+	//Model list datatable
 	
-	
-	//Model list datatable	
-	
-	// Create the datatable
-	$(".model_list_datatable").dataTable({
-		'aaSorting': [ [0, 'asc']],
-		"bAutoWidth": false,
-		"aoColumns": [
-			{
-				//Model
-				"sType": "html",
-				"sWidth": "38%"
-			},
-			{
-				//Owners
-				"sType": "html",
-				"sWidth": "15%"
-			},
-			{
-				//Tags
-				"sType": "html",
-				"sWidth": "20%"
-			},
-			{
-				//Group
-				"sType": "html",
-				"sWidth": "15%"
-			},
-			{
-				//Modified
-				"sType": "num-first-span",
-				"sWidth": "12%"
-			}
-		],
-		"sDom": '<"left-right top"<"left"p><"right"ilf>>t<"left-right bottom"<"left"p><"right">>',
-		"sPaginationType": "two_button_full_text"
-	});
-	$(".dataTables_filter input").attr("placeholder", "Search Results");
+	(function() {	
+		// Create the datatable
+		var table = $(".model_list_datatable").dataTable({
+			'aaSorting': [ [0, 'asc']],
+			"bAutoWidth": false,
+			"aoColumns": [
+				{
+					//Model
+					"sType": "html",
+					"sWidth": "38%"
+				},
+				{
+					//Owners
+					"sType": "html",
+					"sWidth": "15%"
+				},
+				{
+					//Tags
+					"sType": "html",
+					"sWidth": "20%"
+				},
+				{
+					//Group
+					"sType": "html",
+					"sWidth": "15%"
+				},
+				{
+					//Modified
+					"sType": "num-first-span",
+					"sWidth": "12%"
+				}
+			],
+			"sDom": '<"left-right top"<"left"p><"right"ilf>>t<"left-right bottom"<"left"p><"right">>',
+			"sPaginationType": "two_button_full_text"
+		});
+		var title = table.attr("title");
+		if(!title) {
+			title = "";
+		} else {
+			title = " " + title;
+		}
+		table.parents(".dataTables_wrapper").find("input").attr("placeholder", "Search" + title);
+	})();
 	
 	/*$(".empty-on-click").livequery('click', function() {
 	   if ($(this).attr("has_been_clicked_on") != "yes")

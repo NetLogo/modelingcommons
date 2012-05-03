@@ -285,7 +285,7 @@ body {
     margin-bottom: 6px;
   }
   p {
-    margin-bottom: 10px;
+    margin: 10px 0px;
   }
 }
 
@@ -854,6 +854,7 @@ table.simple_table {
   tr {
     padding: 8px;
     float:left;
+    border-bottom: 1px solid $nav-color;
     td {
       width: 300px;
       display: block;
