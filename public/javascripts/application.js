@@ -156,92 +156,104 @@ jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
 };
  
 
-$(document).ready(function () {
-	styled_file_input();
+//Enclose everything in a function so that local variables don't use the global namespace
+(function() {
+	var createAJAXFormReturningHTMLHandler = function(callback) {
+		return function(e) {
+			var form = $(this);
+			$.ajax({
+				url: form.attr("action"),
+				dataType: "html",  
+				type: "post", 
+				data: form.serialize(), 
+				success: callback,
+				error: function(jqXHR, textStatus, errorThrown) {
+					$().flash_notice(textStatus + ": " + errorThrown);
+				}
+			});
+			return false;
+		};
+	};
 	
 	
-	//Model list datatable	
 	
-	
-	// Create the datatable
-	$(".model_list_datatable").dataTable({
-		'aaSorting': [ [0, 'asc']],
-		"bAutoWidth": false,
-		"aoColumns": [
-			{
-				//Model
-				"sType": "html",
-				"sWidth": "38%"
-			},
-			{
-				//Owners
-				"sType": "html",
-				"sWidth": "15%"
-			},
-			{
-				//Tags
-				"sType": "html",
-				"sWidth": "20%"
-			},
-			{
-				//Group
-				"sType": "html",
-				"sWidth": "15%"
-			},
-			{
-				//Modified
-				"sType": "num-first-span",
-				"sWidth": "12%"
-			}
-		],
-		"sDom": '<"left-right top"<"left"p><"right"ilf>>t<"left-right bottom"<"left"p><"right">>',
-		"sPaginationType": "two_button_full_text"
-	});
-	$(".dataTables_filter input").attr("placeholder", "Search Results");
-	
-	/*$(".empty-on-click").livequery('click', function() {
-	   if ($(this).attr("has_been_clicked_on") != "yes")
-	   {
-	       $(this).attr("value", "");
-	       $(this).attr("has_been_clicked_on", "yes");
-	   }
-	});*/
-	
-	    
-	// Search result tabs
-	// Not done with ajax
-	
-	
-	//Disable tabs with no search results
-	var disabledTabsList = [];
-	var selectedSearchTab = -1;
-	$("#search_tabs>ul>li").each(function(index, element) {
-		if($(element).hasClass("empty")) {
-			disabledTabsList.push(index);
-			
-		} else if(selectedSearchTab == -1) {
-			selectedSearchTab = index;
-		}
-	});
-	if($("#search_tabs>ul>li").length == $("#search_tabs>ul>li.empty").length) {
-		$("#search_tabs").tabs({
-			disabled: disabledTabsList,
-			 selected: -1
+	var initializeModelListDataTable = function() {
+		// Create the datatable
+		$(".model_list_datatable").dataTable({
+			'aaSorting': [ [0, 'asc']],
+			"bAutoWidth": false,
+			"aoColumns": [
+				{
+					//Model
+					"sType": "html",
+					"sWidth": "38%"
+				},
+				{
+					//Owners
+					"sType": "html",
+					"sWidth": "15%"
+				},
+				{
+					//Tags
+					"sType": "html",
+					"sWidth": "20%"
+				},
+				{
+					//Group
+					"sType": "html",
+					"sWidth": "15%"
+				},
+				{
+					//Modified
+					"sType": "num-first-span",
+					"sWidth": "12%"
+				}
+			],
+			"sDom": '<"left-right top"<"left"p><"right"ilf>>t<"left-right bottom"<"left"p><"right">>',
+			"sPaginationType": "two_button_full_text"
 		});
-		$("#ifEmpty").css("display", "inline");
-	} else {
-		$("#search_tabs").tabs({
-			disabled: disabledTabsList,
-			selected: selectedSearchTab
-		});
+		$(".dataTables_filter input").attr("placeholder", "Search Results");
 	}
 	
-	
-	
-	$(".complete").autocomplete('/tags/complete_tags', {} );
+	//Allows styling input type="file" by wrapping the file input in a styled label.  To style, change the file_label
+	//class style
+	//Should run before tabs are created
+	var initializeStyledFileInput = (function() {
+		var initialized = false;
+		return function() {
+			if(initialized) {
+				return;
+			}
+			initialized = true;
+			$('input[type="file"]').each(function() {
+				var fileInput = $(this);
+				var name = fileInput.attr("name");
+				if($.trim(name).length == 0) {
+					return;
+				}
+				
+				fileInput.wrap('<label for="' + name + '" class="file_label">Choose File</label>')
+				var wrapper = fileInput.parent();
+				var fileNameLabel = $('<label for="' + name + '" class="file_name_label"></label>');
+				fileNameLabel.insertAfter(wrapper);
+				var updateFileName = function() {
+					var fileName = fileInput.val();
+					if(fileName) {
+						fileName = fileName.split('\\').pop();
+					}
+					fileNameLabel.text(fileName);
+				};
+				updateFileName();
+				fileInput.bind("change", function(e) {
+					updateFileName();
+				});
+			})
+			
+		}
+	})();
 	
 	//Tab loader loads tabs on the element selected by elementId and switches to the tab selected in the hash
-	var tab_loader = function(elementId) {
+	var initializeTabsOnElement = function(elementId) {
 	
 		//Checks URL hash to see if the user wants to go to a specific tab
 		var getURLTabIndex = function() {
@@ -275,264 +287,10 @@ $(document).ready(function () {
 			tab.tabs("select", getURLTabIndex());
 		});
 	};
-	tab_loader("model_tabs");
-	tab_loader("group_tabs");
-
-	// Disable inviting people if the group isn't selected
-	$('select#group_id').livequery('change', function() {
-	   if ($(this).attr('value') == '')
-	   {
-	       $('#invite_users_submit_button').attr('disabled', 'disabled');
-	   }
-	   else
-	   {
-	       $('#invite_users_submit_button').removeAttr('disabled');
-	   }
-	});
-				       
-	// Disable setting permissions if no group has been chosen
-	if ($('#permission-selections').attr('value') == '') {
-	    $('#permission-selections').toggle(false);
-	}
-	$('select#group_id').livequery('change', function() {
-	   if ($(this).attr('value') == '')
-	   {
-	       $('#permission-selections').toggle(false);
-	       $('p#permission-group-reminder').toggle(true);
-	   }
-	   else
-	   {
-	       $('#permission-selections').toggle(true);
-	       $('p#permission-group-reminder').toggle(false);
-	   }
-	});
 	
-	
-	//Validate header login form
-	$("#header_login").validate({
-		rules: {
-			password: {
-				required: ":not(.placeholder)", 
-			},
-			email_address: {
-				required: true,
-				email: true
-			}
-		},
-		messages: {
-			password: {
-				required: function(rules, element) {
-					console.log($(element).parent().children(".placeholder").addClass("error"));
-					return "Password Required"
-				}
-			},
-			email_address: {
-				required: "Email Required",
-				email: "Invalid Email Address"
-			}
-		},
-		//onkeyup: false,
-		//onclick: false,
-		onfocusout: false,
-		errorPlacement: function(error, element) {
-			element.parents("tr").next("tr").children("td").eq(element.parents("td").index()).append(error);
-		}
-	});
-	
-	$('#header_login').keypress(function(e) {
-		if(e.keyCode == 13) {
-			$(this).submit();
-		}
-	});
-	$('#header_login button').click(function(e) {
-		$(this).parents('form').submit();
-	});
-	
-	//Model click to load
-	$("#model_click_to_load").click(function(e) {
-		
-		var tab = $("div#browse_applet");
-		var applet = $("#model_applet");
-		var clickToLoad = $(this);
-		var body = $("body");
-		var container = $("#model_container");
-		if(applet.innerWidth() > tab.innerWidth()) {
-			clickToLoad.css("visibility", "hidden");
-			clickToLoad.css("height", (applet.innerHeight() + 10) + "px");
-			applet.css("display", "block");
-			container.addClass("wide_model");
-			container.css("top", (tab.offset().top + 24) + "px");
-			if(applet.innerWidth() < body.outerWidth()) {
-				container.css("left", ((body.outerWidth() - container.outerWidth())/2 - container.offsetParent().offset().left) + "px");
-			} else {
-				container.css("left", "0px");
-			}
-			
-			applet.before($("div#browse_applet p").detach());
-		} else {
-			clickToLoad.css("display", "none");
-			applet.css("display", "block");
-		}
-		
-	});
-	$("#header_login").bind('focus', function(e) {
-		$().flash_notice("Focus");
-	}).bind('blur', function(e) {
-		$().flash_notice("Blur"); 
-	});
-	
-	var select_no_group_enable = function(enable) {
-		if(enable) {
-			$('#group_select option[value=""]').removeAttr('disabled');
-		} else {
-			$('#group_select option[value=""]').attr('disabled', 'disabled');
-		}
-	}
-	var group_permissions_enable = function(enable) {
-		if(enable) {
-			$('#read_permission_select option[value="g"]').removeAttr("disabled");
-			$('#write_permission_select option[value="g"]').removeAttr("disabled");
-		} else {
-			$('#read_permission_select option[value="g"]').attr("disabled", "disabled");
-			$('#write_permission_select option[value="g"]').attr("disabled", "disabled");
-		}
-	}
-	var submitPermissionChange = function() {
-		var form = $("#group_permission_form");
-		$.ajax({
-			url: form.attr("action"), 
-			type: "post", 
-			data: form.serialize(), 
-			success: function(data, textStatus, jqXHR) {
-				data;
-				$().flash_notice(data.message);
-			},
-			error: function(jqXHR, textStatus, errorThrown) {
-				$().flash_notice(textStatus + ": " + errorThrown);
-			}, 
-			dataType: "json"
-		})
-	};
-	//One model permissions/group selectors behavior
-	if($('#group_select option:selected').attr('value') == "") {
-		group_permissions_enable(false);
-	}
-	if($('#read_permission_select option:selected').attr('value') == 'g' || $('#write_permission_select option:selected').attr('value') == 'g') {
-		select_no_group_enable(false);
-	}
-	
-	$('#group_select').bind('change', function(e) {
-		if(e.currentTarget.value == "") {
-			group_permissions_enable(false);
-		} else {
-			group_permissions_enable(true);
-		}
-		submitPermissionChange();
-	});
-	$('#read_permission_select').bind('change', function(e) {
-		if(e.currentTarget.value != "g" && $('#write_permission_select option:selected').attr('value') != 'g') {
-			select_no_group_enable(true);
-		} else {
-			select_no_group_enable(false);
-		}
-		submitPermissionChange();
-	});
-	$('#write_permission_select').bind('change', function(e) {
-		if(e.currentTarget.value != "g" && $('#read_permission_select option:selected').attr('value') != 'g') {
-			select_no_group_enable(true);
-		} else {
-			select_no_group_enable(false);
-		}
-		submitPermissionChange();
-	});
-	
-	$('#new_discussion_comment').submit(function() {
-		var form = $("#new_discussion_comment");
-		$.ajax({
-			url: form.attr("action"),
-			dataType: "json",  
-			type: "post", 
-			data: form.serialize(), 
-			success: function(data, textStatus, jqXHR) {
-				$().flash_notice(data.message);
-				if(data.success) {
-					var commentsList = $(".comments_list");
-					if(commentsList.find(".comments").length == 0) {
-						commentsList.empty();
-					}
-					$(data.html).appendTo(commentsList)
-					form.find('input:not([type="submit"], [type="button"]), textarea').removeAttr('value').removeAttr('checked');
-				}
-			},
-			error: function(jqXHR, textStatus, errorThrown) {
-				$().flash_notice(textStatus + ": " + errorThrown);
-			}, 
-		});
-		return false;
-	});
-	
-	
-	
-	var createAJAXFormReturningHTMLHandler = function(callback) {
-		return function(e) {
-			var form = $(this);
-			$.ajax({
-				url: form.attr("action"),
-				dataType: "html",  
-				type: "post", 
-				data: form.serialize(), 
-				success: callback,
-				error: function(jqXHR, textStatus, errorThrown) {
-					$().flash_notice(textStatus + ": " + errorThrown);
-				}
-			});
-			return false;
-		};
-	};
-	
-	$('#add_tag_form').submit(createAJAXFormReturningHTMLHandler(function(data, textStatus, jqXHR) {
-		$(data).appendTo("#existing_tags");
-		$('#existing_tags').removeClass('hidden');
-		$('#no_tags').addClass('hidden');
-		$('#new_tags input').each(function(index, element) {
-			element.value = "";
-			
-		});
-		$('#new_tags .file').each(function(index, element) {
-			if(index != 0) {
-				$(element).remove();
-			}
-		});
-	}));
-	$("#existing_tags").on("click", ".tag_delete_form a", function(e) {
-		$(this).parents("form").submit();
-		return false;
-	});
-	
-	$("#existing_tags").on("submit", ".tag_delete_form", function(e) {
-		var form = $(this);
-		$.ajax({
-			url: form.attr("action"),
-			dataType: "json",  
-			type: "post", 
-			data: form.serialize(), 
-			success: function(data, textStatus, jqXHR) {
-				$().flash_notice(data.message);
-				form.parents("tr").remove();
-				if($('#existing_tags tbody tr').length <= 0) {
-					$('#existing_tags').addClass('hidden');
-					$('#no_tags').removeClass('hidden');
-				}
-			},
-			error: function(jqXHR, textStatus, errorThrown) {
-				$().flash_notice(textStatus + ": " + errorThrown);
-			}
-		});
-		return false;
-	});
 	
 	//Person selector for group invitation tab
-	(function() {
+	var initializeGroupInvitationPersonSelector = function() {
 		var selectedList = $("#selected_people");
 		var unselectedList = $("#unselected_people");
 		var groupSelector = $("#group_id");
@@ -614,10 +372,318 @@ $(document).ready(function () {
 		
 		//Call in case the user hit back and left something in the input field
 		fetchNewPeopleFromInput();
+	};
+	
+	
+	
+	
+	//Makes the placeholder attribute work in internet explorer 8, 9
+	//Should be initialized last
+	var initializeIEPlaceholder = (function() {
+		//Private static variables:
+		var ie_placeholder_initialized = false;
+		
+		return function() {
+			if(ie_placeholder_initialized) {
+				return;
+			}
+			ie_placeholder_initialized = true;
+			var test = document.createElement("input");
+			if("placeholder" in test) {
+				return;
+			}
+			$("input[placeholder][type=password]").each(function() {
+				var passwordInput = $(this);
+				passwordInput.addClass("password_placeholder");
+				var textInput = $('<input type="text" />');
+				textInput.attr("placeholder", passwordInput.attr("placeholder"));
+				passwordInput.removeAttr("placeholder");
+				passwordInput.after(textInput);
+				passwordInput.hide();
+				textInput.on("focus", function() {
+					textInput.hide();
+					passwordInput.show();
+					passwordInput.focus();
+				});
+				passwordInput.on("blur", function() {
+					if(passwordInput.val().length == 0) {
+						passwordInput.hide();
+						textInput.show();
+						textInput.blur();
+					}
+				});
+			});
+			
+			
+			var blur = function() {
+				var input = $(this);
+				if(input.val().length == 0) {
+					input.val(input.attr("placeholder"));
+					input.addClass("placeholder");
+				}
+			};
+			var focus = function() {
+				var input = $(this);
+				if(input.hasClass("placeholder")) {
+					input.val("");
+					input.removeClass("placeholder");
+				}
+			};
+			$("[placeholder]").blur(blur).focus(focus).each(blur).parents("form").bind("submit", function() {
+				$(this).find("input.placeholder").val("");
+			});	
+		};
 	})();
 	
-	//Update model behavior
-	(function() {
+	
+	var initializeSearchTabs = function() {
+		//Disable tabs with no search results
+		var disabledTabsList = [];
+		var selectedSearchTab = -1;
+		$("#search_tabs>ul>li").each(function(index, element) {
+			if($(element).hasClass("empty")) {
+				disabledTabsList.push(index);
+				
+			} else if(selectedSearchTab == -1) {
+				selectedSearchTab = index;
+			}
+		});
+		if($("#search_tabs>ul>li").length == $("#search_tabs>ul>li.empty").length) {
+			$("#search_tabs").tabs({
+				disabled: disabledTabsList,
+				 selected: -1
+			});
+			$("#ifEmpty").css("display", "inline");
+		} else {
+			$("#search_tabs").tabs({
+				disabled: disabledTabsList,
+				selected: selectedSearchTab
+			});
+		}
+	};
+	
+	var initializeModelClickToLoad = function() {
+		$("#model_click_to_load").click(function(e) {
+			
+			var tab = $("div#browse_applet");
+			var applet = $("#model_applet");
+			var clickToLoad = $(this);
+			var body = $("body");
+			var container = $("#model_container");
+			if(applet.innerWidth() > tab.innerWidth()) {
+				clickToLoad.css("visibility", "hidden");
+				clickToLoad.css("height", (applet.innerHeight() + 10) + "px");
+				applet.css("display", "block");
+				container.addClass("wide_model");
+				container.css("top", (tab.offset().top + 24) + "px");
+				if(applet.innerWidth() < body.outerWidth()) {
+					container.css("left", ((body.outerWidth() - container.outerWidth())/2 - container.offsetParent().offset().left) + "px");
+				} else {
+					container.css("left", "0px");
+				}
+				
+				applet.before($("div#browse_applet p").detach());
+			} else {
+				clickToLoad.css("display", "none");
+				applet.css("display", "block");
+			}
+			
+		});
+	}
+	
+	var initializeModelPermissionsChanger = function() {
+		var select_no_group_enable = function(enable) {
+			if(enable) {
+				$('#group_select option[value=""]').removeAttr('disabled');
+			} else {
+				$('#group_select option[value=""]').attr('disabled', 'disabled');
+			}
+		}
+		var group_permissions_enable = function(enable) {
+			if(enable) {
+				$('#read_permission_select option[value="g"]').removeAttr("disabled");
+				$('#write_permission_select option[value="g"]').removeAttr("disabled");
+			} else {
+				$('#read_permission_select option[value="g"]').attr("disabled", "disabled");
+				$('#write_permission_select option[value="g"]').attr("disabled", "disabled");
+			}
+		}
+		var submitPermissionChange = function() {
+			var form = $("#group_permission_form");
+			$.ajax({
+				url: form.attr("action"), 
+				type: "post", 
+				data: form.serialize(), 
+				success: function(data, textStatus, jqXHR) {
+					data;
+					$().flash_notice(data.message);
+				},
+				error: function(jqXHR, textStatus, errorThrown) {
+					$().flash_notice(textStatus + ": " + errorThrown);
+				}, 
+				dataType: "json"
+			})
+		};
+		//One model permissions/group selectors behavior
+		if($('#group_select option:selected').attr('value') == "") {
+			group_permissions_enable(false);
+		}
+		if($('#read_permission_select option:selected').attr('value') == 'g' || $('#write_permission_select option:selected').attr('value') == 'g') {
+			select_no_group_enable(false);
+		}
+		
+		$('#group_select').bind('change', function(e) {
+			if(e.currentTarget.value == "") {
+				group_permissions_enable(false);
+			} else {
+				group_permissions_enable(true);
+			}
+			submitPermissionChange();
+		});
+		$('#read_permission_select').bind('change', function(e) {
+			if(e.currentTarget.value != "g" && $('#write_permission_select option:selected').attr('value') != 'g') {
+				select_no_group_enable(true);
+			} else {
+				select_no_group_enable(false);
+			}
+			submitPermissionChange();
+		});
+		$('#write_permission_select').bind('change', function(e) {
+			if(e.currentTarget.value != "g" && $('#read_permission_select option:selected').attr('value') != 'g') {
+				select_no_group_enable(true);
+			} else {
+				select_no_group_enable(false);
+			}
+			submitPermissionChange();
+		});
+	}
+	
+	
+	var initializeHeaderLoginForm = function() {
+		
+		//Validate header login form
+		$("#header_login").validate({
+			rules: {
+				password: {
+					required: ":not(.placeholder)", 
+				},
+				email_address: {
+					required: true,
+					email: true
+				}
+			},
+			messages: {
+				password: {
+					required: function(rules, element) {
+						console.log($(element).parent().children(".placeholder").addClass("error"));
+						return "Password Required"
+					}
+				},
+				email_address: {
+					required: "Email Required",
+					email: "Invalid Email Address"
+				}
+			},
+			//onkeyup: false,
+			//onclick: false,
+			onfocusout: false,
+			errorPlacement: function(error, element) {
+				element.parents("tr").next("tr").children("td").eq(element.parents("td").index()).append(error);
+			}
+		});
+		
+		$('#header_login').keypress(function(e) {
+			if(e.keyCode == 13) {
+				$(this).submit();
+			}
+		});
+		$('#header_login button').click(function(e) {
+			$(this).parents('form').submit();
+		});
+		
+	}
+	
+	var initializeTagEditor = function() {
+		
+		$(".complete").autocomplete('/tags/complete_tags', {} );
+		
+		//Add new tag
+		$('#add_tag_form').submit(createAJAXFormReturningHTMLHandler(function(data, textStatus, jqXHR) {
+			$(data).appendTo("#existing_tags");
+			$('#existing_tags').removeClass('hidden');
+			$('#no_tags').addClass('hidden');
+			$('#new_tags input').each(function(index, element) {
+				element.value = "";
+				
+			});
+			$('#new_tags .file').each(function(index, element) {
+				if(index != 0) {
+					$(element).remove();
+				}
+			});
+		}));
+		
+		
+		$("#existing_tags").on("click", ".tag_delete_form a", function(e) {
+			$(this).parents("form").submit();
+			return false;
+		});
+		
+		//Delete existing tag
+		$("#existing_tags").on("submit", ".tag_delete_form", function(e) {
+			var form = $(this);
+			$.ajax({
+				url: form.attr("action"),
+				dataType: "json",  
+				type: "post", 
+				data: form.serialize(), 
+				success: function(data, textStatus, jqXHR) {
+					$().flash_notice(data.message);
+					form.parents("tr").remove();
+					if($('#existing_tags tbody tr').length <= 0) {
+						$('#existing_tags').addClass('hidden');
+						$('#no_tags').removeClass('hidden');
+					}
+				},
+				error: function(jqXHR, textStatus, errorThrown) {
+					$().flash_notice(textStatus + ": " + errorThrown);
+				}
+			});
+			return false;
+		});
+	}
+	
+	
+	var initializeNewCommentForm = function() {
+		
+		$('#new_discussion_comment').submit(function() {
+			var form = $("#new_discussion_comment");
+			$.ajax({
+				url: form.attr("action"),
+				dataType: "json",  
+				type: "post", 
+				data: form.serialize(), 
+				success: function(data, textStatus, jqXHR) {
+					$().flash_notice(data.message);
+					if(data.success) {
+						var commentsList = $(".comments_list");
+						if(commentsList.find(".comments").length == 0) {
+							commentsList.empty();
+						}
+						$(data.html).appendTo(commentsList)
+						form.find('input:not([type="submit"], [type="button"]), textarea').removeAttr('value').removeAttr('checked');
+					}
+				},
+				error: function(jqXHR, textStatus, errorThrown) {
+					$().flash_notice(textStatus + ": " + errorThrown);
+				}, 
+			});
+			return false;
+		});
+	}
+	
+	
+	var initializeModelUpdater = function() {
 		var form = $("#upload-model-form");
 		form.validate({
 			rules: {
@@ -643,105 +709,27 @@ $(document).ready(function () {
 		$("#fork_overwrite").bind("change", function(e) {
 			form.validate().element("#new_version_name_of_new_child");
 		});
-	})();
-	
-	
-	ie_placeholder();
-});
-
-//Allows styling input type="file" by wrapping the file input in a styled label.  To style, change the file_label
-//class style
-//Should run before tabs are created
-var styled_file_input = (function() {
-	var initialized = false;
-	return function() {
-		if(initialized) {
-			return;
-		}
-		initialized = true;
-		$('input[type="file"]').each(function() {
-			var fileInput = $(this);
-			var name = fileInput.attr("name");
-			if($.trim(name).length == 0) {
-				return;
-			}
-			
-			fileInput.wrap('<label for="' + name + '" class="file_label">Choose File</label>')
-			var wrapper = fileInput.parent();
-			var fileNameLabel = $('<label for="' + name + '" class="file_name_label"></label>');
-			fileNameLabel.insertAfter(wrapper);
-			var updateFileName = function() {
-				var fileName = fileInput.val();
-				if(fileName) {
-					fileName = fileName.split('\\').pop();
-				}
-				fileNameLabel.text(fileName);
-			};
-			updateFileName();
-			fileInput.bind("change", function(e) {
-				updateFileName();
-			});
-		})
-		
-	}
-})();
-
-//Makes the placeholder attribute work in internet explorer 8, 9
-var ie_placeholder = (function() {
-	//Private static variables:
-	var ie_placeholder_initialized = false;
-	
-	return function() {
-		if(ie_placeholder_initialized) {
-			return;
-		}
-		ie_placeholder_initialized = true;
-		var test = document.createElement("input");
-		if("placeholder" in test) {
-			return;
-		}
-		$("input[placeholder][type=password]").each(function() {
-			var passwordInput = $(this);
-			passwordInput.addClass("password_placeholder");
-			var textInput = $('<input type="text" />');
-			textInput.attr("placeholder", passwordInput.attr("placeholder"));
-			passwordInput.removeAttr("placeholder");
-			passwordInput.after(textInput);
-			passwordInput.hide();
-			textInput.on("focus", function() {
-				textInput.hide();
-				passwordInput.show();
-				passwordInput.focus();
-			});
-			passwordInput.on("blur", function() {
-				if(passwordInput.val().length == 0) {
-					passwordInput.hide();
-					textInput.show();
-					textInput.blur();
-				}
-			});
-		});
-		
-		
-		var blur = function() {
-			var input = $(this);
-			if(input.val().length == 0) {
-				input.val(input.attr("placeholder"));
-				input.addClass("placeholder");
-			}
-		};
-		var focus = function() {
-			var input = $(this);
-			if(input.hasClass("placeholder")) {
-				input.val("");
-				input.removeClass("placeholder");
-			}
-		};
-		$("[placeholder]").blur(blur).focus(focus).each(blur).parents("form").bind("submit", function() {
-			$(this).find("input.placeholder").val("");
-		});	
 	};
+	
+	function initialize() {
+		initializeModelListDataTable();
+		initializeStyledFileInput();
+		initializeTabsOnElement("model_tabs");
+		initializeTabsOnElement("group_tabs");
+		initializeSearchTabs();
+		initializeGroupInvitationPersonSelector();
+		initializeModelClickToLoad();
+		initializeModelPermissionsChanger();
+		initializeHeaderLoginForm();
+		initializeNewCommentForm();
+		initializeTagEditor();
+		initializeModelUpdater();
+		initializeIEPlaceholder();
+	}
+	$(document).ready(initialize);
 })();
+
+
 
 
 
