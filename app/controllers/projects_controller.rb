@@ -72,68 +72,9 @@ class ProjectsController < ApplicationController
 
     redirect_to :controller => :projects, :action => :show, :id => project.id
   end
-  def image
-    response.headers["Content-type"] = 'image/png'
-    project = Project.find(params[:id])
-    list = Magick::ImageList.new
-    if project.nodes.length > 0
-      id=project.nodes.fetch(0).id
-      project.nodes.each do |model| 
-        if !model.preview.blank?
-          list.from_blob(model.preview.contents.to_s)
-        end
-        if list.length  >= 4
-          break
-        end
-      end
-    end
-    if list.length == 4
-      list.each do |image| 
-        image.resize_to_fill!(60, 60, Magick::CenterGravity)
-      end
-      
-      m = list.montage {
-        self.geometry = '60x60+0+0'
-        self.tile = '2x2'
-      } .first
-    elsif list.length == 3
-      list[0..1].each { |image|
-        image.resize_to_fill!(60, 60, Magick::CenterGravity)
-      }
-      top = list[0..1].montage {
-        self.geometry = '60x60+0+0'
-        self.tile = '2x1'
-      } .first
-      
-      bottom = list[2]
-      bottom.resize_to_fill!(120, 60, Magick::CenterGravity)
-      list = Magick::ImageList.new
-      list.push(top)
-      list.push(bottom)
-      
-      m = list.montage {
-        self.geometry = '120x60+0+0'
-        self.tile = '1x2'
-      } .first
-    elsif list.length == 2
-      list.each do |image| 
-        image.resize_to_fill!(120, 60, Magick::CenterGravity)
-      end
-      
-      m = list.montage {
-        self.geometry = '120x60+0+0'
-        self.tile = '1x2'
-      } .first
-    elsif list.length == 1
-      m = list.first.resize_to_fill!(120, 120, Magick::CenterGravity)
-    else
-      m = Magick::Image.new(1,1) {
-        self.background_color = 'rgb(230, 230, 230)'
-      }
-    end
-    
-    m.format = 'png'
-    render :text => m.to_blob, :layout => false
-  end
+  
+  
+  
+  
 
 end

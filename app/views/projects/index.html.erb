@@ -1,6 +1,7 @@
 <% @title = 'Projects' %>
-
-<p><%= link_to "<button>Create a new project</button>", :controller => :projects, :action => :new -%></p>
+<% if @person %>
+<p><%= create_project_button -%></p>
+<% end %>
 <% if @projects.empty? %>
 <p><i>No projects have been created.</i></p>
 <% else %>
@@ -10,7 +11,9 @@ Sort by<select id="project_sort_by">
 	<option value="on">Owner Name</option>
 	<option value="mc">Model Count</option>
 </select>
+<% if @person %>
 <label for="project_show_you">Show only your projects<input type="checkbox" id="project_show_you" /></label>
+<% end %>
 </div>
 <table id="projects_table">
 	<tbody>
@@ -53,4 +56,6 @@ Sort by<select id="project_sort_by">
 	</tbody>
 </table>
 <% end %>
-<p><%= link_to "<button>Create a new project</button>", :controller => :projects, :action => :new -%></p>
+<% if @person %>
+<p><%= create_project_button -%></p>
+<% end %>

@@ -296,24 +296,23 @@ body {
  * Page-specific styling
  */
 
-/* 
- * Model Page
- * browse/one_model
+
+/*
+ * Model and project page image preview/info
  */
 
 #preview_info_container {
   width: 960px;
   height: 160px;
   display:table-row;
-  float: left;
   &>div {
     display: table-cell;
     height: 160px;
     vertical-align: top;
   }
 }
-#model_preview {
-  #preview-image {
+#preview_image {
+  &>div, img {
     width: 152px;
     height: 152px;
     line-height: 152px;
@@ -322,13 +321,9 @@ body {
     @include global_padding;
     display: inline-block;
     background-color: hsl(0%, 0%, 85%);
-    img {
-      width: 152px;
-      height: 152px;
-    }
   }
 }
-#model_info {
+#preview_info {
   img {
     vertical-align: middle;
     height: 20px;
@@ -342,11 +337,18 @@ body {
       
     }
   }
-  #actions a {
+  a {
     line-height: 20px;
     display: inline-block;
   }
 }
+
+
+/* 
+ * Model Page
+ * browse/one_model
+ */
+
 
 .posting-title {
     font-weight: bold;
@@ -925,24 +927,8 @@ table.simple_table {
 }
 
 #project_page {
-  #project_image {
-    display:inline-block;
-    vertical-align: top;
-    margin-right: 4px;
-    img {
-      width: 120px;
-    }
-  }
-  #project_info {
-    display:inline-block;
-    vertical-align: top;
-    select {
-      max-width: 460px;
-    }
-    p {
-      margin: 0px;
-      line-height: 60px;
-    }
+  #add_model_to_project select {
+    max-width: 450px;
   }
 }
 

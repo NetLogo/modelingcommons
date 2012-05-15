@@ -1,20 +1,37 @@
 <% @title = "'#{@project.name}' project" -%>
 <div id="project_page">
-<div id="project_image"><%= project_image(@project) %></div>
-<div id="project_info">
-	<p>The project is owned by <%= person_link(@project.person) -%> and contains <%= pluralize(@project.nodes.size, "model") -%></p>
-	<% if @project.person == @person %>
-	<% if !@models_to_add.empty? %>
-	<% form_tag :controller => :projects, :action => :add_model do  %>
-	<p>
-	<%= hidden_field_tag :project_id, @project.id -%>
-	Add one of your models to this project:
-	<%= select_tag :model_id, options_for_select(@models_to_add)  %>
-	<%= submit_tag "Add model" %>
-	</p>
-	<% end %>
-	<% end %>
-	<% end %>
+<div id="preview_info_container">
+	<div id="preview_image">
+		<%= project_image(@project) %>
+	</div>
+	<div id="preview_info">
+		<div id="project_owner">
+			<div>
+				This project is owned by <%= person_link(@project.person) -%> and contains <%= pluralize(@project.nodes.size, "model") -%>
+			</div>
+		</div>
+		<div>
+			<div>
+				
+			</div>
+		</div>
+		<div id="add_model_to_project">
+			<div>
+				<% if @project.person == @person %>
+				<% if !@models_to_add.empty? %>
+				<% form_tag :controller => :projects, :action => :add_model do  %>
+				<%= hidden_field_tag :project_id, @project.id -%>
+				Add one of your models to this project:
+				<%= select_tag :model_id, options_for_select(@models_to_add)  %>
+				<%= submit_tag "Add model" %>
+				<% end %>
+				<% end %>
+				<% end %>
+			</div>
+		</div>
+	</div>
+	
+	
 </div>
 <% if @project.nodes.empty? %>
 <p><i>No models in this project.</i></p>
