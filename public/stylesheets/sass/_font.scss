@@ -4,5 +4,6 @@ $default-font-size: 14px;
   font-family: 'Muli', 'Arial', sans-serif;
 }
 @mixin serif-font() {
-  font-family: 'Georgia', 'Times', serif;
+  //font-family: 'Georgia', 'Times', serif;
+  font-family: 'Muli', 'Arial', sans-serif;
 }

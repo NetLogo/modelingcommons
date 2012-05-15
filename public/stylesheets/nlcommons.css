@@ -2138,7 +2138,7 @@ img#big-preview-image  {
 /* line 23, sass/nlcommons.scss */
 body {
   background-color: #F5F3E9;
-  font-family: 'Georgia', 'Times', serif;
+  font-family: 'Muli', 'Arial', sans-serif;
   font-size: 14px;
 }
 
@@ -2255,7 +2255,7 @@ body {
   float: left;
   margin-right: 0;
   width: 480px;
-  font-family: 'Georgia', 'Times', serif;
+  font-family: 'Muli', 'Arial', sans-serif;
   height: 100px;
   display: table;
 }
@@ -2542,7 +2542,7 @@ body {
 /* line 306, sass/nlcommons.scss */
 .comments {
   margin: 10px 0px 10px 0px;
-  font-family: 'Georgia', 'Times', serif;
+  font-family: 'Muli', 'Arial', sans-serif;
   width: 600px;
 }
 /* line 310, sass/nlcommons.scss */
@@ -3072,7 +3072,7 @@ div.left-right div.right {
  */
 /* line 717, sass/nlcommons.scss */
 input[type=text], input[type=password] {
-  font-family: 'Georgia', 'Times', serif;
+  font-family: 'Muli', 'Arial', sans-serif;
   line-height: 16px;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
@@ -3120,7 +3120,7 @@ input[type=text].placeholder, input[type=password].placeholder {
 
 /* line 750, sass/nlcommons.scss */
 textarea {
-  font-family: 'Georgia', 'Times', serif;
+  font-family: 'Muli', 'Arial', sans-serif;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   -o-border-radius: 5px;
