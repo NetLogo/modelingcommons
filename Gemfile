@@ -17,3 +17,4 @@ gem "compass", " 0.11.7"
 gem "newrelic_rpm" 
 gem 'diff-lcs'
 gem 'zip'
+gem 'hpricot'

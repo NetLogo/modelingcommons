@@ -31,6 +31,7 @@ GEM
     hoptoad_notifier (2.4.11)
       activesupport
       builder
+    hpricot (0.8.6)
     jnunemaker-validatable (1.8.4)
       activesupport (>= 2.3.4)
     mime-types (1.18)
@@ -73,6 +74,7 @@ DEPENDENCIES
   compass (= 0.11.7)
   diff-lcs
   hoptoad_notifier
+  hpricot
   mongo_mapper (= 0.8.6)
   newrelic_rpm
   paperclip
