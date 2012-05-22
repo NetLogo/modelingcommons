@@ -1,7 +1,4 @@
-require 'hpricot'
-require 'open-uri'
-require 'builder'
-
+# -*-ruby-*-
 namespace :sitemap do
   desc 'Generates sitemap.xml file in public directory'
 
@@ -72,6 +69,8 @@ namespace :sitemap do
   # loops each link found
   # adds link to pages array if it should be included, unless it already exists
   def crawl_for_links(uri)
+    return	
+
     if uri =~ /^http/
       url = uri
     else
@@ -80,7 +79,7 @@ namespace :sitemap do
 
     begin
       STDERR.puts "Opening URL '#{url}'"
-      doc = Hpricot(open(url))
+      # doc = Hpricot(open(url))
     rescue
       STDERR.puts "404 error for URI '#{url}'"
       return

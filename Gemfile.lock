@@ -1,5 +1,4 @@
 GEM
-  remote: http://rubygems.org/
   specs:
     BlueCloth (1.0.1)
     GraphvizR (0.5.1)
@@ -31,7 +30,6 @@ GEM
     hoptoad_notifier (2.4.11)
       activesupport
       builder
-    hpricot (0.8.6)
     jnunemaker-validatable (1.8.4)
       activesupport (>= 2.3.4)
     mime-types (1.18)
@@ -71,10 +69,10 @@ DEPENDENCIES
   BlueCloth
   GraphvizR
   bson_ext
+  builder
   compass (= 0.11.7)
   diff-lcs
   hoptoad_notifier
-  hpricot
   mongo_mapper (= 0.8.6)
   newrelic_rpm
   paperclip
