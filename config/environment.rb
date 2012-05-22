@@ -11,22 +11,6 @@ RAILS_GEM_VERSION = '2.3.14' unless defined? RAILS_GEM_VERSION
 require File.join(File.dirname(__FILE__), 'boot')
 
 Rails::Initializer.run do |config|
-  config.gem 'rack'
-  config.gem 'hoptoad_notifier'
-  config.gem 'mongo_mapper', :version => '0.8.6'
-  config.gem 'paperclip', :source => 'http://rubygems.org'
-  config.gem 'plucky', :version => '0.3.8'
-  config.gem 'validates_email'
-  config.gem 'will_paginate', :version => '~> 2.3.11', :source => 'http://gemcutter.org'
-  config.gem 'GraphvizR', :lib => 'graphviz_r'
-  config.gem 'BlueCloth', :lib => 'bluecloth'
-  config.gem "compass", :version => " 0.11.7"
-  config.gem "newrelic_rpm" 
-
-  # config.gem 'zip'
-  # config.gem 'difflcs'
-  # config.gem 'hpricot'
-
   # Settings in config/environments/* take precedence over those specified here.
   # Application configuration should go into files in config/initializers
   # -- all .rb files in that directory are automatically loaded.

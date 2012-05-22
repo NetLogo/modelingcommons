@@ -1,4 +1,5 @@
 require 'capistrano/ext/multistage'
+require "bundler/capistrano"
 
 set :application, "NetLogo Modeling Commons"
 
