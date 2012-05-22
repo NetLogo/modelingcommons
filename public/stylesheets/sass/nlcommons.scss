@@ -889,6 +889,10 @@ table.simple_table {
     ul {
       padding: 0px;
       li {
+        width: 160px;
+        overflow:hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
         &:before {
           content: "-";
           margin: 0px 3px;

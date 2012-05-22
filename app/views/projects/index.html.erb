@@ -30,7 +30,7 @@ Sort by<select id="project_sort_by">
 						<ul>
 						<% num_projects_to_show = 5%>
 						<% project.nodes[0..(num_projects_to_show - 1)].each do |model| %>
-						<li><%= link_to html_string_truncate(model.name, 20), model_url(model) -%></li>
+						<li><%= link_to model.name, model_url(model) -%></li>
 						<% end %>
 						</ul>
 						<% if project.nodes.length > num_projects_to_show %>
