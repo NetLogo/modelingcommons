@@ -147,8 +147,8 @@ class AccountController < ApplicationController
 
     logger.warn "[AccountController#mypage] #{Time.now} before most-downloaded models"
     # most-downloaded models
-    @most_downloaded = Node.most_downloaded.map { |la| [la.node, la.count]}
-    @most_downloaded = @most_downloaded.select {|model_array| model_array[0].visible_to_user?(@person)}[0..9]
+    @most_downloaded = Node.most_downloaded.map { |la| [la.node, la.count] }
+    @most_downloaded = @most_downloaded.select {|model_array| model_array[0] and model_array[0].visible_to_user?(@person)}[0..9]
 
 
     logger.warn "[AccountController#mypage] #{Time.now} before most-applied tags"
@@ -163,7 +163,7 @@ class AccountController < ApplicationController
     @most_recommended_models =
       Recommendation.count(:group => "node_id",
                            :order => "count_all DESC",
-                           :limit => 20).map { |node| [Node.find(node[0]), node[1]]}.select { |node_array| node_array[0].visible_to_user?(@person) }
+                           :limit => 20).map { |node| [Node.find_by_id(node[0]), node[1]]}.select { |node_array| node_array[0].visible_to_user?(@person) if node_array[0]}
 
     logger.warn "[AccountController#mypage] #{Time.now} exit"
     render :layout => 'application_nomargin'

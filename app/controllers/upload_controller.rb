@@ -165,5 +165,33 @@ class UploadController < ApplicationController
     redirect_to :back, :anchor => "upload-div"
   end
 
+  def destroy
+    @model = Node.find(params[:id])
+
+    @model.attachments.each do |attachment|
+      attachment.destroy
+    end
+
+    @model.node_versions.each do |nv|
+      nv.destroy
+    end
+
+    @model.tagged_nodes.each do |tn|
+      tn.destroy
+    end
+
+    @model.postings.each do |posting|
+      posting.destroy
+    end
+
+    @model.recommendations.each do |recommendation|
+      recommendation.destroy
+    end
+
+    @model.destroy
+
+    flash[:notice] = "Model '#{@model.name}' has been destroyed."
+    redirect_to :controller => :account, :action => :mypage
+  end
 
 end
