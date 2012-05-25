@@ -9,7 +9,11 @@
         <th>Type</th>
         <th>Description</th>
         <th>Last updated</th>
+
+        <% if @model.changeable_by_user?(@person) %>
         <th></th>
+        <% end %>
+
       </tr>
     </thead>
 
@@ -21,7 +25,12 @@
         <td><%= f.type -%></td>
         <td><%= f.description %></td>
         <td><%= distance_of_time_in_words(Time.now, f.updated_at) -%> ago, by <%= person_link(f.person) %></td>
-        <td><%= link_to("Delete", {:controller => :file, :action => :delete, :id => @model.id, :file_id => f.id}, :confirm => "Really delete '#{f.filename}'?" ) %></td>
+        <% if @model.changeable_by_user?(@person) %>
+        <td>
+        <%= link_to("Delete", {:controller => :file, :action => :delete, :id => @model.id, :file_id => f.id}, :confirm => "Really delete '#{f.filename}'?" ) %>
+        </td>
+        <% end %>
+        
       </tr>
       <% end -%>
     </tbody>

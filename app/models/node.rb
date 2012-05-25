@@ -295,6 +295,8 @@ class Node < ActiveRecord::Base
   def changeable_by_user?(person)
     return false if person.nil?
 
+    return true if person.administrator?
+
     return true if author?(person)
 
     return true if group and group_changeable? and group.members.member?(person)
