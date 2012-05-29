@@ -587,9 +587,10 @@ div.left-right {
     @include box-shadow(0 0 10px 2px gray);
     overflow: hidden;
     background-color: lighten($header-color, 10%);
-    @include border-radius($tab-corner-radius);
+    @include pie-border-radius($tab-corner-radius);
   }
   .heading {
+    @include pie-border-radius($tab-corner-radius $tab-corner-radius 0px 0px);
     @include sans-font();
     //@include text-shadow($text-highlight, 2px, 2px, 3px);
     background-color: $nav-color;
