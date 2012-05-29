@@ -247,10 +247,80 @@ jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
 				fileInput.bind("change", function(e) {
 					updateFileName();
 				});
-			})
-			
+			})				
 		}
 	})();
+	
+	var initializeProjectsTable = function() {
+		var getSortCol = function(select) {
+			var sortStr = select.find("option:selected").attr("value");
+			var sort = [[1, 'asc']];
+			if(sortStr == "pn") {
+				
+			} else if(sortStr == "on") {
+				sort = [[2, 'asc']];
+			} else if(sortStr == "mc") {
+				sort = [[3, 'desc']];
+			}
+			return sort;
+			
+		};
+		var table = $("#projects_table").dataTable({
+			"aoColumns": [
+			{
+				"bSortable": false
+				
+			}, 
+			{
+				"sType": "string", 
+				"bVisible": false
+			}, 
+			{
+				"sType": "string", 
+				"bVisible": false
+			}, 
+			{
+				"sType": "numeric", 
+				"bVisible": false
+			}, 
+			{
+				"sType": "string",
+				"bVisible": false, 
+				"bSortable": false
+			}
+			], 
+			'aaSorting': getSortCol($("#project_sort_by")),
+			"sDom": '<"left-right top"<"left"><"right"f>>t', 
+			"bPaginate": false, 
+			"bAutoWidth": false
+		});
+		table.parents(".dataTables_wrapper").find("input").attr("placeholder", "Search Projects");
+		$("#project_sort_by").bind('change', function(e) {
+			table.fnSort(getSortCol($(this)));
+		});
+		$("#project_show_you").bind("change", function(e) {
+			if(this.checked) {
+				table.fnFilter("true", 4);
+			} else {
+				table.fnFilter("", 4);
+			}
+		});
+		$(".project_more button").bind("click", function(e) {
+			
+			var list = $(this).parents(".project").find(".project_model_list");
+			
+			list.toggleClass("hidden");
+			if(list.hasClass("hidden")) {
+				$(this).text($(this).text().replace("Hide", "Show"));
+			} else {
+				$(this).text($(this).text().replace("Show", "Hide"));
+			}
+		});
+		
+		$("#custom_filters").contents().detach().prependTo($("#projects_table_wrapper .top .left"));
+		$("#custom_filters").remove();
+	};
+
 	
 	//Tab loader loads tabs on the element selected by elementId and switches to the tab selected in the hash
 	var initializeTabsOnElement = function(elementId) {
@@ -713,6 +783,7 @@ jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
 	
 	function initialize() {
 		initializeModelListDataTable();
+		initializeProjectsTable();
 		initializeStyledFileInput();
 		initializeTabsOnElement("model_tabs");
 		initializeTabsOnElement("group_tabs");

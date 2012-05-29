@@ -1,4 +1,5 @@
 # Controller to deal witih projects
+require 'RMagick'
 
 class ProjectsController < ApplicationController
 
@@ -6,6 +7,11 @@ class ProjectsController < ApplicationController
 
   def index
     @projects = Project.all
+    if @person
+      @models_to_add = @person.models.select {|model| !model.projects.member?(@project)}.sort_by{|model| model.name.downcase}.map {|model| [model.name, model.id]}
+    else
+      @models_to_add = []
+    end
   end
 
   def new
@@ -66,5 +72,9 @@ class ProjectsController < ApplicationController
 
     redirect_to :controller => :projects, :action => :show, :id => project.id
   end
+  
+  
+  
+  
 
 end

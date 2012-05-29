@@ -124,7 +124,4 @@ class BrowseController < ApplicationController
   def pie
     send_file "#{RAILS_ROOT}/public/stylesheets/PIE.htc",  :filename => 'PIE.htc', :disposition => 'inline', :type => 'text/x-component'
   end
-  
-  
-  
 end

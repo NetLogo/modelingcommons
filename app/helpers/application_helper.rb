@@ -89,7 +89,7 @@ ago."
   end
 
   def model_link(node)
-    link_to(model_image(node) + node.name, {:controller => :browse, :action => :one_model, :id => node.id}, {:class => 'model_link'})
+    link_to(model_image(node) + node.name, model_url(node), {:class => 'model_link'})
   end
   
   def model_image(node)
@@ -107,7 +107,18 @@ ago."
   end
   
   def project_link(project)
-    link_to(project.name, :controller => :projects, :action => :show, :id => project.id)
+    link_to(project.name, project_url(project))
   end
-
+  def project_url(project)
+    url_for(:controller => :projects, :action => :show, :id => project.id)
+  end
+  def project_image(project)
+    image_tag("/system/project_images/#{project.id.to_s}/project.png", :alt => project.name)
+  end
+  def html_string_truncate(string, length)
+    if string.length > length
+      string = string[0..length-2] << "&hellip;"
+    end
+    string
+  end
 end

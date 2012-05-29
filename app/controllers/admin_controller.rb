@@ -49,5 +49,10 @@ class AdminController < ApplicationController
       redirect_to :controller => :account, :action => :mypage
     end
   end
-
+  
+  def update_project_images
+    Project.all.each {|p| p.create_project_image}
+    flash[:notice] = 'Project images updated'
+    redirect_to :controller => :account, :action => :mypage
+  end
 end

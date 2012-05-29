@@ -284,7 +284,7 @@ body {
     margin: 16px 0px;
   }
   p {
-    margin-bottom: 10px;
+    margin: 10px 0px;
   }
 }
 
@@ -407,21 +407,21 @@ $comment-border-width: 2px;
 /* 
  * Model Page
  * browse/one_model
+ * Model and project page image preview/info
  */
 
 #preview_info_container {
   width: 960px;
   height: 160px;
   display:table-row;
-  float: left;
   &>div {
     display: table-cell;
     height: 160px;
     vertical-align: top;
   }
 }
-#model_preview {
-  #preview-image {
+#preview_image {
+  &>div, img {
     width: 152px;
     height: 152px;
     line-height: 152px;
@@ -430,13 +430,9 @@ $comment-border-width: 2px;
     @include global_padding;
     display: inline-block;
     background-color: hsl(0%, 0%, 85%);
-    img {
-      width: 152px;
-      height: 152px;
-    }
   }
 }
-#model_info {
+#preview_info {
   img {
     vertical-align: middle;
     height: 20px;
@@ -450,11 +446,18 @@ $comment-border-width: 2px;
       
     }
   }
-  #actions a {
+  a {
     line-height: 20px;
     display: inline-block;
   }
 }
+
+
+/* 
+ * Model Page
+ * browse/one_model
+ */
+
 
 .posting-title {
     font-weight: bold;
@@ -688,9 +691,43 @@ div.left-right {
     }
 }
 
+.shadowbox {
+  &>div {
+    @include box-shadow(0 0 10px 2px gray);
+    overflow: hidden;
+    background-color: lighten($header-color, 10%);
+    @include pie-border-radius($tab-corner-radius);
+  }
+  .heading {
+    @include pie-border-radius($tab-corner-radius $tab-corner-radius 0px 0px);
+    @include sans-font();
+    //@include text-shadow($text-highlight, 2px, 2px, 3px);
+    background-color: $nav-color;
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 2px;
+    font-size: 20px;
+    margin: 0px;
+    .sub_heading {
+      font-size: 13px;
+    }
+    &, a {
+      color: white;
+    }
+    a {
+      display: inline-block;
+      width: 100%;
+    }
+  }
+  .contents {
+    margin: 4px;
+  }
+}
+
 .model_link img {
   height: 30px;
 }
+
 .panel {
   @include global_padding;
   border: 3px solid black;
@@ -908,6 +945,7 @@ label.file_label {
   }
 }
 table.model_list_datatable table {
+  width: 100%;
   td {
     height: 30px;
     &:first-child {
@@ -920,6 +958,9 @@ table.model_list_datatable table {
       vertical-align: top;
       width: 30px; 
       height: 30px;
+    }
+    &.buttons {
+      text-align: right;
     }
   }
 }
@@ -944,6 +985,94 @@ table.simple_table {
     background-color: #ff0;
 }
 
+
+#projects_table {
+  thead {
+    display: none;
+  }
+  width: 100%;
+  tr {
+    padding: 8px;
+    float:left;
+    border-bottom: 1px solid $nav-color;
+    td {
+      width: 300px;
+      display: block;
+    }
+  }
+  .project {
+    h1, h2, p, li {
+      @include sans-font();
+    }
+    h1 {
+      margin: 4px 0px;
+      text-align: center;
+      font-size: 18px;
+    }
+    h2 {
+      margin: 0px;
+      font-size: 16px;
+      line-height: 40px;
+      height: 40px;
+      img {
+        vertical-align: middle;
+        margin-right: 5px;
+        max-height: 40px;
+      }
+    }
+    p {
+      margin: 0px;
+      font-size: 14px;
+    }
+    ul {
+      padding: 0px;
+      li {
+        width: 160px;
+        overflow:hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        &:before {
+          content: "-";
+          margin: 0px 3px;
+          
+        }
+        list-style-type: none;
+        
+      }
+    }
+    
+    a {
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    .project_model_list {
+      display: inline-block;
+      vertical-align: top;
+    }
+    .project_image {
+      margin-bottom: 8px;
+      display: inline-block;
+      vertical-align: top;
+      a {
+        display: inline-block;
+      }
+      img {
+        
+        width: 120px;
+        height: 120px;
+      }
+    }
+   
+  }
+}
+
+#project_page {
+  #add_model_to_project select {
+    max-width: 450px;
+  }
+}
 
 .activity {
   width: 660px;
