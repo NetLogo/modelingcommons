@@ -1,4 +1,5 @@
 # -*-ruby-*-
+source 'https://rubygems.org'
 gem "rails", "~> 2.3.14"
 
 gem "compass", "0.11.7"
