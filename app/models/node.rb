@@ -295,6 +295,8 @@ class Node < ActiveRecord::Base
   def changeable_by_user?(person)
     return false if person.nil?
 
+    return true if person.administrator?
+
     return true if author?(person)
 
     return true if group and group_changeable? and group.members.member?(person)
@@ -378,13 +380,13 @@ class Node < ActiveRecord::Base
   end
 
   def self.most_downloaded
-    LoggedAction.find_by_sql("SELECT COUNT(DISTINCT ip_address), node_id
-                                                   FROM Logged_Actions
-                                                  WHERE controller = 'browse'
-                                                    AND action = 'download_model'
-                                                    AND node_id IS NOT NULL
-                                                    AND logged_at >= NOW() - interval '2 weeks'
-                                               GROUP BY node_id
+    LoggedAction.find_by_sql("SELECT COUNT(DISTINCT LA.ip_address), LA.node_id
+                                                   FROM Logged_Actions LA
+                                                  WHERE LA.controller = 'browse'
+                                                    AND LA.action = 'download_model'
+                                                    AND LA.node_id IS NOT NULL
+                                                    AND LA.logged_at >= NOW() - interval '2 weeks'
+                                               GROUP BY LA.node_id
                                                ORDER BY count DESC
                                                   LIMIT 20;")
   end
