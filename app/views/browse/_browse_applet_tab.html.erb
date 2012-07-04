@@ -14,7 +14,7 @@
      align="bottom"
      width="<%= @model.dimensions[:width] -%>" height="<%= @model.dimensions[:height] -%>"
 
-     archive="/applet/<%= @model.netlogo_version_for_applet -%>/NetLogoLite.jar" >
+     archive="/applet/<%= @model.netlogo_version_for_applet -%>/NetLogoLite.jar.pack.gz" >
     <param name="DefaultModel" value="<%= url_for :controller => :browse, :action => :model_contents, :id => @model.id -%>"></param>
     <param name="java_arguments" value="-Djnlp.packEnabled=true"/>
   </applet>
