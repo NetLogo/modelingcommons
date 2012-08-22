@@ -14,7 +14,14 @@
      align="bottom"
      width="<%= @model.dimensions[:width] -%>" height="<%= @model.dimensions[:height] -%>"
 
-     archive="/applet/<%= @model.netlogo_version_for_applet -%>/NetLogoLite.jar.pack.gz" >
+    <% applet_filename = "/applet/#{@model.netlogo_version_for_applet}/NetLogoLite.jar" -%>
+    <% packed_applet_filename = applet_filename + '.pack.gz' -%>
+    <% packed_exists = FileTest.exists? packed_applet_filename -%>
+
+    <!-- <%= applet_filename = '#{applet_filename}' -%> -->
+    <!-- <%= packed_applet_filename = '#{packed_applet_filename}' -%> -->
+
+     archive="<%= applet_filename -%>"
     <param name="DefaultModel" value="<%= url_for :controller => :browse, :action => :model_contents, :id => @model.id -%>"></param>
     <param name="java_arguments" value="-Djnlp.packEnabled=true"/>
   </applet>
