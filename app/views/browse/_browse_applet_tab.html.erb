@@ -18,8 +18,9 @@
     <% packed_applet_filename = applet_filename + '.pack.gz' -%>
     <% packed_exists = FileTest.exists? packed_applet_filename -%>
 
-    <!-- <%= applet_filename = '#{applet_filename}' -%> -->
-    <!-- <%= packed_applet_filename = '#{packed_applet_filename}' -%> -->
+    <!-- <%= applet_filename = "#{applet_filename}" -%> -->
+    <!-- <%= packed_applet_filename = "#{packed_applet_filename}" -%> -->
+    <!-- <%= packed_exists = "#{packed_exists}" -%> -->
 
      archive="<%= applet_filename -%>"
     <param name="DefaultModel" value="<%= url_for :controller => :browse, :action => :model_contents, :id => @model.id -%>"></param>
