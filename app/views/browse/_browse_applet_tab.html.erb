@@ -23,7 +23,6 @@
 
      archive="<%= applet_filename -%>"
     <param name="DefaultModel" value="<%= url_for :controller => :browse, :action => :model_contents, :id => @model.id -%>"></param>
-    <param name="java_arguments" value="-Djnlp.packEnabled=true"/>
   </applet>
  </div>
   <% end %>
