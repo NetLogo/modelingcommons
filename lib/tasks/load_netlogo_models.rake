@@ -111,7 +111,7 @@ namespace :netlogo do
             new_version = NodeVersion.new(:node_id => node.id,
                                           :person_id => @uri_user.id,
                                           :contents => file_contents,
-                                          :description => 'Updated from NetLogo 5.0')
+                                          :description => 'Updated to version from NetLogo 5.0.3 distribution')
 
             if !new_version.save
               puts "\t\t*** Error trying to save a new version of the new node '#{node.name}', ID '#{node.id}': '#{e.inspect}'"
@@ -153,7 +153,8 @@ namespace :netlogo do
               nv = NodeVersion.new(:node_id => matching_node.id,
                                    :person_id => @uri_user.id,
                                    :contents => model_contents,
-                                   :description => 'Updated to NetLogo 5.0')
+                                   :description => 'Updated to version from NetLogo 5.0.3 distribution')
+
             if nv.save
               puts "\t\t\tSuccessfully saved a new node_version"
             else
