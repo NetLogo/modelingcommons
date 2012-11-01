@@ -13,6 +13,7 @@
 
         <%= hidden_field_tag 'id', @model.id %>
         
+        Model was written in NetLogo <%= @model.netlogo_version -%></br />
         By <%= @model.people.map {|person| person_link(person)}.join(", ") -%> 
         <% model_visibility_letter = @model.visibility.short_form %>
         <% model_changeability_letter = @model.changeability.short_form %>

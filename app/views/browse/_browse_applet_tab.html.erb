@@ -2,8 +2,6 @@
   <% if @model.cannot_be_run_as_applet? and @person and !@person.administrator? %>
   <p>Sorry, but this model cannot be viewed as an applet.  You must <%= link_to "download it", :controller => :browse, :action => :download_model, :id => @model.id -%> and run it within NetLogo on your local computer.</p>
   <% else %>
-  <p>Model was written in NetLogo <%= @model.netlogo_version -%></p>
-
   <!-- browse_applet_tab -->
   <div id="model_click_to_load"  >
   	Click to Run Model

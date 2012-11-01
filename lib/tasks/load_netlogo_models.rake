@@ -196,7 +196,7 @@ def update_previews
       puts "\tsuffix = '#{suffix}'"
 
       # Get matches, and handle accordingly
-      matching_nodes = Node.all(:conditions => { :name => filename} ).select { |n| n.people.member?(@mc_user)}
+      matching_nodes = Node.all(:conditions => { :name => filename} ).select { |n| n.people.member?(@uri_user)}
 
       if suffix == '.png'
 
