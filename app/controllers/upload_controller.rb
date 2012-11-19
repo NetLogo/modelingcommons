@@ -5,9 +5,18 @@ class UploadController < ApplicationController
   before_filter :require_login
 
   def create_model
+    
     if params[:new_model].blank? or params[:new_model][:name].blank? or params[:new_model][:uploaded_body].blank?
-      flash[:notice] = "Sorry, but you must enter a model name and file."
-      redirect_to :action => :new_model
+      respond_to do |format|
+        format.html do 
+          flash[:notice] = "Sorry, but you must enter a model name and file."
+          redirect_to :action => :new_model
+        end
+        format.json do
+          render :json => {:success => 'MISSING_PARAMETERS'}
+        end
+      end
+      
       return
     end
 
@@ -24,8 +33,16 @@ class UploadController < ApplicationController
                         :name => model_name)
 
       if !@model.save
-        flash[:notice] = "Error creating a new model object; it was not saved."
-        redirect_to :back
+        respond_to do |format|
+          format.html do 
+            flash[:notice] = "Error creating a new model object; it was not saved."
+            redirect_to :back
+          end
+          format.json do 
+            render :json => {:success => 'MODEL_NOT_SAVED'}
+          end
+        end
+        return
       end
 
       # Create a new version for that node, and stick the contents in there
@@ -38,60 +55,78 @@ class UploadController < ApplicationController
                         :person_id => @person.id,
                         :contents => node_version_contents,
                         :description => 'Initial upload')
-
+      
       begin
         new_version.save!
-        flash.now[:notice] = "Thanks for uploading the new model called '#{model_name}'."
+        flash[:notice] = "Thanks for uploading the new model called '#{model_name}'."
+        response = {:status => 'SUCCESS', :model => {:id => @model.id, :name => model_name, :url => url_for(:controller => :browse, :action => :one_model, :id => @model.id)}}
+        
+        # If we got a group and permission settings, set those as well
+        group_id = params[:group_id].blank? ? nil : params[:group_id]
+        group = Group.group_or_nil(group_id)
+  
+        read_permission = PermissionSetting.find_by_short_form(params[:read_permission])
+        if group.nil? and read_permission and read_permission.is_group?
+          read_permission = PermissionSetting.find_by_short_form('u')
+        end
+  
+        write_permission = PermissionSetting.find_by_short_form(params[:write_permission])
+        if group.nil? and write_permission and write_permission.is_group?
+          write_permission = PermissionSetting.find_by_short_form('u')
+        end
+  
+        @model.update_attributes(:visibility => read_permission,
+                                 :changeability => write_permission,
+                                 :group => group)
+                                 
+        
+        # ------------------------------------------------------------
+        # Preview image
+        # ------------------------------------------------------------
+  
+        if params[:new_model][:uploaded_preview].present?
+  
+          # Create a preview
+          attachment = NodeAttachment.new(:node_id => @model.id,
+                                          :person_id => @person.id,
+                                          :description => "Preview for '#{model_name}'",
+                                          :filename => model_name + '.png',
+                                          :type => 'preview',
+                                          :contents => params[:new_model][:uploaded_preview].read)
+  
+          expire_page :action => :display_preview, :id => @model.id
+  
+          if !attachment.save
+            response[:success] = 'SUCCESS_PREVIEW_NOT_SAVED'
+            flash[:notice] = "Error creating a new preview object; it was not saved."
+          end
+        end
+        respond_to do |format|
+          format.html do 
+            redirect_to :back
+          end
+          format.json do 
+            render :json => response
+          end
+        end
+        
       rescue Exception => e
         logger.warn "Exception message: '#{e.message}'"
         logger.warn "Exception backtrace: '#{e.backtrace.inspect}'"
 
-        flash[:notice] = "Error creating a new model version; it was not saved."
-        redirect_to :back
+        respond_to do |format|
+          format.html do 
+            flash[:notice] = "Error creating a new model version; it was not saved."
+            redirect_to :back
+          end
+          format.json do 
+            render :json => {:status => 'MODEL_NOT_SAVED'}
+          end
+        end
+        
         raise ActiveRecord::Rollback, "Call tech support!"
       end
-
-      # ------------------------------------------------------------
-      # Preview image
-      # ------------------------------------------------------------
-
-      if params[:new_model][:uploaded_preview].present?
-
-        # Create a preview
-        attachment = NodeAttachment.new(:node_id => @model.id,
-                                        :person_id => @person.id,
-                                        :description => "Preview for '#{model_name}'",
-                                        :filename => model_name + '.png',
-                                        :type => 'preview',
-                                        :contents => params[:new_model][:uploaded_preview].read)
-
-        expire_page :action => :display_preview, :id => @model.id
-
-        if !attachment.save
-          flash[:notice] = "Error creating a new preview object; it was not saved."
-          redirect_to :back
-        end
-      end
-
-      # If we got a group and permission settings, set those as well
-      group_id = params[:group_id].blank? ? nil : params[:group_id]
-      group = Group.group_or_nil(group_id)
-
-      read_permission = PermissionSetting.find_by_short_form(params[:read_permission])
-      if group.nil? and read_permission and read_permission.is_group?
-        read_permission = PermissionSetting.find_by_short_form('u')
-      end
-
-      write_permission = PermissionSetting.find_by_short_form(params[:write_permission])
-      if group.nil? and write_permission and write_permission.is_group?
-        write_permission = PermissionSetting.find_by_short_form('u')
-      end
-
-      @model.update_attributes(:visibility => read_permission,
-                               :changeability => write_permission,
-                               :group => group)
     end
-
   end
 
   def update_model
@@ -165,33 +200,5 @@ class UploadController < ApplicationController
     redirect_to :back, :anchor => "upload-div"
   end
 
-  def destroy
-    @model = Node.find(params[:id])
-
-    @model.attachments.each do |attachment|
-      attachment.destroy
-    end
-
-    @model.node_versions.each do |nv|
-      nv.destroy
-    end
-
-    @model.tagged_nodes.each do |tn|
-      tn.destroy
-    end
-
-    @model.postings.each do |posting|
-      posting.destroy
-    end
-
-    @model.recommendations.each do |recommendation|
-      recommendation.destroy
-    end
-
-    @model.destroy
-
-    flash[:notice] = "Model '#{@model.name}' has been destroyed."
-    redirect_to :controller => :account, :action => :mypage
-  end
 
 end

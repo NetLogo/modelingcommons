@@ -54,37 +54,86 @@ class AccountController < ApplicationController
 
   def login_action
     if params[:email_address].blank? or params[:password].blank?
-      flash[:notice] = "You must provide an e-mail address and password in order to log in."
-      redirect_to :controller => :account, :action => :login
+      respond_to do |format|
+        format.html do
+          flash[:notice] = "You must provide an e-mail address and password in order to log in."
+          redirect_to :controller => :account, :action => :login
+          
+        end
+        format.json do 
+          response = {:status => 'MISSING_PARAMETERS'}
+          render :json => response
+        end
+      end
       return
     end
 
     @person = Person.find_by_email_address(params[:email_address].strip)
     if @person.nil?
       logger.warn "Attempted login with non-existent email_address '#{params[:email_address]}'"
-      flash[:notice] = "Sorry, but no user exists with that e-mail address and password.  Please try again."
-      redirect_to :back
+      respond_to do |format| 
+        format.html do 
+          flash[:notice] = "Sorry, but no user exists with that e-mail address and password.  Please try again."
+          redirect_to :back
+          
+        end
+        format.json do 
+          response = {:status => 'INVALID_CREDENTIALS'}
+          render :json => response
+        end
+        
+      end
       return
     end
 
     encrypted_user_input = Person.encrypted_password(@person.salt, params[:password])
     if encrypted_user_input != @person.password
       logger.warn "Attempted login for email_address '#{params[:email_address]}' with incorrect password '#{params[:password]}'"
-      flash[:notice] = "Sorry, but no user exists with that e-mail address and password.  Please try again."
-      redirect_to :back
+      respond_to do |format|
+        format.html do 
+          flash[:notice] = "Sorry, but no user exists with that e-mail address and password.  Please try again."
+          redirect_to :back
+        end
+        format.json do
+          response = {:status => 'INVALID_CREDENTIALS'}
+          render :json => response
+        end
+      end
       return
     end
 
-    flash[:notice] = "Welcome back to the Commons, #{@person.first_name}!"
+
     session[:person_id] = @person.id
-    redirect_to :controller => :account, :action => :mypage
+    
+    
+    respond_to do |format| 
+      format.html do 
+         flash[:notice] = "Welcome back to the Commons, #{@person.first_name}!"
+         redirect_to :controller => :account, :action => :mypage
+      end
+      format.json do 
+        person_response = {:email_address => @person.email_address, :first_name => @person.first_name, :last_name => @person.last_name, :id => @person.id, :avatar => @person.avatar.url}
+        response = {:status => 'SUCCESS', :person => person_response}
+        render :json => response
+      end
+    end
+   
   end
 
   def logout
     @person = nil
     session[:person_id] = nil
-    flash[:notice] = "You have been logged out.  Please come back soon!"
-    redirect_to :controller => :account, :action => :login
+    respond_to do |format|
+      format.html do 
+        flash[:notice] = "You have been logged out.  Please come back soon!"
+        redirect_to :controller => :account, :action => :login
+      end
+      format.json do 
+        response = {:status => 'SUCCESS'}
+        render :json => response
+      end
+    end
+    
   end
 
   def mypage
@@ -147,8 +196,8 @@ class AccountController < ApplicationController
 
     logger.warn "[AccountController#mypage] #{Time.now} before most-downloaded models"
     # most-downloaded models
-    @most_downloaded = Node.most_downloaded.map { |la| [la.node, la.count] }
-    @most_downloaded = @most_downloaded.select {|model_array| model_array[0] and model_array[0].visible_to_user?(@person)}[0..9]
+    @most_downloaded = Node.most_downloaded.map { |la| [la.node, la.count]}
+    @most_downloaded = @most_downloaded.select {|model_array| model_array[0].visible_to_user?(@person)}[0..9]
 
 
     logger.warn "[AccountController#mypage] #{Time.now} before most-applied tags"
@@ -163,7 +212,7 @@ class AccountController < ApplicationController
     @most_recommended_models =
       Recommendation.count(:group => "node_id",
                            :order => "count_all DESC",
-                           :limit => 20).map { |node| [Node.find_by_id(node[0]), node[1]]}.select { |node_array| node_array[0].visible_to_user?(@person) if node_array[0]}
+                           :limit => 20).map { |node| [Node.find(node[0]), node[1]]}.select { |node_array| node_array[0].visible_to_user?(@person) }
 
     logger.warn "[AccountController#mypage] #{Time.now} exit"
     render :layout => 'application_nomargin'
