@@ -294,5 +294,11 @@ class AccountController < ApplicationController
     #render :json => @all_model_events.map {|model| {:created_at => model.created_at, :author => {:name => model.person.fullname, :id => model.person.id, :url => url_for(:controller => :account, :action => :mypage, :id => model.person.id, :image => model.person.avatar.url(:thumb))}, :name => model.name, :id => model.id}}
     render :json => @tag_events.map {|tagged| {:nodename => tagged.node.name, :tag_node_id => tagged.id, :node_id => tagged.node.id, :date_tagged => tagged.created_at, :tag_id => tagged.tag.id, :comment => tagged.comment}}
   end
-
+  
+  def list_groups
+     render :json => {:groups => @person.memberships.sort_by {|m| m.group_name.downcase}.map do |e| 
+       {:id => e.group_id, :name => e.group_name}
+     end
+     }
+  end
 end
