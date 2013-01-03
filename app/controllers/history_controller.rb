@@ -44,6 +44,7 @@ class HistoryController < ApplicationController
 
     earlier_version = NodeVersion.find(params[:compare_1])
     later_version = NodeVersion.find(params[:compare_2])
+
     @model = earlier_version.node
 
     if earlier_version == later_version
