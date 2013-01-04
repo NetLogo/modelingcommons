@@ -15,7 +15,6 @@ class DiscussionController < ApplicationController
     @posting = Posting.new(params[:new_posting])
 
     if @posting.save
-      logger.warn "\n\n*** @posting.save succeeded"
       respond_to do |format|
         format.html do
           flash[:notice] = "Thanks for contributing to our discussion!" 
@@ -27,7 +26,6 @@ class DiscussionController < ApplicationController
         end
       end
     else
-      logger.warn "\n\n*** @posting.save failed"
       respond_to do |format|
         format.html do
           flash[:notice] = "Thanks for contributing to our discussion!" 

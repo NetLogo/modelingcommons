@@ -11,6 +11,8 @@ class Posting < ActiveRecord::Base
 
   named_scope :created_since, lambda { |since| { :conditions => ['created_at >= ? ', since] }}
 
+  after_save :notify_people
+
   def was_answered?
     !!self.answered_at
   end
@@ -23,6 +25,10 @@ class Posting < ActiveRecord::Base
       :description => "Posting by '#{person.fullname}' about the '#{node.name}' model",
       :title => title,
       :contents => body}
+  end
+
+  def notify_people
+    Notifications.deliver_updated_discussion(node)
   end
 
 end

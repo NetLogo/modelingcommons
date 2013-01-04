@@ -73,9 +73,9 @@ class Notifications < ActionMailer::Base
     @body[:tag] = tag
   end
 
-  def updated_discussion(people, nlmodel)
+  def updated_discussion(nlmodel)
     standard_settings
-    @recipients = people.map{|person| person.email_address}
+    @recipients = nlmodel.people.map{|person| person.email_address}
     @subject = 'Updated discussion'
     @subject = "[TESTING] #{@subject}" if Rails.env == 'development'
     @body[:nlmodel] = nlmodel
