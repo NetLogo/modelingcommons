@@ -395,7 +395,7 @@ class Node < ActiveRecord::Base
   end
 
   def notify_authors
-    Notifications.deliver_modified_model(node)
+    Notifications.deliver_modified_model(self)
   end
 
 end
