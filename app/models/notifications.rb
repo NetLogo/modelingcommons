@@ -55,12 +55,12 @@ class Notifications < ActionMailer::Base
     @subject = "[TESTING] #{@subject}" if Rails.env == 'development'
   end
 
-  def modified_model(people, node)
+  def modified_model(nlmodel)
     standard_settings
-    @recipients = node.people
-    @subject = 'Modeling Commons: Model update'
+    @recipients = nlmodel.people.map {|person| person.email_address}
+    @subject = "Modeling Commons: Update to the '#{nlmodel.name}' model"
     @subject = "[TESTING] #{@subject}" if Rails.env == 'development'
-    @body[:nlmodel] = node
+    @body[:nlmodel] = nlmodel
   end
 
   def applied_tag(people, tag)

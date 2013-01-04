@@ -195,8 +195,6 @@ class UploadController < ApplicationController
       raise ActiveRecord::Rollback, "Call tech support!"
     end
 
-    # Notifications.deliver_modified_model(new_version.node.people.reject { |p| p == @person}, new_version.node)
-
     redirect_to :back, :anchor => "upload-div"
   end
 
