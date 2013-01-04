@@ -33,8 +33,6 @@ class Node < ActiveRecord::Base
   named_scope :created_since, lambda { |since| { :conditions => ['created_at >= ? ', since] }}
   named_scope :updated_since, lambda { |since| { :conditions => ['updated_at >= ? ', since] }}
 
-  after_save :notify_authors
-
   # ------------------------------------------------------------
   # Grab children of various sorts
   # ------------------------------------------------------------
@@ -392,10 +390,6 @@ class Node < ActiveRecord::Base
                                                GROUP BY LA.node_id
                                                ORDER BY count DESC
                                                   LIMIT 20;")
-  end
-
-  def notify_authors
-    Notifications.deliver_modified_model(self)
   end
 
 end
