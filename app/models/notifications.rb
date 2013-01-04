@@ -75,8 +75,10 @@ class Notifications < ActionMailer::Base
 
   def updated_discussion(nlmodel)
     standard_settings
-    @recipients = nlmodel.people.map{|person| person.email_address}
-    @subject = 'Updated discussion'
+    author_addresses = nlmodel.people.map{|person| person.email_address}
+    posting_addresses = nlmodel.active_postings.map {|ap| ap.person.email_address}
+    @recipients = (author_addresses + posting_addresses).uniq
+    @subject = "Modeling Commons: Updated discussion of the #{nlmodel.name} model"
     @subject = "[TESTING] #{@subject}" if Rails.env == 'development'
     @body[:nlmodel] = nlmodel
   end
