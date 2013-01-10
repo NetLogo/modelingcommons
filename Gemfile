@@ -1,6 +1,6 @@
 # -*-ruby-*-
 source 'https://rubygems.org'
-gem "rails", "~> 2.3.14"
+gem "rails", "~> 2.3.15"
 
 gem "compass", "0.11.7"
 gem "newrelic_rpm" 
