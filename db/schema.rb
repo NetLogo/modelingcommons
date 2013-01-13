@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120130001501) do
+ActiveRecord::Schema.define(:version => 20130110113739) do
 
   create_table "email_recommendations", :force => true do |t|
     t.integer  "person_id"
@@ -126,6 +126,9 @@ ActiveRecord::Schema.define(:version => 20120130001501) do
     t.string   "sex"
     t.date     "birthdate"
     t.string   "country_name"
+    t.boolean  "send_site_updates",    :default => true
+    t.boolean  "send_model_updates",   :default => true
+    t.boolean  "send_tag_updates",     :default => true
   end
 
   add_index "people", ["email_address"], :name => "index_people_on_email_address"

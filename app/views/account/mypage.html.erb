@@ -83,6 +83,8 @@
     <ul>
       <% @questions.each do |posting| %>
       <li>
+	<% next if posting.deleted_at %>
+
         <% if posting.person == @the_person %>
         <span class="highlight">
           <% end %>

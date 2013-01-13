@@ -17,6 +17,10 @@ class Posting < ActiveRecord::Base
     !!self.answered_at
   end
 
+  def first_posting?
+    node.postings.count == 1
+  end
+
   def new_thing
     {:id => id,
       :node_id => node_id,
@@ -28,7 +32,7 @@ class Posting < ActiveRecord::Base
   end
 
   def notify_people
-    Notifications.deliver_updated_discussion(node)
+    Notifications.deliver_updated_discussion(node) unless first_posting?
   end
 
 end
