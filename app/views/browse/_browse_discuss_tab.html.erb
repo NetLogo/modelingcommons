@@ -1,50 +1,49 @@
 <h1>Comments and Questions</h1>
 <% if @model.author_visible? %>
-	<p>Comments are disabled for private models.</p>
+<p>Comments are disabled for private models.</p>
 <% else %>
-	<div class="comments_list">
-	<% if @model.postings.empty? %>
-		<p>No comments so far!  Please <%= link_to("log in to", :controller => :account, :action => :login) unless @person -%> start the conversation about this model.</p>
-	<% else %>
-	    <%= render :partial => "discussion/one_posting", :collection => @model.postings.sort_by {|posting| posting.created_at}, :as => :posting -%>
-	<% end %>
-	</div>
-	
-	<% if @person %>
-	
-		<hr />
-		<h1>Post A New Comment</h1>
-		<% form_for(:new_posting, :url => { :controller => "discussion", :action => :create }, :html => {:id => 'new_discussion_comment'}) do |form| %>
-			<table id="posting-table">
-			<tr>
-			  <td><label for="new_posting_title">Title</label></td>
-			  <td><%= form.text_field :title %></td>
-			</tr>
-			<tr>
-			  <td><label for="new_posting_body">Body</label></td>
-			  <td><%= form.text_area :body, {:cols => 40, :rows => 10} %>
-			    <!-- model = <%= @model.inspect %> -->
-			    <%= form.hidden_field :node_id, {:value => @model.id} %></td>
-			</tr>
-			<tr>
-			  
-			  <td colspan="2"><%= form.check_box :is_question %><label for="new_posting_is_question">This is a question that I would like answered</label></td>
-			</tr>
-			
-			<tr>
-			  <td colspan="2"><%= submit_tag 'Submit comment' %></td>
-			</tr>
-			</table>
-		<% end %>
-	<% end %>
-<% end %>
+<div class="comments_list">
+  <% if @model.postings.empty? %>
+  <p>No comments so far!  Please <%= link_to("log in to", :controller => :account, :action => :login) unless @person -%> start the conversation about this model.</p>
+  <% else %>
+  <%= render :partial => "discussion/one_posting", :collection => @model.postings.sort_by {|posting| posting.created_at}, :as => :posting -%>
+  <% end %>
+</div>
 
+<% if @person %>
+
+<hr />
+<h1>Post A New Comment</h1>
+<% form_for(:new_posting, :url => { :controller => "discussion", :action => :create }, :html => {:id => 'new_discussion_comment'}) do |form| %>
+<table id="posting-table">
+  <tr>
+    <td><label for="new_posting_title">Title</label></td>
+    <td><%= form.text_field :title %></td>
+  </tr>
+  <tr>
+    <td><label for="new_posting_body">Body</label></td>
+    <td><%= form.text_area :body, {:cols => 40, :rows => 10} %>
+      <!-- model = <%= @model.inspect %> -->
+      <%= form.hidden_field :node_id, {:value => @model.id} %></td>
+  </tr>
+  <tr>
+    
+    <td colspan="2"><%= form.check_box :is_question %><label for="new_posting_is_question">This is a question that I would like answered</label></td>
+  </tr>
+  
+  <tr>
+    <td colspan="2"><%= submit_tag 'Submit comment' %></td>
+  </tr>
+</table>
+<% end %>
+<% end %>
+<% end %>
 
 <script>
   $("#new-posting-form").validate({
   rules: {
-      'new_posting[title]': 'required',
-      'new_posting[body]': 'required'
-   } } );
+  'new_posting[title]': 'required',
+  'new_posting[body]': 'required'
+  } } );
 </script>
 
