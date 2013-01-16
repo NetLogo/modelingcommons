@@ -82,9 +82,8 @@
     <% else %>
     <ul>
       <% @questions.each do |posting| %>
+      <% next if posting.deleted_at %>
       <li>
-	<% next if posting.deleted_at %>
-
         <% if posting.person == @the_person %>
         <span class="highlight">
           <% end %>
@@ -96,7 +95,6 @@
           <% if posting.person == @the_person %>
         </span>
         <% end %>
-
       </li>
       <% end %>
     </ul>
