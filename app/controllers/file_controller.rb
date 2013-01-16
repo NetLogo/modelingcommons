@@ -33,6 +33,7 @@ class FileController < ApplicationController
   def delete
     if not @model.changeable_by_user?(@person)
       flash[:notice] = "You are not allowed to remove files from this model."
+      logger.warn "User '#{@person.inspect}' tried to remove a file, but was prevented from doing so."
     elsif attachment = NodeAttachment.find(params[:file_id])
       attachment.destroy
       flash[:notice] = "Removed the file."
