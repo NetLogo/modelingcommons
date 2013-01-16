@@ -150,7 +150,7 @@ class AccountController < ApplicationController
     how_new_is_new = 2.weeks.ago
 
     logger.warn "[AccountController#mypage] #{Time.now} before @questions"
-    @questions = Posting.unanswered_questions.select { |question| question.node.visible_to_user?(@person) and question.created_at >= how_new_is_new }
+    @questions = Posting.unanswered_questions.select { |question| question.node.visible_to_user?(@person) and question.created_at >= how_new_is_new and !question.deleted_at }
 
     logger.warn "[AccountController#mypage] #{Time.now} before @recent_tags"
     @recent_tags = @the_person.tags.select { |tag| tag.created_at >= how_new_is_new}
