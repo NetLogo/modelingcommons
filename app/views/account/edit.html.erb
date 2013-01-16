@@ -39,8 +39,19 @@
   </tr>
 
   <tr>
-    <td>Optional image</td>
-    <td><%= form.file_field :avatar %><%= person_image(@person) %> </td>
+    <td>Receive general e-mail updates from the Modeling Commons?</td>
+    <td><%= form.check_box :send_site_updates, :checked => @person.send_site_updates? %><label for="person_send_site_updates">Yes</label></td>
+  </tr>
+
+  <tr>
+    <td>Receive e-mail updates about models which you have written,
+    edited, or discussed?</td>
+    <td><%= form.check_box :send_model_updates, :checked => @person.send_model_updates? %><label for="person_send_model_updates">Yes</label></td>
+  </tr>
+
+  <tr>
+    <td>Receive e-mail updates when tags are applied?</td>
+    <td><%= form.check_box :send_tag_updates, :checked => @person.send_tag_updates? %><label for="person_send_tag_updates">Yes</label></td>
   </tr>
 
   <% unless @person.registration_consent %>

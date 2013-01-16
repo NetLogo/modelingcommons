@@ -58,7 +58,7 @@ class Notifications < ActionMailer::Base
   def modified_model(nlmodel, current_author)
     standard_settings
     @bcc = 'modelingcommons@ccl.northwestern.edu'
-    @recipients = nlmodel.people.map {|person| person.email_address}
+    @recipients = nlmodel.people.select {|p| p.send_model_updates?}.map {|person| person.email_address}
     @recipients.delete(current_author.email_address)
 
     @subject = "Modeling Commons: Update to the '#{nlmodel.name}' model"
@@ -68,17 +68,18 @@ class Notifications < ActionMailer::Base
 
   def applied_tag(people, tag)
     standard_settings
-    @recipients = people.map{|person| person.email_address}
+    @recipients = people.select {|p| p.send_tag_updates?}.map {|person| person.email_address}
     @bcc = 'modelingcommons@ccl.northwestern.edu'
-    @subject = 'Modeling Commons: Tag was applied'
+    @subject = 'Modeling Commons: '#{tag.name}' tag was applied'
     @subject = "[TESTING] #{@subject}" if Rails.env == 'development'
     @body[:tag] = tag
   end
 
   def updated_discussion(nlmodel, current_author)
     standard_settings
+
     author_addresses = nlmodel.people.map{|person| person.email_address}
-    posting_addresses = nlmodel.active_postings.map {|ap| ap.person.email_address}
+    posting_addresses = nlmodel.active_postings.map {|ap| ap.person}.select {|p| p.send_model_updates?}.map { |p| p.email_address}
     @recipients = (author_addresses + posting_addresses).uniq
     @recipients.delete(current_author.email_address)
 
