@@ -4,7 +4,7 @@ class Posting < ActiveRecord::Base
   belongs_to :node
   belongs_to :person
 
-  validates_presence_of :title, :body
+  validates_presence_of :title, :body, :node_id
 
   named_scope :questions, :conditions => { :is_question => true }, :order => "created_at DESC"
   named_scope :unanswered_questions, :conditions => { :is_question => true, :answered_at => nil }, :order => "created_at DESC"
@@ -32,7 +32,7 @@ class Posting < ActiveRecord::Base
   end
 
   def notify_people
-    Notifications.deliver_updated_discussion(node) unless first_posting?
+    Notifications.deliver_updated_discussion(node, person)
   end
 
 end

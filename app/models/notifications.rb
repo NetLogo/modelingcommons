@@ -55,10 +55,12 @@ class Notifications < ActionMailer::Base
     @subject = "[TESTING] #{@subject}" if Rails.env == 'development'
   end
 
-  def modified_model(nlmodel)
+  def modified_model(nlmodel, current_author)
     standard_settings
     @bcc = 'modelingcommons@ccl.northwestern.edu'
     @recipients = nlmodel.people.map {|person| person.email_address}
+    @recipients.delete(current_author.email_address)
+
     @subject = "Modeling Commons: Update to the '#{nlmodel.name}' model"
     @subject = "[TESTING] #{@subject}" if Rails.env == 'development'
     @body[:nlmodel] = nlmodel
@@ -73,11 +75,13 @@ class Notifications < ActionMailer::Base
     @body[:tag] = tag
   end
 
-  def updated_discussion(nlmodel)
+  def updated_discussion(nlmodel, current_author)
     standard_settings
     author_addresses = nlmodel.people.map{|person| person.email_address}
     posting_addresses = nlmodel.active_postings.map {|ap| ap.person.email_address}
     @recipients = (author_addresses + posting_addresses).uniq
+    @recipients.delete(current_author.email_address)
+
     @bcc = 'modelingcommons@ccl.northwestern.edu'
     @subject = "Modeling Commons: Updated discussion of the #{nlmodel.name} model"
     @subject = "[TESTING] #{@subject}" if Rails.env == 'development'

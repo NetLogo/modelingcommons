@@ -86,7 +86,10 @@ class NodeVersion
   end
 
   def notify_authors
-    Notifications.deliver_modified_model(node)
+    return unless node.node_versions.count > 1 
+    return if node.people.uniq.count == 1 and node.people.first == person
+
+    Notifications.deliver_modified_model(node, person) 
   end
 
 end

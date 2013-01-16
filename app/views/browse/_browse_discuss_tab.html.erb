@@ -23,6 +23,7 @@
 			<tr>
 			  <td><label for="new_posting_body">Body</label></td>
 			  <td><%= form.text_area :body, {:cols => 40, :rows => 10} %>
+			    <!-- model = <%= @model.inspect %> -->
 			    <%= form.hidden_field :node_id, {:value => @model.id} %></td>
 			</tr>
 			<tr>
