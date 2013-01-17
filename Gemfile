@@ -19,3 +19,12 @@ gem 'validates_email'
 gem 'will_paginate', '~> 2.3.11'
 gem 'zip'
 gem 'rmagick'
+
+group :development, :test do
+  gem 'capybara'
+  gem 'cucumber'
+  gem 'cucumber-rails'
+  gem 'database_cleaner'
+  gem 'rspec'
+  gem 'watir-webdriver'
+end
