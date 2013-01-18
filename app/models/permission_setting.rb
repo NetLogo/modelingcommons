@@ -5,7 +5,11 @@ class PermissionSetting < ActiveRecord::Base
   OWNER = 2
   GROUP = 3
 
-  validates_presence_of :name, :short_form
+  validates_presence_of :name
+  validates_presence_of :short_form
+
+  validates_uniqueness_of :name
+  validates_uniqueness_of :short_form
 
   has_many :nodes
 

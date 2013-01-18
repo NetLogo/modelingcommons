@@ -4,11 +4,7 @@ class PersonTest < ActiveSupport::TestCase
 
   fixtures :people
 
-  should_have_many :node_versions
-  should_have_many :nodes, :through => :node_versions
-
   should_have_many :postings
-  should_have_many :news_items
   should_have_many :logged_actions
   should_have_many :tags
   should_have_many :tagged_nodes

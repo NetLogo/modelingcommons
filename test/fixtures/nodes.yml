@@ -1,11 +1,9 @@
 wolfsheep:
-  node_type: model
   name: Wolf-Sheep Predation
   visibility: everyone
   changeability: everyone
 
 autumn:
-  node_type: model
   name: Autumn
   visibility: everyone
   changeability: everyone

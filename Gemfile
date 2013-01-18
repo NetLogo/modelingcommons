@@ -22,6 +22,7 @@ gem 'rmagick'
 
 group :development, :test do
   gem 'capybara'
+  gem 'shoulda', '2.11.3'
   gem 'cucumber'
   gem 'cucumber-rails'
   gem 'database_cleaner'
