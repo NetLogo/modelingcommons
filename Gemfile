@@ -24,6 +24,7 @@ group :development, :test do
   gem "capybara", "1.1.1"
   gem "cucumber", "1.1.0"
   gem "cucumber-rails", "0.3.2"
+  gem 'factory_girl'
   gem 'database_cleaner'
   gem 'pry'
   gem 'pry-nav'

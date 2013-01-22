@@ -1,7 +1,4 @@
 # -*-ruby-*-
-STDERR.puts "In rspec.rake, self.inspect = '#{self.inspect}'"
-STDERR.puts "In rspec.rake, self.class = '#{self.class}'"
-
 include Rake::DSL
 
 require 'rake'
