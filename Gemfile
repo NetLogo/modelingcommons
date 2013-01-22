@@ -21,12 +21,12 @@ gem 'zip'
 gem 'rmagick'
 
 group :development, :test do
-  gem 'capybara'
-  gem 'shoulda', '2.11.3'
-  gem 'cucumber'
-  gem 'cucumber-rails'
+  gem "capybara", "1.1.1"
+  gem "cucumber", "1.1.0"
+  gem "cucumber-rails", "0.3.2"
   gem 'database_cleaner'
-  gem 'rspec'
-  gem 'watir-webdriver'
-  gem 'turbulence'
+  gem 'pry'
+  gem 'pry-nav'
+  gem 'pry-remote'
+  gem 'shoulda', '2.11.3'
 end
