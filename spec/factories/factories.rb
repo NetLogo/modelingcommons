@@ -43,6 +43,7 @@ Factory.define(:person) do |person|
   person.sequence(:email_address) { |n| "email#{n}@example.com"}
   person.password "password"
   person.administrator false
+  person.registration_consent true
 
   person.avatar_file_name "avatar"
   person.avatar_content_type "image/jpeg"
