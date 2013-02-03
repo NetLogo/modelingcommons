@@ -3,7 +3,7 @@ def person
 end
 
 def sample_netlogo_file(suffix='')
-  File.open(RAILS_ROOT + "/features/upload_files/test#{suffix}.nlogo").readlines.join("\n")
+  File.read(RAILS_ROOT + "/features/upload_files/test#{suffix}.nlogo")
 end
 
 Given /^a NetLogo model named "([^\"]*)"$/ do |model_name|
@@ -18,6 +18,8 @@ Given /^a NetLogo model named "([^\"]*)"$/ do |model_name|
                                  :description => "Description of the node version",
                                  :contents => sample_netlogo_file)
 
+  STDERR.puts "node_version ID '#{@node_version.id}' is for node ID '#{@node_version.node.id}', which should be the same as '#{@node.id}'"
+
 end
 
 Given /^a NetLogo model named "([^\"]*)" uploaded by "([^\"]*)"$/ do |model_name, email_address|
@@ -27,12 +29,14 @@ Given /^a NetLogo model named "([^\"]*)" uploaded by "([^\"]*)"$/ do |model_name
                          :name => model_name,
                          :visibility_id => 1,
                          :changeability_id => 1)
+  @node.save!
 
   @node_version = Factory.create(:node_version,
                                  :node_id => @node.id,
                                  :person_id => p.id,
                                  :description => "Description of the node version",
                                  :contents => sample_netlogo_file)
+  @node_version.save!
 end
 
 Given /^a NetLogo model named "([^\"]*)" in the project "([^\"]*)"$/ do |model_name, project_name|

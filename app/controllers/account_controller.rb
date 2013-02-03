@@ -223,7 +223,7 @@ class AccountController < ApplicationController
 
     if email_address.index('@').nil?
       flash[:notice] = "Sorry, but '#{email_address}' is not a valid e-mail address.  Please try again."
-      redirect_to :controller => :account, :action => :send_password
+      redirect_to :controller => :account, :action => :reset_password
       return
     end
 

@@ -17,7 +17,6 @@ Given /^an administrator named "([^\"]*)" "([^\"]*)" with e-mail address "([^\"]
                            :email_address => email,
                            :administrator => true,
                            :registration_consent => true)
-  @person.save!
 end
 
 When /^I log in as "([^\"]*)" with password "([^\"]*)"$/ do |email, pwd|

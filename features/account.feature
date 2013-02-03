@@ -22,7 +22,7 @@ So that I can change my name frequently
      And I fill in "password" for "Password confirmation"
      And I press "Update account"
     Then I should see "Successfully updated your account."
-     And I should see "Logged in as BlahFirst BlahLast"
+     And I should see "Hello BlahFirst BlahLast"
 
   Scenario: You should not be able to change your first and last name without a password
     When I go to the home page

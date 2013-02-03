@@ -1,5 +1,4 @@
 # Controller to deal witih projects
-require 'RMagick'
 
 class ProjectsController < ApplicationController
 

@@ -1,5 +1,4 @@
 # Model to keep track of projects (i.e., collections of models)
-require 'RMagick'
 
 
 class Project < ActiveRecord::Base

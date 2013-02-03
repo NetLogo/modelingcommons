@@ -87,7 +87,7 @@ module NavigationHelpers
       '/admin/index'
 
     when /the password reminder page/
-      '/account/send_password'
+      '/account/reset_password'
 
     when /the model page for "([^\"]+)"/
       "/browse/one_model/#{Node.find_by_name($1).id}"
