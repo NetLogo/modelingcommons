@@ -8,5 +8,5 @@ registering.) </p>
 
 <%= error_messages_for :new_person %>
 
-<%= render :partial => 'new_person_form' -%>
+<%= render :partial => 'new_person_form', :locals => {:countries => @countries} -%>
 

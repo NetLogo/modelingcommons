@@ -13,7 +13,7 @@ class UploadController < ApplicationController
           redirect_to :action => :new_model
         end
         format.json do
-          render :json => {:success => 'MISSING_PARAMETERS'}
+          render :json => {:status => 'MISSING_PARAMETERS'}
         end
       end
       
@@ -39,7 +39,7 @@ class UploadController < ApplicationController
             redirect_to :back
           end
           format.json do 
-            render :json => {:success => 'MODEL_NOT_SAVED'}
+            render :json => {:status => 'MODEL_NOT_SAVED'}
           end
         end
         return
@@ -97,7 +97,7 @@ class UploadController < ApplicationController
           expire_page :action => :display_preview, :id => @model.id
   
           if !attachment.save
-            response[:success] = 'SUCCESS_PREVIEW_NOT_SAVED'
+            response[:status] = 'SUCCESS_PREVIEW_NOT_SAVED'
             flash[:notice] = "Error creating a new preview object; it was not saved."
           end
         end
@@ -131,10 +131,18 @@ class UploadController < ApplicationController
 
   def update_model
     existing_node = Node.find(params[:new_version][:node_id])
-
+  
     if params[:new_version].blank? or params[:new_version][:description].blank? or params[:new_version][:uploaded_body].blank?
-      flash[:notice] = "Sorry, but you must enter a model name, file, and description."
-      redirect_to :controller => :browse, :action => :one_model, :id => existing_node.id
+      respond_to do |format|
+        format.html do 
+          flash[:notice] = "Sorry, but you must enter a model name, file, and description."
+          redirect_to :controller => :browse, :action => :one_model, :id => existing_node.id
+        end
+        format.json do 
+          render :json => {:status => 'MISSING_PARAMETERS'}
+        end
+      end
+      
       return
     end
 
@@ -167,7 +175,6 @@ class UploadController < ApplicationController
     elsif fork == 'overwrite'
 
       return unless check_changeability_permissions
-
       node_id = existing_node.id
       flash[:notice] << "Added new version to node #{existing_node.id}. "
     else
@@ -187,15 +194,33 @@ class UploadController < ApplicationController
     begin
       new_version.save!
     rescue Exception => e
+      #Error saving
+      
       logger.warn "Exception message: '#{e.message}'"
       logger.warn "Exception backtrace: '#{e.backtrace.inspect}'"
 
-      flash[:notice] = "Error updating the model."
-      redirect_to :back
+      respond_to do |format|
+        format.html do 
+          flash[:notice] = "Error updating the model."
+          redirect_to :back
+        end
+        format.json do 
+          render :json => {:status => 'MODEL_NOT_SAVED'}
+        end
+      end
+      
       raise ActiveRecord::Rollback, "Call tech support!"
+      return
     end
 
-    redirect_to :back, :anchor => "upload-div"
+    respond_to do |format|
+      format.html do 
+        redirect_to :back, :anchor => "upload-div"
+      end
+      format.json do 
+        render :json => response = {:status => 'SUCCESS', :type => fork, :model => {:id => node_id, :name => new_version.node.name, :url => url_for(:controller => :browse, :action => :one_model, :id => node_id)}}
+      end
+    end
   end
 
 
