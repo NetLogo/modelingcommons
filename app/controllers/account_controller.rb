@@ -258,7 +258,7 @@ class AccountController < ApplicationController
 ]
     respond_to do |format| 
       format.json do 
-        render :json => {:user_agreement => render_to_string(:partial => 'user_agreement.html'), :countries => @countries.map{|e| {:name => e, :priority => ['Israel', 'United States'].include?(e) }} }
+        render :json => {:user_agreement => render_to_string(:partial => 'user_agreement.html'), :countries => @countries.map{|e| {:name => e, :priority => ['United States'].include?(e) }} }
       end
       format.html do
         render 
