@@ -90,4 +90,9 @@ class TagsController < ApplicationController
     end
   end
 
+  def download
+    tag = Tag.find(params[:id])
+    send_file(tag.create_zipfile(@person), :filename => tag.zipfile_name, :type => 'application/zip', :disposition => "inline")
+  end
+
 end

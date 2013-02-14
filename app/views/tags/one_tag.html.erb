@@ -13,6 +13,7 @@
 </ul>
 
 <h2>Models using this tag:</h2>
+<p><%= link_to "Download all models with this tag", :controller => :tags, :action => :download, :id => @tag.id %>
 <ul>
   <% if @tag.nodes.empty? %>
   <p>None</p>
