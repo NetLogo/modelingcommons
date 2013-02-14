@@ -8,6 +8,8 @@
 <p>No models.</p>
 <% end %>
 
+<p><%= link_to "Download all of the #{@group.name}'s models", :controller => :membership, :action => :download, :id => @group.id %></p>
+
 <h2>Members of the <%= @group.name %> group:</h2>
 
 <ul class="grouplist">

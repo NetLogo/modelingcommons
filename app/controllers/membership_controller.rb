@@ -168,4 +168,13 @@ class MembershipController < ApplicationController
                               :conditions => "group_id in (#{@group_ids}) ")
     end
   end
+
+  
+  def download
+    group = Group.find(params[:id])
+
+    send_file(group.create_zipfile(@person), :filename => group.zipfile_name, :type => 'application/zip', :disposition => "inline")
+  end
+
+
 end
