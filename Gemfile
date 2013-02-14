@@ -17,7 +17,7 @@ gem 'postgres-pr'
 gem 'rack'
 gem 'validates_email'
 gem 'will_paginate', '~> 2.3.11'
-gem 'zip'
+gem 'zippy'
 gem 'rmagick'
 
 group :development, :test do
