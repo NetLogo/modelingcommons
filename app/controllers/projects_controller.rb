@@ -74,7 +74,7 @@ class ProjectsController < ApplicationController
   
   def download
     project = Project.find(params[:id])
-    send_file(project.create_zipfile, :filename => project.zipfile_name, :type => 'application/zip', :disposition => "inline")
+    send_file(project.create_zipfile(@person), :filename => project.zipfile_name, :type => 'application/zip', :disposition => "inline")
   end
   
 end

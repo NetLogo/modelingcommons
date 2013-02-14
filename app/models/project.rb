@@ -90,10 +90,11 @@ class Project < ActiveRecord::Base
     "#{RAILS_ROOT}/public/modelzips/#{zipfile_name}"
   end
 
-  def create_zipfile
+  def create_zipfile(web_user)
     Zippy.create zipfile_name_full_path do |io|
 
       nodes.each do |node|
+        next unless node.visible_to_user?(web_user)
 
         io["#{download_name}/#{node.download_name}/#{download_name}.nlogo"] = node.contents.to_s
 
