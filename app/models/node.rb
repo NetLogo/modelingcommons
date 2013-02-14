@@ -342,14 +342,13 @@ class Node < ActiveRecord::Base
   end
 
   def create_zipfile
-    Zip::ZipOutputStream::open(zipfile_name_full_path) do |io|
-      io.put_next_entry("#{download_name}.nlogo")
-      io.write(contents.to_s)
+    Zippy.create zipfile_name_full_path do |io|
+      io["#{download_name}.nlogo"] = contents.to_s
 
       attachments.each do |attachment|
-        io.put_next_entry("#{attachment.filename}")
-        io.write(attachment.contents.to_s)
+        io[attachment.filename] = attachment.contents.to_s
       end
+
     end
 
     zipfile_name_full_path

@@ -6,54 +6,55 @@
 <p><i>No projects have been created.</i></p>
 <% else %>
 <div id="custom_filters">
-Sort by<select id="project_sort_by">
-	<option value="pn">Project Name</option>
-	<option value="on">Owner Name</option>
-	<option value="mc">Model Count</option>
-</select>
-<% if @person %>
-<label for="project_show_you">Show only your projects<input type="checkbox" id="project_show_you" /></label>
-<% end %>
+  Sort by<select id="project_sort_by">
+    <option value="pn">Project Name</option>
+    <option value="on">Owner Name</option>
+    <option value="mc">Model Count</option>
+  </select>
+  <% if @person %>
+  <label for="project_show_you">Show only your projects<input type="checkbox" id="project_show_you" /></label>
+  <% end %>
 </div>
 <table id="projects_table">
-	<tbody>
-		<% @projects.each do |project| %>
-		<tr>
-			<td class="shadowbox">
-				<div class="project">
-					<div class="heading"><%= project_link(project) -%></div>
-					<div class="contents">
-					<div class="project_image">
-						<a href="<%= project_url(project) -%>"><%= project_image(project) %></a>
-					</div>
-					<div class="project_model_list">
-						<ul>
-						<% num_projects_to_show = 5%>
-						<% project.nodes[0..(num_projects_to_show - 1)].each do |model| %>
-						<li><%= link_to model.name, model_url(model) -%></li>
-						<% end %>
-						</ul>
-						<% if project.nodes.length > num_projects_to_show %>
-						<p><%= link_to 'And ' << (project.nodes.length - num_projects_to_show).to_s() << ' more', project_url(project) -%></p>
-						<% end %>
-					</div>
-					<h2><%= link_to (person_image(project.person) + project.person.fullname), person_url(project.person) -%></h2>
-					</div>
-				</div>
-			</td>
-			<td><%= project.name -%></td>
-			<td><%= project.person.fullname -%></td>
-			<td><%= project.nodes.count -%></td>
-			<td>
-				<% if project.person == @person %>
-				true
-				<% else %>
-				false
-				<% end %>
-			</td>
-		</tr>
-		<% end %>	
-	</tbody>
+  <tbody>
+    <% @projects.each do |project| %>
+    <tr>
+      <td class="shadowbox">
+	<div class="project">
+	  <div class="heading"><%= project_link(project) -%></div>
+	  <span class="project-download"><%= link_to "download", :controller => :projects, :action => :download, :id => project.id %></span>
+	  <div class="contents">
+	    <div class="project_image">
+	      <a href="<%= project_url(project) -%>"><%= project_image(project) %></a>
+	    </div>
+	    <div class="project_model_list">
+	      <ul>
+		<% num_projects_to_show = 5%>
+		<% project.nodes[0..(num_projects_to_show - 1)].each do |model| %>
+		<li><%= link_to model.name, model_url(model) -%></li>
+		<% end %>
+	      </ul>
+	      <% if project.nodes.length > num_projects_to_show %>
+	      <p><%= link_to 'And ' << (project.nodes.length - num_projects_to_show).to_s() << ' more', project_url(project) -%></p>
+											       <% end %>
+	    </div>
+	    <h2><%= link_to (person_image(project.person) + project.person.fullname), person_url(project.person) -%></h2>
+	  </div>
+	</div>
+      </td>
+      <td><%= project.name -%></td>
+      <td><%= project.person.fullname -%></td>
+      <td><%= project.nodes.count -%></td>
+      <td>
+	<% if project.person == @person %>
+	true
+	<% else %>
+	false
+	<% end %>
+      </td>
+    </tr>
+    <% end %>	
+  </tbody>
 </table>
 <% end %>
 <% if @person %>

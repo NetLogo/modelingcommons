@@ -72,8 +72,9 @@ class ProjectsController < ApplicationController
     redirect_to :controller => :projects, :action => :show, :id => project.id
   end
   
+  def download
+    project = Project.find(params[:id])
+    send_file(project.create_zipfile, :filename => project.zipfile_name, :type => 'application/zip', :disposition => "inline")
+  end
   
-  
-  
-
 end

@@ -1,6 +1,5 @@
 # Model to keep track of projects (i.e., collections of models)
 
-
 class Project < ActiveRecord::Base
   validates_presence_of :name
   validates_uniqueness_of :name
@@ -79,4 +78,32 @@ class Project < ActiveRecord::Base
     m.write(dir + "project.png")
   end
   
+  def download_name
+    name.gsub(/[\s\/]/, '_')
+  end
+
+  def zipfile_name
+    "#{download_name}.zip"
+  end
+
+  def zipfile_name_full_path
+    "#{RAILS_ROOT}/public/modelzips/#{zipfile_name}"
+  end
+
+  def create_zipfile
+    Zippy.create zipfile_name_full_path do |io|
+
+      nodes.each do |node|
+
+        io["#{download_name}/#{node.download_name}/#{download_name}.nlogo"] = node.contents.to_s
+
+        node.attachments.each do |attachment|
+          io["#{download_name}/#{node.download_name}/#{attachment.filename}"] = attachment.contents.to_s
+        end
+      end
+    end
+
+    zipfile_name_full_path
+  end
+
 end

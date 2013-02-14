@@ -4490,3 +4490,8 @@ div.main-menu-new ul li img {
   vertical-align: top;
 }
 */
+
+.project-download {
+   float: right;
+   padding: 4px;
+}
