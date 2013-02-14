@@ -9,6 +9,7 @@
 	<div>
 	  This project is owned by <%= person_link(@project.person) -%> and contains <%= pluralize(@project.nodes.size, "model") -%>
 	</div>
+	<span class="project-download"><%= link_to "download", :controller => :projects, :action => :download, :id => @project.id %></span>
       </div>
       <div>
 	<div>
