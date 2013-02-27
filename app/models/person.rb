@@ -113,16 +113,19 @@ class Person < ActiveRecord::Base
 
       end
 
-      io["Manifest"] = "Models written by #{fullname}\n"
+      manifest_string = "Models written by #{fullname}\n"
 
       if zipped_nodes.empty?
-        io["Manifest"] << "No models available for download."
+        manifest_string << "No models available for download."
       else
         zipped_nodes.each_with_index do |node_name, index|
-          io["Manifest"] << "[%3d]" % index
-          io["Manifest"] << "#{node_name}\n"
+          manifest_string << "[%3d]" % index
+          manifest_string << "#{node_name}\n"
         end
       end
+
+      io["MANIFEST"] = manifest_string
+
     end
 
     zipfile_name_full_path
