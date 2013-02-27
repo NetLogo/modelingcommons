@@ -99,13 +99,28 @@ class Person < ActiveRecord::Base
   def create_zipfile(web_user)
     Zippy.create zipfile_name_full_path do |io|
 
+      zipped_nodes = [ ]
+
       nodes.each do |node|
         next unless node.visible_to_user?(web_user)
 
+        zipped_nodes << node.name
         io["#{download_name}/#{node.download_name}/#{download_name}.nlogo"] = node.contents.to_s
 
         node.attachments.each do |attachment|
           io["#{download_name}/#{node.download_name}/#{attachment.filename}"] = attachment.contents.to_s
+        end
+
+      end
+
+      io["Manifest"] << "Models written by #{fullname}\n"
+
+      if zipped_nodes.empty?
+        io["Manifest"] << "No models available for download."
+      else
+        zipped_nodes.each_with_index do |node_name, index|
+          io["Manifest"] << "[%3d]" % index
+          io["Manifest"] << "#{node_name}\n"
         end
       end
     end
