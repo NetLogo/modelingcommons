@@ -19,6 +19,7 @@ gem 'validates_email'
 gem 'will_paginate', '~> 2.3.11'
 gem 'zippy'
 gem 'rmagick'
+gem 'capistrano'
 
 group :development, :test do
   gem "capybara", "1.1.1"
