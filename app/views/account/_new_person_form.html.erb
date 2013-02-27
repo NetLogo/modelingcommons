@@ -24,11 +24,11 @@
     	<% 
     	blank = '--------'
     	priority_countries = ['United States']
-    	countries.unshift(blank)
+    	@countries.unshift(blank)
     	index = 0
-    	priority_countries.each{ |e| countries.insert(index, countries.delete(e) ) ; index+=1 }
+    	priority_countries.each{ |e| @countries.insert(index, @countries.delete(e) ) ; index+=1 }
     	%>
-    	<%= form.select :country_name, options_for_select(countries, {:disabled => blank}) %>
+    	<%= form.select :country_name, options_for_select(@countries, {:disabled => blank}) %>
     </td>
   </tr>
   <tr>

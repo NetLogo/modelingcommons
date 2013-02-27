@@ -4,9 +4,9 @@
 (You may view public models, discussions, and tags without
 registering.) </p>
 
-<p>Already registered?  You may <%= link_to "log in", :controller => :account, :action => :login -%>.</p>
+<p>Already registered?  You may <%= link_to "log in", :controller => :account, :action => :login %>.</p>
 
 <%= error_messages_for :new_person %>
 
-<%= render :partial => 'new_person_form', :locals => {:countries => @countries} -%>
+<%= render :partial => 'new_person_form' %>
 
