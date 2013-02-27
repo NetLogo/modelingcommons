@@ -113,7 +113,7 @@ class Person < ActiveRecord::Base
 
       end
 
-      io["Manifest"] << "Models written by #{fullname}\n"
+      io["Manifest"] = "Models written by #{fullname}\n"
 
       if zipped_nodes.empty?
         io["Manifest"] << "No models available for download."
