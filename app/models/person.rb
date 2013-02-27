@@ -119,8 +119,12 @@ class Person < ActiveRecord::Base
         manifest_string << "No models available for download."
       else
         zipped_nodes.each_with_index do |node_name, index|
-          manifest_string << "[%3d]" % index
-          manifest_string << "#{node_name}\n"
+          manifest_string << "[%3d]\t" % index
+          manifest_string << "Created #{node.created_at}\t"
+          manifest_string << "Last updated #{node.updated_at}\t"
+          manifest_string << "#{node.id}\t"
+          manifest_string << "#{node_name}\t"
+          manifest_string << "http://modelingcommons.org/browse/one_model/#{node.id}\n"
         end
       end
 
