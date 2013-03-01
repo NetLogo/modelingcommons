@@ -94,6 +94,7 @@ class Project < ActiveRecord::Base
     Zippy.create zipfile_name_full_path do |io|
 
       zipped_nodes = [ ]
+
       nodes.each do |node|
         next unless node.visible_to_user?(web_user)
 
@@ -104,23 +105,25 @@ class Project < ActiveRecord::Base
           io["#{download_name}/#{node.download_name}/#{attachment.filename}"] = attachment.contents.to_s
         end
 
-        manifest_string = "Models in the #{name} project\n"
+      end
 
-        if zipped_nodes.empty?
-          manifest_string << "No models available for download."
-        else
-          zipped_nodes.each_with_index do |node, index|
-            manifest_string << "[%3d]\t" % index
-            manifest_string << "Created #{node.created_at}\t"
-            manifest_string << "Last updated #{node.updated_at}\t"
-            manifest_string << "#{node.id}\t"
-            manifest_string << "#{node.name}\t"
-            manifest_string << "http://modelingcommons.org/browse/one_model/#{node.id}\n"
-          end
+      manifest_string = "Models in the #{name} project\n"
+
+      if zipped_nodes.empty?
+        manifest_string << "No models available for download."
+      else
+        zipped_nodes.each_with_index do |node, index|
+          manifest_string << "[%3d]\t" % index
+          manifest_string << "Created #{node.created_at}\t"
+          manifest_string << "Last updated #{node.updated_at}\t"
+          manifest_string << "#{node.id}\t"
+          manifest_string << "#{node.name}\t"
+          manifest_string << "http://modelingcommons.org/browse/one_model/#{node.id}\n"
         end
       end
 
       io["MANIFEST"] = manifest_string
+
     end
 
     zipfile_name_full_path
