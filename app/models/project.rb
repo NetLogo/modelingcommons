@@ -118,11 +118,9 @@ class Project < ActiveRecord::Base
             manifest_string << "http://modelingcommons.org/browse/one_model/#{node.id}\n"
           end
         end
-
-        io["MANIFEST"] = manifest_string
-
-
       end
+
+      io["MANIFEST"] = manifest_string
     end
 
     zipfile_name_full_path
