@@ -17,47 +17,92 @@
 <% end %>
 
 <div id="left-news-box">
-  <div class="panel">
-    <% start_time = Time.now %>
-    <h2>Models activity <span class="h2-explanation">(in the last 2 weeks)</span></h2>
-
-    <% if @all_model_events.empty? %>
-    <p>No recent activity</p>
-    <% else %>
-    <ul>
-      <% @all_model_events.each do |model| %>
-      <% if model.created_at == model.updated_at %>
-      <li><%= "#{model_link(model)} was created by #{person_link(model.people.first)} #{distance_of_time_in_words(Time.now, model.created_at)} ago." -%></li>
+  
+  <% start_time = Time.now %>
+  <div class="news">
+  	<div class="news_list">
+  	  <div class="news_heading">
+  	     Models Activity
+  	     <span class="sub_heading">
+  	       (in the last 2 weeks)
+  	     </span>
+  	  </div>
+  	  <% if @all_model_events.empty? %>
+        <div class="news_empty">No recent model activity</div>
       <% else %>
-      <li><%= whats_new_text(model) %></li>
-      <% end %>
-      <% end %>
-    </ul>
-    <% end %>
-    <!-- Time spent in news-box all-models: <%= Time.now - start_time-%> -->
+        <% @all_model_events.each do |model| %>
+          <% model_info = whats_new_model(model) %>
+          <div class="news_post<% if model_info[:your_news] %> your_news<% end %>">
+            <div class="news_image">
+              <a href="<%= url_for(:controller => "browse", :action => "one_model", :id => model.id) -%>">
+                <% if !model.previews.nil? and !model.previews.empty? %>
+                <img src="<%= url_for :controller => :browse, :action => :display_preview, :id => model.id %>" />
+                <% end %>
+              </a>
+            </div>
+            <div class="news_content">
+              <div class="news_above">
+                <%= model_info[:action] %>
+              </div>
+              <div class="news_item">
+                <a href="<%= url_for(:controller => "browse", :action => "one_model", :id => model.id) -%>"><%= model.name -%></a>
+              </div>
+              <div class="news_below">
+                 <%= model_info[:time] %>
+              </div>
+            </div> 
+          </div>
+        <% end %>
+      <% end %>    
+    </div>
   </div>
+  <!-- Time spent in news-box all-models: <%= Time.now - start_time-%> -->
 
-  <div class="panel">
-    <% start_time = Time.now %>
-    <% if @person == @the_person %>
-    <h2>Recent activity in <%= link_to 'your models', :controller => :account, :action => :models, :id => @the_person.id -%>
-      <%= link_to "(All of your models)", :controller => :account, :action => :models, :id => @the_person.id -%></h2>
-    <% else %>
-    <h2>Recent activity in <%= @the_person.first_name %>'s models
-      <%= link_to "(All of #{@the_person.first_name}'s models)", :controller => :account, :action => :models, :id => @the_person.id -%></h2>
-    <% end %>
-
-    <% if @model_events.empty? %>
-    <p>No recent activity</p>
-    <% else %>
-    <ul>
-      <% @model_events.each do |model| %>
-      <li><%= whats_new_text(model) %></li>
-      <% end %>
-    </ul>
-    <% end %>
-    <!-- Time spent in news-box models: <%= Time.now - start_time-%> -->
+  
+  <% start_time = Time.now %>
+  <% whos =  if @person == @the_person then 'Your' else @the_person.first_name + '\'s' end %>
+  <div class="news">
+    <div class="news_list">
+      <div class="news_heading">
+      <%= whos %> Models Activity
+      </div>
+      <% if @model_events.empty? %>
+        <div class="news_empty">
+          No recent model activity in <%= whos %> models
+        </div>
+      <% else %>
+        <% @model_events.each do |model| %>
+          <% model_info = whats_new_model(model) %>
+          <div class="news_post<% if model_info[:your_news] %> your_news<% end %>">
+            <div class="news_image">
+              <a href="<%= url_for(:controller => "browse", :action => "one_model", :id => model.id) -%>">
+                <% if !model.previews.nil? and !model.previews.empty? %>
+                <img src="<%= url_for :controller => :browse, :action => :display_preview, :id => model.id %>" />
+                <% end %>
+              </a>
+            </div>
+            <div class="news_content">
+              <div class="news_above">
+                <%= model_info[:action] %>
+              </div>
+              <div class="news_item">
+                <a href="<%= url_for(:controller => "browse", :action => "one_model", :id => model.id) -%>"><%= model.name -%></a>
+              </div>
+              <div class="news_below">
+                 <%= model_info[:time] %>
+              </div>
+            </div> 
+          </div>
+          <div class="news_more">
+            <a href="<%= url_for(:controller => :account, :action => :models, :id => @the_person.id) -%>">
+              View all of <%= whos %> models
+            </a>
+          </div>
+        <% end %>
+      <% end %>    
+    </div>
   </div>
+  <!-- Time spent in news-box models <%= Time.now - start_time-%> -->
 
   <div class="panel">
     <% start_time = Time.now %>

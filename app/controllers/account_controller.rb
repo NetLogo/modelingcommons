@@ -290,7 +290,9 @@ class AccountController < ApplicationController
           render :json => {:status => 'ERROR_CREATING_USER'}
         end
         format.html do
-          render :action => :new
+          #render :action => :new
+          flash[:notice] = "Error creating new user"
+          redirect_to :action => :new
         end
       end
       

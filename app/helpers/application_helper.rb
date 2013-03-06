@@ -1,5 +1,28 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
+  
+  def whats_new_model(node)
+    
+    now = Time.now
+    time_since_update = distance_of_time_in_words(Time.now, node.updated_at)
+    link_to_item_person = person_link(node.person)
+    
+    original_node_author = NodeVersion.fields(:person_id).all(:conditions => {:node_id => node.id},
+                                                              :order => :created_at.desc
+                                                             ).first.person
+                                                             
+    this_user_did_it = true if original_node_author == @person
+
+    updated_or_created = (node.created_at.to_i == node.updated_at.to_i ? 'created' : 'updated')
+      
+    {
+      :time => "#{time_since_update} ago", 
+      :action => "#{person_link(original_node_author)} #{updated_or_created} model", 
+      :your_news => this_user_did_it
+    }
+      
+  end
+  
   def whats_new_text(item)
 
     this_user_did_it = true if item.person == @person
