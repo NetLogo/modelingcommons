@@ -60,11 +60,11 @@
 
   
   <% start_time = Time.now %>
-  <% whos =  if @person == @the_person then 'Your' else @the_person.first_name + '\'s' end %>
+  <% whos =  if @person == @the_person then 'your' else @the_person.first_name + '\'s' end %>
   <div class="news">
     <div class="news_list">
       <div class="news_heading">
-      <%= whos %> Models Activity
+      <%= whos.capitalize %> Models Activity<span class="sub_heading"> (in the past 2 weeks)</span>
       </div>
       <% if @model_events.empty? %>
         <div class="news_empty">
@@ -104,51 +104,90 @@
   </div>
   <!-- Time spent in news-box models <%= Time.now - start_time-%> -->
 
-  <div class="panel">
-    <% start_time = Time.now %>
-    <% if @person == @the_person %>
-    <h2>Recent activity in <%= link_to "your tags", :controller => :account, :action => :tags -%> </h2>
-    <% else %>
-    <h2>Recent activity in <%= @the_person.first_name %>'s tags</h2>
-    <% end %>
 
-    <% if @tag_events.empty? %>
-    <p>No recent activity</p>
-    <% else %>
-    <ul>
-      <% @tag_events.each do |tag| %>
-      <li><%= whats_new_text(tag) %></li>
-      <% end %>
-    </ul>
-    <% end %>
-    <!-- Time spent in news-box tags: <%= Time.now - start_time-%> -->
-  </div>
-
-  <div class="panel">
-    <h2>Recent requests for help</h2>
-    <% if @questions.empty? %>
-    <p>No questions to display</p>
-    <% else %>
-    <ul>
-      <% @questions.each do |posting| %>
-      <li>
-        <% if posting.person == @the_person %>
-        <span class="highlight">
-          <% end %>
-
-          <%= model_link(posting.node) -%>:
-          <%= person_link(posting.person) %> asked about
-          '<%= link_to posting.title, :controller => :browse, :action => :one_model, :anchor => 'discuss', :id => posting.node.id %>,' <%= distance_of_time_in_words(Time.now, posting.created_at) %> ago
-
-          <% if posting.person == @the_person %>
-        </span>
+  <% start_time = Time.now %>
+  <% whos =  if @person == @the_person then 'your' else @the_person.first_name + '\'s' end %>
+  <div class="news">
+    <div class="news_list">
+      <div class="news_heading">
+      <%= whos.capitalize %> Tag Activity<span class="sub_heading"> (in the past 2 weeks)</span>
+      </div>
+      <% if @tag_events.empty? %>
+        <div class="news_empty">
+          No recent activity in <%= whos %> tags
+        </div>
+      <% else %>
+        <% @tag_events.each do |tag_event| %>
+          <% tag_event_info = whats_new_tag(tag_event) %>
+          <div class="news_post<% if tag_event_info[:your_news] %> your_news<% end %>">
+            <div class="news_image">
+              <a href="<%= tag_event_info[:link] -%>">
+                <%= tag_event_info[:image] %>
+              </a>
+            </div>
+            <div class="news_content">
+              <div class="news_above">
+                <%= tag_event_info[:action] %>
+              </div>
+              <div class="news_item">
+                <a href="<%= tag_event_info[:link] -%>"><%= tag_event_info[:name] %></a>
+              </div>
+              <div class="news_below">
+                 <%= tag_event_info[:time] %>
+              </div>
+            </div> 
+          </div>
+          
         <% end %>
-      </li>
-      <% end %>
-    </ul>
-    <!-- Time spent in news-box help: <%= Time.now - start_time-%> -->
-    <% end %>
+        <% if @person == @the_person %>
+          <div class="news_more">
+            <a href="<%= url_for(:controller => :account, :action => :tags) -%>">
+              View all of <%= whos %> tags
+            </a>
+          </div>
+        <% end %>
+      <% end %>    
+    </div>
   </div>
+  <!-- Time spent in news-box tags <%= Time.now - start_time-%> -->
+  
+  <% start_time = Time.now %>
+  <div class="news">
+    <div class="news_list">
+      <div class="news_heading">
+        Requests for help<span class="sub_heading"> (in the past 2 weeks)</span>
+      </div>
+      <% if @questions.empty? %>
+        <div class="news_empty">
+          No recent requests for help
+        </div>
+      <% else %>
+        <% @questions.each do |question| %>
+          <% question_info = whats_new_comment(question) %>
+          <div class="news_post<% if question_info[:your_news] %> your_news<% end %>">
+            <div class="news_image">
+              <a href="<%= question_info[:link] -%>">
+                <%= question_info[:image] %>
+              </a>
+            </div>
+            <div class="news_content">
+              <div class="news_above">
+                <%= question_info[:action] %>
+              </div>
+              <div class="news_item">
+                <a href="<%= question_info[:link] -%>"><%= question_info[:name] %></a>
+              </div>
+              <div class="news_below">
+                 <%= question_info[:time] %>
+              </div>
+            </div> 
+          </div>
+        <% end %>
+      <% end %>    
+    </div>
+  </div>
+  <!-- Time spent in news-box help <%= Time.now - start_time-%> -->
+  
 </div>
 
 <div id="right-news-box">

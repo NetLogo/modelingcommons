@@ -23,11 +23,70 @@ module ApplicationHelper
       
   end
   
+  def whats_new_tag(item)
+    this_user_did_it = true if item.person == @person
+    now = Time.now
+    time_since_update = distance_of_time_in_words(Time.now, item.updated_at)
+    link_to_item_person = person_link(item.person)
+    
+    if item.is_a?(Tag)
+      action = "#{link_to_item_person} created tag"
+      link = url_for(:controller => :tags, :action => :one_tag, :id => item.id)
+      name = item.name
+    elsif item.is_a?(TaggedNode)
+      action = "#{link_to_item_person} added tag #{link_to(item.tag.name, :controller => :tags, :action => :one_tag, :id => item.tag.id)} to"
+      link = url_for(:controller => "browse", :action => "one_model", :id => item.node.id)
+      name = item.node.name
+      if !item.node.previews.nil? and !item.node.previews.empty?
+        image = "<img src=\"#{url_for :controller => :browse, :action => :display_preview, :id => item.node.id}\""
+      end
+    end
+    
+    {
+      :time => "#{time_since_update} ago", 
+      :action => action, 
+      :your_news => this_user_did_it,
+      :link => link,
+      :name => name,
+      :image => image
+    }
+    
+  end
+  
+  def whats_new_comment(comment)
+    this_user_did_it = true if item.person == @person
+    now = Time.now
+    time_since_update = distance_of_time_in_words(Time.now, item.updated_at)
+    link_to_item_person = person_link(item.person)
+    
+    if item.is_question?
+      action = "#{link_to_item_person} asked a question about"
+    else 
+      action = "#{link_to_item_person} commented on"
+    end
+    
+    link = url_for(:controller => "browse", :action => "one_model", :id => item.node.id)
+    name = item.node.name
+    
+    if !item.node.previews.nil? and !item.node.previews.empty?
+      image = "<img src=\"#{url_for :controller => :browse, :action => :display_preview, :id => item.node.id}\""
+    end
+    
+    {
+      :time => "#{time_since_update} ago", 
+      :action => action, 
+      :your_news => this_user_did_it,
+      :link => link,
+      :name => name,
+      :image => image
+    }
+    
+  end
+  
   def whats_new_text(item)
 
     this_user_did_it = true if item.person == @person
     output = ''
-
     now = Time.now
     time_since_update = distance_of_time_in_words(Time.now, item.updated_at)
     link_to_item_person = person_link(item.person)

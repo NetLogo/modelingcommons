@@ -427,8 +427,10 @@ class AccountController < ApplicationController
     @questions = Posting.unanswered_questions.select { |question| question.node.visible_to_user?(@person) and question.created_at >= how_new_is_new and !question.deleted_at }
 
     logger.warn "[AccountController#mypage] #{Time.now} before @recent_tags"
+    #New tags (type Tag)
     @recent_tags = @the_person.tags.select { |tag| tag.created_at >= how_new_is_new}
 
+    #Models that have recently had a tag attached (type TaggedNode)
     logger.warn "[AccountController#mypage] #{Time.now} before @recent_tagged_models"
     @recent_tagged_models = @the_person.tagged_nodes.select { |tagged_node| tagged_node.node.visible_to_user?(@person) and tagged_node.created_at >= how_new_is_new}
 
