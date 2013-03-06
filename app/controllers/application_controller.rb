@@ -18,8 +18,17 @@ class ApplicationController < ActionController::Base
 
   def require_login
     if @person.nil?
-      flash[:notice] = "You must log in before proceeding."
-      redirect_to :controller => :account, :action => :login
+      respond_to do |format|
+        format.html do 
+          flash[:notice] = "You must log in before proceeding."
+          redirect_to :controller => :account, :action => :login
+          
+        end
+        format.json do 
+          response = {:status => 'NOT_LOGGED_IN'}
+          render :json => response
+        end
+      end
       return false
     end
   end

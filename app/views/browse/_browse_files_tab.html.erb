@@ -9,7 +9,11 @@
         <th>Type</th>
         <th>Description</th>
         <th>Last updated</th>
+
+        <% if @model.changeable_by_user?(@person) %>
         <th></th>
+        <% end %>
+
       </tr>
     </thead>
 
@@ -21,7 +25,12 @@
         <td><%= f.type -%></td>
         <td><%= f.description %></td>
         <td><%= distance_of_time_in_words(Time.now, f.updated_at) -%> ago, by <%= person_link(f.person) %></td>
-        <td><%= link_to("Delete", {:controller => :file, :action => :delete, :id => @model.id, :file_id => f.id}, :confirm => "Really delete '#{f.filename}'?" ) %></td>
+        <% if @model.changeable_by_user?(@person) %>
+        <td>
+        <%= link_to("Delete", {:controller => :file, :action => :delete, :id => @model.id, :file_id => f.id}, :confirm => "Really delete '#{f.filename}'?" ) %>
+        </td>
+        <% end %>
+        
       </tr>
       <% end -%>
     </tbody>
@@ -39,20 +48,23 @@
       <td>File</td>
       <td><%= file_field_tag :uploaded_file, :size => 60 %>
         <%= hidden_field_tag :id, @model.id %></td>
+      <td></td>
     </tr>
 
     <tr>
       <td>Description</td>
       <td><%= text_field_tag :description, nil, :size => 80 %></td>
+      <td></td>
     </tr>
 
     <tr>
       <td>File type:</td>
       <td><%= select("document", "type", NodeAttachment::TYPES.keys.sort, { :include_blank => true }) %></td>
+      <td></td>
     </tr>
 
     <tr>
-      <td colspan="2"><%= submit_tag "Upload file", :class => "submit" %></td>
+      <td colspan="3"><%= submit_tag "Upload file", :class => "submit" %></td>
     </tr>
 
   </table>
@@ -66,6 +78,10 @@
       'document[type]': 'required',
       'uploaded_file': 'required',
       'description': 'required'
-   } } );
+   }, 
+   errorPlacement: function(error, element) {
+		element.parents("tr").children("td:last").append(error);
+	}
+   });
 </script>
 

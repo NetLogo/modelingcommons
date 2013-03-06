@@ -1,7 +1,5 @@
 # Model for an individual node in our graph
 
-require 'bluecloth'
-
 class Node < ActiveRecord::Base
   acts_as_tree :order => "name"
 
@@ -131,7 +129,7 @@ class Node < ActiveRecord::Base
     end
 
     # Handle URLs
-    text.gsub! /(http:\/\/[-\/_.~%\w]+\w)/ do
+    text.gsub! /(http:\/\/[-\/_.~%?=\w]+\w)/ do
       "<a target=\"_blank\" href=\"#{$1}\">#{$1}</a>"
     end
 
@@ -295,6 +293,8 @@ class Node < ActiveRecord::Base
   def changeable_by_user?(person)
     return false if person.nil?
 
+    return true if person.administrator?
+
     return true if author?(person)
 
     return true if group and group_changeable? and group.members.member?(person)
@@ -328,6 +328,7 @@ class Node < ActiveRecord::Base
 
   def cannot_be_run_as_applet?
     return true if name =~ /3D/
+    return true if netlogo_version =~ /3D/
     return true if procedures_tab =~ /hubnet-/
     return true if procedures_tab =~ /file-/
     return true if procedures_tab =~ /extensions/
@@ -341,14 +342,13 @@ class Node < ActiveRecord::Base
   end
 
   def create_zipfile
-    Zip::ZipOutputStream::open(zipfile_name_full_path) do |io|
-      io.put_next_entry("#{download_name}.nlogo")
-      io.write(contents.to_s)
+    Zippy.create zipfile_name_full_path do |io|
+      io["#{download_name}.nlogo"] = contents.to_s
 
       attachments.each do |attachment|
-        io.put_next_entry("#{attachment.filename}")
-        io.write(attachment.contents.to_s)
+        io[attachment.filename] = attachment.contents.to_s
       end
+
     end
 
     zipfile_name_full_path
@@ -378,13 +378,13 @@ class Node < ActiveRecord::Base
   end
 
   def self.most_downloaded
-    LoggedAction.find_by_sql("SELECT COUNT(DISTINCT ip_address), node_id
-                                                   FROM Logged_Actions
-                                                  WHERE controller = 'browse'
-                                                    AND action = 'download_model'
-                                                    AND node_id IS NOT NULL
-                                                    AND logged_at >= NOW() - interval '2 weeks'
-                                               GROUP BY node_id
+    LoggedAction.find_by_sql("SELECT COUNT(DISTINCT LA.ip_address), LA.node_id
+                                                   FROM Logged_Actions LA
+                                                  WHERE LA.controller = 'browse'
+                                                    AND LA.action = 'download_model'
+                                                    AND LA.node_id IS NOT NULL
+                                                    AND LA.logged_at >= NOW() - interval '2 weeks'
+                                               GROUP BY LA.node_id
                                                ORDER BY count DESC
                                                   LIMIT 20;")
   end

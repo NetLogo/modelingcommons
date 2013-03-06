@@ -3,10 +3,12 @@
 <h2>Models in the <%= @group.name %> group:</h2>
 
 <% if @group.models and (not @group.models.empty?) %>
-<%= render :partial => "browse/model_list", :object => @group.models %>
+<%= render :partial => "browse/model_list", :object => @group.models, :locals => {:title => 'Group'}  %>
 <% else %>
 <p>No models.</p>
 <% end %>
+
+<p><%= link_to "Download all of the #{@group.name}'s models", :controller => :membership, :action => :download, :id => @group.id %></p>
 
 <h2>Members of the <%= @group.name %> group:</h2>
 

@@ -23,6 +23,8 @@ class NodeVersion
   before_save :update_indexes
   after_save :update_node_modification_time
 
+  after_save :notify_authors
+
   scope :info_keyword_matches,  lambda { |term| where(:info_keyword_index => term) }
   scope :procedures_keyword_matches,  lambda { |term| where(:procedures_keyword_index => term) }
 
@@ -81,6 +83,13 @@ class NodeVersion
 
   def update_node_modification_time
     node.update_attributes(:updated_at => Time.now)
+  end
+
+  def notify_authors
+    return unless node.node_versions.count > 1 
+    return if node.people.uniq.count == 1 and node.people.first == person
+
+    Notifications.deliver_modified_model(node, person) 
   end
 
 end

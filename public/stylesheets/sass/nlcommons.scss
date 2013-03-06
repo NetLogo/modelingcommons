@@ -281,11 +281,10 @@ body {
       padding-left: 40px;
   }
   h1, h2, h3 {
-    margin-top: 16px;
-    margin-bottom: 6px;
+    margin: 16px 0px;
   }
   p {
-    margin-bottom: 10px;
+    margin: 10px 0px;
   }
 }
 
@@ -296,24 +295,133 @@ body {
  * Page-specific styling
  */
 
+
+/*
+ * New Comments
+ */
+$arrow-width: 12px;
+$arrow-height: 12px;
+$arrow-top: 14px;
+$comment-border-width: 2px;
+.comments {
+  margin: 10px 0px 10px 0px;
+  @include serif-font();
+  width: 600px;
+  td {
+    vertical-align: top;
+  }
+  td.person {
+    div {
+      @include pie-border-radius(8px 8px 8px 8px);
+      @include box-shadow(5px 5px 15px -5px gray);
+    }
+    width: 70px;
+    text-align: center;
+    font-size: 12px;
+    img {
+      width: 70px;
+      @include pie-border-radius(8px 8px 0px 0px);
+    }
+    p {
+      @include sans-font();
+      font-size: 12px;
+      background-color: $nav-color;
+      margin: 0px;
+      padding: 1px 0px;
+      @include pie-border-radius(0px 0px 8px 8px);
+      a {
+        color: white;
+        display: block;
+        text-decoration: none;
+      }
+    }
+  }
+  td.comment {
+    div.comment_box_container {
+      font-size: 0px;
+      position: relative;
+      div.comment_arrow_container {
+        width: $arrow-width;
+        position: absolute;
+        top: $arrow-top;
+        
+        
+        div {
+          width: 0px;
+          height: 0px;
+          position: absolute;
+          left: 0px;
+          top: 0px;
+        }
+        div.black {
+          border-style: solid;
+          border-width: $arrow-height/2 $arrow-width $arrow-height/2 0px;
+          border-color: transparent black transparent transparent;
+        }
+        div.white {
+          border-style: solid;
+          border-width: $arrow-height/2 - $comment-border-width   $arrow-width - 2*$comment-border-width   $arrow-height/2 - $comment-border-width 0px;
+          border-color: transparent white transparent transparent;
+          top: $comment-border-width;
+          left: 2*$comment-border-width;
+        }
+      }
+      div.comment_box {
+        position: relative;
+        margin-left: $arrow-width - $comment-border-width;
+        border: $comment-border-width solid black;
+        background-color: white;
+        min-height: 50px;
+        h1 {
+          font-size: 15px;
+          margin: 4px 8px 4px 8px;
+        }
+        p {
+          font-size: 12px;
+          margin: 0px 8px 0px 8px;
+          @include sans-font();
+        }
+        h2 {
+          font-size: 10px;
+          margin: 3px 8px 3px 8px;
+        }
+        @include box-shadow(5px 5px 15px 0px gray);
+        @include pie-border-radius(8px);
+      }
+      .question {
+        font-size: .7em;
+      }
+      
+    }
+  }
+  .deleted {
+    text-decoration: line-through;
+  }
+}
+#posting-table {
+  input[type="text"], textarea {
+    width: 400px;
+  }
+}
+
 /* 
  * Model Page
  * browse/one_model
+ * Model and project page image preview/info
  */
 
 #preview_info_container {
   width: 960px;
   height: 160px;
   display:table-row;
-  float: left;
   &>div {
     display: table-cell;
     height: 160px;
     vertical-align: top;
   }
 }
-#model_preview {
-  #preview-image {
+#preview_image {
+  &>div, img {
     width: 152px;
     height: 152px;
     line-height: 152px;
@@ -324,23 +432,33 @@ body {
     background-color: hsl(0%, 0%, 85%);
   }
 }
-#model_info {
+#preview_info {
   img {
     vertical-align: middle;
-  }
-  img.inline_image {
     height: 20px;
-  } 
+  }
   &>div {
     height: 53px;
     display: table-row;
     &>div {
       display: table-cell;
       vertical-align: middle;
+      font-size: 12px;
       
     }
   }
+  a {
+    line-height: 20px;
+    display: inline-block;
+  }
 }
+
+
+/* 
+ * Model Page
+ * browse/one_model
+ */
+
 
 .posting-title {
     font-weight: bold;
@@ -380,23 +498,6 @@ body {
 }
 
 #upload-model-form { 
-  label.file_label {
-    @extend button;
-    display: inline-block;
-    position: relative;
-    overflow: hidden;
-    input[type=file] {
-      opacity: 0;
-      filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
-      position: absolute;
-      top: 0px;
-      left: 0px;
-      cursor: pointer;
-      display: block;
-      width: 100%;
-      height: 100%;
-    }
-  }
   td {
     line-height: 26px;
   }
@@ -569,6 +670,12 @@ table#people_adder {
  * Globally useful styling
  */ 
 
+
+
+
+
+
+
 .hidden {
   display: none;
 }
@@ -585,12 +692,50 @@ div.left-right {
     }
 }
 
+.shadowbox {
+  &>div {
+    @include box-shadow(0 0 10px 2px gray);
+    overflow: hidden;
+    background-color: lighten($header-color, 10%);
+    @include pie-border-radius($tab-corner-radius);
+  }
+  .heading {
+    @include pie-border-radius($tab-corner-radius $tab-corner-radius 0px 0px);
+    @include sans-font();
+    //@include text-shadow($text-highlight, 2px, 2px, 3px);
+    background-color: $nav-color;
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 2px;
+    font-size: 20px;
+    margin: 0px;
+    .sub_heading {
+      font-size: 13px;
+    }
+    &, a {
+      color: white;
+    }
+    a {
+      display: inline-block;
+      width: 100%;
+    }
+  }
+  .contents {
+    margin: 4px;
+  }
+}
+
+.model_link img {
+  height: 30px;
+}
+
 .panel {
   @include global_padding;
   border: 3px solid black;
   @include border-radius(8px);
   @include pie-z;
   padding: 4px;
+  
 }
 
 .tabs_panel {
@@ -636,13 +781,43 @@ input[type=text], input[type=password] {
   &:focus.error {
     outline-color: red;
   }
+  &.placeholder {
+    color: lighten(black, 60%);
+  }
+}
+textarea {
+  $color: rgb(50%, 50%, 50%);
+  @include pie;
+  @include serif-font();
+  @include border-radius($input-radius);
+  border: 1px solid $color;
+  padding: 2px;
+  margin: 2px;
+  font-size: $default-font-size;
+  @include box-shadow(-1px 1px 4px 1px lighten($color, 20%) inset);
+  &.error {
+    color: $error-color;
+    border-color: $error-color;
+    
+  }
+  &:focus {
+    outline:none;
+    $input-color: darken($header-color, 10%);
+    @include box-shadow(-1px 1px 4px 1px lighten($color, 20%) inset, 0px 0px 4px 2px $input-color);
+  }
+  &.error:focus {
+    @include box-shadow(-1px 1px 4px 1px lighten($color, 20%) inset, 0px 0px 4px 2px lighten($error-color, 20%));
+  }
+  &:focus.error {
+    outline-color: red;
+  }
 }
 
 /*
  * Buttons
  */
-button, input[type=button], input[type=submit] {
-  @include clickable($background-color: $header-color);
+button, input[type=button], input[type=submit], label.file_label {
+  @include clickable($background-color: $header-color, $active: ':hover:active');
   font-size: $default-font-size;
   line-height: 16px;
   padding-top: 2px;
@@ -657,6 +832,25 @@ button, input[type=button], input[type=submit] {
       display: inline-block;
     }
   @include border-radius($input-radius);
+  
+}
+
+label.file_label {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  input[type=file] {
+    opacity: 0;
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  vertical-align: middle;
 }
 
 .error {
@@ -752,6 +946,7 @@ button, input[type=button], input[type=submit] {
   }
 }
 table.model_list_datatable table {
+  width: 100%;
   td {
     height: 30px;
     &:first-child {
@@ -764,6 +959,9 @@ table.model_list_datatable table {
       vertical-align: top;
       width: 30px; 
       height: 30px;
+    }
+    &.buttons {
+      text-align: right;
     }
   }
 }
@@ -788,6 +986,94 @@ table.simple_table {
     background-color: #ff0;
 }
 
+
+#projects_table {
+  thead {
+    display: none;
+  }
+  width: 100%;
+  tr {
+    padding: 8px;
+    float:left;
+    border-bottom: 1px solid $nav-color;
+    td {
+      width: 300px;
+      display: block;
+    }
+  }
+  .project {
+    h1, h2, p, li {
+      @include sans-font();
+    }
+    h1 {
+      margin: 4px 0px;
+      text-align: center;
+      font-size: 18px;
+    }
+    h2 {
+      margin: 0px;
+      font-size: 16px;
+      line-height: 40px;
+      height: 40px;
+      img {
+        vertical-align: middle;
+        margin-right: 5px;
+        max-height: 40px;
+      }
+    }
+    p {
+      margin: 0px;
+      font-size: 14px;
+    }
+    ul {
+      padding: 0px;
+      li {
+        width: 160px;
+        overflow:hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        &:before {
+          content: "-";
+          margin: 0px 3px;
+          
+        }
+        list-style-type: none;
+        
+      }
+    }
+    
+    a {
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    .project_model_list {
+      display: inline-block;
+      vertical-align: top;
+    }
+    .project_image {
+      margin-bottom: 8px;
+      display: inline-block;
+      vertical-align: top;
+      a {
+        display: inline-block;
+      }
+      img {
+        
+        width: 120px;
+        height: 120px;
+      }
+    }
+   
+  }
+}
+
+#project_page {
+  #add_model_to_project select {
+    max-width: 450px;
+  }
+}
 
 .activity {
   width: 660px;

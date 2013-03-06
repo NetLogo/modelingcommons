@@ -2,8 +2,15 @@
 
 class ProjectsController < ApplicationController
 
+  before_filter :require_login, :only => [:new, :create, :add_model, :remove_model]
+
   def index
     @projects = Project.all
+    if @person
+      @models_to_add = @person.models.select {|model| !model.projects.member?(@project)}.sort_by{|model| model.name.downcase}.map {|model| [model.name, model.id]}
+    else
+      @models_to_add = []
+    end
   end
 
   def new
@@ -64,5 +71,10 @@ class ProjectsController < ApplicationController
 
     redirect_to :controller => :projects, :action => :show, :id => project.id
   end
-
+  
+  def download
+    project = Project.find(params[:id])
+    send_file(project.create_zipfile(@person), :filename => project.zipfile_name, :type => 'application/zip', :disposition => "inline")
+  end
+  
 end

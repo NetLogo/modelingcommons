@@ -20,7 +20,16 @@
   </tr>
   <tr>
     <td>Country</td>
-    <td><%= form.select :country_name, country_options_for_select(nil, ['United States', 'Israel']) %></td>
+    <td>
+    	<% 
+    	blank = '--------'
+    	priority_countries = ['United States']
+    	@countries.unshift(blank)
+    	index = 0
+    	priority_countries.each{ |e| @countries.insert(index, @countries.delete(e) ) ; index+=1 }
+    	%>
+    	<%= form.select :country_name, options_for_select(@countries, {:disabled => blank}) %>
+    </td>
   </tr>
   <tr>
     <td>Birthdate (optional)</td>
@@ -45,47 +54,7 @@
 
 <br />
 
-<p>You are registering for the Modeling Commons, a research project
-  from the Center for Connected Learning and Computer-Based Modeling at
-  Northwestern University, Evanston IL, USA.</p>
-
-<p>The purpose of the Modeling Commons is to better understand
-  modeling practices in individuals and groups, online collaborative
-  learning communities, and the ways in which people learn in groups.
-  We are also interested in learning what design features facilitate
-  collaborative modeling practices. The Modeling Commons itself is thus
-  a research project under active development.</p>
-
-<p>There is no expected end date for this research project. Indeed, if
-  successful, we would hope the Modeling Commons continues as a
-  self-sustaining community. If and when we decide to terminate it, we
-  will make every effort to inform users and provide them with an
-  alternative.</p>
-
-<p>There are no risks to you associated with participating in this
-  research study.  Your participation is completely voluntary.  You can
-  stop participation at any time.</p>
-
-<p>You will benefit from this research by enjoying a community of
-  like-minded modelers, being able to easily post and share your models
-  with others and collaborate with others on model development, keep
-  track of revision history of your models, as well as discuss and tag
-  models that you and others have written. </p>
-
-<p>Instead of participating in this study, you could write your
-  NetLogo models on your own computer, and post them to your own Web
-  site. However, we hope and expect that the collaborative experience we
-  provide will encourage you to use the Modeling Commons.</p>
-
-<p>Public records of your activity in the Modeling Commons may be
-  identified by name. Records that are private to a group, or to your
-  individual account, will be anonymized and/or displayed only in the
-  aggregate. We will never identify you or your work in public if you
-  have not already done so yourself.</p>
-
-<p>If you have any questions about the Modeling Commons, you can
-  contact Northwestern University graduate student, Reuven Lerner, at
-  <%= mail_to "modelingcommons@ccl.northwestern.edu" -%>.</p>
+<%= render :partial => 'user_agreement' -%>
 
 <h2><%= form.check_box :registration_consent -%><label for="new_person_registration_consent">I understand and agree to the above.</label></h2>
 

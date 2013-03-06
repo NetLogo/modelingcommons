@@ -171,7 +171,7 @@ $padding: 5px;
   font-size: 16px; 
   @include sans-font();
   z-index: 0;
-  @include clickable($background-color: $header-color, $selected: '.ui-tabs-selected', $disabled: '.empty', $active: ':active:hover');
+  @include clickable($background-color: $header-color, $selected: '.ui-tabs-selected', $disabled: '.empty');
   @include border-radius(0px 0px 8px 8px);
 }
 .ui-tabs .ui-tabs-nav li:first-child {

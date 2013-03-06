@@ -1,43 +1,43 @@
 <div class="header">
   <div class="banner">
-    <%= link_to "<h2>NetLogo</h2><h1>Modeling Commons</h2>", :controller => :account, :action => :mypage %>
+    <%= link_to "<h2>NetLogo</h2><h1>Modeling Commons</h1>", :controller => :account, :action => :mypage %>
   </div>
   <div class="login_flash">
     <div class="login_container">
-    	<div class="login">
-	      <% if @person %>
-	      Hello <%= link_to @person.fullname, :controller => :account, :action => :mypage -%><%= person_image(@person) %>
-	      | <%= link_to_unless_current "Edit personal details", :controller => :account, :action => :edit, :id => @person.id %>
-	      <% if @person.administrator %> | <%= link_to_unless_current "Admin", :controller => :admin, :action => :index %><% end %>
-	      | <%= link_to_unless_current "Logout", :controller => :account, :action => :logout %>
-	      <% else %>
-	      <% form_tag(url_for(:controller => :account, :action => :login_action), :id => "header_login") do %>
-	      <table>
-		<tr>
-		  <td colspan="3" style="text-align: left"><%= link_to "Register to share and participate", :controller => :account, :action => :new %> | <%= link_to "Forgot Password", :controller => :account, :action => :reset_password -%></td>
-		</tr>
-		<tr>
-		  <td><%= text_field_tag :email_address, nil, :placeholder => "Email Address" %></td>
-		  <td><%= password_field_tag :password, nil, :placeholder => "Password" %></td>
-		  <td><button>Login</button></td>
-		</tr>
-		<tr class="login_error_container">
-		  <td></td>
-		  <td></td>
-		  <td></td>
-		</tr>
-	      </table>
-	      
-	      <% end %>	
-	      <% end %>	
+      <div class="login">
+	<% if @person %>
+	Hello <%= link_to @person.fullname, :controller => :account, :action => :mypage -%><%= person_image(@person) %>
+	| <%= link_to_unless_current "Edit personal details", :controller => :account, :action => :edit, :id => @person.id %>
+	<% if @person.administrator %> | <%= link_to_unless_current "Admin", :controller => :admin, :action => :index %><% end %>
+	| <%= link_to_unless_current "Logout", :controller => :account, :action => :logout %>
+	<% else %>
+	<% form_tag(url_for(:controller => :account, :action => :login_action), :id => "header_login") do %>
+	<table>
+	  <tr>
+	    <td colspan="3" style="text-align: left"><%= link_to "Register to share and participate", :controller => :account, :action => :new %> | <%= link_to "Forgot Password", :controller => :account, :action => :reset_password -%></td>
+	  </tr>
+	  <tr>
+	    <td><%= text_field_tag :email_address, nil, :placeholder => "Email Address" %></td>
+	    <td><%= password_field_tag :password, nil, :placeholder => "Password" %></td>
+	    <td><button>Login</button></td>
+	  </tr>
+	  <tr class="login_error_container">
+	    <td></td>
+	    <td></td>
+	    <td></td>
+	  </tr>
+	</table>
+	
+	<% end %>	
+	<% end %>	
       </div> 
     </div>
     <div class="flash_container">
-    	<div>
-    		<div id="flash_notice">
-    			
-    		</div>
+      <div>
+    	<div id="flash_notice">
+    	  
     	</div>
+      </div>
     </div>
     
     <% if flash[:notice] -%>
@@ -64,6 +64,7 @@
 	<%= link_to "Tags", {:controller => :account, :action => :tags, :id => @person.id},{:title => "Tag a model by category"}  %></li><li>
 	<% end %>
 	<%= link_to "Help", {:controller => :help, :action => :index}, {:title => "Get help and information about the modeling commons"} %></li>
+      <li><%= link_to "Blog", 'http://blog.modelingcommons.org/', {:title => "Modeling Commons blog"} %></li>
     </ul>
     <ul>
       <% if @person %>
@@ -71,8 +72,8 @@
 	<%= link_to "Add model", {:controller => :upload, :action => :new_model}, {:title => "Upload a new model"} %></li>	
       <% end %>
     </ul>
-    
-    
+
+
   </div>
   <div class="search">
     <% form_tag(url_for(:controller => :search, :action => :search_action), { :id => "model_search_form"}) do %>

@@ -1,10 +1,12 @@
 <% @title = 'Comparison of versions' -%>
 
+<%= link_to "Return to model", :controller => :browse, :action => :one_model, :id => @model.id -%>
+
 <h2>Info tab</h2>
 <% if @comparison_results['info_tab'].blank? %>
 <p>No differences in the Info tab.</p>
 <% else %>
-<pre>
+<pre class="monospace">
   <%= @comparison_results['info_tab'] -%>
 </pre>
 <% end %>
@@ -13,7 +15,7 @@
 <% if @comparison_results['procedures_tab'].blank? %>
 <p>No differences in the Code tab.</p>
 <% else %>
-<pre>
+<pre class="monospace">
   <%= @comparison_results['procedures_tab'] -%>
 </pre>
 <% end %>

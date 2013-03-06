@@ -55,28 +55,36 @@ class Notifications < ActionMailer::Base
     @subject = "[TESTING] #{@subject}" if Rails.env == 'development'
   end
 
-  def modified_model(people, node)
+  def modified_model(nlmodel, current_author)
     standard_settings
-    @recipients = node.people
-    @subject = 'Modeling Commons: Model update'
+    @bcc = 'modelingcommons@ccl.northwestern.edu'
+    @recipients = nlmodel.people.select {|p| p.send_model_updates?}.map {|person| person.email_address}
+    @recipients.delete(current_author.email_address)
+
+    @subject = "Modeling Commons: Update to the '#{nlmodel.name}' model"
     @subject = "[TESTING] #{@subject}" if Rails.env == 'development'
-    @body[:nlmodel] = node
+    @body[:nlmodel] = nlmodel
   end
 
   def applied_tag(people, tag)
-    STDERR.puts "At start of applied_tag '#{people.inspect}', '#{tag.inspect}'"
     standard_settings
-    @recipients = people.map{|person| person.email_address}
-    STDERR.puts "@recipients = '#{@recipients.inspect}'"
-    @subject = 'Modeling Commons: Tag was applied'
+    @recipients = people.select {|p| p.send_tag_updates?}.map {|person| person.email_address}
+    @bcc = 'modelingcommons@ccl.northwestern.edu'
+    @subject = 'Modeling Commons: '#{tag.name}' tag was applied'
     @subject = "[TESTING] #{@subject}" if Rails.env == 'development'
     @body[:tag] = tag
   end
 
-  def updated_discussion(people, nlmodel)
+  def updated_discussion(nlmodel, current_author)
     standard_settings
-    @recipients = people.map{|person| person.email_address}
-    @subject = 'Updated discussion'
+
+    author_addresses = nlmodel.people.map{|person| person.email_address}
+    posting_addresses = nlmodel.active_postings.map {|ap| ap.person}.select {|p| p.send_model_updates?}.map { |p| p.email_address}
+    @recipients = (author_addresses + posting_addresses).uniq
+    @recipients.delete(current_author.email_address)
+
+    @bcc = 'modelingcommons@ccl.northwestern.edu'
+    @subject = "Modeling Commons: Updated discussion of the #{nlmodel.name} model"
     @subject = "[TESTING] #{@subject}" if Rails.env == 'development'
     @body[:nlmodel] = nlmodel
   end

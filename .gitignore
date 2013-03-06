@@ -10,9 +10,14 @@ mkmf.log
 nohup.out
 profiling/
 public/browse/*
-public/modelzips/*zip
+public/modelzips
 public/sitemap.xml
 public/system/*
 rerun.txt
 tmp/*
 Other Files/*
+./#*
+./.#*
+turbulence
+turbulence/*
+.#*

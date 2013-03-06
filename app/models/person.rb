@@ -84,6 +84,57 @@ class Person < ActiveRecord::Base
     Digest::SHA1.hexdigest("#{the_salt}--#{plaintext}")
   end
 
+  def download_name
+    fullname.gsub(/[\s\/]/, '_')
+  end
+
+  def zipfile_name
+    "#{download_name}.zip"
+  end
+
+  def zipfile_name_full_path
+    "#{RAILS_ROOT}/public/modelzips/#{zipfile_name}"
+  end
+
+  def create_zipfile(web_user)
+    Zippy.create zipfile_name_full_path do |io|
+
+      zipped_nodes = [ ]
+
+      nodes.each do |node|
+        next unless node.visible_to_user?(web_user)
+
+        zipped_nodes << node
+        io["#{download_name}/#{node.download_name}/#{download_name}.nlogo"] = node.contents.to_s
+
+        node.attachments.each do |attachment|
+          io["#{download_name}/#{node.download_name}/#{attachment.filename}"] = attachment.contents.to_s
+        end
+
+      end
+
+      manifest_string = "Models written by #{fullname}\n"
+
+      if zipped_nodes.empty?
+        manifest_string << "No models available for download."
+      else
+        zipped_nodes.each_with_index do |node, index|
+          manifest_string << "[%3d]\t" % index
+          manifest_string << "Created #{node.created_at}\t"
+          manifest_string << "Last updated #{node.updated_at}\t"
+          manifest_string << "#{node.id}\t"
+          manifest_string << "#{node.name}\t"
+          manifest_string << "http://modelingcommons.org/browse/one_model/#{node.id}\n"
+        end
+      end
+
+      io["MANIFEST"] = manifest_string
+
+    end
+
+    zipfile_name_full_path
+  end
+
   private
 
   def generate_salt_and_encrypt_password

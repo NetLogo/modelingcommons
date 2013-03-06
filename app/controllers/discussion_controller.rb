@@ -12,6 +12,10 @@ class DiscussionController < ApplicationController
     params[:new_posting][:body].gsub!('<', '&lt;')
     params[:new_posting][:body].gsub!('>', '&rt;')
 
+    if params[:new_posting][:is_question].blank?
+      params[:new_posting][:is_question] = false 
+    end
+
     @posting = Posting.new(params[:new_posting])
 
     if @posting.save

@@ -12,6 +12,10 @@
 <div id="person-atom-feed"><%= link_to image_tag("feed.png"), :controller => :account, :action => :follow, :id => @the_person.id, :format => :atom %> <%= link_to "Follow #{@the_person.first_name}'s activity in your feed reader", :controller => :account, :action => :follow, :id => @the_person.id, :format => :atom %></div>
 <% end %>
 
+<% if @the_person.nodes.present? %>
+<p><%= link_to "Download all of #{@the_person.first_name}'s models", :controller => :account, :action => :download, :id => @the_person.id %></p>
+<% end %>
+
 <div id="left-news-box">
   <div class="panel">
     <% start_time = Time.now %>
@@ -94,7 +98,6 @@
           <% if posting.person == @the_person %>
         </span>
         <% end %>
-
       </li>
       <% end %>
     </ul>

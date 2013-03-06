@@ -42,8 +42,11 @@ class HistoryController < ApplicationController
       return
     end
 
-    earlier_version = NodeVersion.find(params[:compare_1])
-    later_version = NodeVersion.find(params[:compare_2])
+    compare_1 = NodeVersion.find(params[:compare_1])
+    compare_2 = NodeVersion.find(params[:compare_2])
+
+    earlier_version, later_version = [compare_1, compare_2].sort_by { |v| v.created_at }
+
     @model = earlier_version.node
 
     if earlier_version == later_version

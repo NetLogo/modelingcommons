@@ -1,15 +1,22 @@
 <html>
-    <body>
-    <h1>Discussion update</h1>
+  <head>
+    <title>Discussion in the Modeling Commons</title>
+  </head>
+  <body>
+    <h1>Discussion in the Modeling Commons</h1>
 
-    <p>This is to inform you that there has been additional discussion
-    of the "<%= @nlmodel.name %>" model in the NetLogo Modeling Commons.  You have either contributed
-    a model or a discussion comment in the past, so we thought that
-    you would like to know. </p>
+    <p>Greetings from the <a href="http://modelingcommons.org">Modeling Commons</a>!</p>
 
-    <p>You are invited to continue to participate in the discussion
-    <a
-    href="http://modelingcommons.org/browse/one_model/<%= @nlmodel.id -%>">here</a>.</p>
+    <p>This is to inform you that there is a new message on the
+      discussion forum for the "<%= @nlmodel.name %>" model.  You have
+      contributed to this model (or to its discussion) in the past, so
+      we thought that you would like to know.</p>
 
-    </body>
+    <p>To view or contribute to the discussion, just go to: 
+      <a href="http://modelingcommons.org/browse/one_model/<%= @nlmodel.id -%>">here</a>.</p>
+
+    <p>To remove yourself from such notifications in the future, click
+    on "edit your profile" from any page on the  <a href="http://modelingcommons.org">Modeling Commons</a>.</p>
+
+  </body>
 </html>

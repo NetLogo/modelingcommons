@@ -24,7 +24,9 @@ class BrowseController < ApplicationController
     @models = Node.all(:order => "updated_at DESC", :limit => 100).select {|model| model.visible_to_user?(@person)}[0..19]
     render 'list_models' , :layout => 'application_nomargin'
   end
-
+  
+  
+  
   def one_model
     render :layout => 'application_nomargin'
   end
@@ -124,7 +126,6 @@ class BrowseController < ApplicationController
   def pie
     send_file "#{RAILS_ROOT}/public/stylesheets/PIE.htc",  :filename => 'PIE.htc', :disposition => 'inline', :type => 'text/x-component'
   end
-  
   
   
 end
