@@ -1134,8 +1134,12 @@ table.simple_table {
 
 
 
-
+$your_news_color: rgb(250, 247, 157);
 .news {
+  .your_news {
+    background-color: $your_news_color;
+  }
+  
   a {
     text-decoration: none;
     &:hover {
@@ -1177,9 +1181,6 @@ table.simple_table {
     background-color: lighten($header-color, 10%);
     @include border-radius($tab-corner-radius);
     .news_post {
-      &.your_news {
-        background-color: rgb(250, 247, 157);
-      }
       margin: 4px;
       
       .news_image {
@@ -1187,14 +1188,30 @@ table.simple_table {
         height: 50px;
         display: inline-block;
         background-color: $no-image-color;
+        position: relative;
         a {
           display: inline-block;
           width: 100%;
           height: 100%;
+          &.tag_image {
+            background-color: lighten($header-color, 10%);
+            &.your_news {
+              background-color: $your_news_color;
+            }
+          }
         }
         img {
           width: 100%;
           height: 100%;
+        }
+        a.tag_overlay {
+          width: 45px;
+          background-image: url(/images/tag_overlay.png);
+          background-size: 100% auto;
+          background-repeat: no-repeat;
+          position: absolute;
+          top: -4px;
+          left: -4px;
         }
         vertical-align:top;
       }

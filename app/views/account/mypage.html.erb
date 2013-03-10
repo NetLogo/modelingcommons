@@ -121,9 +121,16 @@
           <% tag_event_info = whats_new_tag(tag_event) %>
           <div class="news_post<% if tag_event_info[:your_news] %> your_news<% end %>">
             <div class="news_image">
-              <a href="<%= tag_event_info[:link] -%>">
-                <%= tag_event_info[:image] %>
-              </a>
+              <% if tag_event.is_a?(TaggedNode) %>
+                <a href="<%= tag_event_info[:link] -%>">
+                  <%= tag_event_info[:image] %>
+                </a>
+                <a href="<%= tag_event_info[:link] -%>" class="tag_overlay"></a>
+              <% elsif tag_event.is_a?(Tag) %>
+                <a href="<%= tag_event_info[:link] -%>" class="tag_image<% if tag_event_info[:your_news] %> your_news<% end %>">
+                  <img src="images/tag_large.png" />
+                </a>
+              <% end %>
             </div>
             <div class="news_content">
               <div class="news_above">
