@@ -135,6 +135,10 @@ class Person < ActiveRecord::Base
     zipfile_name_full_path
   end
 
+  def downloaded_nodes
+    LoggedAction.find(:all, :conditions => {:action => 'download_model', :person_id => id}).map { |la| Node.find(la.node_id) }.uniq
+  end
+
   private
 
   def generate_salt_and_encrypt_password
