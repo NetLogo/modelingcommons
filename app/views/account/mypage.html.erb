@@ -53,7 +53,12 @@
             </div> 
           </div>
         <% end %>
-      <% end %>    
+      <% end %>  
+      <div class="news_more">
+        <a href="<%= url_for(:controller => :browse, :action => :list_recent_models ) -%>">
+          View recent models
+        </a>
+      </div>  
     </div>
   </div>
   <!-- Time spent in news-box all-models: <%= Time.now - start_time-%> -->
@@ -175,6 +180,9 @@
             <div class="news_image">
               <a href="<%= question_info[:link] -%>">
                 <%= question_info[:image] %>
+              </a>
+              <a href="<%= question_info[:link] -%>" class="image_overlay">
+                <img src="<%= question_info[:person_image] -%>">
               </a>
             </div>
             <div class="news_content">
@@ -398,12 +406,18 @@
      <% 
      tag = tagAndCount[0]
      count = tagAndCount[1]
+     your_news = @person.id == tag.person.id
      %>
       <% next if count.to_i.zero? %>
-      <div class="news_post<% if @person.id == -1 %> your_news<% end %>">
+      <div class="news_post<% if your_news %> your_news<% end %>">
+        <div class="news_image">
+          <a href="<%= url_for(:controller => :tags, :action => :one_tag, :id => tag.id ) -%>" class="tag_image<% if your_news %> your_news<% end %>">
+            <img src="images/tag_large.png" />
+          </a>
+        </div>
       	<div class="news_content">
       		<div class="news_above">
-      			
+      		  &nbsp;
       		</div>
       		<div class="news_item">
       			<a href="<%= url_for(:controller => :tags, :action => :one_tag, :id => tag.id ) -%>"><%= tag.name -%></a>

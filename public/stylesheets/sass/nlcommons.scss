@@ -1136,6 +1136,8 @@ table.simple_table {
 
 $your_news_color: rgb(250, 247, 157);
 .news {
+  font-size: 0px;
+  
   .your_news {
     background-color: $your_news_color;
   }
@@ -1213,17 +1215,32 @@ $your_news_color: rgb(250, 247, 157);
           top: -4px;
           left: -4px;
         }
+        a.image_overlay {
+          width: auto;
+          height: auto;
+          position: absolute;
+          top: -3px;
+          left: -3px;
+          img {
+            max-width: 30px;
+            max-height: 30px;
+          }
+        }
         vertical-align:top;
       }
       .news_content {
-        
+        margin-left: 4px;
         display: inline-block;
         vertical-align: top;
+        width: 408px;
         .news_above {
           font-size: 11px;
         }
         .news_item {
           font-size: 15px;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
         }
         .news_below {
           font-size: 11px;
@@ -1233,9 +1250,11 @@ $your_news_color: rgb(250, 247, 157);
     .news_more {
       text-align: center;
       margin: 4px;
+      font-size: 15px;
     }
     .news_empty {
       margin: 4px;
+      font-size: 15px;
     }
   }
 }

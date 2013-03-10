@@ -4072,19 +4072,23 @@ table.simple_table td {
   font-size: 10px;
 }
 
-/* line 1139, sass/nlcommons.scss */
+/* line 1138, sass/nlcommons.scss */
+.news {
+  font-size: 0px;
+}
+/* line 1141, sass/nlcommons.scss */
 .news .your_news {
   background-color: #faf79d;
 }
-/* line 1143, sass/nlcommons.scss */
+/* line 1145, sass/nlcommons.scss */
 .news a {
   text-decoration: none;
 }
-/* line 1145, sass/nlcommons.scss */
+/* line 1147, sass/nlcommons.scss */
 .news a:hover {
   text-decoration: underline;
 }
-/* line 1151, sass/nlcommons.scss */
+/* line 1153, sass/nlcommons.scss */
 .news .news_list {
   -moz-box-shadow: 0 0 10px 2px gray;
   -webkit-box-shadow: 0 0 10px 2px gray;
@@ -4100,7 +4104,7 @@ table.simple_table td {
   -khtml-border-radius: 8px;
   border-radius: 8px;
 }
-/* line 1155, sass/nlcommons.scss */
+/* line 1157, sass/nlcommons.scss */
 .news .news_list h1 {
   font-family: "Muli", "Arial", sans-serif;
   background-color: #04346c;
@@ -4111,7 +4115,7 @@ table.simple_table td {
   color: white;
   margin: 0px;
 }
-/* line 1166, sass/nlcommons.scss */
+/* line 1168, sass/nlcommons.scss */
 .news .news_list .news_heading {
   font-family: "Muli", "Arial", sans-serif;
   background-color: #04346c;
@@ -4122,15 +4126,15 @@ table.simple_table td {
   color: white;
   margin: 0px;
 }
-/* line 1176, sass/nlcommons.scss */
+/* line 1178, sass/nlcommons.scss */
 .news .news_list .news_heading .sub_heading {
   font-size: 13px;
 }
-/* line 1183, sass/nlcommons.scss */
+/* line 1185, sass/nlcommons.scss */
 .news .news_list .news_post {
   margin: 4px;
 }
-/* line 1186, sass/nlcommons.scss */
+/* line 1188, sass/nlcommons.scss */
 .news .news_list .news_post .news_image {
   width: 50px;
   height: 50px;
@@ -4139,26 +4143,26 @@ table.simple_table td {
   position: relative;
   vertical-align: top;
 }
-/* line 1192, sass/nlcommons.scss */
+/* line 1194, sass/nlcommons.scss */
 .news .news_list .news_post .news_image a {
   display: inline-block;
   width: 100%;
   height: 100%;
 }
-/* line 1196, sass/nlcommons.scss */
+/* line 1198, sass/nlcommons.scss */
 .news .news_list .news_post .news_image a.tag_image {
   background-color: #b7ceea;
 }
-/* line 1198, sass/nlcommons.scss */
+/* line 1200, sass/nlcommons.scss */
 .news .news_list .news_post .news_image a.tag_image.your_news {
   background-color: #faf79d;
 }
-/* line 1203, sass/nlcommons.scss */
+/* line 1205, sass/nlcommons.scss */
 .news .news_list .news_post .news_image img {
   width: 100%;
   height: 100%;
 }
-/* line 1207, sass/nlcommons.scss */
+/* line 1209, sass/nlcommons.scss */
 .news .news_list .news_post .news_image a.tag_overlay {
   width: 45px;
   background-image: url(/images/tag_overlay.png);
@@ -4169,69 +4173,89 @@ table.simple_table td {
   left: -4px;
 }
 /* line 1218, sass/nlcommons.scss */
+.news .news_list .news_post .news_image a.image_overlay {
+  width: auto;
+  height: auto;
+  position: absolute;
+  top: -3px;
+  left: -3px;
+}
+/* line 1224, sass/nlcommons.scss */
+.news .news_list .news_post .news_image a.image_overlay img {
+  max-width: 30px;
+  max-height: 30px;
+}
+/* line 1231, sass/nlcommons.scss */
 .news .news_list .news_post .news_content {
+  margin-left: 4px;
   display: inline-block;
   vertical-align: top;
+  width: 408px;
 }
-/* line 1222, sass/nlcommons.scss */
+/* line 1236, sass/nlcommons.scss */
 .news .news_list .news_post .news_content .news_above {
   font-size: 11px;
 }
-/* line 1225, sass/nlcommons.scss */
+/* line 1239, sass/nlcommons.scss */
 .news .news_list .news_post .news_content .news_item {
   font-size: 15px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
-/* line 1228, sass/nlcommons.scss */
+/* line 1245, sass/nlcommons.scss */
 .news .news_list .news_post .news_content .news_below {
   font-size: 11px;
 }
-/* line 1233, sass/nlcommons.scss */
+/* line 1250, sass/nlcommons.scss */
 .news .news_list .news_more {
   text-align: center;
   margin: 4px;
+  font-size: 15px;
 }
-/* line 1237, sass/nlcommons.scss */
+/* line 1255, sass/nlcommons.scss */
 .news .news_list .news_empty {
   margin: 4px;
+  font-size: 15px;
 }
 
 /* 
  * Legacy Styling
  * All of this should probably be updated
  */
-/* line 1254, sass/nlcommons.scss */
+/* line 1273, sass/nlcommons.scss */
 #menubar-avatar, #logged-in-as {
   float: left;
   margin-left: 1em;
 }
 
-/* line 1259, sass/nlcommons.scss */
+/* line 1278, sass/nlcommons.scss */
 #main-menu, h1, h2, h3, #flash-notice, #logged-in-as {
   font-family: "Muli", "Arial", sans-serif;
   font-weight: bold;
 }
 
-/* line 1264, sass/nlcommons.scss */
+/* line 1283, sass/nlcommons.scss */
 h1, #flash-notice {
   clear: both;
 }
 
-/* line 1268, sass/nlcommons.scss */
+/* line 1287, sass/nlcommons.scss */
 h1, #flash-notice {
   font-size: 21px;
 }
 
-/* line 1272, sass/nlcommons.scss */
+/* line 1291, sass/nlcommons.scss */
 h2 {
   font-size: 17px;
 }
 
-/* line 1276, sass/nlcommons.scss */
+/* line 1295, sass/nlcommons.scss */
 .h2-explanation {
   font-size: 13px;
 }
 
-/* line 1280, sass/nlcommons.scss */
+/* line 1299, sass/nlcommons.scss */
 h3, #menu-bar {
   font-size: 15px;
 }
@@ -4241,7 +4265,7 @@ h3, #menu-bar {
     top: 3.5em;
     left: 20em;
 }*/
-/* line 1290, sass/nlcommons.scss */
+/* line 1309, sass/nlcommons.scss */
 a img {
   border: 0;
   margin: 0;
@@ -4383,7 +4407,7 @@ div ul.subsection_tabs li.tab a:hover {
 .sorting {
     background: url('../images/sort_both.jpg') no-repeat center right;
 }*/
-/* line 1440, sass/nlcommons.scss */
+/* line 1459, sass/nlcommons.scss */
 div.foreSortIcon {
   background: url("../images/sort_both.jpg") no-repeat center right;
   width: 16px;
@@ -4393,7 +4417,7 @@ div.foreSortIcon {
 }
 
 /* Autocomplete */
-/* line 1449, sass/nlcommons.scss */
+/* line 1468, sass/nlcommons.scss */
 ul.jq-ui-autocomplete {
   position: absolute;
   overflow: hidden;
@@ -4406,7 +4430,7 @@ ul.jq-ui-autocomplete {
   color: #333;
 }
 
-/* line 1460, sass/nlcommons.scss */
+/* line 1479, sass/nlcommons.scss */
 ul.jq-ui-autocomplete li {
   display: block;
   padding: 0.3em 0.5em 0.3em 0.3em;
@@ -4414,30 +4438,30 @@ ul.jq-ui-autocomplete li {
   width: 100%;
 }
 
-/* line 1467, sass/nlcommons.scss */
+/* line 1486, sass/nlcommons.scss */
 ul.jq-ui-autocomplete li.active {
   background-color: #3875d7;
   color: #fff;
 }
 
-/* line 1472, sass/nlcommons.scss */
+/* line 1491, sass/nlcommons.scss */
 .deleted {
   text-decoration: line-through;
 }
 
-/* line 1476, sass/nlcommons.scss */
+/* line 1495, sass/nlcommons.scss */
 table#new-person-form tr td {
   width: 10em;
 }
 
-/* line 1480, sass/nlcommons.scss */
+/* line 1499, sass/nlcommons.scss */
 .fieldWithErrors {
   padding: 2px;
   background-color: red;
   display: table;
 }
 
-/* line 1486, sass/nlcommons.scss */
+/* line 1505, sass/nlcommons.scss */
 #errorExplanation {
   width: 450px;
   border: 2px solid red;
@@ -4447,7 +4471,7 @@ table#new-person-form tr td {
   background-color: #f0f0f0;
 }
 
-/* line 1495, sass/nlcommons.scss */
+/* line 1514, sass/nlcommons.scss */
 #error_explanation h2 {
   text-align: left;
   font-weight: bold;
@@ -4459,18 +4483,18 @@ table#new-person-form tr td {
   color: #fff;
 }
 
-/* line 1506, sass/nlcommons.scss */
+/* line 1525, sass/nlcommons.scss */
 #error_explanation ul li {
   font-size: 12px;
   list-style: square;
 }
 
-/* line 1511, sass/nlcommons.scss */
+/* line 1530, sass/nlcommons.scss */
 tr.scaffold-row {
   border-bottom: 2px solid black;
 }
 
-/* line 1515, sass/nlcommons.scss */
+/* line 1534, sass/nlcommons.scss */
 #permission-group-reminder {
   font-style: italic;
 }

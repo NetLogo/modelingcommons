@@ -54,22 +54,25 @@ module ApplicationHelper
   end
   
   def whats_new_comment(comment)
-    this_user_did_it = true if item.person == @person
+    this_user_did_it = true if comment.person == @person
     now = Time.now
-    time_since_update = distance_of_time_in_words(Time.now, item.updated_at)
-    link_to_item_person = person_link(item.person)
+    time_since_update = distance_of_time_in_words(Time.now, comment.updated_at)
+    link_to_item_person = person_link(comment.person)
+    url_for_model = url_for(:controller => "browse", :action => "one_model", :id => comment.node.id)
+    link = url_for(:controller => "browse", :action => "one_model", :id => comment.node.id, :anchor => "model_tabs_browse_discuss")
+    model_name = comment.node.name
+    name = "\"" + comment.title + "\""
     
-    if item.is_question?
-      action = "#{link_to_item_person} asked a question about"
+    if comment.is_question?
+      action = "#{link_to_item_person} asked a question about model <a href=\"#{url_for_model}\">#{model_name}</a>"
     else 
-      action = "#{link_to_item_person} commented on"
+      action = "#{link_to_item_person} commented on model <a href=\"#{url_for_model}\">#{model_name}</a>"
     end
     
-    link = url_for(:controller => "browse", :action => "one_model", :id => item.node.id)
-    name = item.node.name
     
-    if !item.node.previews.nil? and !item.node.previews.empty?
-      image = "<img src=\"#{url_for :controller => :browse, :action => :display_preview, :id => item.node.id}\""
+    
+    if !comment.node.previews.nil? and !comment.node.previews.empty?
+      image = "<img src=\"#{url_for :controller => :browse, :action => :display_preview, :id => comment.node.id}\""
     end
     
     {
@@ -78,7 +81,8 @@ module ApplicationHelper
       :your_news => this_user_did_it,
       :link => link,
       :name => name,
-      :image => image
+      :image => image,
+      :person_image => comment.person.avatar.url(:thumb)
     }
     
   end
