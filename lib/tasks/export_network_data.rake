@@ -127,5 +127,60 @@ namespace :network do
     end
   end
 
+  desc "Generate data for tagging a model"
+  task :tagging => :environment do
+
+    get_network 'tagging' do |person, output|
+      person.tagged_nodes.each do |node|
+        STDERR.puts "\t\t\tTagged model '#{node.id}'"
+        output << ["P#{person.id}", "N#{node.id}", 'tagging'].join("\t")
+      end
+    end
+  end
+
+  desc "Viewed a model"
+  task :viewing => :environment do
+
+    get_network 'viewing' do |person, output|
+      person.viewed_nodes.each do |node|
+        STDERR.puts "\t\t\tViewed model '#{node.id}'"
+        output << ["P#{person.id}", "N#{node.id}", 'viewing'].join("\t")
+      end
+    end
+  end
+
+  desc "Downloaded all of a user's models"
+  task :user_download_all => :environment do
+
+    get_network 'user_download_all' do |person, output|
+      person.user_model_downloads.each do |node|
+        STDERR.puts "\t\t\tDownloaded model '#{node.id}' as part of a full-user download"
+        output << ["P#{person.id}", "N#{node.id}", 'user_download_all'].join("\t")
+      end
+    end
+  end
+
+  desc "Downloaded all of a tag's models"
+  task :tag_download_all => :environment do
+
+    get_network 'tag_download_all' do |person, output|
+      person.tag_model_downloads.each do |node|
+        STDERR.puts "\t\t\tDownloaded model '#{node.id}' as part of a full-tag download"
+        output << ["P#{person.id}", "N#{node.id}", 'tag_download_all'].join("\t")
+      end
+    end
+  end
+
+  desc "Downloaded all of a project's models"
+  task :project_download_all => :environment do
+
+    get_network 'project_download_all' do |person, output|
+      person.project_model_downloads.each do |node|
+        STDERR.puts "\t\t\tDownloaded model '#{node.id}' as part of a full-project download"
+        output << ["P#{person.id}", "N#{node.id}", 'project_download_all'].join("\t")
+      end
+    end
+  end
+
 
 end
