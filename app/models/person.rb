@@ -139,6 +139,18 @@ class Person < ActiveRecord::Base
     LoggedAction.find(:all, :conditions => {:action => 'download_model', :person_id => id}).map { |la| Node.find(la.node_id) }.uniq
   end
 
+  def questions
+    postings.select { |p| p.is_question? }
+  end
+
+  def non_questions
+    postings.reject { |p| p.is_question? }
+  end
+
+  # def user_model_downloads
+  #   LoggedAction.find(:all, :conditions => {:controller => 'account', :action => 'download', :person_id => id}).map { |la| Node.find(la.node_id) }    
+  # end
+
   private
 
   def generate_salt_and_encrypt_password
