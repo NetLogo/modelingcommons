@@ -553,13 +553,45 @@ class AccountController < ApplicationController
   end
 
   def models
-    if params[:id].blank?
-      @the_person = @person
-    else
-      @the_person = @the_person = Person.find(params[:id])
+    respond_to do |format|
+      #standard html request for web app
+      format.html do
+        if params[:id].blank?
+          @the_person = @person
+        else
+          @the_person = @the_person = Person.find(params[:id])
+        end
+        render :layout => 'application_nomargin'
+      end
+      format.json do
+        #json request from Netlogo existing model search
+        query = params[:query].blank? ? "" : params[:query].downcase
+        count = params[:count].blank? ? 10 : params[:count].to_i
+        results = Node.find(:all, :conditions => ["name ILIKE ?", '%' + query + '%'], :limit => count)
+        results = results.select {|n| 
+          n.visible_to_user?(@person)
+        }
+        results = results.sort {|a, b| a.name.downcase <=> b.name.downcase}
+        
+        if !params[:changeability].blank?
+          results = results.select {|model|
+            model.changeable_by_user?(@person)
+          }
+        end
+        
+        results = results[0..count-1]
+        results = results.collect {|model| 
+          {
+            :name => model.name,
+            :id => model.id
+          }
+        }
+        render :json => {:models => results}
+      end
     end
-    render :layout => 'application_nomargin'
+    
   end
+  
   def groups
     render :layout => 'application_nomargin'
   end
@@ -582,30 +614,6 @@ class AccountController < ApplicationController
     }
   end
 
-  def models
-    query = params[:query].blank? ? "" : params[:query].downcase
-    count = params[:count].blank? ? 10 : params[:count].to_i
-    results = Node.find(:all, :conditions => ["name ILIKE ?", '%' + query + '%'], :limit => count)
-    results = results.select {|n| 
-      n.visible_to_user?(@person)
-    }
-    results = results.sort {|a, b| a.name.downcase <=> b.name.downcase}
-    
-    if !params[:changeability].blank?
-      results = results.select {|model|
-        model.changeable_by_user?(@person)
-      }
-    end
-    
-    results = results[0..count-1]
-    results = results.collect {|model| 
-      {
-        :name => model.name,
-        :id => model.id
-      }
-    }
-    render :json => {:models => results}
-  end
 
   def download
     if params[:id].blank?
