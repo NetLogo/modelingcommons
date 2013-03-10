@@ -115,5 +115,17 @@ namespace :network do
     end
   end
 
+  desc "Generate data for forking a user's models"
+  task :forking => :environment do
+
+    get_network 'forking' do |person, output|
+      person.nodes.each do |node|
+        next unless node.parent
+        STDERR.puts "\t\t\tForked model '#{node.parent_id}'"
+        output << ["P#{person.id}", "N#{node.parent_id}", 'forking'].join("\t")
+      end
+    end
+  end
+
 
 end
