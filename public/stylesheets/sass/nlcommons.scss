@@ -110,7 +110,6 @@ body {
         @include pie-border-radius(0px 0px 0px $tab-corner-radius);
         img {
           height: 26px;
-          width: 26px;
           margin-left: 4px;
           margin-right: 4px;
           vertical-align: top;
@@ -422,7 +421,6 @@ $comment-border-width: 2px;
 }
 #preview_image {
   &>div, img {
-    width: 152px;
     height: 152px;
     line-height: 152px;
     vertical-align: middle;
@@ -1592,6 +1590,9 @@ div.main-menu-new ul li img {
   vertical-align: top;
 }
 */
+
+
+
 
 
 
