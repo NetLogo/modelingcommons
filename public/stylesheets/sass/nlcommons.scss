@@ -429,6 +429,9 @@ $comment-border-width: 2px;
     display: inline-block;
     background-color: hsl(0%, 0%, 85%);
   }
+  &>div {
+    width: 152px;
+  }
 }
 #preview_info {
   img {
