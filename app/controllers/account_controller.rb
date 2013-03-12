@@ -3,6 +3,7 @@
 class AccountController < ApplicationController
 
   before_filter :require_login, :only => [:edit, :update, :logout, :tags, :mygroups]
+  before_filter :all_news, :only => [:mypage, :login]
 
   def new_front_page
     render :layout => 'application_nomargin'
@@ -411,7 +412,8 @@ class AccountController < ApplicationController
   end
 
   def mypage
-
+    limit = 10
+    
     logger.warn "[AccountController#mypage] #{Time.now} enter"
     return redirect_to :controller => :account, :action => :login if (@person.nil? and params[:id].blank?)
 
@@ -423,9 +425,7 @@ class AccountController < ApplicationController
 
     how_new_is_new = 2.weeks.ago
 
-    logger.warn "[AccountController#mypage] #{Time.now} before @questions"
-    @questions = Posting.unanswered_questions.select { |question| question.node.visible_to_user?(@person) and question.created_at >= how_new_is_new and !question.deleted_at }
-
+    
     logger.warn "[AccountController#mypage] #{Time.now} before @recent_tags"
     #New tags (type Tag)
     @recent_tags = @the_person.tags.select { |tag| tag.created_at >= how_new_is_new}
@@ -435,61 +435,14 @@ class AccountController < ApplicationController
     @recent_tagged_models = @the_person.tagged_nodes.select { |tagged_node| tagged_node.node.visible_to_user?(@person) and tagged_node.created_at >= how_new_is_new}
 
     logger.warn "[AccountController#mypage] #{Time.now} before @tag_events"
-    @tag_events = [@recent_tags, @recent_tagged_models].flatten.sort_by { |tag| tag.created_at}.reverse
-    @tag_events = @tag_events[0..9] if @tag_events.length > 10
+    @recent_tag_events = [@recent_tags, @recent_tagged_models].flatten.sort_by { |tag| tag.created_at}.reverse[0..limit - 1]
 
-    logger.warn "[AccountController#mypage] #{Time.now} before all model updates"
-    @all_model_events = Node.all(:order => 'updated_at DESC', 
-                                 :limit => 30).select { |node| node.visible_to_user?(@person) and node.updated_at >= how_new_is_new}
-
+    
     logger.warn "[AccountController#mypage] #{Time.now} before user/group model updates"
     # Model updates
-    @model_events = [ ]
-    @group_recent_models = [ ]
-
-    @the_person.models.reverse.each_with_index do |model, index|
-      break if index > 30
-
-      if model.updated_at >= how_new_is_new
-        @model_events << model 
-        @group_recent_models << model if model.group
-      end
-    end
-
-    @group_model_events = @group_recent_models.select { |model| model.group.members.include?(@person)}
-    @model_events = @model_events.select { |model| model.visible_to_user?(@person)}
-
-    logger.warn "[AccountController#mypage] #{Time.now} before most-viewed models"
-
-    # all-time most-viewed models
-    @all_time_most_viewed = Node.all_time_most_viewed.map { |la| [la.node, la.count]}
-    @all_time_most_viewed = @all_time_most_viewed.select {|model_array| model_array[0].visible_to_user?(@person)}[0..9]
-
-    # most-viewed models
-    @most_viewed = Node.most_viewed.map { |la| [la.node, la.count]}
-    @most_viewed.reject! { |model_array| model_array[0].nil? }
-    @most_viewed = @most_viewed.select {|model_array| model_array[0].visible_to_user?(@person)}[0..9]
-
-    logger.warn "[AccountController#mypage] #{Time.now} before most-downloaded models"
-    # most-downloaded models
-    @most_downloaded = Node.most_downloaded.map { |la| [la.node, la.count]}
-    @most_downloaded = @most_downloaded.select {|model_array| model_array[0].visible_to_user?(@person)}[0..9]
-
-
-    logger.warn "[AccountController#mypage] #{Time.now} before most-applied tags"
-    # most-applied tags
-    @most_popular_tags =
-      TaggedNode.count(:group => "tag_id",
-                       :order => "count_all DESC",
-                       :limit => 20).map { |tag| [Tag.find(tag[0]), tag[1]]}
-
-    logger.warn "[AccountController#mypage] #{Time.now} before most-recommended models"
-    # most-recommended models
-    @most_recommended_models =
-      Recommendation.count(:group => "node_id",
-                           :order => "count_all DESC",
-                           :limit => 20).map { |node| [Node.find(node[0]), node[1]]}.select { |node_array| node_array[0].visible_to_user?(@person) }
-
+    @model_events = @the_person.models.select {|model| model.updated_at >= how_new_is_new && model.visible_to_user?(@person)}.sort{|a, b| b.updated_at <=> a.updated_at}[0..limit - 1]
+    @group_model_events = @the_person.models.select {|model| model.updated_at >= how_new_is_new && model.visible_to_user?(@person) && model.group && model.group.members.include?(@person)}.sort{|a, b| b.updated_at <=> a.updated_at}[0..limit - 1]
+    
     logger.warn "[AccountController#mypage] #{Time.now} exit"
     render :layout => 'application_nomargin'
   end
@@ -595,11 +548,13 @@ class AccountController < ApplicationController
   def groups
     render :layout => 'application_nomargin'
   end
+  
   def find_people
     query = params[:query].blank? ? "" : params[:query].downcase
     count = params[:count].blank? ? 10 : params[:count].to_i
     render :json => Person.search(query).sort {|a, b| a.fullname.downcase <=> b.fullname.downcase}[0..count-1].map {|person| {:id => person.id, :html => render_to_string(:partial => 'selectable_person', :locals => { :person => person})}}
   end
+  
   def get_feed
     @all_model_events = Node.all(:order => 'updated_at DESC', :limit => 30).select { |node| node.visible_to_user?(@person)}
     @tag_events = TaggedNode.all(:order => 'updated_at DESC', :limit => 30)

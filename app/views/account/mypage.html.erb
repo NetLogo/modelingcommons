@@ -98,12 +98,12 @@
               </div>
             </div> 
           </div>
-          <div class="news_more">
-            <a href="<%= url_for(:controller => :account, :action => :models, :id => @the_person.id) -%>">
-              View all of <%= whos %> models
-            </a>
-          </div>
         <% end %>
+        <div class="news_more">
+          <a href="<%= url_for(:controller => :account, :action => :models, :id => @the_person.id) -%>">
+            View all of <%= whos %> models
+          </a>
+        </div>
       <% end %>    
     </div>
   </div>
@@ -117,12 +117,12 @@
       <div class="news_heading">
       <%= whos.capitalize %> Tag Activity<span class="sub_heading"> (in the past 2 weeks)</span>
       </div>
-      <% if @tag_events.empty? %>
+      <% if @recent_tag_events.empty? %>
         <div class="news_empty">
           No recent activity in <%= whos %> tags
         </div>
       <% else %>
-        <% @tag_events.each do |tag_event| %>
+        <% @recent_tag_events.each do |tag_event| %>
           <% tag_event_info = whats_new_tag(tag_event) %>
           <div class="news_post<% if tag_event_info[:your_news] %> your_news<% end %>">
             <div class="news_image">
@@ -169,12 +169,12 @@
       <div class="news_heading">
         Requests for help<span class="sub_heading"> (in the past 2 weeks)</span>
       </div>
-      <% if @questions.empty? %>
+      <% if @recent_questions.empty? %>
         <div class="news_empty">
           No recent requests for help
         </div>
       <% else %>
-        <% @questions.each do |question| %>
+        <% @recent_questions.each do |question| %>
           <% question_info = whats_new_comment(question) %>
           <div class="news_post<% if question_info[:your_news] %> your_news<% end %>">
             <div class="news_image">
@@ -207,144 +207,13 @@
 
 <div id="right-news-box">
 	
-  <div class="news">
-    <% start_time = Time.now %>
-    <div class="news_list">
-    	<div class="news_heading">Most Viewed Models<span class="sub_heading"> (of all time)</span></div>
-    
-    	
-    <% if @all_time_most_viewed.empty? %>
-    <div class="news_empty">No statistics on all time most viewed models</div>
-    <% else %>
-      <% @all_time_most_viewed.each do |modelAndCount| %>
-     <% 
-     model = modelAndCount[0]
-     count = modelAndCount[1]
-     %>
-      <% next if count.to_i.zero? %>
-      <div class="news_post<% if @person.id == model.person.id %> your_news<% end %>">
-      	<div class="news_image">
-      		<a href="<%= url_for(:controller => "browse", :action => "one_model", :id => model.id) -%>">
-				<% if !model.previews.nil? and !model.previews.empty? %>
-				<img src="<%= url_for :controller => :browse, :action => :display_preview, :id => model.id %>" />
-				<% end %>
-			</a>
-      	</div>
-      	<div class="news_content">
-      		<div class="news_above">
-      			<a href="<%= url_for(:controller => :account, :action => :mypage, :id => model.person.id) -%>"><%= model.person.fullname -%></a>
-      		</div>
-      		<div class="news_item">
-      			<a href="<%= url_for(:controller => "browse", :action => "one_model", :id => model.id) -%>"><%= model.name -%></a>
-      		</div>
-      		<div class="news_below">
-      			 Viewed <%= pluralize(number_with_delimiter(count), "time", "times") -%>
-      		</div>
-      	</div>
-      </div>
-      <% end %>
-    <% end %>
-    <div class="news_more">
-	  	<a href="<%= url_for(:controller => :browse, :action => :list_models) -%>">
-	  		View all models
-	  	</a>
-	</div>
-    <!-- Time spent in all-time viewed-models: <%= Time.now - start_time-%> -->
-  	</div>
-  </div>
+  <%= render :partial => "all_time_most_viewed", :locals => {} -%>
 	
+	<%= render :partial => "recent_most_viewed", :locals => {} -%>
 	
-	
-  <div class="news">
-    <% start_time = Time.now %>
-    <div class="news_list">
-    	<div class="news_heading">Most Viewed Models<span class="sub_heading"> (in the past 2 weeks)</span></div>
-    	
-    <% if @most_viewed.empty?  %>
-    <div class="news_empty">No statistics on most viewed models in the past 2 weeks</div>
-    <% else %>
-      <% @most_viewed.each do |modelAndCount| %>
-     <% 
-     model = modelAndCount[0]
-     count = modelAndCount[1]
-     %>
-      <% next if count.to_i.zero? %>
-      <div class="news_post<% if @person.id == model.person.id %> your_news<% end %>">
-      	<div class="news_image">
-      		<a href="<%= url_for(:controller => "browse", :action => "one_model", :id => model.id) -%>">
-				<% if !model.previews.nil? and !model.previews.empty? %>
-				<img src="<%= url_for :controller => :browse, :action => :display_preview, :id => model.id %>" />
-				<% end %>
-			</a>
-      	</div>
-      	<div class="news_content">
-      		<div class="news_above">
-      			<a href="<%= url_for(:controller => :account, :action => :mypage, :id => model.person.id) -%>"><%= model.person.fullname -%></a>
-      		</div>
-      		<div class="news_item">
-      			<a href="<%= url_for(:controller => "browse", :action => "one_model", :id => model.id) -%>"><%= model.name -%></a>
-      		</div>
-      		<div class="news_below">
-      			 Viewed <%= pluralize(number_with_delimiter(count), "time", "times") -%> in the past 2 weeks
-      		</div>
-      	</div>
-      </div>
-      <% end %>
-    <% end %>
-    	<div class="news_more">
-      	<a href="<%= url_for(:controller => :browse, :action => :list_recent_models ) -%>">
-      		View recent models
-      	</a>
-      </div>
-    <!-- Time spent in most viewed-models: <%= Time.now - start_time-%> -->
-  	</div>
-  </div>
+  <%= render :partial => "recent_most_re", :locals => {} -%>
 
-
-  <div class="news">
-    <% start_time = Time.now %>
-    <div class="news_list">
-    	<div class="news_heading">Most Recommended Models<span class="sub_heading"> (in the past 2 weeks)</span></div>
-    	
-    <% if @most_recommended_models.empty?  %>
-    <div class="news_empty">No statistics on most recommended models in the past 2 weeks</div>
-    <% else %>
-      <% @most_recommended_models.each do |modelAndCount| %>
-     <% 
-     model = modelAndCount[0]
-     count = modelAndCount[1]
-     %>
-      <% next if count.to_i.zero? %>
-      <div class="news_post<% if @person.id == model.person.id %> your_news<% end %>">
-      	<div class="news_image">
-      		<a href="<%= url_for(:controller => "browse", :action => "one_model", :id => model.id) -%>">
-				<% if !model.previews.nil? and !model.previews.empty? %>
-				<img src="<%= url_for :controller => :browse, :action => :display_preview, :id => model.id %>" />
-				<% end %>
-			</a>
-      	</div>
-      	<div class="news_content">
-      		<div class="news_above">
-      			<a href="<%= url_for(:controller => :account, :action => :mypage, :id => model.person.id) -%>"><%= model.person.fullname -%></a>
-      		</div>
-      		<div class="news_item">
-      			<a href="<%= url_for(:controller => "browse", :action => "one_model", :id => model.id) -%>"><%= model.name -%></a>
-      		</div>
-      		<div class="news_below">
-      			 Recommended <%= pluralize(number_with_delimiter(count), "time", "times") -%> in the past 2 weeks
-      		</div>
-      	</div>
-      </div>
-      <% end %>
-    <% end %>
-    	<div class="news_more">
-      	<a href="<%= url_for(:controller => :browse, :action => :list_recent_models ) -%>">
-      		View recent models
-      	</a>
-      </div>
-    <!-- Time spent in recommended models: <%= Time.now - start_time-%> -->
-  	</div>
-  </div>
+  
 
 
 
@@ -358,8 +227,8 @@
     <% else %>
       <% @most_downloaded.each do |modelAndCount| %>
      <% 
-     model = modelAndCount[0]
-     count = modelAndCount[1]
+     model = modelAndCount.node
+     count = modelAndCount.count
      %>
       <% next if count.to_i.zero? %>
       <div class="news_post<% if @person.id == model.person.id %> your_news<% end %>">
@@ -404,8 +273,8 @@
     <% else %>
       <% @most_popular_tags.each do |tagAndCount| %>
      <% 
-     tag = tagAndCount[0]
-     count = tagAndCount[1]
+     tag = tagAndCount[:tag]
+     count = tagAndCount[:num_tags]
      your_news = @person.id == tag.person.id
      %>
       <% next if count.to_i.zero? %>
