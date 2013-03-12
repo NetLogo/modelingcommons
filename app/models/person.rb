@@ -135,6 +135,64 @@ class Person < ActiveRecord::Base
     zipfile_name_full_path
   end
 
+  def downloaded_nodes
+    LoggedAction.find(:all, :conditions => {:action => 'download_model', :person_id => id}).map { |la| Node.find(la.node_id) }.uniq
+  end
+
+  def questions
+    postings.select { |p| p.is_question? }
+  end
+
+  def non_questions
+    postings.reject { |p| p.is_question? }
+  end
+
+  def viewed_nodes
+    LoggedAction.find(:all, :conditions => { :action => 'one_model', :person_id => id}).map { |la| Node.first(:conditions => {:id => la.node_id})}.uniq
+  end
+
+  def user_model_downloads
+    user_downloads = LoggedAction.find(:all, :conditions => { :controller => 'account', :action => 'download', :person_id => id}).map { |la| [la.logged_at, YAML.load(la.params)['id']]  }
+    
+    downloaded_nodes = [ ]
+
+    user_downloads.each do |download_event|
+      Person.find(download_event[1]).nodes.each do |node|
+        next if node.created_at > download_event[0]
+        downloaded_nodes << node
+      end
+    end
+    downloaded_nodes.uniq
+  end
+
+  def project_model_downloads
+    project_downloads = LoggedAction.find(:all, :conditions => { :controller => 'project', :action => 'download', :person_id => id}).map { |la| [la.logged_at, YAML.load(la.params)['id']]  }
+    
+    downloaded_nodes = [ ]
+
+    project_downloads.each do |download_event|
+      Project.find(download_event[1]).nodes.each do |node|
+        next if node.created_at > download_event[0]
+        downloaded_nodes << node
+      end
+    end
+    downloaded_nodes.uniq
+  end
+
+  def tag_model_downloads
+    tag_downloads = LoggedAction.find(:all, :conditions => { :controller => 'tags', :action => 'download', :person_id => id}).map { |la| [la.logged_at, YAML.load(la.params)['id']]  }
+    
+    downloaded_nodes = [ ]
+
+    tag_downloads.each do |download_event|
+      Tag.find(download_event[1]).nodes.each do |node|
+        next if node.created_at > download_event[0]
+        downloaded_nodes << node
+      end
+    end
+    downloaded_nodes.uniq
+  end
+
   private
 
   def generate_salt_and_encrypt_password
