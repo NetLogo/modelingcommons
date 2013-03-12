@@ -1,6 +1,7 @@
 # Controller to deal with tagging
 
 class TagsController < ApplicationController
+  include Magick
 
   before_filter :require_login, :only => [:new, :create, :edit, :update, :destroy]
 
@@ -99,7 +100,8 @@ class TagsController < ApplicationController
     num_to_fetch_from_db = 10 #limit number of tagged nodes to fetch from db to increase speed
     
     tag = Tag.find(params[:id])
-    nodes = tag.tagged_nodes.all(:order => 'updated_at DESC', :limit => num_to_fetch_from_db).map{|tn| tn.node}.select{|node| node.visible_to_user?(@person) && !node.preview.blank?}[0..3]
+    nodes = tag.tagged_nodes.all(:order => 'updated_at DESC',
+                                 :limit => num_to_fetch_from_db).map{|tn| tn.node}.select{|node| node.visible_to_user?(@person) && !node.preview.blank?}[0..3]
     size = 152
     list = Magick::ImageList.new
     
