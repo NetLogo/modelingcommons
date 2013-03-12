@@ -354,19 +354,19 @@ class Node < ActiveRecord::Base
     zipfile_name_full_path
   end
 
-  def self.all_time_most_viewed
-    LoggedAction.find_by_sql("SELECT COUNT(DISTINCT ip_address), node_id
+  def self.all_time_most_viewed(limit = 20)
+    LoggedAction.find_by_sql(["SELECT COUNT(DISTINCT ip_address), node_id
                                                 FROM Logged_Actions
                                                WHERE controller = 'browse'
                                                  AND action = 'one_model'
                                                  AND node_id IS NOT NULL
                                             GROUP BY node_id
                                             ORDER BY count DESC
-                                               LIMIT 20;")
+                                               LIMIT ?;", limit])
   end
 
-  def self.most_viewed
-    LoggedAction.find_by_sql("SELECT COUNT(DISTINCT ip_address), node_id
+  def self.most_viewed(limit = 20)
+    LoggedAction.find_by_sql(["SELECT COUNT(DISTINCT ip_address), node_id
                                                 FROM Logged_Actions
                                                WHERE controller = 'browse'
                                                  AND action = 'one_model'
@@ -374,11 +374,11 @@ class Node < ActiveRecord::Base
                                                  AND logged_at >= NOW() - interval '2 weeks'
                                             GROUP BY node_id
                                             ORDER BY count DESC
-                                               LIMIT 20;")
+                                               LIMIT ?;", limit])
   end
 
-  def self.most_downloaded
-    LoggedAction.find_by_sql("SELECT COUNT(DISTINCT LA.ip_address), LA.node_id
+  def self.most_downloaded(limit = 20)
+    LoggedAction.find_by_sql(["SELECT COUNT(DISTINCT LA.ip_address), LA.node_id
                                                    FROM Logged_Actions LA
                                                   WHERE LA.controller = 'browse'
                                                     AND LA.action = 'download_model'
@@ -386,7 +386,7 @@ class Node < ActiveRecord::Base
                                                     AND LA.logged_at >= NOW() - interval '2 weeks'
                                                GROUP BY LA.node_id
                                                ORDER BY count DESC
-                                                  LIMIT 20;")
+                                                  LIMIT ?;", limit])
   end
 
 end

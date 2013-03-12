@@ -412,7 +412,6 @@ class AccountController < ApplicationController
   end
 
   def mypage
-    limit = 10
     
     logger.warn "[AccountController#mypage] #{Time.now} enter"
     return redirect_to :controller => :account, :action => :login if (@person.nil? and params[:id].blank?)
@@ -423,9 +422,10 @@ class AccountController < ApplicationController
       @the_person = Person.find(params[:id].to_i, :include => [:postings, :tags, :tagged_nodes])
     end
 
+    limit = 10
+    db_search_factor = 2 # fetch search_factor * limit records from db before filtering to see if user has read permission
     how_new_is_new = 2.weeks.ago
 
-    
     logger.warn "[AccountController#mypage] #{Time.now} before @recent_tags"
     #New tags (type Tag)
     @recent_tags = @the_person.tags.select { |tag| tag.created_at >= how_new_is_new}

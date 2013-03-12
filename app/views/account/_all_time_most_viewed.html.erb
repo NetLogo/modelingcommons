@@ -6,18 +6,19 @@
     <div class="news_empty">No statistics on all time most viewed models</div>
     <% else %>
       <% @all_time_most_viewed.each do |modelAndCount| %>
-     <% 
-     model = modelAndCount.node
-     count = modelAndCount.count
-     %>
+      <% 
+        model = modelAndCount.node
+        count = modelAndCount.count
+        your_news = !@person.nil? && @person.id == model.person.id
+      %>
       <% next if count.to_i.zero? %>
-      <div class="news_post<% if !@person.nil? && @person.id == model.person.id %> your_news<% end %>">
+      <div class="news_post<% if your_news %> your_news<% end %>">
         <div class="news_image">
           <a href="<%= url_for(:controller => "browse", :action => "one_model", :id => model.id) -%>">
-        <% if !model.previews.nil? and !model.previews.empty? %>
-        <img src="<%= url_for :controller => :browse, :action => :display_preview, :id => model.id %>" />
-        <% end %>
-      </a>
+            <% if !model.previews.nil? and !model.previews.empty? %>
+              <img src="<%= url_for :controller => :browse, :action => :display_preview, :id => model.id %>" />
+            <% end %>
+          </a>
         </div>
         <div class="news_content">
           <div class="news_above">

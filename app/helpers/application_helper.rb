@@ -6,21 +6,26 @@ module ApplicationHelper
     now = Time.now
     time_since_update = distance_of_time_in_words(Time.now, node.updated_at)
     link_to_item_person = person_link(node.person)
-    
     original_node_author = NodeVersion.fields(:person_id).all(:conditions => {:node_id => node.id},
                                                               :order => :created_at.desc
-                                                             ).first.person
-                                                             
+                                                             ).first.person           
     this_user_did_it = true if original_node_author == @person
-
     updated_or_created = (node.created_at.to_i == node.updated_at.to_i ? 'created' : 'updated')
-      
+    link = url_for(:controller => "browse", :action => "one_model", :id => node.id)
+    
+    if !node.previews.nil? and !node.previews.empty?
+      image = url_for :controller => :browse, :action => :display_preview, :id => node.id
+    end  
+    
+    
     {
       :time => "#{time_since_update} ago", 
       :action => "#{person_link(original_node_author)} #{updated_or_created} model", 
-      :your_news => this_user_did_it
+      :your_news => this_user_did_it,
+      :image => image,
+      :name => node.name,
+      :link => link
     }
-      
   end
   
   def whats_new_tag(item)
@@ -38,7 +43,7 @@ module ApplicationHelper
       link = url_for(:controller => "browse", :action => "one_model", :id => item.node.id)
       name = item.node.name
       if !item.node.previews.nil? and !item.node.previews.empty?
-        image = "<img src=\"#{url_for :controller => :browse, :action => :display_preview, :id => item.node.id}\""
+        image = url_for :controller => :browse, :action => :display_preview, :id => item.node.id
       end
     end
     
@@ -50,7 +55,6 @@ module ApplicationHelper
       :name => name,
       :image => image
     }
-    
   end
   
   def whats_new_comment(comment)
@@ -68,11 +72,9 @@ module ApplicationHelper
     else 
       action = "#{link_to_item_person} commented on model <a href=\"#{url_for_model}\">#{model_name}</a>"
     end
-    
-    
-    
+
     if !comment.node.previews.nil? and !comment.node.previews.empty?
-      image = "<img src=\"#{url_for :controller => :browse, :action => :display_preview, :id => comment.node.id}\""
+      image = url_for :controller => :browse, :action => :display_preview, :id => comment.node.id
     end
     
     {
@@ -84,7 +86,6 @@ module ApplicationHelper
       :image => image,
       :person_image => comment.person.avatar.url(:thumb)
     }
-    
   end
   
   def whats_new_text(item)

@@ -1,15 +1,15 @@
 <div class="news">
   <% start_time = Time.now %>
   <div class="news_list">
-    <div class="news_heading">Most Recommended Models<span class="sub_heading"> (in the past 2 weeks)</span></div>
+    <div class="news_heading">Most Downloaded Models<span class="sub_heading"> (in the past 2 weeks)</span></div>
     
-  <% if @most_recommended_models.empty?  %>
-  <div class="news_empty">No statistics on most recommended models in the past 2 weeks</div>
+  <% if @most_downloaded.empty?  %>
+  <div class="news_empty">No statistics on most downloaded models in the past 2 weeks</div>
   <% else %>
-    <% @most_recommended_models.each do |modelAndCount| %>
+    <% @most_downloaded.each do |modelAndCount| %>
     <% 
-      model = modelAndCount[:node]
-      count = modelAndCount[:recommendations]
+      model = modelAndCount.node
+      count = modelAndCount.count
       your_news = !@person.nil? && @person.id == model.person.id
     %>
     <% next if count.to_i.zero? %>
@@ -29,7 +29,7 @@
           <a href="<%= url_for(:controller => "browse", :action => "one_model", :id => model.id) -%>"><%= model.name -%></a>
         </div>
         <div class="news_below">
-           Recommended <%= pluralize(number_with_delimiter(count), "time", "times") -%> in the past 2 weeks
+           Downloaded <%= pluralize(number_with_delimiter(count), "time", "times") -%> in the past 2 weeks
         </div>
       </div>
     </div>
