@@ -1,7 +1,6 @@
 # Controller to deal with tagging
 
 class TagsController < ApplicationController
-  include Magick
 
   before_filter :require_login, :only => [:new, :create, :edit, :update, :destroy]
 
@@ -103,7 +102,7 @@ class TagsController < ApplicationController
     nodes = tag.tagged_nodes.all(:order => 'updated_at DESC',
                                  :limit => num_to_fetch_from_db).map{|tn| tn.node}.select{|node| node.visible_to_user?(@person) && !node.preview.blank?}[0..3]
     size = 152
-    list = Magick::ImageList.new
+    list = ::Magick::ImageList.new
     
     if nodes.length > 0
       nodes.each do |model| 
@@ -118,7 +117,7 @@ class TagsController < ApplicationController
     
     if list.length == 4
       list.each do |image| 
-        image.resize_to_fill!(size/2, size/2, Magick::CenterGravity)
+        image.resize_to_fill!(size/2, size/2, ::Magick::CenterGravity)
       end
       
       m = list.montage {
@@ -127,7 +126,7 @@ class TagsController < ApplicationController
       } .first
     elsif list.length == 3
       list[0..1].each { |image|
-        image.resize_to_fill!(size/2, size/2, Magick::CenterGravity)
+        image.resize_to_fill!(size/2, size/2, ::Magick::CenterGravity)
       }
       top = list[0..1].montage {
         self.geometry = "#{size/2}x#{size/2}+0+0"
@@ -135,8 +134,8 @@ class TagsController < ApplicationController
       } .first
       
       bottom = list[2]
-      bottom.resize_to_fill!(size, size/2, Magick::CenterGravity)
-      list = Magick::ImageList.new
+      bottom.resize_to_fill!(size, size/2, ::Magick::CenterGravity)
+      list = ::Magick::ImageList.new
       list.push(top)
       list.push(bottom)
       
@@ -146,7 +145,7 @@ class TagsController < ApplicationController
       } .first
     elsif list.length == 2
       list.each do |image| 
-        image.resize_to_fill!(size, size/2, Magick::CenterGravity)
+        image.resize_to_fill!(size, size/2, ::Magick::CenterGravity)
       end
       
       m = list.montage {
@@ -154,9 +153,9 @@ class TagsController < ApplicationController
         self.tile = '1x2'
       } .first
     elsif list.length == 1
-      m = list.first.resize_to_fill!(size, size, Magick::CenterGravity)
+      m = list.first.resize_to_fill!(size, size, ::Magick::CenterGravity)
     else
-      m = Magick::Image.new(1,1) {
+      m = ::Magick::Image.new(1,1) {
         self.background_color = 'rgba(255, 255, 255, 0)'
       }
     end
