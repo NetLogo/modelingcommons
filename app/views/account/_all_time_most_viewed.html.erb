@@ -16,7 +16,7 @@
         <div class="news_image">
           <a href="<%= url_for(:controller => "browse", :action => "one_model", :id => model.id) -%>">
             <% if !model.previews.nil? and !model.previews.empty? %>
-              <img src="<%= url_for :controller => :browse, :action => :display_preview, :id => model.id %>" />
+              <img src="<%= url_for :controller => :browse, :action => :display_preview, :id => model.id, :size => 'thumb' %>" />
             <% end %>
           </a>
         </div>

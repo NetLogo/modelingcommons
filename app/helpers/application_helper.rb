@@ -14,7 +14,7 @@ module ApplicationHelper
     link = url_for(:controller => "browse", :action => "one_model", :id => node.id)
     
     if !node.previews.nil? and !node.previews.empty?
-      image = url_for :controller => :browse, :action => :display_preview, :id => node.id
+      image = url_for :controller => :browse, :action => :display_preview, :id => node.id, :size => 'thumb'
     end  
     
     
@@ -43,7 +43,7 @@ module ApplicationHelper
       link = url_for(:controller => "browse", :action => "one_model", :id => item.node.id)
       name = item.node.name
       if !item.node.previews.nil? and !item.node.previews.empty?
-        image = url_for :controller => :browse, :action => :display_preview, :id => item.node.id
+        image = url_for :controller => :browse, :action => :display_preview, :id => item.node.id, :size => 'thumb'
       end
     end
     
@@ -74,7 +74,7 @@ module ApplicationHelper
     end
 
     if !comment.node.previews.nil? and !comment.node.previews.empty?
-      image = url_for :controller => :browse, :action => :display_preview, :id => comment.node.id
+      image = url_for :controller => :browse, :action => :display_preview, :id => comment.node.id, :size => 'thumb'
     end
     
     {

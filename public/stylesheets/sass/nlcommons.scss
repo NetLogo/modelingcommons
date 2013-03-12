@@ -429,6 +429,9 @@ $comment-border-width: 2px;
     display: inline-block;
     background-color: hsl(0%, 0%, 85%);
   }
+  &>div {
+    width: 152px;
+  }
 }
 #preview_info {
   img {
@@ -1178,10 +1181,10 @@ $your_news_color: rgb(250, 247, 157);
       }
     }
     margin: 10px 5px;
-    background-color: lighten($header-color, 10%);
+    background-color: lighten($header-color, 18%);
     @include border-radius($tab-corner-radius);
     .news_post {
-      margin: 4px;
+      margin: 5px;
       
       .news_image {
         width: 50px;
@@ -1230,7 +1233,7 @@ $your_news_color: rgb(250, 247, 157);
         margin-left: 4px;
         display: inline-block;
         vertical-align: top;
-        width: 408px;
+        width: 406px;
         .news_above {
           font-size: 11px;
         }
