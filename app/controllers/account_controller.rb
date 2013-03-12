@@ -3,7 +3,7 @@
 class AccountController < ApplicationController
 
   before_filter :require_login, :only => [:edit, :update, :logout, :tags, :mygroups]
-  before_filter :all_news, :only => [:mypage, :login]
+  before_filter :all_news, :only => [:mypage]
 
   def new_front_page
     render :layout => 'application_nomargin'
