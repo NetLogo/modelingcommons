@@ -1,7 +1,5 @@
 # Controller to deal with tagging
 
-require 'rmagick'
-
 class TagsController < ApplicationController
 
   before_filter :require_login, :only => [:new, :create, :edit, :update, :destroy]
