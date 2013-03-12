@@ -1,10 +1,97 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
+  
+  def whats_new_model(node)
+    
+    now = Time.now
+    time_since_update = distance_of_time_in_words(Time.now, node.updated_at)
+    link_to_item_person = person_link(node.person)
+    original_node_author = NodeVersion.fields(:person_id).all(:conditions => {:node_id => node.id},
+                                                              :order => :created_at.desc
+                                                             ).first.person           
+    this_user_did_it = true if original_node_author == @person
+    updated_or_created = (node.created_at.to_i == node.updated_at.to_i ? 'created' : 'updated')
+    link = url_for(:controller => "browse", :action => "one_model", :id => node.id)
+    
+    if !node.previews.nil? and !node.previews.empty?
+      image = url_for :controller => :browse, :action => :display_preview, :id => node.id, :size => 'thumb'
+    end  
+    
+    
+    {
+      :time => "#{time_since_update} ago", 
+      :action => "#{person_link(original_node_author)} #{updated_or_created} model", 
+      :your_news => this_user_did_it,
+      :image => image,
+      :name => node.name,
+      :link => link
+    }
+  end
+  
+  def whats_new_tag(item)
+    this_user_did_it = true if item.person == @person
+    now = Time.now
+    time_since_update = distance_of_time_in_words(Time.now, item.updated_at)
+    link_to_item_person = person_link(item.person)
+    
+    if item.is_a?(Tag)
+      action = "#{link_to_item_person} created tag"
+      link = url_for(:controller => :tags, :action => :one_tag, :id => item.id)
+      name = item.name
+    elsif item.is_a?(TaggedNode)
+      action = "#{link_to_item_person} added tag #{link_to(item.tag.name, :controller => :tags, :action => :one_tag, :id => item.tag.id)} to"
+      link = url_for(:controller => "browse", :action => "one_model", :id => item.node.id)
+      name = item.node.name
+      if !item.node.previews.nil? and !item.node.previews.empty?
+        image = url_for :controller => :browse, :action => :display_preview, :id => item.node.id, :size => 'thumb'
+      end
+    end
+    
+    {
+      :time => "#{time_since_update} ago", 
+      :action => action, 
+      :your_news => this_user_did_it,
+      :link => link,
+      :name => name,
+      :image => image
+    }
+  end
+  
+  def whats_new_comment(comment)
+    this_user_did_it = true if comment.person == @person
+    now = Time.now
+    time_since_update = distance_of_time_in_words(Time.now, comment.updated_at)
+    link_to_item_person = person_link(comment.person)
+    url_for_model = url_for(:controller => "browse", :action => "one_model", :id => comment.node.id)
+    link = url_for(:controller => "browse", :action => "one_model", :id => comment.node.id, :anchor => "model_tabs_browse_discuss")
+    model_name = comment.node.name
+    name = "\"" + comment.title + "\""
+    
+    if comment.is_question?
+      action = "#{link_to_item_person} asked a question about model <a href=\"#{url_for_model}\">#{model_name}</a>"
+    else 
+      action = "#{link_to_item_person} commented on model <a href=\"#{url_for_model}\">#{model_name}</a>"
+    end
+
+    if !comment.node.previews.nil? and !comment.node.previews.empty?
+      image = url_for :controller => :browse, :action => :display_preview, :id => comment.node.id, :size => 'thumb'
+    end
+    
+    {
+      :time => "#{time_since_update} ago", 
+      :action => action, 
+      :your_news => this_user_did_it,
+      :link => link,
+      :name => name,
+      :image => image,
+      :person_image => comment.person.avatar.url(:thumb)
+    }
+  end
+  
   def whats_new_text(item)
 
     this_user_did_it = true if item.person == @person
     output = ''
-
     now = Time.now
     time_since_update = distance_of_time_in_words(Time.now, item.updated_at)
     link_to_item_person = person_link(item.person)

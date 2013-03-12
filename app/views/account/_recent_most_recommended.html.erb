@@ -1,0 +1,45 @@
+<div class="news">
+  <% start_time = Time.now %>
+  <div class="news_list">
+    <div class="news_heading">Most Recommended Models<span class="sub_heading"> (in the past 2 weeks)</span></div>
+    
+  <% if @most_recommended_models.empty?  %>
+  <div class="news_empty">No statistics on most recommended models in the past 2 weeks</div>
+  <% else %>
+    <% @most_recommended_models.each do |modelAndCount| %>
+    <% 
+      model = modelAndCount[:node]
+      count = modelAndCount[:recommendations]
+      your_news = !@person.nil? && @person.id == model.person.id
+    %>
+    <% next if count.to_i.zero? %>
+    <div class="news_post<% if your_news %> your_news<% end %>">
+      <div class="news_image">
+        <a href="<%= url_for(:controller => "browse", :action => "one_model", :id => model.id) -%>">
+          <% if !model.previews.nil? and !model.previews.empty? %>
+            <img src="<%= url_for :controller => :browse, :action => :display_preview, :id => model.id, :size => 'thumb' %>" />
+          <% end %>
+        </a>
+      </div>
+      <div class="news_content">
+        <div class="news_above">
+          <a href="<%= url_for(:controller => :account, :action => :mypage, :id => model.person.id) -%>"><%= model.person.fullname -%></a>
+        </div>
+        <div class="news_item">
+          <a href="<%= url_for(:controller => "browse", :action => "one_model", :id => model.id) -%>"><%= model.name -%></a>
+        </div>
+        <div class="news_below">
+           Recommended <%= pluralize(number_with_delimiter(count), "time", "times") -%> in the past 2 weeks
+        </div>
+      </div>
+    </div>
+    <% end %>
+  <% end %>
+    <div class="news_more">
+      <a href="<%= url_for(:controller => :browse, :action => :list_recent_models ) -%>">
+        View recent models
+      </a>
+    </div>
+  <!-- Time spent in recommended models: <%= Time.now - start_time-%> -->
+  </div>
+</div>

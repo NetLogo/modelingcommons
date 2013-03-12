@@ -1,0 +1,44 @@
+<div class="news">
+  <% start_time = Time.now %>
+  <div class="news_list">
+    <div class="news_heading">Most Popular Tags<span class="sub_heading"> (in the past 2 weeks)</span></div>
+    
+  <% if @most_popular_tags.empty?  %>
+  <div class="news_empty">No statistics on most popular tags in the past 2 weeks</div>
+  <% else %>
+    <% @most_popular_tags.each do |tagAndCount| %>
+    <% 
+      tag = tagAndCount[:tag]
+      count = tagAndCount[:num_tags]
+      your_news = !@person.nil? && @person.id == tag.person.id
+    %>
+    <% next if count.to_i.zero? %>
+    <div class="news_post<% if your_news %> your_news<% end %>">
+      <div class="news_image">
+        <a href="<%= url_for(:controller => :tags, :action => :one_tag, :id => tag.id ) -%>" class="<% if your_news %> your_news<% end %>">
+          <img src="<%= url_for(:controller => :tags, :action => :image, :id => tag.id) %>" />
+        </a>
+        <a href="<%= url_for(:controller => :tags, :action => :one_tag, :id => tag.id ) -%>" class="tag_overlay"></a>
+      </div>
+      <div class="news_content">
+        <div class="news_above">
+          &nbsp;
+        </div>
+        <div class="news_item">
+          <a href="<%= url_for(:controller => :tags, :action => :one_tag, :id => tag.id ) -%>"><%= tag.name -%></a>
+        </div>
+        <div class="news_below">
+           Tagged <%= pluralize(number_with_delimiter(count), "time", "times") -%> in the past 2 weeks
+        </div>
+      </div>
+    </div>
+    <% end %>
+  <% end %>
+    <div class="news_more">
+      <a href="<%= url_for(:controller => :browse, :action => :list_recent_models ) -%>">
+        View recent models
+      </a>
+    </div>
+  <!-- Time spent in recommended models: <%= Time.now - start_time-%> -->
+  </div>
+</div>

@@ -179,5 +179,60 @@ class ApplicationController < ActionController::Base
                       @recent_tags, @recent_tagged_models].flatten.sort_by {|new_item| new_item.updated_at}.reverse
   end
 
+  def all_news
+    limit = 10
+    db_search_factor = 2 # fetch search_factor * limit records from db before filtering to see if user has read permission
+    how_new_is_new = 2.weeks.ago
+    
+    logger.warn "[AccountController#mypage] #{Time.now} before @questions"
+    @recent_questions = Posting.
+                          created_since(how_new_is_new).
+                          unanswered_questions.
+                          all(:limit => limit * db_search_factor).
+                          select { |question| question.node.visible_to_user?(@person) and !question.deleted_at }[0..limit - 1]
+    
+    logger.warn "[AccountController#mypage] #{Time.now} before all model updates"
+    @all_model_events = Node.
+                          updated_since(how_new_is_new).
+                          all(:order => 'updated_at DESC', 
+                              :limit => limit * db_search_factor).
+                          select { |node| node.visible_to_user?(@person)}[0..limit - 1]
+    
+    logger.warn "[AccountController#mypage] #{Time.now} before most-viewed models"
+
+    # all-time most-viewed models
+    @all_time_most_viewed = Node.
+                              all_time_most_viewed(limit * db_search_factor).
+                              select {|node_count| node_count.node.visible_to_user?(@person)}[0..limit - 1]
+
+    # most-viewed models
+    @most_viewed = Node.
+                     most_viewed(limit * db_search_factor).
+                     select{|node_count| !node_count.node.nil? && node_count.node.visible_to_user?(@person)}[0..limit - 1]
+
+    logger.warn "[AccountController#mypage] #{Time.now} before most-downloaded models"
+    # most-downloaded models
+    @most_downloaded = Node.
+                         most_downloaded(limit * db_search_factor).
+                         select {|node_count| node_count.node.visible_to_user?(@person)}[0..limit - 1]
+
+
+    logger.warn "[AccountController#mypage] #{Time.now} before most-applied tags"
+    # most-applied tags
+    @most_popular_tags = TaggedNode.count(:group => "tag_id",
+                                          :order => "count_all DESC",
+                                          :limit => limit).map { |tag| {:tag => Tag.find(tag[0]), :num_tags => tag[1]}}
+
+    logger.warn "[AccountController#mypage] #{Time.now} before most-recommended models"
+    # most-recommended models
+    @most_recommended_models = Recommendation.count(:group => "node_id",
+                                                    :order => "count_all DESC",
+                                                    :limit => limit * db_search_factor).map { |node| {
+                                                    :node => Node.find(node[0]),
+                                                    :recommendations => node[1]
+                                                     }}.select { |node_array| node_array[:node].visible_to_user?(@person) }[0..limit - 1]
+
+    logger.warn "[AccountController#mypage] #{Time.now} exit"
+  end
   
 end

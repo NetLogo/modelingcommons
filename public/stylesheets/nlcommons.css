@@ -4075,27 +4075,30 @@ table.simple_table td {
 }
 
 /* line 1139, sass/nlcommons.scss */
-.sidebar {
-  width: 300px;
-  float: left;
-}
-/* line 1140, sass/nlcommons.scss */
-.sidebar a {
-  text-decoration: none;
+.news {
+  font-size: 0px;
 }
 /* line 1142, sass/nlcommons.scss */
-.sidebar a:hover {
-  text-decoration: underline;
+.news .your_news {
+  background-color: #faf79d;
+}
+/* line 1146, sass/nlcommons.scss */
+.news a {
+  text-decoration: none;
 }
 /* line 1148, sass/nlcommons.scss */
-.sidebar .side_list {
+.news a:hover {
+  text-decoration: underline;
+}
+/* line 1154, sass/nlcommons.scss */
+.news .news_list {
   -moz-box-shadow: 0 0 10px 2px gray;
   -webkit-box-shadow: 0 0 10px 2px gray;
   -o-box-shadow: 0 0 10px 2px gray;
   box-shadow: 0 0 10px 2px gray;
   overflow: hidden;
-  margin: 5px;
-  background-color: #b7ceea;
+  margin: 10px 5px;
+  background-color: #d7e4f3;
   -moz-border-radius: 8px;
   -webkit-border-radius: 8px;
   -o-border-radius: 8px;
@@ -4103,8 +4106,8 @@ table.simple_table td {
   -khtml-border-radius: 8px;
   border-radius: 8px;
 }
-/* line 1152, sass/nlcommons.scss */
-.sidebar .side_list h1 {
+/* line 1158, sass/nlcommons.scss */
+.news .news_list h1 {
   font-family: "Muli", "Arial", sans-serif;
   background-color: #04346c;
   text-align: center;
@@ -4114,80 +4117,147 @@ table.simple_table td {
   color: white;
   margin: 0px;
 }
-/* line 1166, sass/nlcommons.scss */
-.sidebar .side_list .side_post {
-  padding: 4px;
-}
 /* line 1169, sass/nlcommons.scss */
-.sidebar .side_list .side_post .side_image {
+.news .news_list .news_heading {
+  font-family: "Muli", "Arial", sans-serif;
+  background-color: #04346c;
+  text-align: center;
+  padding-top: 5px;
+  padding-bottom: 2px;
+  font-size: 20px;
+  color: white;
+  margin: 0px;
+}
+/* line 1179, sass/nlcommons.scss */
+.news .news_list .news_heading .sub_heading {
+  font-size: 13px;
+}
+/* line 1186, sass/nlcommons.scss */
+.news .news_list .news_post {
+  margin: 5px;
+}
+/* line 1189, sass/nlcommons.scss */
+.news .news_list .news_post .news_image {
   width: 50px;
   height: 50px;
   display: inline-block;
+  background-color: #cccccc;
+  position: relative;
   vertical-align: top;
 }
-/* line 1173, sass/nlcommons.scss */
-.sidebar .side_list .side_post .side_image img {
+/* line 1195, sass/nlcommons.scss */
+.news .news_list .news_post .news_image a {
+  display: inline-block;
   width: 100%;
+  height: 100%;
 }
-/* line 1178, sass/nlcommons.scss */
-.sidebar .side_list .side_post .side_content {
+/* line 1199, sass/nlcommons.scss */
+.news .news_list .news_post .news_image a.tag_image {
+  background-color: #b7ceea;
+}
+/* line 1201, sass/nlcommons.scss */
+.news .news_list .news_post .news_image a.tag_image.your_news {
+  background-color: #faf79d;
+}
+/* line 1206, sass/nlcommons.scss */
+.news .news_list .news_post .news_image img {
+  width: 100%;
+  height: 100%;
+}
+/* line 1210, sass/nlcommons.scss */
+.news .news_list .news_post .news_image a.tag_overlay {
+  width: 45px;
+  background-image: url(/images/tag_overlay.png);
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: -4px;
+  left: -4px;
+}
+/* line 1219, sass/nlcommons.scss */
+.news .news_list .news_post .news_image a.image_overlay {
+  width: auto;
+  height: auto;
+  position: absolute;
+  top: -3px;
+  left: -3px;
+}
+/* line 1225, sass/nlcommons.scss */
+.news .news_list .news_post .news_image a.image_overlay img {
+  max-width: 30px;
+  max-height: 30px;
+}
+/* line 1232, sass/nlcommons.scss */
+.news .news_list .news_post .news_content {
+  margin-left: 4px;
   display: inline-block;
   vertical-align: top;
+  width: 406px;
 }
-/* line 1182, sass/nlcommons.scss */
-.sidebar .side_list .side_post .side_content .side_person {
+/* line 1237, sass/nlcommons.scss */
+.news .news_list .news_post .news_content .news_above {
   font-size: 11px;
 }
-/* line 1185, sass/nlcommons.scss */
-.sidebar .side_list .side_post .side_content .side_item {
+/* line 1240, sass/nlcommons.scss */
+.news .news_list .news_post .news_content .news_item {
+  font-size: 15px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+/* line 1246, sass/nlcommons.scss */
+.news .news_list .news_post .news_content .news_below {
+  font-size: 11px;
+}
+/* line 1251, sass/nlcommons.scss */
+.news .news_list .news_more {
+  text-align: center;
+  margin: 4px;
   font-size: 15px;
 }
-/* line 1188, sass/nlcommons.scss */
-.sidebar .side_list .side_post .side_content .side_views {
-  font-size: 11px;
-}
-/* line 1193, sass/nlcommons.scss */
-.sidebar .side_list .side_more {
-  text-align: center;
+/* line 1256, sass/nlcommons.scss */
+.news .news_list .news_empty {
+  margin: 4px;
+  font-size: 15px;
 }
 
 /* 
  * Legacy Styling
  * All of this should probably be updated
  */
-/* line 1209, sass/nlcommons.scss */
+/* line 1274, sass/nlcommons.scss */
 #menubar-avatar, #logged-in-as {
   float: left;
   margin-left: 1em;
 }
 
-/* line 1214, sass/nlcommons.scss */
+/* line 1279, sass/nlcommons.scss */
 #main-menu, h1, h2, h3, #flash-notice, #logged-in-as {
   font-family: "Muli", "Arial", sans-serif;
   font-weight: bold;
 }
 
-/* line 1219, sass/nlcommons.scss */
+/* line 1284, sass/nlcommons.scss */
 h1, #flash-notice {
   clear: both;
 }
 
-/* line 1223, sass/nlcommons.scss */
+/* line 1288, sass/nlcommons.scss */
 h1, #flash-notice {
   font-size: 21px;
 }
 
-/* line 1227, sass/nlcommons.scss */
+/* line 1292, sass/nlcommons.scss */
 h2 {
   font-size: 17px;
 }
 
-/* line 1231, sass/nlcommons.scss */
+/* line 1296, sass/nlcommons.scss */
 .h2-explanation {
   font-size: 13px;
 }
 
-/* line 1235, sass/nlcommons.scss */
+/* line 1300, sass/nlcommons.scss */
 h3, #menu-bar {
   font-size: 15px;
 }
@@ -4197,7 +4267,7 @@ h3, #menu-bar {
     top: 3.5em;
     left: 20em;
 }*/
-/* line 1245, sass/nlcommons.scss */
+/* line 1310, sass/nlcommons.scss */
 a img {
   border: 0;
   margin: 0;
@@ -4339,7 +4409,7 @@ div ul.subsection_tabs li.tab a:hover {
 .sorting {
     background: url('../images/sort_both.jpg') no-repeat center right;
 }*/
-/* line 1395, sass/nlcommons.scss */
+/* line 1460, sass/nlcommons.scss */
 div.foreSortIcon {
   background: url("../images/sort_both.jpg") no-repeat center right;
   width: 16px;
@@ -4349,7 +4419,7 @@ div.foreSortIcon {
 }
 
 /* Autocomplete */
-/* line 1404, sass/nlcommons.scss */
+/* line 1469, sass/nlcommons.scss */
 ul.jq-ui-autocomplete {
   position: absolute;
   overflow: hidden;
@@ -4362,7 +4432,7 @@ ul.jq-ui-autocomplete {
   color: #333;
 }
 
-/* line 1415, sass/nlcommons.scss */
+/* line 1480, sass/nlcommons.scss */
 ul.jq-ui-autocomplete li {
   display: block;
   padding: 0.3em 0.5em 0.3em 0.3em;
@@ -4370,30 +4440,30 @@ ul.jq-ui-autocomplete li {
   width: 100%;
 }
 
-/* line 1422, sass/nlcommons.scss */
+/* line 1487, sass/nlcommons.scss */
 ul.jq-ui-autocomplete li.active {
   background-color: #3875d7;
   color: #fff;
 }
 
-/* line 1427, sass/nlcommons.scss */
+/* line 1492, sass/nlcommons.scss */
 .deleted {
   text-decoration: line-through;
 }
 
-/* line 1431, sass/nlcommons.scss */
+/* line 1496, sass/nlcommons.scss */
 table#new-person-form tr td {
   width: 10em;
 }
 
-/* line 1435, sass/nlcommons.scss */
+/* line 1500, sass/nlcommons.scss */
 .fieldWithErrors {
   padding: 2px;
   background-color: red;
   display: table;
 }
 
-/* line 1441, sass/nlcommons.scss */
+/* line 1506, sass/nlcommons.scss */
 #errorExplanation {
   width: 450px;
   border: 2px solid red;
@@ -4403,7 +4473,7 @@ table#new-person-form tr td {
   background-color: #f0f0f0;
 }
 
-/* line 1450, sass/nlcommons.scss */
+/* line 1515, sass/nlcommons.scss */
 #error_explanation h2 {
   text-align: left;
   font-weight: bold;
@@ -4415,18 +4485,18 @@ table#new-person-form tr td {
   color: #fff;
 }
 
-/* line 1461, sass/nlcommons.scss */
+/* line 1526, sass/nlcommons.scss */
 #error_explanation ul li {
   font-size: 12px;
   list-style: square;
 }
 
-/* line 1466, sass/nlcommons.scss */
+/* line 1531, sass/nlcommons.scss */
 tr.scaffold-row {
   border-bottom: 2px solid black;
 }
 
-/* line 1470, sass/nlcommons.scss */
+/* line 1535, sass/nlcommons.scss */
 #permission-group-reminder {
   font-style: italic;
 }

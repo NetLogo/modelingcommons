@@ -1,0 +1,44 @@
+<% start_time = Time.now %>
+<div class="news">
+  <div class="news_list">
+    <div class="news_heading">
+       Models Activity
+       <span class="sub_heading">
+         (in the last 2 weeks)
+       </span>
+    </div>
+    <% if @all_model_events.empty? %>
+      <div class="news_empty">No recent model activity</div>
+    <% else %>
+      <% @all_model_events.each do |model| %>
+        <% model_info = whats_new_model(model) %>
+        <div class="news_post<% if model_info[:your_news] %> your_news<% end %>">
+          <div class="news_image">
+            <a href="<%= model_info[:link] -%>">
+              <% if !model_info[:image].nil? %>
+                <img src="<%= model_info[:image] %>" />
+              <% end %>
+            </a>
+          </div>
+          <div class="news_content">
+            <div class="news_above">
+              <%= model_info[:action] %>
+            </div>
+            <div class="news_item">
+              <a href="<%= model_info[:link] -%>"><%= model_info[:name] -%></a>
+            </div>
+            <div class="news_below">
+               <%= model_info[:time] %>
+            </div>
+          </div> 
+        </div>
+      <% end %>
+    <% end %>  
+    <div class="news_more">
+      <a href="<%= url_for(:controller => :browse, :action => :list_recent_models ) -%>">
+        View recent models
+      </a>
+    </div>  
+  </div>
+</div>
+<!-- Time spent in news-box all-models: <%= Time.now - start_time-%> -->

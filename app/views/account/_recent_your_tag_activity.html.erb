@@ -1,0 +1,52 @@
+<% start_time = Time.now %>
+<% whos =  if @person == @the_person then 'your' else @the_person.first_name + '\'s' end %>
+<div class="news">
+  <div class="news_list">
+    <div class="news_heading">
+    <%= whos.capitalize %> Tag Activity<span class="sub_heading"> (in the past 2 weeks)</span>
+    </div>
+    <% if @recent_tag_events.empty? %>
+      <div class="news_empty">
+        No recent activity in <%= whos %> tags
+      </div>
+    <% else %>
+      <% @recent_tag_events.each do |tag_event| %>
+        <% tag_event_info = whats_new_tag(tag_event) %>
+        <div class="news_post<% if tag_event_info[:your_news] %> your_news<% end %>">
+          <div class="news_image">
+            <% if tag_event.is_a?(TaggedNode) %>
+              <a href="<%= tag_event_info[:link] -%>">
+                <img src="<%= tag_event_info[:image] %>" />
+              </a>
+              <a href="<%= tag_event_info[:link] -%>" class="tag_overlay"></a>
+            <% elsif tag_event.is_a?(Tag) %>
+              <a href="<%= tag_event_info[:link] -%>" class="tag_image<% if tag_event_info[:your_news] %> your_news<% end %>">
+                <img src="images/tag_small.png" />
+              </a>
+            <% end %>
+          </div>
+          <div class="news_content">
+            <div class="news_above">
+              <%= tag_event_info[:action] %>
+            </div>
+            <div class="news_item">
+              <a href="<%= tag_event_info[:link] -%>"><%= tag_event_info[:name] %></a>
+            </div>
+            <div class="news_below">
+               <%= tag_event_info[:time] %>
+            </div>
+          </div> 
+        </div>
+        
+      <% end %>
+      <% if @person == @the_person %>
+        <div class="news_more">
+          <a href="<%= url_for(:controller => :account, :action => :tags) -%>">
+            View all of <%= whos %> tags
+          </a>
+        </div>
+      <% end %>
+    <% end %>    
+  </div>
+</div>
+<!-- Time spent in news-box tags <%= Time.now - start_time-%> -->

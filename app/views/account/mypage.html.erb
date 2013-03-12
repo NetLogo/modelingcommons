@@ -17,179 +17,25 @@
 <% end %>
 
 <div id="left-news-box">
-  <div class="panel">
-    <% start_time = Time.now %>
-    <h2>Models activity <span class="h2-explanation">(in the last 2 weeks)</span></h2>
+  <%= render :partial => "recent_model_activity", :locals => {} -%>
+  
+  <%= render :partial => "recent_your_model_activity", :locals => {} -%>
 
-    <% if @all_model_events.empty? %>
-    <p>No recent activity</p>
-    <% else %>
-    <ul>
-      <% @all_model_events.each do |model| %>
-      <% if model.created_at == model.updated_at %>
-      <li><%= "#{model_link(model)} was created by #{person_link(model.people.first)} #{distance_of_time_in_words(Time.now, model.created_at)} ago." -%></li>
-      <% else %>
-      <li><%= whats_new_text(model) %></li>
-      <% end %>
-      <% end %>
-    </ul>
-    <% end %>
-    <!-- Time spent in news-box all-models: <%= Time.now - start_time-%> -->
-  </div>
-
-  <div class="panel">
-    <% start_time = Time.now %>
-    <% if @person == @the_person %>
-    <h2>Recent activity in <%= link_to 'your models', :controller => :account, :action => :models, :id => @the_person.id -%>
-      <%= link_to "(All of your models)", :controller => :account, :action => :models, :id => @the_person.id -%></h2>
-    <% else %>
-    <h2>Recent activity in <%= @the_person.first_name %>'s models
-      <%= link_to "(All of #{@the_person.first_name}'s models)", :controller => :account, :action => :models, :id => @the_person.id -%></h2>
-    <% end %>
-
-    <% if @model_events.empty? %>
-    <p>No recent activity</p>
-    <% else %>
-    <ul>
-      <% @model_events.each do |model| %>
-      <li><%= whats_new_text(model) %></li>
-      <% end %>
-    </ul>
-    <% end %>
-    <!-- Time spent in news-box models: <%= Time.now - start_time-%> -->
-  </div>
-
-  <div class="panel">
-    <% start_time = Time.now %>
-    <% if @person == @the_person %>
-    <h2>Recent activity in <%= link_to "your tags", :controller => :account, :action => :tags -%> </h2>
-    <% else %>
-    <h2>Recent activity in <%= @the_person.first_name %>'s tags</h2>
-    <% end %>
-
-    <% if @tag_events.empty? %>
-    <p>No recent activity</p>
-    <% else %>
-    <ul>
-      <% @tag_events.each do |tag| %>
-      <li><%= whats_new_text(tag) %></li>
-      <% end %>
-    </ul>
-    <% end %>
-    <!-- Time spent in news-box tags: <%= Time.now - start_time-%> -->
-  </div>
-
-  <div class="panel">
-    <h2>Recent requests for help</h2>
-    <% if @questions.empty? %>
-    <p>No questions to display</p>
-    <% else %>
-    <ul>
-      <% @questions.each do |posting| %>
-      <li>
-        <% if posting.person == @the_person %>
-        <span class="highlight">
-          <% end %>
-
-          <%= model_link(posting.node) -%>:
-          <%= person_link(posting.person) %> asked about
-          '<%= link_to posting.title, :controller => :browse, :action => :one_model, :anchor => 'discuss', :id => posting.node.id %>,' <%= distance_of_time_in_words(Time.now, posting.created_at) %> ago
-
-          <% if posting.person == @the_person %>
-        </span>
-        <% end %>
-      </li>
-      <% end %>
-    </ul>
-    <!-- Time spent in news-box help: <%= Time.now - start_time-%> -->
-    <% end %>
-  </div>
+  <%= render :partial => "recent_your_tag_activity", :locals => {} -%>
+  
+  <%= render :partial => "recent_requests_for_help", :locals => {} -%>
 </div>
 
 <div id="right-news-box">
-  <div id="viewed-models" class="panel">
-    <% start_time = Time.now %>
-    <h2>Most-viewed models <span class="h2-explanation">(of all time)</span></h2>
-    <% if @all_time_most_viewed.empty? %>
-    <p>No statistics on all-time most-viewed models</p>
-    <% else %>
-    <ul>
-      <% @all_time_most_viewed.each do |model| %>
-      <% next if model[1].to_i.zero? %>
-      <li><%= model_link(model[0]) %> (<%= pluralize(number_with_delimiter(model[1]), "time", "times") -%>)</li>
-      <% end %>
-    </ul>
-    <% end %>
-    <!-- Time spent in all-time viewed-models: <%= Time.now - start_time-%> -->
-  </div>
+  <%= render :partial => "all_time_most_viewed", :locals => {} -%>
+	
+	<%= render :partial => "recent_most_viewed", :locals => {} -%>
+	
+  <%= render :partial => "recent_most_recommended", :locals => {} -%>
 
-  <div id="viewed-models" class="panel">
-    <% start_time = Time.now %>
-    <h2>Most-viewed models <span class="h2-explanation">(in the last 2 weeks)</span></h2>
-    <% if @most_viewed.empty? %>
-    <p>No statistics on most-viewed models</p>
-    <% else %>
-    <ul>
-      <% @most_viewed.each do |model| %>
-      <% next if model[1].to_i.zero? %>
-      <li><%= model_link(model[0]) %> (<%= pluralize(number_with_delimiter(model[1]), "time", "times") -%>)</li>
-      <% end %>
-    </ul>
-    <% end %>
-    <!-- Time spent in viewed-models: <%= Time.now - start_time-%> -->
-  </div>
+  <%= render :partial => "recent_most_downloaded", :locals => {} -%>
 
-  <div id="recommended" class="panel">
-    <% start_time = Time.now %>
-    <h2>Most-recommended models <span class="h2-explanation">(in the last 2 weeks)</span></h2>
-    <% if @most_recommended_models.empty? %>
-    <p>No model recommendations</p>
-    <% else %>
-    <ul>
-      <% @most_recommended_models.each do |m| %>
-      <% next if m[1].to_i.zero? %>
-      <li><%= model_link m[0] %> (<%= pluralize(number_with_delimiter(m[1]), "time", "times") -%>)</li>
-      <% end %>
-    </ul>
-    <% end %>
-    <!-- Time spent in recommended: <%= Time.now - start_time-%> -->
-  </div>
-
-  <div id="downloaded-models" class="panel">
-    <% start_time = Time.now %>
-    <h2>Most-downloaded models <span class="h2-explanation">(in the last 2 weeks)</span></h2>
-    <% if @most_downloaded.empty? %>
-    <p>No statistics on most-downloaded models</p>
-    <% else %>
-    <ul>
-      <% @most_downloaded.each do |model| %>
-      <% next if model[1].to_i.zero? %>
-      <li><%= model_link(model[0]) %> (<%= pluralize(number_with_delimiter(model[1]), "time", "times") -%>)</li>
-      <% end %>
-    </ul>
-    <% end %>
-    <!-- Time spent in downloaded-models: <%= Time.now - start_time-%> -->
-  </div>
-
-  <div id="applied-tag" class="panel">
-    <% start_time = Time.now %>
-    <h2>Most popular tags <span class="h2-explanation">(in the last 2 weeks)</span></h2>
-    <% if @most_downloaded.empty? %>
-    <p>No statistics on most-popular tags</p>
-    <% else %>
-    <ul>
-      <% @most_popular_tags.each do |tn| %>
-      <% next if tn[1].to_i.zero? %>
-      <li>
-        <%= link_to tn[0].name, :controller => :tags, :action => :one_tag, :id => tn[0].id %>
-        (<%= pluralize(number_with_delimiter(tn[1]), "time", "times" ) -%>)
-      </li>
-      <% end %>
-    </ul>
-    <% end %>
-    <!-- Time spent in applied_tag: <%= Time.now - start_time-%> -->
-  </div>
-
+  <%= render :partial => "recent_most_popular_tags", :locals => {} -%>
 </div>
 
 

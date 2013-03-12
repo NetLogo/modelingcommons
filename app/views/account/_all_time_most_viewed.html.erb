@@ -1,0 +1,44 @@
+<div class="news">
+    <% start_time = Time.now %>
+    <div class="news_list">
+      <div class="news_heading">Most Viewed Models<span class="sub_heading"> (of all time)</span></div>
+    <% if @all_time_most_viewed.empty? %>
+    <div class="news_empty">No statistics on all time most viewed models</div>
+    <% else %>
+      <% @all_time_most_viewed.each do |modelAndCount| %>
+      <% 
+        model = modelAndCount.node
+        count = modelAndCount.count
+        your_news = !@person.nil? && @person.id == model.person.id
+      %>
+      <% next if count.to_i.zero? %>
+      <div class="news_post<% if your_news %> your_news<% end %>">
+        <div class="news_image">
+          <a href="<%= url_for(:controller => "browse", :action => "one_model", :id => model.id) -%>">
+            <% if !model.previews.nil? and !model.previews.empty? %>
+              <img src="<%= url_for :controller => :browse, :action => :display_preview, :id => model.id, :size => 'thumb' %>" />
+            <% end %>
+          </a>
+        </div>
+        <div class="news_content">
+          <div class="news_above">
+            <a href="<%= url_for(:controller => :account, :action => :mypage, :id => model.person.id) -%>"><%= model.person.fullname -%></a>
+          </div>
+          <div class="news_item">
+            <a href="<%= url_for(:controller => "browse", :action => "one_model", :id => model.id) -%>"><%= model.name -%></a>
+          </div>
+          <div class="news_below">
+             Viewed <%= pluralize(number_with_delimiter(count), "time", "times") -%>
+          </div>
+        </div>
+      </div>
+      <% end %>
+    <% end %>
+    <div class="news_more">
+      <a href="<%= url_for(:controller => :browse, :action => :list_models) -%>">
+        View all models
+      </a>
+    </div>
+    <!-- Time spent in all-time viewed-models: <%= Time.now - start_time-%> -->
+  </div>
+</div>
