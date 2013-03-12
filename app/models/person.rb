@@ -15,7 +15,7 @@ class Person < ActiveRecord::Base
   has_many :memberships
   has_many :groups, :through => :memberships, :order => "lower(name) ASC"
 
-  has_attached_file :avatar, :styles => { :medium => "200x200>", :thumb => "40x40>" }, :default_url => "/images/default-person.png"
+  has_attached_file :avatar, :styles => { :medium => "200x200>", :thumb => "40x40>" }, :default_url => "/images/default-person/:style/default-person.png"
 
   attr_protected :avatar_file_name, :avatar_content_type, :avatar_size
 
