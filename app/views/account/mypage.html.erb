@@ -14,9 +14,7 @@
 or 
 <%= link_to "download", :controller => :account, :action => :download, :id => @the_person.id %>
 <%= @the_person == @person ? 'your' : @the_person.first_name + "'s" -%> 
-<%= pluralize(@the_person.nodes.count, 'model') -%>
-models
-</p>
+<%= pluralize(@the_person.nodes.count, 'model') %></p>
 <% end %>
 
 <% if @person != @the_person %>
