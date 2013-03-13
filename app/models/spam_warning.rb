@@ -9,7 +9,7 @@ class SpamWarning < ActiveRecord::Base
   after_save :notify_administrators
 
   def notify_administrators
-    Notifications.report_spam_to_administrators(node, person) 
+    Notifications.deliver_spam_warning(node, person) 
   end
 
 
