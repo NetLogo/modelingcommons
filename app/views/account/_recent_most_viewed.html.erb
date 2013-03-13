@@ -15,7 +15,7 @@
     <% next if count.to_i.zero? %>
     <div class="news_post<% if your_news %> your_news<% end %>">
       <div class="news_image">
-        <a href="<%= url_for(:controller => "browse", :action => "one_model", :id => model.id) -%>">
+        <a href="<%= url_for(:controller => "browse", :action => "one_model", :id => model.id) %>">
           <% if !model.previews.nil? and !model.previews.empty? %>
           <img src="<%= url_for :controller => :browse, :action => :display_preview, :id => model.id, :size => 'thumb' %>" />
           <% end %>
@@ -23,20 +23,24 @@
       </div>
       <div class="news_content">
         <div class="news_above">
-          <a href="<%= url_for(:controller => :account, :action => :mypage, :id => model.person.id) -%>"><%= model.person.fullname -%></a>
+          <a href="<%= url_for(:controller => :account, :action => :mypage, :id => model.person.id) %>"><%= model.person.fullname %></a>
         </div>
         <div class="news_item">
-          <a href="<%= url_for(:controller => "browse", :action => "one_model", :id => model.id) -%>"><%= model.name -%></a>
+          <a href="<%= url_for(:controller => "browse", :action => "one_model", :id => model.id) %>"><%= model.name -%></a>
         </div>
         <div class="news_below">
-          Viewed <%= pluralize(number_with_delimiter(count), "time", "times") -%> in the past 2 weeks
+          Viewed <%= pluralize(number_with_delimiter(count), "time", "times") %> in the past 2 weeks
         </div>
       </div>
     </div>
     <% end %>
     <% end %>
     <div class="news_more">
-      <a href="<%= url_for(:controller => :browse, :action => :list_recent_models ) -%>">
+      <a href="<%= url_for(:controller => :browse, :action => :list_recent_models ) %>">
+        View recent models
+      </a>
+      &bull;
+      <a href="<%= url_for(:controller => :browse, :action => :view_random_model) %>"
         View recent models
       </a>
     </div>
