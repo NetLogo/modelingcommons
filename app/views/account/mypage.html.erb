@@ -13,8 +13,9 @@
 <p><%= link_to "View", :controller => :account, :action => :models, :id => @the_person.id %>
 or 
 <%= link_to "download", :controller => :account, :action => :download, :id => @the_person.id %>
-all of
-<%= @the_person == @person ? 'your' : @the_person.first_name + "'s" -%> models
+<%= @the_person == @person ? 'your' : @the_person.first_name + "'s" -%> 
+<%= pluralize(@the_person.nodes.count, 'model') -%>
+models
 </p>
 <% end %>
 
