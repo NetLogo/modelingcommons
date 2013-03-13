@@ -1,5 +1,7 @@
 # Controller that handles browsing through models
 
+require 'RMagick'
+
 class BrowseController < ApplicationController
 
   caches_page :display_preview
