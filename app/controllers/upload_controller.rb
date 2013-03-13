@@ -101,11 +101,9 @@ class UploadController < ApplicationController
 
         respond_to do |format|
           format.html do 
-            logger.warn "[UploadController#create_model] uploaded model with HTML format"
-            redirect_to :back
+            redirect_to :controller => :browse, :action => :one_model, :id => @model.id
           end
           format.json do 
-            logger.warn "[UploadController#create_model] uploaded model with JSON format"
             render :json => response
           end
         end
