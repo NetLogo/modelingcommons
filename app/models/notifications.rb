@@ -118,4 +118,13 @@ class Notifications < ActionMailer::Base
     @body[:recommender] = recommender
   end
 
+  def report_spam_to_administrators(node, person)
+    standard_settings
+    @recipients = 'modelingcommons@ccl.northwestern.edu'
+    @subject = "Spam reported for the '#{node.name}' model in the NetLogo Modeling Commons"
+    @subject = "[TESTING] #{@subject}" if Rails.env == 'development'
+    @body[:node] = node
+    @body[:person] = person
+  end
+
 end

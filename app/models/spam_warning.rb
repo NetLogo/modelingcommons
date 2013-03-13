@@ -5,4 +5,12 @@
 class SpamWarning < ActiveRecord::Base
   belongs_to :person
   belongs_to :node
+
+  after_save :send_email
+
+  def notify_administrators
+    Notifications.report_spam_to_administrators(node, person) 
+  end
+
+
 end
