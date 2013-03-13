@@ -48,8 +48,6 @@ class UploadController < ApplicationController
       # Create a new version for that node, and stick the contents in there
       node_version_contents = params[:new_model][:uploaded_body].read
 
-      node_version_contents.gsub!(/[^\s\$#\@a-zA-Z0-9.!:?~`'"%^&*()\[\]{}\\|;+=,<>_\/-]/, "_")
-
       new_version =
         NodeVersion.new(:node_id => @model.id,
                         :person_id => @person.id,
