@@ -8,10 +8,6 @@
 <% end -%>
 <% end %>
 
-<% if @person != @the_person %>
-<div id="person-atom-feed"><%= link_to image_tag("feed.png"), :controller => :account, :action => :follow, :id => @the_person.id, :format => :atom %> <%= link_to "Follow #{@the_person.first_name}'s activity in your feed reader", :controller => :account, :action => :follow, :id => @the_person.id, :format => :atom %></div>
-<% end %>
-
 <% if @the_person.nodes.present? %>
 
 <p><%= link_to "View", :controller => :account, :action => :models, :id => @the_person.id %>
@@ -20,6 +16,10 @@ or
 all of
 <%= @the_person == @person ? 'your' : @the_person.first_name + "'s" -%> models
 </p>
+<% end %>
+
+<% if @person != @the_person %>
+<div id="person-atom-feed"><%= link_to image_tag("feed.png"), :controller => :account, :action => :follow, :id => @the_person.id, :format => :atom %> <%= link_to "Follow #{@the_person.first_name}'s activity in your feed reader", :controller => :account, :action => :follow, :id => @the_person.id, :format => :atom %></div>
 <% end %>
 
 <div id="left-news-box">
