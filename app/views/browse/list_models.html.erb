@@ -1,4 +1,9 @@
+<% if params[:action] == 'list_recent_models' %>
+<% @title = 'Recently changed models' %>
+<% else %>
 <% @title = 'List of models' %>
+<% end %>
+
 <div class="panel">
 <% if @person %>
 <p><%= link_to "Upload a new model", :controller => :upload, :action => :new_model -%></p>
