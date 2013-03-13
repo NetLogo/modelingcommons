@@ -103,13 +103,13 @@ class UploadController < ApplicationController
             redirect_to :controller => :browse, :action => :one_model, :id => @model.id
           end
           format.json do 
-            render :json => response
+            render :json => {:status => 'SUCCESS', :model => {:id => @model.id, :name => model_name, :url => url_for(:controller => :browse, :action => :one_model, :id => @model.id)}}
           end
         end
         
       rescue Exception => e
+        logger.warn "Exception class: '#{e.class}'"
         logger.warn "Exception message: '#{e.message}'"
-        logger.warn "Exception backtrace: '#{e.backtrace.inspect}'"
 
         respond_to do |format|
           format.html do 
