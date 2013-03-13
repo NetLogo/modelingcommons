@@ -180,7 +180,6 @@ class UploadController < ApplicationController
     end
 
     node_version_contents = params[:new_version][:uploaded_body].read
-    node_version_contents.gsub!(/[^\s\$#\@a-zA-Z0-9.!:?~`'"%^&*()\[\]{}\\|;+=,<>_\/-]/, "_")
 
     # Create the new version for this node
     new_version =
