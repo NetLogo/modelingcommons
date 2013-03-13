@@ -57,7 +57,6 @@ class UploadController < ApplicationController
       begin
         new_version.save!
         flash[:notice] = "Thanks for uploading the new model called '#{model_name}'."
-        response = {:status => 'SUCCESS', :model => {:id => @model.id, :name => model_name, :url => url_for(:controller => :browse, :action => :one_model, :id => @model.id)}}
         
         # If we got a group and permission settings, set those as well
         group_id = params[:group_id].blank? ? nil : params[:group_id]
