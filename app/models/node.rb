@@ -335,6 +335,10 @@ class Node < ActiveRecord::Base
     return true if procedures_tab =~ /import-/
   end
 
+  def self.get_anonymous_models
+    find_by_sql("SELECT * FROM nodes_visible_to_anonymous_users()")
+  end
+
   def self.search(search_term, person)
     find(:all,
          :conditions => [ "position( ? in lower(name) ) > 0 ", search_term],
