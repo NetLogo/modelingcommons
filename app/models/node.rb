@@ -31,7 +31,7 @@ class Node < ActiveRecord::Base
   named_scope :created_since, lambda { |since| { :conditions => ['created_at >= ? ', since] }}
   named_scope :updated_since, lambda { |since| { :conditions => ['updated_at >= ? ', since] }}
 
-  after_save :send_thank_you_email
+  # after_save :send_thank_you_email
 
   # ------------------------------------------------------------
   # Grab children of various sorts
