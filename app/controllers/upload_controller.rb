@@ -113,6 +113,7 @@ class UploadController < ApplicationController
       rescue Exception => e
         logger.warn "Exception class: '#{e.class}'"
         logger.warn "Exception message: '#{e.message}'"
+        logger.warn "Exception backtrace: '#{e.backtrace.join("\n")}'"
 
         respond_to do |format|
           format.html do 
