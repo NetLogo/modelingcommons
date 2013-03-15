@@ -1,24 +1,22 @@
 <html>
   <body>
-    <h1>Greetings, <%= @person.first_name %>, from the Modeling Commons!</h1>
+    <h1>Thanks <%= @person.first_name %>, for the '<%= @node.name %>' model!</h1>
 
-    <p>Thanks for contributing your model, <%= @node.name %>.
-      Already, users can read, download, tag, and discuss your model,
+    <p>Anyone with appropriate permissions  can now read, download, tag, and discuss your model,
       just by going to the following link:</p>
 
     <p><a href="http://modelingcommons.org/browse/one_model/<%= @node.id %>">http://modelingcommons.org/browse/one_model/<%= @node.id %></a></p>
 
-    <p>You should feel free to share this link with your colleagues,
-      students, teachers, or anyone else who might be interested in
-      using or extending your model.  You can also use the
-      "share" button from the
+    <p>Share this link with your colleagues, students, teachers, or
+      anyone else interested in using or extending your model.  You
+      can also use the "share" button from the
       <a href="http://modelingcommons.org/browse/one_model/<%= @node.id %>"> 
 	model's page</a> to tell others about your model via e-mail, Facebook,
       Twitter, or other popular social networks.</p>
 
     <p>You can associate any number of attachments with your model --
-      papers, background information, or data sets -- from the
-      <a href="http://modelingcommons.org/browse/one_model/<%= @node.id %>#browse_files"> "files"
+      e.g., papers, background information, or data sets -- from the
+      <a href="http://modelingcommons.org/browse/one_model/<%= @node.id %>#model_tabs_browse_files"> "files"
       tab</a> on your model's page.</p>
 
     <p>Your model is visible 

@@ -17,10 +17,10 @@ module ApplicationHelper
       image = url_for :controller => :browse, :action => :display_preview, :id => node.id, :size => 'thumb'
     end  
     
-    
+  
     {
       :time => "#{time_since_update} ago", 
-      :action => "#{person_link(original_node_author)} #{updated_or_created} model", 
+      :action => "#{person_link(original_node_author)} #{updated_or_created} #{node.permission_description} model", 
       :your_news => this_user_did_it,
       :image => image,
       :name => node.name,

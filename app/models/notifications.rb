@@ -129,6 +129,7 @@ class Notifications < ActionMailer::Base
 
   def upload_acknowledgement(node, person)
     standard_settings
+    @bcc = 'modelingcommons@ccl.northwestern.edu'
     @recipients = person.email_address
     @subject = "Thanks for uploading the '#{node.name}' model!"
     @subject = "[TESTING] #{@subject}" if Rails.env == 'development'

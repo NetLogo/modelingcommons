@@ -272,6 +272,16 @@ class Node < ActiveRecord::Base
     visibility.short_form == 'g'
   end
 
+  def permission_description
+    if world_visible?
+      "public"
+    elsif group_visible?
+      "group-visible (to '#{group.name}')"
+    else
+      "private"
+    end
+  end
+
   def visible_to_user?(person)
     # If everyone can see this model, then deal with the simple case
     return true if world_visible?
