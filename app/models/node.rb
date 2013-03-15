@@ -31,8 +31,6 @@ class Node < ActiveRecord::Base
   named_scope :created_since, lambda { |since| { :conditions => ['created_at >= ? ', since] }}
   named_scope :updated_since, lambda { |since| { :conditions => ['updated_at >= ? ', since] }}
 
-  # after_save :send_thank_you_email
-
   # ------------------------------------------------------------
   # Grab children of various sorts
   # ------------------------------------------------------------
@@ -395,9 +393,5 @@ class Node < ActiveRecord::Base
                                                   LIMIT ?;", limit])
   end
 
-
-  def send_thank_you_email
-    Notifications.deliver_upload_acknowledgement(self, most_recent_author)
-  end
 
 end

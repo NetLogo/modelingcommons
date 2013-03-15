@@ -35,6 +35,7 @@ class UploadController < ApplicationController
       if !@model.save
         respond_to do |format|
           format.html do 
+            logger.warn "Error(s): @model.errors"
             flash[:notice] = "Error creating a new model object; it was not saved."
             redirect_to :back
           end
@@ -97,6 +98,8 @@ class UploadController < ApplicationController
             flash[:notice] = "Error creating a new preview object; it was not saved."
           end
         end
+
+        Notifications.deliver_upload_acknowledgement(@model, @person)
 
         respond_to do |format|
           format.html do 
