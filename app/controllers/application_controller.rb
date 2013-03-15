@@ -71,22 +71,22 @@ class ApplicationController < ActionController::Base
     safe_params.delete('password') 
     safe_params.delete('password_confirmation') 
 
-    LoggedAction.create(:person_id => person_id,
-                        :controller => params[:controller],
-                        :action => params[:action],
-                        :logged_at => Time.now(),
-                        :message => message,
-                        :ip_address => ip_address,
-                        :browser_info => browser_info,
-                        :url => request.request_uri,
-                        :params => safe_params.to_yaml,
-                        :session => session_yaml,
-                        :cookies => cookies.to_yaml,
-                        :flash => flash.to_yaml,
-                        :referrer => request.env['HTTP_REFERER'],
-                        :node_id => node_id,
-                        :is_searchbot => is_searchbot(browser_info) 
-                        )
+    LoggedAction.create!(:person_id => person_id,
+                         :controller => params[:controller],
+                         :action => params[:action],
+                         :logged_at => Time.now(),
+                         :message => message,
+                         :ip_address => ip_address,
+                         :browser_info => browser_info,
+                         :url => request.request_uri,
+                         :params => safe_params.to_yaml,
+                         :session => session_yaml,
+                         :cookies => cookies.to_yaml,
+                         :flash => flash.to_yaml,
+                         :referrer => request.env['HTTP_REFERER'],
+                         :node_id => node_id,
+                         :is_searchbot => is_searchbot(browser_info) 
+                         )
   end
 
   def is_searchbot(browser_info_string)
@@ -192,35 +192,35 @@ class ApplicationController < ActionController::Base
     
     logger.warn "[AccountController#mypage] #{Time.now} before @questions"
     @recent_questions = Posting.
-                          created_since(how_new_is_new).
-                          unanswered_questions.
-                          all(:limit => limit * db_search_factor).
-                          select { |question| question.node.visible_to_user?(@person) and !question.deleted_at }[0..limit - 1]
+      created_since(how_new_is_new).
+      unanswered_questions.
+      all(:limit => limit * db_search_factor).
+      select { |question| question.node.visible_to_user?(@person) and !question.deleted_at }[0..limit - 1]
     
     logger.warn "[AccountController#mypage] #{Time.now} before all model updates"
     @all_model_events = Node.
-                          updated_since(how_new_is_new).
-                          all(:order => 'updated_at DESC', 
-                              :limit => limit * db_search_factor).
-                          select { |node| node.visible_to_user?(@person)}[0..limit - 1]
+      updated_since(how_new_is_new).
+      all(:order => 'updated_at DESC', 
+          :limit => limit * db_search_factor).
+      select { |node| node.visible_to_user?(@person)}[0..limit - 1]
     
     logger.warn "[AccountController#mypage] #{Time.now} before most-viewed models"
 
     # all-time most-viewed models
     @all_time_most_viewed = Node.
-                              all_time_most_viewed(limit * db_search_factor).
-                              select {|node_count| node_count.node.visible_to_user?(@person)}[0..limit - 1]
+      all_time_most_viewed(limit * db_search_factor).
+      select {|node_count| node_count.node.visible_to_user?(@person)}[0..limit - 1]
 
     # most-viewed models
     @most_viewed = Node.
-                     most_viewed(limit * db_search_factor).
-                     select{|node_count| !node_count.node.nil? && node_count.node.visible_to_user?(@person)}[0..limit - 1]
+      most_viewed(limit * db_search_factor).
+      select{|node_count| !node_count.node.nil? && node_count.node.visible_to_user?(@person)}[0..limit - 1]
 
     logger.warn "[AccountController#mypage] #{Time.now} before most-downloaded models"
     # most-downloaded models
     @most_downloaded = Node.
-                         most_downloaded(limit * db_search_factor).
-                         select {|node_count| node_count.node.visible_to_user?(@person)}[0..limit - 1]
+      most_downloaded(limit * db_search_factor).
+      select {|node_count| node_count.node.visible_to_user?(@person)}[0..limit - 1]
 
 
     logger.warn "[AccountController#mypage] #{Time.now} before most-applied tags"
@@ -234,9 +234,9 @@ class ApplicationController < ActionController::Base
     @most_recommended_models = Recommendation.count(:group => "node_id",
                                                     :order => "count_all DESC",
                                                     :limit => limit * db_search_factor).map { |node| {
-                                                    :node => Node.find(node[0]),
-                                                    :recommendations => node[1]
-                                                     }}.select { |node_array| node_array[:node].visible_to_user?(@person) }[0..limit - 1]
+        :node => Node.find(node[0]),
+        :recommendations => node[1]
+      }}.select { |node_array| node_array[:node].visible_to_user?(@person) }[0..limit - 1]
 
     logger.warn "[AccountController#mypage] #{Time.now} exit"
   end
