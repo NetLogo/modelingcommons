@@ -2,6 +2,8 @@
 
 class TagsController < ApplicationController
 
+  caches_page :image
+
   before_filter :require_login, :only => [:new, :create, :edit, :update, :destroy]
 
   def index
@@ -96,6 +98,7 @@ class TagsController < ApplicationController
   end
 
   def image
+    expires_in 12.hours
     num_to_fetch_from_db = 10 #limit number of tagged nodes to fetch from db to increase speed
     
     tag = Tag.find(params[:id])
