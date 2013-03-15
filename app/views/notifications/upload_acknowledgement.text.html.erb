@@ -28,9 +28,9 @@
       <% end %></p>
 
     <p>Your model can be changed 
-      <% if @model.author_visible? %>
+      <% if @model.author_changeable? %>
       only by you.
-      <% elsif @model.group_visible? %>
+      <% elsif @model.group_changeable? %>
       only by members of the <%= @model.group.name %> group.
       <% else %>
       by everyone, including users who have not logged in.
