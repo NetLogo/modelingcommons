@@ -1,0 +1,51 @@
+<html>
+  <body>
+    <h1>Greetings, <%= @person.first_name %>, from the Modeling Commons!</h1>
+
+    <p>Thanks for contributing your model, <%= @node.title %>.
+      Already, users can read, download, tag, and discuss your model,
+      just by going to the following link:</p>
+
+    <p><a href="http://modelingcommons.org/browse/one_model/<%= @model.id %>">http://modelingcommons.org/browse/one_model/<%= @model.id %></a></p>
+
+    <p>You should feel free to share this link with your colleagues,
+      students, teachers, or anyone else who might be interested in your
+      model.  You can just forward the link to them, or use the "share"
+      button from the models page to send a message via e-mail,
+      Facebook, Twitter, or several other online services.</p>
+
+    <p>You can associate any number of attachments with your model --
+      papers, background information, or data sets -- from the "file"
+      menu on your model's page.</p>
+
+    <p>Your model is visible 
+      <% if @model.author_visible? %>
+      only to you.
+      <% elsif @model.group_visible? %>
+      only to members of the <%= @model.group.name %> group.
+      <% else %>
+      to everyone, including users who have not logged in.
+      <% end %></p>
+
+    <p>Your model can be changed 
+      <% if @model.author_visible? %>
+      only by you.
+      <% elsif @model.group_visible? %>
+      only by members of the <%= @model.group.name %> group.
+      <% else %>
+      by everyone, including users who have not logged in.
+      <% end %></p>
+
+    <p>You can change these permissions at any time from the model's page.</p>
+
+    <p>To remove yourself from such notifications in the future, click
+      on "edit your profile" from any page on
+      the <a href="http://modelingcommons.org">Modeling Commons</a>,
+      and un-check the appropriate box.</p>
+
+    <p>If you have any questions about the Modeling Commons, please
+      contact us.  We enjoy getting feedback from users, and helping to
+      improve it.</p>
+
+  </body>
+</html>

@@ -127,4 +127,13 @@ class Notifications < ActionMailer::Base
     @body[:person] = person
   end
 
+  def upload_acknowledgement(node, person)
+    standard_settings
+    @recipients = person.email_address
+    @subject = "Thanks for uploading the '#{node.title}' model!"
+    @subject = "[TESTING] #{@subject}" if Rails.env == 'development'
+    @body[:node] = node
+    @body[:person] = person
+  end
+
 end
