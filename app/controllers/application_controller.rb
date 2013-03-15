@@ -84,7 +84,13 @@ class ApplicationController < ActionController::Base
                         :cookies => cookies.to_yaml,
                         :flash => flash.to_yaml,
                         :referrer => request.env['HTTP_REFERER'],
-                        :node_id => node_id)
+                        :node_id => node_id,
+                        :is_searchbot => is_searchbot(browser_info) 
+                        )
+  end
+
+  def is_searchbot(browser_info_string)
+    browser_info_string =~ /bot|yandex|baidu|yahoo|search|crawl|spider/i
   end
 
   def check_visibility_permissions

@@ -374,6 +374,7 @@ class Node < ActiveRecord::Base
                                                WHERE controller = 'browse'
                                                  AND action = 'one_model'
                                                  AND node_id IS NOT NULL
+                                                 AND is_searchbot = 'false'
                                             GROUP BY node_id
                                             ORDER BY count DESC
                                                LIMIT ?;", limit])
@@ -385,6 +386,7 @@ class Node < ActiveRecord::Base
                                                WHERE controller = 'browse'
                                                  AND action = 'one_model'
                                                  AND node_id IS NOT NULL
+                                                 AND is_searchbot = 'false'
                                                  AND logged_at >= NOW() - interval '2 weeks'
                                             GROUP BY node_id
                                             ORDER BY count DESC

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130110113739) do
+ActiveRecord::Schema.define(:version => 20130315142615) do
 
   create_table "email_recommendations", :force => true do |t|
     t.integer  "person_id"
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(:version => 20130110113739) do
     t.string   "ip_address"
     t.text     "browser_info"
     t.text     "url"
-    t.text     "params",       :null => false
+    t.text     "params",                          :null => false
     t.text     "session"
     t.text     "cookies"
     t.text     "flash"
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(:version => 20130110113739) do
     t.integer  "node_id"
     t.text     "controller"
     t.text     "action"
+    t.boolean  "is_searchbot", :default => false
   end
 
   add_index "logged_actions", ["action"], :name => "index_logged_actions_on_action"
