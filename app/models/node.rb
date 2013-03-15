@@ -386,7 +386,7 @@ class Node < ActiveRecord::Base
   end
 
   def self.most_downloaded(limit = 20)
-    LoggedAction.find_by_sql(["SELECT COUNT(DISTINCT LA.ip_address), LA.node_id
+    LoggedAction.find_by_sql(["SELECT COUNT(DISTINCT ip_address), node_id
                                                    FROM Model_Downloads
                                                   WHERE logged_at >= NOW() - interval '2 weeks'
                                                GROUP BY node_id
