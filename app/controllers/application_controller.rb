@@ -90,7 +90,7 @@ class ApplicationController < ActionController::Base
   end
 
   def is_searchbot(browser_info_string)
-    browser_info_string =~ /bot|yandex|baidu|yahoo|search|crawl|spider/i
+    browser_info_string =~ /bot|yandex|baidu|yahoo|search|crawl|spider/i ? true : false
   end
 
   def check_visibility_permissions
