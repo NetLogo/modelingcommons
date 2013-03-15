@@ -370,10 +370,7 @@ class Node < ActiveRecord::Base
 
   def self.all_time_most_viewed(limit = 20)
     LoggedAction.find_by_sql(["SELECT COUNT(DISTINCT ip_address), node_id
-                                                FROM Logged_Actions
-                                               WHERE controller = 'browse'
-                                                 AND action = 'one_model'
-                                                 AND node_id IS NOT NULL
+                                                FROM Model_Views
                                             GROUP BY node_id
                                             ORDER BY count DESC
                                                LIMIT ?;", limit])
@@ -381,12 +378,8 @@ class Node < ActiveRecord::Base
 
   def self.most_viewed(limit = 20)
     LoggedAction.find_by_sql(["SELECT COUNT(DISTINCT ip_address), node_id
-                                                FROM Logged_Actions
-                                               WHERE controller = 'browse'
-                                                 AND action = 'one_model'
-                                                 AND node_id IS NOT NULL
-                                                 AND is_searchbot = 'false'
-                                                 AND logged_at >= NOW() - interval '2 weeks'
+                                                FROM Model_Views
+                                               WHERE logged_at >= NOW() - interval '2 weeks'
                                             GROUP BY node_id
                                             ORDER BY count DESC
                                                LIMIT ?;", limit])
@@ -394,16 +387,10 @@ class Node < ActiveRecord::Base
 
   def self.most_downloaded(limit = 20)
     LoggedAction.find_by_sql(["SELECT COUNT(DISTINCT LA.ip_address), LA.node_id
-                                                   FROM Logged_Actions LA
-                                                  WHERE LA.controller = 'browse'
-                                                    AND LA.action = 'download_model'
-                                                    AND LA.node_id IS NOT NULL
-                                                    AND is_searchbot = 'false'
-                                                    AND LA.logged_at >= NOW() - interval '2 weeks'
-                                               GROUP BY LA.node_id
+                                                   FROM Model_Downloads
+                                                  WHERE logged_at >= NOW() - interval '2 weeks'
+                                               GROUP BY node_id
                                                ORDER BY count DESC
                                                   LIMIT ?;", limit])
   end
-
-
 end
