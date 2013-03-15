@@ -385,6 +385,7 @@ class Node < ActiveRecord::Base
                                                WHERE controller = 'browse'
                                                  AND action = 'one_model'
                                                  AND node_id IS NOT NULL
+                                                 AND is_searchbot = 'false'
                                                  AND logged_at >= NOW() - interval '2 weeks'
                                             GROUP BY node_id
                                             ORDER BY count DESC
@@ -397,6 +398,7 @@ class Node < ActiveRecord::Base
                                                   WHERE LA.controller = 'browse'
                                                     AND LA.action = 'download_model'
                                                     AND LA.node_id IS NOT NULL
+                                                    AND is_searchbot = 'false'
                                                     AND LA.logged_at >= NOW() - interval '2 weeks'
                                                GROUP BY LA.node_id
                                                ORDER BY count DESC
