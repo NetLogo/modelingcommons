@@ -397,7 +397,7 @@ class Node < ActiveRecord::Base
 
 
   def send_thank_you_email
-    Notifications.deliver_upload_acknowledgement(self, @person)
+    Notifications.deliver_upload_acknowledgement(self, most_recent_author)
   end
 
 end
