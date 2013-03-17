@@ -1,23 +1,23 @@
 BEGIN;
 
-DROP TABLE IF EXISTS Model_Views;
-
-CREATE TABLE Model_Views AS
+INSERT INTO Model_Views
+  (logged_at, ip_address, node_id, person_id)
 SELECT logged_at, ip_address, node_id, person_id
-  FROM Logged_Actions
- WHERE controller = 'browse' 
-   AND action = 'one_model' 
-   AND is_searchbot = 'false'
+     FROM Logged_Actions
+    WHERE controller = 'browse'
+      AND action = 'one_model'
+      AND is_searchbot = 'false'
+      AND logged_at > (SELECT max(logged_at) FROM Model_Views)
 ;
 
-DROP TABLE IF EXISTS Model_Downloads;
-
-CREATE TABLE Model_Downloads AS
+INSERT INTO Model_Downloads
+  (logged_at, ip_address, node_id, person_id)
 SELECT logged_at, ip_address, node_id, person_id
-  FROM Logged_Actions
- WHERE controller = 'browse' 
-   AND action = 'download_model' 
-   AND is_searchbot = 'false'
+     FROM Logged_Actions
+    WHERE controller = 'browse'
+      AND action = 'download_model'
+      AND is_searchbot = 'false'
+      AND logged_at > (SELECT max(logged_at) FROM Model_Views)
 ;
 
 COMMIT;
