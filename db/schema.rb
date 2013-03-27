@@ -9,7 +9,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130315142615) do
+ActiveRecord::Schema.define(:version => 20130327224552) do
+
+  create_table "collaborations", :force => true do |t|
+    t.integer  "person_id"
+    t.integer  "node_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "collaborator_type_id"
+  end
+
+  create_table "collaborator_types", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "email_recommendations", :force => true do |t|
     t.integer  "person_id"
@@ -32,10 +46,10 @@ ActiveRecord::Schema.define(:version => 20130315142615) do
     t.integer  "person_id"
     t.datetime "logged_at"
     t.text     "message"
-    t.string   "ip_address"
+    t.string   "text_ip_address"
     t.text     "browser_info"
     t.text     "url"
-    t.text     "params",                          :null => false
+    t.text     "params",                                            :null => false
     t.text     "session"
     t.text     "cookies"
     t.text     "flash"
@@ -43,12 +57,13 @@ ActiveRecord::Schema.define(:version => 20130315142615) do
     t.integer  "node_id"
     t.text     "controller"
     t.text     "action"
-    t.boolean  "is_searchbot", :default => false
+    t.boolean  "is_searchbot",                   :default => false
+    t.string   "ip_address",      :limit => nil
   end
 
   add_index "logged_actions", ["action"], :name => "index_logged_actions_on_action"
   add_index "logged_actions", ["controller"], :name => "index_logged_actions_on_controller"
-  add_index "logged_actions", ["ip_address"], :name => "index_logged_actions_on_ip_address"
+  add_index "logged_actions", ["is_searchbot"], :name => "index_logged_actions_on_is_searchbot"
   add_index "logged_actions", ["logged_at"], :name => "logged_actions_logged_at"
   add_index "logged_actions", ["node_id"], :name => "index_logged_actions_on_node_id"
   add_index "logged_actions", ["node_id"], :name => "logged_actions_not_null_node_id_idx"
@@ -56,6 +71,7 @@ ActiveRecord::Schema.define(:version => 20130315142615) do
   add_index "logged_actions", ["node_id"], :name => "node_id_not_null"
   add_index "logged_actions", ["person_id"], :name => "index_logged_actions_on_person_id"
   add_index "logged_actions", ["referrer"], :name => "index_logged_actions_on_referrer"
+  add_index "logged_actions", ["text_ip_address"], :name => "index_logged_actions_on_ip_address"
   add_index "logged_actions", ["url"], :name => "index_logged_actions_on_url"
 
   create_table "memberships", :force => true do |t|
@@ -70,6 +86,30 @@ ActiveRecord::Schema.define(:version => 20130315142615) do
   add_index "memberships", ["group_id"], :name => "index_memberships_on_group_id"
   add_index "memberships", ["person_id", "group_id"], :name => "index_memberships_on_person_id_and_group_id", :unique => true
   add_index "memberships", ["person_id"], :name => "index_memberships_on_person_id"
+
+  create_table "model_downloads", :id => false, :force => true do |t|
+    t.datetime "logged_at"
+    t.text     "ip_address"
+    t.integer  "node_id"
+    t.integer  "person_id"
+  end
+
+  add_index "model_downloads", ["ip_address"], :name => "model_downloads_ip_address_idx"
+  add_index "model_downloads", ["logged_at"], :name => "model_downloads_logged_at_idx"
+  add_index "model_downloads", ["node_id"], :name => "model_downloads_node_id_idx"
+  add_index "model_downloads", ["person_id"], :name => "model_downloads_person_id_idx"
+
+  create_table "model_views", :id => false, :force => true do |t|
+    t.datetime "logged_at"
+    t.text     "ip_address"
+    t.integer  "node_id"
+    t.integer  "person_id"
+  end
+
+  add_index "model_views", ["ip_address"], :name => "model_views_ip_address_idx"
+  add_index "model_views", ["logged_at"], :name => "model_views_logged_at_idx"
+  add_index "model_views", ["node_id"], :name => "model_views_node_id_idx"
+  add_index "model_views", ["person_id"], :name => "model_views_person_id_idx"
 
   create_table "news_items", :force => true do |t|
     t.string   "title"

@@ -1,0 +1,16 @@
+<h1>Editing collaborator_type</h1>
+
+<% form_for(@collaborator_type) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @collaborator_type %> |
+<%= link_to 'Back', collaborator_types_path %>

@@ -18,6 +18,9 @@ class Node < ActiveRecord::Base
   has_many :recommendations
   has_many :spam_warnings
 
+  has_many :collaborations
+  has_many :collaborators, :through => :collaborations, :class => 'person'
+
   has_many :logged_actions
 
   has_many :node_projects
@@ -76,6 +79,10 @@ class Node < ActiveRecord::Base
 
   def most_recent_author
     @most_recent_author ||= person
+  end
+
+  def authors
+    people
   end
 
   def people

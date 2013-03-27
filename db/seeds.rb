@@ -6,6 +6,11 @@
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Major.create(:name => 'Daley', :city => cities.first)
 
-PermissionSetting.create({ :name => 'Everyone' },
-                         { :name => 'No one but yourself' },
-                         { :name => 'Members of your group' })
+PermissionSetting.create([{ :name => 'Everyone' },
+                          { :name => 'No one but yourself' },
+                          { :name => 'Members of your group' }])
+
+CollaboratorType.create([{ :name => 'Author'},
+                         { :name => 'Domain expert'},
+                         { :name => 'Editor'},
+                         { :name => 'Team member'}])

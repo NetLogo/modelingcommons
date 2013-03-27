@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :collaborator_types
+
   map.resources :projects, :member => { :download => [:get]}
 
   # The priority is based upon order of creation: first created -> highest priority.
