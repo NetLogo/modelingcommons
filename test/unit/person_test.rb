@@ -15,10 +15,8 @@ class PersonTest < ActiveSupport::TestCase
   should_have_many :memberships
   should_have_many :groups, :through => :memberships
 
-  should_validate_presence_of :first_name
-  should_validate_presence_of :last_name
-  should_validate_presence_of :email_address
-  should_validate_presence_of :password
-
-  should_validate_uniqueness_of :email_address, :case_sensitive => false
+  should validate_presence_of :first_name
+  should validate_presence_of :last_name
+  should validate_presence_of :email_address
+  should validate_presence_of :password
 end

@@ -19,7 +19,7 @@ class Node < ActiveRecord::Base
   has_many :spam_warnings
 
   has_many :collaborations
-  has_many :collaborators, :through => :collaborations, :class => 'person'
+  has_many :collaborators, :through => :collaborations, :class_name => 'person'
 
   has_many :logged_actions
 
@@ -88,6 +88,11 @@ class Node < ActiveRecord::Base
   def people
     @model_people ||= node_versions.map {|version| version.person}.uniq
   end
+
+  def people_sentence
+      people.map {|person| ActionController::Base.helpers.person_link(person)}.join(", ") 
+  end
+
 
   def author?(person)
     people.member?(person)
