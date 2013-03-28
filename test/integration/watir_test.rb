@@ -17,7 +17,6 @@ class WatirTest < ActionController::IntegrationTest
   end
 
   def login_as_user(user_symbol)
-    binding.pry
     goto_home_page
     user = people(user_symbol)
     @browser.text_fields(:name => 'email_address').first.set user.email_address

@@ -123,6 +123,8 @@ GEM
     slop (3.4.3)
     term-ansicolor (1.0.7)
     validates_email (0.0.2)
+    watir-webdriver (0.6.2)
+      selenium-webdriver (>= 2.18.0)
     websocket (1.0.7)
     will_paginate (2.3.16)
     xpath (0.1.4)
@@ -160,5 +162,6 @@ DEPENDENCIES
   rmagick
   shoulda (= 2.11.3)
   validates_email
+  watir-webdriver
   will_paginate (~> 2.3.11)
   zippy

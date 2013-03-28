@@ -31,4 +31,5 @@ group :development, :test do
   gem 'pry-nav'
   gem 'pry-remote'
   gem 'shoulda', '2.11.3'
+  gem 'watir-webdriver'
 end
