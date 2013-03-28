@@ -14,7 +14,7 @@ class CollaboratorTypesControllerTest < ActionController::TestCase
 
   test "should create collaborator_type" do
     assert_difference('CollaboratorType.count') do
-      post :create, :collaborator_type => { }
+      post :create, :collaborator_type => {:name => 'illustrator' }
     end
 
     assert_redirected_to collaborator_type_path(assigns(:collaborator_type))
