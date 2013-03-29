@@ -1,9 +1,0 @@
-one:
-  person: administrative_user
-  group: ccl
-  is_administrator: false
-
-two:
-  person: plain_user
-  group: course
-  is_administrator: false

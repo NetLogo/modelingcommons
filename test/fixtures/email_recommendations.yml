@@ -1,9 +1,0 @@
-one:
-  person: plain_user
-  recipient_email_address: reuven@lerner.co.il
-  node: wolfsheep
-
-two:
-  person: administrative_user
-  recipient_email_address: reuven@ccl.northwestern.edu
-  node: autumn
