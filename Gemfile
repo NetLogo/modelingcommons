@@ -36,4 +36,5 @@ group :development, :test do
   gem 'shoulda'
   gem 'guard'
   gem 'guard-rspec', '~> 1.2'
+  gem 'rcov'
 end
