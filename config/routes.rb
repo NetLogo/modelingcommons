@@ -1,4 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
+
   map.resources :collaborator_types
 
   map.resources :projects, :member => { :download => [:get]}

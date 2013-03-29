@@ -18,3 +18,5 @@ config.action_controller.perform_caching             = false
 # ActionMailer::Base.deliveries array.
 config.action_mailer.delivery_method = :test
 
+
+  config.gem 'rspec-rails', :version => '>= 1.3.4', :lib => false unless File.directory?(File.join(Rails.root, 'vendor/plugins/rspec-rails'))
