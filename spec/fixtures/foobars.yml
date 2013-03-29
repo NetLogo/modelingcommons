@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  ab: MyString
+  cd: 2013-03-29 03:18:31
+  ef: 1
+
+two:
+  ab: MyString
+  cd: 2013-03-29 03:18:31
+  ef: 1

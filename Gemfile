@@ -30,6 +30,10 @@ group :development, :test do
   gem 'pry'
   gem 'pry-nav'
   gem 'pry-remote'
-  gem 'shoulda', '2.11.3'
   gem 'watir-webdriver'
+  gem 'rspec', '~> 1.2'
+  gem 'rspec-rails'
+  gem 'shoulda'
+  gem 'guard'
+  gem 'guard-rspec', '~> 1.2'
 end
