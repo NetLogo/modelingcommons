@@ -37,4 +37,6 @@ group :development, :test do
   gem 'guard'
   gem 'guard-rspec', '~> 1.2'
   gem 'rcov'
+  gem 'rb-fsevent', '~> 0.9'
+  gem 'fuubar-legacy'
 end

@@ -34,6 +34,8 @@ class Node < ActiveRecord::Base
   named_scope :created_since, lambda { |since| { :conditions => ['created_at >= ? ', since] }}
   named_scope :updated_since, lambda { |since| { :conditions => ['updated_at >= ? ', since] }}
 
+  after_destroy :remove_node_versions
+
   # ------------------------------------------------------------
   # Grab children of various sorts
   # ------------------------------------------------------------
@@ -90,7 +92,7 @@ class Node < ActiveRecord::Base
   end
 
   def people_sentence
-      people.map {|person| ActionController::Base.helpers.person_link(person)}.join(", ") 
+    people.map {|person| ActionController::Base.helpers.person_link(person)}.join(", ") 
   end
 
 
@@ -405,4 +407,5 @@ class Node < ActiveRecord::Base
                                                ORDER BY count DESC
                                                   LIMIT ?;", limit])
   end
+
 end

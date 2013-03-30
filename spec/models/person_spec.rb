@@ -16,9 +16,12 @@ describe Person do
     Person.create!(@valid_attributes)
   end
 
-  it "should not create a new instance if checkbox is unchecked" do
-    @valid_attributes.delete(:registration_consent)
-    Person.should_not create!(@valid_attributes)
+  %w(email_address password first_name last_name registration_consent).each do |field|
+    it "should not create a new instance if '#{field}' is unchecked" do
+      @valid_attributes.delete(field.to_sym)
+      p = Person.new(@valid_attributes)
+      p.should_not be_valid
+    end
   end
 
 end
