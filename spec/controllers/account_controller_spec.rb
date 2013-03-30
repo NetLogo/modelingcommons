@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe AccountController do
 
-  def mock_account(stubs={})
-    @mock_account ||= mock_model(Account, stubs)
+  def mock_person(stubs={})
+    @mock_person ||= mock_model(Person, stubs)
   end
 
   describe "login" do 
@@ -13,7 +13,29 @@ describe AccountController do
     end
   end
 
+  describe "login_action" do 
+    it "should not be possible to login with a blank username" do 
 
+      get :login
+      post :login_action, :foobar => {
+        :email_address => '',
+        :password => 'password'
+      }
+
+      response.should redirect_to(:controller => :account, :action => :login)
+    end
+
+    it "should not be possible to login with a blank password" do 
+
+      get :login
+      post :login_action, :foobar => {
+        :email_address => 'reuven@lerner.co.il',
+        :password => ''
+      }
+
+      response.should redirect_to(:controller => :account, :action => :login)
+    end
+  end
 
   describe "mypage" 
   describe "new" 
