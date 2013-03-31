@@ -14,26 +14,44 @@ describe AccountController do
   end
 
   describe "login_action" do 
+
+    before(:each) do 
+      @request.env["HTTP_REFERER"] = '/account/login'
+    end
+
     it "should not be possible to login with a blank username" do 
 
-      get :login
       post :login_action, :foobar => {
         :email_address => '',
         :password => 'password'
       }
 
       response.should redirect_to(:controller => :account, :action => :login)
+      flash[:notice].should == "You must provide an e-mail address and password in order to log in."
+      @person.should be_nil
     end
 
     it "should not be possible to login with a blank password" do 
 
-      get :login
       post :login_action, :foobar => {
         :email_address => 'reuven@lerner.co.il',
         :password => ''
       }
 
       response.should redirect_to(:controller => :account, :action => :login)
+      flash[:notice].should == "You must provide an e-mail address and password in order to log in."
+      @person.should be_nil
+    end
+
+    it "should not be possible to login with a bad password" do 
+
+      Person.stub(:find_by_email_address).and_return(mock_person(:salt => 'abc', :password => 'aaa'))
+
+      post :login_action, :email_address => 'reuven@lerner.co.il', :password => 'password'
+
+      response.should redirect_to(:controller => :account, :action => :login)
+      flash[:notice].should == "Sorry, but no user exists with that e-mail address and password.  Please try again."
+      @person.should be_nil
     end
   end
 
