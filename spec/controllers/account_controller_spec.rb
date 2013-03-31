@@ -6,6 +6,13 @@ describe AccountController do
     @mock_person ||= mock_model(Person, stubs)
   end
 
+  describe "new" do 
+    it "should be possible to get a registration form" do 
+      get :new
+      response.should render_template("account/_user_agreement")
+    end
+  end
+
   describe "login" do 
     it "should be possible to get the login page" do 
       get :login
@@ -68,5 +75,26 @@ describe AccountController do
     end
   end
 
+  
+  describe "mypage" do 
+    it "going to personal page without being logged in sends to login" do 
+      get :mypage
+      response.should redirect_to(:controller => :account, :action => :login)
+    end
+
+  end
+
+  describe "create" do 
+
+    before(:each) do 
+      @request.env["HTTP_REFERER"] = '/account/new'
+    end
+
+    it "should not create a new person without required fields" do 
+      people_before = Person.count
+      post :create
+      Person.count.should == people_before
+    end
+  end
 
 end
