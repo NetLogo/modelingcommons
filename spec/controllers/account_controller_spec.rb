@@ -53,6 +53,17 @@ describe AccountController do
       flash[:notice].should == "Sorry, but no user exists with that e-mail address and password.  Please try again."
       @person.should be_nil
     end
+
+    it "should be possible to login with a good password" do 
+      Person.stub(:find_by_email_address).and_return(mock_person(:salt => 'abc', :password => 'shh'))
+      Person.stub(:encrypted_password).and_return('ssh')
+
+      post :login_action, :email_address => 'reuven@lerner.co.il', :password => 'password'
+
+      response.should redirect_to(:controller => :account, :action => :login)
+      flash[:notice].should == "Sorry, but no user exists with that e-mail address and password.  Please try again."
+      @person.should be_nil
+    end
   end
 
   describe "mypage" 
