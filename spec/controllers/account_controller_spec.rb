@@ -21,26 +21,27 @@ describe AccountController do
 
     it "should not be possible to login with a blank username" do 
 
-      post :login_action, :foobar => {
-        :email_address => '',
-        :password => 'password'
-      }
+      post :login_action, :email_address => '', :password => 'password'
 
       response.should redirect_to(:controller => :account, :action => :login)
       flash[:notice].should == "You must provide an e-mail address and password in order to log in."
-      @person.should be_nil
     end
+
+    it "should not be possible to login with an unknown username" do 
+
+      post :login_action, :email_address => 'foo@barbaz.com', :password => 'password'
+
+      response.should redirect_to(:controller => :account, :action => :login)
+      flash[:notice].should == "Sorry, but no user exists with that e-mail address and password.  Please try again."
+    end
+
 
     it "should not be possible to login with a blank password" do 
 
-      post :login_action, :foobar => {
-        :email_address => 'reuven@lerner.co.il',
-        :password => ''
-      }
+      post :login_action, :email_address => 'reuven@lerner.co.il', :password => ''
 
       response.should redirect_to(:controller => :account, :action => :login)
       flash[:notice].should == "You must provide an e-mail address and password in order to log in."
-      @person.should be_nil
     end
 
     it "should not be possible to login with a bad password" do 
@@ -51,35 +52,21 @@ describe AccountController do
 
       response.should redirect_to(:controller => :account, :action => :login)
       flash[:notice].should == "Sorry, but no user exists with that e-mail address and password.  Please try again."
-      @person.should be_nil
     end
 
     it "should be possible to login with a good password" do 
-      Person.stub(:find_by_email_address).and_return(mock_person(:salt => 'abc', :password => 'shh'))
-      Person.stub(:encrypted_password).and_return('ssh')
+      Person.stub(:find_by_email_address).and_return(mock_person(:salt => 'abc', 
+                                                                 :password => 'password',
+                                                                 :first_name => 'Reuven',
+                                                                 :last_name => 'Lerner'))
+      Person.stub(:encrypted_password).and_return('password')
 
       post :login_action, :email_address => 'reuven@lerner.co.il', :password => 'password'
 
-      response.should redirect_to(:controller => :account, :action => :login)
-      flash[:notice].should == "Sorry, but no user exists with that e-mail address and password.  Please try again."
-      @person.should be_nil
+      response.should redirect_to(:controller => :account, :action => :mypage)
+      flash[:notice].should == "Welcome back to the Commons, Reuven!"
     end
   end
 
-  describe "mypage" 
-  describe "new" 
-  describe "create" 
-  describe "edit" 
-  describe "tags" 
-  describe "update" 
-  describe "login_action" 
-  describe "logout" 
-  describe "follow" 
-  describe "models" 
-  describe "groups" 
-  describe "find_people" 
-  describe "get_feed" 
-  describe "list_groups" 
-  describe "download" 
 
 end

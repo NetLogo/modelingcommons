@@ -24,6 +24,7 @@ class NodeVersion
   after_save :update_node_modification_time
 
   after_save :notify_authors
+  after_save :update_collaborators
 
   scope :info_keyword_matches,  lambda { |term| where(:info_keyword_index => term) }
   scope :procedures_keyword_matches,  lambda { |term| where(:procedures_keyword_index => term) }
@@ -92,4 +93,9 @@ class NodeVersion
     Notifications.deliver_modified_model(node, person) 
   end
 
+  def update_collaborators
+    Collaboration.find_or_create_by_node_id_and_person_id_and_collaborator_type_id(node.id,
+                                                                                   person.id,
+                                                                                   CollaboratorType.find_by_name('Author').id)
+  end
 end
