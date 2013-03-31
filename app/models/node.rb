@@ -19,7 +19,7 @@ class Node < ActiveRecord::Base
   has_many :spam_warnings
 
   has_many :collaborations
-  has_many :collaborators, :through => :collaborations, :class_name => 'person'
+  has_many :collaborators, :through => :collaborations, :source => 'person'
 
   has_many :logged_actions
 
