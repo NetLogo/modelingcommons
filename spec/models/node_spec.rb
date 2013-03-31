@@ -1,6 +1,11 @@
 require 'spec_helper'
 
 describe Node do
+
+  def mock_collaborator_type(stubs={})
+    @mock_collaborator_type ||= mock_model(CollaboratorType, stubs)
+  end
+
   before(:each) do
     @valid_attributes = {
       :name => "mynode",
@@ -40,6 +45,7 @@ describe Node do
 
     it "should register a version after we have saved it" do
 
+      CollaboratorType.stub(:find_by_name).and_return(mock_collaborator_type)
       p = Person.create(:email_address => "foo@bar.com",
                         :password => 'password',
                         :first_name => 'firstname',
