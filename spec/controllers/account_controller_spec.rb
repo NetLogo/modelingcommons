@@ -11,6 +11,7 @@ describe AccountController do
       get :new
       response.should render_template("account/_user_agreement")
     end
+
   end
 
   describe "login" do 
