@@ -87,7 +87,8 @@ class Node < ActiveRecord::Base
   end
 
   def people
-    @model_people ||= node_versions.map {|version| version.person}.uniq
+    collaborators
+    #@model_people ||= node_versions.map {|version| version.person}.uniq
   end
 
   def people_sentence

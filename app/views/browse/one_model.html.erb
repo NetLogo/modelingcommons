@@ -13,7 +13,7 @@
 
         <%= hidden_field_tag 'id', @model.id %>
         
-        Model was written in NetLogo <%= @model.netlogo_version %></br />
+        Model was written in NetLogo <%= @model.netlogo_version %> by:</br />
 	
 	<ul>
 	<% @model.collaborations.each do |collaboration| %>
