@@ -15,10 +15,15 @@
         
         Model was written in NetLogo <%= @model.netlogo_version %> by:</br />
 	
-	<ul>
+	<ul id="collaborator-list">
 	<% @model.collaborations.each do |collaboration| %>
 	<li><%= person_link(collaboration.person) %> (<%= collaboration.name %>)</li>
 	<% end %> 
+	
+	<% if @model.people.include?(@person) %>
+	<li id="add-collaborator"><a href="#">Add a collaborator</a></li>
+	<% end %>
+
 	</ul>
 
         <% model_visibility_letter = @model.visibility.short_form %>

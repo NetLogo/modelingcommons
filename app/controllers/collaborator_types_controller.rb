@@ -7,6 +7,7 @@ class CollaboratorTypesController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @collaborator_types }
+      format.json  { render :json => @collaborator_types }
     end
   end
 
