@@ -7,4 +7,8 @@ class Collaboration < ActiveRecord::Base
   belongs_to :person
   belongs_to :collaborator_type
 
+  def name
+    collaborator_type.name
+  end
+
 end

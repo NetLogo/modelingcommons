@@ -10,9 +10,12 @@
     <% 
        model = modelAndCount.node
        count = modelAndCount.count
-       your_news = !@person.nil? && @person.id == model.person.id
-       %>
+
+       your_news = @person and model.person and (@person.id == model.person.id)
+     %>
+
     <% next if count.to_i.zero? %>
+    <% next if model.node_versions.empty? %>
     <div class="news_post<% if your_news %> your_news<% end %>">
       <div class="news_image">
         <a href="<%= url_for(:controller => "browse", :action => "one_model", :id => model.id) %>">

@@ -27,7 +27,6 @@ class ProjectsController < ApplicationController
     end
 
     redirect_to :controller => :account, :action => :mypage
-    return
   end
 
   def show

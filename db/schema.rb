@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130327224552) do
+ActiveRecord::Schema.define(:version => 20130331140537) do
 
   create_table "collaborations", :force => true do |t|
     t.integer  "person_id"
@@ -36,6 +36,12 @@ ActiveRecord::Schema.define(:version => 20130327224552) do
   add_index "email_recommendations", ["node_id"], :name => "index_email_recommendations_on_node_id"
   add_index "email_recommendations", ["person_id"], :name => "index_email_recommendations_on_person_id"
 
+  create_table "foobar", :id => false, :force => true do |t|
+    t.integer "id",                        :null => false
+    t.text    "ip_address"
+    t.string  "new_inet",   :limit => nil
+  end
+
   create_table "groups", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -46,10 +52,10 @@ ActiveRecord::Schema.define(:version => 20130327224552) do
     t.integer  "person_id"
     t.datetime "logged_at"
     t.text     "message"
-    t.string   "text_ip_address"
+    t.string   "ip_address"
     t.text     "browser_info"
     t.text     "url"
-    t.text     "params",                                            :null => false
+    t.text     "params",                          :null => false
     t.text     "session"
     t.text     "cookies"
     t.text     "flash"
@@ -57,12 +63,12 @@ ActiveRecord::Schema.define(:version => 20130327224552) do
     t.integer  "node_id"
     t.text     "controller"
     t.text     "action"
-    t.boolean  "is_searchbot",                   :default => false
-    t.string   "ip_address",      :limit => nil
+    t.boolean  "is_searchbot", :default => false, :null => false
   end
 
   add_index "logged_actions", ["action"], :name => "index_logged_actions_on_action"
   add_index "logged_actions", ["controller"], :name => "index_logged_actions_on_controller"
+  add_index "logged_actions", ["ip_address"], :name => "index_logged_actions_on_ip_address"
   add_index "logged_actions", ["is_searchbot"], :name => "index_logged_actions_on_is_searchbot"
   add_index "logged_actions", ["logged_at"], :name => "logged_actions_logged_at"
   add_index "logged_actions", ["node_id"], :name => "index_logged_actions_on_node_id"
@@ -71,7 +77,6 @@ ActiveRecord::Schema.define(:version => 20130327224552) do
   add_index "logged_actions", ["node_id"], :name => "node_id_not_null"
   add_index "logged_actions", ["person_id"], :name => "index_logged_actions_on_person_id"
   add_index "logged_actions", ["referrer"], :name => "index_logged_actions_on_referrer"
-  add_index "logged_actions", ["text_ip_address"], :name => "index_logged_actions_on_ip_address"
   add_index "logged_actions", ["url"], :name => "index_logged_actions_on_url"
 
   create_table "memberships", :force => true do |t|

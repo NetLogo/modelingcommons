@@ -2,7 +2,7 @@
 <div id="preview_info_container">
 <!--Preview-->
 <div id="preview_image">
-  <%= render :partial => "preview_image", :locals => {:model => @model} -%>
+  <%= render :partial => "preview_image", :locals => {:model => @model} %>
 </div>
 
 <div id="preview_info">
@@ -13,16 +13,23 @@
 
         <%= hidden_field_tag 'id', @model.id %>
         
-        Model was written in NetLogo <%= @model.netlogo_version -%></br />
-        By <%= @model.people.map {|person| person_link(person)}.join(", ") -%>
+        Model was written in NetLogo <%= @model.netlogo_version %></br />
+	
+	<ul>
+	<% @model.collaborations.each do |collaboration| %>
+	<li><%= person_link(collaboration.person) %> (<%= collaboration.name %>)</li>
+	<% end %> 
+	</ul>
+
         <% model_visibility_letter = @model.visibility.short_form %>
         <% model_changeability_letter = @model.changeability.short_form %>
 	<% model_group_id = @model.group ? @model.group.id : 0 %>
+
         <% if @model.people.include?(@person) %>
 	<% if @person and !@person.groups.empty? %>
-	<% @options_for_select = [['No group', nil]] -%>
-	<% @person.groups.each {|g| @options_for_select << [g.name, g.id] } -%> 
-			                                   | Model group <%= select_tag("group_id", options_for_select(@options_for_select, (@model.group ? @model.group.id : 0)), :id => "group_select") %>
+	<% @options_for_select = [['No group', nil]] %>
+	<% @person.groups.each {|g| @options_for_select << [g.name, g.id] } %> 
+        Model group <%= select_tag("group_id", options_for_select(@options_for_select, (@model.group ? @model.group.id : 0)), :id => "group_select") %>
 	   <% end %>
            
            | Visible to <select name="read_permission" id="read_permission_select">
@@ -41,8 +48,9 @@
 	   </select>
 
 	   <% else %>
+
 	   <%if model_group_id != 0 %>
-	   | <%= model_group(@model) %>
+	   <%= model_group(@model) %>
 	   <% end %>
 	   | <%= model_visibility(@model) %> | <%= model_changeability(@model) %>
 	   <% end %>
@@ -61,13 +69,13 @@
 	<% end %>
 	
 	<% if not @model.children.empty? %>
-	Parent of <%= pluralize(@model.children.size, 'model') -%>: <%= @model.children.map {|child| model_link(child) }.to_sentence %>
+	Parent of <%= pluralize(@model.children.size, 'model') %>: <%= @model.children.map {|child| model_link(child) }.to_sentence %>
 	<% end %>
       </div>
     </div>
     <div id="actions">
       <div>
-	<%= link_to image_tag("download.png", :class => "inline_image", :alt => "Download the '#{@model.name}' model", :title => "Download the '#{@model.name}' model") + "Download this model", :controller => "browse", :action => "download_model", :id => @model.id -%> 
+	<%= link_to image_tag("download.png", :class => "inline_image", :alt => "Download the '#{@model.name}' model", :title => "Download the '#{@model.name}' model") + "Download this model", :controller => "browse", :action => "download_model", :id => @model.id %> 
 	<% if @person %>
 	| 
 	<% if @model.recommendations.select {|r| r.person_id == @person.id}.empty? %>
@@ -77,7 +85,7 @@
 	<% end %>
 	<% if !@model.recommendations.empty? %>
 	| 
-	(<%= link_to pluralize(@model.recommendations.length, "recommendation"), :controller => :recommend, :action => :show_recommendations, :id => @model.id -%>)
+	(<%= link_to pluralize(@model.recommendations.length, "recommendation"), :controller => :recommend, :action => :show_recommendations, :id => @model.id %>)
 	<% end %>
 	
 	<% if !@person.spam_warning(@model) %>
@@ -93,7 +101,7 @@
 	<%= link_to 'Delete this model', { :controller => :upload, :action => :destroy, :id => @model.id }, :confirm => 'Delete this model, including its entire history, attachments, and comments?  There is no way to undo this action.' %>
 	<% end %>
 	| 
-	<!--   <div id="model-atom-feed" id="atom-feed-link"><%= link_to image_tag("feed.png", :id => 'atom-image', :alt => "Follow '#{@model.name}' in your feed reader", :title => "Follow '#{@model.name}' in your feed reader"), :controller => :browse, :action => :follow, :id => @model.id, :format => :atom -%><%= link_to "Follow #{@model.name}", {:controller => :browse, :action => :follow, :id => @model.id, :format => :atom}, {:id => 'atom-feed'} %></div> -->
+	<!--   <div id="model-atom-feed" id="atom-feed-link"><%= link_to image_tag("feed.png", :id => 'atom-image', :alt => "Follow '#{@model.name}' in your feed reader", :title => "Follow '#{@model.name}' in your feed reader"), :controller => :browse, :action => :follow, :id => @model.id, :format => :atom %><%= link_to "Follow #{@model.name}", {:controller => :browse, :action => :follow, :id => @model.id, :format => :atom}, {:id => 'atom-feed'} %></div> -->
 	<!-- AddThis Button BEGIN -->
 	<a class="addthis_button" href="http://addthis.com/bookmark.php?v=250&amp;username=reuvenmlerner"><img src="http://s7.addthis.com/static/btn/v2/lg-share-en.gif" width="125" height="16" alt="Bookmark and Share" style="border:0;height: auto;"/></a><script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#username=reuvenmlerner"></script>
 	<!-- AddThis Button END -->
