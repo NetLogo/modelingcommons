@@ -4,8 +4,11 @@ class AddCollaborationForAuthors < ActiveRecord::Migration
     total_nodes = Node.count
     Node.all.each_with_index do |n, n_index|
       STDERR.puts "[#{n_index} / #{total_nodes}]"
-      total_people = n.people.size
-      n.people.each_with_index do |p, p_index|
+
+      old_people = n.node_versions.map {|version| version.person}.uniq
+
+      total_people = old_people.size
+      old_people.each_with_index do |p, p_index|
         STDERR.puts "\t#{p_index} / #{total_people}"
         Collaboration.create!(:node => n,
                               :person => p,
