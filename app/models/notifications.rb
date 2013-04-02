@@ -142,7 +142,7 @@ class Notifications < ActionMailer::Base
     @cc = node.people.map { |p| p.email_address }
     @bcc = 'modelingcommons@ccl.northwestern.edu'
     @recipients = person.email_address
-    @subject = "You have been added as a collaboator to the '#{node.name}'"
+    @subject = "You have been added as a collaboator to the '#{node.name}' model"
     @subject = "[TESTING] #{@subject}" if Rails.env == 'development'
     @body[:node] = node
     @body[:person] = person
