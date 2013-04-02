@@ -12,5 +12,7 @@ PermissionSetting.create([{ :name => 'Everyone' },
 
 CollaboratorType.create([{ :name => 'Author'},
                          { :name => 'Domain expert'},
+                         { :name => 'Advisor'},
+                         { :name => 'Teacher'},
                          { :name => 'Editor'},
                          { :name => 'Team member'}])
