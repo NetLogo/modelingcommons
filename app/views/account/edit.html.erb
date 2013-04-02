@@ -1,126 +1,135 @@
 <% @title = "Edit your profile" %>
 
 <div class="global_padding">
-<% form_for :person, :url => { :action => :update }, :html => {:multipart => true, :id => 'edit-person-form'} do |form| %>
-<table>
+  <% form_for :person, :url => { :action => :update }, :html => {:multipart => true, :id => 'edit-person-form'} do |form| %>
+  <table>
 
-  <tr>
-    <td><label for="person_first_name">First name</label></td>
-    <td><%= form.text_field :first_name, :size => 30, :value => @person.first_name %></td>
-  </tr>
-  <tr>
-    <td><label for="person_last_name">Last name</label></td>
-    <td><%= form.text_field :last_name, :size => 30, :value => @person.last_name %></td>
-  </tr>
-  <tr>
-    <td><label for="person_email_address">E-mail address</label></td>
-    <td><%= form.text_field :email_address, :size => 30, :value => @person.email_address %></td>
-  </tr>
-  <tr>
-    <td>Sex</td>
-    <td><%= form.radio_button :sex, 'f' -%><label for="person_sex_f">Female</label> <br />
+    <tr>
+      <td><label for="person_first_name">First name</label></td>
+      <td><%= form.text_field :first_name, :size => 30, :value => @person.first_name %></td>
+    </tr>
+    <tr>
+      <td><label for="person_last_name">Last name</label></td>
+      <td><%= form.text_field :last_name, :size => 30, :value => @person.last_name %></td>
+    </tr>
+    <tr>
+      <td><label for="person_email_address">E-mail address</label></td>
+      <td><%= form.text_field :email_address, :size => 30, :value => @person.email_address %></td>
+    </tr>
+    <tr>
+      <td>Sex</td>
+      <td><%= form.radio_button :sex, 'f' -%><label for="person_sex_f">Female</label> <br />
         <%= form.radio_button :sex, 'm' -%><label for="person_sex_m">Male</label></td>
-  </tr>
-  <tr>
-    <td>Country</td>
-    <td><%= form.select :country_name, country_options_for_select(@person.country_name, ['United States']), { :include_blank => @person.country_name.blank? } %></td>
-  </tr>
-  <tr>
-    <td>Birthdate</td>
-    <td><%= form.date_select :birthdate, :start_year => 1930, :end_year => 2005, :default => @person.birthdate, :include_blank => @person.birthdate.blank? %></td>
-  </tr>
-  <tr>
-    <td><label for="person_password">Password (if you want to change it)</label></td>
-    <td><%= form.password_field :password, :size => 30, :value => '' %></td>
-  </tr>
-  <tr>
-    <td><label for="person_password_confirmation">Password confirmation</label></td>
-    <td><%= form.password_field :password_confirmation, :size => 30, :value => '' %></td>
-  </tr>
+    </tr>
+    <tr>
+      <td>Country</td>
+      <td><%= form.select :country_name, country_options_for_select(@person.country_name, ['United States']), { :include_blank => @person.country_name.blank? } %></td>
+    </tr>
+    <tr>
+      <td>Birthdate</td>
+      <td><%= form.date_select :birthdate, :start_year => 1930, :end_year => 2005, :default => @person.birthdate, :include_blank => @person.birthdate.blank? %></td>
+    </tr>
+    <tr>
+      <td><label for="person_password">Password (if you want to change it)</label></td>
+      <td><%= form.password_field :password, :size => 30, :value => '' %></td>
+    </tr>
+    <tr>
+      <td><label for="person_password_confirmation">Password confirmation</label></td>
+      <td><%= form.password_field :password_confirmation, :size => 30, :value => '' %></td>
+    </tr>
 
-  <tr>
-    <td>Receive general e-mail updates from the Modeling Commons?</td>
-    <td><%= form.check_box :send_site_updates, :checked => @person.send_site_updates? %><label for="person_send_site_updates">Yes</label></td>
-  </tr>
+    <tr>
+      <td>Receive general e-mail updates from the Modeling Commons?</td>
+      <td><%= form.check_box :send_site_updates, :checked => @person.send_site_updates? %><label for="person_send_site_updates">Yes</label></td>
+    </tr>
 
-  <tr>
-    <td>Receive e-mail updates about models which you have written,
-    edited, or discussed?</td>
-    <td><%= form.check_box :send_model_updates, :checked => @person.send_model_updates? %><label for="person_send_model_updates">Yes</label></td>
-  </tr>
+    <tr>
+      <td>Receive e-mail updates about models which you have written,
+	edited, or discussed?</td>
+      <td><%= form.check_box :send_model_updates, :checked => @person.send_model_updates? %><label for="person_send_model_updates">Yes</label></td>
+    </tr>
 
-  <tr>
-    <td>Receive e-mail updates when tags are applied?</td>
-    <td><%= form.check_box :send_tag_updates, :checked => @person.send_tag_updates? %><label for="person_send_tag_updates">Yes</label></td>
-  </tr>
+    <tr>
+      <td>Receive e-mail updates when tags are applied?</td>
+      <td><%= form.check_box :send_tag_updates, :checked => @person.send_tag_updates? %><label for="person_send_tag_updates">Yes</label></td>
+    </tr>
 
-  <% unless @person.registration_consent %>
-  <tr>
-    <td colspan="2">
-      <p><b>Users of the Modeling Commons are required to agree to the following text:</b></p>
+    <% unless @person.registration_consent %>
+    <tr>
+      <td colspan="2">
+	<p><b>Users of the Modeling Commons are required to agree to the following text:</b></p>
 
-      <p>You are registering for the Modeling Commons, a research project
-	from the Center for Connected Learning and Computer-Based Modeling at
-	Northwestern University, Evanston IL, USA.</p>
+	<p>You are registering for the Modeling Commons, a research project
+	  from the Center for Connected Learning and Computer-Based Modeling at
+	  Northwestern University, Evanston IL, USA.</p>
 
-      <p>The purpose of the Modeling Commons is to better understand
-	modeling practices in individuals and groups, online collaborative
-	learning communities, and the ways in which people learn in groups.
-	We are also interested in learning what design features facilitate
-	collaborative modeling practices. The Modeling Commons itself is thus
-	a research project under active development.</p>
+	<p>The purpose of the Modeling Commons is to better understand
+	  modeling practices in individuals and groups, online collaborative
+	  learning communities, and the ways in which people learn in groups.
+	  We are also interested in learning what design features facilitate
+	  collaborative modeling practices. The Modeling Commons itself is thus
+	  a research project under active development.</p>
 
-      <p>There is no expected end date for this research project. Indeed, if
-	successful, we would hope the Modeling Commons continues as a
-	self-sustaining community. If and when we decide to terminate it, we
-	will make every effort to inform users and provide them with an
-	alternative.</p>
+	<p>There is no expected end date for this research project. Indeed, if
+	  successful, we would hope the Modeling Commons continues as a
+	  self-sustaining community. If and when we decide to terminate it, we
+	  will make every effort to inform users and provide them with an
+	  alternative.</p>
 
-      <p>There are no risks to you associated with participating in this
-	research study.  Your participation is completely voluntary.  You can
-	stop participation at any time.</p>
+	<p>There are no risks to you associated with participating in this
+	  research study.  Your participation is completely voluntary.  You can
+	  stop participation at any time.</p>
 
-      <p>You will benefit from this research by enjoying a community of
-	like-minded modelers, being able to easily post and share your models
-	with others and collaborate with others on model development, keep
-	track of revision history of your models, as well as discuss and tag
-	models that you and others have written. </p>
+	<p>You will benefit from this research by enjoying a community of
+	  like-minded modelers, being able to easily post and share your models
+	  with others and collaborate with others on model development, keep
+	  track of revision history of your models, as well as discuss and tag
+	  models that you and others have written. </p>
 
-      <p>Instead of participating in this study, you could write your
-	NetLogo models on your own computer, and post them to your own Web
-	site. However, we hope and expect that the collaborative experience we
-	provide will encourage you to use the Modeling Commons.</p>
+	<p>Instead of participating in this study, you could write your
+	  NetLogo models on your own computer, and post them to your own Web
+	  site. However, we hope and expect that the collaborative experience we
+	  provide will encourage you to use the Modeling Commons.</p>
 
-      <p>Public records of your activity in the Modeling Commons may be
-	identified by name. Records that are private to a group, or to your
-	individual account, will be anonymized and/or displayed only in the
-	aggregate. We will never identify you or your work in public if you
-	have not already done so yourself.</p>
+	<p>Public records of your activity in the Modeling Commons may be
+	  identified by name. Records that are private to a group, or to your
+	  individual account, will be anonymized and/or displayed only in the
+	  aggregate. We will never identify you or your work in public if you
+	  have not already done so yourself.</p>
 
-      <p>If you have any questions about the Modeling Commons, you can
-	contact Northwestern University graduate student, Reuven Lerner, at
-	<%= mail_to "modelingcommons@ccl.northwestern.edu" -%>.</p>
+	<p>If you have any questions about the Modeling Commons, you can
+	  contact Northwestern University graduate student, Reuven Lerner, at
+	  <%= mail_to "modelingcommons@ccl.northwestern.edu" -%>.</p>
 
-      <p><%= form.check_box :registration_consent -%><label for="person_registration_consent">I understand and agree to the above.</label></p>
-    </td>
-    <% end %>
+	<p><%= form.check_box :registration_consent -%><label for="person_registration_consent">I understand and agree to the above.</label></p>
+      </td>
+      <% end %>
 
-  <tr>
-    <td colspan="2"><%= submit_tag "Update account", :class => "submit" %></td>
-  </tr>
+    <tr>
+      <td>Your picture (optional)
+	<%= person_image(@person) %>
+      </td>
+      <td>
+	<%= form.file_field :avatar, :size => 15 %>
+      </td>
+    </tr>
 
-</table>
-<% end %>
+    <tr>
+      <td colspan="2"><%= submit_tag "Update account", :class => "submit" %></td>
+    </tr>
+
+  </table>
+  <% end %>
 </div>
 <script>
   $("#edit-person-form").validate({
   rules: {
-      'person[first_name]': 'required',
-      'person[last_name]': 'required',
-      'person[email_address]': {
-	  required: true,
-	  email: true },
-      'person[sex]': 'required',
-      'person[country_name]': 'required'
-   } } );
+  'person[first_name]': 'required',
+  'person[last_name]': 'required',
+  'person[email_address]': {
+  required: true,
+  email: true },
+  'person[sex]': 'required',
+  'person[country_name]': 'required'
+  } } );
 </script>

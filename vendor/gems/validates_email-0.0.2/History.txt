@@ -1,9 +1,0 @@
-== 0.0.2 2007-06-18
-
-* 1 minor bug
-  * remove depreciated code practice
-
-== 0.0.1 2007-06-15
-
-* 1 major enhancement:
-  * Initial release

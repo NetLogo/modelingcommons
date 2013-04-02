@@ -1,4 +1,0 @@
-
-This line of markdown below will hang you if you're running BlueCloth.
-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -   
-
