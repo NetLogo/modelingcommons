@@ -16,7 +16,7 @@ class CollaborationsController < ApplicationController
                                                   params[:person_name]])
 
       if @node.author?(collaborator)
-        message = "Not adding '#{collaborator.fullname}', since they are already an author."
+        message = "Not adding '#{collaborator.fullname}', since they are already a collaborator."
       else
         collaboration = Collaboration.new(:node => @node,
                                           :person => collaborator,
