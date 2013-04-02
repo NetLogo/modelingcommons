@@ -78,7 +78,7 @@ class TagsController < ApplicationController
     query = params[:q].downcase
     limit = params[:limit].to_i
 
-    render :text => Person.search(query)[0..limit].map { |tag| tag.name}.join("\n")
+    render :text => Tag.search(query)[0..limit].map { |tag| tag.name}.join("\n")
   end
 
   def destroy

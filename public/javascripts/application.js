@@ -668,7 +668,7 @@ jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
     
     var initializeTagEditor = function() {
 	
-	$(".complete").autocomplete('/tags/complete_tags', {} );
+	$(".tag-complete").autocomplete('/tags/complete_tags', {} );
 	
 	//Add new tag
 	$('#add_tag_form').submit(createAJAXFormReturningHTMLHandler(function(data, textStatus, jqXHR) {
