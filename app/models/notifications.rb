@@ -139,7 +139,7 @@ class Notifications < ActionMailer::Base
 
   def collaboration_notice(node, person)
     standard_settings
-    @cc = node.people
+    @cc = node.people.map { |p| p.email_address }
     @bcc = 'modelingcommons@ccl.northwestern.edu'
     @recipients = person.email_address
     @subject = "You have been added as a collaboator to the '#{node.name}'"
