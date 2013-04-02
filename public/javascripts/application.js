@@ -784,12 +784,15 @@ jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
 
 	$("li#add-collaborator").bind("click", function(e) {
 
-            $('<li class="added-collaborator"><input type="text" placeholder="Collaborator name" name="name" /><select><option></option>\n' + collaboration_options + '</select></li>').insertBefore('#add-collaborator');
+            $('<li class="added-collaborator"><input class="person-complete" type="text" placeholder="Collaborator name" name="name" /><select><option></option>\n' + collaboration_options + '</select></li>').insertBefore('#add-collaborator');
 
 	    if ($("li#save-collaborators").length == 0)
 	    {
 		$('<li id="save-collaborators"><input type="button" value="Save new collaborators" /></li>').insertAfter('#add-collaborator');
 	    }
+
+	    $('.person-complete').autocomplete('/people/complete_people');
+
 	});
     };
 

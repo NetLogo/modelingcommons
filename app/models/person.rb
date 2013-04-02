@@ -65,6 +65,10 @@ class Person < ActiveRecord::Base
     groups.select {|group| group.is_administrator?(self) }
   end
 
+  def self.search(term)
+    all(:conditions => [ "position( ? in lower(first_name || ' ' || last_name) ) > 0 ", term])
+  end
+
   def spam_warning(model)
     spam_warnings.select { |sw| sw.node_id == model.id }.first || nil
   end
