@@ -11,4 +11,9 @@ class Collaboration < ActiveRecord::Base
     collaborator_type.name
   end
 
+  after_save :notify_collaborator
+
+  def notify_collaborator
+    Notifications.deliver_collaboration_notice(node, person) 
+  end
 end

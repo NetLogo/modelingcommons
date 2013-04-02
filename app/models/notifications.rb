@@ -137,4 +137,15 @@ class Notifications < ActionMailer::Base
     @body[:person] = person
   end
 
+  def collaboration_notice(node, person)
+    standard_settings
+    @cc = node.people
+    @bcc = 'modelingcommons@ccl.northwestern.edu'
+    @recipients = person.email_address
+    @subject = "You have been added as a collaboator to the '#{node.name}'"
+    @subject = "[TESTING] #{@subject}" if Rails.env == 'development'
+    @body[:node] = node
+    @body[:person] = person
+  end
+
 end
