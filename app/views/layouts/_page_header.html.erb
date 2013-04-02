@@ -7,7 +7,7 @@
       <div class="login">
 	<% if @person %>
 	Hello <%= link_to @person.fullname, :controller => :account, :action => :mypage -%><%= person_image(@person) %>
-	| <%= link_to_unless_current "Edit personal details", :controller => :account, :action => :edit, :id => @person.id %>
+	| <%= link_to_unless_current "Edit your details", :controller => :account, :action => :edit, :id => @person.id %>
 	<% if @person.administrator %> | <%= link_to_unless_current "Admin", :controller => :admin, :action => :index %><% end %>
 	| <%= link_to_unless_current "Logout", :controller => :account, :action => :logout %>
 	<% else %>

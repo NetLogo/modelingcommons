@@ -788,12 +788,18 @@ jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
 
 	    if ($("li#save-collaborators").length == 0)
 	    {
-		$('<li id="save-collaborators"><input type="button" value="Save new collaborators" /></li>').insertAfter('#add-collaborator');
+		$('<li id="save-collaborators"><input id="save-collaborators-button" type="button" value="Save new collaborators" /></li>').insertAfter('#add-collaborator');
+
+		$("#save-collaborators-button").bind("click", function(e) {
+		    $(".added-collaborator").each( function(index, item) { alert("Saving " + item) });
+		});
 	    }
 
 	    $('.person-complete').autocomplete('/people/complete_people');
 
 	});
+
+
     };
 
     function initialize() {
