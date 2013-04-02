@@ -69,6 +69,14 @@
 	Part of project '<%= project_link(@model.projects.first) %>'
 	<% end %>
 	
+	<p>Tags:
+	<% if @model.tags.empty? %>
+	None
+	<% else %>
+	<%= @model.tags.map {|t| tag_link(t)}.to_sentence %>
+	<% end %>
+	</p>
+
 	<% if @model.parent %>
 	Child of model <%= model_link(@model.parent) %>
 	<% end %>
