@@ -13,6 +13,8 @@ class Person < ActiveRecord::Base
   has_many :projects
 
   has_many :collaborations
+  has_many :nodes, :through => :collaborations
+
   has_many :memberships
   has_many :groups, :through => :memberships, :order => "lower(name) ASC"
 
@@ -36,10 +38,6 @@ class Person < ActiveRecord::Base
 
   after_validation_on_create :generate_salt_and_encrypt_password
   after_validation_on_update :encrypt_updated_password
-
-  def nodes
-    Node.find_all_by_id(NodeVersion.fields(:node_id).all(:conditions => {:person_id => id}, :order => :updated_at).map {|nv| nv.node_id})
-  end
 
   def node_versions
     NodeVersion.fields(:id, :node_id, :person_id, :description, :created_at, :updated_at).all(:conditions => { :person_id => id}, :order => :updated_at)
