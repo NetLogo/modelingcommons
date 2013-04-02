@@ -5,9 +5,13 @@ class CollaborationsController < ApplicationController
   before_filter :require_login
 
   def create
+    return if params[:person_name].blank?
     @node = Node.find(params[:node_id])
 
-    if @node.author?(@person)
+    if params[:collaborator_type_id].blank? 
+      message = "No collaboration type indicated; ignoring."
+      
+    elsif @node.author?(@person)
       collaborator = Person.first(:conditions => ["first_name || ' ' || last_name = ?", 
                                                   params[:person_name]])
 
