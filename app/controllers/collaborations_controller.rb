@@ -5,15 +5,35 @@ class CollaborationsController < ApplicationController
   before_filter :require_login
 
   def create
-    @collaboration = Collaboration.new(params[:collaboration])
-    
-    if @collaboration.save
-      flash[:notice] = "Successfully added collaboration"
+    @node = Node.find(params[:node_id])
+
+    if @node.author?(@person)
+      collaborator = Person.first(:conditions => ["first_name || ' ' || last_name = ?", 
+                                                  params[:person_name]])
+
+      if @node.author?(collaborator)
+        message = "Not adding '#{collaborator.fullname}', since they are already an author."
+      else
+        collaboration = Collaboration.new(:node => @node,
+                                          :person => collaborator,
+                                          :collaborator_type_id => params[:collaborator_type_id])
+        if collaboration.save
+          message = "Successfully added #{collaborator.fullname} as a collaborator."
+        else
+          message = "Could not create the collaboration"
+        end
+      end
+
     else
-      logger.warn "[CollaborationsController#create] errors saving collaboration: '#{@collaboration.errors.inspect}'"
-      flash[:notice] = "Could not create the collaboration"
+      message = 'You cannot set collaborators for this model'
     end
 
-    redirect_to :back
+    respond_to do |format| 
+      format.html do
+        flash[:notice] = message
+        redirect_to :back 
+      end
+      format.json { render :json => { :message => message } }
+    end
   end
 end

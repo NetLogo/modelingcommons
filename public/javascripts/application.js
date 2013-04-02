@@ -782,16 +782,32 @@ jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
 	});
 
 
+	var node_id = $("#id").val();
+
 	$("li#add-collaborator").bind("click", function(e) {
 
-            $('<li class="added-collaborator"><input class="person-complete" type="text" placeholder="Collaborator name" name="name" /><select><option></option>\n' + collaboration_options + '</select></li>').insertBefore('#add-collaborator');
+            $('<li class="added-collaborator"><input class="person-complete" type="text" size="40" placeholder="Collaborator name" name="name" /><select><option></option>\n' + collaboration_options + '</select></li>').insertBefore('#add-collaborator');
 
 	    if ($("li#save-collaborators").length == 0)
 	    {
 		$('<li id="save-collaborators"><input id="save-collaborators-button" type="button" value="Save new collaborators" /></li>').insertAfter('#add-collaborator');
 
 		$("#save-collaborators-button").bind("click", function(e) {
-		    $(".added-collaborator").each( function(index, item) { alert("Saving " + item) });
+		    $(".added-collaborator").each( function(index, item) { 
+			var collaborator_name = item.children[0].value;
+			var collaborator_type_id = item.children[1].value;
+
+			$.post('/collaborations/create',
+			       {
+				   node_id: node_id,
+				   person_name: collaborator_name,
+				   collaborator_type_id: collaborator_type_id,
+				   format: 'json'
+				},
+			       function(data) {
+				   alert(data['message']);
+			       });
+		    });
 		});
 	    }
 
