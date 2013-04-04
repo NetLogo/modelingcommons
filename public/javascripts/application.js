@@ -827,7 +827,11 @@ jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
 		       if (data['message'] == 'ok')
 			   {
 			       window.location.reload();
-			       }
+			   }
+		       else
+			   {
+			       alert(data['message']);
+			   }
 		   });
 	});
     };

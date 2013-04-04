@@ -45,11 +45,18 @@ class CollaborationsController < ApplicationController
     @model = Node.find_by_id(params[:node_id])
     if @model.nil?
       message = 'No such model'
+    elsif @model.collaborations.size == 1
+      message = 'Cannot remove the last collaborator'
     elsif @model.author?(@person)
       collaboration = Collaboration.find_by_node_id_and_person_id(@model.id, @person.id)
-      collaboration.destroy
-      flash[:notice] = "Removed you as a collaborator"
-      message = 'ok'
+      
+      if collaboration.name == 'Author'
+        message = 'Cannot remove author collaborators'
+      else
+        collaboration.destroy
+        flash[:notice] = "Removed you as a collaborator"
+        message = 'ok'
+      end
     else
       message = "Not adding '#{collaborator.fullname}', since they are already a collaborator."
     end

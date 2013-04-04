@@ -18,7 +18,7 @@
 	<ul id="collaborator-list">
 	<% @model.collaborations.each do |collaboration| %>
 	<li><%= person_image(collaboration.person) %> <%= person_link(collaboration.person) %> (<%= collaboration.name %>)
-	<% if collaboration.person == @person %>
+	<% if collaboration.person == @person and collaboration.name != 'Author' %>
 	<input type="button" value="Remove" id="remove-collaboration" />
 	<% end %>
 	</li>
