@@ -40,4 +40,20 @@ class CollaborationsController < ApplicationController
       format.json { render :json => { :message => message } }
     end
   end
+
+  def destroy
+    @model = Node.find_by_id(params[:node_id])
+    if @model.nil?
+      message = 'No such model'
+    elsif @model.author?(@person)
+      collaboration = Collaboration.find_by_node_id_and_person_id(@model.id, @person.id)
+      collaboration.destroy
+      flash[:notice] = "Removed you as a collaborator"
+      message = 'ok'
+    else
+      message = "Not adding '#{collaborator.fullname}', since they are already a collaborator."
+    end
+    render :json => { :message => message }
+  end
+
 end

@@ -17,7 +17,11 @@
 	
 	<ul id="collaborator-list">
 	<% @model.collaborations.each do |collaboration| %>
-	<li><%= person_image(collaboration.person) %> <%= person_link(collaboration.person) %> (<%= collaboration.name %>)</li>
+	<li><%= person_image(collaboration.person) %> <%= person_link(collaboration.person) %> (<%= collaboration.name %>)
+	<% if collaboration.person == @person %>
+	<input type="button" value="Remove" id="remove-collaboration" />
+	<% end %>
+	</li>
 	<% end %> 
 	
 	<% if @model.people.include?(@person) %>
@@ -34,6 +38,7 @@
 	<% if @person and !@person.groups.empty? %>
 	<% @options_for_select = [['No group', nil]] %>
 	<% @person.groups.each {|g| @options_for_select << [g.name, g.id] } %> 
+        <br />							   
         Model group <%= select_tag("group_id", options_for_select(@options_for_select, (@model.group ? @model.group.id : 0)), :id => "group_select") %>
 	   <% end %>
            

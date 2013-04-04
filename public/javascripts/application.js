@@ -774,13 +774,14 @@ jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
     
     var initializeCollaboration = function() {
 
-	var collaboration_options;
-	$.get('/collaborator_types.json', function(data) {
-	    collaboration_options = data.map(function(o) { 
-		return "<option value='" + o.collaborator_type.id + "'>"+ o.collaborator_type.name  + "</option>"  ;
-	    }).join("\n");
-	});
-
+	if ($("li#add-collaborator").length > 0) {
+	    var collaboration_options;
+	    $.get('/collaborator_types.json', function(data) {
+		collaboration_options = data.map(function(o) { 
+		    return "<option value='" + o.collaborator_type.id + "'>"+ o.collaborator_type.name  + "</option>"  ;
+		}).join("\n");
+	    });
+	}
 
 	var node_id = $("#id").val();
 
@@ -803,7 +804,7 @@ jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
 				   person_name: collaborator_name,
 				   collaborator_type_id: collaborator_type_id,
 				   format: 'json'
-				},
+			       },
 			       function(data) {
 				   alert(data['message']);
 			       });
@@ -815,7 +816,20 @@ jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
 
 	});
 
+	$("#remove-collaboration").bind("click", function(e) {	
 
+	    $.post('/collaborations/destroy',
+		   {
+		       node_id: node_id,
+		       format: 'json'
+		   },
+		   function(data) {
+		       if (data['message'] == 'ok')
+			   {
+			       window.location.reload();
+			       }
+		   });
+	});
     };
 
     function initialize() {
