@@ -22,7 +22,7 @@ gem 'rmagick'
 gem 'capistrano'
 
 group :development, :test do
-  gem "capybara", "1.1.1"
+  gem "capybara", "0.3.7"
   gem "cucumber", "1.1.0"
   gem "cucumber-rails", "0.3.2"
   gem 'factory_girl'
@@ -31,8 +31,7 @@ group :development, :test do
   gem 'pry-nav'
   gem 'pry-remote'
   gem 'watir-webdriver'
-  gem 'rspec', '~> 1.2'
-  gem 'rspec-rails'
+  gem 'rspec-rails', '~> 1.3.2'
   gem 'shoulda'
   gem 'guard'
   gem 'guard-rspec', '~> 1.2'

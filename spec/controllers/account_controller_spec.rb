@@ -98,4 +98,10 @@ describe AccountController do
     end
   end
 
+  describe "groups" do 
+    it "should not give an error when an anonymous user visits the 'group' page" do 
+      
+    end
+  end
+
 end

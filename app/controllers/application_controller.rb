@@ -158,6 +158,9 @@ class ApplicationController < ActionController::Base
     return false
   end
 
+  def shelter 
+  end
+
   def get_model_from_id_param
     if params[:id].blank?
       flash[:notice] = "No model ID provided"
