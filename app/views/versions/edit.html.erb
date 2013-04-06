@@ -1,0 +1,28 @@
+<h1>Editing version</h1>
+
+<% form_for(@version) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :node_id %><br />
+    <%= f.text_field :node_id %>
+  </p>
+  <p>
+    <%= f.label :person_id %><br />
+    <%= f.text_field :person_id %>
+  </p>
+  <p>
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </p>
+  <p>
+    <%= f.label :contents %><br />
+    <%= f.text_area :contents %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @version %> |
+<%= link_to 'Back', versions_path %>

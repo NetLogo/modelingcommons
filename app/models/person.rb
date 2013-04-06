@@ -12,6 +12,8 @@ class Person < ActiveRecord::Base
   has_many :spam_warnings
   has_many :projects
 
+  has_many :versions
+
   has_many :collaborations
   has_many :nodes, :through => :collaborations
 
@@ -40,7 +42,7 @@ class Person < ActiveRecord::Base
   after_validation_on_update :encrypt_updated_password
 
   def node_versions
-    NodeVersion.fields(:id, :node_id, :person_id, :description, :created_at, :updated_at).all(:conditions => { :person_id => id}, :order => :updated_at)
+    versions
   end
 
   def attachments

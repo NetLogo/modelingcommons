@@ -1,0 +1,23 @@
+<p>
+  <b>Node:</b>
+  <%=h @version.node_id %>
+</p>
+
+<p>
+  <b>Person:</b>
+  <%=h @version.person_id %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%=h @version.description %>
+</p>
+
+<p>
+  <b>Contents:</b>
+  <%=h @version.contents %>
+</p>
+
+
+<%= link_to 'Edit', edit_version_path(@version) %> |
+<%= link_to 'Back', versions_path %>

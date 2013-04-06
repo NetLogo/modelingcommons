@@ -97,7 +97,5 @@ class NodeVersion
     c = Collaboration.find_or_create_by_node_id_and_person_id_and_collaborator_type_id(node.id,
                                                                                    person.id,
                                                                                    CollaboratorType.find_by_name('Author').id)
-    STDERR.puts "[NodeVersion#update_collaborators] collaboration '#{c.inspect}'"
-
   end
 end

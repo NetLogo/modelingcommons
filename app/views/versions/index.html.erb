@@ -1,0 +1,26 @@
+<h1>Listing versions</h1>
+
+<table>
+  <tr>
+    <th>Node</th>
+    <th>Person</th>
+    <th>Description</th>
+    <th>Contents</th>
+  </tr>
+
+<% @versions.each do |version| %>
+  <tr>
+    <td><%=h version.node_id %></td>
+    <td><%=h version.person_id %></td>
+    <td><%=h version.description %></td>
+    <td><%=h version.contents %></td>
+    <td><%= link_to 'Show', version %></td>
+    <td><%= link_to 'Edit', edit_version_path(version) %></td>
+    <td><%= link_to 'Destroy', version, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New version', new_version_path %>

@@ -50,10 +50,10 @@ class UploadController < ApplicationController
       node_version_contents = params[:new_model][:uploaded_body].read
 
       new_version =
-        NodeVersion.new(:node_id => @model.id,
-                        :person_id => @person.id,
-                        :contents => node_version_contents,
-                        :description => 'Initial upload')
+        Version.new(:node_id => @model.id,
+                    :person_id => @person.id,
+                    :contents => node_version_contents,
+                    :description => 'Initial upload')
       
       begin
         new_version.save!
@@ -186,10 +186,10 @@ class UploadController < ApplicationController
 
     # Create the new version for this node
     new_version =
-      NodeVersion.new(:node_id => node_id,
-                      :person_id => @person.id,
-                      :contents => node_version_contents,
-                      :description => description)
+      Version.new(:node_id => node_id,
+                  :person_id => @person.id,
+                  :contents => node_version_contents,
+                  :description => description)
 
     begin
       new_version.save!

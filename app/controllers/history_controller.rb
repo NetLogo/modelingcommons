@@ -14,7 +14,7 @@ class HistoryController < ApplicationController
     end
 
     # Check that we're not reverting to the latest version!
-    version = NodeVersion.find(version_id)
+    version = Version.find(version_id)
     if version == @model.current_version
       flash[:notice] = "That is already the current version!"
       redirect_to :back
@@ -22,10 +22,10 @@ class HistoryController < ApplicationController
     end
 
     @new_version =
-      NodeVersion.create(:node_id => @model.id,
-                         :person_id => @person.id,
-                         :contents => version.contents,
-                         :description => "Reverted to older version")
+      Version.create(:node_id => @model.id,
+                     :person_id => @person.id,
+                     :contents => version.contents,
+                     :description => "Reverted to older version")
     if @new_version.save
       flash[:notice] = "Model was reverted to an older version"
     else
@@ -42,8 +42,8 @@ class HistoryController < ApplicationController
       return
     end
 
-    compare_1 = NodeVersion.find(params[:compare_1])
-    compare_2 = NodeVersion.find(params[:compare_2])
+    compare_1 = Version.find(params[:compare_1])
+    compare_2 = Version.find(params[:compare_2])
 
     earlier_version, later_version = [compare_1, compare_2].sort_by { |v| v.created_at }
 

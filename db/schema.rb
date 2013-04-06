@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130331140537) do
+ActiveRecord::Schema.define(:version => 20130406231216) do
 
   create_table "collaborations", :force => true do |t|
     t.integer  "person_id"
@@ -306,5 +306,17 @@ ActiveRecord::Schema.define(:version => 20130331140537) do
     t.text "txtkeyword"
     t.text "txtsample"
   end
+
+  create_table "versions", :force => true do |t|
+    t.integer  "node_id",     :null => false
+    t.integer  "person_id",   :null => false
+    t.text     "description", :null => false
+    t.text     "contents",    :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "versions", ["node_id"], :name => "index_versions_on_node_id"
+  add_index "versions", ["person_id"], :name => "index_versions_on_person_id"
 
 end

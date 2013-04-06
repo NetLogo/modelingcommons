@@ -26,6 +26,8 @@ class Node < ActiveRecord::Base
   has_many :node_projects
   has_many :projects, :through => :node_projects
 
+  has_many :versions
+
   validates_presence_of :name, :visibility_id, :changeability_id
   validates_numericality_of :visibility_id, :changeability_id
 
@@ -40,12 +42,11 @@ class Node < ActiveRecord::Base
   # ------------------------------------------------------------
 
   def node_versions
-    # NodeVersion.all(:conditions => {:node => id}, :order => :created_at.desc)
-    NodeVersion.fields(:id, :node_id, :person_id, :description, :created_at, :updated_at).all(:conditions => { :node_id => id}, :order => :created_at.desc)
+    versions
   end
 
   def current_version
-    node_versions.empty? ? nil : NodeVersion.first(:conditions => { :node_id => id}, :order => :created_at.desc)
+    versions.empty? ? nil : versions.sort_by { |v| v.created_at }.reverse.first
   end
 
   # Create methods for the different attachment types
@@ -75,6 +76,7 @@ class Node < ActiveRecord::Base
   end
 
   def person
+    logger.warn "[Node#person] id = '#{id}'"
     current_version.person unless current_version.nil?
   end
 
@@ -88,7 +90,6 @@ class Node < ActiveRecord::Base
 
   def people
     collaborators
-    #@model_people ||= node_versions.map {|version| version.person}.uniq
   end
 
   def people_sentence

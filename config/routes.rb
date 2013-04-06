@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :versions
+
 
   map.resources :collaborator_types
 
