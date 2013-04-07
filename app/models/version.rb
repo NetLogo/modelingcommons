@@ -18,8 +18,8 @@ class Version < ActiveRecord::Base
     end
   end
 
-  scope :info_keyword_matches,  lambda { |term| info_tab.index(term) }
-  scope :procedures_keyword_matches,  lambda { |term| procedures_tab.index(term) }
+  named_scope :info_keyword_matches, lambda { |term| { :conditions => ["contents ilike ?", '%' + term + '%'] } }
+  named_scope :procedures_keyword_matches, lambda { |term| { :conditions => ["contents ilike ?", '%' + term + '%'] } }
 
   after_save :update_node_modification_time
   after_save :notify_authors
