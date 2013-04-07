@@ -12,7 +12,7 @@ class UnmongoNodeAttachments < ActiveRecord::Migration
         
         Attachment.create!(:person_id => na.person_id,
                            :node_id => na.node_id,
-                           :contents => na.contents,
+                           :contents => na.contents.to_s,
                            :description => na.description,
                            :filename => na.filename,
                            :content_type => na.type,
