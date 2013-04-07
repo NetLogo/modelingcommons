@@ -84,12 +84,12 @@ class UploadController < ApplicationController
         if params[:new_model][:uploaded_preview].present?
           
           # Create a preview
-          attachment = NodeAttachment.new(:node_id => @model.id,
-                                          :person_id => @person.id,
-                                          :description => "Preview for '#{model_name}'",
-                                          :filename => model_name + '.png',
-                                          :type => 'preview',
-                                          :contents => params[:new_model][:uploaded_preview].read)
+          attachment = Attachment.new(:node_id => @model.id,
+                                      :person_id => @person.id,
+                                      :description => "Preview for '#{model_name}'",
+                                      :filename => model_name + '.png',
+                                      :content_type => 'preview',
+                                      :contents => params[:new_model][:uploaded_preview].read)
           
           expire_page :action => :display_preview, :id => @model.id
           

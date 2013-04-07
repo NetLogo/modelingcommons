@@ -59,7 +59,7 @@
 
     <tr>
       <td>File type:</td>
-      <td><%= select("document", "type", NodeAttachment::TYPES.keys.sort, { :include_blank => true }) %></td>
+      <td><%= select("document", "type", Attachment::TYPES.keys.sort, { :include_blank => true }) %></td>
       <td></td>
     </tr>
 
