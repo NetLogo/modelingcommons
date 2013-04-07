@@ -9,7 +9,22 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130406231216) do
+ActiveRecord::Schema.define(:version => 20130407102046) do
+
+  create_table "attachments", :force => true do |t|
+    t.integer  "node_id",      :null => false
+    t.integer  "person_id",    :null => false
+    t.string   "description",  :null => false
+    t.binary   "contents",     :null => false
+    t.string   "filename",     :null => false
+    t.string   "content_type", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "attachments", ["content_type"], :name => "index_attachments_on_type"
+  add_index "attachments", ["node_id"], :name => "index_attachments_on_node_id"
+  add_index "attachments", ["person_id"], :name => "index_attachments_on_person_id"
 
   create_table "collaborations", :force => true do |t|
     t.integer  "person_id"

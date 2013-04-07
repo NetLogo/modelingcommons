@@ -1,0 +1,30 @@
+<h1>Listing attachments</h1>
+
+<table>
+  <tr>
+    <th>Node</th>
+    <th>Person</th>
+    <th>Description</th>
+    <th>Contents</th>
+    <th>Filename</th>
+    <th>Type</th>
+  </tr>
+
+<% @attachments.each do |attachment| %>
+  <tr>
+    <td><%=h attachment.node_id %></td>
+    <td><%=h attachment.person_id %></td>
+    <td><%=h attachment.description %></td>
+    <td><%=h attachment.contents %></td>
+    <td><%=h attachment.filename %></td>
+    <td><%=h attachment.type %></td>
+    <td><%= link_to 'Show', attachment %></td>
+    <td><%= link_to 'Edit', edit_attachment_path(attachment) %></td>
+    <td><%= link_to 'Destroy', attachment, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New attachment', new_attachment_path %>

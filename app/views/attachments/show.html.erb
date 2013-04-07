@@ -1,0 +1,33 @@
+<p>
+  <b>Node:</b>
+  <%=h @attachment.node_id %>
+</p>
+
+<p>
+  <b>Person:</b>
+  <%=h @attachment.person_id %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%=h @attachment.description %>
+</p>
+
+<p>
+  <b>Contents:</b>
+  <%=h @attachment.contents %>
+</p>
+
+<p>
+  <b>Filename:</b>
+  <%=h @attachment.filename %>
+</p>
+
+<p>
+  <b>Type:</b>
+  <%=h @attachment.type %>
+</p>
+
+
+<%= link_to 'Edit', edit_attachment_path(@attachment) %> |
+<%= link_to 'Back', attachments_path %>

@@ -27,6 +27,7 @@ class Node < ActiveRecord::Base
   has_many :projects, :through => :node_projects
 
   has_many :versions
+  has_many :attachments
 
   validates_presence_of :name, :visibility_id, :changeability_id
   validates_numericality_of :visibility_id, :changeability_id
@@ -63,9 +64,6 @@ class Node < ActiveRecord::Base
     end
   end
 
-  def attachments
-    NodeAttachment.all(:conditions => { :node_id => id})
-  end
 
   # ------------------------------------------------------------
   # Info from the latest version

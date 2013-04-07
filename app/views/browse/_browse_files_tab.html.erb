@@ -22,7 +22,7 @@
 
       <tr>
         <td><%= f.filename -%></td>
-        <td><%= f.type -%></td>
+        <td><%= f.content_type -%></td>
         <td><%= f.description %></td>
         <td><%= distance_of_time_in_words(Time.now, f.updated_at) -%> ago, by <%= person_link(f.person) %></td>
         <% if @model.changeable_by_user?(@person) %>

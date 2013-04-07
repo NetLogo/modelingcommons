@@ -13,6 +13,7 @@ class Person < ActiveRecord::Base
   has_many :projects
 
   has_many :versions
+  has_many :attachments
 
   has_many :collaborations
   has_many :nodes, :through => :collaborations
@@ -43,10 +44,6 @@ class Person < ActiveRecord::Base
 
   def node_versions
     versions
-  end
-
-  def attachments
-    NodeAttachment.all(:conditions => { :person_id => id})
   end
 
   def models
