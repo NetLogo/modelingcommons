@@ -1,1 +1,1 @@
-MongoMapper.database = 'modelingcommons'
+MongoMapper.database = "modelingcommons_#{RAILS_ENV}"
