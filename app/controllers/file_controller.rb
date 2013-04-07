@@ -16,11 +16,11 @@ class FileController < ApplicationController
     if not @model.changeable_by_user?(@person)
       flash[:notice] = "You are not allowed to modify this model."
 
-    elsif NodeAttachment.create(:node_id => @model.id,
+    elsif Attachment.create(:node_id => @model.id,
                                 :person_id => @person.id,
                                 :description => description,
                                 :filename => filename,
-                                :type => attachment_type,
+                                :content_type => attachment_type,
                                 :contents => params[:uploaded_file].read)
       flash[:notice] = "Successfully added file '#{filename}'."
     else
@@ -34,7 +34,7 @@ class FileController < ApplicationController
     if not @model.changeable_by_user?(@person)
       flash[:notice] = "You are not allowed to remove files from this model."
       logger.warn "User '#{@person.inspect}' tried to remove a file, but was prevented from doing so."
-    elsif attachment = NodeAttachment.find(params[:file_id])
+    elsif attachment = Attachment.find(params[:file_id])
       attachment.destroy
       flash[:notice] = "Removed the file."
     else
