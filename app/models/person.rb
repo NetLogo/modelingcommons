@@ -138,7 +138,7 @@ class Person < ActiveRecord::Base
   end
 
   def downloaded_nodes
-    LoggedAction.find(:all, :conditions => {:action => 'download_model', :person_id => id}).map { |la| Node.find(la.node_id) }.uniq
+    LoggedAction.find(:all, :conditions => {:action => 'download_model', :person_id => id}, :include => :node).map { |la| Node.find(la.node_id) }.uniq
   end
 
   def questions
@@ -150,7 +150,7 @@ class Person < ActiveRecord::Base
   end
 
   def viewed_nodes
-    LoggedAction.find(:all, :conditions => { :action => 'one_model', :person_id => id}).map { |la| Node.first(:conditions => {:id => la.node_id})}.uniq
+    LoggedAction.find(:all, :conditions => { :action => 'one_model', :person_id => id}, :include => :node).map { |la| Node.first(:conditions => {:id => la.node_id})}.uniq
   end
 
   def user_model_downloads
