@@ -27,10 +27,6 @@ class Attachment < ActiveRecord::Base
   }
 
   def type_must_be_defined
-    STDERR.puts "[Attachment#type_must_be_defined] TYPES = '#{TYPES.inspect}'"
-    STDERR.puts "[Attachment#type_must_be_defined] content_type = '#{content_type.inspect}'"
-    STDERR.puts "[Attachment#type_must_be_defined] TYPES.member?(content_type) = '#{TYPES.member?(content_type)}'"
-
     errors.add_to_base "The type of this document is undefined" unless TYPES.member?(content_type)
   end
 
