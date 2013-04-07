@@ -8,6 +8,8 @@ class Version < ActiveRecord::Base
   validates_presence_of :description
   validates_presence_of :contents
 
+  default_scope :order => 'created_at DESC'
+
   SECTION_SEPARATOR = '@#$#@#$#@'
   validate :must_be_valid_netlogo_file
   def must_be_valid_netlogo_file
