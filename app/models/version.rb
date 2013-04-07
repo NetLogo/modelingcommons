@@ -24,7 +24,11 @@ class Version < ActiveRecord::Base
   after_save :update_collaborators
 
   def update_node_modification_time
-    node.update_attributes(:updated_at => Time.now)
+    if node
+      node.update_attributes(:updated_at => Time.now)
+    else
+      STDERR.puts "Version is looking for node_id '#{node_id}', but it does not exist"
+    end
   end
 
   def notify_authors
