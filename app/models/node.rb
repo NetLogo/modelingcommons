@@ -54,12 +54,12 @@ class Node < ActiveRecord::Base
   Attachment::TYPES.keys.each do |attachment_type|
 
     define_method(attachment_type.to_sym) do
-      Attachment.first(:conditions => { :type => attachment_type, :node_id => id},
+      Attachment.first(:conditions => { :content_type => attachment_type, :node_id => id},
                        :order => 'created_at DESC')
     end
 
     define_method("#{attachment_type}s".to_sym) do
-      Attachment.all(:conditions => { :type => attachment_type, :node_id => id},
+      Attachment.all(:conditions => { :content_type => attachment_type, :node_id => id},
                      :order => 'created_at DESC')
     end
   end

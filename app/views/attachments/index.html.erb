@@ -17,7 +17,7 @@
     <td><%=h attachment.description %></td>
     <td><%=h attachment.contents %></td>
     <td><%=h attachment.filename %></td>
-    <td><%=h attachment.type %></td>
+    <td><%=h attachment.content_type %></td>
     <td><%= link_to 'Show', attachment %></td>
     <td><%= link_to 'Edit', edit_attachment_path(attachment) %></td>
     <td><%= link_to 'Destroy', attachment, :confirm => 'Are you sure?', :method => :delete %></td>
