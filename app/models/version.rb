@@ -40,14 +40,14 @@ class Version < ActiveRecord::Base
 
       # Notifications.deliver_modified_model(node, person) 
     end
+  end
 
-    def update_collaborators
-      author_collaboration_id = CollaboratorType.find_by_name("Author").id
-      c = 
-        Collaboration.find_or_create_by_node_id_and_person_id_and_collaborator_type_id(node.id,
-                                                                                       person.id,
-                                                                                       author_collaboration_id)
-    end
+  def update_collaborators
+    author_collaboration_id = CollaboratorType.find_by_name("Author").id
+    c = 
+      Collaboration.find_or_create_by_node_id_and_person_id_and_collaborator_type_id(node.id,
+                                                                                     person.id,
+                                                                                     author_collaboration_id)
   end
 
   def procedures_tab
