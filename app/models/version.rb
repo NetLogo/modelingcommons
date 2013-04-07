@@ -32,18 +32,22 @@ class Version < ActiveRecord::Base
   end
 
   def notify_authors
-    return unless node.node_versions.count > 1 
-    return if node.people.uniq.count == 1 and node.people.first == person
+    if node.nil?
+      STDERR.puts "Version is looking for node_d '#{node_id}', but it does not exist"
+    else
+      return unless node.node_versions.count > 1 
+      return if node.people.uniq.count == 1 and node.people.first == person
 
-    # Notifications.deliver_modified_model(node, person) 
-  end
+      # Notifications.deliver_modified_model(node, person) 
+    end
 
-  def update_collaborators
-    author_collaboration_id = CollaboratorType.find_by_name("Author").id
-    c = 
-      Collaboration.find_or_create_by_node_id_and_person_id_and_collaborator_type_id(node.id,
-                                                                                     person.id,
-                                                                                     author_collaboration_id)
+    def update_collaborators
+      author_collaboration_id = CollaboratorType.find_by_name("Author").id
+      c = 
+        Collaboration.find_or_create_by_node_id_and_person_id_and_collaborator_type_id(node.id,
+                                                                                       person.id,
+                                                                                       author_collaboration_id)
+    end
   end
 
   def procedures_tab
