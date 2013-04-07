@@ -43,11 +43,18 @@ class Version < ActiveRecord::Base
   end
 
   def update_collaborators
-    author_collaboration_id = CollaboratorType.find_by_name("Author").id
-    c = 
-      Collaboration.find_or_create_by_node_id_and_person_id_and_collaborator_type_id(node.id,
-                                                                                     person.id,
-                                                                                     author_collaboration_id)
+    if person.nil?
+      STDERR.puts "Looking for person '#{person_id}', but cannot find it"
+    elsif node.nil?
+      STDERR.puts "Looking for node '#{node_id}', but cannot find it"
+    else
+
+      author_collaboration_id = CollaboratorType.find_by_name("Author").id
+      c = 
+        Collaboration.find_or_create_by_node_id_and_person_id_and_collaborator_type_id(node.id,
+                                                                                       person.id,
+                                                                                       author_collaboration_id)
+    end
   end
 
   def procedures_tab
