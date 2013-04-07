@@ -41,7 +41,7 @@ class Version < ActiveRecord::Base
       return unless node.node_versions.count > 1 
       return if node.people.uniq.count == 1 and node.people.first == person
 
-      # Notifications.deliver_modified_model(node, person) 
+      Notifications.deliver_modified_model(node, person) 
     end
   end
 
