@@ -8,6 +8,8 @@ class Version < ActiveRecord::Base
   validates_presence_of :description
   validates_presence_of :contents
 
+  default_scope :order => 'created_at DESC'
+
   SECTION_SEPARATOR = '@#$#@#$#@'
   validate :must_be_valid_netlogo_file
   def must_be_valid_netlogo_file
@@ -16,30 +18,46 @@ class Version < ActiveRecord::Base
     end
   end
 
-  scope :info_keyword_matches,  lambda { |term| where(:info_keyword_index => term) }
-  scope :procedures_keyword_matches,  lambda { |term| where(:procedures_keyword_index => term) }
+  named_scope :info_keyword_matches, lambda { |term| { :conditions => ["split_part(contents, ?, 3) ilike ?", SECTION_SEPARATOR, '%' + term + '%'] } }
+  named_scope :procedures_keyword_matches, lambda { |term| { :conditions => ["split_part(contents, ?, 1) ilike ?", SECTION_SEPARATOR, '%' + term + '%'] } }
+
 
   after_save :update_node_modification_time
   after_save :notify_authors
   after_save :update_collaborators
 
   def update_node_modification_time
-    node.update_attributes(:updated_at => Time.now)
+    if node
+      node.update_attributes(:updated_at => Time.now)
+    else
+      STDERR.puts "Version is looking for node_id '#{node_id}', but it does not exist"
+    end
   end
 
   def notify_authors
-    return unless node.node_versions.count > 1 
-    return if node.people.uniq.count == 1 and node.people.first == person
+    if node.nil?
+      STDERR.puts "Version is looking for node_d '#{node_id}', but it does not exist"
+    else
+      return unless node.node_versions.count > 1 
+      return if node.people.uniq.count == 1 and node.people.first == person
 
-    Notifications.deliver_modified_model(node, person) 
+      Notifications.deliver_modified_model(node, person) 
+    end
   end
 
   def update_collaborators
-    author_collaboration_id = CollaboratorType.find_by_name("Author").id
-    c = 
-      Collaboration.find_or_create_by_node_id_and_person_id_and_collaborator_type_id(node.id,
-                                                                                     person.id,
-                                                                                     author_collaboration_id)
+    if person.nil?
+      STDERR.puts "Looking for person '#{person_id}', but cannot find it"
+    elsif node.nil?
+      STDERR.puts "Looking for node '#{node_id}', but cannot find it"
+    else
+
+      author_collaboration_id = CollaboratorType.find_by_name("Author").id
+      c = 
+        Collaboration.find_or_create_by_node_id_and_person_id_and_collaborator_type_id(node.id,
+                                                                                       person.id,
+                                                                                       author_collaboration_id)
+    end
   end
 
   def procedures_tab

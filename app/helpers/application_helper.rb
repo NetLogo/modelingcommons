@@ -6,9 +6,7 @@ module ApplicationHelper
     now = Time.now
     time_since_update = distance_of_time_in_words(Time.now, node.updated_at)
     link_to_item_person = person_link(node.person)
-    original_node_author = Version.all(:conditions => {:node_id => node.id},
-                                       :order => :created_at.desc
-                                       ).first.person           
+    original_node_author = node.versions.last.person
     this_user_did_it = true if original_node_author == @person
     updated_or_created = (node.created_at.to_i == node.updated_at.to_i ? 'created' : 'updated')
     link = url_for(:controller => "browse", :action => "one_model", :id => node.id)
@@ -103,9 +101,7 @@ module ApplicationHelper
       output << "#{model_link(item.node)} was tagged #{link_to(item.tag.name, :controller => :tags, :action => :one_tag, :id => item.tag.id)} by #{link_to_item_person}, #{time_since_update} ago."
 
     elsif item.is_a?(Node)
-      original_node_author = 
-        Version.all(:conditions => {:node_id => item.id},
-                    :order => :created_at.desc).first.person
+      original_node_author = item.versions.first.person
       this_user_did_it = true if original_node_author == @person
 
       updated_or_created = (item.created_at.to_i == item.updated_at.to_i ? 'created' : 'updated')

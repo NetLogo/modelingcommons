@@ -74,7 +74,6 @@ class Node < ActiveRecord::Base
   end
 
   def person
-    logger.warn "[Node#person] id = '#{id}'"
     current_version.person unless current_version.nil?
   end
 
