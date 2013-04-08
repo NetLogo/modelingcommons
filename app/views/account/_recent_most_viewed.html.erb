@@ -11,7 +11,7 @@
        model = modelAndCount.node
        count = modelAndCount.count
 
-       your_news = @person and model.person and (@person.id == model.person.id)
+       your_news = model.author?(@person)
      %>
 
     <% next if count.to_i.zero? %>
