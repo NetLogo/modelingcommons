@@ -381,11 +381,10 @@ class Node < ActiveRecord::Base
   end
 
   def self.all_time_most_viewed(limit = 20)
-    LoggedAction.find_by_sql(["SELECT COUNT(DISTINCT ip_address), node_id
-                                                FROM Model_Views
-                                            GROUP BY node_id
-                                            ORDER BY count DESC
-                                               LIMIT ?;", limit])
+    LoggedAction.find_by_sql(["SELECT count, node_id
+                                 FROM Model_View_Counts
+                             ORDER BY count DESC
+                                LIMIT ?;", limit])
   end
 
   def self.most_viewed(limit = 20)
@@ -405,5 +404,4 @@ class Node < ActiveRecord::Base
                                                ORDER BY count DESC
                                                   LIMIT ?;", limit])
   end
-
 end
