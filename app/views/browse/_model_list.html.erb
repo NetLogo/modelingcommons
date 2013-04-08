@@ -1,8 +1,8 @@
 <%
-# This partial is the actual table that contains the list of models.
-# Takes optional parameter :buttons
-# :buttons is a Proc(model) that is called on each model to render buttons conditionally (such as delete) on a model in the list 
-%>
+   # This partial is the actual table that contains the list of models.
+   # Takes optional parameter :buttons
+   # :buttons is a Proc(model) that is called on each model to render buttons conditionally (such as delete) on a model in the list 
+   %>
 
 <% @render_time = Hash.new(0) %>
 
@@ -27,15 +27,15 @@
         <!-- <%= model.name -%> -->
         
         <table>
-        	<tbody>
-        	<tr>
-        		<td><%= model_image(model) %></td>
-        		<td><%= link_to model.name, :controller => "browse", :action => "one_model", :id => model.id %></td>
-        		<td class="buttons">
-        			 <%= buttons.call(model) if defined?(buttons) %> 
-        		</td>
-        	</tr>
-        	</tbody>
+          <tbody>
+            <tr>
+              <td><%= model_image(model) %></td>
+              <td><%= link_to model.name, :controller => "browse", :action => "one_model", :id => model.id %></td>
+              <td class="buttons">
+        	<%= buttons.call(model) if defined?(buttons) %> 
+              </td>
+            </tr>
+          </tbody>
         </table>
         
         <% @render_time[:name] += Time.now - start_time -%>
@@ -92,4 +92,4 @@
 <!-- Total render time: <%= @render_time.inspect -%> -->
 <!--<div>
 
-</div>-->
+    </div>-->
