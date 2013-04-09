@@ -30,6 +30,8 @@ gem 'validates_email'
 gem 'will_paginate', '~> 2.3.11'
 gem 'zippy'
 
+gem 'simplecov', :require => false, :group => :test
+
 group :development, :test do
   # gem "cucumber", "1.1.0"
   # gem "cucumber-rails", "0.3.2"
@@ -39,6 +41,7 @@ group :development, :test do
   gem 'pry-nav'
   gem 'pry-remote'
   # gem 'watir-webdriver'
+  gem 'test-unit', '1.2.3'
   gem 'rspec'
   gem 'rspec-rails'
   # gem 'shoulda'

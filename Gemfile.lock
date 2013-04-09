@@ -88,6 +88,8 @@ GEM
     rubyzip (0.9.9)
     sass (3.2.7)
     slop (3.4.4)
+    test-unit (1.2.3)
+      hoe (>= 1.5.1)
     validates_email (0.0.2)
     will_paginate (2.3.16)
     zippy (0.2.1)
@@ -120,6 +122,7 @@ DEPENDENCIES
   rmagick
   rspec
   rspec-rails
+  test-unit (= 1.2.3)
   validates_email
   will_paginate (~> 2.3.11)
   zippy
