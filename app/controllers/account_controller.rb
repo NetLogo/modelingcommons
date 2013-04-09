@@ -414,10 +414,7 @@ class AccountController < ApplicationController
   def mypage
     
     logger.warn "[AccountController#mypage] #{Time.now} enter"
-    logger.warn "[AccountController#mypage] #{Time.now} Ruby version '#{RUBY_VERSION}'"
     return redirect_to :controller => :account, :action => :login if (@person.nil? and params[:id].blank?)
-
-    logger.warn "[AccountController#mypage] #{Time.now} User = '#{@person.fullname}', or '#{@person.email_address}'"
 
     if params[:id].blank?
       @the_person = @person
