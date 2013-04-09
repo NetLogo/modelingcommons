@@ -40,16 +40,10 @@ GEM
     hoptoad_notifier (2.4.11)
       activesupport
       builder
-    jnunemaker-validatable (1.8.4)
-      activesupport (>= 2.3.4)
     method_source (0.8.1)
     mime-types (1.22)
     mongo (1.8.4)
       bson (~> 1.8.4)
-    mongo_mapper (0.8.6)
-      activesupport (>= 2.3.4)
-      jnunemaker-validatable (~> 1.8.4)
-      plucky (~> 0.3.6)
     net-scp (1.1.0)
       net-ssh (>= 2.6.5)
     net-sftp (2.1.1)
@@ -106,7 +100,6 @@ DEPENDENCIES
   compass (= 0.11.7)
   diff-lcs
   hoptoad_notifier
-  mongo_mapper (= 0.8.6)
   newrelic_rpm
   paperclip
   pg
