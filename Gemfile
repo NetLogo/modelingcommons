@@ -7,11 +7,10 @@ end
 
 
 source 'https://rubygems.org'
-gem "rails", "~> 2.3.17"
+gem "rails", "~> 3.2.13"
 
 gem "compass", "0.11.7"
 gem "country_select"
-gem "jrails"
 gem "newrelic_rpm" 
 gem 'BlueCloth'
 gem 'GraphvizR'
@@ -23,11 +22,11 @@ gem 'diff-lcs'
 gem 'hoptoad_notifier'
 gem 'paperclip'
 gem 'pg'
-gem 'plucky', '0.3.8'
+gem 'plucky'
 gem 'rack'
 gem 'rmagick'
 gem 'validates_email'
-gem 'will_paginate', '~> 2.3.11'
+gem 'will_paginate'
 gem 'zippy'
 
 gem 'simplecov', :require => false, :group => :test
