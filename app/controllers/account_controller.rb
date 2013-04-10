@@ -520,7 +520,7 @@ class AccountController < ApplicationController
         #json request from Netlogo existing model search
         query = params[:query].blank? ? "" : params[:query].downcase
         count = params[:count].blank? ? 10 : params[:count].to_i
-        results = Node.find(:all, :conditions => ["name ILIKE ?", '%' + query + '%'], :limit => count)
+        results = Node.all(:conditions => ["name ILIKE ?", '%' + query + '%'], :limit => count)
         results = results.select {|n| 
           n.visible_to_user?(@person)
         }

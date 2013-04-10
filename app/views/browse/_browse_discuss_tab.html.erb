@@ -14,7 +14,7 @@
 
 <hr />
 <h1>Post A New Comment</h1>
-<% form_for(:new_posting, :url => { :controller => "discussion", :action => :create }, :html => {:id => 'new_discussion_comment'}) do |form| %>
+<%= form_for(:new_posting, :url => { :controller => "discussion", :action => :create }, :html => {:id => 'new_discussion_comment'}) do |form| %>
 <table id="posting-table">
   <tr>
     <td><label for="new_posting_title">Title</label></td>

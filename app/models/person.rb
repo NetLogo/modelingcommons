@@ -138,7 +138,7 @@ class Person < ActiveRecord::Base
   end
 
   def downloaded_nodes
-    LoggedAction.find(:all, :conditions => {:action => 'download_model', :person_id => id}, :include => :node).map { |la| Node.find(la.node_id) }.uniq
+    LoggedAction.all(:conditions => {:action => 'download_model', :person_id => id}, :include => :node).map { |la| Node.find(la.node_id) }.uniq
   end
 
   def questions
@@ -150,11 +150,11 @@ class Person < ActiveRecord::Base
   end
 
   def viewed_nodes
-    LoggedAction.find(:all, :conditions => { :action => 'one_model', :person_id => id}, :include => :node).map { |la| Node.first(:conditions => {:id => la.node_id})}.uniq
+    LoggedAction.all(:conditions => { :action => 'one_model', :person_id => id}, :include => :node).map { |la| Node.first(:conditions => {:id => la.node_id})}.uniq
   end
 
   def user_model_downloads
-    user_downloads = LoggedAction.find(:all, :conditions => { :controller => 'account', :action => 'download', :person_id => id}).map { |la| [la.logged_at, YAML.load(la.params)['id']]  }
+    user_downloads = LoggedAction.all(:conditions => { :controller => 'account', :action => 'download', :person_id => id}).map { |la| [la.logged_at, YAML.load(la.params)['id']]  }
     
     downloaded_nodes = [ ]
 
@@ -168,7 +168,7 @@ class Person < ActiveRecord::Base
   end
 
   def project_model_downloads
-    project_downloads = LoggedAction.find(:all, :conditions => { :controller => 'project', :action => 'download', :person_id => id}).map { |la| [la.logged_at, YAML.load(la.params)['id']]  }
+    project_downloads = LoggedAction.all(:conditions => { :controller => 'project', :action => 'download', :person_id => id}).map { |la| [la.logged_at, YAML.load(la.params)['id']]  }
     
     downloaded_nodes = [ ]
 
@@ -182,7 +182,7 @@ class Person < ActiveRecord::Base
   end
 
   def tag_model_downloads
-    tag_downloads = LoggedAction.find(:all, :conditions => { :controller => 'tags', :action => 'download', :person_id => id}).map { |la| [la.logged_at, YAML.load(la.params)['id']]  }
+    tag_downloads = LoggedAction.all(:conditions => { :controller => 'tags', :action => 'download', :person_id => id}).map { |la| [la.logged_at, YAML.load(la.params)['id']]  }
     
     downloaded_nodes = [ ]
 

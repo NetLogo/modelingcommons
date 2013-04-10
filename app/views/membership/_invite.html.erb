@@ -14,7 +14,7 @@
       <td>
 	<div>
 	  <label for="search_people_to_invite">Search for people to invite <input type="text" id="search_people_to_invite" placeholder="Search People" /></label>
-	  <% form_tag({:controller => :account, :action => :find_people}) do %>
+	  <%= form_tag({:controller => :account, :action => :find_people}) do %>
 	  <div id="unselected_people">
 	    <div class="no_people">
 	      <label for="search_people_to_invite">No people found. Search for people to add.</label> 
@@ -25,7 +25,7 @@
       </td>
       <td>
 	<div>
-	  <% form_tag({:controller => "membership", :action => :invite_people}, :id => 'group_invite_form' )  do %>
+	  <%= form_tag({:controller => "membership", :action => :invite_people}, :id => 'group_invite_form' )  do %>
 	  <label for="group_id">Invite to group <%= select("group", "id", [['--select a group--', '']] + @person.groups.map {|g| [g.name, g.id]}) %></label>
 	  <input id="submit_selected_people" type="submit" value="Invite" disabled="disabled" />
 	  <div id="selected_people">

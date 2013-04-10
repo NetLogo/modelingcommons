@@ -20,7 +20,7 @@
 	<div>
 	  <% if @project.person == @person %>
 	  <% if !@models_to_add.empty? %>
-	  <% form_tag :controller => :projects, :action => :add_model do  %>
+	  <%= form_tag :controller => :projects, :action => :add_model do  %>
 	  <%= hidden_field_tag :project_id, @project.id -%>
 	  Add one of your models to this project:
 	  <%= select_tag :model_id, options_for_select(@models_to_add)  %>
