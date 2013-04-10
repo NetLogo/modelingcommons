@@ -9,7 +9,7 @@ class Tag < ActiveRecord::Base
   validates_presence_of :name, :person_id
   validates_uniqueness_of :name, :case_sensitive => false
 
-  named_scope :created_since, lambda { |since| { :conditions => ['created_at >= ? ', since] }}
+  scope :created_since, lambda { |since| { :conditions => ['created_at >= ? ', since] }}
 
   def people
     return self.nodes.map {|model| model.person}.uniq
@@ -32,7 +32,7 @@ class Tag < ActiveRecord::Base
   end
 
   def zipfile_name_full_path
-    "#{RAILS_ROOT}/public/modelzips/#{zipfile_name}"
+    "#{Rails.root}/public/modelzips/#{zipfile_name}"
   end
 
   def create_zipfile(web_user)

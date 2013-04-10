@@ -7,7 +7,7 @@ class TaggedNode < ActiveRecord::Base
 
   validates_presence_of :node_id, :tag_id, :person_id
 
-  named_scope :created_since, lambda { |since| { :conditions => ['created_at >= ? ', since] }}
+  scope :created_since, lambda { |since| { :conditions => ['created_at >= ? ', since] }}
 
   def new_thing
     {:id => id,

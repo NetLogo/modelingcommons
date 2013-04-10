@@ -18,8 +18,8 @@ class Version < ActiveRecord::Base
     end
   end
 
-  named_scope :info_keyword_matches, lambda { |term| { :conditions => ["split_part(contents, ?, 3) ilike ?", SECTION_SEPARATOR, '%' + term + '%'] } }
-  named_scope :procedures_keyword_matches, lambda { |term| { :conditions => ["split_part(contents, ?, 1) ilike ?", SECTION_SEPARATOR, '%' + term + '%'] } }
+  scope :info_keyword_matches, lambda { |term| { :conditions => ["split_part(contents, ?, 3) ilike ?", SECTION_SEPARATOR, '%' + term + '%'] } }
+  scope :procedures_keyword_matches, lambda { |term| { :conditions => ["split_part(contents, ?, 1) ilike ?", SECTION_SEPARATOR, '%' + term + '%'] } }
 
 
   after_save :update_node_modification_time

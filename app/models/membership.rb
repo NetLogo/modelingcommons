@@ -12,8 +12,8 @@ class Membership < ActiveRecord::Base
   delegate :fullname, :to => :person, :prefix => 'person'
   delegate :name, :to => :group, :prefix => 'group'
 
-  named_scope :approved_members, :conditions => { :status => 'approved' }
-  named_scope :administrators, :conditions => { :is_administrator => true }
+  scope :approved_members, :conditions => { :status => 'approved' }
+  scope :administrators, :conditions => { :is_administrator => true }
 
   def group_size
     group.members.size

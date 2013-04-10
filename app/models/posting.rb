@@ -6,10 +6,10 @@ class Posting < ActiveRecord::Base
 
   validates_presence_of :title, :body, :node_id
 
-  named_scope :questions, :conditions => { :is_question => true }, :order => "created_at DESC"
-  named_scope :unanswered_questions, :conditions => { :is_question => true, :answered_at => nil }, :order => "created_at DESC"
+  scope :questions, :conditions => { :is_question => true }, :order => "created_at DESC"
+  scope :unanswered_questions, :conditions => { :is_question => true, :answered_at => nil }, :order => "created_at DESC"
 
-  named_scope :created_since, lambda { |since| { :conditions => ['created_at >= ? ', since] }}
+  scope :created_since, lambda { |since| { :conditions => ['created_at >= ? ', since] }}
 
   after_save :notify_people
 

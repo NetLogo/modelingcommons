@@ -17,6 +17,3 @@ config.action_controller.perform_caching             = false
 # The :test delivery method accumulates sent emails in the
 # ActionMailer::Base.deliveries array.
 config.action_mailer.delivery_method = :test
-
-
-  config.gem 'rspec-rails', :version => '>= 1.3.4', :lib => false unless File.directory?(File.join(Rails.root, 'vendor/plugins/rspec-rails'))
