@@ -21,7 +21,7 @@ class RecommendController < ApplicationController
     elsif node.nil?
       flash[:notice] = "There is no node with an ID number of '#{params[:node_id]}'."
     else
-      Notifications.deliver_friend_recommendation(@person, friend_email_address, node)
+      Notifications.friend_recommendation(@person, friend_email_address, node).deliver
 
       EmailRecommendation.create(:person_id => @person.id,
                                  :recipient_email_address => friend_email_address,
@@ -40,7 +40,7 @@ class RecommendController < ApplicationController
     model_people = @model.people
     model_people.delete_if {|person| person == @person}
     if not model_people.empty?
-      Notifications.deliver_recommended_message(@person, model_people, @node)
+      Notifications.recommended_message(@person, model_people, @node).deliver
     end
 
     flash[:notice] = "Added your recommendation."

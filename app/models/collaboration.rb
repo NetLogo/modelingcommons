@@ -14,6 +14,6 @@ class Collaboration < ActiveRecord::Base
   after_save :notify_collaborator
 
   def notify_collaborator
-    Notifications.deliver_collaboration_notice(node, person) 
+    Notifications.collaboration_notice(node, person).deliver
   end
 end
