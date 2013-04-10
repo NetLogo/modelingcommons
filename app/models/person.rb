@@ -36,8 +36,8 @@ class Person < ActiveRecord::Base
   validates_uniqueness_of :email_address, :case_sensitive => false
   validates_confirmation_of :password
 
-  named_scope :created_since, lambda { |since| { :conditions => ['created_at >= ? ', since] }}
-  named_scope :phone_book, :order => "last_name, first_name"
+  scope :created_since, lambda { |since| { :conditions => ['created_at >= ? ', since] }}
+  scope :phone_book, :order => "last_name, first_name"
 
   after_validation_on_create :generate_salt_and_encrypt_password
   after_validation_on_update :encrypt_updated_password
@@ -95,7 +95,7 @@ class Person < ActiveRecord::Base
   end
 
   def zipfile_name_full_path
-    "#{RAILS_ROOT}/public/modelzips/#{zipfile_name}"
+    "#{Rails.root}/public/modelzips/#{zipfile_name}"
   end
 
   def create_zipfile(web_user)

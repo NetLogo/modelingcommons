@@ -73,7 +73,7 @@ class Project < ActiveRecord::Base
     end
     
     m.format = 'png'
-    dir = RAILS_ROOT + "/public/system/project_images/" + self.id.to_s + "/"
+    dir = Rails.root + "/public/system/project_images/" + self.id.to_s + "/"
     Dir.mkdir(dir) if !File.exists?(dir)
     m.write(dir + "project.png")
   end
@@ -87,7 +87,7 @@ class Project < ActiveRecord::Base
   end
 
   def zipfile_name_full_path
-    "#{RAILS_ROOT}/public/modelzips/#{zipfile_name}"
+    "#{Rails.root}/public/modelzips/#{zipfile_name}"
   end
 
   def create_zipfile(web_user)

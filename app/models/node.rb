@@ -34,8 +34,8 @@ class Node < ActiveRecord::Base
 
   default_scope :order => 'name ASC', :include => [:visibility, :changeability, :tagged_nodes, :tags, :group]
 
-  named_scope :created_since, lambda { |since| { :conditions => ['created_at >= ? ', since] }}
-  named_scope :updated_since, lambda { |since| { :conditions => ['updated_at >= ? ', since] }}
+  scope :created_since, lambda { |since| { :conditions => ['created_at >= ? ', since] }}
+  scope :updated_since, lambda { |since| { :conditions => ['updated_at >= ? ', since] }}
 
 
   # ------------------------------------------------------------
@@ -111,7 +111,7 @@ class Node < ActiveRecord::Base
   end
 
   def netlogo_version_for_applet
-    applet_directory = "#{RAILS_ROOT}/public/applet/"
+    applet_directory = "#{Rails.root}/public/applet/"
     netlogo_version.gsub(/^(\d+\.\d+).*/, '\1')
   end
 
@@ -269,7 +269,7 @@ class Node < ActiveRecord::Base
   end
 
   def zipfile_name_full_path
-    "#{RAILS_ROOT}/public/modelzips/#{zipfile_name}"
+    "#{Rails.root}/public/modelzips/#{zipfile_name}"
   end
 
   def world_visible?

@@ -55,7 +55,7 @@ namespace :sitemap do
 
     # convert builder xml to xml string, and save
     xml_string = xml.to_s.gsub("<to_s/>","")
-    filename = RAILS_ROOT + "/public/sitemap.xml"
+    filename = Rails.root + "/public/sitemap.xml"
     xml_file = File.new(filename, "w")
     xml_file << xml_string
     xml_file.close

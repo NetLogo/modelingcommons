@@ -14,7 +14,7 @@ class Group < ActiveRecord::Base
 
   before_destroy :remove_group_from_models
 
-  named_scope :search, lambda { |term| { :conditions => ["lower(name) ilike ? ", term] } }
+  scope :search, lambda { |term| { :conditions => ["lower(name) ilike ? ", term] } }
 
   def approved_members
     memberships.approved_members
@@ -60,7 +60,7 @@ class Group < ActiveRecord::Base
   end
 
   def zipfile_name_full_path
-    "#{RAILS_ROOT}/public/modelzips/#{zipfile_name}"
+    "#{Rails.root}/public/modelzips/#{zipfile_name}"
   end
 
   def create_zipfile(web_user)

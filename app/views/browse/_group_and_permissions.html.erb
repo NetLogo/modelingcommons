@@ -1,4 +1,4 @@
-<% form_remote_tag(:url => { :controller => :browse, :action => :set_permissions }) do %>
+<% form_tag(:url => { :controller => :browse, :action => :set_permissions }, :remote => true) do %>
 
 <%= hidden_field_tag 'id', @model.id %>
 
