@@ -14,7 +14,6 @@ class Notifications < ActionMailer::Base
 
   def standard_settings
     @from = FROM_ADDRESS
-    @sent_on = Time.now()
     @content_type = 'text/html'
   end
 
