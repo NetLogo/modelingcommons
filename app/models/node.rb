@@ -29,8 +29,9 @@ class Node < ActiveRecord::Base
   has_many :versions
   has_many :attachments
 
-  validates_presence_of :name, :visibility_id, :changeability_id
-  validates_numericality_of :visibility_id, :changeability_id
+  validates :name, :presence => true
+  validates :visibility_id, :presence => true, :numericality => true
+  validates :changeability_id, :presence => true, :numericality => true
 
   default_scope :order => 'name ASC', :include => [:visibility, :changeability, :tagged_nodes, :tags, :group]
 

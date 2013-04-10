@@ -27,14 +27,14 @@ class Person < ActiveRecord::Base
 
   attr_accessor :password_confirmation
 
-  validates_presence_of :first_name
-  validates_presence_of :last_name
-  validates_presence_of :email_address
-  validates_presence_of :registration_consent, :message => "must be checked"
+  validates :first_name, :presence => true
+  validates :last_name, :presence => true
+  validates :email_address, :presence => true
+  validates :registration_consent, :presence => true, :message => "must be checked"
+  validates :password, :presence => true, :confirmation => true
+  validates :email_address, :uniqueness => true, :case_sensitive => false
+
   validates_email :email_address, :level => 1
-  validates_presence_of :password
-  validates_uniqueness_of :email_address, :case_sensitive => false
-  validates_confirmation_of :password
 
   scope :created_since, lambda { |since| { :conditions => ['created_at >= ? ', since] }}
   scope :phone_book, :order => "last_name, first_name"

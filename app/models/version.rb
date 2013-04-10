@@ -3,10 +3,10 @@ class Version < ActiveRecord::Base
   belongs_to :person
   belongs_to :node
 
-  validates_presence_of :person_id
-  validates_presence_of :node_id
-  validates_presence_of :description
-  validates_presence_of :contents
+  validates :person_id, :presence => true
+  validates :node_id, :presence => true
+  validates :description, :presence => true
+  validates :contents,:presence => true
 
   default_scope :order => 'created_at DESC'
 

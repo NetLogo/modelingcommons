@@ -3,12 +3,12 @@ class Attachment < ActiveRecord::Base
   belongs_to :node
   belongs_to :person
 
-  validates_presence_of :node_id
-  validates_presence_of :person_id
-  validates_presence_of :description
-  validates_presence_of :filename
-  validates_presence_of :content_type
-  validates_presence_of :contents
+  validates :node_id, :presence => true
+  validates :person_id, :presence => true
+  validates :description, :presence => true
+  validates :filename, :presence => true
+  validates :content_type, :presence => true
+  validates :contents, :presence => true
 
   validate :type_must_be_defined
 
