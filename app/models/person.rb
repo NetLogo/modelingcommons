@@ -30,17 +30,17 @@ class Person < ActiveRecord::Base
   validates :first_name, :presence => true
   validates :last_name, :presence => true
   validates :email_address, :presence => true
-  validates :registration_consent, :presence => true, :message => "must be checked"
+  validates :registration_consent, :presence => { :message => "must be checked" }
   validates :password, :presence => true, :confirmation => true
-  validates :email_address, :uniqueness => true, :case_sensitive => false
+  validates :email_address, :uniqueness => { :case_sensitive => false }
 
   validates_email :email_address, :level => 1
 
   scope :created_since, lambda { |since| { :conditions => ['created_at >= ? ', since] }}
   scope :phone_book, :order => "last_name, first_name"
 
-  after_validation_on_create :generate_salt_and_encrypt_password
-  after_validation_on_update :encrypt_updated_password
+  # after_validation_on_create :generate_salt_and_encrypt_password
+  # after_validation_on_update :encrypt_updated_password
 
   def node_versions
     versions
