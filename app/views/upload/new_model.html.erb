@@ -1,6 +1,6 @@
 <% @title = "Upload a NetLogo model" %>
 
-<% form_for(:new_model, :url => { :action => :create_model }, :html => {:multipart => true, :id => 'new-model-form'}) do |form| %>
+<%= form_for(:new_model, :url => { :action => :create_model }, :html => {:multipart => true, :id => 'new-model-form'}) do |form| %>
 
 <table>
 

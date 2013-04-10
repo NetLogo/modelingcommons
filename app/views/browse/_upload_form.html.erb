@@ -1,7 +1,7 @@
 <div id="upload-model">
   <h2>Upload a new version</h2>
   <table>
-    <% form_for(:new_version, :url => { :controller => "upload", :action => :update_model }, :html => {:multipart => true}) do |form| %>
+    <%= form_for(:new_version, :url => { :controller => "upload", :action => :update_model }, :html => {:multipart => true}) do |form| %>
     <tr>
       <td>Model file</td>
       <td><%= form.file_field :uploaded_body %>

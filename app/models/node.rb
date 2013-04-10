@@ -362,9 +362,8 @@ class Node < ActiveRecord::Base
   end
 
   def self.search(search_term, person)
-    find(:all,
-         :conditions => [ "position( ? in lower(name) ) > 0 ", search_term],
-         :include => :visibility).select { |node| node.visible_to_user?(person)}
+    all(:conditions => [ "position( ? in lower(name) ) > 0 ", search_term],
+        :include => :visibility).select { |node| node.visible_to_user?(person)}
   end
 
   def create_zipfile

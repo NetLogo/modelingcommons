@@ -5,7 +5,7 @@
   <td><%= distance_of_time_in_words(Time.now, tm.updated_at) -%> ago</td>
   <% if @person and (@person.administrator? or @person == tm.person) -%>
   <td>
-  	<% form_tag({:controller => :tags, :action => :destroy, :id => tm.id}, :class => 'tag_delete_form') do %>
+	<%= form_tag({:controller => :tags, :action => :destroy, :id => tm.id}, :class => 'tag_delete_form') do %>
   	<%= hidden_field_tag 'id', tm.id -%>
     <a href="#">Remove</a>
     <% end %>

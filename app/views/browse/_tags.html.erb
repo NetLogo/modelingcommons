@@ -9,7 +9,7 @@
 
 <div id="add-tags">
   <h2>Add one or more tags:</h2>
-  <% form_for(:new_tag, :remote => true, :url => {:controller => "tags", :action => :new}) do |form| -%>
+  <%= form_for(:new_tag, :remote => true, :url => {:controller => "tags", :action => :new}) do |form| -%>
   <%= hidden_field_tag :node_id, @model.id -%>
   <div id="tags">
     <%= render :partial => "add_tag", :locals => {:form => form} -%>

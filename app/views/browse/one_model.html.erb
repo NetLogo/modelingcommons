@@ -9,7 +9,7 @@
   <!--Info-->
   <div id="general_info">
 	<div>  	
-		<% form_tag(url_for( :controller => :browse, :action => :set_permissions), :id => "group_permission_form") do %>
+		<%= form_tag(url_for( :controller => :browse, :action => :set_permissions), :id => "group_permission_form") do %>
 
         <%= hidden_field_tag 'id', @model.id %>
         

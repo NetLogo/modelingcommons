@@ -10,7 +10,7 @@
     <th>Download</th>
   </tr>
 
-  <% form_tag :controller => :history, :action => :compare_versions, :id => node.id do %>
+  <%= form_tag :controller => :history, :action => :compare_versions, :id => node.id do %>
 
   <% @model.node_versions.sort_by {|v| v.created_at}.each do |version| %>
   <tr>
