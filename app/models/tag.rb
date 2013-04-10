@@ -6,8 +6,11 @@ class Tag < ActiveRecord::Base
   has_many :tagged_nodes
   has_many :nodes, :through => :tagged_nodes
 
-  validates_presence_of :name, :person_id
-  validates_uniqueness_of :name, :case_sensitive => false
+  validates :name, :uniquess => true
+  validates :person_id, :uniqueness
+
+:person_id
+    validates :name, :case_sensitive => false
 
   scope :created_since, lambda { |since| { :conditions => ['created_at >= ? ', since] }}
 

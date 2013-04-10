@@ -3,8 +3,7 @@
 # off from being generally viewable.
 
 class Group < ActiveRecord::Base
-  validates_presence_of :name
-  validates_uniqueness_of :name
+  validates :name, :presence => true, :uniqueness => true
 
   has_many :memberships
   has_many :people, :through => :memberships

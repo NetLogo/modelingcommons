@@ -2,7 +2,8 @@
 # may optionally be an administrator.
 
 class Membership < ActiveRecord::Base
-  validates_presence_of :person, :group
+  validates :person, :presence => true
+  validates :group, :presence => true
 
   belongs_to :person
   belongs_to :group

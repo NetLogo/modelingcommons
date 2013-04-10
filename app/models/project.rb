@@ -1,8 +1,7 @@
 # Model to keep track of projects (i.e., collections of models)
 
 class Project < ActiveRecord::Base
-  validates_presence_of :name
-  validates_uniqueness_of :name
+  validates :name, :presence => true, :uniqueness => true
 
   has_many :node_projects
   has_many :nodes, :through => :node_projects

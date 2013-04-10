@@ -5,7 +5,8 @@ class TaggedNode < ActiveRecord::Base
   belongs_to :tag
   belongs_to :person
 
-  validates_presence_of :node_id, :tag_id, :person_id
+  validates :node_id, :presence => true
+  validates :tag_id, :presence => true, :person_id => true
 
   scope :created_since, lambda { |since| { :conditions => ['created_at >= ? ', since] }}
 

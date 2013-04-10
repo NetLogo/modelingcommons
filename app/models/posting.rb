@@ -4,7 +4,9 @@ class Posting < ActiveRecord::Base
   belongs_to :node
   belongs_to :person
 
-  validates_presence_of :title, :body, :node_id
+  validates :title, :presence => true
+  validates :body, :presence => true
+  validates :node_id, :presence => true
 
   scope :questions, :conditions => { :is_question => true }, :order => "created_at DESC"
   scope :unanswered_questions, :conditions => { :is_question => true, :answered_at => nil }, :order => "created_at DESC"
