@@ -95,7 +95,7 @@ class MembershipController < ApplicationController
                                        :status => 'approved')
 
         # Send them e-mail
-        Notifications.deliver_invited_to_group(Person.find(person_id), membership)
+        Notifications.invited_to_group(Person.find(person_id), membership).deliver
         counter = counter + 1
       end
 

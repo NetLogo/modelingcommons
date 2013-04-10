@@ -273,7 +273,7 @@ class AccountController < ApplicationController
     if @new_person.save
       flash[:notice] = "Congratulations, #{@new_person.first_name}!  You are now registered with the Modeling Commons.  We're delighted that you've joined us."
 
-      Notifications.deliver_signup(@new_person, params[:new_person][:password])
+      Notifications.signup(@new_person, params[:new_person][:password]).deliver
       session[:person_id] = @new_person.id
       respond_to do |format| 
         format.json do 
@@ -467,7 +467,7 @@ class AccountController < ApplicationController
       encrypted_password = Person.encrypted_password(@person.salt, new_password)
       @person.update_attribute(:password, encrypted_password)
 
-      Notifications.deliver_password_reminder(@person, new_password)
+      Notifications.password_reminder(@person, new_password).deliver
       flash[:notice] = "Your password has been reset.  The new password was sent to your e-mail address."
       redirect_to :controller => :account, :action => :login
     else

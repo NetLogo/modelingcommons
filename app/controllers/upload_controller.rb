@@ -102,7 +102,7 @@ class UploadController < ApplicationController
           end
         end
 
-        Notifications.deliver_upload_acknowledgement(@model, @person)
+        Notifications.upload_acknowledgement(@model, @person).deliver
 
         respond_to do |format|
           format.html do 

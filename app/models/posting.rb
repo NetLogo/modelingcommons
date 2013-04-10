@@ -32,7 +32,7 @@ class Posting < ActiveRecord::Base
   end
 
   def notify_people
-    Notifications.deliver_updated_discussion(node, person)
+    Notifications.updated_discussion(node, person).deliver
   end
 
 end
