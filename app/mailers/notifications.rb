@@ -24,34 +24,47 @@ class Notifications < ActionMailer::Base
     @subject = "Welcome to the NetLogo Modeling Commons!"
     @subject = "[TESTING] #{@subject}" if Rails.env == 'development'
 
-    @body[:person] = person
+    @person = person
     logger.warn "Cleartext password = '#{cleartext_password}'"
-    @body[:cleartext_password] = cleartext_password
+    @cleartext_password = cleartext_password
+
+    mail(:to => @recipients,
+         :bcc => @bcc,
+         :subject => subject)
   end
 
   def reset_password(person)
     standard_settings
     @recipients = person.email_address
-    @body[:person] = person
+    @person = person
     @subject = 'Modeling Commons: Your new password'
     @subject = "[TESTING] #{@subject}" if Rails.env == 'development'
+    mail(:to => @recipients,
+         :bcc => @bcc,
+         :subject => subject)
   end
 
   def password_reminder(person, new_password)
     standard_settings
     @recipients = person.email_address
-    @body[:person] = person
-    @body[:new_password] = new_password
+    @person = person
+    @new_password = new_password
     @subject = 'Modeling Commons: Your password'
     @subject = "[TESTING] #{@subject}" if Rails.env == 'development'
+    mail(:to => @recipients,
+         :bcc => @bcc,
+         :subject => subject)
   end
 
   def changed_password(person)
     standard_settings
     @recipients = person.email_address
-    @body[:person] = person
+    @person = person
     @subject = 'Your new password'
     @subject = "[TESTING] #{@subject}" if Rails.env == 'development'
+    mail(:to => @recipients,
+         :bcc => @bcc,
+         :subject => subject)
   end
 
   def modified_model(nlmodel, current_author)
@@ -62,7 +75,10 @@ class Notifications < ActionMailer::Base
 
     @subject = "Modeling Commons: Update to the '#{nlmodel.name}' model"
     @subject = "[TESTING] #{@subject}" if Rails.env == 'development'
-    @body[:nlmodel] = nlmodel
+    @nlmodel = nlmodel
+    mail(:to => @recipients,
+         :bcc => @bcc,
+         :subject => subject)
   end
 
   def applied_tag(people, tag)
@@ -71,7 +87,10 @@ class Notifications < ActionMailer::Base
     @bcc = 'modelingcommons@ccl.northwestern.edu'
     @subject = 'Modeling Commons: '#{tag.name}' tag was applied'
     @subject = "[TESTING] #{@subject}" if Rails.env == 'development'
-    @body[:tag] = tag
+    @tag = tag
+    mail(:to => @recipients,
+         :bcc => @bcc,
+         :subject => subject)
   end
 
   def updated_discussion(nlmodel, current_author)
@@ -86,7 +105,10 @@ class Notifications < ActionMailer::Base
     @bcc = 'modelingcommons@ccl.northwestern.edu'
     @subject = "Modeling Commons: Updated discussion of the #{nlmodel.name} model"
     @subject = "[TESTING] #{@subject}" if Rails.env == 'development'
-    @body[:nlmodel] = nlmodel
+    @nlmodel = nlmodel
+    mail(:to => @recipients,
+         :bcc => @bcc,
+         :subject => subject)
   end
 
   def invited_to_group(person, membership)
@@ -94,7 +116,10 @@ class Notifications < ActionMailer::Base
     @recipients = person.email_address
     @subject = 'Group invitation from the NetLogo Modeling Commons'
     @subject = "[TESTING] #{@subject}" if Rails.env == 'development'
-    @body[:membership] = membership
+    @membership = membership
+    mail(:to => @recipients,
+         :bcc => @bcc,
+         :subject => subject)
   end
 
   def friend_recommendation(sender, friend_email_address, node)
@@ -103,8 +128,11 @@ class Notifications < ActionMailer::Base
     @cc = sender.email_address
     @subject = 'View an interesting NetLogo model'
     @subject = "[TESTING] #{@subject}" if Rails.env == 'development'
-    @body[:node] = node
-    @body[:sender] = sender
+    @node = node
+    @sender = sender
+    mail(:to => @recipients,
+         :bcc => @bcc,
+         :subject => subject)
   end
 
   def recommended_message(recommender, people, model)
@@ -113,8 +141,11 @@ class Notifications < ActionMailer::Base
     @bcc = people.map{|person| person.email_address}
     @subject = "Recommendation for the '#{model.name}' model in the NetLogo Modeling Commons"
     @subject = "[TESTING] #{@subject}" if Rails.env == 'development'
-    @body[:nlmodel] = model
-    @body[:recommender] = recommender
+    @nlmodel = model
+    @recommender = recommender
+    mail(:to => @recipients,
+         :bcc => @bcc,
+         :subject => subject)
   end
 
   def spam_warning(node, person)
@@ -122,8 +153,11 @@ class Notifications < ActionMailer::Base
     @recipients = 'modelingcommons@ccl.northwestern.edu'
     @subject = "Spam reported for the '#{node.name}' model in the NetLogo Modeling Commons"
     @subject = "[TESTING] #{@subject}" if Rails.env == 'development'
-    @body[:node] = node
-    @body[:person] = person
+    @node = node
+    @person = person
+    mail(:to => @recipients,
+         :bcc => @bcc,
+         :subject => subject)
   end
 
   def upload_acknowledgement(node, person)
@@ -132,8 +166,11 @@ class Notifications < ActionMailer::Base
     @recipients = person.email_address
     @subject = "Thanks for uploading the '#{node.name}' model!"
     @subject = "[TESTING] #{@subject}" if Rails.env == 'development'
-    @body[:node] = node
-    @body[:person] = person
+    @node = node
+    @person = person
+    mail(:to => @recipients,
+         :bcc => @bcc,
+         :subject => subject)
   end
 
   def collaboration_notice(node, person)
@@ -143,8 +180,11 @@ class Notifications < ActionMailer::Base
     @recipients = person.email_address
     @subject = "You have been added as a collaborator to the '#{node.name}' model"
     @subject = "[TESTING] #{@subject}" if Rails.env == 'development'
-    @body[:node] = node
-    @body[:person] = person
+    @node = node
+    @person = person
+    mail(:to => @recipients,
+         :bcc => @bcc,
+         :subject => subject)
   end
 
 end
