@@ -1,12 +1,18 @@
 <% @title = "Register as a new user" %>
 
 <p>Before you can participate in the Commons, you must first register.
-(You may view public models, discussions, and tags without
-registering.) </p>
+  (You may view public models, discussions, and tags without
+  registering.) </p>
 
 <p>Already registered?  You may <%= link_to "log in", :controller => :account, :action => :login %>.</p>
 
-<%= error_messages_for :new_person %>
+<% if @new_person.errors.present? %>
+<ul>
+  <% @new_person.errors.full_messages.each do |error| %>
+  <li><%= error %></li>
+  <% end %>
+</ul>
+<% end %>
 
 <%= render :partial => 'new_person_form' %>
 
