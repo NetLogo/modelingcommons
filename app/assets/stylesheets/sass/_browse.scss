@@ -1,0 +1,86 @@
+@import "font";
+
+/*
+ * This appears to have been used by _model_tab.html.erb, which has been replaced by one_model.html.erb
+ */
+/*
+.main-div {
+    position: absolute;
+    margin: 2px;
+    top: 100px;
+    width: 60%;
+    left: 10px;
+}*/
+
+/*.ui-corner-all {
+    clear: both;
+}*/
+
+/*img#preview-image  {
+    width: 70px;
+    height: 70px;
+    float: left;
+    margin-right: 20px;
+}*/
+
+
+/*
+ * Used by browse_preview_tab.html.erb
+ * Which appears to be unused, as it is not a one_model tab
+ */
+
+/*
+img#big-preview-image  {
+    width: 400px;
+    height: 400px;
+    float: left;
+}
+*/
+/*
+ * Not used anywhere
+ */
+/*
+.model-tab, .group-tabs {
+    background: #fff;
+    padding: 10px;
+}
+*/
+
+
+
+
+/*
+ * This seems to be used for the add tag part of the edit model page
+ */
+
+.one-model-div {
+    background-color: #fff;
+    display: none;
+    clear: left;
+    width: 60%;
+}
+
+.one-model-shown-div {
+    display: block;
+    clear: left;
+}
+/*
+ * This is used nowhere
+ */
+/*
+#menu-div {
+    @include sans-font();
+}
+*/
+
+
+/*
+ * This doesn't seem to be used anywhere
+ */
+
+/*
+#activity {
+    margin-left: 10px;
+    float: left;
+}
+*/
