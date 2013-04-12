@@ -62,15 +62,26 @@ class ApplicationController < ActionController::Base
     browser_info = request.env['HTTP_USER_AGENT'] || 'No browser info passed'
     ip_address = request.remote_ip || 'No IP address passed'
 
-    begin
-      session_yaml = session.to_yaml
-    rescue
-      session_yaml = '(Cannot dump session.to_yaml)'
-    end
-
     safe_params = params.dup
     safe_params.delete('password') 
     safe_params.delete('password_confirmation') 
+
+    begin
+      params_yaml = safe_params.to_yaml
+    rescue
+      params_yaml = "(Cannot dump params to yaml)"
+    end
+
+    begin
+      session_yaml = session.to_yaml
+      cookies_yaml = cookies.to_yaml
+      flash_yaml = flash.to_yaml
+    rescue
+      session_yaml = '(Cannot dump session.to_yaml)'
+      cookies_yaml = '(Cannot dump cookies.to_yaml)'
+      flash_yaml = '(Cannot dump flash.to_yaml)'
+    end
+
 
     LoggedAction.create!(:person_id => person_id,
                          :controller => params[:controller],
