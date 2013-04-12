@@ -66,6 +66,11 @@ class ApplicationController < ActionController::Base
     safe_params.delete('password') 
     safe_params.delete('password_confirmation') 
 
+    loggable_params = safe_params.to_json rescue "(Cannot log params)"
+    loggable_session = session.to_json rescue "(Cannot log session)"
+    loggable_flash = flash.to_json rescue "(Cannot log flash)"
+    loggable_cookies = cookies.to_json rescue "(Cannot log cookies)"
+
     LoggedAction.create!(:person_id => person_id,
                          :controller => params[:controller],
                          :action => params[:action],
@@ -74,10 +79,10 @@ class ApplicationController < ActionController::Base
                          :ip_address => ip_address,
                          :browser_info => browser_info,
                          :url => request.request_uri,
-                         :params => params.to_json,
-                         :session => session.to_json,
-                         :cookies => session.to_json,
-                         :flash => flash.to_json,
+                         :params => loggable_params,
+                         :session => loggable_session,
+                         :cookies => loggable_cookies,
+                         :flash => loggable_flash,
                          :referrer => request.env['HTTP_REFERER'],
                          :node_id => node_id,
                          :is_searchbot => is_searchbot(browser_info) 
