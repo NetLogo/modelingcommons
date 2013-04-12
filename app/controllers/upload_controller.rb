@@ -47,6 +47,8 @@ class UploadController < ApplicationController
       end
 
       # Create a new version for that node, and stick the contents in there
+      
+      params[:new_model][:uploaded_body].rewind
       node_version_contents = params[:new_model][:uploaded_body].read
 
       new_version =
@@ -84,6 +86,7 @@ class UploadController < ApplicationController
         if params[:new_model][:uploaded_preview].present?
           
           # Create a preview
+          params[:new_model][:uploaded_preview].rewind
           attachment = Attachment.new(:node_id => @model.id,
                                       :person_id => @person.id,
                                       :description => "Preview for '#{model_name}'",
