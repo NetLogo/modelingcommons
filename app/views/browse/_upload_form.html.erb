@@ -1,7 +1,7 @@
 <div id="upload-model">
   <h2>Upload a new version</h2>
   <table>
-    <%= form_for(:new_version, :url => { :controller => "upload", :action => :update_model }, :html => {:multipart => true}) do |form| %>
+    <%= form_for(:new_version, :url => { :controller => "upload", :action => :update_model }) do |form| %>
     <tr>
       <td>Model file</td>
       <td><%= form.file_field :uploaded_body %>
@@ -35,9 +35,7 @@
 <div id="upload-document"  >
   <h2>Upload a new attachment</h2>
   <table>
-    <% form_for(:new_document,
-       :url => { :controller => :file, :action => :create },
-    :html => {:multipart => true}) do |form| %>
+    <% form_for(:new_document, :url => { :controller => :file, :action => :create }) do |form| %>
     <tr>
       <td>Document file</td>
       <td><%= form.file_field :uploaded_document %>

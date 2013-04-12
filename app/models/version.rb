@@ -1,4 +1,13 @@
+class NetlogoModelFileValidator < ActiveModel::EachValidator
+  def validate_each(record, attribute, value)
+    if value.split(Version::SECTION_SEPARATOR).length < 8
+      record.errors[attribute] << 'Not a legal NetLogo model'
+    end
+  end
+end
+
 class Version < ActiveRecord::Base
+  attr_accessible :node_id, :person_id, :contents, :description
 
   belongs_to :person
   belongs_to :node
@@ -8,15 +17,11 @@ class Version < ActiveRecord::Base
   validates :description, :presence => true
   validates :contents,:presence => true
 
+  validates :contents, :netlogo_model_file => true
+
   default_scope :order => 'created_at DESC'
 
   SECTION_SEPARATOR = '@#$#@#$#@'
-  validate :must_be_valid_netlogo_file
-  def must_be_valid_netlogo_file
-    if contents.split(SECTION_SEPARATOR).length < 8
-      errors.add_to_base "Does not appear to be a valid NetLogo file"
-    end
-  end
 
   scope :info_keyword_matches, lambda { |term| { :conditions => ["split_part(contents, ?, 3) ilike ?", SECTION_SEPARATOR, '%' + term + '%'] } }
   scope :procedures_keyword_matches, lambda { |term| { :conditions => ["split_part(contents, ?, 1) ilike ?", SECTION_SEPARATOR, '%' + term + '%'] } }

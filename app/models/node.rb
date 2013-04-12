@@ -1,6 +1,7 @@
 # Model for an individual node in our graph
 
 class Node < ActiveRecord::Base
+  attr_accessible :parent_id, :name
   acts_as_tree :order => "name"
 
   belongs_to :group

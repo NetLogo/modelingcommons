@@ -9,9 +9,14 @@ class Tag < ActiveRecord::Base
   validates :name, :uniqueness => true
   validates :person_id, :uniqueness => true
 
-    validates :name, :uniqueness => {  :case_sensitive => false }
+  validates :name, :uniqueness => {  :case_sensitive => false }
 
   scope :created_since, lambda { |since| { :conditions => ['created_at >= ? ', since] }}
+
+  before_validation :remove_tag_characters
+  def remove_tag_characters
+    name.gsub!(/[<>]/, ' ')
+  end
 
   def people
     return self.nodes.map {|model| model.person}.uniq
