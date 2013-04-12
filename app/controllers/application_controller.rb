@@ -62,15 +62,14 @@ class ApplicationController < ActionController::Base
     browser_info = request.env['HTTP_USER_AGENT'] || 'No browser info passed'
     ip_address = request.remote_ip || 'No IP address passed'
 
-    begin
-      session_yaml = session.to_yaml
-    rescue
-      session_yaml = '(Cannot dump session.to_yaml)'
-    end
-
     safe_params = params.dup
     safe_params.delete('password') 
     safe_params.delete('password_confirmation') 
+
+    loggable_params = safe_params.to_json rescue "(Cannot log params)"
+    loggable_session = session.to_json rescue "(Cannot log session)"
+    loggable_flash = flash.to_json rescue "(Cannot log flash)"
+    loggable_cookies = cookies.to_json rescue "(Cannot log cookies)"
 
     LoggedAction.create!(:person_id => person_id,
                          :controller => params[:controller],
@@ -79,11 +78,11 @@ class ApplicationController < ActionController::Base
                          :message => message,
                          :ip_address => ip_address,
                          :browser_info => browser_info,
-                         :url => request.request_uri,
-                         :params => safe_params.to_yaml,
-                         :session => session_yaml,
-                         :cookies => cookies.to_yaml,
-                         :flash => flash.to_yaml,
+                         :url => request.fullpath,
+                         :params => loggable_params,
+                         :session => loggable_session,
+                         :cookies => loggable_cookies,
+                         :flash => loggable_flash,
                          :referrer => request.env['HTTP_REFERER'],
                          :node_id => node_id,
                          :is_searchbot => is_searchbot(browser_info) 
@@ -128,8 +127,6 @@ class ApplicationController < ActionController::Base
       flash[:notice] = "Error detected; cannot upload.  Please notify the site administrator."
       return false
     end
-
-    logger.warn "Checking changeability permissions for model '#{@model.to_yaml}' and person '#{@person.to_yaml}'"
 
     # This only applies if the node is a model
     # If there's no model, then allow everything

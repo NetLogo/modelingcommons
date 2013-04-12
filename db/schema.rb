@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130407102046) do
+ActiveRecord::Schema.define(:version => 20130412084458) do
 
   create_table "attachments", :force => true do |t|
     t.integer  "node_id",      :null => false
@@ -118,6 +118,14 @@ ActiveRecord::Schema.define(:version => 20130407102046) do
   add_index "model_downloads", ["logged_at"], :name => "model_downloads_logged_at_idx"
   add_index "model_downloads", ["node_id"], :name => "model_downloads_node_id_idx"
   add_index "model_downloads", ["person_id"], :name => "model_downloads_person_id_idx"
+
+  create_table "model_view_counts", :id => false, :force => true do |t|
+    t.integer "count",   :limit => 8
+    t.integer "node_id"
+  end
+
+  add_index "model_view_counts", ["count"], :name => "new_model_view_counts_count_idx"
+  add_index "model_view_counts", ["node_id"], :name => "new_model_view_counts_node_id_idx"
 
   create_table "model_views", :id => false, :force => true do |t|
     t.datetime "logged_at"
@@ -260,6 +268,11 @@ ActiveRecord::Schema.define(:version => 20130407102046) do
   add_index "projects", ["person_id"], :name => "index_projects_on_person_id"
   add_index "projects", ["visibility_id"], :name => "index_projects_on_visibility_id"
 
+  create_table "recent_model_downloads", :id => false, :force => true do |t|
+    t.integer "count",   :limit => 8
+    t.integer "node_id"
+  end
+
   create_table "recommendations", :force => true do |t|
     t.integer  "node_id"
     t.integer  "person_id"
@@ -271,7 +284,7 @@ ActiveRecord::Schema.define(:version => 20130407102046) do
   add_index "recommendations", ["person_id"], :name => "index_recommendations_on_person_id"
 
   create_table "sessions", :force => true do |t|
-    t.string   "session_id", :null => false
+    t.text     "session_id", :null => false
     t.text     "data"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -320,6 +333,11 @@ ActiveRecord::Schema.define(:version => 20130407102046) do
   create_table "test_tsquery", :id => false, :force => true do |t|
     t.text "txtkeyword"
     t.text "txtsample"
+  end
+
+  create_table "total_model_downloads", :id => false, :force => true do |t|
+    t.integer "count",   :limit => 8
+    t.integer "node_id"
   end
 
   create_table "versions", :force => true do |t|
