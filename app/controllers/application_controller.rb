@@ -78,7 +78,7 @@ class ApplicationController < ActionController::Base
                          :message => message,
                          :ip_address => ip_address,
                          :browser_info => browser_info,
-                         :url => request.request_uri,
+                         :url => request.fullpath,
                          :params => loggable_params,
                          :session => loggable_session,
                          :cookies => loggable_cookies,
@@ -127,8 +127,6 @@ class ApplicationController < ActionController::Base
       flash[:notice] = "Error detected; cannot upload.  Please notify the site administrator."
       return false
     end
-
-    logger.warn "Checking changeability permissions for model '#{@model.id}' and person '#{@person.id}'"
 
     # This only applies if the node is a model
     # If there's no model, then allow everything
