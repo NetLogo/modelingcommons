@@ -1,3 +1,5 @@
+@import "compass/utilities/general/clearfix";
+
 $nav-color: #04346C;
 $nav-text-color: white;
 $header-color: lighten(#6899D3, 10%);
@@ -7,6 +9,7 @@ $input-radius: 5px;
 $button-color: #FFB540;
 $error-color: red;
 $no-image-color: lighten(black, 80%);
+$your_news_color: rgb(250, 247, 157);
 
 $pie-behavior: url("/browse/pie");
 $pie-base-class: pie;
@@ -24,7 +27,12 @@ $pie-base-class: pie;
   @include pie-element(relative);
   -pie-poll: false;
 }
+
 @mixin pie-z($z: 0) {
   @include pie-element(z-index, z);
   -pie-poll: false;
+}
+
+.clearfix {
+  @include pie-clearfix();
 }
