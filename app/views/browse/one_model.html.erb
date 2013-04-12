@@ -62,7 +62,7 @@
 	   <%if model_group_id != 0 %>
 	   <%= raw model_group(@model) %>
 	   <% end %>
-	   | <%= model_visibility(@model) %> | <%= model_changeability(@model) %>
+	   | <%= raw model_visibility(@model) %> | <%= raw model_changeability(@model) %>
 	   <% end %>
 	   
            <% end %>
@@ -78,16 +78,16 @@
 	<% if @model.tags.empty? %>
 	None
 	<% else %>
-	<%= @model.tags.map {|t| tag_link(t)}.to_sentence %>
+	<%= raw @model.tags.map {|t| tag_link(t)}.to_sentence %>
 	<% end %>
 	</p>
 
 	<% if @model.parent %>
-	Child of model <%= model_link(@model.parent) %>
+	Child of model <%= raw model_link(@model.parent) %>
 	<% end %>
 	
 	<% if not @model.children.empty? %>
-	Parent of <%= pluralize(@model.children.size, 'model') %>: <%= @model.children.map {|child| model_link(child) }.to_sentence %>
+	Parent of <%= pluralize(@model.children.size, 'model') %>: <%= raw @model.children.map {|child| model_link(child) }.to_sentence %>
 	<% end %>
       </div>
     </div>

@@ -78,7 +78,7 @@ class ApplicationController < ActionController::Base
                          :message => message,
                          :ip_address => ip_address,
                          :browser_info => browser_info,
-                         :url => request.request_uri,
+                         :url => request.fullpath,
                          :params => loggable_params,
                          :session => loggable_session,
                          :cookies => loggable_cookies,
