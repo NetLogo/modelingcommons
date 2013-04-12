@@ -82,7 +82,6 @@ class ApplicationController < ActionController::Base
       flash_yaml = '(Cannot dump flash.to_yaml)'
     end
 
-
     LoggedAction.create!(:person_id => person_id,
                          :controller => params[:controller],
                          :action => params[:action],
@@ -91,10 +90,10 @@ class ApplicationController < ActionController::Base
                          :ip_address => ip_address,
                          :browser_info => browser_info,
                          :url => request.request_uri,
-                         :params => safe_params.to_yaml,
+                         :params => params_yaml,
                          :session => session_yaml,
-                         :cookies => cookies.to_yaml,
-                         :flash => flash.to_yaml,
+                         :cookies => cookies_yaml,
+                         :flash => flash_yaml,
                          :referrer => request.env['HTTP_REFERER'],
                          :node_id => node_id,
                          :is_searchbot => is_searchbot(browser_info) 
