@@ -123,7 +123,7 @@ class ApplicationController < ActionController::Base
       return false
     end
 
-    logger.warn "Checking changeability permissions for model '#{@model.to_yaml}' and person '#{@person.to_yaml}'"
+    logger.warn "Checking changeability permissions for model '#{@model.id}' and person '#{@person.id}'"
 
     # This only applies if the node is a model
     # If there's no model, then allow everything
