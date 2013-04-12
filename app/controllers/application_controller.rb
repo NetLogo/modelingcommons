@@ -66,22 +66,6 @@ class ApplicationController < ActionController::Base
     safe_params.delete('password') 
     safe_params.delete('password_confirmation') 
 
-    begin
-      params_yaml = safe_params.to_yaml
-    rescue
-      params_yaml = "(Cannot dump params to yaml)"
-    end
-
-    begin
-      session_yaml = session.to_yaml
-      cookies_yaml = cookies.to_yaml
-      flash_yaml = flash.to_yaml
-    rescue
-      session_yaml = '(Cannot dump session.to_yaml)'
-      cookies_yaml = '(Cannot dump cookies.to_yaml)'
-      flash_yaml = '(Cannot dump flash.to_yaml)'
-    end
-
     LoggedAction.create!(:person_id => person_id,
                          :controller => params[:controller],
                          :action => params[:action],
@@ -90,10 +74,10 @@ class ApplicationController < ActionController::Base
                          :ip_address => ip_address,
                          :browser_info => browser_info,
                          :url => request.request_uri,
-                         :params => params_yaml,
-                         :session => session_yaml,
-                         :cookies => cookies_yaml,
-                         :flash => flash_yaml,
+                         :params => params.to_json,
+                         :session => session.to_json,
+                         :cookies => session.to_json,
+                         :flash => flash.to_json,
                          :referrer => request.env['HTTP_REFERER'],
                          :node_id => node_id,
                          :is_searchbot => is_searchbot(browser_info) 
