@@ -12,25 +12,19 @@ class TagsController < ApplicationController
 
   def create
     @node = Node.find(params[:node_id])
-
     @new_tagged_nodes = [ ]
-    @html = '';
     params[:new_tag].each_with_index do |tag_name, index|
-      next if tag_name.blank? or tag_name == 'tag name'
-
+      next if tag_name.blank?
       comment = params[:new_comment][index].strip
-
       tag = Tag.find_or_create_by_name(tag_name.downcase.strip, :person_id => @person.id)
       tn = TaggedNode.find_or_create_by_tag_id_and_person_id_and_node_id(tag.id,
                                                                          @person.id,
                                                                          @node.id,
-                                                                         :comment => comment)
-
+                                                                         :comment => comment
+      )
       if tn.created_at < 1.minute.ago
         @new_tagged_nodes << tn
-
         notification_recipients = @node.people.reject { |person| person == @person}
-
         if notification_recipients.empty?
           logger.warn "No recipients; not sending the notification"
         else
@@ -38,18 +32,16 @@ class TagsController < ApplicationController
           Notifications.deliver_applied_tag(notification_recipients, tn.tag)
         end
       end
-      @html += render_to_string(:partial => 'one_tag.html', :locals => { :tm => tn})
     end
+    html = render_to_string(:partial => "tags/tag_cloud.html", :locals => {:model => Node.find(params[:node_id])})
     respond_to do |format|
       format.html do
-        render :text => @html;
+        render :text => html
       end
       format.json do
-        render :json => {:success => true, :html => @html, :message => '' + params[:new_tag].length + ' tags added'}
+        render :json => {:success => true, :html => html, :message => '' + params[:new_tag].length + ' tags added'}
       end
     end
-    
-    
   end
 
   def one_tag
@@ -167,4 +159,5 @@ class TagsController < ApplicationController
     send_data(m.to_blob, :type => 'image/png', :disposition => 'inline')
     #render :json => {:count => list.length}
   end
+  
 end

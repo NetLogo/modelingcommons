@@ -204,4 +204,24 @@ ago."
     end
     string
   end
+  
+  def tag_size(count)
+    max_size = 40
+    min_size = 10
+    max_count = 100
+    
+    base = max_count**(1.0/(max_size - min_size))
+    size = Math.log(count)/Math.log(base) + min_size
+    size = max_size if size > max_size
+    size
+  end
+  
+  def pluralize_without_number(count, word)
+    if count == 1
+      word
+    else
+      word.pluralize
+    end
+  end
+  
 end

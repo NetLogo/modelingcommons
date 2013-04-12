@@ -1,132 +1,156 @@
 <% @title = @model.name %>
-<div id="preview_info_container">
-<!--Preview-->
-<div id="preview_image">
-  <%= render :partial => "preview_image", :locals => {:model => @model} %>
-</div>
-
-<div id="preview_info">
-  <!--Info-->
-  <div id="general_info">
-	<div>  	
-		<% form_tag(url_for( :controller => :browse, :action => :set_permissions), :id => "group_permission_form") do %>
-
-        <%= hidden_field_tag 'id', @model.id %>
+<div class="model_info">
+  <div class="model_info_top">
+    <% if @model.previews.nil? or @model.previews.empty? %>
+      <div class="no_preview_image">No preview image</div>
+    <% else %>
+        <%= model_image(@model)%>
+    <% end %>
+    <div class="info_social_container">
+      <div class="info_container">
         
-        Model was written in NetLogo <%= @model.netlogo_version %> by:</br />
-	
-	<ul id="collaborator-list">
-	<% @model.collaborations.each do |collaboration| %>
-	<li><%= person_image(collaboration.person) %> <%= person_link(collaboration.person) %> (<%= collaboration.name %>)
-	<% if collaboration.person == @person and collaboration.name != 'Author' %>
-	<input type="button" value="Remove" id="remove-collaboration" />
-	<% end %>
-	</li>
-	<% end %> 
-	
-	<% if @model.people.include?(@person) %>
-	<li id="add-collaborator"><a href="#">Add a collaborator</a></li>
-	<% end %>
-
-	</ul>
-
-        <% model_visibility_letter = @model.visibility.short_form %>
-        <% model_changeability_letter = @model.changeability.short_form %>
-	<% model_group_id = @model.group ? @model.group.id : 0 %>
-
-        <% if @model.people.include?(@person) %>
-	<% if @person and !@person.groups.empty? %>
-	<% @options_for_select = [['No group', nil]] %>
-	<% @person.groups.each {|g| @options_for_select << [g.name, g.id] } %> 
-        <br />							   
-        Model group <%= select_tag("group_id", options_for_select(@options_for_select, (@model.group ? @model.group.id : 0)), :id => "group_select") %>
-	   <% end %>
-           
-           | Visible to <select name="read_permission" id="read_permission_select">
-	     <option value="a" <% if model_visibility_letter ==  'a'%>selected="selected"<% end %>>everyone</option>
-	     <% if @person and !@person.groups.empty? %>
-	     <option value="g" <% if model_visibility_letter ==  'g'%>selected="selected"<% end %>>group members only</option>
-	     <% end %>
-	     <option value="u" <% if model_visibility_letter ==  'u'%>selected="selected"<% end %>>you only</option>
-	   </select>
-	   | Changeable by <select name="write_permission" id="write_permission_select">
-	     <option value="a" <% if model_changeability_letter ==  'a'%>selected="selected"<% end %>>everyone</option>
-	     <% if @person and !@person.groups.empty? %>
-	     <option value="g" <% if model_changeability_letter ==  'g'%>selected="selected"<% end %>>group members only</option>
-	     <% end %>
-	     <option value="u" <% if model_changeability_letter ==  'u'%>selected="selected"<% end %>>you only</option>
-	   </select>
-
-	   <% else %>
-
-	   <%if model_group_id != 0 %>
-	   <%= model_group(@model) %>
-	   <% end %>
-	   | <%= model_visibility(@model) %> | <%= model_changeability(@model) %>
-	   <% end %>
-	   
-           <% end %>
-      </div>	
-    </div>
-    <div id="family_info">
-      <div>
-	<% if !@model.projects.empty? %>
-	Part of project '<%= project_link(@model.projects.first) %>'
-	<% end %>
-	
-	<p>Tags:
-	<% if @model.tags.empty? %>
-	None
-	<% else %>
-	<%= @model.tags.map {|t| tag_link(t)}.to_sentence %>
-	<% end %>
-	</p>
-
-	<% if @model.parent %>
-	Child of model <%= model_link(@model.parent) %>
-	<% end %>
-	
-	<% if not @model.children.empty? %>
-	Parent of <%= pluralize(@model.children.size, 'model') %>: <%= @model.children.map {|child| model_link(child) }.to_sentence %>
-	<% end %>
+        <div class="collaborators">
+          <p>Written by</p>
+          <ul id="collaborator-list">
+            <% @model.collaborations.each do |collaboration| %>
+              <li><%= person_image(collaboration.person) %> <%= person_link(collaboration.person) %> (<%= collaboration.name %>)
+              <% if collaboration.person == @person and collaboration.name != 'Author' %>
+                <input type="button" value="Remove" id="remove-collaboration" />
+              <% end %>
+              </li>
+            <% end %> 
+            <% if @model.people.include?(@person) %>
+              <li id="add-collaborator"><a href="#">Add a collaborator</a></li>
+            <% end %>
+            <% form_for(:add_collaborator, :url => {:controller => :collaborations, :action => :create}, :html => {:class => 'popup_form'}) do |form| -%>
+              <div class="left-right"><div class="left"><h1>Add Collaborator</h1></div><div class="right"><h2><a href="#" class="close_form">Close</a></h2></div></div>
+              <input type="hidden" name="node_id" value="<%= @model.id %>" />
+              <p>
+                <input type="text" class="complete" placeholder="Collaborator name" name="person_name" size="45" />
+                <select name="collaborator_type_id">
+                  <% CollaboratorType.all.each do |type| %>
+                    <option value="<%= type.id %>"><%= type.name %></option>
+                  <% end %>
+                </select>
+              </p>              
+              <p>
+                <button id="save_collaborators">Save new collaborators</button>
+              </p>
+            <% end -%>
+          </ul>
+        </div>
+        
+        <% form_tag(url_for( :controller => :browse, :action => :set_permissions), :id => "group_permission_form") do %>
+          <%= hidden_field_tag 'id', @model.id %>
+          <% model_visibility_letter = @model.visibility.short_form %>
+          <% model_changeability_letter = @model.changeability.short_form %>
+          <% model_group_id = @model.group ? @model.group.id : 0 %>
+          <% if @model.people.include?(@person) %>
+            <% if @person and !@person.groups.empty? %>
+              <% @options_for_select = [['No group', nil]] %>
+              <% @person.groups.each {|g| @options_for_select << [g.name, g.id] } %> 
+              <br />                 
+              Model group <%= select_tag("group_id", options_for_select(@options_for_select, (@model.group ? @model.group.id : 0)), :id => "group_select") %>
+              | 
+            <% end %>
+            Visible to 
+            <select name="read_permission" id="read_permission_select">
+              <option value="a" <% if model_visibility_letter ==  'a'%>selected="selected"<% end %>>everyone</option>
+              <% if @person and !@person.groups.empty? %>
+                <option value="g" <% if model_visibility_letter ==  'g'%>selected="selected"<% end %>>group members only</option>
+              <% end %>
+              <option value="u" <% if model_visibility_letter ==  'u'%>selected="selected"<% end %>>you only</option>
+            </select>
+             | Changeable by
+            <select name="write_permission" id="write_permission_select">
+              <option value="a" <% if model_changeability_letter ==  'a'%>selected="selected"<% end %>>everyone</option>
+              <% if @person and !@person.groups.empty? %>
+              <option value="g" <% if model_changeability_letter ==  'g'%>selected="selected"<% end %>>group members only</option>
+              <% end %>
+              <option value="u" <% if model_changeability_letter ==  'u'%>selected="selected"<% end %>>you only</option>
+            </select>
+          <% else %>
+            <%if model_group_id != 0 %>
+              <%= model_group(@model) %>
+            <% end %>
+             | <%= model_visibility(@model) %> | <%= model_changeability(@model) %>
+          <% end %>
+        <% end %>
+        
+        <div class="family_info">
+          <% if !@model.projects.empty? %>
+          Part of project '<%= project_link(@model.projects.first) %>'
+          <% end %>
+        
+          <% if @model.parent %>
+          Child of model <%= model_link(@model.parent) %>
+          <% end %>
+          
+          <% if not @model.children.empty? %>
+          Parent of <%= pluralize(@model.children.size, 'model') %>: <%= @model.children.map {|child| model_link(child) }.to_sentence %>
+          <% end %>
+        </div>
+        
+        <div class="tag_cloud_container">
+            <h3>Tags</h3>
+            <%= render :partial => "tags/tag_cloud", :locals => {:model => @model} %>
+            <% form_for(:new_tag, :url => {:controller => :tags, :action => :create}, :html => {:class => 'add_tag_form popup_form'}) do |form| -%>
+              <div class="left-right"><div class="left"><h1>Add New Tag</h1></div><div class="right"><h2><a href="#" id="close_add_tag_form">Close</a></h2></div></div>
+              <%= hidden_field_tag :node_id, @model.id -%>
+              <p><%= text_field_tag 'new_tag[]', "", {:class => 'complete', :placeholder => "Tag name", :size => 45} %></p>
+              <p><%= text_field_tag 'new_comment[]', "", {:placeholder => "(Optional) Why tag is relevant to this model", :size => 45} %></p>
+              <p><button id="add_tag">Tag this model</button></p>
+            <% end -%>
+            <p><a href="#" id="open_add_tag_form">Add tag</a></p>
+        </div>
+        
+        <div class="netlogo_version">
+          Model was written in NetLogo <%= @model.netlogo_version %>
+        </div>
+        
+        
+        
       </div>
-    </div>
-    <div id="actions">
-      <div>
-	<%= link_to image_tag("download.png", :class => "inline_image", :alt => "Download the '#{@model.name}' model", :title => "Download the '#{@model.name}' model") + "Download this model", :controller => "browse", :action => "download_model", :id => @model.id %> 
-	<% if @person %>
-	| 
-	<% if @model.recommendations.select {|r| r.person_id == @person.id}.empty? %>
-	<%= link_to image_tag("thumb.jpeg", :class => "inline_image", :alt => "Recommend '#{@model.name}' to other users", :title => "Recommend '#{@model.name}' to other users") + "Recommend", :controller => :recommend, :action => :add_recommendation, :id => @model.id %>
-	<% else %>
-	<%= person_link(@person) %> recommended this model
-	<% end %>
-	<% if !@model.recommendations.empty? %>
-	| 
-	(<%= link_to pluralize(@model.recommendations.length, "recommendation"), :controller => :recommend, :action => :show_recommendations, :id => @model.id %>)
-	<% end %>
-	
-	<% if !@person.spam_warning(@model) %>
-	| 
-	<%= link_to "Report as spam", :controller => :possible_spam, :action => :mark_as_spam, :id => @model.id %>
-	<% if !@model.spam_warnings.empty? %>
-	(<%= pluralize(@model.spam_warnings.length, "person") %> marked it as spam)
-	<% end %>
-	<% end %>
-	<% end %>
-	<% if @person and @model.people.include?(@person) %>
-	| 
-	<%= link_to 'Delete this model', { :controller => :upload, :action => :destroy, :id => @model.id }, :confirm => 'Delete this model, including its entire history, attachments, and comments?  There is no way to undo this action.' %>
-	<% end %>
-	| 
-	<!--   <div id="model-atom-feed" id="atom-feed-link"><%= link_to image_tag("feed.png", :id => 'atom-image', :alt => "Follow '#{@model.name}' in your feed reader", :title => "Follow '#{@model.name}' in your feed reader"), :controller => :browse, :action => :follow, :id => @model.id, :format => :atom %><%= link_to "Follow #{@model.name}", {:controller => :browse, :action => :follow, :id => @model.id, :format => :atom}, {:id => 'atom-feed'} %></div> -->
-	<!-- AddThis Button BEGIN -->
-	<a class="addthis_button" href="http://addthis.com/bookmark.php?v=250&amp;username=reuvenmlerner"><img src="http://s7.addthis.com/static/btn/v2/lg-share-en.gif" width="125" height="16" alt="Bookmark and Share" style="border:0;height: auto;"/></a><script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#username=reuvenmlerner"></script>
-	<!-- AddThis Button END -->
+      
+      <div class="social_container">
+        <!-- AddThis Button BEGIN -->
+        <div class="addthis_toolbox addthis_floating_style addthis_32x32_style">
+        <a class="addthis_button_preferred_1"></a>
+        <a class="addthis_button_preferred_2"></a>
+        <a class="addthis_button_preferred_3"></a>
+        <a class="addthis_button_preferred_4"></a>
+        <a class="addthis_button_compact"></a>
+        </div>
+        <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=xa-5167809d4418e244"></script>
+        <!-- AddThis Button END -->
+        
       </div>
     </div>
   </div>
+  <div class="model_info_bottom">
+    <div class="actions">
+      <%= link_to image_tag("download.png", :class => "inline_image", :alt => "Download the '#{@model.name}' model", :title => "Download the '#{@model.name}' model") + "Download this model", :controller => "browse", :action => "download_model", :id => @model.id %> 
+      <% if @person %>
+        | 
+        <%= render :partial => 'recommend/recommendations.html', :locals => {:id => @model.id} %>
+      
+        <% if !@person.spam_warning(@model) %>
+          | 
+          <%= link_to "Report as spam", :controller => :possible_spam, :action => :mark_as_spam, :id => @model.id %>
+          <% if !@model.spam_warnings.empty? %>
+            (<%= pluralize(@model.spam_warnings.length, "person") %> marked it as spam)
+          <% end %>
+        <% end %>
+      <% end %>
+      <% if @person and @model.people.include?(@person) %>
+        | 
+        <%= link_to 'Delete this model', { :controller => :upload, :action => :destroy, :id => @model.id }, :confirm => 'Delete this model, including its entire history, attachments, and comments?  There is no way to undo this action.' %>
+      <% end %>
+    </div>
+  </div>
+  
 </div>
+
 <div id="model_tabs" class="tabs_panel">
   <ul>
     <li><a href="#browse_discuss">Discuss</a></li>

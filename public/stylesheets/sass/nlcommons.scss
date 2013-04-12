@@ -9,6 +9,7 @@ $blueprint-grid-width: 40px;
 @import "font";
 @import "all";
 @import "ui.everything";
+@import "numeric";
 
 
 /* 
@@ -409,16 +410,242 @@ $comment-border-width: 2px;
  * Model and project page image preview/info
  */
 
+.tag_cloud_container {
+  h3 {
+    margin: 0px;
+  }
+}
+
+.tag_cloud {
+  $tag-cloud-color: $nav-color;
+  font-family: 'Muli';
+  display: inline-block;
+  
+  
+  width: 300px;
+  .tag {
+    display:inline-block;
+    &>a {
+      text-decoration: underline;
+      color: $tag-cloud-color;
+    }
+    &:hover>a {
+      color: white;
+      background-color: $tag-cloud-color;
+    }
+  }
+  .tag_info {
+    padding: 2px;
+    display: none;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background-color: $tag-cloud-color;
+    color: white;
+    //width: 300px;
+    z-index: 10;
+    a {
+      color: white;
+    }
+    p {
+      margin: 0px;
+      font-size: 10px;
+    }
+    p.tag_comment {
+      font-size: 14px;
+    }
+    
+  }
+  
+}
+
+.popup_form {
+  border: $comment-border-width solid black;
+  background-color: white;
+  z-index: 10;
+  @include box-shadow(5px 5px 15px 0px gray);
+  @include pie-border-radius(8px);
+  position: absolute;
+  //display: inline-block;
+  display: none;
+  p {
+    margin: 0px;
+  }
+  h1 {
+    font-size: 15px;
+    margin: 4px 8px 4px 8px;
+    
+  }
+  h2 {
+    font-size: 10px;
+    margin: 3px 8px 3px 8px;
+    
+  }
+}
+
+.model_title {
+  padding: 4px;
+  h1 {
+    margin: 0px;
+  }
+}
+
+$info-height: 240px;
+
+.model_info {
+  .actions, .collaborators {
+    a {
+      line-height: 20px;
+      display: inline-block;
+    }
+    img {
+      vertical-align: middle;
+      height: 20px;
+    }
+  }
+  #rec_container, #rec_counter_container {
+    display: inline-block;
+  }
+  #rec_counter {
+    @include numeric(blue);
+    vertical-align: baseline;
+  }
+  #recommendations {
+    border: 2px solid black;
+    display: none;  
+    position: absolute;
+    background-color: white;
+    @include box-shadow(5px 5px 15px 0px gray);
+    @include pie-border-radius(8px);
+    position: absolute;
+    z-index: 10;
+    p {
+      margin: 0px;
+    }
+    h1 {
+      font-size: 15px;
+      margin: 4px 8px 4px 8px;
+      
+    }
+    h2 {
+      font-size: 10px;
+      margin: 3px 8px 3px 8px;
+      
+    }
+    ul {
+      list-style-type: none;
+      padding: 0px 3px;
+      margin: 3px 0px;
+    }
+    li {
+      line-height: 20px;
+      margin: 2px 0px;
+      img {
+        height: 20px;
+        vertical-align: top;
+        padding-right: 3px;
+      }
+    }
+  }
+}
+
+
+.model_info_top {
+  width: 960px - 4px;
+  padding: 0px 0px 0px 4px;
+  display: table;
+  &>div {
+    
+  }
+  
+  
+  &>img, &>div.no_preview_image {
+    height: $info-height;
+    display: block;
+  }
+  &>div.no_preview_image {
+    background-color: hsl(0%, 0%, 85%);
+    width: $info-height;
+    line-height: $info-height;
+    text-align: center;
+  }
+  .info_social_container {
+    display: table-cell;
+    height: $info-height;
+    vertical-align: top;
+    
+    .info_container {
+      font-size: 12px;
+      display: table-cell;
+      width: 100%;
+      vertical-align: top;
+      padding: 0px 0px 0px 4px;
+      
+      #group_permission_form {
+        select {
+          width: 110px;
+        }
+      }
+    }
+    
+    .social_container {
+      display: table-cell;
+      width: 46px;
+      height: $info-height;
+      vertical-align: top;
+    }
+  }
+}
+
+.model_info_bottom {
+  padding: 0px 4px 0px 4px;
+  font-size: 12px;
+}
+
+.addthis_toolbox {
+  background: none;
+  position:relative;
+}
+
+
+$preview-height: 240px;
 #preview_info_container {
    width: 960px;
-   height: 160px;
-   display:table-row;
+   height: $preview-height;
+   display: block;
+   float:left;
    &>div {
-      display: table-cell;
-      height: 160px;
       vertical-align: top;
    }
 }
+$image-padding: 4px;
+
+
+
+
+
+#model_info {
+  display: inline-block;
+  img {
+    vertical-align: middle;
+    height: 20px;
+  }
+  &>div {
+    height: 53px;
+    display: table-row;
+    &>div {
+      display: table-cell;
+      vertical-align: middle;
+      
+    }
+  }
+  #actions a {
+    line-height: 20px;
+    display: inline-block;
+  }
+}
+
+
 #preview_image {
    &>div, img {
       height: 152px;

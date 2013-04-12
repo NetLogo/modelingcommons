@@ -1,0 +1,23 @@
+<div class="tag_cloud">
+<% tags = model.tagged_nodes %>
+<% tags.sort! {|a, b| a.tag.name <=> b.tag.name } %>
+<% tags.each do |t| %>
+<div class="tag">
+  <a title="<%= t.comment %>" href="<%= url_for :controller => :tags, :action => :one_tag, :id => t.tag.id %>" style="font-size: <%= tag_size(t.tag.nodes.count) %>px;"><%= t.tag.name %></a>
+  <div class="tag_info">
+    <% if t.comment.length > 0 %>
+    <p class="tag_comment">&quot;<%= t.comment %>&quot;</p>
+    <% end %>
+    <p>Tagged by <%= person_link(t.person) %> <%= distance_of_time_in_words(Time.now, t.updated_at) -%> ago</p>
+    <% if @person and (@person.administrator? or @person == t.person) -%>
+      
+        <% form_tag({:controller => :tags, :action => :destroy, :id => t.id}, :class => 'tag_delete_form') do %>
+        <%= hidden_field_tag 'id', t.id -%>
+        <p><a href="#" class="tag_delete_button">Remove Tag</a></p>
+        <% end %>
+      
+    <% end %>
+  </div>
+</div>
+<% end %>
+</div>

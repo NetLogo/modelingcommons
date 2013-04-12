@@ -51,5 +51,18 @@ class RecommendController < ApplicationController
     @recommendations = Recommendation.find_all_by_node_id(@model.id,
                                                           :order => "created_at DESC") || []
   end
+  
+  def add_recommendation_new
+    Recommendation.create(:node_id => @model.id,
+                          :person_id => @person.id)
+
+    model_people = @model.people
+    model_people.delete_if {|person| person == @person}
+    if not model_people.empty?
+      Notifications.deliver_recommended_message(@person, model_people, @node)
+    end
+    @recommendations = Recommendation.find_all_by_node_id(@model.id, :order => "created_at DESC") || []
+    render :partial => 'recommendations.html'
+  end
 
 end

@@ -156,7 +156,12 @@ jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
 
 //Enclose everything in a function so that local variables don't use the global namespace
 (function() {
-    var createAJAXFormReturningHTMLHandler = function(callback) {
+    var createAJAXFormReturningHTMLHandler = function(callback, error) {
+        if(typeof(error) === "undefined") {
+            var error = function(jqXHR, textStatus, errorThrown) {
+                $().flash_notice(textStatus + ": " + errorThrown);
+            }
+        }
 	return function(e) {
 	    var form = $(this);
 	    $.ajax({
@@ -165,9 +170,7 @@ jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
 		type: "post", 
 		data: form.serialize(), 
 		success: callback,
-		error: function(jqXHR, textStatus, errorThrown) {
-		    $().flash_notice(textStatus + ": " + errorThrown);
-		}
+		error: error
 	    });
 	    return false;
 	};
@@ -745,113 +748,325 @@ jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
     }
     
     var initializeModelUpdater = function() {
-	var form = $("#upload-model-form");
-	form.validate({
-	    rules: {
-		"new_version[uploaded_body]": {
-		    "required": true
-		},
-		"new_version[description]": "required", 
-		"new_version[name_of_new_child]": {
-		    "required": "#fork_child:checked"
-		}
-	    }, 
-	    
-
-	});
-	
-	
-	
-	
-	form.find('input[type="file"]').bind("change", function() {
-	    form.validate().element(this);
-	})
-	
-	$("#fork_overwrite").bind("change", function(e) {
-	    form.validate().element("#new_version_name_of_new_child");
-	});
+    	var form = $("#upload-model-form");
+    	form.validate({
+    	    rules: {
+    		"new_version[uploaded_body]": {
+    		    "required": true
+    		},
+    		"new_version[description]": "required", 
+    		"new_version[name_of_new_child]": {
+    		    "required": "#fork_child:checked"
+    		}
+    	    }, 
+    	    
+    
+    	});
+    	
+    	
+    	
+    	
+    	form.find('input[type="file"]').bind("change", function() {
+    	    form.validate().element(this);
+    	})
+    	
+    	$("#fork_overwrite").bind("change", function(e) {
+    	    form.validate().element("#new_version_name_of_new_child");
+    	});
     };
     
     var initializeCollaboration = function() {
-
-	if ($("li#add-collaborator").length > 0) {
-	    var collaboration_options;
-	    $.get('/collaborator_types.json', function(data) {
-		collaboration_options = data.map(function(o) { 
-		    return "<option value='" + o.collaborator_type.id + "'>"+ o.collaborator_type.name  + "</option>"  ;
-		}).join("\n");
-	    });
-	}
-
-	var node_id = $("#id").val();
-
-	$("li#add-collaborator").bind("click", function(e) {
-
-            $('<li class="added-collaborator"><input class="person-complete" type="text" size="40" placeholder="Collaborator name" name="name" /><select><option></option>\n' + collaboration_options + '</select></li>').insertBefore('#add-collaborator');
-
-	    if ($("li#save-collaborators").length == 0)
-	    {
-		$('<li id="save-collaborators"><input id="save-collaborators-button" type="button" value="Save new collaborators" /></li>').insertAfter('#add-collaborator');
-
-		$("#save-collaborators-button").bind("click", function(e) {
-		    $(".added-collaborator").each( function(index, item) { 
-			var collaborator_name = item.children[0].value;
-			var collaborator_type_id = item.children[1].value;
-
-			$.post('/collaborations/create',
-			       {
-				   node_id: node_id,
-				   person_name: collaborator_name,
-				   collaborator_type_id: collaborator_type_id,
-				   format: 'json'
-			       },
-			       function(data) {
-				   alert(data['message']);
-			       });
-		    });
-		});
-	    }
-
-	    $('.person-complete').autocomplete('/people/complete_people');
-
-	});
-
-	$("#remove-collaboration").bind("click", function(e) {	
-
-	    $.post('/collaborations/destroy',
-		   {
-		       node_id: node_id,
-		       format: 'json'
-		   },
-		   function(data) {
-		       if (data['message'] == 'ok')
-			   {
-			       window.location.reload();
-			   }
-		       else
-			   {
-			       alert(data['message']);
-			   }
-		   });
-	});
+    
+    	if ($("li#add-collaborator").length > 0) {
+    	    var collaboration_options;
+    	    $.get('/collaborator_types.json', function(data) {
+    		collaboration_options = data.map(function(o) { 
+    		    return "<option value='" + o.collaborator_type.id + "'>"+ o.collaborator_type.name  + "</option>"  ;
+    		}).join("\n");
+    	    });
+    	}
+    
+    	var node_id = $("#id").val();
+    	
+    	
+        var add_collaborator_form = $(".collaborators form.popup_form");
+        
+        add_collaborator_form.find(".complete").autocomplete('/people/complete_people');
+        
+        var open_form_button = $(".collaborators #add-collaborator");
+        var close_form_button = add_collaborator_form.find(".close_form");
+        var form_opened = false;
+        function open_form() {
+            if(form_opened) {
+                return;
+            }
+            var open_form_offset = open_form_button.position();
+            add_collaborator_form.css("left", open_form_offset.left + "px");
+            add_collaborator_form.css("top", open_form_offset.top + "px");
+            add_collaborator_form.show();
+            form_opened = true;
+        }
+        function close_form() {
+            if(!form_opened) {
+                return;
+            }
+            add_collaborator_form.hide();
+            add_collaborator_form.find('input:not([type="submit"], [type="button"], [type="hidden"]), textarea').removeAttr('value').removeAttr('checked');
+            form_opened = false;
+            
+        }
+        open_form_button.click(function() {
+            open_form();
+            return false;
+        });
+        
+        close_form_button.click(function() {
+            close_form();
+            return false;
+        });
+        
+        /*
+        $("#add_tag").click(function() {
+            add_tag_form.submit(createAJAXFormReturningHTMLHandler(function(data, textStatus, jqXHR) {
+                close_tag_form();
+                tag_cloud.replaceWith(data);
+                tag_cloud = container.find(".tag_cloud");
+                loadHoverHandler();
+            }));
+            
+        });
+    	
+    	*/
+    /*
+    	$("li#add-collaborator").bind("click", function(e) {
+    
+                $('<li class="added-collaborator"><input class="person-complete" type="text" size="40" placeholder="Collaborator name" name="name" /><select><option></option>\n' + collaboration_options + '</select></li>').insertBefore('#add-collaborator');
+    
+    	    if ($("li#save-collaborators").length == 0)
+    	    {
+    		$('<li id="save-collaborators"><input id="save-collaborators-button" type="button" value="Save new collaborators" /></li>').insertAfter('#add-collaborator');
+    
+    		$("#save-collaborators-button").bind("click", function(e) {
+    		    $(".added-collaborator").each( function(index, item) { 
+    			var collaborator_name = item.children[0].value;
+    			var collaborator_type_id = item.children[1].value;
+    
+    			$.post('/collaborations/create',
+    			       {
+    				   node_id: node_id,
+    				   person_name: collaborator_name,
+    				   collaborator_type_id: collaborator_type_id,
+    				   format: 'json'
+    			       },
+    			       function(data) {
+    				   alert(data['message']);
+    			       });
+    		    });
+    		});
+    	    }
+    
+    	    $('.person-complete').autocomplete('/people/complete_people');
+    
+    	});
+    */
+        $("li#add-collaborator").click(function(e) {
+            
+        });
+        
+    	$("#remove-collaboration").bind("click", function(e) {	
+    
+    	    $.post('/collaborations/destroy',
+    		   {
+    		       node_id: node_id,
+    		       format: 'json'
+    		   },
+    		   function(data) {
+    		       if (data['message'] == 'ok')
+    			   {
+    			       window.location.reload();
+    			   }
+    		       else
+    			   {
+    			       alert(data['message']);
+    			   }
+    		   });
+    	});
     };
 
+
+    var initializeTagCloud = function() {
+        $(".tag_cloud_container").each(function() {
+            var container = $(this);
+            var tag_cloud = $(this).find(".tag_cloud");
+            container.find(".complete").autocomplete('/tags/complete_tags', {} );
+            function appearTagInfo() {
+                var tag = $(this);
+                var tag_info = tag.find("div.tag_info");
+                var tag_offset = tag.position();
+                tag_info.css("top", (tag_offset.top + tag.outerHeight()) + "px");
+                console.log(tag_info.width());
+                
+                if(tag_offset.left + tag_info.outerWidth() > tag.offsetParent().width()) {
+                    tag_info.css("left", "auto");
+                    tag_info.css("right", "0px");
+                } else {
+                    tag_info.css("left", tag_offset.left + "px");
+                    tag_info.css("right", "auto");
+                }
+                tag_info.show();
+                
+            }
+            function disappearTagInfo() {
+                $(this).find("div.tag_info").hide();
+            }
+            
+            function loadHoverHandler() {
+                tag_cloud.find("div.tag").hoverIntent(appearTagInfo, disappearTagInfo);
+            }
+            loadHoverHandler();
+            
+            var add_tag_form = $(".tag_cloud_container .add_tag_form");
+            var open_add_tag_form = $("#open_add_tag_form");
+            var close_add_tag_form = $("#close_add_tag_form");
+            var tag_form_opened = false;
+            function open_tag_form() {
+                if(tag_form_opened) {
+                    return;
+                }
+                var tag_offset = open_add_tag_form.position();
+                add_tag_form.css("left", tag_offset.left + "px");
+                add_tag_form.css("top", tag_offset.top + "px");
+                add_tag_form.show();
+                tag_form_opened = true;
+            }
+            function close_tag_form() {
+                if(!tag_form_opened) {
+                    return;
+                }
+                add_tag_form.hide();
+                add_tag_form.find('input:not([type="submit"], [type="button"], [type="hidden"]), textarea').removeAttr('value').removeAttr('checked');
+                tag_form_opened = false;
+                
+            }
+            open_add_tag_form.click(function() {
+                open_tag_form();
+                return false;
+            });
+            
+            close_add_tag_form.click(function() {
+                close_tag_form();
+                return false;
+            });
+            $("#add_tag").click(function() {
+                add_tag_form.submit(createAJAXFormReturningHTMLHandler(function(data, textStatus, jqXHR) {
+                    close_tag_form();
+                    tag_cloud.replaceWith(data);
+                    tag_cloud = container.find(".tag_cloud");
+                    loadHoverHandler();
+                }));
+                
+            });
+            container.on("click", ".tag_delete_button", function() {
+                $(this).parents("form.tag_delete_form").submit();
+                return false;
+            });
+            
+            container.on("submit", ".tag_delete_form", function(e) {
+                console.log("yes");
+                var form = $(this);
+                $.ajax({
+                    url: form.attr("action"),
+                    dataType: "json",  
+                    type: "post", 
+                    data: form.serialize(), 
+                    success: function(data, textStatus, jqXHR) {
+                        $().flash_notice(data.message);
+                        form.parents(".tag").remove();
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        $().flash_notice(textStatus + ": " + errorThrown);
+                    }
+                });
+                return false;
+            });
+        });
+    };
+    
+    
+    
+    var initializeRecommendations = function() {
+        var attachRecommendationListeners = function(container) {
+            var counter_container = container.find("#rec_counter_container")
+            var counter = container.find("#rec_counter");
+            var recommendations = container.find("#recommendations");
+            var showRecs = function() {
+                var offset = container.position();
+                recommendations.css("left", (offset.left) + "px");
+                recommendations.css("top", (offset.top + container.innerHeight() - 2) + "px");
+                recommendations.show();
+            };
+            var hideRecs = function() {
+                recommendations.hide();
+            };
+            
+            var count = parseInt(counter.text(), 10);
+            if(count > 0) {
+                counter_container.hoverIntent(showRecs, hideRecs);                
+            }
+            
+            
+            
+            var add_recommendation_button = container.find("#add_recommendation");
+            
+            add_recommendation_button.click(function(e) {
+               var add_recommendation_container = $("#add_recommendation_container");
+               add_recommendation_container.hide();
+               var success = function(data, textStatus, jqXHR) {
+                   container.replaceWith(data);
+                   attachRecommendationListeners($("#rec_container"));
+                   $().flash_notice("Your recommendation has been added");
+               };
+               var error = function(jqXHR, textStatus, errorThrown) {
+                    $().flash_notice(textStatus + ": " + errorThrown);
+                    add_recommendation_container.show();
+               };   
+               var url = add_recommendation_button.attr("href");
+               $.ajax({
+                    url: url,
+                    dataType: "html",  
+                    type: "post", 
+                    success: success,
+                    error: error
+                });
+               return false;
+            });
+            
+        }
+        
+        attachRecommendationListeners($("#rec_container"));
+    };
+
+
+    
+    
     function initialize() {
-	initializeModelListDataTable();
-	initializeProjectsTable();
-	initializeStyledFileInput();
-	initializeTabsOnElement("model_tabs");
-	initializeTabsOnElement("group_tabs");
-	initializeSearchTabs();
-	initializeGroupInvitationPersonSelector();
-	initializeModelClickToLoad();
-	initializeModelPermissionsChanger();
-	initializeHeaderLoginForm();
-	initializeNewCommentForm();
-	initializeTagEditor();
-	initializeModelUpdater();
-	initializeIEPlaceholder();
-	initializeCollaboration();
+    	initializeModelListDataTable();
+    	initializeProjectsTable();
+    	initializeStyledFileInput();
+    	initializeTabsOnElement("model_tabs");
+    	initializeTabsOnElement("group_tabs");
+    	initializeSearchTabs();
+    	initializeGroupInvitationPersonSelector();
+    	initializeModelClickToLoad();
+    	initializeModelPermissionsChanger();
+    	initializeHeaderLoginForm();
+    	initializeNewCommentForm();
+    	initializeTagEditor();
+    	initializeModelUpdater();
+    	initializeIEPlaceholder();
+    	initializeCollaboration();
+    	initializeTagCloud();
+    	initializeRecommendations();
     };
 
     $(document).ready(initialize);
