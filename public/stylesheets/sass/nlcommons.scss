@@ -759,6 +759,10 @@ input[type=text], input[type=password] {
   //color: $color; 
    @include serif-font();
    line-height: 16px;
+   height: 16px;&.highlight {
+    background-color: $your_news_color;
+    
+  }
    @include border-radius($input-radius);
    border: 1px solid $color;
    padding: 2px;
@@ -781,6 +785,12 @@ input[type=text], input[type=password] {
    }
    &:focus.error {
       outline-color: red;
+   }
+   &.highlight {
+    background-color: $your_news_color;
+   }
+   &.highlight:focus {
+     //@include box-shadow(-1px 1px 4px 1px lighten($color, 20%) inset, 0px 0px 4px 2px lighten($your_news_color, 0%));
    }
    &.placeholder {
       color: lighten(black, 60%);
@@ -1135,7 +1145,6 @@ table.simple_table {
 
 
 
-$your_news_color: rgb(250, 247, 157);
 .news {
    font-size: 0px;
    
@@ -1249,13 +1258,16 @@ $your_news_color: rgb(250, 247, 157);
 	 }
       }
       .news_more {
-	 text-align: center;
-	 margin: 4px;
-	 font-size: 15px;
+      	text-align: center;
+      	margin: 4px;
+      	font-size: 15px;
       }
       .news_empty {
-	 margin: 4px;
-	 font-size: 15px;
+	      margin: 4px;
+	      font-size: 15px;
+        p {
+          margin: 4px 0px;
+        }
       }
    }
 }

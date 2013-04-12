@@ -1,47 +1,6 @@
 // Place your application-specific JavaScript functions and classes here
 // This file is automatically included by javascript_include_tag :defaults
 
-(function($) {
-    var queue = [];
-    var flash_element, width;
-    var running = false;
-    var display_next = function() {
-	if(queue.length >= 1) {
-	    running = true;
-	    flash_element.text(queue[0]);
-	    flash_element.animate(
-		{
-		    right: "0px"
-		},
-		600
-	    ).delay(
-		5000
-	    ).animate(
-		{
-		    right: "-" + width + "px"
-		},
-		{
-		    duration: 600,
-		    complete: function() {
-			queue.shift();
-			display_next();
-		    }
-		}
-	    );
-	} else {
-	    running = false;
-	}
-    };
-
-    $.fn.flash_notice = function(text) {
-	flash_element = $("#flash_notice");
-	width = flash_element.innerWidth();
-	queue.push(text);
-	if(!running) {
-	    display_next();
-	}
-    };
-})(jQuery);
 
 // Datatable sort for date modified column
 // Numerical sort where the number to sort by is enclosed in the first span tag with class "hidden_elapsed_time"
@@ -835,23 +794,73 @@ jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
 		   });
 	});
     };
+    
+    var initializeFlashNotice = function() {
+        var queue = [];
+        var flash_element, width;
+        var running = false;
+        var display_next = function() {
+            if(queue.length >= 1) {
+                running = true;
+                flash_element.text(queue[0]);
+                flash_element.animate(
+                    {right: "0px"}, 600
+                ).delay(5000
+                ).animate(
+                    {right: "-" + width + "px"},
+                    {
+                        duration: 600,
+                        complete: function() {
+                            queue.shift();
+                            display_next();
+                        }
+                    }
+                );
+            } else {
+                running = false;
+            }
+        }
+        $.fn.flash_notice = function(text) {
+            flash_element = $("#flash_notice");
+            width = flash_element.innerWidth();
+            queue.push(text);
+            if(!running) {
+                display_next();
+            }
+        }
+    };
+     
+    var initializeAlreadyRegisteredButton = function() {
+        loginButton = $("#login_to_the_commons");
+        loginButton.click(function() {
+            //Use animate({opacity: 1}, ) to delay the animation instead of delay since delay cannot be stopped, even by stop()
+            //If we used the unstoppable delay, there would be problems if the user clicked the login button while the removeClass
+            //animation was still occuring
+            $("#email_address").stop(true, true).addClass("highlight").focus().animate({opacity: 1}, 2000).removeClass("highlight", 2000);
+            
+            //Return false so we scroll to the top of the page rather than just to the input field
+            return false;
+        });
+    };
 
     function initialize() {
-	initializeModelListDataTable();
-	initializeProjectsTable();
-	initializeStyledFileInput();
-	initializeTabsOnElement("model_tabs");
-	initializeTabsOnElement("group_tabs");
-	initializeSearchTabs();
-	initializeGroupInvitationPersonSelector();
-	initializeModelClickToLoad();
-	initializeModelPermissionsChanger();
-	initializeHeaderLoginForm();
-	initializeNewCommentForm();
-	initializeTagEditor();
-	initializeModelUpdater();
-	initializeIEPlaceholder();
-	initializeCollaboration();
+        initializeFlashNotice();
+    	initializeModelListDataTable();
+    	initializeProjectsTable();
+    	initializeStyledFileInput();
+    	initializeTabsOnElement("model_tabs");
+    	initializeTabsOnElement("group_tabs");
+    	initializeSearchTabs();
+    	initializeGroupInvitationPersonSelector();
+    	initializeModelClickToLoad();
+    	initializeModelPermissionsChanger();
+    	initializeHeaderLoginForm();
+    	initializeNewCommentForm();
+    	initializeTagEditor();
+    	initializeModelUpdater();
+    	initializeIEPlaceholder();
+    	initializeCollaboration();
+    	initializeAlreadyRegisteredButton();
     };
 
     $(document).ready(initialize);

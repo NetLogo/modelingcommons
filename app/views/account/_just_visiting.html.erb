@@ -1,0 +1,19 @@
+<div class="news">
+  <div class="news_list">
+    <div class="news_heading">
+      Explore The Modeling Commons
+    </div>
+    <div class="news_empty">
+      <ul>
+        <li><%= render :partial => "search/search_form" -%></li>
+        <li><p><%= link_to "Show all models", :controller => :browse, :action => :list_models -%></p></li>
+        <li><p><%= link_to "Show recent models", :controller => :browse, :action => :list_recent_models -%></p></li>
+        <li><p><%= link_to "View a random model", :controller => :browse, :action => :view_random_model -%></p></li>
+        <li><p><%= link_to "View projects", :controller => :projects -%></p></li>
+        <li><p><%= link_to "Get help", :controller => :help -%></p></li>
+        
+        
+      </ul>
+    </div>
+  </div>
+</div>
