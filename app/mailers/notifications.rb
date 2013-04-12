@@ -30,7 +30,7 @@ class Notifications < ActionMailer::Base
 
     mail(:to => @recipients,
          :bcc => @bcc,
-         :subject => subject)
+         :subject => @subject)
   end
 
   def reset_password(person)
@@ -41,7 +41,7 @@ class Notifications < ActionMailer::Base
     @subject = "[TESTING] #{@subject}" if Rails.env == 'development'
     mail(:to => @recipients,
          :bcc => @bcc,
-         :subject => subject)
+         :subject => @subject)
   end
 
   def password_reminder(person, new_password)
@@ -53,7 +53,7 @@ class Notifications < ActionMailer::Base
     @subject = "[TESTING] #{@subject}" if Rails.env == 'development'
     mail(:to => @recipients,
          :bcc => @bcc,
-         :subject => subject)
+         :subject => @subject)
   end
 
   def changed_password(person)
@@ -64,7 +64,7 @@ class Notifications < ActionMailer::Base
     @subject = "[TESTING] #{@subject}" if Rails.env == 'development'
     mail(:to => @recipients,
          :bcc => @bcc,
-         :subject => subject)
+         :subject => @subject)
   end
 
   def modified_model(nlmodel, current_author)
@@ -78,7 +78,7 @@ class Notifications < ActionMailer::Base
     @nlmodel = nlmodel
     mail(:to => @recipients,
          :bcc => @bcc,
-         :subject => subject)
+         :subject => @subject)
   end
 
   def applied_tag(people, tag)
@@ -90,7 +90,7 @@ class Notifications < ActionMailer::Base
     @tag = tag
     mail(:to => @recipients,
          :bcc => @bcc,
-         :subject => subject)
+         :subject => @subject)
   end
 
   def updated_discussion(nlmodel, current_author)
@@ -108,7 +108,7 @@ class Notifications < ActionMailer::Base
     @nlmodel = nlmodel
     mail(:to => @recipients,
          :bcc => @bcc,
-         :subject => subject)
+         :subject => @subject)
   end
 
   def invited_to_group(person, membership)
@@ -119,7 +119,7 @@ class Notifications < ActionMailer::Base
     @membership = membership
     mail(:to => @recipients,
          :bcc => @bcc,
-         :subject => subject)
+         :subject => @subject)
   end
 
   def friend_recommendation(sender, friend_email_address, node)
@@ -132,7 +132,7 @@ class Notifications < ActionMailer::Base
     @sender = sender
     mail(:to => @recipients,
          :bcc => @bcc,
-         :subject => subject)
+         :subject => @subject)
   end
 
   def recommended_message(recommender, people, model)
@@ -145,7 +145,7 @@ class Notifications < ActionMailer::Base
     @recommender = recommender
     mail(:to => @recipients,
          :bcc => @bcc,
-         :subject => subject)
+         :subject => @subject)
   end
 
   def spam_warning(node, person)
@@ -157,7 +157,7 @@ class Notifications < ActionMailer::Base
     @person = person
     mail(:to => @recipients,
          :bcc => @bcc,
-         :subject => subject)
+         :subject => @subject)
   end
 
   def upload_acknowledgement(node, person)
@@ -170,7 +170,7 @@ class Notifications < ActionMailer::Base
     @person = person
     mail(:to => @recipients,
          :bcc => @bcc,
-         :subject => subject)
+         :subject => @subject)
   end
 
   def collaboration_notice(node, person)
@@ -184,7 +184,7 @@ class Notifications < ActionMailer::Base
     @person = person
     mail(:to => @recipients,
          :bcc => @bcc,
-         :subject => subject)
+         :subject => @subject)
   end
 
 end
