@@ -2893,11 +2893,16 @@ div#register_new_user {
   overflow-x: hidden;
 }
 
+/* line 554, sass/nlcommons.scss */
+.top_info {
+  margin: 0px 4px;
+}
+
 /* 
  * Search Results Page 
  * search/search_action
  */
-/* line 560, sass/nlcommons.scss */
+/* line 564, sass/nlcommons.scss */
 #search_tabs .num-results {
   background-color: #cc0000;
   background: -webkit-gradient(radial, 25% 25%, 0, 25% 25%, 100, color-stop(0%, #ff0000), color-stop(100%, #990000));
@@ -2928,7 +2933,7 @@ div#register_new_user {
   margin-top: 3px;
   margin-bottom: 3px;
 }
-/* line 581, sass/nlcommons.scss */
+/* line 585, sass/nlcommons.scss */
 #search_tabs .num-results.empty {
   background-color: #705c5c;
   background: -webkit-gradient(radial, 25% 25%, 0, 25% 25%, 100, color-stop(0%, #8c7373), color-stop(100%, #544545));
@@ -2944,12 +2949,12 @@ div#register_new_user {
  * One Group Page
  * membership/one_group
  */
-/* line 594, sass/nlcommons.scss */
+/* line 598, sass/nlcommons.scss */
 .grouplist img {
   height: 30px;
   vertical-align: middle;
 }
-/* line 599, sass/nlcommons.scss */
+/* line 603, sass/nlcommons.scss */
 .grouplist li {
   margin-top: 4px;
   margin-bototm: 4px;
@@ -2959,7 +2964,7 @@ div#register_new_user {
  * Admin view all actions
  * admin/view_all_people
  */
-/* line 611, sass/nlcommons.scss */
+/* line 615, sass/nlcommons.scss */
 .actions_table_container {
   overflow: scroll;
 }
@@ -2968,21 +2973,21 @@ div#register_new_user {
  * Group people selector
  * membership/_invite
  */
-/* line 622, sass/nlcommons.scss */
+/* line 626, sass/nlcommons.scss */
 table#people_adder {
   width: 100%;
 }
-/* line 624, sass/nlcommons.scss */
+/* line 628, sass/nlcommons.scss */
 table#people_adder td {
   width: 50%;
   vertical-align: top;
 }
-/* line 627, sass/nlcommons.scss */
+/* line 631, sass/nlcommons.scss */
 table#people_adder td > div {
   vertical-align: baseline;
 }
 
-/* line 634, sass/nlcommons.scss */
+/* line 638, sass/nlcommons.scss */
 .selectable_person {
   background-color: #e6e6e6;
   padding: 2px;
@@ -2997,18 +3002,18 @@ table#people_adder td > div {
   margin-top: 5px;
   margin-bottom: 5px;
 }
-/* line 643, sass/nlcommons.scss */
+/* line 647, sass/nlcommons.scss */
 .selectable_person img {
   vertical-align: top;
   height: 24px;
   padding-right: 10px;
 }
 
-/* line 649, sass/nlcommons.scss */
+/* line 653, sass/nlcommons.scss */
 #selected_people, #unselected_people {
   padding: 4px;
 }
-/* line 651, sass/nlcommons.scss */
+/* line 655, sass/nlcommons.scss */
 #selected_people .no_people, #unselected_people .no_people {
   text-align: center;
   font-size: 11px;
@@ -3016,17 +3021,17 @@ table#people_adder td > div {
   background-color: #e6e6e6;
 }
 
-/* line 658, sass/nlcommons.scss */
+/* line 662, sass/nlcommons.scss */
 #selected_people button.person_add {
   display: none;
 }
 
-/* line 661, sass/nlcommons.scss */
+/* line 665, sass/nlcommons.scss */
 #unselected_people button.person_remove {
   display: none;
 }
 
-/* line 664, sass/nlcommons.scss */
+/* line 668, sass/nlcommons.scss */
 .no_people label {
   width: 100%;
   display: inline-block;
@@ -3036,28 +3041,28 @@ table#people_adder td > div {
 /*
  * Globally useful styling
  */
-/* line 680, sass/nlcommons.scss */
+/* line 684, sass/nlcommons.scss */
 .hidden {
   display: none;
 }
 
-/* line 683, sass/nlcommons.scss */
+/* line 687, sass/nlcommons.scss */
 div.left-right {
   width: 100%;
   display: table;
 }
-/* line 686, sass/nlcommons.scss */
+/* line 690, sass/nlcommons.scss */
 div.left-right div.left {
   display: table-cell;
   text-align: left;
 }
-/* line 690, sass/nlcommons.scss */
+/* line 694, sass/nlcommons.scss */
 div.left-right div.right {
   display: table-cell;
   text-align: right;
 }
 
-/* line 697, sass/nlcommons.scss */
+/* line 701, sass/nlcommons.scss */
 .shadowbox > div {
   -moz-box-shadow: 0 0 10px 2px gray;
   -webkit-box-shadow: 0 0 10px 2px gray;
@@ -3072,7 +3077,7 @@ div.left-right div.right {
   -khtml-border-radius: 8px;
   border-radius: 8px;
 }
-/* line 703, sass/nlcommons.scss */
+/* line 707, sass/nlcommons.scss */
 .shadowbox .heading {
   -moz-border-radius: 8px 8px 0px 0px;
   -webkit-border-radius: 8px 8px 0px 0px;
@@ -3088,30 +3093,30 @@ div.left-right div.right {
   font-size: 20px;
   margin: 0px;
 }
-/* line 713, sass/nlcommons.scss */
+/* line 717, sass/nlcommons.scss */
 .shadowbox .heading .sub_heading {
   font-size: 13px;
 }
-/* line 716, sass/nlcommons.scss */
+/* line 720, sass/nlcommons.scss */
 .shadowbox .heading, .shadowbox .heading a {
   color: white;
 }
-/* line 719, sass/nlcommons.scss */
+/* line 723, sass/nlcommons.scss */
 .shadowbox .heading a {
   display: inline-block;
   width: 100%;
 }
-/* line 724, sass/nlcommons.scss */
+/* line 728, sass/nlcommons.scss */
 .shadowbox .contents {
   margin: 4px;
 }
 
-/* line 729, sass/nlcommons.scss */
+/* line 733, sass/nlcommons.scss */
 .model_link img {
   height: 30px;
 }
 
-/* line 733, sass/nlcommons.scss */
+/* line 737, sass/nlcommons.scss */
 .panel, .tabs_panel {
   margin: 4px;
   border: 3px solid black;
@@ -3127,12 +3132,12 @@ div.left-right div.right {
   padding: 4px;
 }
 
-/* line 742, sass/nlcommons.scss */
+/* line 746, sass/nlcommons.scss */
 .tabs_panel {
   padding: 0px;
   overflow: hidden;
 }
-/* line 744, sass/nlcommons.scss */
+/* line 748, sass/nlcommons.scss */
 .tabs_panel > ul {
   /* 
    * Setting padding-left to inherit cancels the .content wide setting of 40px left padding for ul
@@ -3143,7 +3148,7 @@ div.left-right div.right {
 /* 
  * Text Input Field
  */
-/* line 756, sass/nlcommons.scss */
+/* line 760, sass/nlcommons.scss */
 input[type=text], input[type=password] {
   font-family: 'Muli', 'Arial', sans-serif;
   line-height: 16px;
@@ -3163,16 +3168,16 @@ input[type=text], input[type=password] {
   -o-box-shadow: -1px 1px 4px 1px #b2b2b2 inset;
   box-shadow: -1px 1px 4px 1px #b2b2b2 inset;
 }
-/* line 762, sass/nlcommons.scss */
+/* line 766, sass/nlcommons.scss */
 input[type=text].highlight, input[type=password].highlight {
   background-color: #faf79d;
 }
-/* line 772, sass/nlcommons.scss */
+/* line 776, sass/nlcommons.scss */
 input[type=text].error, input[type=password].error {
   color: red;
   border-color: red;
 }
-/* line 778, sass/nlcommons.scss */
+/* line 782, sass/nlcommons.scss */
 input[type=text]:focus, input[type=password]:focus {
   outline: none;
   -moz-box-shadow: -1px 1px 4px 1px #b2b2b2 inset, 0px 0px 4px 2px #6899d3;
@@ -3180,27 +3185,27 @@ input[type=text]:focus, input[type=password]:focus {
   -o-box-shadow: -1px 1px 4px 1px #b2b2b2 inset, 0px 0px 4px 2px #6899d3;
   box-shadow: -1px 1px 4px 1px #b2b2b2 inset, 0px 0px 4px 2px #6899d3;
 }
-/* line 783, sass/nlcommons.scss */
+/* line 787, sass/nlcommons.scss */
 input[type=text].error:focus, input[type=password].error:focus {
   -moz-box-shadow: -1px 1px 4px 1px #b2b2b2 inset, 0px 0px 4px 2px #ff6666;
   -webkit-box-shadow: -1px 1px 4px 1px #b2b2b2 inset, 0px 0px 4px 2px #ff6666;
   -o-box-shadow: -1px 1px 4px 1px #b2b2b2 inset, 0px 0px 4px 2px #ff6666;
   box-shadow: -1px 1px 4px 1px #b2b2b2 inset, 0px 0px 4px 2px #ff6666;
 }
-/* line 786, sass/nlcommons.scss */
+/* line 790, sass/nlcommons.scss */
 input[type=text]:focus.error, input[type=password]:focus.error {
   outline-color: red;
 }
-/* line 789, sass/nlcommons.scss */
+/* line 793, sass/nlcommons.scss */
 input[type=text].highlight, input[type=password].highlight {
   background-color: #faf79d;
 }
-/* line 795, sass/nlcommons.scss */
+/* line 799, sass/nlcommons.scss */
 input[type=text].placeholder, input[type=password].placeholder {
   color: #999999;
 }
 
-/* line 799, sass/nlcommons.scss */
+/* line 803, sass/nlcommons.scss */
 textarea {
   font-family: 'Muli', 'Arial', sans-serif;
   -moz-border-radius: 5px;
@@ -3218,12 +3223,12 @@ textarea {
   -o-box-shadow: -1px 1px 4px 1px #b2b2b2 inset;
   box-shadow: -1px 1px 4px 1px #b2b2b2 inset;
 }
-/* line 809, sass/nlcommons.scss */
+/* line 813, sass/nlcommons.scss */
 textarea.error {
   color: red;
   border-color: red;
 }
-/* line 814, sass/nlcommons.scss */
+/* line 818, sass/nlcommons.scss */
 textarea:focus {
   outline: none;
   -moz-box-shadow: -1px 1px 4px 1px #b2b2b2 inset, 0px 0px 4px 2px #6899d3;
@@ -3231,14 +3236,14 @@ textarea:focus {
   -o-box-shadow: -1px 1px 4px 1px #b2b2b2 inset, 0px 0px 4px 2px #6899d3;
   box-shadow: -1px 1px 4px 1px #b2b2b2 inset, 0px 0px 4px 2px #6899d3;
 }
-/* line 819, sass/nlcommons.scss */
+/* line 823, sass/nlcommons.scss */
 textarea.error:focus {
   -moz-box-shadow: -1px 1px 4px 1px #b2b2b2 inset, 0px 0px 4px 2px #ff6666;
   -webkit-box-shadow: -1px 1px 4px 1px #b2b2b2 inset, 0px 0px 4px 2px #ff6666;
   -o-box-shadow: -1px 1px 4px 1px #b2b2b2 inset, 0px 0px 4px 2px #ff6666;
   box-shadow: -1px 1px 4px 1px #b2b2b2 inset, 0px 0px 4px 2px #ff6666;
 }
-/* line 822, sass/nlcommons.scss */
+/* line 826, sass/nlcommons.scss */
 textarea:focus.error {
   outline-color: red;
 }
@@ -3246,7 +3251,7 @@ textarea:focus.error {
 /*
  * Buttons
  */
-/* line 830, sass/nlcommons.scss */
+/* line 834, sass/nlcommons.scss */
 button, input[type=button], input[type=submit], label.file_label {
   color: black;
   font-family: 'Muli', 'Arial', sans-serif;
@@ -3398,7 +3403,7 @@ button.selected[disabled], input[type=button].selected[disabled], input[type=sub
   -pie-background: linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
   background: linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
 }
-/* line 839, sass/nlcommons.scss */
+/* line 843, sass/nlcommons.scss */
 button div.ui-icon, input[type=button] div.ui-icon, input[type=submit] div.ui-icon, label.file_label div.ui-icon {
   margin-top: 1px;
   margin-bottom: 1px;
@@ -3406,14 +3411,14 @@ button div.ui-icon, input[type=button] div.ui-icon, input[type=submit] div.ui-ic
   display: inline-block;
 }
 
-/* line 849, sass/nlcommons.scss */
+/* line 853, sass/nlcommons.scss */
 label.file_label {
   display: inline-block;
   position: relative;
   overflow: hidden;
   vertical-align: middle;
 }
-/* line 853, sass/nlcommons.scss */
+/* line 857, sass/nlcommons.scss */
 label.file_label input[type=file] {
   opacity: 0;
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
@@ -3426,7 +3431,7 @@ label.file_label input[type=file] {
   height: 100%;
 }
 
-/* line 867, sass/nlcommons.scss */
+/* line 871, sass/nlcommons.scss */
 .error {
   color: red;
 }
@@ -3434,12 +3439,12 @@ label.file_label input[type=file] {
 /*
  * DataTables Styling
  */
-/* line 875, sass/nlcommons.scss */
+/* line 879, sass/nlcommons.scss */
 .dataTables_wrapper div.ui-icon {
   display: inline-block;
   vertical-align: top;
 }
-/* line 880, sass/nlcommons.scss */
+/* line 884, sass/nlcommons.scss */
 .dataTables_wrapper .dataTables_paginate button {
   color: black;
   font-family: 'Muli', 'Arial', sans-serif;
@@ -3628,19 +3633,19 @@ label.file_label input[type=file] {
   -pie-background: linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
   background: linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
 }
-/* line 895, sass/nlcommons.scss */
+/* line 899, sass/nlcommons.scss */
 .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter {
   display: inline-block;
   margin-left: 10px;
   font-size: 15px;
 }
-/* line 900, sass/nlcommons.scss */
+/* line 904, sass/nlcommons.scss */
 .dataTables_wrapper .top, .dataTables_wrapper .bottom, .dataTables_wrapper .datatable {
   margin-top: 4px;
   margin-bottom: 4px;
 }
 
-/* line 907, sass/nlcommons.scss */
+/* line 911, sass/nlcommons.scss */
 .dataTables {
   width: 100%;
   border-bottom: 1px solid black;
@@ -3656,11 +3661,11 @@ label.file_label input[type=file] {
   border-radius: 8px;
   overflow: hidden;
 }
-/* line 919, sass/nlcommons.scss */
+/* line 923, sass/nlcommons.scss */
 .dataTables > thead tr {
   font-family: 'Muli', 'Arial', sans-serif;
 }
-/* line 921, sass/nlcommons.scss */
+/* line 925, sass/nlcommons.scss */
 .dataTables > thead tr th {
   color: black;
   font-family: 'Muli', 'Arial', sans-serif;
@@ -3874,127 +3879,127 @@ label.file_label input[type=file] {
   -pie-background: linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
   background: linear-gradient(#9e9e9e 35%, #919191 45%, #9e9e9e 85%);
 }
-/* line 932, sass/nlcommons.scss */
+/* line 936, sass/nlcommons.scss */
 .dataTables > thead tr th div.ui-icon {
   margin-top: 2px;
   margin-bottom: 2px;
 }
-/* line 948, sass/nlcommons.scss */
+/* line 952, sass/nlcommons.scss */
 .dataTables > tbody tr:nth-child(even) {
   background-color: #dee9f6;
 }
-/* line 951, sass/nlcommons.scss */
+/* line 955, sass/nlcommons.scss */
 .dataTables > tbody td {
   padding: 3px;
 }
-/* line 955, sass/nlcommons.scss */
+/* line 959, sass/nlcommons.scss */
 .dataTables span.hidden_elapsed_time {
   display: none;
 }
 
-/* line 959, sass/nlcommons.scss */
+/* line 963, sass/nlcommons.scss */
 table.model_list_datatable table {
   width: 100%;
 }
-/* line 961, sass/nlcommons.scss */
+/* line 965, sass/nlcommons.scss */
 table.model_list_datatable table td {
   height: 30px;
 }
-/* line 963, sass/nlcommons.scss */
+/* line 967, sass/nlcommons.scss */
 table.model_list_datatable table td:first-child {
   padding-left: 4px;
   padding-right: 4px;
   width: 30px;
   min-width: 30px;
 }
-/* line 969, sass/nlcommons.scss */
+/* line 973, sass/nlcommons.scss */
 table.model_list_datatable table td img {
   vertical-align: top;
   width: 30px;
   height: 30px;
 }
-/* line 974, sass/nlcommons.scss */
+/* line 978, sass/nlcommons.scss */
 table.model_list_datatable table td.buttons {
   text-align: right;
 }
 
-/* line 980, sass/nlcommons.scss */
+/* line 984, sass/nlcommons.scss */
 table.simple_table {
   border-collapse: collapse;
 }
-/* line 982, sass/nlcommons.scss */
+/* line 986, sass/nlcommons.scss */
 table.simple_table img {
   vertical-align: middle;
 }
-/* line 985, sass/nlcommons.scss */
+/* line 989, sass/nlcommons.scss */
 table.simple_table th {
   font-weight: bold;
   padding-left: 5px;
   padding-right: 5px;
 }
-/* line 990, sass/nlcommons.scss */
+/* line 994, sass/nlcommons.scss */
 table.simple_table td {
   border: 1px solid;
   padding: 5px;
 }
 
-/* line 996, sass/nlcommons.scss */
+/* line 1000, sass/nlcommons.scss */
 .highlight {
   background-color: #ff0;
 }
 
-/* line 1001, sass/nlcommons.scss */
+/* line 1005, sass/nlcommons.scss */
 #projects_table {
   width: 100%;
 }
-/* line 1002, sass/nlcommons.scss */
+/* line 1006, sass/nlcommons.scss */
 #projects_table thead {
   display: none;
 }
-/* line 1006, sass/nlcommons.scss */
+/* line 1010, sass/nlcommons.scss */
 #projects_table tr {
   padding: 8px;
   float: left;
   border-bottom: 1px solid #04346c;
 }
-/* line 1010, sass/nlcommons.scss */
+/* line 1014, sass/nlcommons.scss */
 #projects_table tr td {
   width: 300px;
   display: block;
 }
-/* line 1016, sass/nlcommons.scss */
+/* line 1020, sass/nlcommons.scss */
 #projects_table .project h1, #projects_table .project h2, #projects_table .project p, #projects_table .project li {
   font-family: 'Muli', 'Arial', sans-serif;
 }
-/* line 1019, sass/nlcommons.scss */
+/* line 1023, sass/nlcommons.scss */
 #projects_table .project h1 {
   margin: 4px 0px;
   text-align: center;
   font-size: 18px;
 }
-/* line 1024, sass/nlcommons.scss */
+/* line 1028, sass/nlcommons.scss */
 #projects_table .project h2 {
   margin: 0px;
   font-size: 16px;
   line-height: 40px;
   height: 40px;
 }
-/* line 1029, sass/nlcommons.scss */
+/* line 1033, sass/nlcommons.scss */
 #projects_table .project h2 img {
   vertical-align: middle;
   margin-right: 5px;
   max-height: 40px;
 }
-/* line 1035, sass/nlcommons.scss */
+/* line 1039, sass/nlcommons.scss */
 #projects_table .project p {
   margin: 0px;
   font-size: 14px;
 }
-/* line 1039, sass/nlcommons.scss */
+/* line 1043, sass/nlcommons.scss */
 #projects_table .project ul {
   padding: 0px;
 }
-/* line 1041, sass/nlcommons.scss */
+/* line 1045, sass/nlcommons.scss */
 #projects_table .project ul li {
   width: 160px;
   overflow: hidden;
@@ -4002,51 +4007,51 @@ table.simple_table td {
   text-overflow: ellipsis;
   list-style-type: none;
 }
-/* line 1046, sass/nlcommons.scss */
+/* line 1050, sass/nlcommons.scss */
 #projects_table .project ul li:before {
   content: "-";
   margin: 0px 3px;
 }
-/* line 1056, sass/nlcommons.scss */
+/* line 1060, sass/nlcommons.scss */
 #projects_table .project a {
   text-decoration: none;
 }
-/* line 1058, sass/nlcommons.scss */
+/* line 1062, sass/nlcommons.scss */
 #projects_table .project a:hover {
   text-decoration: underline;
 }
-/* line 1062, sass/nlcommons.scss */
+/* line 1066, sass/nlcommons.scss */
 #projects_table .project .project_model_list {
   display: inline-block;
   vertical-align: top;
 }
-/* line 1066, sass/nlcommons.scss */
+/* line 1070, sass/nlcommons.scss */
 #projects_table .project .project_image {
   margin-bottom: 8px;
   display: inline-block;
   vertical-align: top;
 }
-/* line 1070, sass/nlcommons.scss */
+/* line 1074, sass/nlcommons.scss */
 #projects_table .project .project_image a {
   display: inline-block;
 }
-/* line 1073, sass/nlcommons.scss */
+/* line 1077, sass/nlcommons.scss */
 #projects_table .project .project_image img {
   width: 120px;
   height: 120px;
 }
 
-/* line 1084, sass/nlcommons.scss */
+/* line 1088, sass/nlcommons.scss */
 #project_page #add_model_to_project select {
   max-width: 450px;
 }
 
-/* line 1089, sass/nlcommons.scss */
+/* line 1093, sass/nlcommons.scss */
 .activity {
   width: 660px;
   float: left;
 }
-/* line 1092, sass/nlcommons.scss */
+/* line 1096, sass/nlcommons.scss */
 .activity .post {
   padding: 4px;
   margin-top: 10px;
@@ -4054,15 +4059,15 @@ table.simple_table td {
   border-bottom: 1px solid black;
   overflow: auto;
 }
-/* line 1093, sass/nlcommons.scss */
+/* line 1097, sass/nlcommons.scss */
 .activity .post a {
   text-decoration: none;
 }
-/* line 1095, sass/nlcommons.scss */
+/* line 1099, sass/nlcommons.scss */
 .activity .post a:hover {
   text-decoration: underline;
 }
-/* line 1106, sass/nlcommons.scss */
+/* line 1110, sass/nlcommons.scss */
 .activity .post .main_image {
   vertical-align: top;
   display: inline-block;
@@ -4070,21 +4075,21 @@ table.simple_table td {
   height: 80px;
   padding-right: 12px;
 }
-/* line 1111, sass/nlcommons.scss */
+/* line 1115, sass/nlcommons.scss */
 .activity .post .main_image img {
   width: 100%;
 }
-/* line 1116, sass/nlcommons.scss */
+/* line 1120, sass/nlcommons.scss */
 .activity .post .post_content {
   vertical-align: top;
   display: inline-block;
 }
-/* line 1119, sass/nlcommons.scss */
+/* line 1123, sass/nlcommons.scss */
 .activity .post .post_content .post_person {
   line-height: 30px;
   font-size: 16px;
 }
-/* line 1122, sass/nlcommons.scss */
+/* line 1126, sass/nlcommons.scss */
 .activity .post .post_content .post_person img {
   vertical-align: top;
   height: 30px;
@@ -4092,36 +4097,36 @@ table.simple_table td {
   padding-left: 5px;
   padding-right: 5px;
 }
-/* line 1131, sass/nlcommons.scss */
+/* line 1135, sass/nlcommons.scss */
 .activity .post .post_content .post_item {
   font-size: 30px;
 }
-/* line 1135, sass/nlcommons.scss */
+/* line 1139, sass/nlcommons.scss */
 .activity .post .post_content .post_date {
   font-size: 16px;
 }
-/* line 1138, sass/nlcommons.scss */
+/* line 1142, sass/nlcommons.scss */
 .activity .post .post_content .post_more {
   font-size: 10px;
 }
 
-/* line 1148, sass/nlcommons.scss */
+/* line 1152, sass/nlcommons.scss */
 .news {
   font-size: 0px;
 }
-/* line 1151, sass/nlcommons.scss */
+/* line 1155, sass/nlcommons.scss */
 .news .your_news {
   background-color: #faf79d;
 }
-/* line 1155, sass/nlcommons.scss */
+/* line 1159, sass/nlcommons.scss */
 .news a {
   text-decoration: none;
 }
-/* line 1157, sass/nlcommons.scss */
+/* line 1161, sass/nlcommons.scss */
 .news a:hover {
   text-decoration: underline;
 }
-/* line 1163, sass/nlcommons.scss */
+/* line 1167, sass/nlcommons.scss */
 .news .news_list {
   -moz-box-shadow: 0 0 10px 2px gray;
   -webkit-box-shadow: 0 0 10px 2px gray;
@@ -4137,7 +4142,7 @@ table.simple_table td {
   -khtml-border-radius: 8px;
   border-radius: 8px;
 }
-/* line 1167, sass/nlcommons.scss */
+/* line 1171, sass/nlcommons.scss */
 .news .news_list h1 {
   font-family: 'Muli', 'Arial', sans-serif;
   background-color: #04346c;
@@ -4148,7 +4153,7 @@ table.simple_table td {
   color: white;
   margin: 0px;
 }
-/* line 1178, sass/nlcommons.scss */
+/* line 1182, sass/nlcommons.scss */
 .news .news_list .news_heading {
   font-family: 'Muli', 'Arial', sans-serif;
   background-color: #04346c;
@@ -4159,15 +4164,15 @@ table.simple_table td {
   color: white;
   margin: 0px;
 }
-/* line 1188, sass/nlcommons.scss */
+/* line 1192, sass/nlcommons.scss */
 .news .news_list .news_heading .sub_heading {
   font-size: 13px;
 }
-/* line 1195, sass/nlcommons.scss */
+/* line 1199, sass/nlcommons.scss */
 .news .news_list .news_post {
   margin: 5px;
 }
-/* line 1198, sass/nlcommons.scss */
+/* line 1202, sass/nlcommons.scss */
 .news .news_list .news_post .news_image {
   width: 50px;
   height: 50px;
@@ -4176,26 +4181,26 @@ table.simple_table td {
   position: relative;
   vertical-align: top;
 }
-/* line 1204, sass/nlcommons.scss */
+/* line 1208, sass/nlcommons.scss */
 .news .news_list .news_post .news_image a {
   display: inline-block;
   width: 100%;
   height: 100%;
 }
-/* line 1208, sass/nlcommons.scss */
+/* line 1212, sass/nlcommons.scss */
 .news .news_list .news_post .news_image a.tag_image {
   background-color: #b7ceea;
 }
-/* line 1210, sass/nlcommons.scss */
+/* line 1214, sass/nlcommons.scss */
 .news .news_list .news_post .news_image a.tag_image.your_news {
   background-color: #faf79d;
 }
-/* line 1215, sass/nlcommons.scss */
+/* line 1219, sass/nlcommons.scss */
 .news .news_list .news_post .news_image img {
   width: 100%;
   height: 100%;
 }
-/* line 1219, sass/nlcommons.scss */
+/* line 1223, sass/nlcommons.scss */
 .news .news_list .news_post .news_image a.tag_overlay {
   width: 45px;
   background-image: url(/images/tag_overlay.png);
@@ -4205,7 +4210,7 @@ table.simple_table td {
   top: -4px;
   left: -4px;
 }
-/* line 1228, sass/nlcommons.scss */
+/* line 1232, sass/nlcommons.scss */
 .news .news_list .news_post .news_image a.image_overlay {
   width: auto;
   height: auto;
@@ -4213,45 +4218,45 @@ table.simple_table td {
   top: -3px;
   left: -3px;
 }
-/* line 1234, sass/nlcommons.scss */
+/* line 1238, sass/nlcommons.scss */
 .news .news_list .news_post .news_image a.image_overlay img {
   max-width: 30px;
   max-height: 30px;
 }
-/* line 1241, sass/nlcommons.scss */
+/* line 1245, sass/nlcommons.scss */
 .news .news_list .news_post .news_content {
   margin-left: 4px;
   display: inline-block;
   vertical-align: top;
   width: 406px;
 }
-/* line 1246, sass/nlcommons.scss */
+/* line 1250, sass/nlcommons.scss */
 .news .news_list .news_post .news_content .news_above {
   font-size: 11px;
 }
-/* line 1249, sass/nlcommons.scss */
+/* line 1253, sass/nlcommons.scss */
 .news .news_list .news_post .news_content .news_item {
   font-size: 15px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
-/* line 1255, sass/nlcommons.scss */
+/* line 1259, sass/nlcommons.scss */
 .news .news_list .news_post .news_content .news_below {
   font-size: 11px;
 }
-/* line 1260, sass/nlcommons.scss */
+/* line 1264, sass/nlcommons.scss */
 .news .news_list .news_more {
   text-align: center;
   margin: 4px;
   font-size: 15px;
 }
-/* line 1265, sass/nlcommons.scss */
+/* line 1269, sass/nlcommons.scss */
 .news .news_list .news_empty {
   margin: 4px;
   font-size: 15px;
 }
-/* line 1268, sass/nlcommons.scss */
+/* line 1272, sass/nlcommons.scss */
 .news .news_list .news_empty p {
   margin: 4px 0px;
 }
@@ -4260,39 +4265,39 @@ table.simple_table td {
  * Legacy Styling
  * All of this should probably be updated
  */
-/* line 1286, sass/nlcommons.scss */
+/* line 1290, sass/nlcommons.scss */
 #menubar-avatar, #logged-in-as {
   float: left;
   margin-left: 1em;
 }
 
-/* line 1291, sass/nlcommons.scss */
+/* line 1295, sass/nlcommons.scss */
 #main-menu, h1, h2, h3, #flash-notice, #logged-in-as {
   font-family: 'Muli', 'Arial', sans-serif;
   font-weight: bold;
 }
 
-/* line 1296, sass/nlcommons.scss */
+/* line 1300, sass/nlcommons.scss */
 h1, #flash-notice {
   clear: both;
 }
 
-/* line 1300, sass/nlcommons.scss */
+/* line 1304, sass/nlcommons.scss */
 h1, #flash-notice {
   font-size: 21px;
 }
 
-/* line 1304, sass/nlcommons.scss */
+/* line 1308, sass/nlcommons.scss */
 h2 {
   font-size: 17px;
 }
 
-/* line 1308, sass/nlcommons.scss */
+/* line 1312, sass/nlcommons.scss */
 .h2-explanation {
   font-size: 13px;
 }
 
-/* line 1312, sass/nlcommons.scss */
+/* line 1316, sass/nlcommons.scss */
 h3, #menu-bar {
   font-size: 15px;
 }
@@ -4302,7 +4307,7 @@ h3, #menu-bar {
     top: 3.5em;
     left: 20em;
 }*/
-/* line 1322, sass/nlcommons.scss */
+/* line 1326, sass/nlcommons.scss */
 a img {
   border: 0;
   margin: 0;
@@ -4444,7 +4449,7 @@ div ul.subsection_tabs li.tab a:hover {
 .sorting {
     background: url('../images/sort_both.jpg') no-repeat center right;
 }*/
-/* line 1472, sass/nlcommons.scss */
+/* line 1476, sass/nlcommons.scss */
 div.foreSortIcon {
   background: url("../images/sort_both.jpg") no-repeat center right;
   width: 16px;
@@ -4454,7 +4459,7 @@ div.foreSortIcon {
 }
 
 /* Autocomplete */
-/* line 1481, sass/nlcommons.scss */
+/* line 1485, sass/nlcommons.scss */
 ul.jq-ui-autocomplete {
   position: absolute;
   overflow: hidden;
@@ -4467,7 +4472,7 @@ ul.jq-ui-autocomplete {
   color: #333;
 }
 
-/* line 1492, sass/nlcommons.scss */
+/* line 1496, sass/nlcommons.scss */
 ul.jq-ui-autocomplete li {
   display: block;
   padding: .3em .5em .3em .3em;
@@ -4475,30 +4480,30 @@ ul.jq-ui-autocomplete li {
   width: 100%;
 }
 
-/* line 1499, sass/nlcommons.scss */
+/* line 1503, sass/nlcommons.scss */
 ul.jq-ui-autocomplete li.active {
   background-color: #3875d7;
   color: #fff;
 }
 
-/* line 1504, sass/nlcommons.scss */
+/* line 1508, sass/nlcommons.scss */
 .deleted {
   text-decoration: line-through;
 }
 
-/* line 1508, sass/nlcommons.scss */
+/* line 1512, sass/nlcommons.scss */
 table#new-person-form tr td {
   width: 10em;
 }
 
-/* line 1512, sass/nlcommons.scss */
+/* line 1516, sass/nlcommons.scss */
 .fieldWithErrors {
   padding: 2px;
   background-color: red;
   display: table;
 }
 
-/* line 1518, sass/nlcommons.scss */
+/* line 1522, sass/nlcommons.scss */
 #errorExplanation {
   width: 450px;
   border: 2px solid red;
@@ -4508,7 +4513,7 @@ table#new-person-form tr td {
   background-color: #f0f0f0;
 }
 
-/* line 1527, sass/nlcommons.scss */
+/* line 1531, sass/nlcommons.scss */
 #error_explanation h2 {
   text-align: left;
   font-weight: bold;
@@ -4520,18 +4525,18 @@ table#new-person-form tr td {
   color: #fff;
 }
 
-/* line 1538, sass/nlcommons.scss */
+/* line 1542, sass/nlcommons.scss */
 #error_explanation ul li {
   font-size: 12px;
   list-style: square;
 }
 
-/* line 1543, sass/nlcommons.scss */
+/* line 1547, sass/nlcommons.scss */
 tr.scaffold-row {
   border-bottom: 2px solid black;
 }
 
-/* line 1547, sass/nlcommons.scss */
+/* line 1551, sass/nlcommons.scss */
 #permission-group-reminder {
   font-style: italic;
 }

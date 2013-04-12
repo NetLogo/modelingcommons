@@ -9,11 +9,14 @@
 <% end %>
 
 <% if @the_person.nodes.present? %>
-
-<p><%= link_to "View", :controller => :account, :action => :models, :id => @the_person.id %>
-or 
-<%= link_to "download", :controller => :account, :action => :download, :id => @the_person.id %>
-<%= @the_person == @person ? 'your' : @the_person.first_name + "'s" -%> models
+<div class="top_info">
+  <p>
+    <%= link_to "View", :controller => :account, :action => :models, :id => @the_person.id %>
+    or 
+    <%= link_to "download", :controller => :account, :action => :download, :id => @the_person.id %>
+    <%= @the_person == @person ? 'your' : @the_person.first_name + "'s" -%> models
+  </p>
+</div>
 <% end %>
 
 <% if @person != @the_person %>
