@@ -1,4 +1,4 @@
-require 'spec/factories/factories'
+require File.expand_path(Rails.root + 'spec/factories/factories')
 
 Given /^a user named "([^\"]*)" "([^\"]*)" with e-mail address "([^\"]*)" and password "([^\"]*)"$/ do |first_name, last_name, email, password|
   @person = Factory.create(:person,

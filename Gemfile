@@ -31,9 +31,8 @@ gem 'zippy'
 
 group :test do
   gem "cucumber"
-  gem "cucumber-rails"
+  gem "cucumber-rails", :require => false
   gem 'factory_girl'
-  gem 'fuubar-legacy'
   gem 'rspec'
   gem 'rspec-rails'
   gem 'shoulda'
