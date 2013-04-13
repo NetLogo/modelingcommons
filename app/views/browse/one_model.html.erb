@@ -69,8 +69,7 @@
           <% if @model.people.include?(@person) %>
             <% if @person and !@person.groups.empty? %>
               <% @options_for_select = [['No group', nil]] %>
-              <% @person.groups.each {|g| @options_for_select << [g.name, g.id] } %> 
-              <br />                 
+              <% @person.groups.each {|g| @options_for_select << [g.name, g.id] } %>                
               Model group <%= select_tag("group_id", options_for_select(@options_for_select, (@model.group ? @model.group.id : 0)), :id => "group_select") %>
               | 
             <% end %>
