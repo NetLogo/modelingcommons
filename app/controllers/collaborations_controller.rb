@@ -25,6 +25,8 @@ class CollaborationsController < ApplicationController
                                           :collaborator_type_id => params[:collaborator_type_id])
         if collaboration.save
           message = "Successfully added #{collaborator.fullname} as a collaborator."
+          success = true;
+          
         else
           message = "Could not create the collaboration"
         end
@@ -37,9 +39,13 @@ class CollaborationsController < ApplicationController
     respond_to do |format| 
       format.html do
         flash[:notice] = message
-        redirect_to :back 
+        redirect_to :back
       end
-      format.json { render :json => { :message => message } }
+      if success
+        @model = @node
+        html = render_to_string(:partial => "collaborations/collaborator_list.html")
+      end
+      format.json { render :json => { :message => message, :html => html } }
     end
   end
 
@@ -56,13 +62,13 @@ class CollaborationsController < ApplicationController
         message = 'Cannot remove author collaborators'
       else
         collaboration.destroy
-        flash[:notice] = "Removed you as a collaborator"
-        message = 'ok'
+        message = "Removed you as a collaborator"
       end
     else
-      message = "Not adding '#{collaborator.fullname}', since they are already a collaborator."
+      message = "Not adding '#{@person.fullname}', since they are already a collaborator."
     end
-    render :json => { :message => message }
+    flash[:notice] = message
+    redirect_to :back
   end
 
 end

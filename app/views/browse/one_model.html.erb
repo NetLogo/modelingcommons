@@ -8,21 +8,17 @@
     <% end %>
     <div class="info_social_container">
       <div class="info_container">
-        
         <div class="collaborators">
-          <p>Written by</p>
-          <ul id="collaborator-list">
-            <% @model.collaborations.each do |collaboration| %>
-              <li><%= person_image(collaboration.person) %> <%= person_link(collaboration.person) %> (<%= collaboration.name %>)
-              <% if collaboration.person == @person and collaboration.name != 'Author' %>
-                <input type="button" value="Remove" id="remove-collaboration" />
-              <% end %>
-              </li>
-            <% end %> 
+          <h3>
+            <span id="collaborator_count"><%= pluralize(@model.collaborations.size, 'collaborator') %></span>
             <% if @model.people.include?(@person) %>
-              <li id="add-collaborator"><a href="#">Add a collaborator</a></li>
+              <span class="smaller" id="add-collaborator"><a href="#">Add a collaborator</a></span>
             <% end %>
-            <% form_for(:add_collaborator, :url => {:controller => :collaborations, :action => :create}, :html => {:class => 'popup_form'}) do |form| -%>
+          </h3>
+          
+          <%= render :partial => "/collaborations/collaborator_list" %>
+          
+          <% form_for(:add_collaborator, :url => {:controller => :collaborations, :action => :create}, :html => {:class => 'popup_form'}) do |form| -%>
               <div class="left-right"><div class="left"><h1>Add Collaborator</h1></div><div class="right"><h2><a href="#" class="close_form">Close</a></h2></div></div>
               <input type="hidden" name="node_id" value="<%= @model.id %>" />
               <p>
@@ -37,7 +33,32 @@
                 <button id="save_collaborators">Save new collaborators</button>
               </p>
             <% end -%>
-          </ul>
+        </div>
+         
+        <div class="tag_cloud_container">
+            <h3>Tags <span class="smaller"><a href="#" id="open_add_tag_form">Add tag</a></span></h3>
+            <%= render :partial => "tags/tag_cloud", :locals => {:model => @model} %>
+            <% form_for(:new_tag, :url => {:controller => :tags, :action => :create}, :html => {:class => 'add_tag_form popup_form'}) do |form| -%>
+              <div class="left-right"><div class="left"><h1>Add New Tag</h1></div><div class="right"><h2><a href="#" id="close_add_tag_form">Close</a></h2></div></div>
+              <%= hidden_field_tag :node_id, @model.id -%>
+              <p><%= text_field_tag 'new_tag[]', "", {:class => 'complete', :placeholder => "Tag name", :size => 45} %></p>
+              <p><%= text_field_tag 'new_comment[]', "", {:placeholder => "(Optional) Why tag is relevant to this model", :size => 45} %></p>
+              <p><button id="add_tag">Tag this model</button></p>
+            <% end -%>
+        </div>
+        
+        <div class="family_info">
+          <% if !@model.projects.empty? %>
+          Part of project '<%= project_link(@model.projects.first) %>'
+          <% end %>
+        
+          <% if @model.parent %>
+          Child of model <%= model_link(@model.parent) %>
+          <% end %>
+          
+          <% if not @model.children.empty? %>
+          Parent of <%= pluralize(@model.children.size, 'model') %>: <%= @model.children.map {|child| model_link(child) }.to_sentence %>
+          <% end %>
         </div>
         
         <% form_tag(url_for( :controller => :browse, :action => :set_permissions), :id => "group_permission_form") do %>
@@ -71,44 +92,11 @@
             </select>
           <% else %>
             <%if model_group_id != 0 %>
-              <%= model_group(@model) %>
+              <%= model_group(@model) %> | 
             <% end %>
-             | <%= model_visibility(@model) %> | <%= model_changeability(@model) %>
+              <%= model_visibility(@model) %> | <%= model_changeability(@model) %>
           <% end %>
         <% end %>
-        
-        <div class="family_info">
-          <% if !@model.projects.empty? %>
-          Part of project '<%= project_link(@model.projects.first) %>'
-          <% end %>
-        
-          <% if @model.parent %>
-          Child of model <%= model_link(@model.parent) %>
-          <% end %>
-          
-          <% if not @model.children.empty? %>
-          Parent of <%= pluralize(@model.children.size, 'model') %>: <%= @model.children.map {|child| model_link(child) }.to_sentence %>
-          <% end %>
-        </div>
-        
-        <div class="tag_cloud_container">
-            <h3>Tags</h3>
-            <%= render :partial => "tags/tag_cloud", :locals => {:model => @model} %>
-            <% form_for(:new_tag, :url => {:controller => :tags, :action => :create}, :html => {:class => 'add_tag_form popup_form'}) do |form| -%>
-              <div class="left-right"><div class="left"><h1>Add New Tag</h1></div><div class="right"><h2><a href="#" id="close_add_tag_form">Close</a></h2></div></div>
-              <%= hidden_field_tag :node_id, @model.id -%>
-              <p><%= text_field_tag 'new_tag[]', "", {:class => 'complete', :placeholder => "Tag name", :size => 45} %></p>
-              <p><%= text_field_tag 'new_comment[]', "", {:placeholder => "(Optional) Why tag is relevant to this model", :size => 45} %></p>
-              <p><button id="add_tag">Tag this model</button></p>
-            <% end -%>
-            <p><a href="#" id="open_add_tag_form">Add tag</a></p>
-        </div>
-        
-        <div class="netlogo_version">
-          Model was written in NetLogo <%= @model.netlogo_version %>
-        </div>
-        
-        
         
       </div>
       
@@ -128,6 +116,9 @@
     </div>
   </div>
   <div class="model_info_bottom">
+    <div class="netlogo_version">
+      Model was written in NetLogo <%= @model.netlogo_version %>
+    </div>
     <div class="actions">
       <%= link_to image_tag("download.png", :class => "inline_image", :alt => "Download the '#{@model.name}' model", :title => "Download the '#{@model.name}' model") + "Download this model", :controller => "browse", :action => "download_model", :id => @model.id %> 
       <% if @person %>

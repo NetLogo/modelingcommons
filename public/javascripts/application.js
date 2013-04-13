@@ -736,7 +736,7 @@ jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
     
     var initializeCollaboration = function() {
     
-    	if ($("li#add-collaborator").length > 0) {
+    	if ($("#add-collaborator").length > 0) {
     	    var collaboration_options;
     	    $.get('/collaborator_types.json', function(data) {
     		collaboration_options = data.map(function(o) { 
@@ -754,6 +754,8 @@ jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
         
         var open_form_button = $(".collaborators #add-collaborator");
         var close_form_button = add_collaborator_form.find(".close_form");
+        var save_collaborators_button = $("#save_collaborators");
+        
         var form_opened = false;
         function open_form() {
             if(form_opened) {
@@ -784,52 +786,53 @@ jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
             return false;
         });
         
-        /*
-        $("#add_tag").click(function() {
-            add_tag_form.submit(createAJAXFormReturningHTMLHandler(function(data, textStatus, jqXHR) {
-                close_tag_form();
-                tag_cloud.replaceWith(data);
-                tag_cloud = container.find(".tag_cloud");
-                loadHoverHandler();
-            }));
+        var updateList = function(listHTML) {
+            var newList = $(listHTML);
+            convertTo2ColumnLayout(newList, ".collaborator");
+            $("#collaborator-list").replaceWith(newList);
             
+            var collaborator_count = $(".collaborators #collaborator_count");
+            //Increment counter
+            var newText = collaborator_count.text().replace(/\d+/, function(match) {
+                return newList.find(".collaborator").size();
+            });
+            //Pluralize (don't have to worry about 1 collaborator because before we added one, there was the author (n=1))
+            if(newText.charAt(newText.length - 1) != "s") {
+                newText = newText + "s";
+            }
+            collaborator_count.text(newText);
+        }
+        
+        add_collaborator_form.submit(function(e) {
+            var form = $(this);
+            $.ajax({
+                url: form.attr("action"),
+                dataType: "json",  
+                type: "post", 
+                data: form.serialize(), 
+                success: function(data, textStatus, jqXHR) {
+                    $().flash_notice(data.message);
+                    if(data.html) {
+                        updateList(data.html);
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    $().flash_notice(textStatus + ": " + errorThrown);
+                }
+            });
+            return false;
         });
-    	
-    	*/
-    /*
-    	$("li#add-collaborator").bind("click", function(e) {
-    
-                $('<li class="added-collaborator"><input class="person-complete" type="text" size="40" placeholder="Collaborator name" name="name" /><select><option></option>\n' + collaboration_options + '</select></li>').insertBefore('#add-collaborator');
-    
-    	    if ($("li#save-collaborators").length == 0)
-    	    {
-    		$('<li id="save-collaborators"><input id="save-collaborators-button" type="button" value="Save new collaborators" /></li>').insertAfter('#add-collaborator');
-    
-    		$("#save-collaborators-button").bind("click", function(e) {
-    		    $(".added-collaborator").each( function(index, item) { 
-    			var collaborator_name = item.children[0].value;
-    			var collaborator_type_id = item.children[1].value;
-    
-    			$.post('/collaborations/create',
-    			       {
-    				   node_id: node_id,
-    				   person_name: collaborator_name,
-    				   collaborator_type_id: collaborator_type_id,
-    				   format: 'json'
-    			       },
-    			       function(data) {
-    				   alert(data['message']);
-    			       });
-    		    });
-    		});
-    	    }
-    
-    	    $('.person-complete').autocomplete('/people/complete_people');
-    
-    	});
-    */
-        $("li#add-collaborator").click(function(e) {
-            
+        
+        save_collaborators_button.click(function(e) {
+            add_collaborator_form.submit();
+            close_form();
+            return false;
+        });
+        
+        $(".collaborators").on("click", ".remove_collaborator", function(e) {
+            var form = $(this).parents("form");
+            form.submit();
+            return false;
         });
         
     	$("#remove-collaboration").bind("click", function(e) {	
@@ -941,6 +944,9 @@ jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
                     success: function(data, textStatus, jqXHR) {
                         $().flash_notice(data.message);
                         form.parents(".tag").remove();
+                        if(tag_cloud.find(".tag").size() == 0) {
+                            tag_cloud.find(".no_tags").show();
+                        }
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
                         $().flash_notice(textStatus + ": " + errorThrown);
@@ -1041,7 +1047,7 @@ jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
     };
      
     var initializeAlreadyRegisteredButton = function() {
-        loginButton = $("#login_to_the_commons");
+        var loginButton = $("#login_to_the_commons");
         loginButton.click(function() {
             //Use animate({opacity: 1}, ) to delay the animation instead of delay since delay cannot be stopped, even by stop()
             //If we used the unstoppable delay, there would be problems if the user clicked the login button while the removeClass
@@ -1053,7 +1059,30 @@ jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
         });
     };
 
-
+    var convertTo2ColumnLayout = function(container, elementSelector) {
+        
+        if(typeof(container) == "string") {
+            container = $(container);
+        }
+        var elements = container.find(elementSelector);
+        var div2cols = $("<div class=\"list-2-columns\">");
+        var column1 = $("<div class=\"column-1\">");
+        var column2 = $("<div class=\"column-2\">");
+        var numInCol1 = Math.floor((elements.size() + 1) / 2);
+        
+        elements.each(function(index, element) {
+            var theColumn;
+            if(index < numInCol1) {
+                theColumn = column1;
+            } else {
+                theColumn = column2;
+            }
+            $(element).detach().appendTo(theColumn);
+        });
+        
+        div2cols.append(column1).append(column2);
+        container.append(div2cols);
+    };
     
     
     function initialize() {
@@ -1076,6 +1105,7 @@ jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
     	initializeTagCloud();
     	initializeRecommendations();
     	initializeAlreadyRegisteredButton();
+    	convertTo2ColumnLayout("#collaborator-list", ".collaborator");
     };
 
     $(document).ready(initialize);

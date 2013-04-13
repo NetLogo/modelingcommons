@@ -8,7 +8,8 @@
         <% end %>
         <% @recommendations.each do |recommendation| %>
           <li>
-            <%= link_to person_image(recommendation.person) + recommendation.person.fullname, person_url(recommendation.person) %> recommended it <%= distance_of_time_in_words(Time.now, recommendation.created_at) -%> ago
+            <% rec_person_name = recommendation.person == @person ? "You" : recommendation.person.fullname %>
+            <%= link_to person_image(recommendation.person) + rec_person_name, person_url(recommendation.person) %> recommended it <%= distance_of_time_in_words(Time.now, recommendation.created_at) -%> ago
           </li>
         <% end %>
       </ul>

@@ -410,19 +410,13 @@ $comment-border-width: 2px;
  * Model and project page image preview/info
  */
 
-.tag_cloud_container {
-  h3 {
-    margin: 0px;
-  }
-}
 
 .tag_cloud {
   $tag-cloud-color: $nav-color;
   font-family: 'Muli';
   display: inline-block;
   
-  
-  width: 300px;
+  width: 400px;
   .tag {
     display:inline-block;
     &>a {
@@ -490,9 +484,17 @@ $comment-border-width: 2px;
   }
 }
 
-$info-height: 240px;
+$info-height: 260px;
 
 .model_info {
+  h3 {
+    margin: 0px;
+    span.smaller {
+        font-size: 12px;
+        font-weight: normal;
+      }
+  }
+  
   .actions, .collaborators {
     a {
       line-height: 20px;
@@ -503,6 +505,49 @@ $info-height: 240px;
       height: 20px;
     }
   }
+  
+  .tag_cloud_container {
+    height: 100px;
+  }
+  
+  #group_permission_form {
+    height: 22px;
+  }
+  
+  .family_info {
+    height: 22px;
+    img {
+      height: 22px;
+      vertical-align: middle;
+      padding-right: 3px;
+    }
+  }
+  
+  .collaborators {
+    height: 116px;
+    div#collaborator-list {
+      height: 93px;
+      overflow: scroll;
+      padding-left: 0px;
+      .collaborator {
+        list-style-type: none;
+        margin-bottom: 1px;
+        form {
+          display: inline;
+        }
+      }
+    }
+    .list-2-columns {
+      display: table;
+      width: 100%;
+      .column-1, .column-2 {
+        display: table-cell;
+        width: 50%;
+      }
+    }
+    
+  }
+  
   #rec_container, #rec_counter_container {
     display: inline-block;
   }
@@ -552,7 +597,7 @@ $info-height: 240px;
 
 .model_info_top {
   width: 960px - 4px;
-  padding: 0px 0px 0px 4px;
+  padding: 0px 0px 4px 4px;
   display: table;
   &>div {
     
@@ -608,7 +653,7 @@ $info-height: 240px;
 }
 
 
-$preview-height: 240px;
+$preview-height: 260px;
 #preview_info_container {
    width: 960px;
    height: $preview-height;
