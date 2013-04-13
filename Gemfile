@@ -29,23 +29,23 @@ gem 'validates_email'
 gem 'will_paginate'
 gem 'zippy'
 
-gem 'simplecov', :require => false, :group => :test
 
 group :development, :test do
-  # gem "cucumber", "1.1.0"
-  # gem "cucumber-rails", "0.3.2"
-  # gem 'factory_girl'
-  # gem 'database_cleaner'
+  gem "cucumber"
+  gem "cucumber-rails"
+  gem 'database_cleaner'
+  gem 'factory_girl'
+  gem 'fuubar-legacy' 
+  gem 'guard'
+  gem 'guard-rspec'
   gem 'pry'
   gem 'pry-nav'
   gem 'pry-remote'
-  # gem 'watir-webdriver'
-  gem 'test-unit', '1.2.3'
+  gem 'rb-fsevent'
   gem 'rspec'
   gem 'rspec-rails'
-  # gem 'shoulda'
-  # gem 'guard'
-  # gem 'guard-rspec', '~> 1.2'
-  # gem 'rb-fsevent', '~> 0.9'
-  # gem 'fuubar-legacy' 
+  gem 'shoulda'
+  gem 'simplecov', :require => false
+  gem 'test-unit', '1.2.3'
+  gem 'watir-webdriver'
 end
