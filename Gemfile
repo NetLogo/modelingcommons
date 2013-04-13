@@ -41,12 +41,14 @@ group :test do
 end
 
 group :development, :test do
+  gem 'awesome_print'
   gem 'database_cleaner'
   gem 'guard'
   gem 'guard-rspec'
   gem 'pry'
   gem 'pry-nav'
   gem 'pry-remote'
+  gem 'pry-rails'
   gem 'rb-fsevent'
   gem 'watir-webdriver'
 end

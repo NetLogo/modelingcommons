@@ -153,7 +153,11 @@ class Node < ActiveRecord::Base
 
   def bluecloth_info_tab
     logger.warn "[Node#info_tab_html] NetLogo 5!  Using textile"
-    BlueCloth.new(info_tab).to_html
+    text = BlueCloth.new(info_tab).to_html
+
+    text.gsub! /(?<!")(https?:\/\/[-\/_.~%?='\w]+\w)/ do
+      "<a target=\"_blank\" href=\"#{$1}\">#{$1}</a>"
+    end
   rescue
     logger.warn "[Node#info_tab_html] NetLogo 5!  Error with Bluecloth... using standard markup..."
     markup_info_tab
