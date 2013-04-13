@@ -22,7 +22,6 @@ gem 'diff-lcs'
 gem 'hoptoad_notifier'
 gem 'paperclip'
 gem 'pg'
-gem 'plucky'
 gem 'rack'
 gem 'rmagick'
 gem 'validates_email'
@@ -30,22 +29,24 @@ gem 'will_paginate'
 gem 'zippy'
 
 
-group :development, :test do
+group :test do
   gem "cucumber"
   gem "cucumber-rails"
-  gem 'database_cleaner'
   gem 'factory_girl'
   gem 'fuubar-legacy'
+  gem 'rspec'
+  gem 'rspec-rails'
+  gem 'shoulda'
+  gem 'simplecov', :require => false
+end
+
+group :development, :test do
+  gem 'database_cleaner'
   gem 'guard'
   gem 'guard-rspec'
   gem 'pry'
   gem 'pry-nav'
   gem 'pry-remote'
   gem 'rb-fsevent'
-  gem 'rspec'
-  gem 'rspec-rails'
-  gem 'shoulda'
-  gem 'simplecov', :require => false
-  gem 'test-unit', '1.2.3'
   gem 'watir-webdriver'
 end

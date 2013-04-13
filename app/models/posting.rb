@@ -1,6 +1,8 @@
 # Model to keep track of discussion postings
 
 class Posting < ActiveRecord::Base
+  attr_accessible :title, :body, :node_id, :is_question, :person_id, :deleted_at
+
   belongs_to :node
   belongs_to :person
 
