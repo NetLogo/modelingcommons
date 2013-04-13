@@ -1,6 +1,8 @@
 # Model to keep track of projects (i.e., collections of models)
 
 class Project < ActiveRecord::Base
+  attr_accessible :name, :person
+
   validates :name, :presence => true, :uniqueness => true
 
   has_many :node_projects

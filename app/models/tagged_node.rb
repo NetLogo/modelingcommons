@@ -1,6 +1,8 @@
 # Model to keep track of tag-node joins
 
 class TaggedNode < ActiveRecord::Base
+  attr_accessible :comment
+
   belongs_to :node
   belongs_to :tag
   belongs_to :person
