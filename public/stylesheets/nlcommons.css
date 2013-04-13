@@ -1045,7 +1045,7 @@ img#big-preview-image  {
 /* line 180, sass/_ui.everything.scss */
 .ui-tabs .ui-tabs-nav li a {
   display: inline-block;
-  min-width: 80px;
+  min-width: 100px;
   line-height: 28px;
   padding: 5px;
   text-decoration: none;
