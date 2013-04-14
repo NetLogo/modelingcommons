@@ -1,5 +1,7 @@
 <div id="your-groups-div" class="group-tab">
-  <% if @person.memberships.empty? %>
+  <% if @person.nil? %>
+  <p>You are not logged in.</p>
+  <% elsif @person.memberships.empty? %>
   <p>You are not a member of any groups.</p>
   <% else %>
 
