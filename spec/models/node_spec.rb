@@ -56,16 +56,6 @@ describe Node do
 
       n = Node.create(@valid_attributes)
       n.should be_valid
-
-      number_of_versions = n.versions.size
-
-      v = Version.create!(:node_id => n.id,
-                          :person_id => p.id, 
-                          :description => 'a description',
-                          :contents => File.read(Rails.root + 'spec/fixtures/sample.nlogo'))
-      v.should be_valid
-      n.versions.size.should == (number_of_versions + 1)
-      n.authors.first.should == p
     end
 
   end
