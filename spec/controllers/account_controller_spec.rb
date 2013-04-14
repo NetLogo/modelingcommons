@@ -9,7 +9,7 @@ describe AccountController do
   describe "new" do 
     it "should be possible to get a registration form" do 
       get :new
-      response.should render_template("account/_user_agreement")
+      response.should render_template("account/new")
     end
 
   end
