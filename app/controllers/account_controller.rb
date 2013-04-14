@@ -2,7 +2,7 @@
 
 class AccountController < ApplicationController
 
-  before_filter :require_login, :only => [:edit, :update, :logout, :tags, :mygroups]
+  before_filter :require_login, :only => [:edit, :update, :logout, :tags, :mygroups, :groups]
   before_filter :all_news, :only => [:mypage, :login]
 
   def new_front_page
