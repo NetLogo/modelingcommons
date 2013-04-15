@@ -1,7 +1,6 @@
 # Filters added to this controller apply to all controllers in the application.
 # Likewise, all the methods added will be available for all controllers.
 
-require 'RMagick'
 require 'diff/lcs'
 require 'diff/lcs/hunk'
 require 'diff/lcs/string'

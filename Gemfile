@@ -37,6 +37,7 @@ group :test do
   gem 'rspec-rails'
   gem 'shoulda'
   gem 'simplecov', :require => false
+  gem 'simplecov-rcov-text', :require => false
 end
 
 group :development, :test do
