@@ -3223,13 +3223,8 @@ div#register_new_user {
   overflow-x: hidden;
 }
 
-/* line 826, sass/nlcommons.scss */
-.top_info {
-  margin: 0px 4px;
-}
-
-/* 
- * Search Results Page 
+/*
+ * Search Results Page
  * search/search_action
  */
 /* line 836, sass/nlcommons.scss */

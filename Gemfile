@@ -28,8 +28,7 @@ gem 'validates_email'
 gem 'will_paginate'
 gem 'zippy'
 
-
-group :test do
+group :test do 
   gem "cucumber"
   gem "cucumber-rails", :require => false
   gem 'factory_girl'
