@@ -25,7 +25,7 @@ class DiscussionController < ApplicationController
           redirect_to :back, :anchor => "discussion"
         end
         format.json do 
-          @res = {:success => true, :message => 'Comment Added', :html => render_to_string(:partial => 'one_posting.html', :locals => { :posting => @posting})}
+          @res = {:success => true, :message => 'Comment Added', :html => render_to_string(:partial => 'one_posting', :layout => false, :formats => 'html', :locals => { :posting => @posting})}
           render :json => @res
         end
       end
