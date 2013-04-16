@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'mbox'
+require 'set'
 mbox = Mbox.open('/Users/reuven/Downloads/ccl-tech.mbox')
 
 community_model_authors = { }
@@ -15,6 +16,13 @@ mbox.each_with_index do |message, index|
 
     if content =~ /A model, "[^"]*?([^"\\]+)" was contributed/
       model_name = $1
+      model_name.gsub!("&amp;", "&")
+
+      if model_name !~ /nlogo$/
+        puts "\tBad model name; not a .nlogo file"
+        next
+      end
+
       puts "\t#{model_count} Model name: '#{model_name}'"
       model_count += 1
 
@@ -27,7 +35,7 @@ mbox.each_with_index do |message, index|
       if community_model_authors.has_key?(email)
         community_model_authors[email] << model_name
       else
-        community_model_authors[email] = [model_name]
+        community_model_authors[email] = Set.new([model_name])
       end
 
     else
@@ -41,8 +49,8 @@ end
 puts community_model_authors.inspect 
 community_model_authors.each do |email, models|
   puts email
-  models.each do |model|
-    puts "\t#{model}"
+  models.each_with_index do |model, index|
+    puts "\t[#{index}] #{model}"
   end
 end
 

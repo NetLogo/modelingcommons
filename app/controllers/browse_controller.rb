@@ -5,7 +5,7 @@ class BrowseController < ApplicationController
   caches_page :display_preview
 
   prepend_before_filter :log_one_action, :except => [:display_preview, :pie]
-  prepend_before_filter :get_model_from_id_param, :except => [:index, :list_models, :list_recent_models, :search, :news, :one_node, :view_random_model, :about, :model_contents, :extension, :pie]
+  prepend_before_filter :get_model_from_id_param, :except => [:index, :list_models, :list_recent_models, :search, :news, :one_node, :view_random_model, :about, :model_contents, :extension, :pie, :fail]
 
   before_filter :require_login, :only => [:set_permissions]
   before_filter :check_visibility_permissions, :only => [:one_model, :one_applet ]
@@ -131,4 +131,10 @@ class BrowseController < ApplicationController
   end
   
   
+  def fail
+    x = 10
+    y = 0
+    render :text => x/y
+  end
+
 end
