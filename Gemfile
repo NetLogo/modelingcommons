@@ -39,9 +39,12 @@ group :test do
   gem 'simplecov-rcov-text', :require => false
 end
 
-group :development, :test do
+group :development do 
   gem 'better_errors'
   gem 'binding_of_caller'
+end
+
+group :development, :test do
   gem 'awesome_print'
   gem 'database_cleaner'
   gem 'guard'
