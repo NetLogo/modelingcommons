@@ -1,0 +1,28 @@
+@import "compass/css3";
+@import "font";
+
+@mixin numeric($color: darken(red, 10%)) {
+  background-color: $color;
+  @include background(radial-gradient(25% 25%, lighten($color, 10%), darken($color, 10%)));
+  $radius: 10px;
+  $padding: 3px;
+  $top-offset: 0px;
+  color: white;
+  font-size: 12px;
+  line-height: $radius*2 + 1;
+  min-width: $radius*2 - $padding*2;
+  height: $radius*2 - $top-offset;
+  padding-top: $top-offset;
+  padding-left: $padding;
+  padding-right: $padding;
+  @include border-radius($radius*2);
+  border: 1px solid white;
+  margin-right: 4px;
+  display: inline-block;
+  vertical-align: top;
+  text-align: center;
+  &.empty {
+    background-color: desaturate($color, 90%);
+    @include background(radial-gradient(25% 25%, desaturate(lighten($color, 10%), 90%), desaturate(darken($color, 10%), 90%)));
+  }  
+}

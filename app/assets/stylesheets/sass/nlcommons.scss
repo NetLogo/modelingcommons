@@ -12,12 +12,12 @@ $blueprint-grid-width: 40px;
 @import "numeric";
 
 
-/*
+/* 
  * Overall Page Layout
  */
 
 
-/*
+/* 
  * Page background color
  * Global styling, such as default font family and color
  */
@@ -26,7 +26,7 @@ body {
    @include serif-font();
    font-size: $default-font-size;
 }
-/*
+/* 
  * Center page container
  * Blueprint column container
  */
@@ -35,7 +35,7 @@ body {
    overflow: visible;
    z-index: 0;
    position: relative;
-
+   
 }
 .container {
    overflow: hidden;
@@ -49,7 +49,7 @@ body {
 
 
 
-/*
+/* 
  * Page header, at the top of all pages
  * layouts/_page_header
  */
@@ -92,9 +92,9 @@ body {
       }
    }
    .login_flash {
-
+      
       position: relative;
-
+      
       .login_container {
 	 display: table-row;
 	 text-align: right;
@@ -127,7 +127,7 @@ body {
             }
             .login_error_container {
                max-height: 18px;
-
+               
             }
 	 }
       }
@@ -191,7 +191,7 @@ body {
 	 }
 	 height: 100%;
 	 background-color: red;
-
+	 
       }
    }
    $nav-height: 40px;
@@ -245,10 +245,10 @@ body {
 	 margin-right: 1px;
       }
       li:hover a {
-
+	 
       }
       li a {
-
+	 
       }
       height: $nav-height;
       line-height: $nav-height;
@@ -291,7 +291,7 @@ body {
 
 
 
-/*
+/* 
  * Page-specific styling
  */
 
@@ -344,8 +344,8 @@ $comment-border-width: 2px;
             width: $arrow-width;
             position: absolute;
             top: $arrow-top;
-
-
+            
+            
             div {
                width: 0px;
                height: 0px;
@@ -391,7 +391,7 @@ $comment-border-width: 2px;
 	 .question {
             font-size: .7em;
 	 }
-
+	 
       }
    }
    .deleted {
@@ -404,7 +404,7 @@ $comment-border-width: 2px;
    }
 }
 
-/*
+/* 
  * Model Page
  * browse/one_model
  * Model and project page image preview/info
@@ -717,7 +717,7 @@ $image-padding: 4px;
 	 display: table-cell;
 	 vertical-align: middle;
 	 font-size: 12px;
-
+	 
       }
    }
    a {
@@ -727,7 +727,7 @@ $image-padding: 4px;
 }
 
 
-/*
+/* 
  * Model Page
  * browse/one_model
  */
@@ -747,7 +747,7 @@ $image-padding: 4px;
    width: 938px;
    height: 500px;
    line-height: 500px;
-
+   
 }
 #model_applet {
    display: none;
@@ -762,7 +762,7 @@ $image-padding: 4px;
    padding-bottom: 10px;
    @include border-radius($tab-corner-radius);
    @include box-shadow(0 0 15px 10px gray);
-
+   
 }
 .ui-tabs #browse_applet.ui-tabs-hide {
    position: absolute;
@@ -770,15 +770,15 @@ $image-padding: 4px;
    display: block;
 }
 
-#upload-model-form {
+#upload-model-form { 
    td {
       line-height: 26px;
    }
 }
 
 
-/*
- * Code Highlighting
+/* 
+ * Code Highlighting 
  * Proc is procedure
  * browse/_browse/procedures_tab
  */
@@ -798,7 +798,7 @@ $image-padding: 4px;
 
 
 
-/*
+/* 
  * Login Page (Front Page)
  * account/login
  */
@@ -812,8 +812,8 @@ div#register_new_user {
 }
 
 
-/*
- * User Page (Front Page)
+/* 
+ * User Page (Front Page) 
  * account/mypage
  */
 #left-news-box {
@@ -828,8 +828,8 @@ div#register_new_user {
 }
 
 
-/*
- * Search Results Page
+/* 
+ * Search Results Page 
  * search/search_action
  */
 #search_tabs {
@@ -857,7 +857,7 @@ div#register_new_user {
       &.empty {
 	 background-color: desaturate(darken(red, 10%), 90%);
 	 @include background(radial-gradient(25% 25%, desaturate(red, 90%), desaturate(darken(red, 20%), 90%)));
-      }
+      }  
    }
 }
 
@@ -870,13 +870,13 @@ div#register_new_user {
    img {
       height: 30px;
       vertical-align: middle;
-
+      
    }
    li {
       margin-top: 4px;
       margin-bototm: 4px;
    }
-
+   
 }
 
 
@@ -902,7 +902,7 @@ table#people_adder {
       vertical-align: top;
       &>div {
 	 vertical-align: baseline;
-
+	 
       }
    }
 }
@@ -920,7 +920,7 @@ table#people_adder {
       vertical-align: top;
       height: $height;
       padding-right: 10px;
-   }
+   } 
 }
 #selected_people, #unselected_people {
    padding: 4px;
@@ -945,7 +945,7 @@ table#people_adder {
 
 /*
  * Globally useful styling
- */
+ */ 
 
 
 
@@ -1012,13 +1012,13 @@ div.left-right {
    @include border-radius(8px);
    @include pie-z;
    padding: 4px;
-
+   
 }
 
 .tabs_panel {
    @extend .panel;
    &>ul {
-    /*
+    /* 
      * Setting padding-left to inherit cancels the .content wide setting of 40px left padding for ul
      */
       padding-left: inherit;
@@ -1026,13 +1026,13 @@ div.left-right {
    padding: 0px;
    overflow: hidden;
 }
-/*
+/* 
  * Text Input Field
  */
 input[type=text], input[type=password] {
    @include pie;
    $color: rgb(50%, 50%, 50%);
-  //color: $color;
+  //color: $color; 
    @include serif-font();
    line-height: 16px;
    height: 16px;&.highlight {
@@ -1049,7 +1049,7 @@ input[type=text], input[type=password] {
       color: $error-color;
       border-color: $error-color;
     //@include box-shadow(-1px 1px 4px 1px lighten($error-color, 20%) inset);
-
+      
    }
    &:focus {
       outline:none;
@@ -1085,7 +1085,7 @@ textarea {
    &.error {
       color: $error-color;
       border-color: $error-color;
-
+      
    }
    &:focus {
       outline:none;
@@ -1119,7 +1119,7 @@ button, input[type=button], input[type=submit], label.file_label {
       display: inline-block;
    }
    @include border-radius($input-radius);
-
+   
 }
 
 label.file_label {
@@ -1156,15 +1156,15 @@ label.file_label {
       button {
          @include clickable($background-color: $header-color, $disabled: '.paginate_disabled_previous' '.paginate_disabled_next');
       }
-
+      
       .paginate_disabled_previous, .paginate_enabled_previous {
          div.ui-icon {
-            @extend .ui-icon-triangle-1-w;
+            @extend .ui-icon-triangle-1-w; 
          }
       }
       .paginate_disabled_next, .paginate_enabled_next {
          div.ui-icon {
-            @extend .ui-icon-triangle-1-e;
+            @extend .ui-icon-triangle-1-e; 
          }
       }
    }
@@ -1244,7 +1244,7 @@ table.model_list_datatable table {
       }
       img {
 	 vertical-align: top;
-	 width: 30px;
+	 width: 30px; 
 	 height: 30px;
       }
       &.buttons {
@@ -1322,13 +1322,13 @@ table.simple_table {
             &:before {
                content: "-";
                margin: 0px 3px;
-
+               
             }
             list-style-type: none;
-
+            
 	 }
       }
-
+      
       a {
 	 text-decoration: none;
 	 &:hover {
@@ -1347,12 +1347,12 @@ table.simple_table {
             display: inline-block;
 	 }
 	 img {
-
+            
             width: 120px;
             height: 120px;
 	 }
       }
-
+      
    }
 }
 
@@ -1377,7 +1377,7 @@ table.simple_table {
       margin-bottom: 10px;
       border-bottom: 1px solid black;
       overflow: auto;
-
+      
     //line-height: 80px;
       .main_image {
 	 vertical-align: top;
@@ -1402,18 +1402,18 @@ table.simple_table {
                padding-left: 5px;
                padding-right: 5px;
             }
-
+            
 	 }
 	 .post_item {
 	    font-size: 30px;
-
+            
 	 }
 	 .post_date {
             font-size: 16px;
 	 }
 	 .post_more {
             font-size: 10px;
-
+            
 	 }
       }
    }
@@ -1423,11 +1423,11 @@ table.simple_table {
 
 .news {
    font-size: 0px;
-
+   
    .your_news {
       background-color: $your_news_color;
    }
-
+   
    a {
       text-decoration: none;
       &:hover {
@@ -1437,7 +1437,7 @@ table.simple_table {
   //width: $sidebar-width;
   //float: left;
    .news_list {
-
+      
       @include box-shadow(0 0 10px 2px gray);
       overflow: hidden;
       h1 {
@@ -1470,7 +1470,7 @@ table.simple_table {
       @include border-radius($tab-corner-radius);
       .news_post {
 	 margin: 5px;
-
+	 
 	 .news_image {
             width: 50px;
             height: 50px;
@@ -1551,7 +1551,7 @@ table.simple_table {
 
 
 
-/*
+/* 
  * Legacy Styling
  * All of this should probably be updated
  */
@@ -1706,7 +1706,7 @@ div ul.subsection_tabs li.tab a:hover {
 }*/
 
 
-/*
+/* 
  * Old DataTables
  */
 
@@ -1824,7 +1824,7 @@ tr.scaffold-row {
    font-style: italic;
 }
 
-/*
+/* 
  * Old (New?) Menu
  */
 /*
@@ -1834,14 +1834,14 @@ div.main-menu-new {
   margin-bottom: 5px;
   background-color: red;
   float:left;
-
+  
 }
 div.main-menu-new ul {
   list-style-type: none;
   padding: 0px;
   margin: 0px;
   float:left;
-
+  
 }
 div.main-menu-new ul li {
   display: inline-block;
@@ -1863,7 +1863,7 @@ div.main-menu-new ul li.selected {
 }
 div.main-menu-new ul.left {
   float:left;
-
+  
 }
 div.main-menu-new ul.left li {
   margin-right: 1px;
