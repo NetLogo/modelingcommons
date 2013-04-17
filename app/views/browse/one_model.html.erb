@@ -122,7 +122,7 @@
       <%= link_to image_tag("download.png", :class => "inline_image", :alt => "Download the '#{@model.name}' model", :title => "Download the '#{@model.name}' model") + "Download this model", :controller => "browse", :action => "download_model", :id => @model.id %> 
       <% if @person %>
         | 
-        <%= render :partial => 'recommend/recommendations.html', :locals => {:id => @model.id} %>
+        <%= render :partial => 'recommend/recommendations', :locals => {:id => @model.id} %>
       
         <% if !@person.spam_warning(@model) %>
           | 
