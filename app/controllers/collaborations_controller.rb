@@ -43,7 +43,7 @@ class CollaborationsController < ApplicationController
       end
       if success
         @model = @node
-        html = render_to_string(:partial => "collaborations/collaborator_list.html")
+        html = render_to_string(:partial => "collaborations/collaborator_list", :layout => false, :formats => 'html')
       end
       format.json { render :json => { :message => message, :html => html } }
     end

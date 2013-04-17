@@ -260,7 +260,7 @@ class AccountController < ApplicationController
                  ]
     respond_to do |format| 
       format.json do 
-        render :json => {:user_agreement => render_to_string(:partial => 'user_agreement.html'), :countries => @countries.map{|e| {:name => e, :priority => ['United States'].include?(e) }} }
+        render :json => {:user_agreement => render_to_string(:partial => 'user_agreement', :layout => false, :formats => 'html'), :countries => @countries.map{|e| {:name => e, :priority => ['United States'].include?(e) }} }
       end
       format.html do
         render 
@@ -552,7 +552,7 @@ class AccountController < ApplicationController
   def find_people
     query = params[:query].blank? ? "" : params[:query].downcase
     count = params[:count].blank? ? 10 : params[:count].to_i
-    render :json => Person.search(query).sort {|a, b| a.fullname.downcase <=> b.fullname.downcase}[0..count-1].map {|person| {:id => person.id, :html => render_to_string(:partial => 'selectable_person', :locals => { :person => person})}}
+    render :json => Person.search(query).sort {|a, b| a.fullname.downcase <=> b.fullname.downcase}[0..count-1].map {|person| {:id => person.id, :html => render_to_string(:partial => 'selectable_person', :layout => false, :formats => 'html', :locals => { :person => person})}}
   end
   
   def get_feed

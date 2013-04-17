@@ -33,7 +33,7 @@ class TagsController < ApplicationController
         end
       end
     end
-    html = render_to_string(:partial => "tags/tag_cloud.html", :locals => {:model => Node.find(params[:node_id])})
+    html = render_to_string(:partial => "tags/tag_cloud", :layout => false, :formats => 'html', :locals => {:model => Node.find(params[:node_id])})
     respond_to do |format|
       format.html do
         render :text => html

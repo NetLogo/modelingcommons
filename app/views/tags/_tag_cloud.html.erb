@@ -9,11 +9,11 @@
     <p class="tag_comment">&quot;<%= t.comment %>&quot;</p>
     <% end %>
     <p>Tagged by <%= person_link(t.person) %> <%= distance_of_time_in_words(Time.now, t.updated_at) -%> ago</p>
-    <% if @person and (@person.administrator? or @person == t.person) -%>
+    <% if @person and (@person.administrator? or @person == t.person) %>
       
-        <% form_tag({:controller => :tags, :action => :destroy, :id => t.id}, :class => 'tag_delete_form') do %>
-        <%= hidden_field_tag 'id', t.id -%>
-        <p><a href="#" class="tag_delete_button">Remove Tag</a></p>
+        <%= form_tag({:controller => :tags, :action => :destroy, :id => t.id}, :class => 'tag_delete_form') do %>
+          <%= hidden_field_tag 'id', t.id -%>
+          <p><a href="#" class="tag_delete_button">Remove Tag</a></p>
         <% end %>
       
     <% end %>
