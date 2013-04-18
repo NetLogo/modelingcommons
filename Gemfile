@@ -9,7 +9,6 @@ end
 source 'https://rubygems.org'
 gem "rails", "~> 3.2.13"
 
-gem "compass", "0.11.7"
 gem "country_select"
 gem "newrelic_rpm" 
 gem 'BlueCloth'
@@ -52,4 +51,9 @@ group :development, :test do
   gem 'pry-rails'
   gem 'rb-fsevent'
   gem 'watir-webdriver'
+end
+
+group :assets do
+  gem 'sass-rails'
+  gem 'compass-rails'
 end

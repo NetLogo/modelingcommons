@@ -68,9 +68,10 @@ body {
       @include column(12);
       height: 100px;
       color: white;
-      @include text-shadow($nav-color, 3px, 3px, 5px);
+      
       h1, h2 {
 	 display: inline-block;
+	 @include text-shadow($nav-color 3px 3px 5px);
 	 filter: progid:DXImageTransform.Microsoft.Shadow(color=#{$nav-color}, direction=135, strength=5px);
       }
       h1 {
@@ -1494,7 +1495,7 @@ table.simple_table {
             }
             a.tag_overlay {
                width: 45px;
-               background-image: url(/images/tag_overlay.png);
+               background-image: url(/assets/tag_overlay.png);
                background-size: 100% auto;
                background-repeat: no-repeat;
                position: absolute;
