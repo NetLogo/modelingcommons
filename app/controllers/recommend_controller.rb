@@ -45,7 +45,7 @@ class RecommendController < ApplicationController
     model_people = @model.people
     model_people.delete_if {|person| person == @person}
     if not model_people.empty?
-      Notifications.recommended_message(@person, model_people, @node)
+      Notifications.recommended_message(@person, model_people, @node).deliver
     end
     @recommendations = Recommendation.find_all_by_node_id(@model.id, :order => "created_at DESC") || []
     render :partial => 'recommendations.html'
