@@ -35,7 +35,7 @@ class BrowseController < ApplicationController
   def display_preview
     if @model.preview.blank?
       expires_in 5.minutes
-      redirect_to "/images/1x1.png"
+      redirect_to "/assets/1x1.png"
     else
       expires_in 12.hours
       if params[:size].present? && params[:size] == 'thumb'
@@ -43,7 +43,7 @@ class BrowseController < ApplicationController
         image.resize_to_fill!(50, 50, Magick::CenterGravity)
         send_data(image.to_blob, :type => 'image/png', :disposition => 'inline')
       else
-        render :text => @model.preview.contents, :type => 'image/png', :disposition => 'inline', :layout => false
+        send_data @model.preview.contents, :type => 'image/png', :disposition => 'inline'
       end
     end
   end
