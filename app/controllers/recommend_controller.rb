@@ -33,33 +33,19 @@ class RecommendController < ApplicationController
     redirect_to :back
   end
 
-  def add_recommendation
-    Recommendation.create(:node_id => @model.id,
-                          :person_id => @person.id)
-
-    model_people = @model.people
-    model_people.delete_if {|person| person == @person}
-    if not model_people.empty?
-      Notifications.recommended_message(@person, model_people, @node).deliver
-    end
-
-    flash[:notice] = "Added your recommendation."
-    redirect_to :back
-  end
-
   def show_recommendations
     @recommendations = Recommendation.find_all_by_node_id(@model.id,
                                                           :order => "created_at DESC") || []
   end
   
-  def add_recommendation_new
+  def add_recommendation
     Recommendation.create(:node_id => @model.id,
-                          :person_id => @person.id)
-
+                          :person_id => @person.id).save! 
+    
     model_people = @model.people
     model_people.delete_if {|person| person == @person}
     if not model_people.empty?
-      Notifications.deliver_recommended_message(@person, model_people, @node)
+      Notifications.recommended_message(@person, model_people, @node)
     end
     @recommendations = Recommendation.find_all_by_node_id(@model.id, :order => "created_at DESC") || []
     render :partial => 'recommendations.html'
