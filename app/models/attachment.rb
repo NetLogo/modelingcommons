@@ -1,5 +1,7 @@
 class Attachment < ActiveRecord::Base
-
+  
+  attr_accessible :node_id, :person_id, :description, :filename, :content_type, :contents
+  
   belongs_to :node
   belongs_to :person
 
