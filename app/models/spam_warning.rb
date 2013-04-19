@@ -3,6 +3,8 @@
 # models from the system.
 
 class SpamWarning < ActiveRecord::Base
+  attr_accessible :node_id, :person_id
+  
   belongs_to :person
   belongs_to :node
 
