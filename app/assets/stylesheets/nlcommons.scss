@@ -62,7 +62,7 @@ body {
    background-color: /*lighten($header-color, 10%);*/$header-color;
    .banner {
     //background-color: $header-color;
-      background-image: url('banner.png');
+      background-image: url('/assets/banner.png');
       background-color: $header-color;
       cursor: pointer;
       @include column(12);
