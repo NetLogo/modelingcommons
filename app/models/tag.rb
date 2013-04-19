@@ -1,13 +1,11 @@
 # Model to store and track social tags
 
 class Tag < ActiveRecord::Base
+  attr_accessible :name, :person_id
   belongs_to :person
 
   has_many :tagged_nodes
   has_many :nodes, :through => :tagged_nodes
-
-  validates :name, :uniqueness => true
-  validates :person_id, :uniqueness => true
 
   validates :name, :uniqueness => {  :case_sensitive => false }
 
