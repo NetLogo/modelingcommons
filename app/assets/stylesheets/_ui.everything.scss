@@ -214,14 +214,14 @@ $padding: 5px;
 .ui-widget { /*font-family: Optima,Verdana,Arial,sans-serif;*/ /*font-size: 0.8em;*/font-size: $default-font-size; }
 .ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button { /*font-family: Optima,Verdana,Arial,sans-serif; font-size: 0.9em; */}
 .ui-widget-content { color: #222222; color: inherit; font-family: inherit}
-.ui-widget-header { /*border: 1px solid #aaaaaa; background: #cccccc url(/stylesheets/themes/nlcommons/images/ui-bg_highlight-soft_75_cccccc_1x100.png) 50% 50% repeat-x; color: #222222; font-weight: bold; */}
+.ui-widget-header { /*border: 1px solid #aaaaaa; background: #cccccc url(/assets/themes/nlcommons/images/ui-bg_highlight-soft_75_cccccc_1x100.png) 50% 50% repeat-x; color: #222222; font-weight: bold; */}
 .ui-widget-header a { color: #222222; }
 
 /* Interaction states
 ----------------------------------*/
 .ui-state-default, .ui-widget-content .ui-state-default {
    border: 1px solid #d3d3d3;
-    //background: #e6e6e6 url(/stylesheets/themes/nlcommons/images/ui-bg_glass_75_e6e6e6_1x400.png) 50% 50% repeat-x; 
+    //background: #e6e6e6 url(/assets/themes/nlcommons/images/ui-bg_glass_75_e6e6e6_1x400.png) 50% 50% repeat-x; 
     font-weight: normal;
     color: #555555;
     outline: none; 
@@ -233,7 +233,7 @@ $padding: 5px;
 }
 .ui-state-hover, .ui-widget-content .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus { 
   border: 1px solid #999999; 
-  //background: #dadada url(/stylesheets/themes/nlcommons/images/ui-bg_glass_75_dadada_1x400.png) 50% 50% repeat-x; 
+  //background: #dadada url(/assets/themes/nlcommons/images/ui-bg_glass_75_dadada_1x400.png) 50% 50% repeat-x; 
   font-weight: normal; 
   color: #212121; 
   outline: none; 
@@ -259,9 +259,9 @@ $padding: 5px;
 
 /* Interaction Cues
 ----------------------------------*/
-.ui-state-highlight, .ui-widget-content .ui-state-highlight {border: 1px solid #fcefa1; background: #fbf9ee url(/stylesheets/themes/nlcommons/images/ui-bg_glass_55_fbf9ee_1x400.png) 50% 50% repeat-x; color: #363636; }
+.ui-state-highlight, .ui-widget-content .ui-state-highlight {border: 1px solid #fcefa1; background: #fbf9ee url(/assets/themes/nlcommons/images/ui-bg_glass_55_fbf9ee_1x400.png) 50% 50% repeat-x; color: #363636; }
 .ui-state-highlight a, .ui-widget-content .ui-state-highlight a { color: #363636; }
-.ui-state-error, .ui-widget-content .ui-state-error {border: 1px solid #cd0a0a; background: #fef1ec url(/stylesheets/themes/nlcommons/images/ui-bg_glass_95_fef1ec_1x400.png) 50% 50% repeat-x; color: #cd0a0a; }
+.ui-state-error, .ui-widget-content .ui-state-error {border: 1px solid #cd0a0a; background: #fef1ec url(/assets/themes/nlcommons/images/ui-bg_glass_95_fef1ec_1x400.png) 50% 50% repeat-x; color: #cd0a0a; }
 .ui-state-error a, .ui-widget-content .ui-state-error a { color: #cd0a0a; }
 .ui-state-error-text, .ui-widget-content .ui-state-error-text { color: #cd0a0a; }
 .ui-state-disabled, .ui-widget-content .ui-state-disabled { /*opacity: .35; filter:Alpha(Opacity=35); background-image: none; */}
@@ -272,14 +272,14 @@ $padding: 5px;
 ----------------------------------*/
 
 /* states and images */
-.ui-icon { width: 16px; height: 16px; background-image: url(/stylesheets/themes/nlcommons/images/ui-icons_222222_256x240.png); }
-.ui-widget-content .ui-icon {background-image: url(/stylesheets/themes/nlcommons/images/ui-icons_222222_256x240.png); }
-.ui-widget-header .ui-icon {background-image: url(/stylesheets/themes/nlcommons/images/ui-icons_222222_256x240.png); }
-.ui-state-default .ui-icon { background-image: url(/stylesheets/themes/nlcommons/images/ui-icons_888888_256x240.png); }
-.ui-state-hover .ui-icon, .ui-state-focus .ui-icon {background-image: url(/stylesheets/themes/nlcommons/images/ui-icons_454545_256x240.png); }
-.ui-state-active .ui-icon {background-image: url(/stylesheets/themes/nlcommons/images/ui-icons_454545_256x240.png); }
-.ui-state-highlight .ui-icon {background-image: url(/stylesheets/themes/nlcommons/images/ui-icons_2e83ff_256x240.png); }
-.ui-state-error .ui-icon, .ui-state-error-text .ui-icon {background-image: url(/stylesheets/themes/nlcommons/images/ui-icons_cd0a0a_256x240.png); }
+.ui-icon { width: 16px; height: 16px; background-image: url(/assets/themes/nlcommons/images/ui-icons_222222_256x240.png); }
+.ui-widget-content .ui-icon {background-image: url(/assets/themes/nlcommons/images/ui-icons_222222_256x240.png); }
+.ui-widget-header .ui-icon {background-image: url(/assets/themes/nlcommons/images/ui-icons_222222_256x240.png); }
+.ui-state-default .ui-icon { background-image: url(/assets/themes/nlcommons/images/ui-icons_888888_256x240.png); }
+.ui-state-hover .ui-icon, .ui-state-focus .ui-icon {background-image: url(/assets/themes/nlcommons/images/ui-icons_454545_256x240.png); }
+.ui-state-active .ui-icon {background-image: url(/assets/themes/nlcommons/images/ui-icons_454545_256x240.png); }
+.ui-state-highlight .ui-icon {background-image: url(/assets/themes/nlcommons/images/ui-icons_2e83ff_256x240.png); }
+.ui-state-error .ui-icon, .ui-state-error-text .ui-icon {background-image: url(/assets/themes/nlcommons/images/ui-icons_cd0a0a_256x240.png); }
 
 /* positioning */
 .ui-icon-carat-1-n { background-position: 0 0; }
@@ -472,5 +472,5 @@ $padding: 5px;
 .ui-corner-all { @include border-radius(8px); }*/
 
 /* Overlays */
-.ui-widget-overlay { background: #aaaaaa url(/stylesheets/themes/nlcommons/images/ui-bg_flat_0_aaaaaa_40x100.png) 50% 50% repeat-x; opacity: .30;filter:Alpha(Opacity=30); }
-.ui-widget-shadow { margin: -8px 0 0 -8px; padding: 8px; background: #aaaaaa url(/stylesheets/themes/nlcommons/images/ui-bg_flat_0_aaaaaa_40x100.png) 50% 50% repeat-x; opacity: .30;filter:Alpha(Opacity=30); -moz-border-radius: 8px; -webkit-border-radius: 8px; }
+.ui-widget-overlay { background: #aaaaaa url(/assets/themes/nlcommons/images/ui-bg_flat_0_aaaaaa_40x100.png) 50% 50% repeat-x; opacity: .30;filter:Alpha(Opacity=30); }
+.ui-widget-shadow { margin: -8px 0 0 -8px; padding: 8px; background: #aaaaaa url(/assets/themes/nlcommons/images/ui-bg_flat_0_aaaaaa_40x100.png) 50% 50% repeat-x; opacity: .30;filter:Alpha(Opacity=30); -moz-border-radius: 8px; -webkit-border-radius: 8px; }
