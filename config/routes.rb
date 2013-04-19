@@ -64,6 +64,10 @@ Nlcommons::Application.routes.draw do
   # just remember to delete public/index.html.
   root :to => 'account#mypage'
 
+  # Need to specify size of preview image
+  # If we use parameter string, then caches will ignore the size parameter, therefore we need to use the path 
+  match 'browse/display_preview/:id/:size' => 'browse#display_preview'
+
   # See how all your routes lay out with "rake routes"
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
