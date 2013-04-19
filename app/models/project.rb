@@ -74,7 +74,7 @@ class Project < ActiveRecord::Base
     end
     
     m.format = 'png'
-    dir = Rails.root + "/public/system/project_images/" + self.id.to_s + "/"
+    dir = Rails.root.to_s + "/public/system/project_images/" + self.id.to_s + "/"
     Dir.mkdir(dir) if !File.exists?(dir)
     m.write(dir + "project.png")
   end
