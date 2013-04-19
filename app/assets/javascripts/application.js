@@ -1018,7 +1018,7 @@ jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
         var display_next = function() {
             if(queue.length >= 1) {
                 running = true;
-                flash_element.text(queue[0]);
+                flash_element.html(queue[0]);
                 flash_element.animate(
                     {right: "0px"}, 600
                 ).delay(5000
