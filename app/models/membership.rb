@@ -2,6 +2,7 @@
 # may optionally be an administrator.
 
 class Membership < ActiveRecord::Base
+  attr_accessible :person_id, :person, :group
   validates :person, :presence => true
   validates :group, :presence => true
 
