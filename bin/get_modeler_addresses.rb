@@ -2,6 +2,7 @@
 
 require 'mbox'
 require 'set'
+require 'pony' 
 mbox = Mbox.open('/Users/reuven/Downloads/ccl-tech.mbox')
 
 community_model_authors = { }
@@ -46,20 +47,26 @@ mbox.each_with_index do |message, index|
   end
 end
 
-puts community_model_authors.inspect 
+email_template = 
+  File.read('/Users/reuven/LS/Dissertation/Correspondence/invitation-to-community-models-authors.text')
+
+puts "About to send e-mail to #{community_model_authors.size} people..."
+
 community_model_authors.each do |email, models|
-  puts email
+  puts "Sending e-mail to #{email}"
   models.each_with_index do |model, index|
-    puts "\t[#{index}] #{model}"
+    puts "\t[#{index+1}] #{model}"
+
+    begin
+      Pony.mail(to:'reuven@lerner.co.il',
+                cc:'modelingcommons@ccl.northwestern.edu',
+                from:'nlcommons@modelingcommons.org',
+                subject:"Invitation to the NetLogo Modeling Commons",
+                body: email_template)
+    rescue Exception => e
+      puts "Unable to send e-mail: #{e.inspect}"
+    end
+
   end
 end
-
-
-
-# A model, "AntsOpt.nlogo" was contributed,
-# and has been saved to /home/httpd/contrib_models/AntsOpt.nlogo.3885.
-
-# Name: Erich Neuwirth
-# E-mail: erich.neuwirth@univie.ac.at
-# Organization: University of Vienna
 
