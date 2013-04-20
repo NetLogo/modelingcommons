@@ -22,3 +22,4 @@ turbulence
 turbulence/*
 .#*
 output.html
+.sass-cache/*

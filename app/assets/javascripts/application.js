@@ -1,47 +1,6 @@
 // Place your application-specific JavaScript functions and classes here
 // This file is automatically included by javascript_include_tag :defaults
 
-(function($) {
-    var queue = [];
-    var flash_element, width;
-    var running = false;
-    var display_next = function() {
-	if(queue.length >= 1) {
-	    running = true;
-	    flash_element.text(queue[0]);
-	    flash_element.animate(
-		{
-		    right: "0px"
-		},
-		600
-	    ).delay(
-		5000
-	    ).animate(
-		{
-		    right: "-" + width + "px"
-		},
-		{
-		    duration: 600,
-		    complete: function() {
-			queue.shift();
-			display_next();
-		    }
-		}
-	    );
-	} else {
-	    running = false;
-	}
-    };
-
-    $.fn.flash_notice = function(text) {
-	flash_element = $("#flash_notice");
-	width = flash_element.innerWidth();
-	queue.push(text);
-	if(!running) {
-	    display_next();
-	}
-    };
-})(jQuery);
 
 // Datatable sort for date modified column
 // Numerical sort where the number to sort by is enclosed in the first span tag with class "hidden_elapsed_time"
@@ -62,37 +21,37 @@ jQuery.fn.dataTableExt.oSort['num-first-span-desc'] = function(a,b) {
 };
 
 jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
-
+    
     "fnInit": function ( oSettings, nPaging, fnCallbackDraw )
     {
 	var nPrevious, nNext, nPreviousInner, nNextInner;
-
+	
 	nPrevious = document.createElement( 'button' );
 	nNext = document.createElement( 'button' );
-
+	
 	nPreviousInner = document.createElement('div');
 	nPreviousInner.className = 'ui-icon';
 	nPrevious.appendChild(nPreviousInner);
-
+	
 	nPreviousInner = document.createTextNode('Previous');
 	nPrevious.appendChild(nPreviousInner);
-
+	
 	nNextInner = document.createTextNode('Next');
 	nNext.appendChild(nNextInner);
-
+	
 	nNextInner = document.createElement('div');
 	nNextInner.className = 'ui-icon';
 	nNext.appendChild(nNextInner);
-
+	
 	nPrevious.className = oSettings.oClasses.sPagePrevDisabled;
 	nNext.className = oSettings.oClasses.sPageNextDisabled;
-
+	
 	nPrevious.title = oSettings.oLanguage.oPaginate.sPrevious;
 	nNext.title = oSettings.oLanguage.oPaginate.sNext;
-
+	
 	nPaging.appendChild( nPrevious );
 	nPaging.appendChild( nNext );
-
+	
 	$(nPrevious).bind( 'click.DT', function() {
 	    if ( oSettings.oApi._fnPageChange( oSettings, "previous" ) )
 	    {
@@ -100,18 +59,18 @@ jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
 		fnCallbackDraw( oSettings );
 	    }
 	} );
-
+	
 	$(nNext).bind( 'click.DT', function() {
 	    if ( oSettings.oApi._fnPageChange( oSettings, "next" ) )
 	    {
 		fnCallbackDraw( oSettings );
 	    }
 	} );
-
+	
 	/* Take the brutal approach to cancelling text selection */
 	$(nPrevious).bind( 'selectstart.DT', function () { return false; } );
 	$(nNext).bind( 'selectstart.DT', function () { return false; } );
-
+	
 	/* ID the first elements only */
 	if ( oSettings.sTableId !== '' && typeof oSettings.aanFeatures.p == "undefined" )
 	{
@@ -120,7 +79,7 @@ jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
 	    nNext.setAttribute( 'id', oSettings.sTableId+'_next' );
 	}
     },
-
+    
     /*
      * Function: oPagination.two_button.fnUpdate
      * Purpose:  Update the two button pagination at the end of the draw
@@ -134,19 +93,19 @@ jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
 	{
 	    return;
 	}
-
+	
 	/* Loop over each instance of the pager */
 	var an = oSettings.aanFeatures.p;
 	for ( var i=0, iLen=an.length ; i<iLen ; i++ )
 	{
 	    if ( an[i].childNodes.length !== 0 )
 	    {
-		an[i].childNodes[0].className =
-		    ( oSettings._iDisplayStart === 0 ) ?
+		an[i].childNodes[0].className = 
+		    ( oSettings._iDisplayStart === 0 ) ? 
 		    oSettings.oClasses.sPagePrevDisabled : oSettings.oClasses.sPagePrevEnabled;
-
-		an[i].childNodes[1].className =
-		    ( oSettings.fnDisplayEnd() == oSettings.fnRecordsDisplay() ) ?
+		
+		an[i].childNodes[1].className = 
+		    ( oSettings.fnDisplayEnd() == oSettings.fnRecordsDisplay() ) ? 
 		    oSettings.oClasses.sPageNextDisabled : oSettings.oClasses.sPageNextEnabled;
 	    }
 	}
@@ -156,23 +115,26 @@ jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
 
 //Enclose everything in a function so that local variables don't use the global namespace
 (function() {
-    var createAJAXFormReturningHTMLHandler = function(callback) {
+    var createAJAXFormReturningHTMLHandler = function(callback, error) {
+        if(typeof(error) === "undefined") {
+            var error = function(jqXHR, textStatus, errorThrown) {
+                $().flash_notice(textStatus + ": " + errorThrown);
+            }
+        }
 	return function(e) {
 	    var form = $(this);
 	    $.ajax({
 		url: form.attr("action"),
-		dataType: "html",
-		type: "post",
-		data: form.serialize(),
+		dataType: "html",  
+		type: "post", 
+		data: form.serialize(), 
 		success: callback,
-		error: function(jqXHR, textStatus, errorThrown) {
-		    $().flash_notice(textStatus + ": " + errorThrown);
-		}
+		error: error
 	    });
 	    return false;
 	};
     };
-
+    
     var initializeModelListDataTable = function() {
 	// Create the datatable
 	$(".model_list_datatable").dataTable({
@@ -210,7 +172,7 @@ jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
 	});
 	$(".dataTables_filter input").attr("placeholder", "Search Results");
     };
-
+    
     //Allows styling input type="file" by wrapping the file input in a styled label.  To style, change the file_label
     //class style
     //Should run before tabs are created
@@ -227,7 +189,7 @@ jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
 		if($.trim(name).length == 0) {
 		    return;
 		}
-
+		
 		fileInput.wrap('<label for="' + name + '" class="file_label">Choose File</label>')
 		var wrapper = fileInput.parent();
 		var fileNameLabel = $('<label for="' + name + '" class="file_name_label"></label>');
@@ -243,51 +205,51 @@ jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
 		fileInput.bind("change", function(e) {
 		    updateFileName();
 		});
-	    })
+	    })				
 	}
     })();
-
+    
     var initializeProjectsTable = function() {
 	var getSortCol = function(select) {
 	    var sortStr = select.find("option:selected").attr("value");
 	    var sort = [[1, 'asc']];
 	    if(sortStr == "pn") {
-
+		
 	    } else if(sortStr == "on") {
 		sort = [[2, 'asc']];
 	    } else if(sortStr == "mc") {
 		sort = [[3, 'desc']];
 	    }
 	    return sort;
-
+	    
 	};
 	var table = $("#projects_table").dataTable({
 	    "aoColumns": [
 		{
 		    "bSortable": false
-
-		},
+		    
+		}, 
+		{
+		    "sType": "string", 
+		    "bVisible": false
+		}, 
+		{
+		    "sType": "string", 
+		    "bVisible": false
+		}, 
+		{
+		    "sType": "numeric", 
+		    "bVisible": false
+		}, 
 		{
 		    "sType": "string",
-		    "bVisible": false
-		},
-		{
-		    "sType": "string",
-		    "bVisible": false
-		},
-		{
-		    "sType": "numeric",
-		    "bVisible": false
-		},
-		{
-		    "sType": "string",
-		    "bVisible": false,
+		    "bVisible": false, 
 		    "bSortable": false
 		}
-	    ],
+	    ], 
 	    'aaSorting': getSortCol($("#project_sort_by")),
-	    "sDom": '<"left-right top"<"left"><"right"f>>t',
-	    "bPaginate": false,
+	    "sDom": '<"left-right top"<"left"><"right"f>>t', 
+	    "bPaginate": false, 
 	    "bAutoWidth": false
 	});
 	table.parents(".dataTables_wrapper").find("input").attr("placeholder", "Search Projects");
@@ -302,9 +264,9 @@ jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
 	    }
 	});
 	$(".project_more button").bind("click", function(e) {
-
+	    
 	    var list = $(this).parents(".project").find(".project_model_list");
-
+	    
 	    list.toggleClass("hidden");
 	    if(list.hasClass("hidden")) {
 		$(this).text($(this).text().replace("Hide", "Show"));
@@ -312,15 +274,15 @@ jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
 		$(this).text($(this).text().replace("Show", "Hide"));
 	    }
 	});
-
+	
 	$("#custom_filters").contents().detach().prependTo($("#projects_table_wrapper .top .left"));
 	$("#custom_filters").remove();
     };
 
-
+    
     //Tab loader loads tabs on the element selected by elementId and switches to the tab selected in the hash
     var initializeTabsOnElement = function(elementId) {
-
+	
 	//Checks URL hash to see if the user wants to go to a specific tab
 	var getURLTabIndex = function() {
 	    var tab_index = 0;
@@ -337,35 +299,35 @@ jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
 	    }
 	    return tab_index;
 	};
-
+	
 	//Create the tabs
 	var tab = $("#" + elementId).tabs({
 	    //Select the correct tab
 	    selected: getURLTabIndex(),
-	    //When the tab changes, update the URL hash
+	    //When the tab changes, update the URL hash 
 	    show: function(event, ui) {
 		window.location.hash = elementId + "_" + ui.panel.id;
 	    }
 	});
-
+	
 	//Change tabs on back/forward by monitoring URL hash
 	$(window).bind("hashchange", function() {
 	    tab.tabs("select", getURLTabIndex());
 	});
     };
-
-
+    
+    
     //Person selector for group invitation tab
     var initializeGroupInvitationPersonSelector = function() {
 	var selectedList = $("#selected_people");
 	var unselectedList = $("#unselected_people");
 	var groupSelector = $("#group_id");
 	var personSearchInput = $("#search_people_to_invite");
-
+	
 	groupSelector.bind("change", function(e) {
 	    updateSelectedListIndicatorState();
 	});
-
+	
 	var personAdded = function(idToCheck) {
 	    var isAdded = false;
 	    selectedList.find(".selectable_person input#person_id").each(function(index, element) {
@@ -415,11 +377,11 @@ jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
 	    if(personSearchInput.attr("value")) {
 		$.ajax({
 		    url: unselectedList.parents("form").attr("action"),
-		    dataType: "json",
-		    type: "post",
+		    dataType: "json",  
+		    type: "post", 
 		    data: $.param({
 			query: personSearchInput.attr("value")
-		    }),
+		    }), 
 		    success: function(data, textStatus, jqXHR) {
 			clearUnselectedList();
 			for(var i = 0; i < data.length; i++) {
@@ -428,25 +390,25 @@ jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
 			    }
 			}
 			updateUnselectedListIndicatorState();
-
+			
 		    }
 		});
 	    }
-
+	    
 	};
 	personSearchInput.bind("keypress", fetchNewPeopleFromInput);
-
+	
 	//Call in case the user hit back and left something in the input field
 	fetchNewPeopleFromInput();
     };
-
-
+    
+    
     //Makes the placeholder attribute work in internet explorer 8, 9
     //Should be initialized last
     var initializeIEPlaceholder = (function() {
 	//Private static variables:
 	var ie_placeholder_initialized = false;
-
+	
 	return function() {
 	    if(ie_placeholder_initialized) {
 		return;
@@ -477,8 +439,8 @@ jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
 		    }
 		});
 	    });
-
-
+	    
+	    
 	    var blur = function() {
 		var input = $(this);
 		if(input.val().length == 0) {
@@ -495,11 +457,11 @@ jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
 	    };
 	    $("[placeholder]").blur(blur).focus(focus).each(blur).parents("form").bind("submit", function() {
 		$(this).find("input.placeholder").val("");
-	    });
+	    });	
 	};
     })();
-
-
+    
+    
     var initializeSearchTabs = function() {
 	//Disable tabs with no search results
 	var disabledTabsList = [];
@@ -507,7 +469,7 @@ jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
 	$("#search_tabs>ul>li").each(function(index, element) {
 	    if($(element).hasClass("empty")) {
 		disabledTabsList.push(index);
-
+		
 	    } else if(selectedSearchTab == -1) {
 		selectedSearchTab = index;
 	    }
@@ -525,10 +487,10 @@ jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
 	    });
 	}
     };
-
+    
     var initializeModelClickToLoad = function() {
 	$("#model_click_to_load").click(function(e) {
-
+	    
 	    var tab = $("div#browse_applet");
 	    var applet = $("#model_applet");
 	    var clickToLoad = $(this);
@@ -545,16 +507,16 @@ jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
 		} else {
 		    container.css("left", "0px");
 		}
-
+		
 		applet.before($("div#browse_applet p").detach());
 	    } else {
 		clickToLoad.css("display", "none");
 		applet.css("display", "block");
 	    }
-
+	    
 	});
     };
-
+    
     var initializeModelPermissionsChanger = function() {
 	var select_no_group_enable = function(enable) {
 	    if(enable) {
@@ -575,16 +537,16 @@ jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
 	var submitPermissionChange = function() {
 	    var form = $("#group_permission_form");
 	    $.ajax({
-		url: form.attr("action"),
-		type: "post",
-		data: form.serialize(),
+		url: form.attr("action"), 
+		type: "post", 
+		data: form.serialize(), 
 		success: function(data, textStatus, jqXHR) {
 		    data;
 		    $().flash_notice(data.message);
 		},
 		error: function(jqXHR, textStatus, errorThrown) {
 		    $().flash_notice(textStatus + ": " + errorThrown);
-		},
+		}, 
 		dataType: "json"
 	    })
 	};
@@ -595,7 +557,7 @@ jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
 	if($('#read_permission_select option:selected').attr('value') == 'g' || $('#write_permission_select option:selected').attr('value') == 'g') {
 	    select_no_group_enable(false);
 	}
-
+	
 	$('#group_select').bind('change', function(e) {
 	    if(e.currentTarget.value == "") {
 		group_permissions_enable(false);
@@ -621,14 +583,14 @@ jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
 	    submitPermissionChange();
 	});
     };
-
+    
     var initializeHeaderLoginForm = function() {
-
+	
 	//Validate header login form
 	$("#header_login").validate({
 	    rules: {
 		password: {
-		    required: ":not(.placeholder)",
+		    required: ":not(.placeholder)", 
 		},
 		email_address: {
 		    required: true,
@@ -654,7 +616,7 @@ jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
 		element.parents("tr").next("tr").children("td").eq(element.parents("td").index()).append(error);
 	    }
 	});
-
+	
 	$('#header_login').keypress(function(e) {
 	    if(e.keyCode == 13) {
 		$(this).submit();
@@ -663,13 +625,13 @@ jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
 	$('#header_login button').click(function(e) {
 	    $(this).parents('form').submit();
 	});
-
+	
     };
-
+    
     var initializeTagEditor = function() {
-
+	
 	$(".tag-complete").autocomplete('/tags/complete_tags', {} );
-
+	
 	//Add new tag
 	$('#add_tag_form').submit(createAJAXFormReturningHTMLHandler(function(data, textStatus, jqXHR) {
 	    $(data).appendTo("#existing_tags");
@@ -677,7 +639,7 @@ jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
 	    $('#no_tags').addClass('hidden');
 	    $('#new_tags input').each(function(index, element) {
 		element.value = "";
-
+		
 	    });
 	    $('#new_tags .file').each(function(index, element) {
 		if(index != 0) {
@@ -685,21 +647,21 @@ jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
 		}
 	    });
 	}));
-
-
+	
+	
 	$("#existing_tags").on("click", ".tag_delete_form a", function(e) {
 	    $(this).parents("form").submit();
 	    return false;
 	});
-
+	
 	//Delete existing tag
 	$("#existing_tags").on("submit", ".tag_delete_form", function(e) {
 	    var form = $(this);
 	    $.ajax({
 		url: form.attr("action"),
-		dataType: "json",
-		type: "post",
-		data: form.serialize(),
+		dataType: "json",  
+		type: "post", 
+		data: form.serialize(), 
 		success: function(data, textStatus, jqXHR) {
 		    $().flash_notice(data.message);
 		    form.parents("tr").remove();
@@ -715,16 +677,16 @@ jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
 	    return false;
 	});
     };
-
+    
     var initializeNewCommentForm = function() {
-
+	
 	$('#new_discussion_comment').submit(function() {
 	    var form = $("#new_discussion_comment");
 	    $.ajax({
 		url: form.attr("action"),
-		dataType: "json",
-		type: "post",
-		data: form.serialize(),
+		dataType: "json",  
+		type: "post", 
+		data: form.serialize(), 
 		success: function(data, textStatus, jqXHR) {
 		    $().flash_notice(data.message);
 		    if(data.success) {
@@ -738,120 +700,412 @@ jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
 		},
 		error: function(jqXHR, textStatus, errorThrown) {
 		    $().flash_notice(textStatus + ": " + errorThrown);
-		},
+		}, 
 	    });
 	    return false;
 	});
     }
-
+    
     var initializeModelUpdater = function() {
-	var form = $("#upload-model-form");
-	form.validate({
-	    rules: {
-		"new_version[uploaded_body]": {
-		    "required": true
-		},
-		"new_version[description]": "required",
-		"new_version[name_of_new_child]": {
-		    "required": "#fork_child:checked"
-		}
-	    },
-
-
-	});
-
-
-
-
-	form.find('input[type="file"]').bind("change", function() {
-	    form.validate().element(this);
-	})
-
-	$("#fork_overwrite").bind("change", function(e) {
-	    form.validate().element("#new_version_name_of_new_child");
-	});
+    	var form = $("#upload-model-form");
+    	form.validate({
+    	    rules: {
+    		"new_version[uploaded_body]": {
+    		    "required": true
+    		},
+    		"new_version[description]": "required", 
+    		"new_version[name_of_new_child]": {
+    		    "required": "#fork_child:checked"
+    		}
+    	    }, 
+    	    
+    
+    	});
+    	
+    	
+    	
+    	
+    	form.find('input[type="file"]').bind("change", function() {
+    	    form.validate().element(this);
+    	})
+    	
+    	$("#fork_overwrite").bind("change", function(e) {
+    	    form.validate().element("#new_version_name_of_new_child");
+    	});
     };
-
+    
     var initializeCollaboration = function() {
-
-	if ($("li#add-collaborator").length > 0) {
-	    var collaboration_options;
-	    $.get('/collaborator_types.json', function(data) {
-		collaboration_options = data.map(function(o) {
-		    return "<option value='" + o.collaborator_type.id + "'>"+ o.collaborator_type.name  + "</option>"  ;
-		}).join("\n");
-	    });
-	}
-
-	var node_id = $("#id").val();
-
-	$("li#add-collaborator").bind("click", function(e) {
-
-            $('<li class="added-collaborator"><input class="person-complete" type="text" size="40" placeholder="Collaborator name" name="name" /><select><option></option>\n' + collaboration_options + '</select></li>').insertBefore('#add-collaborator');
-
-	    if ($("li#save-collaborators").length == 0)
-	    {
-		$('<li id="save-collaborators"><input id="save-collaborators-button" type="button" value="Save new collaborators" /></li>').insertAfter('#add-collaborator');
-
-		$("#save-collaborators-button").bind("click", function(e) {
-		    $(".added-collaborator").each( function(index, item) {
-			var collaborator_name = item.children[0].value;
-			var collaborator_type_id = item.children[1].value;
-
-			$.post('/collaborations/create',
-			       {
-				   node_id: node_id,
-				   person_name: collaborator_name,
-				   collaborator_type_id: collaborator_type_id,
-				   format: 'json'
-			       },
-			       function(data) {
-				   alert(data['message']);
-			       });
-		    });
-		});
-	    }
-
-	    $('.person-complete').autocomplete('/people/complete_people');
-
-	});
-
-	$("#remove-collaboration").bind("click", function(e) {
-
-	    $.post('/collaborations/destroy',
-		   {
-		       node_id: node_id,
-		       format: 'json'
-		   },
-		   function(data) {
-		       if (data['message'] == 'ok')
-			   {
-			       window.location.reload();
-			   }
-		       else
-			   {
-			       alert(data['message']);
-			   }
-		   });
-	});
+    
+    	if ($("#add-collaborator").length > 0) {
+    	    var collaboration_options;
+    	    $.get('/collaborator_types.json', function(data) {
+    		collaboration_options = data.map(function(o) { 
+    		    return "<option value='" + o.collaborator_type.id + "'>"+ o.collaborator_type.name  + "</option>"  ;
+    		}).join("\n");
+    	    });
+    	}
+    
+    	var node_id = $("#id").val();
+    	
+    	
+        var add_collaborator_form = $(".collaborators form.popup_form");
+        
+        add_collaborator_form.find(".complete").autocomplete('/people/complete_people');
+        
+        var open_form_button = $(".collaborators #add-collaborator");
+        var close_form_button = add_collaborator_form.find(".close_form");
+        var save_collaborators_button = $("#save_collaborators");
+        
+        var form_opened = false;
+        function open_form() {
+            if(form_opened) {
+                return;
+            }
+            var open_form_offset = open_form_button.position();
+            add_collaborator_form.css("left", open_form_offset.left + "px");
+            add_collaborator_form.css("top", open_form_offset.top + "px");
+            add_collaborator_form.show();
+            form_opened = true;
+        }
+        function close_form() {
+            if(!form_opened) {
+                return;
+            }
+            add_collaborator_form.hide();
+            add_collaborator_form.find('input:not([type="submit"], [type="button"], [type="hidden"]), textarea').removeAttr('value').removeAttr('checked');
+            form_opened = false;
+            
+        }
+        open_form_button.click(function() {
+            open_form();
+            return false;
+        });
+        
+        close_form_button.click(function() {
+            close_form();
+            return false;
+        });
+        
+        var updateList = function(listHTML) {
+            var newList = $(listHTML);
+            convertTo2ColumnLayout(newList, ".collaborator");
+            $("#collaborator-list").replaceWith(newList);
+            
+            var collaborator_count = $(".collaborators #collaborator_count");
+            //Increment counter
+            var newText = collaborator_count.text().replace(/\d+/, function(match) {
+                return newList.find(".collaborator").size();
+            });
+            //Pluralize (don't have to worry about 1 collaborator because before we added one, there was the author (n=1))
+            if(newText.charAt(newText.length - 1) != "s") {
+                newText = newText + "s";
+            }
+            collaborator_count.text(newText);
+        }
+        
+        add_collaborator_form.submit(function(e) {
+            var form = $(this);
+            $.ajax({
+                url: form.attr("action"),
+                dataType: "json",  
+                type: "post", 
+                data: form.serialize(), 
+                success: function(data, textStatus, jqXHR) {
+                    $().flash_notice(data.message);
+                    if(data.html) {
+                        updateList(data.html);
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    $().flash_notice(textStatus + ": " + errorThrown);
+                }
+            });
+            return false;
+        });
+        
+        save_collaborators_button.click(function(e) {
+            add_collaborator_form.submit();
+            close_form();
+            return false;
+        });
+        
+        $(".collaborators").on("click", ".remove_collaborator", function(e) {
+            var form = $(this).parents("form");
+            form.submit();
+            return false;
+        });
+        
+    	$("#remove-collaboration").bind("click", function(e) {	
+    
+    	    $.post('/collaborations/destroy',
+    		   {
+    		       node_id: node_id,
+    		       format: 'json'
+    		   },
+    		   function(data) {
+    		       if (data['message'] == 'ok')
+    			   {
+    			       window.location.reload();
+    			   }
+    		       else
+    			   {
+    			       alert(data['message']);
+    			   }
+    		   });
+    	});
     };
 
+
+    var initializeTagCloud = function() {
+        $(".tag_cloud_container").each(function() {
+            var container = $(this);
+            var tag_cloud = $(this).find(".tag_cloud");
+            container.find(".complete").autocomplete('/tags/complete_tags', {} );
+            function appearTagInfo() {
+                var tag = $(this);
+                var tag_info = tag.find("div.tag_info");
+                var tag_offset = tag.position();
+                tag_info.css("top", (tag_offset.top + tag.outerHeight()) + "px");
+                console.log(tag_info.width());
+                
+                if(tag_offset.left + tag_info.outerWidth() > tag.offsetParent().width()) {
+                    tag_info.css("left", "auto");
+                    tag_info.css("right", "0px");
+                } else {
+                    tag_info.css("left", tag_offset.left + "px");
+                    tag_info.css("right", "auto");
+                }
+                tag_info.show();
+                
+            }
+            function disappearTagInfo() {
+                $(this).find("div.tag_info").hide();
+            }
+            
+            function loadHoverHandler() {
+                tag_cloud.find("div.tag").hoverIntent(appearTagInfo, disappearTagInfo);
+            }
+            loadHoverHandler();
+            
+            var add_tag_form = $(".tag_cloud_container .add_tag_form");
+            var open_add_tag_form = $("#open_add_tag_form");
+            var close_add_tag_form = $("#close_add_tag_form");
+            var tag_form_opened = false;
+            function open_tag_form() {
+                if(tag_form_opened) {
+                    return;
+                }
+                var tag_offset = open_add_tag_form.position();
+                add_tag_form.css("left", tag_offset.left + "px");
+                add_tag_form.css("top", tag_offset.top + "px");
+                add_tag_form.show();
+                tag_form_opened = true;
+            }
+            function close_tag_form() {
+                if(!tag_form_opened) {
+                    return;
+                }
+                add_tag_form.hide();
+                add_tag_form.find('input:not([type="submit"], [type="button"], [type="hidden"]), textarea').removeAttr('value').removeAttr('checked');
+                tag_form_opened = false;
+                
+            }
+            open_add_tag_form.click(function() {
+                open_tag_form();
+                return false;
+            });
+            
+            close_add_tag_form.click(function() {
+                close_tag_form();
+                return false;
+            });
+            $("#add_tag").click(function() {
+                add_tag_form.submit(createAJAXFormReturningHTMLHandler(function(data, textStatus, jqXHR) {
+                    close_tag_form();
+                    tag_cloud.replaceWith(data);
+                    tag_cloud = container.find(".tag_cloud");
+                    loadHoverHandler();
+                }));
+                
+            });
+            container.on("click", ".tag_delete_button", function() {
+                $(this).parents("form.tag_delete_form").submit();
+                return false;
+            });
+            
+            container.on("submit", ".tag_delete_form", function(e) {
+                console.log("yes");
+                var form = $(this);
+                $.ajax({
+                    url: form.attr("action"),
+                    dataType: "json",  
+                    type: "post", 
+                    data: form.serialize(), 
+                    success: function(data, textStatus, jqXHR) {
+                        $().flash_notice(data.message);
+                        form.parents(".tag").remove();
+                        if(tag_cloud.find(".tag").size() == 0) {
+                            tag_cloud.find(".no_tags").show();
+                        }
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        $().flash_notice(textStatus + ": " + errorThrown);
+                    }
+                });
+                return false;
+            });
+        });
+    };
+    
+    
+    
+    var initializeRecommendations = function() {
+        var attachRecommendationListeners = function(container) {
+            var counter_container = container.find("#rec_counter_container")
+            var counter = container.find("#rec_counter");
+            var recommendations = container.find("#recommendations");
+            var showRecs = function() {
+                var offset = container.position();
+                recommendations.css("left", (offset.left) + "px");
+                recommendations.css("top", (offset.top + container.innerHeight() - 2) + "px");
+                recommendations.show();
+            };
+            var hideRecs = function() {
+                recommendations.hide();
+            };
+            
+            var count = parseInt(counter.text(), 10);
+            if(count > 0) {
+                counter_container.hoverIntent(showRecs, hideRecs);                
+            }
+            
+            
+            
+            var add_recommendation_button = container.find("#add_recommendation");
+            
+            add_recommendation_button.click(function(e) {
+               var add_recommendation_container = $("#add_recommendation_container");
+               add_recommendation_container.hide();
+               var success = function(data, textStatus, jqXHR) {
+                   container.replaceWith(data);
+                   attachRecommendationListeners($("#rec_container"));
+                   $().flash_notice("Your recommendation has been added");
+               };
+               var error = function(jqXHR, textStatus, errorThrown) {
+                    $().flash_notice(textStatus + ": " + errorThrown);
+                    add_recommendation_container.show();
+               };   
+               var url = add_recommendation_button.attr("href");
+               $.ajax({
+                    url: url,
+                    dataType: "html",  
+                    type: "post", 
+                    success: success,
+                    error: error
+                });
+               return false;
+            });
+            
+        }
+        
+        attachRecommendationListeners($("#rec_container"));
+    };
+    
+    var initializeFlashNotice = function() {
+        var queue = [];
+        var flash_element, width;
+        var running = false;
+        var display_next = function() {
+            if(queue.length >= 1) {
+                running = true;
+                flash_element.html(queue[0]);
+                flash_element.animate(
+                    {right: "0px"}, 600
+                ).delay(5000
+                ).animate(
+                    {right: "-" + width + "px"},
+                    {
+                        duration: 600,
+                        complete: function() {
+                            queue.shift();
+                            display_next();
+                        }
+                    }
+                );
+            } else {
+                running = false;
+            }
+        }
+        $.fn.flash_notice = function(text) {
+            flash_element = $("#flash_notice");
+            width = flash_element.innerWidth();
+            queue.push(text);
+            if(!running) {
+                display_next();
+            }
+        }
+    };
+     
+    var initializeAlreadyRegisteredButton = function() {
+        var loginButton = $("#login_to_the_commons");
+        loginButton.click(function() {
+            //Use animate({opacity: 1}, ) to delay the animation instead of delay since delay cannot be stopped, even by stop()
+            //If we used the unstoppable delay, there would be problems if the user clicked the login button while the removeClass
+            //animation was still occuring
+            $("#email_address").stop(true, true).addClass("highlight").focus().animate({opacity: 1}, 2000).removeClass("highlight", 2000);
+            
+            //Return false so we scroll to the top of the page rather than just to the input field
+            return false;
+        });
+    };
+
+    var convertTo2ColumnLayout = function(container, elementSelector) {
+        
+        if(typeof(container) == "string") {
+            container = $(container);
+        }
+        var elements = container.find(elementSelector);
+        var div2cols = $("<div class=\"list-2-columns\">");
+        var column1 = $("<div class=\"column-1\">");
+        var column2 = $("<div class=\"column-2\">");
+        var numInCol1 = Math.floor((elements.size() + 1) / 2);
+        
+        elements.each(function(index, element) {
+            var theColumn;
+            if(index < numInCol1) {
+                theColumn = column1;
+            } else {
+                theColumn = column2;
+            }
+            $(element).detach().appendTo(theColumn);
+        });
+        
+        div2cols.append(column1).append(column2);
+        container.append(div2cols);
+    };
+    
+    
     function initialize() {
-	initializeModelListDataTable();
-	initializeProjectsTable();
-	initializeStyledFileInput();
-	initializeTabsOnElement("model_tabs");
-	initializeTabsOnElement("group_tabs");
-	initializeSearchTabs();
-	initializeGroupInvitationPersonSelector();
-	initializeModelClickToLoad();
-	initializeModelPermissionsChanger();
-	initializeHeaderLoginForm();
-	initializeNewCommentForm();
-	initializeTagEditor();
-	initializeModelUpdater();
-	initializeIEPlaceholder();
-	initializeCollaboration();
+        initializeFlashNotice();
+    	initializeModelListDataTable();
+    	initializeProjectsTable();
+    	initializeStyledFileInput();
+    	initializeTabsOnElement("model_tabs");
+    	initializeTabsOnElement("group_tabs");
+    	initializeSearchTabs();
+    	initializeGroupInvitationPersonSelector();
+    	initializeModelClickToLoad();
+    	initializeModelPermissionsChanger();
+    	initializeHeaderLoginForm();
+    	initializeNewCommentForm();
+    	initializeTagEditor();
+    	initializeModelUpdater();
+    	initializeIEPlaceholder();
+    	initializeCollaboration();
+    	initializeTagCloud();
+    	initializeRecommendations();
+    	initializeAlreadyRegisteredButton();
+    	convertTo2ColumnLayout("#collaborator-list", ".collaborator");
     };
 
     $(document).ready(initialize);

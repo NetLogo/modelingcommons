@@ -75,9 +75,9 @@ class UploadController < ApplicationController
           write_permission = PermissionSetting.find_by_short_form('u')
         end
         
-        @model.update_attributes!(:visibility => read_permission,
-                                  :changeability => write_permission,
-                                  :group => group)
+        @model.update_attributes!(:visibility_id => read_permission.id,
+                                  :changeability_id => write_permission.id,
+                                  :group_id => group.id)
         
         # ------------------------------------------------------------
         # Preview image

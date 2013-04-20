@@ -70,7 +70,7 @@
             <% if @person and !@person.groups.empty? %>
               <% @options_for_select = [['No group', nil]] %>
               <% @person.groups.each {|g| @options_for_select << [g.name, g.id] } %>                
-              Model group <%= select_tag("group_id", options_for_select(@options_for_select, (@model.group ? @model.group.id : 0)), :id => "group_select") %>
+              Model group <%= raw select_tag("group_id", options_for_select(@options_for_select, (@model.group ? @model.group.id : 0)), :id => "group_select") %>
               | 
             <% end %>
             Visible to 
@@ -91,9 +91,9 @@
             </select>
           <% else %>
             <%if model_group_id != 0 %>
-              <%= model_group(@model) %> | 
+              <%= raw model_group(@model) %> | 
             <% end %>
-              <%= model_visibility(@model) %> | <%= model_changeability(@model) %>
+              <%= raw model_visibility(@model) %> | <%= raw model_changeability(@model) %>
           <% end %>
         <% end %>
         
@@ -122,7 +122,7 @@
       <%= link_to image_tag("download.png", :class => "inline_image", :alt => "Download the '#{@model.name}' model", :title => "Download the '#{@model.name}' model") + "Download this model", :controller => "browse", :action => "download_model", :id => @model.id %> 
       <% if @person %>
         | 
-        <%= render :partial => 'recommend/recommendations.html', :locals => {:id => @model.id} %>
+        <%= render :partial => 'recommend/recommendations', :locals => {:id => @model.id} %>
       
         <% if !@person.spam_warning(@model) %>
           | 

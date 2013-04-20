@@ -1,4 +1,6 @@
 class Collaboration < ActiveRecord::Base
+  attr_accessible :node, :person, :collaborator_type_id
+  
   validates :node_id, :presence => true
   validates :person_id, :presence => true
   validates :collaborator_type_id, :presence => true

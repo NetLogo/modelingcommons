@@ -12,7 +12,7 @@
       (No models)
       <% else %>
       (Applied to
-      <%= tag.nodes.sort_by {|n| n.name}.map {|n| link_to n.name, :controller => :browse, :action => :one_model, :id => n.id}.uniq.join(', ') %>
+      <%= raw tag.nodes.sort_by {|n| n.name}.map {|n| link_to n.name, :controller => :browse, :action => :one_model, :id => n.id}.uniq.join(', ') %>
       )
       <% end %>
     </td>
