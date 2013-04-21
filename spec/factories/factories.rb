@@ -46,6 +46,8 @@
       administrator false
       registration_consent true
       salt 'salt'
+      sex 'm'
+      country_name 'Israel'
 
       avatar { fixture_file_upload(Rails.root.join('app', 'assets', 'images', 'person.jpeg'), 'image/jpeg') }
 
