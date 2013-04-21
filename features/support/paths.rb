@@ -107,8 +107,8 @@ module NavigationHelpers
     when /the login action page/
       "/account/login_action"
 
-    when /the password reminder action page/
-      "/account/send_password_action"
+    when /the password reset action page/
+      "/account/reset_password_action"
 
     else
       raise "Can't find mapping from \"#{page_name}\" to a path.\n" +
