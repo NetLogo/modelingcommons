@@ -89,6 +89,9 @@ GEM
     erubis (2.7.0)
     factory_girl (4.2.0)
       activesupport (>= 3.0.0)
+    factory_girl_rails (4.2.1)
+      factory_girl (~> 4.2.0)
+      railties (>= 3.0.0)
     ffi (1.7.0)
     formatador (0.2.4)
     fssm (0.2.10)
@@ -259,7 +262,7 @@ DEPENDENCIES
   cucumber-rails
   database_cleaner
   diff-lcs
-  factory_girl
+  factory_girl_rails (~> 4.0)
   guard
   guard-rspec
   hoptoad_notifier

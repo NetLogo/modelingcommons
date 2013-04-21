@@ -2,6 +2,8 @@
 
 class Notifications < ActionMailer::Base
 
+  default :from => 'nlcommons@modelingcommons.org'
+
   ActionMailer::Base.smtp_settings = {
     :address => "mail.modelingcommons.org",
     :port => 25,
@@ -10,15 +12,7 @@ class Notifications < ActionMailer::Base
     :enable_starttls_auto => false
   }
 
-  FROM_ADDRESS = 'nlcommons@modelingcommons.org'
-
-  def standard_settings
-    @from = FROM_ADDRESS
-    @content_type = 'text/html'
-  end
-
   def signup(person, cleartext_password)
-    standard_settings
     @recipients = person.email_address
     @bcc = 'modelingcommons@ccl.northwestern.edu'
     @subject = "Welcome to the NetLogo Modeling Commons!"
@@ -34,7 +28,6 @@ class Notifications < ActionMailer::Base
   end
 
   def reset_password(person)
-    standard_settings
     @recipients = person.email_address
     @person = person
     @subject = 'Modeling Commons: Your new password'
@@ -45,7 +38,6 @@ class Notifications < ActionMailer::Base
   end
 
   def password_reminder(person, new_password)
-    standard_settings
     @recipients = person.email_address
     @person = person
     @new_password = new_password
@@ -57,7 +49,6 @@ class Notifications < ActionMailer::Base
   end
 
   def changed_password(person)
-    standard_settings
     @recipients = person.email_address
     @person = person
     @subject = 'Your new password'
@@ -68,7 +59,6 @@ class Notifications < ActionMailer::Base
   end
 
   def modified_model(nlmodel, current_author)
-    standard_settings
     @bcc = 'modelingcommons@ccl.northwestern.edu'
     @recipients = nlmodel.people.select {|p| p.send_model_updates?}.map {|person| person.email_address}
     @recipients.delete(current_author.email_address)
@@ -82,7 +72,6 @@ class Notifications < ActionMailer::Base
   end
 
   def applied_tag(people, tag)
-    standard_settings
     @recipients = people.select {|p| p.send_tag_updates?}.map {|person| person.email_address}
     @bcc = 'modelingcommons@ccl.northwestern.edu'
     @subject = 'Modeling Commons: '#{tag.name}' tag was applied'
@@ -94,7 +83,6 @@ class Notifications < ActionMailer::Base
   end
 
   def updated_discussion(nlmodel, current_author)
-    standard_settings
 
     author_addresses = nlmodel.people.map{|person| person.email_address}
     #posting_addresses = nlmodel.active_postings.map {|ap| ap.person}.select {|p| p.send_model_updates?}.map { |p| p.email_address}
@@ -112,7 +100,6 @@ class Notifications < ActionMailer::Base
   end
 
   def invited_to_group(person, membership)
-    standard_settings
     @recipients = person.email_address
     @subject = 'Group invitation from the NetLogo Modeling Commons'
     @subject = "[TESTING] #{@subject}" if Rails.env == 'development'
@@ -123,7 +110,6 @@ class Notifications < ActionMailer::Base
   end
 
   def friend_recommendation(sender, friend_email_address, node)
-    standard_settings
     @recipients = friend_email_address
     @cc = sender.email_address
     @subject = 'View an interesting NetLogo model'
@@ -136,7 +122,6 @@ class Notifications < ActionMailer::Base
   end
 
   def recommended_message(recommender, people, model)
-    standard_settings
     @recipients = recommender.email_address
     @bcc = people.map{|person| person.email_address}
     @subject = "Recommendation for the '#{model.name}' model in the NetLogo Modeling Commons"
@@ -149,7 +134,6 @@ class Notifications < ActionMailer::Base
   end
 
   def spam_warning(node, person)
-    standard_settings
     @recipients = 'modelingcommons@ccl.northwestern.edu'
     @subject = "Spam reported for the '#{node.name}' model in the NetLogo Modeling Commons"
     @subject = "[TESTING] #{@subject}" if Rails.env == 'development'
@@ -161,7 +145,6 @@ class Notifications < ActionMailer::Base
   end
 
   def upload_acknowledgement(node, person)
-    standard_settings
     @bcc = 'modelingcommons@ccl.northwestern.edu'
     @recipients = person.email_address
     @subject = "Thanks for uploading the '#{node.name}' model!"
@@ -174,7 +157,6 @@ class Notifications < ActionMailer::Base
   end
 
   def collaboration_notice(node, person)
-    standard_settings
     @cc = node.people.map { |p| p.email_address }
     @bcc = 'modelingcommons@ccl.northwestern.edu'
     @recipients = person.email_address

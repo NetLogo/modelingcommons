@@ -30,7 +30,7 @@ gem 'zippy'
 group :test do 
   gem "cucumber"
   gem "cucumber-rails", :require => false
-  gem 'factory_girl'
+  gem 'factory_girl_rails', "~> 4.0"
   gem 'rspec'
   gem 'rspec-rails'
   gem 'shoulda'

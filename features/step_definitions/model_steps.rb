@@ -1,5 +1,5 @@
 def person
-  @person || Factory.create(:person)
+  @person || FactoryGirl.create(:person)
 end
 
 def sample_netlogo_file(suffix='')
@@ -7,12 +7,12 @@ def sample_netlogo_file(suffix='')
 end
 
 Given /^a NetLogo model named "([^\"]*)"$/ do |model_name|
-  @node = Factory.create(:node,
+  @node = FactoryGirl.create(:node,
                          :name => model_name,
                          :visibility_id => 1,
                          :changeability_id => 1)
 
-  @node_version = Factory.create(:node_version,
+  @node_version = FactoryGirl.create(:node_version,
                                  :node_id => @node.id,
                                  :person_id => @person.id,
                                  :description => "Description of the node version",
@@ -25,13 +25,13 @@ end
 Given /^a NetLogo model named "([^\"]*)" uploaded by "([^\"]*)"$/ do |model_name, email_address|
   p = Person.find_by_email_address(email_address)
 
-  @node = Factory.create(:node,
+  @node = FactoryGirl.create(:node,
                          :name => model_name,
                          :visibility_id => 1,
                          :changeability_id => 1)
   @node.save!
 
-  @node_version = Factory.create(:node_version,
+  @node_version = FactoryGirl.create(:node_version,
                                  :node_id => @node.id,
                                  :person_id => p.id,
                                  :description => "Description of the node version",
@@ -40,18 +40,18 @@ Given /^a NetLogo model named "([^\"]*)" uploaded by "([^\"]*)"$/ do |model_name
 end
 
 Given /^a NetLogo model named "([^\"]*)" in the project "([^\"]*)"$/ do |model_name, project_name|
-  @node = Factory.create(:node,
+  @node = FactoryGirl.create(:node,
                          :name => model_name,
                          :visibility_id => 1,
                          :changeability_id => 1)
 
-  @node_version = Factory.create(:node_version,
+  @node_version = FactoryGirl.create(:node_version,
                                  :node_id => @node.id,
                                  :person_id => person.id,
                                  :description => "Description of the node version",
                                  :contents => sample_netlogo_file)
 
-  @project = Factory.create(:project,
+  @project = FactoryGirl.create(:project,
                             :name => project_name)
 
   @project.nodes << @node
@@ -79,7 +79,7 @@ Given /^(\d+) additional versions? of "([^\"]*)"$/ do |number_of_versions, model
   @node_versions = []
 
   number_of_versions.to_i.times do
-    @node_versions << Factory.create(:node_version,
+    @node_versions << FactoryGirl.create(:node_version,
                                      :node_id => @model.id,
                                      :person_id => person.id,
                                      :description => "Description of the node version",
@@ -91,7 +91,7 @@ end
 Given /^a version of "([^\"]*)" with different content$/ do |model_name|
   @model = Node.find_by_name(model_name)
 
-  @node_version = Factory.create(:node_version,
+  @node_version = FactoryGirl.create(:node_version,
                                  :node_id => @model.id,
                                  :person_id => person.id,
                                  :description => "Testing the system!",
