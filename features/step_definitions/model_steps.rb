@@ -12,14 +12,13 @@ Given /^a NetLogo model named "([^\"]*)"$/ do |model_name|
                              :visibility_id => 1,
                              :changeability_id => 1)
 
-  @node_version = FactoryGirl.create(:version,
-                                     :node_id => @node.id,
-                                     :person_id => @person.id,
-                                     :description => "Description of the node version",
-                                     :contents => sample_netlogo_file)
+  @version = FactoryGirl.create(:version,
+                                :node_id => @node.id,
+                                :person_id => @person.id,
+                                :description => "Description of the node version",
+                                :contents => sample_netlogo_file)
 
-  STDERR.puts "node_version ID '#{@node_version.id}' is for node ID '#{@node_version.node.id}', which should be the same as '#{@node.id}'"
-
+  STDERR.puts "version ID '#{@version.id}' is for node ID '#{@version.node.id}', which should be the same as '#{@node.id}'"
 end
 
 Given /^a NetLogo model named "([^\"]*)" uploaded by "([^\"]*)"$/ do |model_name, email_address|
@@ -29,14 +28,12 @@ Given /^a NetLogo model named "([^\"]*)" uploaded by "([^\"]*)"$/ do |model_name
                              :name => model_name,
                              :visibility_id => 1,
                              :changeability_id => 1)
-  @node.save!
 
-  @node_version = FactoryGirl.create(:node_version,
-                                     :node_id => @node.id,
-                                     :person_id => p.id,
-                                     :description => "Description of the node version",
-                                     :contents => sample_netlogo_file)
-  @node_version.save!
+  @version = FactoryGirl.create(:version,
+                                :node_id => @node.id,
+                                :person_id => p.id,
+                                :description => "Description of the node version",
+                                :contents => sample_netlogo_file)
 end
 
 Given /^a NetLogo model named "([^\"]*)" in the project "([^\"]*)"$/ do |model_name, project_name|
@@ -45,11 +42,11 @@ Given /^a NetLogo model named "([^\"]*)" in the project "([^\"]*)"$/ do |model_n
                              :visibility_id => 1,
                              :changeability_id => 1)
 
-  @node_version = FactoryGirl.create(:node_version,
-                                     :node_id => @node.id,
-                                     :person_id => person.id,
-                                     :description => "Description of the node version",
-                                     :contents => sample_netlogo_file)
+  @version = FactoryGirl.create(:version,
+                                :node_id => @node.id,
+                                :person_id => person.id,
+                                :description => "Description of the node version",
+                                :contents => sample_netlogo_file)
 
   @project = FactoryGirl.create(:project,
                                 :name => project_name)
@@ -67,7 +64,7 @@ When /^I attach a preview image$/ do
 end
 
 When /^the model "([^\"]*)" should have (\d+) versions$/ do |model_name, number_of_versions|
-  Node.find_by_name(model_name).node_versions.length.should == number_of_versions.to_i
+  Node.find_by_name(model_name).versions.length.should == number_of_versions.to_i
 end
 
 When /^the model "([^\"]*)" should have (\d+) child(ren)?$/ do |model_name, number_of_children, ignore|
@@ -76,26 +73,25 @@ end
 
 Given /^(\d+) additional versions? of "([^\"]*)"$/ do |number_of_versions, model_name|
   @model = Node.find_by_name(model_name)
-  @node_versions = []
+  @versions = []
 
   number_of_versions.to_i.times do
-    @node_versions << FactoryGirl.create(:node_version,
-                                         :node_id => @model.id,
-                                         :person_id => person.id,
-                                         :description => "Description of the node version",
-                                         :contents => sample_netlogo_file)
-
+    @versions << FactoryGirl.create(:version,
+                                    :node_id => @model.id,
+                                    :person_id => person.id,
+                                    :description => "Description of the node version",
+                                    :contents => sample_netlogo_file)
   end
 end
 
 Given /^a version of "([^\"]*)" with different content$/ do |model_name|
   @model = Node.find_by_name(model_name)
 
-  @node_version = FactoryGirl.create(:node_version,
-                                     :node_id => @model.id,
-                                     :person_id => person.id,
-                                     :description => "Testing the system!",
-                                     :contents => sample_netlogo_file('2'))
+  @version = FactoryGirl.create(:version,
+                                :node_id => @model.id,
+                                :person_id => person.id,
+                                :description => "Testing the system!",
+                                :contents => sample_netlogo_file('2'))
 end
 
 Given /^I spill my guts$/ do
