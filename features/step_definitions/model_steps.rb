@@ -17,8 +17,6 @@ Given /^a NetLogo model named "([^\"]*)"$/ do |model_name|
                                 :person_id => @person.id,
                                 :description => "Description of the node version",
                                 :contents => sample_netlogo_file)
-
-  STDERR.puts "version ID '#{@version.id}' is for node ID '#{@version.node.id}', which should be the same as '#{@node.id}'"
 end
 
 Given /^a NetLogo model named "([^\"]*)" uploaded by "([^\"]*)"$/ do |model_name, email_address|

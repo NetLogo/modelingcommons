@@ -9,8 +9,7 @@ So that other people can interact with it
     Given a user named "Reuven" "Lerner" with e-mail address "reuven@lerner.co.il" and password "password"
      When I log in as "reuven@lerner.co.il" with password "password"
       And I go to the administration page
-     Then show me the page
-      And I should see "Only administrators may visit this URL."
+     Then I should see "Only administrators may visit this URL."
 
   Scenario: A regular user does not get an admin link
     Given a user named "Reuven" "Lerner" with e-mail address "reuven@lerner.co.il" and password "password"

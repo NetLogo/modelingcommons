@@ -16,7 +16,7 @@
 <p><%= link_to "Download all models with this tag", :controller => :tags, :action => :download, :id => @tag.id %>
 <ul>
   <% if @tag.nodes.empty? %>
-  <p>None</p>
+  <p>No models have been tagged with <%= @tag.name %>.</p>
   <% else %>
   <% @tag.nodes.uniq.each do |model| %>
   <% next unless model.visible_to_user?(@person) %>
@@ -28,7 +28,7 @@
 <h2>Uses of this tag:</h2>
 <ul>
   <% if @tag.tagged_nodes.empty? %>
-  <p>None</p>
+  <p>No models have ever been tagged with <%= @tag.name %>.</p>
   <% else %>
   <% @tag.tagged_nodes.sort_by {|t| t.updated_at}.each do |tm| %>
   <% next unless tm.node.visible_to_user?(@person) %>
@@ -42,7 +42,7 @@
 <h2>People who have used this tag:</h2>
 <ul>
   <% if @tag.tagged_nodes.empty? %>
-  <p>None</p>
+  <p>No people have ever tagged models with <%= @tag.name %>.</p>
   <% else %>
   <% @tag.tagged_nodes.map {|tm| tm.person}.uniq.sort_by {|p| "#{p.last_name} #{p.first_name}" }.each do |person| %>
   <li><%= link_to person.fullname, :controller => "account", :action => "mypage", :id => person.id %></li>
