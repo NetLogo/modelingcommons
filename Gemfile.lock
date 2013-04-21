@@ -84,7 +84,7 @@ GEM
       cucumber (>= 1.2.0)
       nokogiri (>= 1.5.0)
       rails (~> 3.0)
-    database_cleaner (0.9.1)
+    database_cleaner (1.0.0.RC1)
     debug_inspector (0.0.2)
     diff-lcs (1.2.3)
     erubis (2.7.0)
@@ -263,7 +263,7 @@ DEPENDENCIES
   country_select
   cucumber
   cucumber-rails
-  database_cleaner
+  database_cleaner (~> 1.0.0RC1)
   diff-lcs
   factory_girl_rails (~> 4.0)
   guard

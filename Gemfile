@@ -46,7 +46,7 @@ end
 
 group :development, :test do
   gem 'awesome_print'
-  gem 'database_cleaner'
+  gem 'database_cleaner', '~> 1.0.0RC1'
   gem 'guard'
   gem 'guard-rspec'
   gem 'pry'
