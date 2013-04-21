@@ -86,7 +86,7 @@ module NavigationHelpers
     when /the administration page/
       '/admin/index'
 
-    when /the password reminder page/
+    when /the password reset page/
       '/account/reset_password'
 
     when /the model page for "([^\"]+)"/

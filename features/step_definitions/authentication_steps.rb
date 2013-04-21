@@ -1,17 +1,21 @@
 Given /^a user named "([^\"]*)" "([^\"]*)" with e-mail address "([^\"]*)" and password "([^\"]*)"$/ do |first_name, last_name, email, password|
+  encrypted_password = Person.encrypted_password('salt', password)
+
   @person = FactoryGirl.create(:person,
                                :first_name => first_name,
                                :last_name => last_name,
-                               :password => password,
+                               :password => encrypted_password,
                                :email_address => email,
                                :registration_consent => true)
 end
 
 Given /^an administrator named "([^\"]*)" "([^\"]*)" with e-mail address "([^\"]*)" and password "([^\"]*)"$/ do |first_name, last_name, email, password|
+  encrypted_password = Person.encrypted_password('salt', password)
+
   @person = FactoryGirl.create(:person,
                                :first_name => first_name,
                                :last_name => last_name,
-                               :password => password,
+                               :password => encrypted_password,
                                :email_address => email,
                                :administrator => true,
                                :registration_consent => true)

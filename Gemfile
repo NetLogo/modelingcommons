@@ -31,6 +31,7 @@ group :test do
   gem "cucumber"
   gem "cucumber-rails", :require => false
   gem 'factory_girl_rails', "~> 4.0"
+  gem 'launchy'
   gem 'rspec'
   gem 'rspec-rails'
   gem 'shoulda'
@@ -50,8 +51,8 @@ group :development, :test do
   gem 'guard-rspec'
   gem 'pry'
   gem 'pry-nav'
-  gem 'pry-remote'
   gem 'pry-rails'
+  gem 'pry-remote'
   gem 'rb-fsevent'
   gem 'watir-webdriver'
 end

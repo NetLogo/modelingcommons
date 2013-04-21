@@ -17,11 +17,19 @@ So that other people can interact with it
      And I go to the upload page
     Then I should not see "Optional: Set the group"
 
-  Scenario: A user may not upload an empty model
+  Scenario: A user may not upload an empty model (non-JavaScript version)
     When I log in as "reuven@lerner.co.il" with password "password"
      And I go to the upload page
      And I press "Upload model"
-    Then I should see "Sorry, but you must enter a model name and file."
+    Then I should see "Upload a NetLogo model"
+
+  @javascript
+  Scenario: A user may not upload an empty model (JavaScript version)
+    When I log in as "reuven@lerner.co.il" with password "password"
+     And I go to the upload page
+     And I press "Upload model"
+    Then I should see "This field is required." within "label[for=new_model_name]"
+     And I should see "This field is required." within "label[for=new_model_uploaded_body]"
 
   Scenario: A user may upload a valid model file
     When I log in as "reuven@lerner.co.il" with password "password"
