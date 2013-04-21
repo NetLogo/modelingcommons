@@ -43,7 +43,7 @@ So that I can use the system
 
   Scenario: Edit account information
     When I log in as "reuven@lerner.co.il" with password "password"
-     And I follow "Edit personal details"
+     And I follow "Edit your details"
      And I fill in "NewFirstname" for "First name"
      And I fill in "NewLastname" for "Last name"
      And I fill in "newpw" for "Password"
