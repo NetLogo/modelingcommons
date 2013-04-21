@@ -77,7 +77,7 @@ class UploadController < ApplicationController
         
         @model.update_attributes!(:visibility_id => read_permission.id,
                                   :changeability_id => write_permission.id,
-                                  :group_id => group.id)
+                                  :group => group)
         
         # ------------------------------------------------------------
         # Preview image

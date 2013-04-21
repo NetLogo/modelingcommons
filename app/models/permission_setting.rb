@@ -1,6 +1,8 @@
 # Model to handle different permission settings
 
 class PermissionSetting < ActiveRecord::Base
+  attr_accessible :name, :short_form
+
   ANYONE = 1
   OWNER = 2
   GROUP = 3
