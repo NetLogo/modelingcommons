@@ -83,7 +83,10 @@ class UploadController < ApplicationController
         # Preview image
         # ------------------------------------------------------------
         
-        if params[:new_model][:uploaded_preview].present?
+        params[:new_model][:uploaded_preview].rewind
+        preview_body = params[:new_model][:uploaded_preview].read
+
+        if preview_body.present?
           
           # Create a preview
           params[:new_model][:uploaded_preview].rewind
@@ -92,7 +95,7 @@ class UploadController < ApplicationController
                                       :description => "Preview for '#{model_name}'",
                                       :filename => model_name + '.png',
                                       :content_type => 'preview',
-                                      :contents => params[:new_model][:uploaded_preview].read)
+                                      :contents => preview_body)
           
           expire_page :action => :display_preview, :id => @model.id
           
