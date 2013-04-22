@@ -7,10 +7,13 @@ def sample_netlogo_file(suffix='')
 end
 
 Given /^a NetLogo model named "([^\"]*)"$/ do |model_name|
+  everyone_permission = PermissionSetting.find_by_short_form('a')
+
+
   @node = FactoryGirl.create(:node,
                              :name => model_name,
-                             :visibility_id => 1,
-                             :changeability_id => 1)
+                             :visibility => everyone_permission,
+                             :changeability => everyone_permission)
 
   @version = FactoryGirl.create(:version,
                                 :node_id => @node.id,
@@ -21,11 +24,13 @@ end
 
 Given /^a NetLogo model named "([^\"]*)" uploaded by "([^\"]*)"$/ do |model_name, email_address|
   p = Person.find_by_email_address(email_address)
+  everyone_permission = FactoryGirl.create(:permission_setting,
+                                           :id => 1, :short_form => 'a', :name => 'Everyone')
 
   @node = FactoryGirl.create(:node,
                              :name => model_name,
-                             :visibility_id => 1,
-                             :changeability_id => 1)
+                             :visibility => everyone_permission,
+                             :changeability => everyone_permission)
 
   @version = FactoryGirl.create(:version,
                                 :node_id => @node.id,
