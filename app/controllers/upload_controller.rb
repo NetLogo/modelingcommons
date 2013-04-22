@@ -83,16 +83,18 @@ class UploadController < ApplicationController
         # Preview image
         # ------------------------------------------------------------
         
-        if params[:new_model][:uploaded_preview].present?
-          
+        params[:new_model][:uploaded_preview].rewind
+        preview_body = params[:new_model][:uploaded_preview].read
+
+        if preview_body.present?
+
           # Create a preview
-          params[:new_model][:uploaded_preview].rewind
           attachment = Attachment.new(:node_id => @model.id,
                                       :person_id => @person.id,
                                       :description => "Preview for '#{model_name}'",
                                       :filename => model_name + '.png',
                                       :content_type => 'preview',
-                                      :contents => params[:new_model][:uploaded_preview].read)
+                                      :contents => preview_body)
           
           expire_page :action => :display_preview, :id => @model.id
           
@@ -186,13 +188,13 @@ class UploadController < ApplicationController
     end
 
     params[:new_version][:uploaded_body].rewind
-    node_version_contents = params[:new_version][:uploaded_body].read
+    version_contents = params[:new_version][:uploaded_body].read
 
     # Create the new version for this node
     new_version =
       Version.new(:node_id => node_id,
                   :person_id => @person.id,
-                  :contents => node_version_contents,
+                  :contents => version_contents,
                   :description => description)
 
     begin
