@@ -188,6 +188,7 @@ class UploadController < ApplicationController
       raise "Unknown option '#{fork}' passed to update_model"
     end
 
+    params[:new_version][:uploaded_body].rewind
     node_version_contents = params[:new_version][:uploaded_body].read
 
     # Create the new version for this node
