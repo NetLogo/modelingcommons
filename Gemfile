@@ -57,7 +57,5 @@ group :development, :test do
   gem 'watir-webdriver'
 end
 
-group :assets do
-  gem 'sass-rails'
-  gem 'compass-rails'
-end
+gem 'sass-rails'
+gem 'compass-rails'
