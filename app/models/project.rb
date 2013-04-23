@@ -1,8 +1,9 @@
 # Model to keep track of projects (i.e., collections of models)
 
 class Project < ActiveRecord::Base
-  validates_presence_of :name
-  validates_uniqueness_of :name
+  attr_accessible :name, :person
+
+  validates :name, :presence => true, :uniqueness => true
 
   has_many :node_projects
   has_many :nodes, :through => :node_projects
@@ -73,7 +74,7 @@ class Project < ActiveRecord::Base
     end
     
     m.format = 'png'
-    dir = RAILS_ROOT + "/public/system/project_images/" + self.id.to_s + "/"
+    dir = Rails.root.to_s + "/public/system/project_images/" + self.id.to_s + "/"
     Dir.mkdir(dir) if !File.exists?(dir)
     m.write(dir + "project.png")
   end
@@ -87,7 +88,7 @@ class Project < ActiveRecord::Base
   end
 
   def zipfile_name_full_path
-    "#{RAILS_ROOT}/public/modelzips/#{zipfile_name}"
+    "#{Rails.root}/public/modelzips/#{zipfile_name}"
   end
 
   def create_zipfile(web_user)

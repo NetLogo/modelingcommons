@@ -2,7 +2,9 @@
 # may optionally be an administrator.
 
 class Membership < ActiveRecord::Base
-  validates_presence_of :person, :group
+  attr_accessible :person_id, :person, :group
+  validates :person, :presence => true
+  validates :group, :presence => true
 
   belongs_to :person
   belongs_to :group
@@ -12,8 +14,8 @@ class Membership < ActiveRecord::Base
   delegate :fullname, :to => :person, :prefix => 'person'
   delegate :name, :to => :group, :prefix => 'group'
 
-  named_scope :approved_members, :conditions => { :status => 'approved' }
-  named_scope :administrators, :conditions => { :is_administrator => true }
+  scope :approved_members, :conditions => { :status => 'approved' }
+  scope :administrators, :conditions => { :is_administrator => true }
 
   def group_size
     group.members.size

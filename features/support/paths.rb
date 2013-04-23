@@ -86,7 +86,7 @@ module NavigationHelpers
     when /the administration page/
       '/admin/index'
 
-    when /the password reminder page/
+    when /the password reset page/
       '/account/reset_password'
 
     when /the model page for "([^\"]+)"/
@@ -94,9 +94,6 @@ module NavigationHelpers
 
     when /the rename page for "([^\"]+)"/
       "/browse/rename_model/#{Node.find_by_name($1).id}"
-
-    when /the "([^\"]+)" tab for "([^\"]+)"/
-      "/browse/browse_#{$1}_tab/#{Node.find_by_name($2).id}"
 
     when /the related graph for "([^\"]+)"/
       "/graph/graphviz/#{Node.find_by_name($1).id}"
@@ -107,8 +104,8 @@ module NavigationHelpers
     when /the login action page/
       "/account/login_action"
 
-    when /the password reminder action page/
-      "/account/send_password_action"
+    when /the password reset action page/
+      "/account/reset_password_action"
 
     else
       raise "Can't find mapping from \"#{page_name}\" to a path.\n" +

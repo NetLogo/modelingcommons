@@ -14,7 +14,7 @@
     <% model_info = whats_new_model(model) %>
     <div class="news_post<% if model_info[:your_news] %> your_news<% end %>">
       <div class="news_image">
-        <a href="<%= model_info[:link] -%>">
+        <a href="<%= raw model_info[:link] -%>">
           <% if !model_info[:image].nil? %>
           <img src="<%= model_info[:image] %>" />
           <% end %>
@@ -22,13 +22,13 @@
       </div>
       <div class="news_content">
         <div class="news_above">
-          <%= model_info[:action] %>
+          <%= raw model_info[:action] %>
         </div>
         <div class="news_item">
           <a href="<%= model_info[:link] -%>"><%= model_info[:name] -%></a>
         </div>
         <div class="news_below">
-          <%= model_info[:time] %>
+          <%= raw model_info[:time] %>
         </div>
       </div> 
     </div>

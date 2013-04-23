@@ -1,6 +1,6 @@
 <div class="header">
   <div class="banner">
-    <%= link_to "<h2>NetLogo</h2><h1>Modeling Commons</h1>", :controller => :account, :action => :mypage %>
+    <%= link_to raw("<h2>NetLogo</h2><h1>Modeling Commons</h1>"), :controller => :account, :action => :mypage %>
   </div>
   <div class="login_flash">
     <div class="login_container">
@@ -11,7 +11,7 @@
 	<% if @person.administrator %> | <%= link_to_unless_current "Admin", :controller => :admin, :action => :index %><% end %>
 	| <%= link_to_unless_current "Logout", :controller => :account, :action => :logout %>
 	<% else %>
-	<% form_tag(url_for(:controller => :account, :action => :login_action), :id => "header_login") do %>
+	<%= form_tag(url_for(:controller => :account, :action => :login_action), :id => "header_login") do %>
 	<table>
 	  <tr>
 	    <td colspan="3" style="text-align: left"><%= link_to "Register to share and participate", :controller => :account, :action => :new %> | <%= link_to "Forgot Password", :controller => :account, :action => :reset_password -%></td>
@@ -76,7 +76,7 @@
 
   </div>
   <div class="search">
-    <% form_tag(url_for(:controller => :search, :action => :search_action), { :id => "model_search_form"}) do %>
+    <%= form_tag(url_for(:controller => :search, :action => :search_action), { :id => "model_search_form"}) do %>
     <%= text_field_tag :search_term, nil, {:id => 'model_search', :placeholder => 'Search Models'} -%>
     <input style="display: none;" type="submit" value="Search!" />
     <% end %>

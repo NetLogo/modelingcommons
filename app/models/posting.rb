@@ -1,15 +1,19 @@
 # Model to keep track of discussion postings
 
 class Posting < ActiveRecord::Base
+  attr_accessible :title, :body, :node_id, :is_question, :person_id, :deleted_at
+
   belongs_to :node
   belongs_to :person
 
-  validates_presence_of :title, :body, :node_id
+  validates :title, :presence => true
+  validates :body, :presence => true
+  validates :node_id, :presence => true
 
-  named_scope :questions, :conditions => { :is_question => true }, :order => "created_at DESC"
-  named_scope :unanswered_questions, :conditions => { :is_question => true, :answered_at => nil }, :order => "created_at DESC"
+  scope :questions, :conditions => { :is_question => true }, :order => "created_at DESC"
+  scope :unanswered_questions, :conditions => { :is_question => true, :answered_at => nil }, :order => "created_at DESC"
 
-  named_scope :created_since, lambda { |since| { :conditions => ['created_at >= ? ', since] }}
+  scope :created_since, lambda { |since| { :conditions => ['created_at >= ? ', since] }}
 
   after_save :notify_people
 
@@ -32,7 +36,7 @@ class Posting < ActiveRecord::Base
   end
 
   def notify_people
-    Notifications.deliver_updated_discussion(node, person)
+    Notifications.updated_discussion(node, person).deliver
   end
 
 end

@@ -1,15 +1,14 @@
 # Model to handle different permission settings
 
 class PermissionSetting < ActiveRecord::Base
+  attr_accessible :name, :short_form
+
   ANYONE = 1
   OWNER = 2
   GROUP = 3
 
-  validates_presence_of :name
-  validates_presence_of :short_form
-
-  validates_uniqueness_of :name
-  validates_uniqueness_of :short_form
+  validates :name, :presence => true, :uniqueness => true
+  validates :short_form, :presence => true, :uniqueness => true
 
   has_many :nodes
 

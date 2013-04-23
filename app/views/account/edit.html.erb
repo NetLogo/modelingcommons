@@ -1,7 +1,7 @@
 <% @title = "Edit your profile" %>
 
 <div class="global_padding">
-  <% form_for :person, :url => { :action => :update }, :html => {:multipart => true, :id => 'edit-person-form'} do |form| %>
+  <%= form_for :person, :url => { :action => :update }, :html => {:id => 'edit-person-form'} do |form| %>
   <table>
 
     <tr>

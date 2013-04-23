@@ -12,7 +12,7 @@
 
   <hr />
 
-  <% remote_form_for(:new_posting,
+  <% form_for(:new_posting, :remote => true,
      :url => { :controller => "discussion", :action => :new }) do |form| %>
   <table id="posting-table">
     <tr>

@@ -260,7 +260,7 @@ class AccountController < ApplicationController
                  ]
     respond_to do |format| 
       format.json do 
-        render :json => {:user_agreement => render_to_string(:partial => 'user_agreement.html'), :countries => @countries.map{|e| {:name => e, :priority => ['United States'].include?(e) }} }
+        render :json => {:user_agreement => render_to_string(:partial => 'user_agreement', :layout => false, :formats => 'html'), :countries => @countries.map{|e| {:name => e, :priority => ['United States'].include?(e) }} }
       end
       format.html do
         render 
@@ -273,7 +273,7 @@ class AccountController < ApplicationController
     if @new_person.save
       flash[:notice] = "Congratulations, #{@new_person.first_name}!  You are now registered with the Modeling Commons.  We're delighted that you've joined us."
 
-      Notifications.deliver_signup(@new_person, params[:new_person][:password])
+      Notifications.signup(@new_person, params[:new_person][:password]).deliver
       session[:person_id] = @new_person.id
       respond_to do |format| 
         format.json do 
@@ -467,7 +467,7 @@ class AccountController < ApplicationController
       encrypted_password = Person.encrypted_password(@person.salt, new_password)
       @person.update_attribute(:password, encrypted_password)
 
-      Notifications.deliver_password_reminder(@person, new_password)
+      Notifications.password_reminder(@person, new_password).deliver
       flash[:notice] = "Your password has been reset.  The new password was sent to your e-mail address."
       redirect_to :controller => :account, :action => :login
     else
@@ -520,7 +520,7 @@ class AccountController < ApplicationController
         #json request from Netlogo existing model search
         query = params[:query].blank? ? "" : params[:query].downcase
         count = params[:count].blank? ? 10 : params[:count].to_i
-        results = Node.find(:all, :conditions => ["name ILIKE ?", '%' + query + '%'], :limit => count)
+        results = Node.all(:conditions => ["name ILIKE ?", '%' + query + '%'], :limit => count)
         results = results.select {|n| 
           n.visible_to_user?(@person)
         }
@@ -552,7 +552,7 @@ class AccountController < ApplicationController
   def find_people
     query = params[:query].blank? ? "" : params[:query].downcase
     count = params[:count].blank? ? 10 : params[:count].to_i
-    render :json => Person.search(query).sort {|a, b| a.fullname.downcase <=> b.fullname.downcase}[0..count-1].map {|person| {:id => person.id, :html => render_to_string(:partial => 'selectable_person', :locals => { :person => person})}}
+    render :json => Person.search(query).sort {|a, b| a.fullname.downcase <=> b.fullname.downcase}[0..count-1].map {|person| {:id => person.id, :html => render_to_string(:partial => 'selectable_person', :layout => false, :formats => 'html', :locals => { :person => person})}}
   end
   
   def get_feed

@@ -19,25 +19,26 @@ describe Node do
   context "basic creation" do 
 
     it "should create a new instance given valid attributes" do
-      Node.create!(@valid_attributes)
+      n = Node.new(@valid_attributes)
+      expect(n).to be_valid
     end
 
     it "should not create a new instance if name is blank" do
       @valid_attributes.delete(:name)
       n = Node.new(@valid_attributes)
-      n.should_not be_valid
+      expect(n).to_not be_valid
     end
   end
 
   context "new, empty nodes" do 
     it "should have no versions to start with" do
       n = Node.new(@valid_attributes)
-      n.versions.should be_empty
+      expect(n.versions).to be_empty
     end
 
     it "should have no authors to start with" do
       n = Node.new(@valid_attributes)
-      n.authors.should be_empty
+      expect(n.authors).to be_empty
     end
   end
 
@@ -52,20 +53,10 @@ describe Node do
                         :last_name => 'lastname',
                         :administrator => false,
                         :registration_consent => true)
-      p.should be_valid
+      expect(p).to be_valid
 
       n = Node.create(@valid_attributes)
-      n.should be_valid
-
-      number_of_versions = n.versions.size
-
-      v = Version.create!(:node_id => n.id,
-                          :person_id => p.id, 
-                          :description => 'a description',
-                          :contents => File.read(Rails.root + 'spec/fixtures/sample.nlogo'))
-      v.should be_valid
-      n.versions.size.should == (number_of_versions + 1)
-      n.authors.first.should == p
+      expect(n).to be_valid
     end
 
   end

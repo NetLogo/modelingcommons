@@ -7,7 +7,7 @@ class TagsController < ApplicationController
   before_filter :require_login, :only => [:new, :create, :edit, :update, :destroy]
 
   def index
-    @tags = Tag.find(:all)
+    @tags = Tag.all
   end
 
   def create
@@ -29,11 +29,11 @@ class TagsController < ApplicationController
           logger.warn "No recipients; not sending the notification"
         else
           logger.warn "Notification recipients = '#{notification_recipients}'"
-          Notifications.deliver_applied_tag(notification_recipients, tn.tag)
+          Notifications.applied_tag(notification_recipients, tn.tag).deliver
         end
       end
     end
-    html = render_to_string(:partial => "tags/tag_cloud.html", :locals => {:model => Node.find(params[:node_id])})
+    html = render_to_string(:partial => "tags/tag_cloud", :layout => false, :formats => 'html', :locals => {:model => Node.find(params[:node_id])})
     respond_to do |format|
       format.html do
         render :text => html

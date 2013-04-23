@@ -1,6 +1,7 @@
 # Model for an individual node in our graph
 
 class Node < ActiveRecord::Base
+  attr_accessible :parent_id, :name, :updated_at, :group_id, :visibility_id, :changeability_id, :group
   acts_as_tree :order => "name"
 
   belongs_to :group
@@ -29,13 +30,14 @@ class Node < ActiveRecord::Base
   has_many :versions
   has_many :attachments
 
-  validates_presence_of :name, :visibility_id, :changeability_id
-  validates_numericality_of :visibility_id, :changeability_id
+  validates :name, :presence => true
+  validates :visibility_id, :presence => true, :numericality => true
+  validates :changeability_id, :presence => true, :numericality => true
 
   default_scope :order => 'name ASC', :include => [:visibility, :changeability, :tagged_nodes, :tags, :group]
 
-  named_scope :created_since, lambda { |since| { :conditions => ['created_at >= ? ', since] }}
-  named_scope :updated_since, lambda { |since| { :conditions => ['updated_at >= ? ', since] }}
+  scope :created_since, lambda { |since| { :conditions => ['created_at >= ? ', since] }}
+  scope :updated_since, lambda { |since| { :conditions => ['updated_at >= ? ', since] }}
 
 
   # ------------------------------------------------------------
@@ -111,7 +113,7 @@ class Node < ActiveRecord::Base
   end
 
   def netlogo_version_for_applet
-    applet_directory = "#{RAILS_ROOT}/public/applet/"
+    applet_directory = "#{Rails.root}/public/applet/"
     netlogo_version.gsub(/^(\d+\.\d+).*/, '\1')
   end
 
@@ -151,7 +153,11 @@ class Node < ActiveRecord::Base
 
   def bluecloth_info_tab
     logger.warn "[Node#info_tab_html] NetLogo 5!  Using textile"
-    BlueCloth.new(info_tab).to_html
+    text = BlueCloth.new(info_tab).to_html
+
+    text.gsub! /(?<!")(https?:\/\/[-\/_.~%?='\w]+\w)/ do
+      "<a target=\"_blank\" href=\"#{$1}\">#{$1}</a>"
+    end
   rescue
     logger.warn "[Node#info_tab_html] NetLogo 5!  Error with Bluecloth... using standard markup..."
     markup_info_tab
@@ -269,7 +275,7 @@ class Node < ActiveRecord::Base
   end
 
   def zipfile_name_full_path
-    "#{RAILS_ROOT}/public/modelzips/#{zipfile_name}"
+    "#{Rails.root}/public/modelzips/#{zipfile_name}"
   end
 
   def world_visible?
@@ -362,9 +368,8 @@ class Node < ActiveRecord::Base
   end
 
   def self.search(search_term, person)
-    find(:all,
-         :conditions => [ "position( ? in lower(name) ) > 0 ", search_term],
-         :include => :visibility).select { |node| node.visible_to_user?(person)}
+    all(:conditions => [ "position( ? in lower(name) ) > 0 ", search_term],
+        :include => :visibility).select { |node| node.visible_to_user?(person)}
   end
 
   def create_zipfile

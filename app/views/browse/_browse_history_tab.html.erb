@@ -9,7 +9,7 @@
 
   <p>There are <%= pluralize(@model.node_versions.length, "version") -%> of this model.</p>
 
-  <% form_tag :controller => :history, :action => :compare_versions, :id => @model.id do %>
+  <%= form_tag :controller => :history, :action => :compare_versions, :id => @model.id do %>
 
   <p><input type="submit" value="Compare selected versions" /></p>
 

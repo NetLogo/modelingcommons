@@ -1,67 +1,89 @@
-# require 'factory_girl'
+include ActionDispatch::TestProcess
 
-# Factory.define(:posting) do |posting|
-#   posting.association :person
-#   posting.association :node
-#   posting.sequence(:title) { |n| "title#{n}"}
-#   posting.sequence(:body) { |n| "body#{n}"}
-#   posting.is_question false
-#   posting.deleted_at nil
-#   posting.answered_at nil
-# end
+FactoryGirl.define do 
 
-# Factory.define(:group) do |group|
-#   group.sequence(:name) { |n| "tag#{n}"}
-# end
+  factory :posting do
+    association :person
+    association :node
+    sequence(:title) { |n| "title#{n}"}
+    sequence(:body) { |n| "body#{n}"}
+    is_question false
+    deleted_at nil
+    answered_at nil
+  end
 
-# Factory.define(:membership) do |m|
-#   m.association :person
-#   m.association :group
-#   m.is_administrator false
-#   m.status "pending"
-# end
+  factory :group do
+    sequence(:name) { |n| "tag#{n}"}
+  end
 
-# Factory.define(:node) do |node|
-#   node.sequence(:name) { |n| "name#{n}"}
-#   node.association :visibility, :factory => :permission_setting
-#   node.association :changeability, :factory => :permission_setting
-# end
+  factory :membership do
+    association :person
+    association :group
+    is_administrator false
+    status "pending"
+  end
 
-# Factory.define(:node_version) do |node_version|
-#   node_version.description "This is a description"
-#   node_version.contents "These are contents"
-# end
+  factory :node do
+    sequence(:name) { |n| "name#{n}"}
+    association :visibility, :factory => :permission_setting
+    association :changeability, :factory => :permission_setting
+  end
 
-# Factory.define(:permission_setting) do |p|
-#   p.short_form "a"
-#   p.name "Everyone"
-# end
+  factory :version do
+    contents "These are contents"
+  end
 
-# Factory.define(:person) do |person|
-#   person.sequence(:first_name) { |n| "first#{n}"}
-#   person.sequence(:last_name) { |n| "last#{n}"}
-#   person.sequence(:email_address) { |n| "email#{n}@example.com"}
-#   person.password "password"
-#   person.administrator false
-#   person.registration_consent true
+  factory :permission_setting do
+    id 1
+    short_form "a"
+    name "Everyone"
+  end
 
-#   person.avatar_file_name "avatar"
-#   person.avatar_content_type "image/jpeg"
-#   person.avatar_file_size 20
-# end
+  factory :person do
+    sequence(:first_name) { |n| "first#{n}"}
+    sequence(:last_name) { |n| "last#{n}"}
+    sequence(:email_address) { |n| "email#{n}@example.com"}
+    password "password"
+    administrator false
+    registration_consent true
+    salt 'salt'
+    sex 'm'
+    country_name 'Israel'
 
-# Factory.define(:project) do |project|
-#   project.sequence(:name) { |n| "tag#{n}"}
-# end
+    avatar { fixture_file_upload(Rails.root.join('app', 'assets', 'images', 'person.jpeg'), 'image/jpeg') }
 
-# Factory.define(:tag) do |tag|
-#   tag.sequence(:name) { |n| "tag#{n}"}
-#   tag.association :person
-# end
 
-# Factory.define(:tagged_node) do |tn|
-#   tn.association :node
-#   tn.association :tag
-#   tn.association :person
-#   tn.sequence(:comment) { |n| "comment#{n}"}
-# end
+    avatar_file_name "avatar"
+    avatar_content_type "image/jpeg"
+    avatar_file_size 20
+  end
+
+  factory :project do
+    sequence(:name) { |n| "tag#{n}"}
+  end
+
+  factory :tag do
+    sequence(:name) { |n| "tag#{n}"}
+    association :person
+  end
+
+  factory :tagged_node do
+    association :node
+    association :tag
+    association :person
+    sequence(:comment) { |n| "comment#{n}"}
+  end
+
+  factory :collaborator_type do 
+    :name
+  end
+
+end
+
+FactoryGirl.create(:permission_setting, :id => 1, :name => 'Everyone', :short_form => 'a')
+FactoryGirl.create(:permission_setting, :id => 2, :name => 'No one but yourself', :short_form => 'u')
+FactoryGirl.create(:permission_setting, :id => 3, :name => 'Members of your group', :short_form => 'g')
+
+['Author', 'Domain expert', 'Advisor', 'Teacher', 'Editor', 'Team member'].each do |collaborator_type|
+  FactoryGirl.create(:collaborator_type, :name => collaborator_type)
+end

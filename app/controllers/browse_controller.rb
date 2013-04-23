@@ -5,7 +5,7 @@ class BrowseController < ApplicationController
   caches_page :display_preview
 
   prepend_before_filter :log_one_action, :except => [:display_preview, :pie]
-  prepend_before_filter :get_model_from_id_param, :except => [:index, :list_models, :list_recent_models, :search, :news, :one_node, :view_random_model, :about, :model_contents, :extension, :pie]
+  prepend_before_filter :get_model_from_id_param, :except => [:index, :list_models, :list_recent_models, :search, :news, :one_node, :view_random_model, :about, :model_contents, :extension, :pie, :fail]
 
   before_filter :require_login, :only => [:set_permissions]
   before_filter :check_visibility_permissions, :only => [:one_model, :one_applet ]
@@ -35,7 +35,7 @@ class BrowseController < ApplicationController
   def display_preview
     if @model.preview.blank?
       expires_in 5.minutes
-      redirect_to "/images/1x1.png"
+      redirect_to "/assets/1x1.png"
     else
       expires_in 12.hours
       if params[:size].present? && params[:size] == 'thumb'
@@ -43,7 +43,7 @@ class BrowseController < ApplicationController
         image.resize_to_fill!(50, 50, Magick::CenterGravity)
         send_data(image.to_blob, :type => 'image/png', :disposition => 'inline')
       else
-        render :text => @model.preview.contents, :type => 'image/png', :disposition => 'inline', :layout => false
+        send_data @model.preview.contents, :type => 'image/png', :disposition => 'inline'
       end
     end
   end
@@ -127,8 +127,14 @@ class BrowseController < ApplicationController
   end
 
   def pie
-    send_file "#{RAILS_ROOT}/public/stylesheets/PIE.htc",  :filename => 'PIE.htc', :disposition => 'inline', :type => 'text/x-component'
+    send_file "#{Rails.root}/public/stylesheets/PIE.htc",  :filename => 'PIE.htc', :disposition => 'inline', :type => 'text/x-component'
   end
   
   
+  def fail
+    x = 10
+    y = 0
+    render :text => x/y
+  end
+
 end

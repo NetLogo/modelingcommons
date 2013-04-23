@@ -2,7 +2,7 @@
 <div id="create-project-div" class="project-tab">
   <p>You may create as many projects as you wish.  Each project must have a unique name.</p>
 
-  <% form_tag :controller => :projects, :action => :create do  %>
+  <%= form_tag :controller => :projects, :action => :create do  %>
       <p><label for="project_name">Name of your new project:</label> <%= text_field_tag "project_name" %></p>
       <p><%= submit_tag "Create project" %></p>
   <% end %>

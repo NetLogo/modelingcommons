@@ -27,21 +27,28 @@ class MembershipController < ApplicationController
 
   def make_administrator
     membership = Membership.find(params[:id])
-    membership.update_attributes(:is_administrator => true, :status => 'approved')
+    membership.is_administrator = true
+    membership.status = 'approved'
+    membership.save
+    
     flash[:notice] = "User '#{membership.person_fullname}' is now an administrator of '#{membership.group_name}'."
     redirect_to :controller => :account, :action => :groups, :anchor => 'manage'
   end
 
   def remove_administrator
     membership = Membership.find(params[:id])
-    membership.update_attributes(:is_administrator => false)
+    membership.is_administrator = false
+    membership.save
+    
     flash[:notice] = "User '#{membership.person_fullname}' is no longer an administrator of '#{membership.group_name}'."
     redirect_to :controller => :account, :action => :groups, :anchor => 'manage'
   end
 
   def approve_membership
     membership = Membership.find(params[:id])
-    membership.update_attributes(:status => 'approved')
+    membership.status = 'approved'
+    membership.save
+    
     flash[:notice] = "User '#{membership.person_fullname}' is now a member of '#{membership.group_name}'."
     redirect_to :back
   end
@@ -53,10 +60,11 @@ class MembershipController < ApplicationController
     flash[:notice] = group ? "The name '#{group_name}' is already taken; please try a different one." :
       Group.transaction do
       group = Group.create!(:name => group_name)
-      Membership.create!(:person => @person,
-                         :group => group,
-                         :is_administrator => true,
-                         :status => 'approved')
+      membership = Membership.create!(:person => @person,
+                         :group => group)
+      membership.is_administrator = true
+      membership.status = 'approved'
+      membership.save!
       "Successfully created the group '#{group_name}'."
     end
 
@@ -90,12 +98,13 @@ class MembershipController < ApplicationController
       else
         # Invite them to the group
         membership = Membership.create(:person_id => person_id,
-                                       :group => group,
-                                       :is_administrator => false,
-                                       :status => 'approved')
-
+                                       :group => group)
+        membership.status = 'approved'
+        membership.is_administrator = false
+        membership.save
+        
         # Send them e-mail
-        Notifications.deliver_invited_to_group(Person.find(person_id), membership)
+        Notifications.invited_to_group(Person.find(person_id), membership).deliver
         counter = counter + 1
       end
 
@@ -110,7 +119,8 @@ class MembershipController < ApplicationController
       flash[:notice] = "This is not your invitation.  Sorry!"
 
     else
-      @membership.update_attributes(:status => 'pending')
+      @membership.status = 'pending'
+      @membership.save
       flash[:notice] = "Congratulations!  You're now a member of the '#{@membership.group_name}' group."
     end
 

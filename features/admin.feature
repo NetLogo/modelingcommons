@@ -4,12 +4,12 @@ As an administrator,
 I want to upload my model
 So that other people can interact with it
 
+  @javascript
   Scenario: A regular user may not access admin pages
     Given a user named "Reuven" "Lerner" with e-mail address "reuven@lerner.co.il" and password "password"
      When I log in as "reuven@lerner.co.il" with password "password"
       And I go to the administration page
-     Then show me the page
-      And I should see "Only administrators may visit this URL."
+     Then I should see "Only administrators may visit this URL."
 
   Scenario: A regular user does not get an admin link
     Given a user named "Reuven" "Lerner" with e-mail address "reuven@lerner.co.il" and password "password"
@@ -60,5 +60,6 @@ So that other people can interact with it
     Given an administrator named "Reuven" "Lerner" with e-mail address "reuven@lerner.co.il" and password "password"
      When I log in as "reuven@lerner.co.il" with password "password"
       And I go to the admin person-actions page for "reuven@lerner.co.il"
-     Then I should see "action: view_person_actions"
-      And I should see "action: mypage"
+     Then I should see "View all actions"
+      And I should see "View all people"
+      And I should see "View all models"

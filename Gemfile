@@ -7,11 +7,9 @@ end
 
 
 source 'https://rubygems.org'
-gem "rails", "~> 2.3.17"
+gem "rails", "~> 3.2.13"
 
-gem "compass", "0.11.7"
 gem "country_select"
-gem "jrails"
 gem "newrelic_rpm" 
 gem 'BlueCloth'
 gem 'GraphvizR'
@@ -23,30 +21,43 @@ gem 'diff-lcs'
 gem 'hoptoad_notifier'
 gem 'paperclip'
 gem 'pg'
-gem 'plucky', '0.3.8'
 gem 'rack'
 gem 'rmagick'
 gem 'validates_email'
-gem 'will_paginate', '~> 2.3.11'
+gem 'will_paginate'
 gem 'zippy'
 
-gem 'simplecov', :require => false, :group => :test
-
-group :development, :test do
-  # gem "cucumber", "1.1.0"
-  # gem "cucumber-rails", "0.3.2"
-  # gem 'factory_girl'
-  # gem 'database_cleaner'
-  gem 'pry'
-  gem 'pry-nav'
-  gem 'pry-remote'
-  # gem 'watir-webdriver'
-  gem 'test-unit', '1.2.3'
+group :test do 
+  gem "cucumber"
+  gem "cucumber-rails", :require => false
+  gem 'factory_girl_rails', "~> 4.0"
+  gem 'launchy'
   gem 'rspec'
   gem 'rspec-rails'
-  # gem 'shoulda'
-  # gem 'guard'
-  # gem 'guard-rspec', '~> 1.2'
-  # gem 'rb-fsevent', '~> 0.9'
-  # gem 'fuubar-legacy' 
+  gem 'shoulda'
+  gem 'simplecov', :require => false
+  gem 'simplecov-rcov-text', :require => false
+end
+
+group :development do 
+  gem 'better_errors'
+  gem 'binding_of_caller'
+end
+
+group :development, :test do
+  gem 'awesome_print'
+  gem 'database_cleaner', '~> 1.0.0RC1'
+  gem 'guard'
+  gem 'guard-rspec'
+  gem 'pry'
+  gem 'pry-nav'
+  gem 'pry-rails'
+  gem 'pry-remote'
+  gem 'rb-fsevent'
+  gem 'watir-webdriver'
+end
+
+group :assets do
+  gem 'sass-rails'
+  gem 'compass-rails'
 end

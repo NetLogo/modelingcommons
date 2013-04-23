@@ -1,7 +1,9 @@
 class Collaboration < ActiveRecord::Base
-  validates_presence_of :node_id
-  validates_presence_of :person_id
-  validates_presence_of :collaborator_type_id
+  attr_accessible :node, :person, :collaborator_type_id
+  
+  validates :node_id, :presence => true
+  validates :person_id, :presence => true
+  validates :collaborator_type_id, :presence => true
 
   belongs_to :node
   belongs_to :person
@@ -14,6 +16,6 @@ class Collaboration < ActiveRecord::Base
   after_save :notify_collaborator
 
   def notify_collaborator
-    Notifications.deliver_collaboration_notice(node, person) 
+    Notifications.collaboration_notice(node, person).deliver
   end
 end

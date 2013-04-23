@@ -21,26 +21,30 @@ class Person < ActiveRecord::Base
   has_many :memberships
   has_many :groups, :through => :memberships, :order => "lower(name) ASC"
 
-  has_attached_file :avatar, :styles => { :medium => "200x200>", :thumb => "40x40>" }, :default_url => "/images/default-person/:style/default-person.png"
+  has_attached_file :avatar,
+                    :styles => { :medium => "200x200>", :thumb => "40x40>" },
+                    :default_url => "/assets/default-person/:style/default-person.png",
+                    :path => ":rails_root/public/system/:attachment/:id/:style/:filename",
+                    :url => "/system/:attachment/:id/:style/:filename"
 
   attr_protected :avatar_file_name, :avatar_content_type, :avatar_size
 
   attr_accessor :password_confirmation
 
-  validates_presence_of :first_name
-  validates_presence_of :last_name
-  validates_presence_of :email_address
-  validates_presence_of :registration_consent, :message => "must be checked"
+  validates :first_name, :presence => true
+  validates :last_name, :presence => true
+  validates :email_address, :presence => true
+  validates :registration_consent, :presence => { :message => "must be checked" }
+  validates :password, :presence => true, :confirmation => true
+  validates :email_address, :uniqueness => { :case_sensitive => false }
+
   validates_email :email_address, :level => 1
-  validates_presence_of :password
-  validates_uniqueness_of :email_address, :case_sensitive => false
-  validates_confirmation_of :password
 
-  named_scope :created_since, lambda { |since| { :conditions => ['created_at >= ? ', since] }}
-  named_scope :phone_book, :order => "last_name, first_name"
+  scope :created_since, lambda { |since| { :conditions => ['created_at >= ? ', since] }}
+  scope :phone_book, :order => "last_name, first_name"
 
-  after_validation_on_create :generate_salt_and_encrypt_password
-  after_validation_on_update :encrypt_updated_password
+  # after_validation_on_create :generate_salt_and_encrypt_password
+  # after_validation_on_update :encrypt_updated_password
 
   def node_versions
     versions
@@ -95,7 +99,7 @@ class Person < ActiveRecord::Base
   end
 
   def zipfile_name_full_path
-    "#{RAILS_ROOT}/public/modelzips/#{zipfile_name}"
+    "#{Rails.root}/public/modelzips/#{zipfile_name}"
   end
 
   def create_zipfile(web_user)
@@ -138,7 +142,7 @@ class Person < ActiveRecord::Base
   end
 
   def downloaded_nodes
-    LoggedAction.find(:all, :conditions => {:action => 'download_model', :person_id => id}, :include => :node).map { |la| Node.find(la.node_id) }.uniq
+    LoggedAction.all(:conditions => {:action => 'download_model', :person_id => id}, :include => :node).map { |la| Node.find(la.node_id) }.uniq
   end
 
   def questions
@@ -150,11 +154,11 @@ class Person < ActiveRecord::Base
   end
 
   def viewed_nodes
-    LoggedAction.find(:all, :conditions => { :action => 'one_model', :person_id => id}, :include => :node).map { |la| Node.first(:conditions => {:id => la.node_id})}.uniq
+    LoggedAction.all(:conditions => { :action => 'one_model', :person_id => id}, :include => :node).map { |la| Node.first(:conditions => {:id => la.node_id})}.uniq
   end
 
   def user_model_downloads
-    user_downloads = LoggedAction.find(:all, :conditions => { :controller => 'account', :action => 'download', :person_id => id}).map { |la| [la.logged_at, YAML.load(la.params)['id']]  }
+    user_downloads = LoggedAction.all(:conditions => { :controller => 'account', :action => 'download', :person_id => id}).map { |la| [la.logged_at, YAML.load(la.params)['id']]  }
     
     downloaded_nodes = [ ]
 
@@ -168,7 +172,7 @@ class Person < ActiveRecord::Base
   end
 
   def project_model_downloads
-    project_downloads = LoggedAction.find(:all, :conditions => { :controller => 'project', :action => 'download', :person_id => id}).map { |la| [la.logged_at, YAML.load(la.params)['id']]  }
+    project_downloads = LoggedAction.all(:conditions => { :controller => 'project', :action => 'download', :person_id => id}).map { |la| [la.logged_at, YAML.load(la.params)['id']]  }
     
     downloaded_nodes = [ ]
 
@@ -182,7 +186,7 @@ class Person < ActiveRecord::Base
   end
 
   def tag_model_downloads
-    tag_downloads = LoggedAction.find(:all, :conditions => { :controller => 'tags', :action => 'download', :person_id => id}).map { |la| [la.logged_at, YAML.load(la.params)['id']]  }
+    tag_downloads = LoggedAction.all(:conditions => { :controller => 'tags', :action => 'download', :person_id => id}).map { |la| [la.logged_at, YAML.load(la.params)['id']]  }
     
     downloaded_nodes = [ ]
 

@@ -1,4 +1,4 @@
-<% form_tag(url_for(:controller => :search, :action => :search_action), :id => 'search-form') do %>
+<%= form_tag({:controller => :search, :action => :search_action}, :id => 'search-form') do %>
 <p>
   <%= text_field_tag :search_term, nil, :placeholder => 'Search Models', :style => 'vertical-align: top;' %> <%= submit_tag "Search", :class => "submit" %>
 </p>

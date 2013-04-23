@@ -10,35 +10,24 @@ So that I can change my name frequently
 
   Scenario: You should be able to go to the "Edit your profile" page when logged in
     When I go to the home page
-     And I follow "Edit personal details"
+     And I follow "Edit your details"
     Then I should see "Edit your profile"
 
+  @javascript
   Scenario: You should be able to change your first and last name
     When I go to the home page
-     And I follow "Edit personal details"
+     And I follow "Edit your details"
      And I fill in "BlahFirst" for "First name"
      And I fill in "BlahLast" for "Last name"
-     And I fill in "password" for "Password"
-     And I fill in "password" for "Password confirmation"
      And I press "Update account"
     Then I should see "Successfully updated your account."
      And I should see "Hello BlahFirst BlahLast"
 
-  Scenario: You should not be able to change your first and last name without a password
-    When I go to the home page
-     And I follow "Edit personal details"
-     And I fill in "BlahFirst" for "First name"
-     And I fill in "BlahLast" for "Last name"
-     And I fill in "password111" for "Password"
-     And I fill in "password222" for "Password confirmation"
-     And I press "Update account"
-    Then I should see "Error updating your account: 'Validation failed: Password doesn't match confirmation'"
-
+  @javascript
   Scenario: You should be able to change your password
     When I go to the home page
-     And I follow "Edit personal details"
-     And I fill in "password111" for "Password"
-     And I fill in "password111" for "Password confirmation"
+     And I follow "Edit your details"
+     And I fill in "password111" for "person[password]"
+     And I fill in "password111" for "person[password_confirmation]"
      And I press "Update account"
     Then I should see "Successfully updated your account."
-

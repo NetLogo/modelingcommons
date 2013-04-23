@@ -23,7 +23,7 @@
 
 <div id="create-group-div" class="group-tab" style="display:none;">
   <h3>Create a group</h3>
-  <% form_tag :controller => "membership", :action => :create_group do %>
+  <%= form_tag :controller => "membership", :action => :create_group do %>
   <%= text_field_tag "group_name" %>
   <p><%= submit_tag "Create group" %></p>
   <% end %>
@@ -72,7 +72,7 @@
   <p>You are not a member of any groups.</p>
   <% else %>
 
-  <% form_tag :controller => "membership", :action => :invite_people do %>
+  <%= form_tag :controller => "membership", :action => :invite_people do %>
   <%= select("group", "id", @person.groups.to_hash, :selected => model_group_id) %>
   <p>E-mail addresses, separated by commas:</p>
   <p><%= text_area_tag "invitees" %></p>

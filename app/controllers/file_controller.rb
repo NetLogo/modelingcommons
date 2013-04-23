@@ -14,6 +14,9 @@ class FileController < ApplicationController
     logger.warn "[create] Model is '#{@model.inspect}'"
     filename = @model.name + '.png' if attachment_type == 'preview'
 
+    params[:uploaded_file].rewind
+    contents = params[:uploaded_file].read
+
     # Add a new attachment, if allowed
     if not @model.changeable_by_user?(@person)
       flash[:notice] = "You are not allowed to modify this model."

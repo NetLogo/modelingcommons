@@ -1,13 +1,17 @@
 # Model to keep track of tag-node joins
 
 class TaggedNode < ActiveRecord::Base
+  attr_accessible :comment
+
   belongs_to :node
   belongs_to :tag
   belongs_to :person
 
-  validates_presence_of :node_id, :tag_id, :person_id
+  validates :node_id, :presence => true
+  validates :tag_id, :presence => true
+  validates :person_id, :presence => true
 
-  named_scope :created_since, lambda { |since| { :conditions => ['created_at >= ? ', since] }}
+  scope :created_since, lambda { |since| { :conditions => ['created_at >= ? ', since] }}
 
   def new_thing
     {:id => id,
