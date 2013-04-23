@@ -59,3 +59,4 @@ end
 
 gem 'sass-rails'
 gem 'compass-rails'
+gem 'uglifier'
