@@ -57,6 +57,9 @@ group :development, :test do
   gem 'watir-webdriver'
 end
 
-gem 'sass-rails'
+gem 'coffee-rails'
 gem 'compass-rails'
+gem 'sass-rails'
+gem 'sass-rails'
+gem 'therubyracer'
 gem 'uglifier'
