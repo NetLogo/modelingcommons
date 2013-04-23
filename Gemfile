@@ -57,10 +57,12 @@ group :development, :test do
   gem 'watir-webdriver'
 end
 
-gem 'coffee-rails'
-gem 'compass-rails'
-gem 'sass-rails'
-gem 'sass-rails'
-gem 'therubyracer'
-gem 'uglifier'
-gem 'haml'
+group :assets do 
+  gem 'coffee-rails'
+  gem 'compass-rails'
+  gem 'sass-rails'
+  gem 'sass-rails'
+  gem 'therubyracer'
+  gem 'uglifier'
+  gem 'haml'
+end
