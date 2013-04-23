@@ -116,6 +116,7 @@ GEM
     guard-rspec (2.5.3)
       guard (>= 1.1)
       rspec (~> 2.11)
+    haml-edge (3.1.79)
     highline (1.6.18)
     hike (1.2.2)
     hoe (3.5.3)
@@ -286,6 +287,7 @@ DEPENDENCIES
   factory_girl_rails (~> 4.0)
   guard
   guard-rspec
+  haml-edge
   hoptoad_notifier
   launchy
   newrelic_rpm
