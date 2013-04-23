@@ -1,9 +1,9 @@
 <% @env_title = (Rails.env == 'production' ? '' :  '[DEVELOPMENT/STAGING SERVER]' ) %> 
 <title><%= @env_title -%>NetLogo Modeling Commons -- <%= @title %></title>
-<%= stylesheet_link_tag 'nlcommons', 'jquery.autocomplete', :cache => false -%>
+<%= stylesheet_link_tag 'application' -%>
 <!--[if lt IE 8]><link rel="stylesheet" href="/stylesheets/ie.css" type="text/css" media="screen, projection"><![endif]-->
 <!-- defaults below here -->
-<%= javascript_include_tag 'jquery', 'jquery-ui', 'jquery.livequery', 'jquery.autocomplete', 'jquery.validate.pack.js', 'jquery.dataTables.min', 'jquery.hoverIntent', 'application' , :cache => false -%>
+<%= javascript_include_tag 'application' %>
 <link href='http://fonts.googleapis.com/css?family=Muli' rel='stylesheet' type='text/css'>
 <script type="text/javascript">
 
