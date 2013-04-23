@@ -16,7 +16,7 @@ class Notifications < ActionMailer::Base
     @recipients = person.email_address
     @bcc = 'modelingcommons@ccl.northwestern.edu'
     @subject = "Welcome to the NetLogo Modeling Commons!"
-    @subject = "[TESTING] #{@subject}" if Rails.env == 'development'
+    @subject = "[TESTING] #{@subject}" unless Rails.env.production?
 
     @person = person
     logger.warn "Cleartext password = '#{cleartext_password}'"

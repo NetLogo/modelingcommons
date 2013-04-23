@@ -26,13 +26,6 @@ end
 
 set :deploy_via, :export
 
-namespace :rake do
- desc "Generate a sitemap on a remote server."
- task :generate_sitemap do
-    run("cd #{deploy_to}/current; /usr/bin/rake sitemap:generate RAILS_ENV=production")
- end
-end
-
 Dir[File.join(File.dirname(__FILE__), '..', 'vendor', 'gems', 'hoptoad_notifier-*')].each do |vendored_notifier|
   $: << File.join(vendored_notifier, 'lib')
 end
