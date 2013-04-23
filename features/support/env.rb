@@ -8,7 +8,6 @@ SimpleCov.start 'rails'
 # files.
 
 require 'cucumber/rails'
-binding.pry
 
 
 # Capybara defaults to CSS3 selectors rather than XPath.

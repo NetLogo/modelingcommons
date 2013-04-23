@@ -22,8 +22,11 @@ Given /^an administrator named "([^\"]*)" "([^\"]*)" with e-mail address "([^\"]
 end
 
 When /^I log in as "([^\"]*)" with password "([^\"]*)"$/ do |email, pwd|
+  first_name = Person.find_by_email_address(email).first_name
+
   step "I go to the home page"
   step "I fill in \"#{email}\" for \"email_address\""
   step "I fill in \"#{pwd}\" for \"password\""
   step "I press \"Login\""
+  step "I should see \"Hello #{first_name}\""
 end
