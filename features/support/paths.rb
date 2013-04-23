@@ -95,9 +95,6 @@ module NavigationHelpers
     when /the rename page for "([^\"]+)"/
       "/browse/rename_model/#{Node.find_by_name($1).id}"
 
-    when /the "([^\"]+)" tab for "([^\"]+)"/
-      "/browse/browse_#{$1}_tab/#{Node.find_by_name($2).id}"
-
     when /the related graph for "([^\"]+)"/
       "/graph/graphviz/#{Node.find_by_name($1).id}"
 

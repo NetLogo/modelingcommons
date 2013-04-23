@@ -11,7 +11,7 @@ So that people can enjoy the cool new features that I have added
 
   @javascript
   Scenario: A user may update a model with a newer version
-    When I go to the "upload" tab for "Test model"
+    When I select the "upload" tab for "Test model"
      And I attach a model file to "new_version_uploaded_body"
      And I fill in "new_version_description" with "Description"
      And I choose "Replace the existing model"
@@ -20,7 +20,7 @@ So that people can enjoy the cool new features that I have added
 
   @javascript
   Scenario: Updating a model shows up on the home page
-    When I go to the "upload" tab for "Test model"
+    When I select the "upload" tab for "Test model"
      And I attach a model file to "new_version_uploaded_body"
      And I fill in "new_version_description" with "Description"
      And I choose "Replace the existing model"
@@ -30,7 +30,7 @@ So that people can enjoy the cool new features that I have added
 
   @javascript
   Scenario: A user may give a model with a child
-    When I go to the "upload" tab for "Test model"
+    When I select the "upload" tab for "Test model"
      And I attach a model file to "new_version_uploaded_body"
      And I fill in "new_version_description" with "Description"
      And I choose "Upload a new child"
