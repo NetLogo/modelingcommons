@@ -25,3 +25,4 @@ output.html
 .sass-cache/*
 .sass-cache
 *flymake*
+public/assets
