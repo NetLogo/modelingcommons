@@ -58,13 +58,12 @@ group :development, :test do
 end
 
 gem 'compass-rails'
+gem 'sass-rails'
 
 group :assets do 
-  gem 'jquery-rails'  
   gem 'coffee-rails'
-  gem 'sass-rails'
-  gem 'sass-rails'
+  gem 'haml'
+  gem 'jquery-rails'  
   gem 'therubyracer'
   gem 'uglifier'
-  gem 'haml'
 end
