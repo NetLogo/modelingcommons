@@ -57,10 +57,11 @@ group :development, :test do
   gem 'watir-webdriver'
 end
 
+gem 'compass-rails'
+
 group :assets do 
   gem 'jquery-rails'  
   gem 'coffee-rails'
-  gem 'compass-rails'
   gem 'sass-rails'
   gem 'sass-rails'
   gem 'therubyracer'
