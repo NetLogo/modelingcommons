@@ -23,3 +23,5 @@ turbulence/*
 .#*
 output.html
 .sass-cache/*
+.sass-cache
+*flymake*
