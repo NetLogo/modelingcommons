@@ -58,6 +58,7 @@ group :development, :test do
 end
 
 group :assets do 
+  gem 'jquery-rails'  
   gem 'coffee-rails'
   gem 'compass-rails'
   gem 'sass-rails'
