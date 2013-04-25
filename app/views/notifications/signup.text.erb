@@ -1,0 +1,30 @@
+<html>
+    <body>
+    <h1>Welcome, <%= @person.first_name %>!</h1>
+
+    <p>You have successfully registered with the
+    <%= link_to "NetLogo Modeling Commons", "http://modelingcommons.org"  -%>.</p>
+
+    <p>Your e-mail address (which is used to log in) is
+    '<%= @person.email_address %>'.</p>
+
+    <p>The Modeling Commons is a public space for online modeling in
+      <a href="http://ccl.northwestern.edu/netlogo">NetLogo</a>.
+      The goal is to make it easy for people to share models with one
+      another, to collaborate on modeling projects, and to discuss
+      models.</p>
+
+    <h2>Some common tasks:</h2>
+
+    <ul>
+        <li><%= link_to "Your personal home page", :host => 'modelingcommons.org', :controller => "account", :action => "mypage" %></li>
+        <li><%= link_to "List models in the Commons", :host => 'modelingcommons.org', :controller => "browse", :action => "list_models" %></li>
+        <li><%= link_to "Upload a new model", :host => 'modelingcommons.org', :controller => "upload", :action => "new_model" %></li>
+    </ul>
+
+    <p>If you have any comments or questions about the Modeling Commons,
+    please send e-mail to
+    <%= mail_to "modelingcommons@ccl.northwestern.edu", 'us' %>.
+
+    </body>
+</html>

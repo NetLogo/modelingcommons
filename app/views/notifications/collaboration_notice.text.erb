@@ -1,0 +1,27 @@
+<html>
+  <body>
+    <h1>Thanks <%= @person.first_name %>, for contributing to the '<%= @node.name %>' model!</h1>
+
+    <p>Greetings from the 
+    <a href="http://modelingcommons.org">NetLogo Modeling Commons</a>!  This is to let
+    you know that you have been added as a collaborator to the 
+    '<%= @node.name %>' model.</p>
+
+    <p>People will see your name on the
+      <a href="http://modelingcommons.org/browse/one_model/<%= @node.id %>"> 
+	model's page</a>, or when they view 
+      <a href="http://modelingcommons.org/account/models/<%= @person.id %>"> 
+	your models</a>.
+
+    <p>To remove yourself from such notifications in the future, click
+      on "edit your profile" from any page on
+      the <a href="http://modelingcommons.org">Modeling Commons</a>,
+      and un-check the appropriate box.</p>
+
+    <p>If you have any questions about the Modeling Commons, please
+      <a href="mailto:modelingcommons@ccl.northwestern.edu">contact
+      us</a>.  We enjoy getting feedback, and helping to
+      improve the Modeling Commons for our users.</p>
+
+  </body>
+</html>

@@ -1,0 +1,55 @@
+<html>
+  <body>
+    <h1>Thanks <%= @person.first_name %>, for the '<%= @node.name %>' model!</h1>
+
+    <p>Anyone with appropriate permissions  can now read, download, tag, and discuss your model,
+      just by going to the following link:</p>
+
+    <p><a href="http://modelingcommons.org/browse/one_model/<%= @node.id %>">http://modelingcommons.org/browse/one_model/<%= @node.id %></a></p>
+
+    <p>Share this link with your colleagues, students, teachers, or
+      anyone else interested in using or extending your model.  You
+      can also use the "share" button from the
+      <a href="http://modelingcommons.org/browse/one_model/<%= @node.id %>"> 
+	model's page</a> to tell others about your model via e-mail, Facebook,
+      Twitter, or other popular social networks.</p>
+
+    <p>You can associate any number of attachments with your model --
+      e.g., papers, background information, or data sets -- from the
+      <a href="http://modelingcommons.org/browse/one_model/<%= @node.id %>#model_tabs_browse_files"> "files"
+      tab</a> on your model's page.</p>
+
+    <p>Your model is visible 
+      <% if @node.author_visible? %>
+      only to you.
+      <% elsif @node.group_visible? %>
+      only to members of the '<%= @node.group.name %>' group.
+      <% else %>
+      to everyone, including users who have not logged in.
+      <% end %></p>
+
+    <p>Your model can be changed 
+      <% if @node.author_changeable? %>
+      only by you.
+      <% elsif @node.group_changeable? %>
+      only by members of the '<%= @node.group.name %>' group.
+      <% else %>
+      by all registered and logged-in users.
+      <% end %></p>
+
+    <p>You can change these permissions at any time from the
+      <a href="http://modelingcommons.org/browse/one_model/<%= @node.id %>">
+	model's page</a>.</p>
+
+    <p>To remove yourself from such notifications in the future, click
+      on "edit your profile" from any page on
+      the <a href="http://modelingcommons.org">Modeling Commons</a>,
+      and un-check the appropriate box.</p>
+
+    <p>If you have any questions about the Modeling Commons, please
+      <a href="mailto:modelingcommons@ccl.northwestern.edu">contact
+      us</a>.  We enjoy getting feedback, and helping to
+      improve the Modeling Commons for our users.</p>
+
+  </body>
+</html>
