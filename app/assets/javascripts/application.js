@@ -12,5 +12,6 @@
 //
 //= require jquery
 //= require jquery-ui
+//= require jquery.autocomplete
 //= require_tree .
 
