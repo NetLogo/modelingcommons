@@ -12,8 +12,8 @@
 //
 //= require jquery
 //= require jquery-ui
+//= jquery.bgiframe.min
 //= require jquery.autocomplete
-//= require ui.autocomplete
 //= require jquery.dataTables.min
-//= require_tree .
-
+//= jquery.hoverIntent
+//= nlcommons
