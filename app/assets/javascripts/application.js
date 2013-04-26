@@ -13,5 +13,7 @@
 //= require jquery
 //= require jquery-ui
 //= require jquery.autocomplete
+//= require ui.autocomplete
+//= require jquery.dataTables.min
 //= require_tree .
 

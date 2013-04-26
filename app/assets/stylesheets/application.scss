@@ -12,11 +12,9 @@
 @import "compass/css3";
 @import "compass/utilities/general/clearfix";
 @import "font";
-@import "jquery.ui.base.css";
-@import "jquery.ui.theme.css";
+@import "themes/base/jquery.ui.base.css";
+@import "themes/base/jquery.ui.theme.css";
 @import "numeric";
-/* @import "partials/base"; */
-@import "ui.base.css";
-@import "ui.everything";
-@import "ui.theme.css";
+@import "themes/base/ui.base.css";
+@import "themes/base/ui.theme.css";
 @import "nlcommons"
