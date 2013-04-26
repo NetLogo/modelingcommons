@@ -16,4 +16,5 @@
 //= require jquery.autocomplete
 //= require jquery.dataTables.min
 //= jquery.hoverIntent
+//= jquery.validate.pack
 //= nlcommons
