@@ -12,9 +12,9 @@
 //
 //= require jquery
 //= require jquery-ui
-//= jquery.bgiframe.min
+//= require jquery.bgiframe.min
 //= require jquery.autocomplete
 //= require jquery.dataTables.min
-//= jquery.hoverIntent
-//= jquery.validate.pack
-//= nlcommons
+//= require jquery.hoverIntent
+//= require jquery.validate.pack
+//= require nlcommons
