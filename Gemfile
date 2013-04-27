@@ -26,6 +26,7 @@ gem 'rmagick', :require => 'RMagick'
 gem 'validates_email'
 gem 'will_paginate'
 gem 'zippy'
+gem 'textacular', '~> 3.0', require: 'textacular/rails'
 
 group :test do 
   gem "cucumber"
