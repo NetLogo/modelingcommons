@@ -5,7 +5,6 @@ class GraphController < ApplicationController
   before_filter :get_model_from_id_param
 
   def graphviz
-    logger.warn "model = '#{@model.inspect}'"
     stem = "graphviz_#{Time.now.to_i}"
     format = 'png'
     filename = "/tmp/#{stem}.#{format}"

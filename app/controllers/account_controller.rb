@@ -412,8 +412,6 @@ class AccountController < ApplicationController
   end
 
   def mypage
-    
-    logger.warn "[AccountController#mypage] #{Time.now} enter"
     return redirect_to :controller => :account, :action => :login if (@person.nil? and params[:id].blank?)
 
     if params[:id].blank?
@@ -426,24 +424,19 @@ class AccountController < ApplicationController
     db_search_factor = 2 # fetch search_factor * limit records from db before filtering to see if user has read permission
     how_new_is_new = 2.weeks.ago
 
-    logger.warn "[AccountController#mypage] #{Time.now} before @recent_tags"
     #New tags (type Tag)
     @recent_tags = @the_person.tags.select { |tag| tag.created_at >= how_new_is_new}
 
     #Models that have recently had a tag attached (type TaggedNode)
-    logger.warn "[AccountController#mypage] #{Time.now} before @recent_tagged_models"
     @recent_tagged_models = @the_person.tagged_nodes.select { |tagged_node| tagged_node.node.visible_to_user?(@person) and tagged_node.created_at >= how_new_is_new}
 
-    logger.warn "[AccountController#mypage] #{Time.now} before @tag_events"
     @recent_tag_events = [@recent_tags, @recent_tagged_models].flatten.sort_by { |tag| tag.created_at}.reverse[0..limit - 1]
 
     
-    logger.warn "[AccountController#mypage] #{Time.now} before user/group model updates"
     # Model updates
     @model_events = @the_person.models.select {|model| model.updated_at >= how_new_is_new && model.visible_to_user?(@person)}.sort{|a, b| b.updated_at <=> a.updated_at}[0..limit - 1]
     @group_model_events = @the_person.models.select {|model| model.updated_at >= how_new_is_new && model.visible_to_user?(@person) && model.group && model.group.members.include?(@person)}.sort{|a, b| b.updated_at <=> a.updated_at}[0..limit - 1]
     
-    logger.warn "[AccountController#mypage] #{Time.now} exit"
     render :layout => 'application_nomargin'
   end
 
@@ -480,7 +473,6 @@ class AccountController < ApplicationController
   def follow
     if params[:id].blank?
       flash[:notice] = "You must indicate the person whose actions you wish to follow."
-      logger.warn "[follow] Sending user back; no ID specified"
       redirect_to :back
       return
     end

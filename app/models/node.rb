@@ -134,7 +134,6 @@ class Node < ActiveRecord::Base
   end
 
   def markup_info_tab
-    logger.warn "[Node#info_tab_html] Old version!  Using old info-tab parser"
     text = info_tab
 
     # Handle headlines
@@ -152,14 +151,12 @@ class Node < ActiveRecord::Base
   end
 
   def bluecloth_info_tab
-    logger.warn "[Node#info_tab_html] NetLogo 5!  Using textile"
     text = BlueCloth.new(info_tab).to_html
 
     text.gsub! /(?<!")(https?:\/\/[-\/_.~%?='\w]+\w)/ do
       "<a target=\"_blank\" href=\"#{$1}\">#{$1}</a>"
     end
   rescue
-    logger.warn "[Node#info_tab_html] NetLogo 5!  Error with Bluecloth... using standard markup..."
     markup_info_tab
   end
 

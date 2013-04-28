@@ -11,11 +11,8 @@ class BrowseController < ApplicationController
   before_filter :check_visibility_permissions, :only => [:one_model, :one_applet ]
 
   def list_models
-    logger.warn "[BrowseController#list_models] #{Time.now} before getting @models"
     @models = Node.all(:order => "name ASC", :include => [:tags, :visibility, :changeability])
-    logger.warn "[BrowseController#list_models] #{Time.now} before filtering @models"
     @models = @models.select {|model| model.visible_to_user?(@person)}
-    logger.warn "[BrowseController#list_models] #{Time.now} after filtering @models"
     render :layout => 'application_nomargin'
   end
 
@@ -57,7 +54,6 @@ class BrowseController < ApplicationController
       @model = Node.find(params[:id]) if params[:id].present?
       send_data @model.contents
     else
-      logger.warn "[BrowseController#model_contents] Error requesting contents of model ID '#{params[:id]}'"
       render :text => "Error sending contents of model ID '#{params[:id]}'"
     end
   end
