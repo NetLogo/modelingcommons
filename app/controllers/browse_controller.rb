@@ -102,7 +102,7 @@ class BrowseController < ApplicationController
       redirect_to :controller => :account, :action => :login
     end
 
-    redirect_to :controller => :browse, :action => :one_model, :id => models.rand.id
+    redirect_to :controller => :browse, :action => :one_model, :id => models.sample.id
   end
 
   def rename_model
