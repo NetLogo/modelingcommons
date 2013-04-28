@@ -23,8 +23,8 @@ class SearchController < ApplicationController
 
     matching_versions = Version.basic_search(@original_search_term)
 
-    @info_match_models = matching_versions.select {|v| v.info_tab.find(@original_search_term)}.map {|nv| nv.node}.uniq.select { |node| node.visible_to_user?(@person)}
-    @procedures_match_models = matching_versions.select {|v| v.procedures_tab.find(@original_search_term)}.map {|nv| nv.node}.uniq.select { |node| node.visible_to_user?(@person)}
+    @info_match_models = matching_versions.select {|v| v.info_tab.index(@original_search_term)}.map {|nv| nv.node}.uniq.select { |node| node.visible_to_user?(@person)}
+    @procedures_match_models = matching_versions.select {|v| v.procedures_tab.index(@original_search_term)}.map {|nv| nv.node}.uniq.select { |node| node.visible_to_user?(@person)}
 
   end
 
