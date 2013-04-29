@@ -77,7 +77,6 @@ class Notifications < ActionMailer::Base
   end
 
   def updated_discussion(nlmodel, current_author)
-    subj
     author_addresses = nlmodel.people.map{|person| person.email_address}
     #posting_addresses = nlmodel.active_postings.map {|ap| ap.person}.select {|p| p.send_model_updates?}.map { |p| p.email_address}
     posting_addresses = nlmodel.active_postings.map {|ap| ap.person}.map { |p| p.email_address}
