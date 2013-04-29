@@ -34,7 +34,7 @@ class Node < ActiveRecord::Base
   validates :visibility_id, :presence => true, :numericality => true
   validates :changeability_id, :presence => true, :numericality => true
 
-  default_scope :order => 'name ASC', :include => [:visibility, :changeability, :tagged_nodes, :tags, :group]
+  default_scope :include => [:visibility, :changeability, :tagged_nodes, :tags, :group]
 
   scope :created_since, lambda { |since| { :conditions => ['created_at >= ? ', since] }}
   scope :updated_since, lambda { |since| { :conditions => ['updated_at >= ? ', since] }}
