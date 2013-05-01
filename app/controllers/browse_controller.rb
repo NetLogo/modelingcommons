@@ -58,7 +58,7 @@ class BrowseController < ApplicationController
       filename = "#{params[:id]}.#{params[:format]}"
       node_id = session[:model_id]
       attachment = Attachment.where(node_id:node_id, filename:filename).first
-      send_data attachment.contents
+      send_data attachment.present? ? attachment.contents : "No attachment for node #{node_id} and filename '#{filename}'"
     else
       render :text => "Error sending contents of model ID '#{params[:id]}'"
     end

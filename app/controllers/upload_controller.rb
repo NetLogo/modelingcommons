@@ -83,10 +83,12 @@ class UploadController < ApplicationController
         # Preview image
         # ------------------------------------------------------------
         
-        params[:new_model][:uploaded_preview].rewind
-        preview_body = params[:new_model][:uploaded_preview].read
+        preview_param = params[:new_model][:uploaded_preview]
+        if preview_param.present?
 
-        if preview_body.present?
+          preview_param.rewind
+          preview_body = preview_param.read
+
           # Create a preview
           attachment = Attachment.new(:node_id => @model.id,
                                       :person_id => @person.id,
