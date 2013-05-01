@@ -127,7 +127,8 @@ class BrowseController < ApplicationController
   end
   
   def extension
-    render text => params.inspect
+    logger.warn "params.inspect = '#{params.inspect}'"
+    render text => "No extension"
   end
 
 end
