@@ -126,11 +126,8 @@ class BrowseController < ApplicationController
     send_file "#{Rails.root}/public/stylesheets/PIE.htc",  :filename => 'PIE.htc', :disposition => 'inline', :type => 'text/x-component'
   end
   
-  
-  def fail
-    x = 10
-    y = 0
-    render :text => x/y
+  def extension
+    render text => params.inspect
   end
 
 end
