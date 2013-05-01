@@ -22,6 +22,7 @@ class BrowseController < ApplicationController
   end
   
   def one_model
+    session[:model_id] = @model.id
     render :layout => 'application_nomargin'
   end
 
@@ -50,9 +51,14 @@ class BrowseController < ApplicationController
   end
 
   def model_contents
-    if params[:id].present?
+    if params[:id].to_i > 0
       @model = Node.find(params[:id]) if params[:id].present?
       send_data @model.contents
+    elsif params[:id].to_i.zero?
+      filename = "#{params[:id]}.#{params[:format]}"
+      node_id = session[:model_id]
+      attachment = Attachment.where(node_id:node_id, filename:filename).first
+      send_data attachment.contents
     else
       render :text => "Error sending contents of model ID '#{params[:id]}'"
     end
