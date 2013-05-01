@@ -127,8 +127,7 @@ class BrowseController < ApplicationController
   end
   
   def extension
-    logger.warn "params.inspect = '#{params.inspect}'"
-    render text => "No extension"
+    send_file "#{Rails.root}/public/extensions/#{params[:dirname]}/#{params[:extensionname]}.jar",  :filename => '#{params[:extensionname]}.jar', :disposition => 'inline', :type => 'application/octet-stream'
   end
 
 end
