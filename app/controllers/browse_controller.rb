@@ -50,23 +50,16 @@ class BrowseController < ApplicationController
     send_file(@model.create_zipfile, :filename => @model.zipfile_name, :type => 'application/zip', :disposition => "inline")
   end
 
+  def model_attachment
+    node_id = params[:id]
+    filename = "#{params[:filename]}.#{params[:format]}"
+    attachment = Attachment.where(node_id:node_id, filename:filename).first
+    send_data attachment.present? ? attachment.contents : "No attachment for node #{node_id} and filename '#{filename}'"
+  end
+
   def model_contents
-    logger.warn "[BrowseController#model_contents] starting, with params = '#{params.inspect}'"
-    if params[:id].to_i > 0
       @model = Node.find(params[:id]) if params[:id].present?
-      logger.warn "[BrowseController#model_contents] Sending contents of model #{@model.id}"
       send_data @model.contents
-    elsif params[:id].to_i.zero?
-      logger.warn "[BrowseController#model_contents] Sending filename #{params[:id]}, format #{params[:format]}"
-      filename = "#{params[:id]}.#{params[:format]}"
-      node_id = session[:model_id]
-      attachment = Attachment.where(node_id:3617, filename:filename).first
-      logger.warn "[BrowseController#model_contents] attachment.present? = '#{attachment.present?}'" 
-      logger.warn "[BrowseController#model_contents] attachment.contents = '#{attachment.contents}'" 
-      send_data attachment.present? ? attachment.contents : "No attachment for node #{node_id} and filename '#{filename}'"
-    else
-      render :text => "Error sending contents of model ID '#{params[:id]}'"
-    end
   end
 
   def set_permissions

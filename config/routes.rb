@@ -13,6 +13,12 @@ Nlcommons::Application.routes.draw do
 
   match '/browse/model_contents/:dirname/:extensionname.:format' => 'browse#extension'
 
+  match '/browse/:id/model_contents/' => 'browse#model_contents', :as => :model_contents
+
+  match '/browse/:id/:filename.:format' => 'browse#model_attachment', :as => :model_attachment
+  match '/browse/:id/model_contents/:filename.:format' => 'browse#model_contents', :as => :model_attachment
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

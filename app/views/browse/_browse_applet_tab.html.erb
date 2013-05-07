@@ -12,11 +12,12 @@
 
   <applet id="model_applet"
      code="<%= @model.applet_class -%>"
+     archive="<%= applet_filename -%>"
      align="bottom"
      width="<%= @model.dimensions[:width] -%>" height="<%= @model.dimensions[:height] -%>"
      archive="<%= applet_filename -%>" >
 
-    <param name="DefaultModel" value="<%= url_for :controller => :browse, :action => :model_contents, :id => @model.id -%>"></param>
+    <param name="DefaultModel" value="<%= model_contents_url(:id => @model.id)  -%>"></param>
   </applet>
  </div>
   <% end %>
