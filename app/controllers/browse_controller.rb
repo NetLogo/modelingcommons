@@ -53,8 +53,8 @@ class BrowseController < ApplicationController
   def model_contents
     logger.warn "[BrowseController#model_contents] starting, with params = '#{params.inspect}'"
     if params[:id].to_i > 0
-      logger.warn "[BrowseController#model_contents] Sending contents of model #{@model.id}"
       @model = Node.find(params[:id]) if params[:id].present?
+      logger.warn "[BrowseController#model_contents] Sending contents of model #{@model.id}"
       send_data @model.contents
     elsif params[:id].to_i.zero?
       logger.warn "[BrowseController#model_contents] Sending filename #{params[:id]}, format #{params[:format]}"
