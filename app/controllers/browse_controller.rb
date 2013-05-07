@@ -61,6 +61,8 @@ class BrowseController < ApplicationController
       filename = "#{params[:id]}.#{params[:format]}"
       node_id = session[:model_id]
       attachment = Attachment.where(node_id:node_id, filename:filename).first
+      logger.warn "[BrowseController#model_contents] attachment.present? = '#{attachment.present?}'" 
+      logger.warn "[BrowseController#model_contents] attachment.contents = '#{attachment.contents}'" 
       send_data attachment.present? ? attachment.contents : "No attachment for node #{node_id} and filename '#{filename}'"
     else
       render :text => "Error sending contents of model ID '#{params[:id]}'"
