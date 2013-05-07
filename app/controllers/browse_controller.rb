@@ -51,10 +51,13 @@ class BrowseController < ApplicationController
   end
 
   def model_contents
+    logger.warn "[BrowseController#model_contents] starting, with params = '#{params.inspect}'"
     if params[:id].to_i > 0
+      logger.warn "[BrowseController#model_contents] Sending contents of model #{@model.id}"
       @model = Node.find(params[:id]) if params[:id].present?
       send_data @model.contents
     elsif params[:id].to_i.zero?
+      logger.warn "[BrowseController#model_contents] Sending filename #{params[:id]}, format #{params[:format]}"
       filename = "#{params[:id]}.#{params[:format]}"
       node_id = session[:model_id]
       attachment = Attachment.where(node_id:node_id, filename:filename).first

@@ -37,7 +37,6 @@ class Notifications < ActionMailer::Base
     @recipients = person.email_address
     @person = person
     mail(:to => @recipients,
-         :bcc => NLCOMMONS_LIST,
          :subject => wrap_subject('Modeling Commons: Your new password'))
   end
 
