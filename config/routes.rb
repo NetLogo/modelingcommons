@@ -15,6 +15,7 @@ Nlcommons::Application.routes.draw do
 
   match '/browse/:id/model_contents/' => 'browse#model_contents', :as => :model_contents
 
+  match '/browse/:id/:extension/:extension.jar' => 'browse#extension', :as => :extension
   match '/browse/:id/:filename.:format' => 'browse#model_attachment', :as => :model_attachment
   match '/browse/:id/model_contents/:filename.:format' => 'browse#model_contents', :as => :model_attachment
 

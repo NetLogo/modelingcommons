@@ -131,7 +131,7 @@ class BrowseController < ApplicationController
   end
   
   def extension
-    send_file "#{Rails.root}/public/extensions/#{params[:dirname]}/#{params[:extensionname]}.jar",  :filename => '#{params[:extensionname]}.jar', :disposition => 'inline', :type => 'application/octet-stream'
+    send_file "#{Rails.root}/public/extensions/#{params[:extension]}/#{params[:extension]}.jar",  :filename => '#{params[:extension]}.jar', :disposition => 'inline', :type => 'application/octet-stream'
   end
 
 end
