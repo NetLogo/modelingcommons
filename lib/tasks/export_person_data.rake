@@ -10,6 +10,7 @@ namespace :nlcommons do
     output = [ ]
 
     header_line = %w(id email_address first_name last_name registered_at updated_at has_avatar sex birthdate country_name number_of_models number_of_postings number_of_questions number_of_tagged_models number_of_recommendations number_of_projects number_of_model_versions number_of_model_attachments number_of_collaborations)
+    output << header_line.join("\t")
 
     output_filename = "/tmp/person.data"
 

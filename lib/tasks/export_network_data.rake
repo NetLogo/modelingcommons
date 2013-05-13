@@ -182,5 +182,10 @@ namespace :network do
     end
   end
 
+  desc "Export all data"
+  task :export_all_data => [:environment, :authoring, :attaching, :recommending, :downloading, :non_question_posting, :answered_question_posting, :unanswered_question_posting, :download_user_models, :forking, :tagging, :viewing, :user_download_all, :project_download_all, :tag_download_all] do 
+    STDERR.puts "Exported all"
+  end
+
 
 end
