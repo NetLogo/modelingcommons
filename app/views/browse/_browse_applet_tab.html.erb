@@ -12,7 +12,7 @@
 
   <applet id="model_applet"
      code="<%= @model.applet_class -%>"
-     archive="<%= applet_filename -%>"
+     codebase="/browse/one_model/<%= @model.id %>/"
      align="bottom"
      width="<%= @model.dimensions[:width] -%>" height="<%= @model.dimensions[:height] -%>"
      archive="<%= applet_filename -%>" >
