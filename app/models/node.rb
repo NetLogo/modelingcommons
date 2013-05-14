@@ -355,9 +355,6 @@ class Node < ActiveRecord::Base
     return true if name =~ /3D/
     return true if netlogo_version =~ /3D/
     return true if procedures_tab =~ /hubnet-/
-    return true if procedures_tab =~ /file-/
-    return true if procedures_tab =~ /extensions/
-    return true if procedures_tab =~ /import-/
   end
 
   def self.get_anonymous_models
