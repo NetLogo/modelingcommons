@@ -222,6 +222,7 @@ class ApplicationController < ActionController::Base
     # most-recommended models
     @most_recommended_models = Recommendation.count(:group => "node_id",
                                                     :order => "count_all DESC",
+                                                    :conditions => "created_at > (now() - interval '2 weeks')",
                                                     :limit => limit * db_search_factor).map { |node| {
         :node => Node.find(node[0]),
         :recommendations => node[1]

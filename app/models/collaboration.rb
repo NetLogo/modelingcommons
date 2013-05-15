@@ -16,6 +16,7 @@ class Collaboration < ActiveRecord::Base
   after_save :notify_collaborator
 
   def notify_collaborator
+    return if node.collaborators.count == 1
     Notifications.collaboration_notice(node, person).deliver
   end
 end
