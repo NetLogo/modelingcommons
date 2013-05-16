@@ -4,7 +4,7 @@
     <div class="news_heading">Most Recommended Models<span class="sub_heading"> (in the past 2 weeks)</span></div>
     
   <% if @most_recommended_models.empty?  %>
-  <div class="news_empty">No statistics on most recommended models in the past 2 weeks</div>
+  <div class="news_empty">No models were recommended in the past 2 weeks</div>
   <% else %>
     <% @most_recommended_models.each do |modelAndCount| %>
     <% 

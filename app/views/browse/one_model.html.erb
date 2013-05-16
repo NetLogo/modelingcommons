@@ -36,7 +36,7 @@
         </div>
          
         <div class="tag_cloud_container">
-            <h3>Tags <span class="smaller"><a href="#" id="open_add_tag_form">Add tag</a></span></h3>
+            <h3>Tags <span class="smaller">Please <a href="#" id="open_add_tag_form">add tags/a> that describe this model</span></h3>
             <%= render :partial => "tags/tag_cloud", :locals => {:model => @model} %>
             <%= form_for(:new_tag, :url => {:controller => :tags, :action => :create}, :html => {:class => 'add_tag_form popup_form'}) do |form| -%>
               <div class="left-right"><div class="left"><h1>Add New Tag</h1></div><div class="right"><h2><a href="#" id="close_add_tag_form">Close</a></h2></div></div>
