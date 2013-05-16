@@ -13,19 +13,19 @@
         <% question_info = whats_new_comment(question) %>
         <div class="news_post<% if question_info[:your_news] %> your_news<% end %>">
           <div class="news_image">
-            <a href="<%= raw question_info[:link] -%>">
+            <a href="<%= question_info[:link] -%>">
               <img src="<%= question_info[:image] %>" />
             </a>
-            <a href="<%= raw question_info[:link] -%>" class="image_overlay">
+            <a href="<%= question_info[:link] -%>" class="image_overlay">
               <img src="<%= question_info[:person_image] -%>">
             </a>
           </div>
           <div class="news_content">
             <div class="news_above">
-              <%= question_info[:action] %>
+              <%= raw question_info[:action] %>
             </div>
             <div class="news_item">
-              <a href="<%= question_info[:link] -%>"><%= question_info[:name] %></a>
+              <a href="<%= raw question_info[:link] -%>"><%= question_info[:name] %></a>
             </div>
             <div class="news_below">
                <%= question_info[:time] %>
