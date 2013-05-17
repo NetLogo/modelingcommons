@@ -312,6 +312,9 @@ class AccountController < ApplicationController
       params[:person].delete(:password_confirmation)
     end
 
+    params[:person][:password] = Person.encrypted_password(@person.salt, params[:password][:password])    
+    params[:person][:password_confirmation] = Person.encrypted_password(@person.salt, params[:password][:password_confirmation])    
+
     begin
       @person.update_attributes!(params[:person])
       flash[:notice] = "Successfully updated your account."
