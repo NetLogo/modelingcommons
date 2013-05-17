@@ -5,5 +5,6 @@
 <% @headline_avatar = @the_person.avatar.url(:thumb) %>
 <% end %>
 <div class="panel">
-<%= render :partial => "browse/model_list", :object => @the_person.models %>
+<%= render :partial => "browse/model_list", 
+    :object => @the_person.models.select {|m| m.visible_to_user?(@person) } %>
 </div>
