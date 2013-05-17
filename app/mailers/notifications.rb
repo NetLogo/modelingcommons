@@ -45,7 +45,6 @@ class Notifications < ActionMailer::Base
     @person = person
     @new_password = new_password
     mail(:to => @recipients,
-         :bcc => NLCOMMONS_LIST,
          :subject => wrap_subject('Modeling Commons: Your password'))
   end
 
@@ -53,7 +52,6 @@ class Notifications < ActionMailer::Base
     @recipients = person.email_address
     @person = person
     mail(:to => @recipients,
-         :bcc => NLCOMMONS_LIST,
          :subject => wrap_subject('Your new password'))
   end
 
