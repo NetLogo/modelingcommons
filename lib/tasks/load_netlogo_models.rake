@@ -100,13 +100,13 @@ def update_models
         puts "\tReading the file contents"
         file_contents = File.open(path).read
 
-        puts "\tCreating a new NodeVersion"
+        puts "\tCreating a new Version"
 
         begin
-          new_version = NodeVersion.new(:node_id => node.id,
-                                        :person_id => @uri_user.id,
-                                        :contents => file_contents,
-                                        :description => 'Updated version tag')
+          new_version = Version.new(:node_id => node.id,
+                                    :person_id => @uri_user.id,
+                                    :contents => file_contents,
+                                    :description => 'Updated to NetLogo 5.0.4')
 
           if !new_version.save
             puts "\t\t*** Error trying to save a new version of the new node '#{node.name}', ID '#{node.id}': '#{e.inspect}'"
@@ -145,10 +145,10 @@ def update_models
 
         begin
           new_version =
-            nv = NodeVersion.new(:node_id => matching_node.id,
-                                 :person_id => @uri_user.id,
-                                 :contents => model_contents,
-                                 :description => 'Updated version tag')
+            nv = Version.new(:node_id => matching_node.id,
+                             :person_id => @uri_user.id,
+                             :contents => model_contents,
+                             :description => 'Updated to NetLogo 5.0.4')
 
           if nv.save
             puts "\t\t\tSuccessfully saved a new node_version"
@@ -206,6 +206,7 @@ def update_previews
         elsif matching_nodes.length == 1
           matching_node = matching_nodes.first
           file_contents = File.open(path).read
+          file_contents.force_encoding(Encoding.find('ASCII-8BIT'))
 
           puts "\t\tFound a matching node for '#{filename}'. Creating a new attachment, of type preview."
 
@@ -219,14 +220,13 @@ def update_previews
             puts "\t\t\tNo existing preview attachment for '#{filename}', so we must create one"
           end
 
-          new_version =
-            attachment = NodeAttachment.new(:node_id => matching_node.id,
-                                            :person_id => @uri_user.id,
-                                            :description => "Preview for '#{filename}'",
-                                            :filename => filename + '.png',
-                                            :type => 'preview',
-                                            :contents => file_contents)
-          if new_version.save
+          attachment = Attachment.new(:node_id => matching_node.id,
+                                      :person_id => @uri_user.id,
+                                      :description => "Preview for '#{filename}'",
+                                      :filename => filename + '.png',
+                                      :content_type => 'preview',
+                                      :contents => file_contents)
+          if attachment.save
             puts "\t\t\tSuccessfully saved a new preview"
           else
             puts "\t\t*** Error trying to create a attachment to node '#{matching_node.name}', ID '#{matching_node.id}'"
@@ -252,18 +252,18 @@ namespace :netlogo do
 
     should_update_models = ENV['UPDATE_MODELS']
     if should_update_models
-      puts "Now updating models, because should_update_models = '#{should_update_models}"
+      puts "Now updating models, because UPDATE_MODELS = '#{should_update_models}'"
       update_models
     else
-      puts "Not updating models, because should_update_models = '#{should_update_models}"
+      puts "Not updating models, because UPDATE_MODELS = '#{should_update_models}'"
     end
 
     should_update_previews = ENV['UPDATE_PREVIEWS']
     if should_update_previews
-      puts "Now updating previews, because should_update_previews = '#{should_update_previews}"
+      puts "Now updating previews, because UPDATE_PREVIEWS = '#{should_update_previews}'"
       update_previews
     else
-      puts "Not updating previews, because should_update_previews = '#{should_update_previews}"
+      puts "Not updating previews, because UPDATE_PREVIEWS = '#{should_update_previews}'"
     end
 
     puts "Done."

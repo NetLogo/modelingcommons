@@ -26,7 +26,7 @@
       <% end %>
     </tr>
 
-    <% @model.node_versions.sort_by {|v| v.created_at}.each do |version| %>
+    <% @model.node_versions.sort_by {|v| v.created_at}.reverse.each do |version| %>
     <tr>
       <td><input type="radio" id="<%= "compare_1_#{version.id}" -%>" name="compare_1" value="<%= version.id -%>" /></td>
       <td><input type="radio" id="<%= "compare_2_#{version.id}" -%>" name="compare_2" value="<%= version.id -%>" /></td>
