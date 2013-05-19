@@ -1049,9 +1049,11 @@ jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
     var initializeAlreadyRegisteredButton = function() {
         var loginButton = $("#login_to_the_commons");
         loginButton.click(function() {
-            //Use animate({opacity: 1}, ) to delay the animation instead of delay since delay cannot be stopped, even by stop()
-            //If we used the unstoppable delay, there would be problems if the user clicked the login button while the removeClass
-            //animation was still occuring
+            //Use animate({opacity: 1}, ) to delay the animation
+            //instead of delay since delay cannot be stopped, even by
+            //stop() If we used the unstoppable delay, there would be
+            //problems if the user clicked the login button while the
+            //removeClass animation was still occuring
             $("#email_address").stop(true, true).addClass("highlight").focus().animate({opacity: 1}, 2000).removeClass("highlight", 2000);
             
             //Return false so we scroll to the top of the page rather than just to the input field
