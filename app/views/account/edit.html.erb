@@ -16,6 +16,20 @@
       <td><label for="person_email_address">E-mail address</label></td>
       <td><%= form.text_field :email_address, :size => 30, :value => @person.email_address %></td>
     </tr>
+  <tr>
+    <td>Show your e-mail address to other registered users?</td>
+    <td><%= form.radio_button :show_email_address, 'true' -%><label for="new_person_show_email_address_true">Yes, let them see it</label> <br />
+        <%= form.radio_button :show_email_address, 'false' -%><label for="new_person_show_email_address_false">No, keep
+        it private</label></td>
+  </tr>
+  <tr>
+    <td><label for="new_person_url">URL of your home page (optional)</label></td>
+    <td><%= form.text_field :url, :size => 50 %></td>
+  </tr>
+  <tr>
+    <td><label for="new_person_biography">Tell us about yourself (optional)</label></td>
+    <td><%= form.text_area :biography, :rows => 5, :cols => 80 %></td>
+  </tr>
     <tr>
       <td>Sex</td>
       <td><%= form.radio_button :sex, 'f' -%><label for="person_sex_f">Female</label> <br />

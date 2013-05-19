@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130427214653) do
+ActiveRecord::Schema.define(:version => 20130519153050) do
 
   create_table "attachments", :force => true do |t|
     t.integer  "node_id",      :null => false
@@ -126,8 +126,8 @@ ActiveRecord::Schema.define(:version => 20130427214653) do
     t.integer "node_id"
   end
 
-  add_index "model_view_counts", ["count"], :name => "new_model_view_counts_count_idx"
-  add_index "model_view_counts", ["node_id"], :name => "new_model_view_counts_node_id_idx"
+  add_index "model_view_counts", ["count"], :name => "new_model_view_counts_count_idx1"
+  add_index "model_view_counts", ["node_id"], :name => "new_model_view_counts_node_id_idx1"
 
   create_table "model_views", :id => false, :force => true do |t|
     t.datetime "logged_at"
@@ -200,6 +200,9 @@ ActiveRecord::Schema.define(:version => 20130427214653) do
     t.boolean  "send_site_updates",    :default => true
     t.boolean  "send_model_updates",   :default => true
     t.boolean  "send_tag_updates",     :default => true
+    t.string   "url"
+    t.text     "biography"
+    t.boolean  "show_email_address",   :default => false
   end
 
   add_index "people", ["email_address"], :name => "index_people_on_email_address"
@@ -270,11 +273,6 @@ ActiveRecord::Schema.define(:version => 20130427214653) do
   add_index "projects", ["person_id"], :name => "index_projects_on_person_id"
   add_index "projects", ["visibility_id"], :name => "index_projects_on_visibility_id"
 
-  create_table "recent_model_downloads", :id => false, :force => true do |t|
-    t.integer "count",   :limit => 8
-    t.integer "node_id"
-  end
-
   create_table "recommendations", :force => true do |t|
     t.integer  "node_id"
     t.integer  "person_id"
@@ -335,11 +333,6 @@ ActiveRecord::Schema.define(:version => 20130427214653) do
   create_table "test_tsquery", :id => false, :force => true do |t|
     t.text "txtkeyword"
     t.text "txtsample"
-  end
-
-  create_table "total_model_downloads", :id => false, :force => true do |t|
-    t.integer "count",   :limit => 8
-    t.integer "node_id"
   end
 
   create_table "versions", :force => true do |t|
