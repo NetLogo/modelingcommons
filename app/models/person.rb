@@ -199,6 +199,10 @@ class Person < ActiveRecord::Base
     downloaded_nodes.uniq
   end
 
+  def html_biography
+    biography.gsub('\n', '<br />')
+  end
+
   private
 
   def generate_salt_and_encrypt_password

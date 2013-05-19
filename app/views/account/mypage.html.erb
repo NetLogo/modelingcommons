@@ -5,9 +5,18 @@
   <% else %>
     <% @title = "Page for #{@the_person.fullname}" %>
     <% @headline_avatar = @the_person.avatar.url(:thumb) %>
-    <% if @person and @person.administrator? -%>
-      (<%= mail_to @the_person.email_address -%>)
+    <% if @person and (@person.administrator? or @the_person.show_email_address?) -%>
+      <%= mail_to @the_person.email_address -%>
     <% end -%>
+
+    <% if @the_person.url.present? -%>
+      <%= link_to @the_person.url, {}, :target => '_blank' -%>
+    <% end -%>
+
+    <% if @the_person.biography.present? %>
+    <div id="biography"><%= raw @the_person.html_biography %></div>
+    <% end %>
+
   <% end %>
 
   <% if @the_person.nodes.present? %>
