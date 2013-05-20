@@ -1,36 +1,37 @@
 <div class="top_info">
   
   <% if @person == @the_person %>
-    <% @title = "Your personal page" %>
+      <% @title = "Your personal page" %>
+      <% @headline_avatar = @person.avatar.url(:thumb) %>
   <% else %>
-    <% @title = "Page for #{@the_person.fullname}" %>
-    <% @headline_avatar = @the_person.avatar.url(:thumb) %>
-    <% if @person and (@person.administrator? or @the_person.show_email_address?) -%>
+      <% @title = "Page for #{@the_person.fullname}" %>
+      <% @headline_avatar = @the_person.avatar.url(:thumb) %>
+  <% end %>
+
+  <% if @person and (@person.administrator? or @the_person.show_email_address?) -%>
       <%= mail_to @the_person.email_address -%>
-    <% end -%>
+  <% end -%>
 
-    <% if @the_person.url.present? -%>
+  <% if @the_person.url.present? -%>
       <%= link_to @the_person.url, {}, :target => '_blank' -%>
-    <% end -%>
+  <% end -%>
 
-    <% if @the_person.biography.present? %>
-    <div id="biography"><%= raw @the_person.html_biography %></div>
-    <% end %>
-
+  <% if @the_person.biography.present? %>
+      <div id="biography"><%= raw @the_person.html_biography %></div>
   <% end %>
 
   <% if @the_person.nodes.present? %>
-    <p>
-      <%= link_to "View", :controller => :account, :action => :models, :id => @the_person.id %>
-      or 
-      <%= link_to "download", :controller => :account, :action => :download, :id => @the_person.id %>
-      <%= @the_person == @person ? 'your' : @the_person.first_name + "'s" -%> models
-    </p>
+  <p>
+    <%= link_to "View", :controller => :account, :action => :models, :id => @the_person.id %>
+    or 
+    <%= link_to "download", :controller => :account, :action => :download, :id => @the_person.id %>
+    <%= @the_person == @person ? 'your' : @the_person.first_name + "'s" -%> models
+  </p>
   <% end %>
 
 
   <% if @person != @the_person %>
-    <div id="person-atom-feed"><%= link_to image_tag("feed.png"), :controller => :account, :action => :follow, :id => @the_person.id, :format => :atom %> <%= link_to "Follow #{@the_person.first_name}'s activity in your feed reader", :controller => :account, :action => :follow, :id => @the_person.id, :format => :atom %></div>
+  <div id="person-atom-feed"><%= link_to image_tag("feed.png"), :controller => :account, :action => :follow, :id => @the_person.id, :format => :atom %> <%= link_to "Follow #{@the_person.first_name}'s activity in your feed reader", :controller => :account, :action => :follow, :id => @the_person.id, :format => :atom %></div>
   <% end %>
   
 </div>
