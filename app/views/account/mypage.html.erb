@@ -9,11 +9,11 @@
   <% end %>
 
   <% if @person and (@person.administrator? or @the_person.show_email_address?) -%>
-      <%= mail_to @the_person.email_address -%>
+      E-mail: <%= mail_to @the_person.email_address -%><br />
   <% end -%>
 
   <% if @the_person.url.present? -%>
-      <%= link_to @the_person.url, {}, :target => '_blank' -%>
+      Home page: <%= link_to @the_person.url, {}, :target => '_blank' -%><br />
   <% end -%>
 
   <% if @the_person.biography.present? %>
