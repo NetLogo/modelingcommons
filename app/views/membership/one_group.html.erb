@@ -1,5 +1,11 @@
 <% @title = "Group info for '#{@group.name}'" %>
 
+<p>You are an administrator of the <%= @group.name %> group.  To add
+  users to the group, go to the
+  "<a href="/account/groups#group_tabs_invite_to_group">invite
+  tab</a>" on the <a href="/account/groups">group management
+  page.</a></p>
+
 <h2>Models in the <%= @group.name %> group:</h2>
 
 <% if @group.models and (not @group.models.empty?) %>
