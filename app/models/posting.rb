@@ -17,6 +17,15 @@ class Posting < ActiveRecord::Base
 
   after_save :notify_people
 
+  def safe_body
+    output = body
+    output.gsub!(/<[^>]+script[^>]+>/, '') # remove script tags
+    output.gsub!(/<[^>]+style[^>]+>/, '') # remove style tags
+    output.gsub!(/[\r\n]+/, '<br />')     # handle newlines
+    output
+  end
+
+
   def was_answered?
     !!self.answered_at
   end
