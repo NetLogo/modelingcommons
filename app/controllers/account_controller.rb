@@ -346,7 +346,7 @@ class AccountController < ApplicationController
       return
     end
 
-    @person = Person.find_by_email_address(params[:email_address].strip)
+    @person = Person.where("lower(email_address) = lower(?)", params[:email_address].strip).first
     if @person.nil?
       logger.warn "Attempted login with non-existent email_address '#{params[:email_address]}'"
       respond_to do |format| 
