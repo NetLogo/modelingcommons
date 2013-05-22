@@ -11,7 +11,6 @@ gem "rails", "~> 3.2.13"
 
 gem "country_select"
 gem "newrelic_rpm" 
-gem 'thin'
 gem 'BlueCloth'
 gem 'GraphvizR'
 gem 'acts_as_tree'
@@ -22,12 +21,16 @@ gem 'diff-lcs'
 gem 'hoptoad_notifier'
 gem 'paperclip'
 gem 'pg'
+gem 'pry'
+gem 'pry-nav'
+gem 'pry-rails'
+gem 'pry-remote'
 gem 'rack'
 gem 'rmagick', :require => 'RMagick'
+gem 'textacular', '~> 3.0', require: 'textacular/rails'
 gem 'validates_email'
 gem 'will_paginate'
 gem 'zippy'
-gem 'textacular', '~> 3.0', require: 'textacular/rails'
 
 group :test do 
   gem "cucumber"
@@ -42,6 +45,7 @@ group :test do
 end
 
 group :development do 
+  gem 'thin'
   gem 'better_errors'
   gem 'binding_of_caller'
 end
@@ -51,10 +55,6 @@ group :development, :test do
   gem 'database_cleaner', '~> 1.0.0RC1'
   gem 'guard'
   gem 'guard-rspec'
-  gem 'pry'
-  gem 'pry-nav'
-  gem 'pry-rails'
-  gem 'pry-remote'
   gem 'rb-fsevent'
   gem 'watir-webdriver'
 end
