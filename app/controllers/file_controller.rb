@@ -3,6 +3,7 @@
 class FileController < ApplicationController
 
   prepend_before_filter :get_model_from_id_param
+  before_filter :check_visibility_permissions, :only => [:download]
   before_filter :check_changeability_permissions, :only => [:create, :delete]
 
   def create
@@ -49,4 +50,15 @@ class FileController < ApplicationController
     redirect_to :controller => :browse, :action => :one_model, :id => @model.id, :anchor => "files"
   end
 
+  def download
+    if not @model.visible_to_user?(@person)
+      flash[:notice] = "You are not allowed to remove files from this model."
+      logger.warn "User '#{@person.inspect}' tried to download a file, but was prevented from doing so."
+    elsif attachment = Attachment.find(params[:file_id])
+      send_data(attachment.contents, :filename => attachment.filename, :type => Attachment::TYPES[attachment.content_type])
+    else
+      flash[:notice] = 'No such attachment.'
+      redirect_to :controller => :browse, :action => :one_model, :id => @model.id, :anchor => "files"
+    end
+  end
 end

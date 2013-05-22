@@ -10,8 +10,12 @@
         <th>Description</th>
         <th>Last updated</th>
 
+        <% if @model.visible_to_user?(@person) %>
+        <th></th><!-- Download -->
+        <% end %>
+
         <% if @model.changeable_by_user?(@person) %>
-        <th></th>
+        <th></th><!-- Delete -->
         <% end %>
 
       </tr>
@@ -25,6 +29,12 @@
         <td><%= f.content_type -%></td>
         <td><%= f.description %></td>
         <td><%= distance_of_time_in_words(Time.now, f.updated_at) -%> ago, by <%= person_link(f.person) %></td>
+        <% if @model.visible_to_user?(@person) %>
+        <td>
+        <%= link_to("Download", :controller => :file, :action => :download, :id => @model.id, :file_id => f.id) %>
+        </td>
+	<% end %>
+
         <% if @model.changeable_by_user?(@person) %>
         <td>
         <%= link_to("Delete", {:controller => :file, :action => :delete, :id => @model.id, :file_id => f.id}, :confirm => "Really delete '#{f.filename}'?" ) %>
