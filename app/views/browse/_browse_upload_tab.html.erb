@@ -1,26 +1,33 @@
 <div>
   <h2>Upload a new version</h2>
+
+  <p>As you improve your model, upload new versions here.  (For
+  attached files, go <a href="#model_tabs_browse_files">here</a>.)</p>
+
   <%= form_for(:new_version, :url => { :controller => "upload", :action => :update_model }, :html => {:multipart => true, :id => 'upload-model-form'}) do |form| %>
   <table>
     <tr>
-      <td><label for="new_version_uploaded_body">Model file</label></td>
+      <td><label for="new_version_uploaded_body">Model (.nlogo) file</label></td>
       <td><%= form.file_field :uploaded_body %><%= form.hidden_field :node_id, {:value => @model.id} %></td>
       <td></td>
     </tr>
     <tr>
-      <td><label for="new_version_description">Short comment</label></td>
+      <td><label for="new_version_description">Short comment this new version</label></td>
       <td><%= form.text_field :description %></td>
       <td></td>
     </tr>
 
     <tr>
       <td colspan="2">
-        <%= radio_button_tag :fork, 'overwrite', {:checked => true} %><label for="fork_overwrite">Replace the existing model</label>
+        <%= radio_button_tag :fork, 'overwrite', {:checked => true}
+        %><label for="fork_overwrite">Replace the existing model with
+        this .nlogo file</label>
       </td>
       <td></td>
     </tr>
     <tr>
-    	<td><%= radio_button_tag :fork, 'child' %><label for="fork_child">Upload a new child, to be called</label></td>
+    	<td><%= radio_button_tag :fork, 'child'
+    	%><label for="fork_child">Create a new model, a child of "<%= @model.name %>", to be called: </label></td>
     	<td><%= form.text_field :name_of_new_child %></td>
     	<td></td>
     </tr>

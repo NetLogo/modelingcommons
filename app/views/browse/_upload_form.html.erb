@@ -1,9 +1,15 @@
 <div id="upload-model">
   <h2>Upload a new version</h2>
+
+  <p>From here, you can create a new version of your NetLogo model.
+  As you improve your model, upload new versions here.  You can always
+  revert to a previous version (via the "history" tab), if you make a
+  mistake.</p>
+
   <table>
     <%= form_for(:new_version, :url => { :controller => "upload", :action => :update_model }) do |form| %>
     <tr>
-      <td>Model file</td>
+      <td>Model (.nlogo) file</td>
       <td><%= form.file_field :uploaded_body %>
         <%= form.hidden_field :node_id, {:value => node.id} %></td>
     </tr>

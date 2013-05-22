@@ -1,4 +1,6 @@
 <div>
+  <h2>Attached files</h2>
+
   <% if @model.attachments.empty? -%>
   <p>No files</p>
   <% else -%>
@@ -50,7 +52,10 @@
   <% end -%>
 
   <% if @person %>
-  <h2>Add or update a file</h2>
+  <h2>Add or update an attached file</h2>
+
+  <p>Use this form to attach one or more files to your model &mdash; data, images,
+  presentations, or papers.  (To update the model itself, go <a href="#model_tabs_browse_upload_tab">here</a>.)</p>
 
   <%= form_tag({:controller => :file, :action => :create}, {:multipart => true, :id => 'new-file-form'}) do %>
   <table>

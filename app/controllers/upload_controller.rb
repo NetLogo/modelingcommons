@@ -137,95 +137,97 @@ class UploadController < ApplicationController
   end
 
   def update_model
-    existing_node = Node.find(params[:new_version][:node_id])
-    
-    if params[:new_version].blank? or params[:new_version][:description].blank? or params[:new_version][:uploaded_body].blank?
+    Node.transaction do 
+      existing_node = Node.find(params[:new_version][:node_id])
+      
+      if params[:new_version].blank? or params[:new_version][:description].blank? or params[:new_version][:uploaded_body].blank?
+        respond_to do |format|
+          format.html do 
+            flash[:notice] = "Sorry, but you must enter a model name, file, and description."
+            redirect_to :controller => :browse, :action => :one_model, :id => existing_node.id
+          end
+          format.json do 
+            render :json => {:status => 'MISSING_PARAMETERS'}
+          end
+        end
+        
+        return
+      end
+
+      fork = params[:fork] || 'overwrite'
+
+      description = params[:new_version][:description]
+      description = 'No description provided' if description.blank?
+
+      flash[:notice] = ''
+
+      # If fork is 'child', then we have create a new node, and then
+      # set its parent to the current node.  Then we create a new node_version
+      # attached to this new (child) node.
+
+      # If fork is 'overwrite', then we create a new node_version,
+      # attached to the existing node.
+
+      if fork == 'child'
+        name_of_new_child = params[:new_version][:name_of_new_child]
+        name_of_new_child = "Child of #{existing_node.name}" if name_of_new_child.blank?
+
+        child_node = Node.create(:parent_id => existing_node.id,
+                                 :name => name_of_new_child,
+                                 :group_id => existing_node.group_id,
+                                 :visibility_id => existing_node.visibility_id,
+                                 :changeability_id => existing_node.changeability_id)
+
+        node_id = child_node.id
+        flash[:notice] << "Added a new child to this model. "
+      elsif fork == 'overwrite'
+
+        return unless check_changeability_permissions
+        node_id = existing_node.id
+        flash[:notice] << "Added new version to node #{existing_node.id}. "
+      else
+        raise "Unknown option '#{fork}' passed to update_model"
+      end
+
+      params[:new_version][:uploaded_body].rewind
+      version_contents = params[:new_version][:uploaded_body].read
+
+      # Create the new version for this node
+      new_version =
+        Version.new(:node_id => node_id,
+                    :person_id => @person.id,
+                    :contents => version_contents,
+                    :description => description)
+
+      begin
+        new_version.save!
+      rescue Exception => e
+        #Error saving
+        
+        logger.warn "Exception message: '#{e.message}'"
+        logger.warn "Exception backtrace: '#{e.backtrace.inspect}'"
+
+        respond_to do |format|
+          format.html do 
+            flash[:notice] = "Error: #{e.message}"
+            redirect_to :back
+          end
+          format.json do 
+            render :json => {:status => 'MODEL_NOT_SAVED'}
+          end
+        end
+        
+        raise ActiveRecord::Rollback, "Call tech support!"
+        return
+      end
+
       respond_to do |format|
         format.html do 
-          flash[:notice] = "Sorry, but you must enter a model name, file, and description."
-          redirect_to :controller => :browse, :action => :one_model, :id => existing_node.id
+          redirect_to :back, :anchor => "upload-div"
         end
         format.json do 
-          render :json => {:status => 'MISSING_PARAMETERS'}
+          render :json => response = {:status => 'SUCCESS', :type => fork, :model => {:id => node_id, :name => new_version.node.name, :url => url_for(:controller => :browse, :action => :one_model, :id => node_id)}}
         end
-      end
-      
-      return
-    end
-
-    fork = params[:fork] || 'overwrite'
-
-    description = params[:new_version][:description]
-    description = 'No description provided' if description.blank?
-
-    flash[:notice] = ''
-
-    # If fork is 'child', then we have create a new node, and then
-    # set its parent to the current node.  Then we create a new node_version
-    # attached to this new (child) node.
-
-    # If fork is 'overwrite', then we create a new node_version,
-    # attached to the existing node.
-
-    if fork == 'child'
-      name_of_new_child = params[:new_version][:name_of_new_child]
-      name_of_new_child = "Child of #{existing_node.name}" if name_of_new_child.blank?
-
-      child_node = Node.create(:parent_id => existing_node.id,
-                               :name => name_of_new_child,
-                               :group_id => existing_node.group_id,
-                               :visibility_id => existing_node.visibility_id,
-                               :changeability_id => existing_node.changeability_id)
-
-      node_id = child_node.id
-      flash[:notice] << "Added a new child to this model. "
-    elsif fork == 'overwrite'
-
-      return unless check_changeability_permissions
-      node_id = existing_node.id
-      flash[:notice] << "Added new version to node #{existing_node.id}. "
-    else
-      raise "Unknown option '#{fork}' passed to update_model"
-    end
-
-    params[:new_version][:uploaded_body].rewind
-    version_contents = params[:new_version][:uploaded_body].read
-
-    # Create the new version for this node
-    new_version =
-      Version.new(:node_id => node_id,
-                  :person_id => @person.id,
-                  :contents => version_contents,
-                  :description => description)
-
-    begin
-      new_version.save!
-    rescue Exception => e
-      #Error saving
-      
-      logger.warn "Exception message: '#{e.message}'"
-      logger.warn "Exception backtrace: '#{e.backtrace.inspect}'"
-
-      respond_to do |format|
-        format.html do 
-          flash[:notice] = "Error updating the model."
-          redirect_to :back
-        end
-        format.json do 
-          render :json => {:status => 'MODEL_NOT_SAVED'}
-        end
-      end
-      
-      raise ActiveRecord::Rollback, "Call tech support!"
-      return
-    end
-
-    respond_to do |format|
-      format.html do 
-        redirect_to :back, :anchor => "upload-div"
-      end
-      format.json do 
-        render :json => response = {:status => 'SUCCESS', :type => fork, :model => {:id => node_id, :name => new_version.node.name, :url => url_for(:controller => :browse, :action => :one_model, :id => node_id)}}
       end
     end
   end
