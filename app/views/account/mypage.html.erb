@@ -29,7 +29,8 @@
     <%= link_to "View", :controller => :account, :action => :models, :id => @the_person.id %>
     or 
     <%= link_to "download", :controller => :account, :action => :download, :id => @the_person.id %>
-    <%= @the_person == @person ? 'your' : @the_person.first_name + "'s" -%> models
+    <%= @the_person == @person ? 'your' : @the_person.first_name + "'s" -%> 
+    <%= pluralize(@person.models, 'model') %>
   </p>
   <% end %>
 
