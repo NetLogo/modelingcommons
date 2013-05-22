@@ -9,7 +9,9 @@
   <% end %>
 
   <ul>
+    <% if @person %>
     <li>Registered <%= distance_of_time_in_words(Time.now, @person.created_at) %> ago</li>
+    <% end %>
 
     <% if @person and (@person.administrator? or @the_person.show_email_address?) -%>
     <li>E-mail: <%= mail_to @the_person.email_address -%></li>
