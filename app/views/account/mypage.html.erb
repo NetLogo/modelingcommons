@@ -8,6 +8,8 @@
       <% @headline_avatar = @the_person.avatar.url(:thumb) %>
   <% end %>
 
+  <p>(Member of the Modeling Commons for <%= distance_of_time_in_words(Time.now, @person.created_at) %>)</p>
+
   <% if @person and (@person.administrator? or @the_person.show_email_address?) -%>
       E-mail: <%= mail_to @the_person.email_address -%><br />
   <% end -%>
