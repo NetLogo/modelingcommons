@@ -11,6 +11,7 @@ gem "rails", "~> 3.2.13"
 
 gem "country_select"
 gem "newrelic_rpm" 
+gem 'thin'
 gem 'BlueCloth'
 gem 'GraphvizR'
 gem 'acts_as_tree'

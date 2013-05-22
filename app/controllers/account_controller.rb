@@ -546,7 +546,7 @@ class AccountController < ApplicationController
   
   def find_people
     query = params[:query].blank? ? "" : params[:query].downcase
-    count = params[:count].blank? ? 10 : params[:count].to_i
+    count = params[:count].blank? ? 20 : params[:count].to_i
     render :json => Person.search(query).sort {|a, b| a.fullname.downcase <=> b.fullname.downcase}[0..count-1].map {|person| {:id => person.id, :html => render_to_string(:partial => 'selectable_person', :layout => false, :formats => 'html', :locals => { :person => person})}}
   end
   
