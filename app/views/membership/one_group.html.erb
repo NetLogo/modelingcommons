@@ -18,7 +18,7 @@
 
 <p><%= link_to "Download all of the #{@group.name}'s models", :controller => :membership, :action => :download, :id => @group.id %></p>
 
-<h2>Members of the <%= @group.name %> group:</h2>
+<h2>There are <%= pluralize @group.people.count, 'member' %> of the <%= @group.name %> group:</h2>
 
 <ul class="grouplist">
   <% @group.people.sort_by {|p| p.last_name + p.first_name}.each do |person| %>
