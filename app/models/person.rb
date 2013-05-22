@@ -54,6 +54,10 @@ class Person < ActiveRecord::Base
     nodes
   end
 
+  def models_visible_to(another_person)
+    nodes.select { |n| n.visible_to_user?(another_person) }
+  end
+
   def fullname
     @fullname ||= "#{first_name} #{last_name}"
   end

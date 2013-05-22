@@ -30,7 +30,7 @@
     or 
     <%= link_to "download", :controller => :account, :action => :download, :id => @the_person.id %>
     <%= @the_person == @person ? 'your' : @the_person.first_name + "'s" -%> 
-    <%= pluralize(@person.models, 'model') %>
+    <%= pluralize(@person.models_visible_to(@person), 'model') %>
   </p>
   <% end %>
 
