@@ -11,7 +11,7 @@
   </tr>
   <tr>
     <td><label for="new_person_email_address">E-mail address</label></td>
-    <td><%= form.text_field :email_address, :size => 30 %></td>
+    <td><%= form.email_field :email_address, :size => 30 %></td>
   </tr>
   <tr>
     <td>Show your e-mail address to other registered users?</td>
@@ -21,7 +21,7 @@
   </tr>
   <tr>
     <td><label for="new_person_url">URL of your home page (optional)</label></td>
-    <td><%= form.text_field :url, :size => 50 %></td>
+    <td><%= form.url_field :url, :size => 50 %></td>
   </tr>
   <tr>
     <td><label for="new_person_biography">Tell us about yourself (optional)</label></td>

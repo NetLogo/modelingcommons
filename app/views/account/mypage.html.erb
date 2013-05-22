@@ -1,26 +1,28 @@
 <div class="top_info">
   
   <% if @person == @the_person %>
-      <% @title = "Your personal page" %>
-      <% @headline_avatar = @person.avatar.url(:thumb) %>
+  <% @title = "Your personal page" %>
+  <% @headline_avatar = @person.avatar.url(:thumb) %>
   <% else %>
-      <% @title = "Page for #{@the_person.fullname}" %>
-      <% @headline_avatar = @the_person.avatar.url(:thumb) %>
+  <% @title = "Page for #{@the_person.fullname}" %>
+  <% @headline_avatar = @the_person.avatar.url(:thumb) %>
   <% end %>
 
-  <p>(Member of the Modeling Commons for <%= distance_of_time_in_words(Time.now, @person.created_at) %>)</p>
+  <ul>
+    <li>Registered <%= distance_of_time_in_words(Time.now, @person.created_at) ago %></li>
 
-  <% if @person and (@person.administrator? or @the_person.show_email_address?) -%>
-      E-mail: <%= mail_to @the_person.email_address -%><br />
-  <% end -%>
+    <% if @person and (@person.administrator? or @the_person.show_email_address?) -%>
+    <li>E-mail: <%= mail_to @the_person.email_address -%></li>
+    <% end -%>
 
-  <% if @the_person.url.present? -%>
-      Home page: <%= link_to @the_person.url, {}, :target => '_blank' -%><br />
-  <% end -%>
+    <% if @the_person.url.present? -%>
+    <li>Home page: <%= link_to @the_person.url, {}, :target => '_blank' -%></li>
+    <% end -%>
 
-  <% if @the_person.biography.present? %>
-      <div id="biography"><%= raw @the_person.html_biography %></div>
-  <% end %>
+    <% if @the_person.biography.present? %>
+    <li><div id="biography"><%= raw @the_person.html_biography %></div></li>
+    <% end %>
+  </ul>
 
   <% if @the_person.nodes.present? %>
   <p>
