@@ -23,8 +23,8 @@ class SearchController < ApplicationController
 
     matching_versions = Version.find_by_sql ["SELECT * FROM Versions WHERE (to_tsvector('english', contents)) @@ to_tsquery('english', ?)", @original_search_term]
 
-    @info_match_models = matching_versions.select {|v| v.info_tab.index(@original_search_term)}.map {|nv| nv.node}.select { |node| node.visible_to_user?(@person)}.uniq
-    @procedures_match_models = matching_versions.select {|v| v.procedures_tab.index(@original_search_term)}.map {|nv| nv.node}.select { |node| node.visible_to_user?(@person)}.uniq
+    @info_match_models = matching_versions.select {|v| v.info_tab.index(@original_search_term)}.map {|nv| nv.node}.select { |node| node and node.visible_to_user?(@person)}.uniq
+    @procedures_match_models = matching_versions.select {|v| v.procedures_tab.index(@original_search_term)}.map {|nv| nv.node}.select { |node| node and node.visible_to_user?(@person)}.uniq
 
   end
 
