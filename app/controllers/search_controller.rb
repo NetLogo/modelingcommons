@@ -22,7 +22,7 @@ class SearchController < ApplicationController
     Tag.search(@original_search_term).each {  |tag| @tag_match_models += tag.nodes }
     @tag_match_models = @tag_match_models.uniq.select { |node| node.visible_to_user?(@person)}
 
-    matching_nodes = Version.text_search(@original_search_term).map { |v| v.node}.select { |n| n and n.visible_to_user?(@person) }
+    matching_nodes = Version.text_search(@original_search_term).map { |v| v.node}.uniq.select { |n| n and n.visible_to_user?(@person) }
 
     @info_match_models = matching_nodes.select {|n| n.contains_any_of?(n.info_tab, @original_search_term) }
     @procedures_match_models = matching_nodes.select {|n| n.contains_any_of?(n.procedures_tab, @original_search_term) }
