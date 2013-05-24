@@ -91,9 +91,4 @@ class Version < ActiveRecord::Base
     Version.find_by_sql ["SELECT * FROM Versions WHERE (to_tsvector('english', contents)) @@ to_tsquery('english', ?)", query.gsub(/\s+/, ' | ')]
   end
 
-  def contains_any_of?(text, words)
-    lowercase_text = text.downcase
-    words.split.detect { |word| lowercase_text.index(word) }
-  end
-
 end

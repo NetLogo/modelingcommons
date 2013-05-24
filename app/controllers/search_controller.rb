@@ -10,6 +10,7 @@ class SearchController < ApplicationController
     end
 
     @original_search_term = params[:search_term].downcase
+    @original_search_term.gsub!(/\W*\d+\W*/, ' ')
 
     @models = Node.search(@original_search_term, @person)
 
@@ -21,12 +22,10 @@ class SearchController < ApplicationController
     Tag.search(@original_search_term).each {  |tag| @tag_match_models += tag.nodes }
     @tag_match_models = @tag_match_models.uniq.select { |node| node.visible_to_user?(@person)}
 
-    matching_versions = Version.text_search(@original_search_term)
+    matching_nodes = Version.text_search(@original_search_term).map { |v| v.node}.select { |n| n and n.visible_to_user?(@person) }
 
-
-    @info_match_models = matching_versions.select {|v| v.contains_any_of?(v.info_tab, @original_search_term) }.map {|nv| nv.node}.select { |node| node and node.visible_to_user?(@person)}.uniq
-    @procedures_match_models = matching_versions.select {|v| v.contains_any_of?(v.procedures_tab, @original_search_term) }.map {|nv| nv.node}.select { |node| node and node.visible_to_user?(@person)}.uniq
-
+    @info_match_models = matching_nodes.select {|n| n.contains_any_of?(n.info_tab, @original_search_term) }
+    @procedures_match_models = matching_nodes.select {|n| n.contains_any_of?(n.procedures_tab, @original_search_term) }
   end
 
 end

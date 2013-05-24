@@ -403,4 +403,10 @@ class Node < ActiveRecord::Base
                                                ORDER BY count DESC
                                                   LIMIT ?;", limit])
   end
+
+  def contains_any_of?(text, words)
+    lowercase_text = text.downcase
+    words.split.detect { |word| lowercase_text.index(word) }
+  end
+
 end

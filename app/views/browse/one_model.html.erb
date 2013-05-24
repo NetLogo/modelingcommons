@@ -1,4 +1,6 @@
 <% @title = @model.name %>
+<% @meta_description = "View, run, and discuss the '#{@model.name}'
+			model, written in NetLogo." %>
 <div class="model_info">
   <div class="model_info_top">
     <% if @model.previews.nil? or @model.previews.empty? %>
