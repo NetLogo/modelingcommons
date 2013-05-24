@@ -10,7 +10,8 @@ class SearchController < ApplicationController
     end
 
     @original_search_term = params[:search_term].downcase
-    @original_search_term.gsub!(/\W*\d+\W*/, ' ').strip
+    @original_search_term.gsub!(/\W*\d+\W*/, ' ')
+    @original_search_term.strip!
 
     @models = Node.search(@original_search_term, @person)
 
