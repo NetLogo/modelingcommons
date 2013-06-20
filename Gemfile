@@ -11,25 +11,25 @@ gem "rails", "~> 3.2.13"
 
 gem "country_select"
 gem "newrelic_rpm" 
-gem 'BlueCloth'
-gem 'GraphvizR'
+gem 'BlueCloth', '~> 1.0.1'
+gem 'GraphvizR', '~> 0.5.1'
 gem 'acts_as_tree'
 gem 'bson_ext'
 gem 'builder'
 gem 'capistrano'
 gem 'diff-lcs'
 gem 'hoptoad_notifier'
-gem 'paperclip'
-gem 'pg'
+gem 'paperclip', '~> 3.4.1'
+gem 'pg', '~> 0.15.1'
 gem 'pry'
 gem 'pry-nav'
 gem 'pry-rails'
 gem 'pry-remote'
 gem 'rack'
-gem 'rmagick', :require => 'RMagick'
+gem 'rmagick', '~> 2.13.2', :require => 'RMagick'
 gem 'textacular', '~> 3.0', require: 'textacular/rails'
 gem 'validates_email'
-gem 'will_paginate'
+gem 'will_paginate', '~> 3.0.4'
 gem 'zippy'
 
 group :test do 

@@ -280,8 +280,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  BlueCloth
-  GraphvizR
+  BlueCloth (~> 1.0.1)
+  GraphvizR (~> 0.5.1)
   acts_as_tree
   awesome_print
   better_errors
@@ -304,8 +304,8 @@ DEPENDENCIES
   jquery-rails
   launchy
   newrelic_rpm
-  paperclip
-  pg
+  paperclip (~> 3.4.1)
+  pg (~> 0.15.1)
   pry
   pry-nav
   pry-rails
@@ -313,7 +313,7 @@ DEPENDENCIES
   rack
   rails (~> 3.2.13)
   rb-fsevent
-  rmagick
+  rmagick (~> 2.13.2)
   rspec
   rspec-rails
   sass-rails
@@ -326,5 +326,5 @@ DEPENDENCIES
   uglifier
   validates_email
   watir-webdriver
-  will_paginate
+  will_paginate (~> 3.0.4)
   zippy
