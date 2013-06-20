@@ -140,7 +140,7 @@
 	<% end %>
 	<% if @person and @model.people.include?(@person) %>
         | 
-        <%= link_to 'Delete this model', { :controller => :upload, :action => :destroy, :id => @model.id }, :confirm => 'Delete this model, including its entire history, attachments, and comments?  There is no way to undo this action.' %>
+        <%= link_to 'Delete this model', { :controller => :upload, :action => :destroy, :id => @model.id }, :confirm => "Delete this model, including its entire history, attachments, and comments?  There is no way to undo this action.\n\nDon't delete a model just because you have a newer version; instead, use the 'upload' tab to put a newer version online." %>
 	<% end %>
       </div>
     </div>
