@@ -12,26 +12,13 @@ class TagsController < ApplicationController
 
   def create
     @node = Node.find(params[:node_id])
-    @new_tagged_nodes = [ ]
     params[:new_tag].each_with_index do |tag_name, index|
       next if tag_name.blank?
       comment = params[:new_comment][index].strip
       tag = Tag.find_or_create_by_name(tag_name.downcase.strip, :person_id => @person.id)
-      tn = TaggedNode.find_or_create_by_tag_id_and_person_id_and_node_id(tag.id,
-                                                                         @person.id,
-                                                                         @node.id,
-                                                                         :comment => comment
-      )
-      if tn.created_at < 1.minute.ago
-        @new_tagged_nodes << tn
-        notification_recipients = @node.people.reject { |person| person == @person}
-        if notification_recipients.empty?
-          logger.warn "No recipients; not sending the notification"
-        else
-          logger.warn "Notification recipients = '#{notification_recipients}'"
-          Notifications.applied_tag(notification_recipients, tn.tag).deliver
-        end
-      end
+      TaggedNode.find_or_create_by_tag_id_and_person_id_and_node_id(tag.id, @person.id,
+                                                                    @node.id,
+                                                                    :comment => comment)
     end
     html = render_to_string(:partial => "tags/tag_cloud", :layout => false, :formats => 'html', :locals => {:model => Node.find(params[:node_id])})
     respond_to do |format|

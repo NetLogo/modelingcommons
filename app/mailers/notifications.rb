@@ -65,12 +65,13 @@ class Notifications < ActionMailer::Base
          :subject => wrap_subject("Modeling Commons: Update to the '#{nlmodel.name}' model"))
   end
 
-  def applied_tag(people, tag)
+  def applied_tag(people, tag, node)
     @recipients = people.select {|p| p.send_tag_updates?}.map {|person| person.email_address}
     @tag = tag
+    @node = node
     mail(:to => @recipients,
          :bcc => NLCOMMONS_LIST,
-         :subject => wrap_subject("Modeling Commons: '#{tag.name}' tag was applied"))
+         :subject => wrap_subject("Modeling Commons: '#{tag.name}' tag was applied to '#{node.name}' model"))
   end
 
   def updated_discussion(nlmodel, current_author)
