@@ -1,0 +1,19 @@
+<p>Greetings from the <a href="http://modelingcommons.org/">NetLogo Modeling Commons</a>!</p>
+
+<p>We keep track of how often your models are viewed and
+  downloaded, and wanted to share that information with you:</p>
+
+<ul>
+  <% @person.models.each do |model| %>
+  <li>
+    <%= link_to model.name, "http://modelingcommons.org/browse/one_model/#{model.id}" %>: 
+    Viewed <%= pluralize(model.views, 'time') %>, 
+    downloaded <%= pluralize(model.downloads, 'time') %>
+    (<%= model.permission_description %>)
+  </li>
+  <% end %>
+</ul>
+
+<p>To remove yourself from such notifications in the future, click on "edit your profile" from any page on the  <a href="http://modelingcommons.org">Modeling Commons</a>.</p>
+
+<p>If you have any questions about the Modeling Commons, please <a href="mailto:modelingcommons@ccl.northwestern.edu">contact us</a>.  We enjoy getting feedback, and helping to improve the Modeling Commons for our users.</p>

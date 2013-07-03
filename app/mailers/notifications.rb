@@ -154,4 +154,13 @@ class Notifications < ActionMailer::Base
          :subject => wrap_subject("Reminder to tag your models"))
   end
 
+
+  def views_downloads_update(person)
+    @person = person
+    # mail(:to => @person.email_address,
+    mail(:to => 'reuven@lerner.co.il',
+         :bcc => NLCOMMONS_LIST,
+         :subject => wrap_subject("How many people have seen your models?"))
+  end
+
 end

@@ -290,8 +290,10 @@ class Node < ActiveRecord::Base
   def permission_description
     if world_visible?
       "public"
-    elsif group_visible?
-      "group-visible (to '#{group.name}')"
+    elsif group.present? and group_visible?
+        "group-visible (to '#{group.name}')"
+    elsif group.blank? and group_visible?
+        "group-visible"
     else
       "private"
     end
