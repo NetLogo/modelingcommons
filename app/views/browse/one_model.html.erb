@@ -122,8 +122,13 @@
   </div>
   <div class="model_info_bottom">
     <div class="netlogo_version">
-      Model was written in NetLogo <%= @model.netlogo_version %>
+      Model was written in NetLogo <%= @model.netlogo_version %> 
+      &bull; 
+      Viewed <%= pluralize(@model.views, "time") %>
+      &bull; 
+      Downloaded <%= pluralize(@model.downloads, "time") %>
     </div>
+    
     <div class="actions">
       <%= link_to image_tag("download.png", :class => "inline_image", :alt => "Download the '#{@model.name}' model", :title => "Download the '#{@model.name}' model") + "Download this model", :controller => "browse", :action => "download_model", :id => @model.id %> 
 	<% if @person %>
