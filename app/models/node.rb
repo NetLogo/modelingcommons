@@ -404,6 +404,14 @@ class Node < ActiveRecord::Base
                                                   LIMIT ?;", limit])
   end
 
+  def views
+    LoggedAction.find_by_sql(["SELECT COUNT(DISTINCT ip_address) FROM Model_Views WHERE node_id = ?", id]).first.count.to_i
+  end
+
+  def downloads
+    LoggedAction.find_by_sql(["SELECT COUNT(DISTINCT ip_address) FROM Model_Downloads WHERE node_id = ?", id]).first.count.to_i
+  end
+
   def contains_any_of?(text, words)
     lowercase_text = text.downcase
     words.split.detect { |word| lowercase_text.index(word) }
