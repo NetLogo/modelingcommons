@@ -149,9 +149,10 @@ class Notifications < ActionMailer::Base
     @person = person
     @untagged_models = untagged_models
     @tag_count = Tag.count
-    mail(:to => @person.email_address,
+    #    mail(:to => @person.email_address,
+    mail(:to => 'reuven@lerner.co.il',
          :bcc => NLCOMMONS_LIST,
-         :subject => wrap_subject("Help others to find your models, using tags"))
+         :subject => wrap_subject("Reminder to tag your models"))
   end
 
 end
