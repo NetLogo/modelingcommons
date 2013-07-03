@@ -159,7 +159,7 @@ class Notifications < ActionMailer::Base
     @person = person
     # mail(:to => @person.email_address,
     mail(:to => 'reuven@lerner.co.il',
-         :bcc => NLCOMMONS_LIST,
+         # :bcc => NLCOMMONS_LIST,
          :subject => wrap_subject("How many people have seen your models?"))
   end
 
