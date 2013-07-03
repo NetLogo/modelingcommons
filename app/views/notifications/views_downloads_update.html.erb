@@ -8,15 +8,16 @@
   <li>
     <%= link_to model.name, "http://modelingcommons.org/browse/one_model/#{model.id}" %>: 
     Viewed <%= pluralize(model.views, 'time') %>, 
-    downloaded <%= pluralize(model.downloads, 'time') %>
-    (<%= model.permission_description %>)
+    downloaded <%= pluralize(model.downloads, 'time') %> &mdash; (<%= model.permission_description %> model)
   </li>
   <% end %>
 </ul>
 
 <p>Want more people to see, download, comment on, or tag a model?
   Tell them about it!  Each model's page has built-in links that let
-  you e-mail friends, or notify others via Twitter and Facebook.</p>
+  you e-mail friends, or notify others via Twitter and Facebook.
+  Also remember that every time you create a new model or upload a
+  new version, it is placed at the top of each user's profile page.</p>
 
 <p>To remove yourself from such notifications in the future, click on "edit your profile" from any page on the  <a href="http://modelingcommons.org">Modeling Commons</a>.</p>
 
