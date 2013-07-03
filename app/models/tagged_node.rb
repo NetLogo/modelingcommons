@@ -11,6 +11,8 @@ class TaggedNode < ActiveRecord::Base
   validates :tag_id, :presence => true
   validates :person_id, :presence => true
 
+  validates :tag_id, :uniqueness => { :scope => [:node_id, :person_id] }
+
   scope :created_since, lambda { |since| { :conditions => ['created_at >= ? ', since] }}
 
   after_save :notify_people
