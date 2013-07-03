@@ -15,6 +15,8 @@ class Notifications < ActionMailer::Base
   }
 
   def wrap_subject(text)
+    text = "Modeling Commons: #{text}"
+
     if Rails.env.production?
       text
     else
@@ -37,7 +39,7 @@ class Notifications < ActionMailer::Base
     @recipients = person.email_address
     @person = person
     mail(:to => @recipients,
-         :subject => wrap_subject('Modeling Commons: Your new password'))
+         :subject => wrap_subject('Your new password'))
   end
 
   def password_reminder(person, new_password)
@@ -45,7 +47,7 @@ class Notifications < ActionMailer::Base
     @person = person
     @new_password = new_password
     mail(:to => @recipients,
-         :subject => wrap_subject('Modeling Commons: Your password'))
+         :subject => wrap_subject('Your password'))
   end
 
   def changed_password(person)
@@ -62,7 +64,7 @@ class Notifications < ActionMailer::Base
     @nlmodel = nlmodel
     mail(:to => @recipients,
          :bcc => NLCOMMONS_LIST,
-         :subject => wrap_subject("Modeling Commons: Update to the '#{nlmodel.name}' model"))
+         :subject => wrap_subject("Update to the '#{nlmodel.name}' model"))
   end
 
   def applied_tag(people, tag, node)
@@ -71,7 +73,7 @@ class Notifications < ActionMailer::Base
     @node = node
     mail(:to => @recipients,
          :bcc => NLCOMMONS_LIST,
-         :subject => wrap_subject("Modeling Commons: '#{tag.name}' tag was applied to '#{node.name}' model"))
+         :subject => wrap_subject("'#{tag.name}' tag was applied to '#{node.name}' model"))
   end
 
   def updated_discussion(nlmodel, current_author)
@@ -84,7 +86,7 @@ class Notifications < ActionMailer::Base
     @nlmodel = nlmodel
     mail(:to => @recipients,
          :bcc => NLCOMMONS_LIST,
-         :subject => wrap_subject("Modeling Commons: Updated discussion of the #{nlmodel.name} model"))
+         :subject => wrap_subject("Updated discussion of the #{nlmodel.name} model"))
   end
 
   def invited_to_group(person, membership)
@@ -140,6 +142,16 @@ class Notifications < ActionMailer::Base
     mail(:to => @recipients,
          :bcc => NLCOMMONS_LIST,
          :subject => wrap_subject("You have been added as a collaborator to the '#{node.name}' model"))
+  end
+
+
+  def untagged_models_reminder(person, untagged_models)
+    @person = person
+    @untagged_models = untagged_models
+    @tag_count = Tag.count
+    mail(:to => @person.email_address,
+         :bcc => NLCOMMONS_LIST,
+         :subject => wrap_subject("Help others to find your models, using tags"))
   end
 
 end

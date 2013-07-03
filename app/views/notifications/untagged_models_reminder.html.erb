@@ -1,0 +1,29 @@
+<p>Greetings from the <a href="http://modelingcommons.org/">NetLogo Modeling Commons</a>!</p>
+
+<p>First and foremost, we want to thank you for contributing and
+  sharing your models with our community.  (Even if your model is
+  private, we still see it as a contribution.)</p>
+
+<p>One of the best ways for people to find models, and related models,
+  in the Modeling Commons, is
+  via <a href="http://modelingcommons.org/tags">tags</a>.  You can
+  think of a tag as a kind of categorization or taxonomy &mdash; but
+  one which is written and developed organically by our users.  If
+  many people apply a tag to a model, then that tag is seen as more
+  fitting, or appropriate.</p>
+
+<p>In a periodic, automated review of uploaded models, we have found
+  <%= pluralize(@untagged_models.count, 'model') %> of yours without
+  tags.  For the sake of other users in the Modeling Commons, please
+  take the time to tag the following:</p>
+
+<ul>
+  <% @untagged_models.each do |model| %>
+  <li><%= link_to model.name, "http://modelingcommons.org/browse/one_model/#{model.id}" %></li>
+  <% end %>
+</ul>
+
+<p>If you have any questions about the Modeling Commons, please
+  <a href="mailto:modelingcommons@ccl.northwestern.edu">contact
+    us</a>.  We enjoy getting feedback, and helping to
+  improve the Modeling Commons for our users.</p>
