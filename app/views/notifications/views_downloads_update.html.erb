@@ -8,7 +8,9 @@
   <li>
     <%= link_to model.name, "http://modelingcommons.org/browse/one_model/#{model.id}" %>: 
     Viewed <%= pluralize(model.views, 'time') %>, 
-    downloaded <%= pluralize(model.downloads, 'time') %> &mdash; <%= model.permission_description %> model
+    downloaded <%= pluralize(model.downloads, 'time') %>,
+    recommended <%= pluralize(model.recommendations.count, 'time') %>
+    &mdash; <%= model.permission_description %> model
   </li>
   <% end %>
 </ul>
