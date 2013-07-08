@@ -56,7 +56,8 @@ class CollaborationsController < ApplicationController
             collaboration = 
               NonMemberCollaboration.create(non_member_collaborator_id:nmc.id,
                                             node_id:@node.id, 
-                                            collaborator_type_id: params[:collaborator_type_id])
+                                            collaborator_type_id: params[:collaborator_type_id],
+                                            person_id:@person.id)
 
             if collaboration.valid?
               message = "Added non-member collaborator '#{params[:person_email]}'"

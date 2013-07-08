@@ -144,6 +144,16 @@ class Notifications < ActionMailer::Base
          :subject => wrap_subject("You have been added as a collaborator to the '#{node.name}' model"))
   end
 
+  def nonmember_collaboration_notice(node, nmc, person)
+    @node = node
+    @nmc = nmc
+    @person = person
+    mail(:to => @nmc.email_address,
+         :cc => @person.email_address,
+         :bcc => NLCOMMONS_LIST,
+         :subject => wrap_subject("You have been added as a collaborator to the '#{node.name}' model"))
+  end
+
 
   def untagged_models_reminder(person, untagged_models)
     @person = person

@@ -563,7 +563,8 @@ CREATE TABLE non_member_collaborations (
     node_id integer,
     collaborator_type_id integer,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    person_id integer NOT NULL
 );
 
 
@@ -2232,6 +2233,8 @@ INSERT INTO schema_migrations (version) VALUES ('20130519153050');
 INSERT INTO schema_migrations (version) VALUES ('20130708125819');
 
 INSERT INTO schema_migrations (version) VALUES ('20130708125917');
+
+INSERT INTO schema_migrations (version) VALUES ('20130708143024');
 
 INSERT INTO schema_migrations (version) VALUES ('21');
 
