@@ -1,4 +1,4 @@
-<% @env_title = (Rails.env.production? '' :  '[DEVELOPMENT/STAGING SERVER]' ) %> 
+<% @env_title = (Rails.env.production? ? '' :  '[DEVELOPMENT/STAGING SERVER]' ) %> 
 <title><%= @env_title -%>NetLogo Modeling Commons -- <%= @title %></title>
 <%= stylesheet_link_tag 'application' -%>
 <!--[if lt IE 8]><link rel="stylesheet" href="/stylesheets/ie.css" type="text/css" media="screen, projection"><![endif]-->
