@@ -23,10 +23,10 @@ class Person < ActiveRecord::Base
   has_many :groups, :through => :memberships, :order => "lower(name) ASC"
 
   has_attached_file :avatar,
-                    :styles => { :medium => "200x200>", :thumb => "40x40>" },
-                    :default_url => "/assets/default-person/:style/default-person.png",
-                    :path => ":rails_root/public/system/:attachment/:id/:style/:filename",
-                    :url => "/system/:attachment/:id/:style/:filename"
+  :styles => { :medium => "200x200>", :thumb => "40x40>" },
+  :default_url => "/assets/default-person/:style/default-person.png",
+  :path => ":rails_root/public/system/:attachment/:id/:style/:filename",
+  :url => "/system/:attachment/:id/:style/:filename"
 
   attr_protected :avatar_file_name, :avatar_content_type, :avatar_size
 
@@ -46,6 +46,8 @@ class Person < ActiveRecord::Base
 
   # after_validation_on_create :generate_salt_and_encrypt_password
   # after_validation_on_update :encrypt_updated_password
+
+  after_create :transform_nonmember_collaborations
 
   def node_versions
     versions
@@ -206,6 +208,23 @@ class Person < ActiveRecord::Base
 
   def html_biography
     biography.gsub('\n', '<br />')
+  end
+
+  def transform_nonmember_collaborations
+    nmc = NonMemberCollaborator.find_by_email(email_address)
+    logger.warn "Found nmc = '#{nmc.inspect}'"
+    return unless nmc
+    nmc.non_member_collaborations.each do |c|
+      logger.warn "Transferring collaboration '#{c.inspect}'"
+      newc = Collaboration.create!(:node => c.node,
+                                   :person => self,
+                                   :collaborator_type_id => c.collaborator_type_id)
+      logger.warn "New collaboration '#{newc.inspect}'"
+      logger.warn "Destroying collaboration '#{c.inspect}'"
+      c.destroy
+    end
+    logger.warn "Destroying nmc '#{nmc.inspect}'"
+    nmc.destroy
   end
 
   private

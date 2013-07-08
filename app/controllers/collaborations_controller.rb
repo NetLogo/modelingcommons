@@ -33,10 +33,10 @@ class CollaborationsController < ApplicationController
             message = "Not adding '#{collaborator.fullname}', since they are already a collaborator."
           else
             
-            collaboration = Collaboration.new
-            collaboration.assign_attributes(:node => @node,
-                                            :person => collaborator,
-                                            :collaborator_type_id => params[:collaborator_type_id])
+            collaboration = Collaboration.new(:node => @node,
+                                              :person => collaborator,
+                                              :collaborator_type_id => params[:collaborator_type_id])
+
             if collaboration.save
               message = "Successfully added #{collaborator.fullname} as a collaborator."
               success = true;
