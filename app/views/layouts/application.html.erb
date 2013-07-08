@@ -32,6 +32,7 @@
 	    </div>
     </div>
 
+<% unless Rails.env.development? %>
 <!-- Mouseflow -->
     <script type="text/javascript">
         var _mfq = _mfq || [];
@@ -42,6 +43,7 @@
       })();
     </script>
 <!-- End of mouseflow -->
+<% end %>
   </body>
 
 </html>
