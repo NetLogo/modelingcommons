@@ -28,7 +28,7 @@ gem 'pry-remote'
 gem 'rack'
 gem 'rmagick', '~> 2.13.2', :require => 'RMagick'
 gem 'textacular', '~> 3.0', require: 'textacular/rails'
-gem 'validates_email'
+gem 'validate_email'
 gem 'will_paginate', '~> 3.0.4'
 gem 'zippy'
 

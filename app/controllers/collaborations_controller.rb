@@ -6,12 +6,11 @@ class CollaborationsController < ApplicationController
 
   def create
     
-    
     if params[:node_id].blank?
       message = "You must provide a model to add a collaborator to"
       
-    elsif params[:person_name].blank?
-      message = "You must enter a person's name."
+    elsif params[:person_name].blank? and params[:person_email].blank?
+      message = "You must enter a person's name and/or e-mail address."
 
     elsif params[:collaborator_type_id].blank? 
       message = "No collaboration type indicated; ignoring."
@@ -26,27 +25,49 @@ class CollaborationsController < ApplicationController
         
       else
         collaborator = Person.first(:conditions => ["first_name || ' ' || last_name = ?", 
-                                                    params[:person_name]])
-  
-        if @node.author?(collaborator)
-          message = "Not adding '#{collaborator.fullname}', since they are already a collaborator."
-        else
-          
-          collaboration = Collaboration.new
-          collaboration.assign_attributes(:node => @node,
+                                                    params[:person_name]]) ||
+          Person.find_by_email_address(params[:person_email])
+        
+        if collaborator
+          if @node.author?(collaborator)
+            message = "Not adding '#{collaborator.fullname}', since they are already a collaborator."
+          else
+            
+            collaboration = Collaboration.new
+            collaboration.assign_attributes(:node => @node,
                                             :person => collaborator,
                                             :collaborator_type_id => params[:collaborator_type_id])
-          if collaboration.save
-            message = "Successfully added #{collaborator.fullname} as a collaborator."
-            success = true;
-            
+            if collaboration.save
+              message = "Successfully added #{collaborator.fullname} as a collaborator."
+              success = true;
+            else
+              message = "Could not create the collaboration"
+            end
+          end
+        elsif params[:person_email]
+          nmc = NonMemberCollaborator.find_or_create_by_email(params[:person_email], 
+                                                              {name:params[:person_name]})
+
+          if @node.non_member_collaborators.member?(nmc)
+            message = "This person ('#{nmc.email}') is already a collaborator"
+            success = false
+
           else
-            message = "Could not create the collaboration"
+            collaboration = 
+              NonMemberCollaboration.create(non_member_collaborator_id:nmc.id,
+                                            node_id:@node.id, 
+                                            collaborator_type_id: params[:collaborator_type_id])
+
+            if collaboration.valid?
+              message = "Added non-member collaborator '#{params[:person_email]}'"
+              success = true
+            else
+              message = "Error adding non-member collaborator '#{params[:person_email]}'; invalid e-mail address"
+              success = false
+            end
           end
         end
-        
       end
-      
     end
     
 

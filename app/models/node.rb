@@ -22,6 +22,9 @@ class Node < ActiveRecord::Base
   has_many :collaborations
   has_many :collaborators, :through => :collaborations, :source => 'person'
 
+  has_many :non_member_collaborations
+  has_many :non_member_collaborators, :through => :non_member_collaborations
+
   has_many :logged_actions
 
   has_many :node_projects
@@ -89,6 +92,14 @@ class Node < ActiveRecord::Base
 
   def people
     collaborators
+  end
+
+  def all_collaborators
+    collaborators + non_member_collaborators
+  end
+
+  def all_collaborations
+    collaborations + non_member_collaborations
   end
 
   def people_sentence

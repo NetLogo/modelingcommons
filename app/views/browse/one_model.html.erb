@@ -12,7 +12,7 @@
       <div class="info_container">
         <div class="collaborators">
           <h3>
-            <span id="collaborator_count"><%= pluralize(@model.collaborations.size, 'collaborator') %></span>
+            <span id="collaborator_count"><%= pluralize(@model.all_collaborations.size, 'collaborator') %></span>
             <% if @model.people.include?(@person) %>
             <span class="smaller" id="add-collaborator"><a href="#">Add a collaborator</a></span>
             <% end %>
@@ -30,6 +30,7 @@
               <option value="<%= type.id %>"><%= type.name %></option>
               <% end %>
             </select>
+            <input type="email" placeholder="Collaborator e-mail (if not a member) " name="person_email" size="45" />
           </p>              
           <p>
             <button id="save_collaborators">Save new collaborator</button>

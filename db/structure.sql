@@ -554,6 +554,71 @@ CREATE VIEW non_ccl_model_creations_per_month AS
 
 
 --
+-- Name: non_member_collaborations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE non_member_collaborations (
+    id integer NOT NULL,
+    non_member_collaborator_id integer,
+    node_id integer,
+    collaborator_type_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: non_member_collaborations_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE non_member_collaborations_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: non_member_collaborations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE non_member_collaborations_id_seq OWNED BY non_member_collaborations.id;
+
+
+--
+-- Name: non_member_collaborators; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE non_member_collaborators (
+    id integer NOT NULL,
+    email character varying(255),
+    name character varying(255),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: non_member_collaborators_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE non_member_collaborators_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: non_member_collaborators_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE non_member_collaborators_id_seq OWNED BY non_member_collaborators.id;
+
+
+--
 -- Name: people; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1058,6 +1123,20 @@ ALTER TABLE ONLY nodes ALTER COLUMN id SET DEFAULT nextval('nodes_id_seq'::regcl
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY non_member_collaborations ALTER COLUMN id SET DEFAULT nextval('non_member_collaborations_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY non_member_collaborators ALTER COLUMN id SET DEFAULT nextval('non_member_collaborators_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY people ALTER COLUMN id SET DEFAULT nextval('people_id_seq'::regclass);
 
 
@@ -1202,6 +1281,22 @@ ALTER TABLE ONLY node_projects
 
 ALTER TABLE ONLY nodes
     ADD CONSTRAINT nodes_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: non_member_collaborations_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY non_member_collaborations
+    ADD CONSTRAINT non_member_collaborations_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: non_member_collaborators_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY non_member_collaborators
+    ADD CONSTRAINT non_member_collaborators_pkey PRIMARY KEY (id);
 
 
 --
@@ -1503,6 +1598,41 @@ CREATE INDEX index_nodes_on_parent_id ON nodes USING btree (parent_id);
 --
 
 CREATE INDEX index_nodes_on_visibility_id ON nodes USING btree (visibility_id);
+
+
+--
+-- Name: index_non_member_collaborations_on_collaborator_type_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_non_member_collaborations_on_collaborator_type_id ON non_member_collaborations USING btree (collaborator_type_id);
+
+
+--
+-- Name: index_non_member_collaborations_on_node_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_non_member_collaborations_on_node_id ON non_member_collaborations USING btree (node_id);
+
+
+--
+-- Name: index_non_member_collaborations_on_non_member_collaborator_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_non_member_collaborations_on_non_member_collaborator_id ON non_member_collaborations USING btree (non_member_collaborator_id);
+
+
+--
+-- Name: index_non_member_collaborators_on_email; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_non_member_collaborators_on_email ON non_member_collaborators USING btree (email);
+
+
+--
+-- Name: index_non_member_collaborators_on_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_non_member_collaborators_on_name ON non_member_collaborators USING btree (name);
 
 
 --
@@ -2098,6 +2228,10 @@ INSERT INTO schema_migrations (version) VALUES ('20130412084458');
 INSERT INTO schema_migrations (version) VALUES ('20130427214653');
 
 INSERT INTO schema_migrations (version) VALUES ('20130519153050');
+
+INSERT INTO schema_migrations (version) VALUES ('20130708125819');
+
+INSERT INTO schema_migrations (version) VALUES ('20130708125917');
 
 INSERT INTO schema_migrations (version) VALUES ('21');
 

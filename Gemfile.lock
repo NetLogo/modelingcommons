@@ -270,7 +270,9 @@ GEM
     uglifier (2.1.1)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
-    validates_email (0.0.2)
+    validate_email (0.1.6)
+      activemodel (>= 3.0)
+      mail (>= 2.2.5)
     watir-webdriver (0.6.4)
       selenium-webdriver (>= 2.18.0)
     websocket (1.0.7)
@@ -328,7 +330,7 @@ DEPENDENCIES
   therubyracer
   thin
   uglifier
-  validates_email
+  validate_email
   watir-webdriver
   will_paginate (~> 3.0.4)
   zippy

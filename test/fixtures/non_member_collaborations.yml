@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  non_member_collaborator_id: 1
+  node_id: 1
+  collaborator_type_id: 1
+
+two:
+  non_member_collaborator_id: 1
+  node_id: 1
+  collaborator_type_id: 1

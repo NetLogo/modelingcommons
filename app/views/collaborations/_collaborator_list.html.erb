@@ -1,14 +1,20 @@
 <div id="collaborator-list">
   <% @model.collaborations.each do |collaboration| %>
-    <div class="collaborator">
-      <%= person_image(collaboration.person) %> <%= person_link(collaboration.person) %> (<%= collaboration.name %>)
-      
-      <% if collaboration.person == @person and collaboration.name != 'Author' %>
-        <form action="/collaborations/destroy" method="post">
-          <input type="hidden" name="node_id" value="<%= @model.id %>" />
-          (<a href="#" class="remove_collaborator">Remove</a>)
-        </form>
-      <% end %>
-    </div>
+  <div class="collaborator">
+    <%= person_image(collaboration.person) %> <%= person_link(collaboration.person) %> (<%= collaboration.name %>)
+    
+    <% if collaboration.person == @person and collaboration.name != 'Author' %>
+    <form action="/collaborations/destroy" method="post">
+      <input type="hidden" name="node_id" value="<%= @model.id %>" />
+      (<a href="#" class="remove_collaborator">Remove</a>)
+    </form>
+    <% end %>
+  </div>
+  <% end %>
+
+  <% @model.non_member_collaborations.each do |collaboration| %>
+  <div class="collaborator">
+    <%= collaboration.non_member_collaborator.display_name %> (<%= collaboration.name %>)
+  </div>
   <% end %>
 </div>
