@@ -16,7 +16,7 @@ class NonMemberCollaborator < ActiveRecord::Base
 
   def display_name
     if name.present?
-      "#{email} (#{name})"
+      "#{name}, #{email}"
     else
       email
     end
