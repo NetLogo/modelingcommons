@@ -1,6 +1,5 @@
 <% @title = @model.name %>
-<% @meta_description = "View, run, and discuss the '#{@model.name}'
-			model, written in NetLogo." %>
+<% @meta_description = "View, run, and discuss the '#{@model.name}' model, written in NetLogo." %>
 <div class="model_info">
   <div class="model_info_top">
     <% if @model.previews.nil? or @model.previews.empty? %>
@@ -9,6 +8,12 @@
     <%= model_image(@model)%>
     <% end %>
     <div class="info_social_container">
+      <div class="seeking-collaborators">
+	<% if @person and @model.author?(@person) %>
+	<input id="wants_help" name="wants_help" type="checkbox"/>
+	<% end %>
+	<label for="wants_help">This model is seeking new collaborators!</label>
+      </div>
       <div class="info_container">
         <div class="collaborators">
           <h3>
@@ -20,6 +25,8 @@
           
           <%= render :partial => "/collaborations/collaborator_list" %>
           
+
+
           <%= form_for(:add_collaborator, :url => {:controller => :collaborations, :action => :create}, :html => {:class => 'popup_form'}) do |form| -%>
           <div class="left-right"><div class="left"><h1>Add Collaborator</h1></div><div class="right"><h2><a href="#" class="close_form">Close</a></h2></div></div>
           <input type="hidden" name="node_id" value="<%= @model.id %>" />

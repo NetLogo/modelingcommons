@@ -281,47 +281,47 @@ jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
 
     
     //Tab loader loads tabs on the element selected by elementId and switches to the tab selected in the hash
-var initializeTabsOnElement = function(elementId) {
-    
-    //Checks URL hash to see if the user wants to go to a specific tab
-    var getURLTabIndex = function() {
-	var tab_index = 0;
-	if(window.location.hash.indexOf(elementId + "_") != -1) {
-	    var startIndex = window.location.hash.indexOf(elementId + "_") + (elementId + "_").length;
-	    var endIndex = window.location.hash.indexOf("&", startIndex);
-	    endIndex = endIndex == -1 ? window.location.hash.length : endIndex;
-	    var tab_id = window.location.hash.substring(startIndex, endIndex);
-	    $("#" + elementId + ">div").each(function(index, element) {
-		if(tab_id == element.id) {
-		    tab_index = index;
+    var initializeTabsOnElement = function(elementId) {
+	
+	//Checks URL hash to see if the user wants to go to a specific tab
+	var getURLTabIndex = function() {
+	    var tab_index = 0;
+	    if(window.location.hash.indexOf(elementId + "_") != -1) {
+		var startIndex = window.location.hash.indexOf(elementId + "_") + (elementId + "_").length;
+		var endIndex = window.location.hash.indexOf("&", startIndex);
+		endIndex = endIndex == -1 ? window.location.hash.length : endIndex;
+		var tab_id = window.location.hash.substring(startIndex, endIndex);
+		$("#" + elementId + ">div").each(function(index, element) {
+		    if(tab_id == element.id) {
+			tab_index = index;
+		    }
+		});
+
+		if (typeof mouseflow != "undefined") {
+		    mouseflow.newPageView();
 		}
-	    });
 
-	    if (typeof mouseflow != "undefined") {
-		mouseflow.newPageView();
+		console.log("In getURLTabIndex, tab_index = " + tab_index);
 	    }
+	    return tab_index;
+	};
+	
+	//Create the tabs
+	var tab = $("#" + elementId).tabs({
+	    //Select the correct tab
+	    selected: getURLTabIndex(),
 
-	    console.log("In getURLTabIndex, tab_index = " + tab_index);
-	}
-	return tab_index;
+	    //When the tab changes, update the URL hash 
+	    show: function(event, ui) {
+		window.location.hash = elementId + "_" + ui.panel.id;
+	    }
+	});
+	
+	//Change tabs on back/forward by monitoring URL hash
+	$(window).bind("hashchange", function() {
+	    tab.tabs("select", getURLTabIndex());
+	});
     };
-    
-    //Create the tabs
-    var tab = $("#" + elementId).tabs({
-	//Select the correct tab
-	selected: getURLTabIndex(),
-
-	//When the tab changes, update the URL hash 
-	show: function(event, ui) {
-	    window.location.hash = elementId + "_" + ui.panel.id;
-	}
-    });
-    
-    //Change tabs on back/forward by monitoring URL hash
-    $(window).bind("hashchange", function() {
-	tab.tabs("select", getURLTabIndex());
-    });
-};
     
     
     //Person selector for group invitation tab
@@ -726,7 +726,7 @@ var initializeTabsOnElement = function(elementId) {
     		}
     	    }, 
     	    
-    
+	    
     	});
     	
     	
@@ -742,7 +742,7 @@ var initializeTabsOnElement = function(elementId) {
     };
     
     var initializeCollaboration = function() {
-    
+	
     	if ($("#add-collaborator").length > 0) {
     	    var collaboration_options;
     	    $.get('/collaborator_types.json', function(data) {
@@ -751,9 +751,8 @@ var initializeTabsOnElement = function(elementId) {
     		}).join("\n");
     	    });
     	}
-    
+	
     	var node_id = $("#id").val();
-    	
     	
         var add_collaborator_form = $(".collaborators form.popup_form");
         
@@ -843,7 +842,7 @@ var initializeTabsOnElement = function(elementId) {
         });
         
     	$("#remove-collaboration").bind("click", function(e) {	
-    
+	    
     	    $.post('/collaborations/destroy',
     		   {
     		       node_id: node_id,
@@ -851,17 +850,26 @@ var initializeTabsOnElement = function(elementId) {
     		   },
     		   function(data) {
     		       if (data['message'] == 'ok')
-    			   {
-    			       window.location.reload();
-    			   }
+    		       {
+    			   window.location.reload();
+    		       }
     		       else
-    			   {
-    			       alert(data['message']);
-    			   }
+    		       {
+    			   alert(data['message']);
+    		       }
     		   });
     	});
-    };
 
+	$("#wants_help").click(function(e) {
+	    $.post('/nodes/change_wants_help',
+		  {
+		      id: $("#node_id").val(),
+		      wants_help: $("#wants_help").attr("checked")
+		  }
+		 )
+	}
+			     );
+    };
 
     var initializeTagCloud = function() {
         $(".tag_cloud_container").each(function() {
@@ -991,26 +999,26 @@ var initializeTabsOnElement = function(elementId) {
             var add_recommendation_button = container.find("#add_recommendation");
             
             add_recommendation_button.click(function(e) {
-               var add_recommendation_container = $("#add_recommendation_container");
-               add_recommendation_container.hide();
-               var success = function(data, textStatus, jqXHR) {
-                   container.replaceWith(data);
-                   attachRecommendationListeners($("#rec_container"));
-                   $().flash_notice("Your recommendation has been added");
-               };
-               var error = function(jqXHR, textStatus, errorThrown) {
+		var add_recommendation_container = $("#add_recommendation_container");
+		add_recommendation_container.hide();
+		var success = function(data, textStatus, jqXHR) {
+                    container.replaceWith(data);
+                    attachRecommendationListeners($("#rec_container"));
+                    $().flash_notice("Your recommendation has been added");
+		};
+		var error = function(jqXHR, textStatus, errorThrown) {
                     $().flash_notice(textStatus + ": " + errorThrown);
                     add_recommendation_container.show();
-               };   
-               var url = add_recommendation_button.attr("href");
-               $.ajax({
+		};   
+		var url = add_recommendation_button.attr("href");
+		$.ajax({
                     url: url,
                     dataType: "html",  
                     type: "post", 
                     success: success,
                     error: error
                 });
-               return false;
+		return false;
             });
             
         }
@@ -1029,16 +1037,16 @@ var initializeTabsOnElement = function(elementId) {
                 flash_element.animate(
                     {right: "0px"}, 600
                 ).delay(5000
-                ).animate(
-                    {right: "-" + width + "px"},
-                    {
-                        duration: 600,
-                        complete: function() {
-                            queue.shift();
-                            display_next();
-                        }
-                    }
-                );
+                       ).animate(
+			   {right: "-" + width + "px"},
+			   {
+                               duration: 600,
+                               complete: function() {
+				   queue.shift();
+				   display_next();
+                               }
+			   }
+                       );
             } else {
                 running = false;
             }
@@ -1052,7 +1060,7 @@ var initializeTabsOnElement = function(elementId) {
             }
         }
     };
-     
+    
     var initializeAlreadyRegisteredButton = function() {
         var loginButton = $("#login_to_the_commons");
         loginButton.click(function() {

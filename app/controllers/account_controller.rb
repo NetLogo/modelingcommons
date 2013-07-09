@@ -435,6 +435,7 @@ class AccountController < ApplicationController
 
     @recent_tag_events = [@recent_tags, @recent_tagged_models].flatten.sort_by { |tag| tag.created_at}.reverse[0..limit - 1]
 
+    @models_wanting_help = Node.where(:wants_help => true).all.select { |n| n.visible_to_user?(@person) }[0..limit - 1]
     
     # Model updates
     @model_events = @the_person.models.select {|model| model.updated_at >= how_new_is_new && model.visible_to_user?(@person)}.sort{|a, b| b.updated_at <=> a.updated_at}[0..limit - 1]

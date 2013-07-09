@@ -180,7 +180,8 @@ CREATE TABLE nodes (
     updated_at timestamp without time zone,
     visibility_id integer DEFAULT 1 NOT NULL,
     changeability_id integer DEFAULT 1 NOT NULL,
-    group_id integer
+    group_id integer,
+    wants_help boolean DEFAULT false NOT NULL
 );
 
 
@@ -432,6 +433,18 @@ ALTER SEQUENCE memberships_id_seq OWNED BY memberships.id;
 --
 
 CREATE TABLE model_downloads (
+    logged_at timestamp without time zone,
+    ip_address text,
+    node_id integer,
+    person_id integer
+);
+
+
+--
+-- Name: model_runs; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE model_runs (
     logged_at timestamp without time zone,
     ip_address text,
     node_id integer,
@@ -1602,6 +1615,13 @@ CREATE INDEX index_nodes_on_visibility_id ON nodes USING btree (visibility_id);
 
 
 --
+-- Name: index_nodes_on_wants_help; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_nodes_on_wants_help ON nodes USING btree (wants_help);
+
+
+--
 -- Name: index_non_member_collaborations_on_collaborator_type_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1914,6 +1934,34 @@ CREATE INDEX model_downloads_node_id_idx ON model_downloads USING btree (node_id
 --
 
 CREATE INDEX model_downloads_person_id_idx ON model_downloads USING btree (person_id);
+
+
+--
+-- Name: model_runs_ip_address_idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX model_runs_ip_address_idx ON model_runs USING btree (ip_address);
+
+
+--
+-- Name: model_runs_logged_at_idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX model_runs_logged_at_idx ON model_runs USING btree (logged_at);
+
+
+--
+-- Name: model_runs_node_id_idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX model_runs_node_id_idx ON model_runs USING btree (node_id);
+
+
+--
+-- Name: model_runs_person_id_idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX model_runs_person_id_idx ON model_runs USING btree (person_id);
 
 
 --
@@ -2235,6 +2283,8 @@ INSERT INTO schema_migrations (version) VALUES ('20130708125819');
 INSERT INTO schema_migrations (version) VALUES ('20130708125917');
 
 INSERT INTO schema_migrations (version) VALUES ('20130708143024');
+
+INSERT INTO schema_migrations (version) VALUES ('20130709165843');
 
 INSERT INTO schema_migrations (version) VALUES ('21');
 

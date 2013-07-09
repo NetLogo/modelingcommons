@@ -1,0 +1,31 @@
+<div class="news">
+  <div class="news_list">
+    <div class="news_heading">
+      Models looking for collaborators
+    </div>
+    <% if @models_wanting_help.empty? %>
+      <div class="news_empty">
+        No models looking for collaborators
+      </div>
+    <% else %>
+      <% @models_wanting_help.each do |model| %>
+        <div class="news_post<% if model.author?(@person) %> your_news<% end %>">
+          <div class="news_image">
+	    <%= model_thumb_image(model) %>
+          </div>
+          <div class="news_content">
+            <div class="news_above">
+              <a href="<%= url_for(:controller => :account, :action => :mypage, :id => model.person.id) %>"><%= model.person.fullname %></a>
+            </div>
+            <div class="news_item">
+	      <%= model_link(model) %>
+            </div>
+            <div class="news_below">
+              Below
+            </div>
+          </div> 
+        </div>
+      <% end %>
+    <% end %>    
+  </div>
+</div>
