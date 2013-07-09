@@ -3,7 +3,7 @@
 <% tags.sort! {|a, b| a.tag.name <=> b.tag.name } %>
 <% tags.each do |t| %>
 <div class="tag">
-  <a title="<%= t.comment %>" href="<%= url_for :controller => :tags, :action => :one_tag, :id => t.tag.id %>" style="font-size: <%= tag_size(t.tag.nodes.count) %>px;"><%= t.tag.name %></a>
+  <a title="<%= t.comment %>" href="<%= url_for :controller => :tags, :action => :one_tag, :id => t.tag.id %>" style="font-size: <%= tag_size(t.tag.nodes.select {|n| n.id == model.id}.count * 2) %>px;"><%= t.tag.name %></a>&nbsp;
   <div class="tag_info">
     <% if t.comment.length > 0 %>
     <p class="tag_comment">&quot;<%= t.comment %>&quot;</p>

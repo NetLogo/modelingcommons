@@ -41,7 +41,7 @@
         <div class="tag_cloud_container">
           <h3>Tags
             <% if @person %>
-            <span class="smaller">Please <a href="#" id="open_add_tag_form">add tags</a> that describe this model</span>
+            <span class="smaller">Take a few moments to <a href="#" id="open_add_tag_form">tag this model</a>!</span>
             <% end %>
           </h3>
           <%= render :partial => "tags/tag_cloud", :locals => {:model => @model} %>
