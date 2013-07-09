@@ -12,9 +12,9 @@
 	<% if @person and @model.author?(@person) %>
 	<input id="wants_help" name="wants_help" type="checkbox" 
                <%= @model.wants_help? ? 'checked' : '' %> />
-	<label for="wants_help">This model is seeking new collaborators!</label>
+	<label for="wants_help">Check this box to ask for new collaborators</label>
 	<% elsif @model.wants_help? %>
-	<p>This model is seeking new collaborators!</p>
+	<p>This model is seeking new collaborators &mdash; would you please help them?</p>
 	<% end %>
       </div>
       <div class="info_container">
