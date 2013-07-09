@@ -190,7 +190,7 @@ jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
 		    return;
 		}
 		
-		fileInput.wrap('<label for="' + name + '" class="file_label">Choose File</label>')
+		fileInput.wrap('<label for="' + name + '" class="file_label">Upload file: </label>')
 		var wrapper = fileInput.parent();
 		var fileNameLabel = $('<label for="' + name + '" class="file_name_label"></label>');
 		fileNameLabel.insertAfter(wrapper);
