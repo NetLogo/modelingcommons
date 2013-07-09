@@ -164,6 +164,14 @@ class Notifications < ActionMailer::Base
          :subject => wrap_subject("Reminder to tag your models"))
   end
 
+  def solo_models_reminder(person, solo_models)
+    @person = person
+    @solo_models = solo_models
+    mail(:to => @person.email_address,
+         :bcc => NLCOMMONS_LIST,
+         :subject => wrap_subject("Reminder to add collaborators to models"))
+  end
+
 
   def views_downloads_update(person)
     @person = person

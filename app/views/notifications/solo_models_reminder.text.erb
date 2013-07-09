@@ -1,0 +1,31 @@
+Greetings from the NetLogo Modeling Commons!
+
+This is an automated reminder that your <%= pluralize(@solo_models.count, 'model') %> 
+is listed as having a single person work on it (i.e., you).  Now
+  that's just fine, and we're delighted that you have contributed to
+  the Modeling Commons.  But we want to be sure that everyone who has worked on a model receives
+  appropriate credit.
+
+(You should receive this message only once per model that you upload.)
+
+So if anyone has helped you with a model &mdash; as a modeler, domain
+  expert, advisor, or in another role &mdash; we encourage you to log into the 
+  Modeling Commons and identify those collaborators, by clicking on the "Add a
+  collaborator" link on a model page.  (This link is only visible to a
+  model's authors.)
+
+We recently made it possible to acknowledge collaborators who are
+  not members of the Modeling Commons.  To add such a person, enter
+  their e-mail address, in addition to their name.  We'll thank them
+  for their contributions, and their name will appear on the model
+  page, along with other contributors.  (If and when such people join
+  the Modeling Commons, we'll be sure that the collaboration credit
+  points to their new account.)
+
+Your <%= pluralize(@solo_models.count, 'model') %>:
+
+  <% @solo_models.each do |model| %>
+  -- <%= link_to model.name, "http://modelingcommons.org/browse/one_model/#{model.id}" %>
+  <% end %>
+
+If you have any questions about the Modeling Commons, please contact us at modelingcommons@ccl.northwestern.edu. We enjoy getting feedback, and helping to improve the Modeling Commons for our users.
