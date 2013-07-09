@@ -22,10 +22,10 @@
           <a href="<%= url_for(:controller => :account, :action => :mypage, :id => model.person.id) %>"><%= model.person.fullname %></a>
         </div>
         <div class="news_item">
-	  <%= model_link(model) %>
+          <a href="<%= url_for(:controller => "browse", :action => "one_model", :id => model.id) -%>"><%= model.name -%></a>
         </div>
         <div class="news_below">
-          <%= model.all_collaborators.count, 'collaborator' %>
+          <%= pluralize(model.all_collaborations.count, 'collaborator') %>
         </div>
       </div> 
     </div>
