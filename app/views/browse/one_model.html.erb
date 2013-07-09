@@ -10,7 +10,8 @@
     <div class="info_social_container">
       <div class="seeking-collaborators">
 	<% if @person and @model.author?(@person) %>
-	<input id="wants_help" name="wants_help" type="checkbox"/>
+	<input id="wants_help" name="wants_help" type="checkbox" 
+               <%= @model.wants_help? ? 'checked' : '' %> />
 	<label for="wants_help">This model is seeking new collaborators!</label>
 	<% elsif @model.wants_help? %>
 	<p>This model is seeking new collaborators!</p>
