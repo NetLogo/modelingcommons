@@ -131,7 +131,7 @@ class Notifications < ActionMailer::Base
     @person = person
     mail(:to => @recipients,
          :bcc => NLCOMMONS_LIST,
-         :subject => wrap_subject("Thanks for uploading the '#{node.name}' model!"))
+         :subject => wrap_subject("#{person.first_name}, thanks for uploading the '#{node.name}' model!"))
   end
 
   def collaboration_notice(node, person)
@@ -141,7 +141,7 @@ class Notifications < ActionMailer::Base
     @person = person
     mail(:to => @recipients,
          :bcc => NLCOMMONS_LIST,
-         :subject => wrap_subject("You have been added as a collaborator to the '#{node.name}' model"))
+         :subject => wrap_subject("#{person.first_name}, you have been added as a collaborator to the '#{node.name}' model"))
   end
 
   def nonmember_collaboration_notice(node, nmc, person)
@@ -161,7 +161,7 @@ class Notifications < ActionMailer::Base
     @tag_count = Tag.count
     mail(:to => @person.email_address,
          :bcc => NLCOMMONS_LIST,
-         :subject => wrap_subject("Reminder to tag your models"))
+         :subject => wrap_subject("#{person.first_name}, don't forget to tag your models!"))
   end
 
   def solo_models_reminder(person, solo_models)
@@ -169,7 +169,7 @@ class Notifications < ActionMailer::Base
     @solo_models = solo_models
     mail(:to => @person.email_address,
          :bcc => NLCOMMONS_LIST,
-         :subject => wrap_subject("Reminder to add collaborators to models"))
+         :subject => wrap_subject("#{person.first_name}, have you credited your collaborators?"))
   end
 
 
