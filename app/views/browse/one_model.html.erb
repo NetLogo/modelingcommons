@@ -11,8 +11,10 @@
       <div class="seeking-collaborators">
 	<% if @person and @model.author?(@person) %>
 	<input id="wants_help" name="wants_help" type="checkbox"/>
-	<% end %>
 	<label for="wants_help">This model is seeking new collaborators!</label>
+	<% elsif @model.wants_help? %>
+	<p>This model is seeking new collaborators!</p>
+	<% end %>
       </div>
       <div class="info_container">
         <div class="collaborators">
