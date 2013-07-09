@@ -281,40 +281,47 @@ jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
 
     
     //Tab loader loads tabs on the element selected by elementId and switches to the tab selected in the hash
-    var initializeTabsOnElement = function(elementId) {
-	
-	//Checks URL hash to see if the user wants to go to a specific tab
-	var getURLTabIndex = function() {
-	    var tab_index = 0;
-	    if(window.location.hash.indexOf(elementId + "_") != -1) {
-		var startIndex = window.location.hash.indexOf(elementId + "_") + (elementId + "_").length;
-		var endIndex = window.location.hash.indexOf("&", startIndex);
-		endIndex = endIndex == -1 ? window.location.hash.length : endIndex;
-		var tab_id = window.location.hash.substring(startIndex, endIndex);
-		$("#" + elementId + ">div").each(function(index, element) {
-		    if(tab_id == element.id) {
-			tab_index = index;
-		    }
-		});
+var initializeTabsOnElement = function(elementId) {
+    
+    //Checks URL hash to see if the user wants to go to a specific tab
+    var getURLTabIndex = function() {
+	var tab_index = 0;
+	if(window.location.hash.indexOf(elementId + "_") != -1) {
+	    var startIndex = window.location.hash.indexOf(elementId + "_") + (elementId + "_").length;
+	    var endIndex = window.location.hash.indexOf("&", startIndex);
+	    endIndex = endIndex == -1 ? window.location.hash.length : endIndex;
+	    var tab_id = window.location.hash.substring(startIndex, endIndex);
+	    $("#" + elementId + ">div").each(function(index, element) {
+		if(tab_id == element.id) {
+		    tab_index = index;
+		}
+	    });
+
+	    if (typeof mouseflow != "undefined") {
+		mouseflow.newPageView();
 	    }
-	    return tab_index;
-	};
-	
-	//Create the tabs
-	var tab = $("#" + elementId).tabs({
-	    //Select the correct tab
-	    selected: getURLTabIndex(),
-	    //When the tab changes, update the URL hash 
-	    show: function(event, ui) {
-		window.location.hash = elementId + "_" + ui.panel.id;
-	    }
-	});
-	
-	//Change tabs on back/forward by monitoring URL hash
-	$(window).bind("hashchange", function() {
-	    tab.tabs("select", getURLTabIndex());
-	});
+
+	    console.log("In getURLTabIndex, tab_index = " + tab_index);
+	}
+	return tab_index;
     };
+    
+    //Create the tabs
+    var tab = $("#" + elementId).tabs({
+	//Select the correct tab
+	selected: getURLTabIndex(),
+
+	//When the tab changes, update the URL hash 
+	show: function(event, ui) {
+	    window.location.hash = elementId + "_" + ui.panel.id;
+	}
+    });
+    
+    //Change tabs on back/forward by monitoring URL hash
+    $(window).bind("hashchange", function() {
+	tab.tabs("select", getURLTabIndex());
+    });
+};
     
     
     //Person selector for group invitation tab
