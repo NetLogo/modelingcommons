@@ -20,7 +20,7 @@
   <% else %>
   <% @tag.nodes.uniq.each do |model| %>
   <% next unless model.visible_to_user?(@person) %>
-  <li><%= link_to model.name, :controller => "browse", :action => "one_model", :id => model.id %></li>
+  <li><%= model_image(model) %>&nbsp;<%= link_to model.name, :controller => "browse", :action => "one_model", :id => model.id %></li>
   <% end %>
   <% end %>
 </ul>
