@@ -421,6 +421,10 @@ class Node < ActiveRecord::Base
     LoggedAction.find_by_sql(["SELECT COUNT(DISTINCT ip_address) FROM Model_Views WHERE node_id = ?", id]).first.count.to_i
   end
 
+  def runs
+    LoggedAction.find_by_sql(["SELECT COUNT(DISTINCT ip_address) FROM Model_Runs WHERE node_id = ?", id]).first.count.to_i
+  end
+
   def downloads
     LoggedAction.find_by_sql(["SELECT COUNT(DISTINCT ip_address) FROM Model_Downloads WHERE node_id = ?", id]).first.count.to_i
   end
