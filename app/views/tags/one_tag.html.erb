@@ -4,7 +4,7 @@
 
 <h2>Tag creation:</h2>
 <ul>
-  <li>Tag created by <%= person_link(@tag.person) %> on <%= @tag.created_at %></li>
+  <li>Tag created by <%= person_image(@tag.person) %><%= person_link(@tag.person) %> on <%= @tag.created_at %></li>
   <% if @tag.tagged_nodes.empty? %>
   <p>This tag has never been used.</p>
   <% else %>
@@ -14,30 +14,36 @@
 
 <h2>Models using this tag:</h2>
 <p><%= link_to "Download all models with this tag", :controller => :tags, :action => :download, :id => @tag.id %>
-<ul>
   <% if @tag.nodes.empty? %>
-  <p>No models have been tagged with <%= @tag.name %>.</p>
-  <% else %>
+<p>No models have been tagged with <%= @tag.name %>.</p>
+<% else %>
+<table>
   <% @tag.nodes.uniq.each do |model| %>
   <% next unless model.visible_to_user?(@person) %>
-  <li><%= model_image(model) %>&nbsp;<%= link_to model.name, :controller => "browse", :action => "one_model", :id => model.id %></li>
+  <tr>
+    <td><%= model_thumb_image(model) %></td>
+    <td><%= link_to model.name, :controller => "browse", :action => "one_model", :id => model.id %></td>
+  </tr>
   <% end %>
-  <% end %>
-</ul>
+</table>
+<% end %>
 
 <h2>Uses of this tag:</h2>
-<ul>
-  <% if @tag.tagged_nodes.empty? %>
-  <p>No models have ever been tagged with <%= @tag.name %>.</p>
-  <% else %>
+<% if @tag.tagged_nodes.empty? %>
+<p>No models have ever been tagged with <%= @tag.name %>.</p>
+<% else %>
+<table>
   <% @tag.tagged_nodes.sort_by {|t| t.updated_at}.each do |tm| %>
   <% next unless tm.node.visible_to_user?(@person) %>
-  <li><%= link_to tm.node.name, :controller => "browse", :action => "one_model", :id => tm.node_id %> 
-  <%= " (#{tm.comment}), " if tm.comment.present? %>
-  by <%= link_to tm.person.fullname, :controller => :account, :action => :mypage, :id => tm.person.id %> <%= distance_of_time_in_words(Time.now, tm.updated_at) -%> ago </li>
+  <tr>
+    <td><%= link_to tm.node.name, :controller => "browse", :action => "one_model", :id => tm.node_id %></td>
+    <td><%= " (#{tm.comment}), " if tm.comment.present? %></td>
+    <td><%= person_image(tm.person) %>&nbsp;<%= person_link(tm.person) %></td>
+    <td><%= distance_of_time_in_words(Time.now, tm.updated_at) -%> ago</td>
+  </tr>
   <% end %>
-  <% end %>
-</ul>
+</table>
+<% end %>
 
 <h2>People who have used this tag:</h2>
 <ul>

@@ -182,9 +182,19 @@ ago."
       ''
     end
   end
+
+  def model_thumb_image(node)
+    if !node.previews.empty?
+      image_tag(url_for(:controller => :browse, :action => :display_preview, :id => node.id, :size => 'thumb'), :alt => node.name + " preview image")
+    else
+      ''
+    end
+  end
+
   def model_url(node)
     url_for(:controller => :browse, :action => :one_model, :id => node.id)
   end
+
   def discuss_link(node, text)
     link_to(text, :controller => :browse, :action => :one_model, :id => node.id, :anchor => 'discuss')
   end
