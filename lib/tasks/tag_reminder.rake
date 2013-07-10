@@ -19,7 +19,7 @@ namespace :nlcommons do
         next
       end
 
-      untagged_models = person.models.select {|m| m.tags.empty? and m.created_at > minimum_creation_age}
+      untagged_models = person.models.select {|m| m.tags.empty? and m.updated_at > minimum_creation_age}
       if untagged_models.empty?
         STDERR.puts "\tNo untagged models"
       else

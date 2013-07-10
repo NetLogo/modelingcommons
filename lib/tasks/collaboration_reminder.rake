@@ -19,7 +19,7 @@ namespace :nlcommons do
         next
       end
 
-      solo_models = person.models.select {|m| (m.all_collaborations.size == 1) and m.created_at > minimum_creation_age}
+      solo_models = person.models.select {|m| (m.all_collaborations.size == 1) and m.updated_at > minimum_creation_age}
       if solo_models.empty?
         STDERR.puts "\tNo solo models"
       else
