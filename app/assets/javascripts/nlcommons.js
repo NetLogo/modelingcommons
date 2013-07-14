@@ -914,6 +914,7 @@ jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
                 add_tag_form.css("left", tag_offset.left + "px");
                 add_tag_form.css("top", tag_offset.top + "px");
                 add_tag_form.show();
+		$("#new_tag_").focus();
                 tag_form_opened = true;
             }
             function close_tag_form() {
