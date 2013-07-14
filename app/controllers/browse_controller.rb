@@ -11,7 +11,7 @@ class BrowseController < ApplicationController
   before_filter :check_visibility_permissions, :only => [:one_model, :one_applet ]
 
   def list_models
-    @models = Node.all(:order => "name ASC", :include => [:tags, :visibility, :changeability])
+    @models = Node.all(:order => "name ASC", :include => [:tags, :visibility, :changeability, :attachments, :collaborators, :non_member_collaborators])
     @models = @models.select {|model| model.visible_to_user?(@person)}
     render :layout => 'application_nomargin'
   end
