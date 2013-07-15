@@ -22,7 +22,9 @@
       </div>
       <div class="news_content">
         <div class="news_above">
-	  <span class="help-banner">This modeler wants help!</span>
+	  <% if model.wants_help? %>
+	  <span class="help-banner">This modeler wants help!</span><br/>
+	  <% end %>
           <%= raw model_info[:action] %>
         </div>
         <div class="news_item">
