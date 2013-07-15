@@ -1530,6 +1530,9 @@ table.simple_table {
             width: 406px;
             .news_above {
                font-size: 11px;
+	       .help-banner {
+		  background-color: $your_news_color;		  
+	       }
             }
             .news_item {
                font-size: 15px;
