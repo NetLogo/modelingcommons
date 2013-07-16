@@ -1565,6 +1565,13 @@ table.simple_table {
    background-color: $your_news_color;
 }
 
+form.button_to {
+   display: inline;
+}
+
+form.button_to div {
+   display: inline;
+}
 
 /* 
  * Legacy Styling
