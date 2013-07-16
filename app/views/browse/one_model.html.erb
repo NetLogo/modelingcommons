@@ -158,7 +158,7 @@
 	<% end %>
 	<% if @person and @model.people.include?(@person) %>
         | 
-        <%= link_to 'Delete this model', { :controller => :upload, :action => :destroy, :id => @model.id }, :confirm => "Delete this model, including its entire history, attachments, and comments?  There is no way to undo this action.\n\nDon't delete a model just because you have a newer version; instead, use the 'upload' tab to put a newer version online." %>
+        <%= button_to "Delete this model", { controller: :upload, action: :destroy, id: @model.id }, {method: :delete, data: { confirm: "Are you REALLY sure you want to delete this model, including the history, attachments, and comments?\n\nDon't delete a model just because you have a newer version; instead, use the 'upload' tab to put a newer version online.  And if you want to hide the model, just change the permissions.", disable_with: "Deleting..." } }%>
 	<% end %>
       </div>
     </div>

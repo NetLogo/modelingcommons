@@ -292,7 +292,7 @@ class AccountController < ApplicationController
         end
         format.html do
           #render :action => :new
-          flash[:notice] = "Error creating new user"
+          flash[:notice] = "Error creating new user!  You shouldn't see this message, so please contact us at modelingcommons@ccl.northwestern.edu to figure out what went wrong!"
           redirect_to :action => :new
         end
       end
@@ -351,7 +351,7 @@ class AccountController < ApplicationController
       logger.warn "Attempted login with non-existent email_address '#{params[:email_address]}'"
       respond_to do |format| 
         format.html do 
-          flash[:notice] = "Sorry, but no user exists with that e-mail address and password.  Please try again."
+          flash[:notice] = "Sorry, but no user exists with that e-mail address and password.  Please try again, or ask to have a password reminder sent to you."
           redirect_to :back
           
         end

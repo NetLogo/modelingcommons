@@ -747,7 +747,7 @@ jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
     	    var collaboration_options;
     	    $.get('/collaborator_types.json', function(data) {
     		collaboration_options = data.map(function(o) { 
-    		    return "<option value='" + o.collaborator_type.id + "'>"+ o.collaborator_type.name  + "</option>"  ;
+    		    return "<option value='" + o.id + "'>"+ o.name  + "</option>"  ;
     		}).join("\n");
     	    });
     	}
