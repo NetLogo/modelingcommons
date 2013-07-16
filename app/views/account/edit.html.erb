@@ -53,18 +53,17 @@
     </tr>
 
     <tr>
-      <td>Receive general e-mail updates from the Modeling Commons?</td>
+      <td>Receive (infrequent) general e-mail updates from the Modeling Commons, pointing to new features?</td>
       <td><%= form.check_box :send_site_updates, :checked => @person.send_site_updates? %><label for="person_send_site_updates">Yes</label></td>
     </tr>
 
     <tr>
-      <td>Receive e-mail updates about models which you have written,
-	edited, or discussed?</td>
+      <td>Receive e-mail updates about models which you have written, edited, or discussed, as well as a weekly update about your models' popularity?</td>
       <td><%= form.check_box :send_model_updates, :checked => @person.send_model_updates? %><label for="person_send_model_updates">Yes</label></td>
     </tr>
 
     <tr>
-      <td>Receive e-mail updates when tags are applied?</td>
+      <td>Receive e-mail updates about tags that you have created, used, or applied?</td>
       <td><%= form.check_box :send_tag_updates, :checked => @person.send_tag_updates? %><label for="person_send_tag_updates">Yes</label></td>
     </tr>
 
