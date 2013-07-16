@@ -4,7 +4,9 @@
 <% else %>
 <div class="comments_list">
   <% if @model.postings.empty? %>
-  <p>No comments so far!  Please <%= link_to("log in to", :controller => :account, :action => :login) unless @person -%> start the conversation about this model.</p>
+  Do you have questions or comments about this model?  Ask them here!
+  <%= link_to("(You'll first need to log in.)", :controller => :account, :action => :login) unless @person -%>
+</p>
   <% else %>
   <%= render :partial => "discussion/one_posting", :collection => @model.postings.sort_by {|posting| posting.created_at}, :as => :posting -%>
   <% end %>
@@ -17,6 +19,9 @@
 <%= form_for(:new_posting, :url => { :controller => "discussion", :action => :create }, :html => {:id => 'new_discussion_comment'}) do |form| %>
 <table id="posting-table">
   <tr>
+        <td colspan="2"><%= form.check_box :is_question %><label for="new_posting_is_question">This is a question that I would like answered</label></td>
+  </tr>
+  <tr>
     <td><label for="new_posting_title">Title</label></td>
     <td><%= form.text_field :title %></td>
   </tr>
@@ -25,10 +30,6 @@
     <td><%= form.text_area :body, {:cols => 40, :rows => 10} %>
       <!-- model = <%= @model.inspect %> -->
       <%= form.hidden_field :node_id, {:value => @model.id} %></td>
-  </tr>
-  <tr>
-    
-    <td colspan="2"><%= form.check_box :is_question %><label for="new_posting_is_question">This is a question that I would like answered</label></td>
   </tr>
   
   <tr>

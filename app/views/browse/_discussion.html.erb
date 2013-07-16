@@ -1,10 +1,6 @@
 <div>
-  <% if node.postings.empty? %>
-  <b>Please start the conversation about this model.</b>
-  <% else %>
-  <b>Please add to the conversation about this model.</b>
-  <hr />
-  <% end %>
+  <b>Do you have questions or comments about this model?  Ask them
+  here!</b>
 
   <table id="discussion">
   <%= render :partial => "discussion/one_posting", :collection => node.postings.sort_by {|posting| posting.created_at}, :as => :posting -%>
