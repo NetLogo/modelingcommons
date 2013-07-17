@@ -30,7 +30,7 @@ class TaggedNode < ActiveRecord::Base
 
   def notify_people
     notification_recipients = (node.people + tag.people).uniq
-    logger.warn "Notification recipients = '#{notification_recipients}'"
+    logger.warn "Notification recipients for tagged node '#{self.inspect}' = '#{notification_recipients}'"
     Notifications.applied_tag(notification_recipients, tag, node).deliver
   end
 
