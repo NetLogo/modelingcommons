@@ -351,7 +351,7 @@ class AccountController < ApplicationController
       logger.warn "Attempted login with non-existent email_address '#{params[:email_address]}'"
       respond_to do |format| 
         format.html do 
-          flash[:notice] = "Sorry, but no user exists with that e-mail address and password.  Please try again, or ask to have a password reminder sent to you."
+          flash[:notice] = "Sorry, but no user has that e-mail and password. We can send you a password reminder, if you need."
           redirect_to :back
           
         end
