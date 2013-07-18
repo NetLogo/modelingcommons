@@ -217,6 +217,7 @@ class ApplicationController < ActionController::Base
     # most-applied tags
     @most_popular_tags = TaggedNode.count(:group => "tag_id",
                                           :order => "count_all DESC",
+                                          :conditions => "created_at > (now() - interval '2 weeks')",
                                           :limit => limit).map { |tag| {:tag => Tag.find(tag[0]), :num_tags => tag[1]}}
 
     # most-recommended models
