@@ -12,6 +12,7 @@
     <th>Downloads</th>
     <th>Recommendations</th>
     <th>Runs</th>
+    <th>Collaborators (other than you)</th>
     <th>Unanswered questions</th>
     <th>Tags</th>
   </tr>
@@ -24,6 +25,7 @@
       <td><%= model.downloads %></td>
       <td><%= model.recommendations.count %></td>
       <td><%= model.runs %></td>
+      <td><%= model.all_collaborators.count - 1 %></td>
       <td><%= model.unanswered_questions %></td>
       <th><%= model.tags.size %></th>
     </tr>

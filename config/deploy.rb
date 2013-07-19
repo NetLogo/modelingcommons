@@ -3,7 +3,6 @@ require "bundler/capistrano"
 
 set :application, "NetLogo Modeling Commons"
 
-default_run_options[:pty] = true
 set :repository,  "git@main.lerner.co.il:/home/git/nlcommons.git"
 set :scm, "git"
 set :scm_passphrase, "" #This is your custom users password
