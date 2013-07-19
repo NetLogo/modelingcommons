@@ -1,20 +1,34 @@
 <p>Greetings, <%= @person.first_name %>, from the  <a href="http://modelingcommons.org/">NetLogo Modeling Commons</a>!</p>
 
-<p>We keep track of how often your models are viewed and
-  downloaded, and wanted to share that information with you:</p>
+<p>This is a weekly update, describing how often your models are
+  viewed and downloaded, and wanted to share that information with
+  you:</p>
 
-<ul>
+<table>
+  <tr>
+    <th>Model<th>
+    <th>Permissions</th>
+    <th>Views</th>
+    <th>Downloads</th>
+    <th>Recommendations</th>
+    <th>Runs</th>
+    <th>Unanswered questions</th>
+    <th>Tags</th>
+  </tr>
+
   <% @person.models.each do |model| %>
-  <li>
-    <%= link_to model.name, "http://modelingcommons.org/browse/one_model/#{model.id}" %>: 
-    Viewed <%= pluralize(model.views, 'time') %>, 
-    downloaded <%= pluralize(model.downloads, 'time') %>,
-    recommended <%= pluralize(model.recommendations.count, 'time') %>,
-    run <%= pluralize(model.runs, 'time') %>
-    &mdash; <%= model.permission_description %> model
-  </li>
-  <% end %>
-</ul>
+    <tr>
+      <td><%= link_to model.name, "http://modelingcommons.org/browse/one_model/#{model.id}" %><td>
+      <td><%= model.permission_description %></td>
+      <td><%= model.views %></td>
+      <td><%= model.downloads %></td>
+      <td><%= model.recommendations.count %></td>
+      <td><%= model.runs %></td>
+      <td><%= model.unanswered_questions %></td>
+      <th><%= model.tags.size %></th>
+    </tr>
+<  <% end %>
+</table>
 
 <p>Want more people to see, download, comment on, or tag a model?
   Tell them about it!  Each model's page has built-in links that let

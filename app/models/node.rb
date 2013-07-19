@@ -434,4 +434,8 @@ class Node < ActiveRecord::Base
     words.split.detect { |word| lowercase_text.index(word) }
   end
 
+  def unanswered_questions
+    active_postings.select { |p| p.is_question? }
+  end
+
 end
