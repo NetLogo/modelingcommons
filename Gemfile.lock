@@ -134,6 +134,8 @@ GEM
     json (1.8.0)
     launchy (2.3.0)
       addressable (~> 2.3)
+    letter_opener (1.1.2)
+      launchy (~> 2.2)
     libv8 (3.11.8.17)
     listen (1.2.2)
       rb-fsevent (>= 0.9.3)
@@ -309,6 +311,7 @@ DEPENDENCIES
   hoptoad_notifier
   jquery-rails
   launchy
+  letter_opener
   newrelic_rpm
   paperclip (~> 3.4.1)
   pg (~> 0.15.1)

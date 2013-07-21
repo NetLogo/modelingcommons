@@ -51,6 +51,7 @@ group :development do
 end
 
 group :development, :test do
+  gem 'letter_opener'
   gem 'awesome_print'
   gem 'database_cleaner', '~> 1.0.0RC1'
   gem 'guard'

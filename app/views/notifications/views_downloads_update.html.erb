@@ -1,49 +1,75 @@
 <p>Greetings, <%= @person.first_name %>, from the  <a href="http://modelingcommons.org/">NetLogo Modeling Commons</a>!</p>
 
 <p>This is a weekly update, describing how often your models are
-  viewed and downloaded, and wanted to share that information with
-  you:</p>
+  viewed and downloaded.</p>
+
+<style>
+  tr:nth-child(even) {
+  background: #CCC;
+  }
+  tr:nth-child(odd) {
+  background: #FFF
+  }
+
+  .highlight {
+  color: #ffff00;
+  background-color: red;
+  font-weight: bold;
+  }
+
+</style>
 
 <table>
   <tr>
-    <th>Model<th>
-    <th>Permissions</th>
+    <th>Model</th>
+    <th>Visibility</th>
     <th>Views</th>
     <th>Downloads</th>
     <th>Recommendations</th>
     <th>Runs</th>
     <th>Collaborators (other than you)</th>
+    <th>Postings</th>
     <th>Unanswered questions</th>
     <th>Tags</th>
   </tr>
 
-  <% @person.models.each do |model| %>
+  <% @person.models.sort_by(&:name).each do |model| %>
     <tr>
-      <td><%= link_to model.name, "http://modelingcommons.org/browse/one_model/#{model.id}" %><td>
+      <td><%= link_to model.name, "http://modelingcommons.org/browse/one_model/#{model.id}" %></td>
       <td><%= model.permission_description %></td>
       <td><%= model.views %></td>
       <td><%= model.downloads %></td>
       <td><%= model.recommendations.count %></td>
       <td><%= model.runs %></td>
-      <td><%= model.all_collaborators.count - 1 %></td>
-      <td><%= model.unanswered_questions %></td>
-      <td><%= model.tags.size %></td>
+      <td>
+	<span class="<%= (model.all_collaborators.count == 1) ? "highlight" : "" %>">
+	  <%= model.all_collaborators.count - 1 %>
+	</span>
+      </td>
+      <td><%= model.active_postings.count %></td>
+      <td>
+	<span class="<%= !model.unanswered_questions.empty? ? "highlight" : "" %>">
+	  <%= model.unanswered_questions.count %>
+	</span>
+      </td>
+      <td>
+	<span class="<%= model.tags.empty? ? "highlight" : "" %>">
+	  <%= model.tags.size %>
+	</span>
+      </td>
     </tr>
-<  <% end %>
+  <% end %>
 </table>
 
-<p>Want more people to see, download, comment on, or tag a model?
-  Tell them about it!  Each model's page has built-in links that let
-  you e-mail friends, or notify others via Twitter and Facebook.
-  Also remember that every time you create a new model or upload a
-  new version, it is placed at the top of each user's profile page.</p>
+<p><span class="highlight">Highlighted</span> items point to things
+  that you can change, to make your model more visible, by specifying
+  collaborators (using the "add a collaborator" link), adding tags
+  (using the "add a tag" link), and answering questions (on the
+  "discussion" tab).</p>
 
-<p>Also remember that you can (and should!) specify your co-authors
-  and collaborators, not just in a model's Info tab, but also on the
-  model page itself, by clicking on "Add a collaborator."  Doing so
-  not only ensures that the person receives appropriate credit, but
-  also allows their name to show up in a search.</p>
+<p>Remember that each model page has built-in links that let spread
+  the word about your model, via e-mail, Twitter, and Facebook.</p>
 
-<p>To remove yourself from such notifications in the future, click on "edit your profile" from any page on the  <a href="http://modelingcommons.org">Modeling Commons</a>.</p>
+<p>To remove yourself from these notifications, click on <a href="http://modelingcommons.org/account/edit">edit your profile</a> from any page on the <a href="http://modelingcommons.org">Modeling Commons</a>.</p>
 
 <p>If you have any questions about the Modeling Commons, please <a href="mailto:modelingcommons@ccl.northwestern.edu">contact us</a>.  We enjoy getting feedback, and helping to improve the Modeling Commons for our users.</p>
