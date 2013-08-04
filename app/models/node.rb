@@ -153,7 +153,7 @@ class Node < ActiveRecord::Base
     end
 
     # Handle URLs
-    text.gsub! /(https?:\/\/[-\/_.~%?='\w]+\w)/ do
+    text.gsub! /(https?:\/\/[-\/_.~%?='\w:]+\w)/ do
       "<a target=\"_blank\" href=\"#{$1}\">#{$1}</a>"
     end
 
