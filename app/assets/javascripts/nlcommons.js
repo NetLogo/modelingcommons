@@ -299,6 +299,7 @@ jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
 
 		if (typeof mouseflow != "undefined") {
 		    mouseflow.newPageView();
+		    _paq.push(['trackPageView']);
 		}
 
 		console.log("In getURLTabIndex, tab_index = " + tab_index);
