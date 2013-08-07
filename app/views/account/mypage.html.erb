@@ -18,7 +18,7 @@
     <% end -%>
 
     <% if @the_person.url.present? -%>
-    <li>Home page: <%= link_to @the_person.url, {}, :target => '_blank' -%></li>
+    <li>Home page: <%= link_to @the_person.url, @the_person.url, {}, :target => '_blank' -%></li>
     <% end -%>
 
     <% if @the_person.biography.present? %>
