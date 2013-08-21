@@ -1,6 +1,8 @@
 <% @title = "Welcome to the Modeling Commons!" %>
 
-<p>The Modeling Commons is for sharing and discussing agent-based models written in <%= link_to "NetLogo", 'http://ccl.northwestern.edu/netlogo', :target => "_blank" %>.  With more than 1,000 models, contributed by modelers from around the world, you're bound to learn something new.  Have you created a new NetLogo model?  We would love to see it; please register and share it with us!</p>
+<p>The Modeling Commons is for sharing and discussing agent-based models written in <%= link_to "NetLogo", 'http://ccl.northwestern.edu/netlogo', :target => "_blank" %>.  With more than 1,000 models, contributed by modelers from around the world, you're bound to learn something new.</p>
+
+<p>Have you created a new NetLogo model?  We would love to see it; please <%= link_to "register", :controller => :account, :action => :new %>, and share it with us!</p>
 
 <div id="left-news-box">
   <%= render :partial => "just_visiting", :locals => {} -%>
