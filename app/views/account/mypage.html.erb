@@ -1,3 +1,4 @@
+<% @meta_description = "Modeling Commons profile for #{@the_person.fullname}, who has contributed #{@the_person.models.count} NetLogo models, and tagged #{@the_person.tagged_nodes.count} models with #{@the_person.tags.count} tags." %>
 <div class="top_info">
   
   <% if @person == @the_person %>
@@ -10,7 +11,7 @@
 
   <ul>
     <% if @person %>
-    <li>Registered <%= distance_of_time_in_words(Time.now, @the_person.created_at) %> ago</li>
+    <li>Registered <%= distance_of_time_in_words(Time.now, @the_person.created_at) %> ago, from <%= @the_person.country_name %></li>
     <% end %>
 
     <% if @person and (@person.administrator? or @the_person.show_email_address?) -%>
