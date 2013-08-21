@@ -13,7 +13,7 @@
     <% if @person %>
       <li>Registered <%= distance_of_time_in_words(Time.now, @the_person.created_at) %> ago
 	<% if @the_person.country_name.present? %>
-	  (from <%= @the_person.country_name %>)
+	  (<%= @the_person.country_name %>)
 	<% end %>
       </li>
     <% end %>
