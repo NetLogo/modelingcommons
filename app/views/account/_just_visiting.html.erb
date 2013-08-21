@@ -7,7 +7,7 @@
     </div>
     <div class="news_empty">
       <ul>
-        <li><%= render :partial => "search/search_form" -%> (Suggestion: Search for '<%= @tryword %>')</li>
+        <li><%= render :partial => "search/search_form" -%> <i>Suggestion: Search for '<%= @tryword %>'</i></li>
         <li><p><%= link_to "List all 1,000+ models", :controller => :browse, :action => :list_models -%></p></li>
         <li><p><%= link_to "List recently changed models", :controller => :browse, :action => :list_recent_models -%></p></li>
         <li><p><%= link_to "Jump to a random model", :controller => :browse, :action => :view_random_model -%></p></li>
