@@ -41,6 +41,8 @@ class Person < ActiveRecord::Base
 
   validates_email :email_address, :level => 1
 
+  before_validation :strip_bad_tags
+
   scope :created_since, lambda { |since| { :conditions => ['created_at >= ? ', since] }}
   scope :phone_book, :order => "last_name, first_name"
 
@@ -241,4 +243,14 @@ class Person < ActiveRecord::Base
     self.password = Person.encrypted_password(salt, password)
   end
 
+  def strip_bad_tags
+    attributes.each do |name, value|
+      %w(link script style form input textarea button img).each do |bad_word|
+        if value.to_s =~ /(<\s*#{bad_word})/i
+          STDERR.puts "'#{bad_word}' found in '#{name}' = '#{value}'"
+          self.send("#{name}=".to_sym, attributes[name].gsub($1, "&amp;#{bad_word}"))
+        end
+      end
+    end
+  end
 end
