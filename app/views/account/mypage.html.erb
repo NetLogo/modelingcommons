@@ -2,44 +2,48 @@
 <div class="top_info">
   
   <% if @person == @the_person %>
-  <% @title = "Your personal page" %>
-  <% @headline_avatar = @person.avatar.url(:thumb) %>
+    <% @title = "Your personal page" %>
+    <% @headline_avatar = @person.avatar.url(:thumb) %>
   <% else %>
-  <% @title = "Page for #{@the_person.fullname}" %>
-  <% @headline_avatar = @the_person.avatar.url(:thumb) %>
+    <% @title = "Page for #{@the_person.fullname}" %>
+    <% @headline_avatar = @the_person.avatar.url(:thumb) %>
   <% end %>
 
   <ul>
     <% if @person %>
-    <li>Registered <%= distance_of_time_in_words(Time.now, @the_person.created_at) %> ago, from <%= @the_person.country_name %></li>
+      <li>Registered <%= distance_of_time_in_words(Time.now, @the_person.created_at) %> ago
+	<% if @the_person.country_name.present? %>
+	  (from <%= @the_person.country_name %>)
+	<% end %>
+      </li>
     <% end %>
 
     <% if @person and (@person.administrator? or @the_person.show_email_address?) -%>
-    <li>E-mail: <%= mail_to @the_person.email_address -%></li>
+      <li>E-mail: <%= mail_to @the_person.email_address -%></li>
     <% end -%>
 
     <% if @the_person.url.present? -%>
-    <li>Home page: <%= link_to @the_person.url, @the_person.url, {}, :target => '_blank' -%></li>
+      <li>Home page: <%= link_to @the_person.url, @the_person.url, {}, :target => '_blank' -%></li>
     <% end -%>
 
     <% if @the_person.biography.present? %>
-    <li><div id="biography"><%= raw @the_person.html_biography %></div></li>
+      <li><div id="biography"><%= raw @the_person.html_biography %></div></li>
     <% end %>
   </ul>
 
   <% if @the_person.nodes.present? %>
-  <p>
-    <%= link_to "View", :controller => :account, :action => :models, :id => @the_person.id %>
-    or 
-    <%= link_to "download", :controller => :account, :action => :download, :id => @the_person.id %>
-    <%= @the_person == @person ? 'your' : @the_person.first_name + "'s" -%> 
-    <%= pluralize(@the_person.models_visible_to(@person).size, 'model') %>
-  </p>
+    <p>
+      <%= link_to "View", :controller => :account, :action => :models, :id => @the_person.id %>
+      or 
+      <%= link_to "download", :controller => :account, :action => :download, :id => @the_person.id %>
+      <%= @the_person == @person ? 'your' : @the_person.first_name + "'s" -%> 
+      <%= pluralize(@the_person.models_visible_to(@person).size, 'model') %>
+    </p>
   <% end %>
 
 
   <% if @person != @the_person %>
-  <div id="person-atom-feed"><%= link_to image_tag("feed.png"), :controller => :account, :action => :follow, :id => @the_person.id, :format => :atom %> <%= link_to "Follow #{@the_person.first_name}'s activity in your feed reader", :controller => :account, :action => :follow, :id => @the_person.id, :format => :atom %></div>
+    <div id="person-atom-feed"><%= link_to image_tag("feed.png"), :controller => :account, :action => :follow, :id => @the_person.id, :format => :atom %> <%= link_to "Follow #{@the_person.first_name}'s activity in your feed reader", :controller => :account, :action => :follow, :id => @the_person.id, :format => :atom %></div>
   <% end %>
   
 </div>
