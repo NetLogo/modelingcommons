@@ -184,7 +184,7 @@ class UploadController < ApplicationController
 
         return unless check_changeability_permissions
         node_id = existing_node.id
-        flash[:notice] << "Added new version to node #{existing_node.id}. "
+        flash[:notice] << "Added new version to the #{existing_node.name} model, ID #{existing_node.id}."
       else
         raise "Unknown option '#{fork}' passed to update_model"
       end
