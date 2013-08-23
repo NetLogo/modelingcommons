@@ -15,16 +15,8 @@ class Posting < ActiveRecord::Base
 
   scope :created_since, lambda { |since| { :conditions => ['created_at >= ? ', since] }}
 
+  before_validation :strip_bad_tags
   after_save :notify_people
-
-  def safe_body
-    output = body
-    output.gsub!(/<[^>]+script[^>]+>/, '') # remove script tags
-    output.gsub!(/<[^>]+style[^>]+>/, '') # remove style tags
-    output.gsub!(/[\r\n]+/, '<br />')     # handle newlines
-    output
-  end
-
 
   def was_answered?
     !!self.answered_at
@@ -46,6 +38,17 @@ class Posting < ActiveRecord::Base
 
   def notify_people
     Notifications.updated_discussion(node, person).deliver
+  end
+
+  def strip_bad_tags
+    attributes.each do |name, value|
+      %w(link script style form input textarea button img).each do |bad_word|
+        if value.to_s =~ /(<\s*#{bad_word})/i
+          STDERR.puts "'#{bad_word}' found in '#{name}' = '#{value}'"
+          self.send("#{name}=".to_sym, attributes[name].gsub($1, "&amp;#{bad_word}"))
+        end
+      end
+    end
   end
 
 end
