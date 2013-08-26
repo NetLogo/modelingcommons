@@ -211,7 +211,7 @@ class ApplicationController < ActionController::Base
     # most-downloaded models
     @most_downloaded = Node.
       most_downloaded(limit * db_search_factor).
-      select {|node_count| node_count.node.visible_to_user?(@person)}[0..limit - 1]
+      select {|node_count| node_count.node and node_count.node.visible_to_user?(@person)}[0..limit - 1]
 
 
     # most-applied tags
