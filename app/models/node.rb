@@ -375,7 +375,7 @@ class Node < ActiveRecord::Base
   end
 
   def self.search(search_term, person)
-    all(:conditions => [ "position( ? in lower(name) ) > 0 ", search_term],
+    all(:conditions => [ "position( ? in lower(nodes.name) ) > 0 ", search_term],
         :include => :visibility).select { |node| node.visible_to_user?(person)}
   end
 
