@@ -45,6 +45,7 @@ group :test do
 end
 
 group :development do 
+  gem 'xray-rails'
   gem 'thin'
   gem 'better_errors'
   gem 'binding_of_caller'
