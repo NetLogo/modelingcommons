@@ -24,7 +24,7 @@
 	    </span>
 	    <% end %>
 	  </h1>
-	  <p class="<%= 'deleted' if posting.deleted_at? -%>"><%= raw posting %></p>
+	  <p class="<%= 'deleted' if posting.deleted_at? -%>"><%= raw posting.body %></p>
 	  <div class="left-right">
 	    <div class="left">
 	      <h2>Posted <%= distance_of_time_in_words(Time.now, posting.created_at) -%> ago</h2>
