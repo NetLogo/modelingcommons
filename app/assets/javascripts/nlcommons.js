@@ -170,7 +170,7 @@ jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
 	    "sDom": '<"left-right top"<"left"p><"right"ilf>>t<"left-right bottom"<"left"p><"right">>',
 	    "sPaginationType": "two_button_full_text"
 	});
-	$(".dataTables_filter input").attr("placeholder", "Search Results");
+	$(".dataTables_filter input").attr("placeholder", "Filter Results");
     };
     
     //Allows styling input type="file" by wrapping the file input in a styled label.  To style, change the file_label
