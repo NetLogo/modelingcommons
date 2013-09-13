@@ -78,6 +78,8 @@
   <div class="search">
     <%= form_tag(url_for(:controller => :search, :action => :search_action), { :id => "model_search_form"}) do %>
     <%= text_field_tag :search_term, nil, {:id => 'model_search', :placeholder => 'Search Models'} -%>
+    <%= hidden_field_tag :search_source, "page-header" -%>
+
     <input style="display: none;" type="submit" value="Search!" />
     <% end %>
   </div>
