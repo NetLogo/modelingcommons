@@ -1,4 +1,4 @@
-<h1>Comments and Questions</h1>
+<h2>Comments and Questions</h2>
 <% if @model.author_visible? %>
 <p>Comments are disabled for private models.</p>
 <% else %>
@@ -15,7 +15,7 @@
 <% if @person %>
 
 <hr />
-<h1>Post A New Comment</h1>
+<h2>Post A New Comment</h2>
 <%= form_for(:new_posting, :url => { :controller => "discussion", :action => :create }, :html => {:id => 'new_discussion_comment'}) do |form| %>
 <table id="posting-table">
   <tr>

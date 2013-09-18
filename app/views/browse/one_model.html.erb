@@ -32,7 +32,7 @@
 
 
           <%= form_for(:add_collaborator, :url => {:controller => :collaborations, :action => :create}, :html => {:class => 'popup_form'}) do |form| -%>
-          <div class="left-right"><div class="left"><h1>Add Collaborator</h1></div><div class="right"><h2><a href="#" class="close_form">Close</a></h2></div></div>
+          <div class="left-right"><div class="left"><div class="add-collaborator">Add Collaborator</div></div><div class="right"><h2><a href="#" class="close_form">Close</a></h2></div></div>
           <input type="hidden" name="node_id" value="<%= @model.id %>" />
           <p>
             <input type="text" class="complete" placeholder="Collaborator name" name="person_name" size="45" />
@@ -57,7 +57,7 @@
           </h3>
           <%= render :partial => "tags/tag_cloud", :locals => {:model => @model} %>
           <%= form_for(:new_tag, :url => {:controller => :tags, :action => :create}, :html => {:class => 'add_tag_form popup_form'}) do |form| -%>
-          <div class="left-right"><div class="left"><h1>Add New Tag</h1></div><div class="right"><h2><a href="#" id="close_add_tag_form">Close</a></h2></div></div>
+          <div class="left-right"><div class="left"><div class="add-new-tag">Add New Tag</div></div><div class="right"><h2><a href="#" id="close_add_tag_form">Close</a></h2></div></div>
           <%= hidden_field_tag :node_id, @model.id -%>
           <p><%= text_field_tag 'new_tag[]', "", {:class => 'complete', :placeholder => "Tag name", :size => 45} %></p>
           <p><%= text_field_tag 'new_comment[]', "", {:placeholder => "(Optional) Why tag is relevant to this model", :size => 45} %></p>

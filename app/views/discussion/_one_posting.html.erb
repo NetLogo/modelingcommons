@@ -12,7 +12,7 @@
       <div class="comment_box_container">
 	
 	<div class="comment_box">
-	  <h1 class="<%= 'deleted' if posting.deleted_at? -%>">
+	  <h2 class="<%= 'deleted' if posting.deleted_at? -%>">
 	    <%= h(posting.title) %>
 	    <% if posting.is_question? %>
 	    <span class="question">
@@ -23,7 +23,7 @@
 	      <% end %>
 	    </span>
 	    <% end %>
-	  </h1>
+	  </h2>
 	  <p class="<%= 'deleted' if posting.deleted_at? -%>"><%= raw posting.body %></p>
 	  <div class="left-right">
 	    <div class="left">
