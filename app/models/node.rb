@@ -98,6 +98,10 @@ class Node < ActiveRecord::Base
     collaborators + non_member_collaborators
   end
 
+  def all_collaborators_sentence
+    all_collaborators.map {|c| c.fullname}.to_sentence
+  end
+
   def all_collaborations
     collaborations + non_member_collaborations
   end
