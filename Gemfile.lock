@@ -288,6 +288,7 @@ GEM
     xray-rails (0.1.7)
       coffee-rails
       rails (>= 3.1.0)
+    zip (2.0.2)
     zippy (0.2.1)
       rubyzip (>= 0.9.1)
 
@@ -344,4 +345,5 @@ DEPENDENCIES
   watir-webdriver
   will_paginate (~> 3.0.4)
   xray-rails
+  zip
   zippy

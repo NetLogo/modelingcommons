@@ -5,7 +5,6 @@ require 'diff/lcs'
 require 'diff/lcs/hunk'
 require 'diff/lcs/string'
 require 'graphviz_r'
-require 'zip/zip'
 
 class ApplicationController < ActionController::Base
   before_filter :get_person

@@ -31,6 +31,7 @@ gem 'textacular', '~> 3.0', require: 'textacular/rails'
 gem 'validate_email'
 gem 'will_paginate', '~> 3.0.4'
 gem 'zippy'
+gem 'zip'
 
 group :test do 
   gem "cucumber"
