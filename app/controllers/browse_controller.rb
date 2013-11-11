@@ -23,7 +23,13 @@ class BrowseController < ApplicationController
   
   def one_model
     session[:model_id] = @model.id
-    render :layout => 'application_nomargin'
+
+    logger.warn "params = '#{params.inspect}'"
+    if params[:embedded].present?
+      render 'one_model_embedded', :layout => 'application_nomargin'
+    else
+      render :layout => 'application_nomargin'
+    end
   end
 
   def one_node
@@ -58,8 +64,8 @@ class BrowseController < ApplicationController
   end
 
   def model_contents
-      @model = Node.find(params[:id]) if params[:id].present?
-      send_data @model.contents
+    @model = Node.find(params[:id]) if params[:id].present?
+    send_data @model.contents
   end
 
   def set_permissions

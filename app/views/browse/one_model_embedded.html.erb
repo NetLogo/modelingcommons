@@ -1,0 +1,81 @@
+<% @title = "#{@model.name}, by #{@model.all_collaborators_sentence} (model ID #{@model.id})" %>
+<% @headline = @model.name %>
+<% @meta_description = "View, run, and discuss the '#{@model.name}' model, written by #{@model.all_collaborators_sentence}.  The Modeling Commons contains more than  1,000 other NetLogo models, contributed by modelers around the world." %>
+
+<% @show_menubar = false %>
+
+<div class="model_info">
+  <div class="model_info_bottom">
+    <div class="netlogo_version">
+      Model was written in NetLogo <%= @model.netlogo_version %> 
+      &bull; 
+      Viewed <%= pluralize(@model.views, "time") %>
+      &bull; 
+      Downloaded <%= pluralize(@model.downloads, "time") %>
+      &bull; 
+      Run <%= pluralize(@model.runs, "time") %>
+    </div>
+    
+    <div class="actions">
+      <%= link_to image_tag("download.png", :class => "inline_image", :alt => "Download the '#{@model.name}' model", :title => "Download the '#{@model.name}' model") + "Download this model", :controller => "browse", :action => "download_model", :id => @model.id %> 
+	<% if @person %>
+        | 
+        <%= render :partial => 'recommend/recommendations', :locals => {:id => @model.id} %>
+	
+        <% if !@person.spam_warning(@model) %>
+        | 
+        <%= link_to "Report as spam", :controller => :possible_spam, :action => :mark_as_spam, :id => @model.id %>
+        <% if !@model.spam_warnings.empty? %>
+        (<%= pluralize(@model.spam_warnings.length, "person") %> marked it as spam)
+        <% end %>
+        <% end %>
+	<% end %>
+	<% if @person and @model.people.include?(@person) %>
+        | 
+        <%= button_to "Delete this model", { controller: :upload, action: :destroy, id: @model.id }, {method: :delete, data: { confirm: "Are you REALLY sure you want to delete this model, including the history, attachments, and comments?\n\nDon't delete a model just because you have a newer version; instead, use the 'upload' tab to put a newer version online.  And if you want to hide the model, just change the permissions.", disable_with: "Deleting..." } }%>
+	<% end %>
+      </div>
+    </div>
+    
+  </div>
+
+  <div id="model_tabs" class="tabs_panel">
+    <ul>
+      <li><a href="#browse_discuss">Discuss</a></li>
+      <li><a href="#browse_applet">Run</a></li>
+      <li><a href="#browse_info">Info</a></li>
+      <li><a href="#browse_procedures">Code</a></li>
+      <li><a href="#browse_history">History</a></li>
+      <li><a href="#browse_files">Files</a></li>
+      <li><a href="#browse_family">Family</a></li>
+      <% if @person %>
+      <li><a href="#browse_upload_tab">Upload</a></li>
+      <% end %>
+    </ul>
+    <div id="browse_discuss">
+      <%= render :partial => "/browse/browse_discuss_tab" %>
+    </div>
+    <div id="browse_applet">
+      <%= render :partial => "/browse/browse_applet_tab" %>
+    </div>
+    <div id="browse_info">
+      <%= render :partial => "/browse/browse_info_tab" %>
+    </div>
+    <div id="browse_procedures">
+      <%= render :partial => "/browse/browse_procedures_tab" %>
+    </div>
+    <div id="browse_history">
+      <%= render :partial => "/browse/browse_history_tab" %>
+    </div>
+    <div id="browse_files">
+      <%= render :partial => "/browse/browse_files_tab" %>
+    </div>
+    <div id="browse_family">
+      <%= render :partial => "/browse/browse_family_tab" %>
+    </div>
+    <% if @person %>
+    <div id="browse_upload_tab">
+      <%= render :partial => "/browse/browse_upload_tab" %>
+    </div>
+    <% end %>
+  </div>
