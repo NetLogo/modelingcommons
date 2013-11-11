@@ -3,6 +3,7 @@
 --
 
 SET statement_timeout = 0;
+SET lock_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
@@ -190,7 +191,12 @@ CREATE TABLE nodes (
 --
 
 CREATE VIEW ccl_model_creations_per_month AS
-    SELECT to_char(nodes.created_at, 'YY MM'::text) AS yearmonth, count(*) AS count FROM nodes WHERE (nodes.group_id = 2) GROUP BY to_char(nodes.created_at, 'YY MM'::text) ORDER BY to_char(nodes.created_at, 'YY MM'::text);
+ SELECT to_char(nodes.created_at, 'YY MM'::text) AS yearmonth, 
+    count(*) AS count
+   FROM nodes
+  WHERE (nodes.group_id = 2)
+  GROUP BY to_char(nodes.created_at, 'YY MM'::text)
+  ORDER BY to_char(nodes.created_at, 'YY MM'::text);
 
 
 --
@@ -255,6 +261,92 @@ CREATE SEQUENCE collaborator_types_id_seq
 --
 
 ALTER SEQUENCE collaborator_types_id_seq OWNED BY collaborator_types.id;
+
+
+--
+-- Name: logged_actions; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE logged_actions (
+    id integer NOT NULL,
+    person_id integer,
+    logged_at timestamp without time zone,
+    message text,
+    ip_address character varying(255),
+    browser_info text,
+    url text,
+    params text NOT NULL,
+    session text,
+    cookies text,
+    flash text,
+    referrer text,
+    node_id integer,
+    controller text,
+    action text,
+    is_searchbot boolean DEFAULT false NOT NULL
+);
+
+
+--
+-- Name: people; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE people (
+    id integer NOT NULL,
+    email_address character varying(255),
+    first_name character varying(255),
+    last_name character varying(255),
+    password character varying(255),
+    administrator boolean,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    avatar_file_name text,
+    avatar_content_type character varying(255),
+    avatar_file_size integer,
+    avatar_updated_at timestamp without time zone,
+    salt character varying(255),
+    registration_consent boolean DEFAULT false,
+    sex character varying(255),
+    birthdate date,
+    country_name character varying(255),
+    send_site_updates boolean DEFAULT true,
+    send_model_updates boolean DEFAULT true,
+    send_tag_updates boolean DEFAULT true,
+    url character varying(255),
+    biography text,
+    show_email_address boolean DEFAULT false
+);
+
+
+--
+-- Name: versions; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE versions (
+    id integer NOT NULL,
+    node_id integer NOT NULL,
+    person_id integer NOT NULL,
+    description text NOT NULL,
+    contents text NOT NULL,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: create_view_models_view; Type: VIEW; Schema: public; Owner: -
+--
+
+CREATE VIEW create_view_models_view AS
+ SELECT p.id, 
+    ( SELECT min(v.created_at) AS min
+           FROM versions v
+          WHERE (v.person_id = p.id)) AS earliest_version_creation, 
+    ( SELECT min(l.logged_at) AS min
+           FROM logged_actions l
+          WHERE (((p.id = l.person_id) AND (l.controller = 'browse'::text)) AND (l.action = 'one_model'::text))) AS earliest_view_model
+   FROM people p
+  ORDER BY p.id;
 
 
 --
@@ -352,27 +444,30 @@ ALTER SEQUENCE groups_id_seq OWNED BY groups.id;
 
 
 --
--- Name: logged_actions; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: hits_and_days_view; Type: VIEW; Schema: public; Owner: -
 --
 
-CREATE TABLE logged_actions (
-    id integer NOT NULL,
-    person_id integer,
-    logged_at timestamp without time zone,
-    message text,
-    ip_address character varying(255),
-    browser_info text,
-    url text,
-    params text NOT NULL,
-    session text,
-    cookies text,
-    flash text,
-    referrer text,
-    node_id integer,
-    controller text,
-    action text,
-    is_searchbot boolean DEFAULT false NOT NULL
-);
+CREATE VIEW hits_and_days_view AS
+ SELECT count(*) AS count, 
+    (logged_actions.logged_at)::date AS logged_at, 
+    date_part('dow'::text, (logged_actions.logged_at)::date) AS date_part
+   FROM logged_actions
+  WHERE (logged_actions.is_searchbot = false)
+  GROUP BY (logged_actions.logged_at)::date
+  ORDER BY (logged_actions.logged_at)::date;
+
+
+--
+-- Name: hits_and_months_view; Type: VIEW; Schema: public; Owner: -
+--
+
+CREATE VIEW hits_and_months_view AS
+ SELECT count(*) AS count, 
+    ((date_part('year'::text, (logged_actions.logged_at)::date) || '-'::text) || date_part('month'::text, (logged_actions.logged_at)::date))
+   FROM logged_actions
+  WHERE (logged_actions.is_searchbot = false)
+  GROUP BY ((date_part('year'::text, (logged_actions.logged_at)::date) || '-'::text) || date_part('month'::text, (logged_actions.logged_at)::date))
+  ORDER BY ((date_part('year'::text, (logged_actions.logged_at)::date) || '-'::text) || date_part('month'::text, (logged_actions.logged_at)::date));
 
 
 --
@@ -475,6 +570,18 @@ CREATE TABLE model_views (
 
 
 --
+-- Name: month_year_referrers; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE month_year_referrers (
+    to_char text,
+    referrer text,
+    controller text,
+    action text
+);
+
+
+--
 -- Name: news_items; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -563,7 +670,12 @@ ALTER SEQUENCE nodes_id_seq OWNED BY nodes.id;
 --
 
 CREATE VIEW non_ccl_model_creations_per_month AS
-    SELECT to_char(nodes.created_at, 'YY MM'::text) AS yearmonth, count(*) AS count FROM nodes WHERE (nodes.group_id <> 2) GROUP BY to_char(nodes.created_at, 'YY MM'::text) ORDER BY to_char(nodes.created_at, 'YY MM'::text);
+ SELECT to_char(nodes.created_at, 'YY MM'::text) AS yearmonth, 
+    count(*) AS count
+   FROM nodes
+  WHERE (nodes.group_id <> 2)
+  GROUP BY to_char(nodes.created_at, 'YY MM'::text)
+  ORDER BY to_char(nodes.created_at, 'YY MM'::text);
 
 
 --
@@ -633,37 +745,6 @@ ALTER SEQUENCE non_member_collaborators_id_seq OWNED BY non_member_collaborators
 
 
 --
--- Name: people; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE people (
-    id integer NOT NULL,
-    email_address character varying(255),
-    first_name character varying(255),
-    last_name character varying(255),
-    password character varying(255),
-    administrator boolean,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone,
-    avatar_file_name text,
-    avatar_content_type character varying(255),
-    avatar_file_size integer,
-    avatar_updated_at timestamp without time zone,
-    salt character varying(255),
-    registration_consent boolean DEFAULT false,
-    sex character varying(255),
-    birthdate date,
-    country_name character varying(255),
-    send_site_updates boolean DEFAULT true,
-    send_model_updates boolean DEFAULT true,
-    send_tag_updates boolean DEFAULT true,
-    url character varying(255),
-    biography text,
-    show_email_address boolean DEFAULT false
-);
-
-
---
 -- Name: people_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -712,6 +793,16 @@ CREATE SEQUENCE permission_settings_id_seq
 --
 
 ALTER SEQUENCE permission_settings_id_seq OWNED BY permission_settings.id;
+
+
+--
+-- Name: permissions_changed_log_view; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE permissions_changed_log_view (
+    count bigint,
+    id text
+);
 
 
 SET default_with_oids = true;
@@ -766,6 +857,20 @@ CREATE TABLE pg_ts_parser (
 );
 
 
+--
+-- Name: popular_pages_view; Type: VIEW; Schema: public; Owner: -
+--
+
+CREATE VIEW popular_pages_view AS
+ SELECT count(*) AS count, 
+    logged_actions.controller, 
+    logged_actions.action
+   FROM logged_actions
+  WHERE (logged_actions.is_searchbot = false)
+  GROUP BY logged_actions.controller, logged_actions.action
+  ORDER BY count(*) DESC;
+
+
 SET default_with_oids = false;
 
 --
@@ -785,6 +890,20 @@ CREATE TABLE postings (
     deleted_at timestamp without time zone,
     answered_at timestamp without time zone
 );
+
+
+--
+-- Name: posting_count_view; Type: VIEW; Schema: public; Owner: -
+--
+
+CREATE VIEW posting_count_view AS
+ SELECT count(*) AS count, 
+    postings.node_id
+   FROM postings
+  WHERE (postings.deleted_at IS NULL)
+  GROUP BY postings.node_id
+ HAVING (count(*) > 2)
+  ORDER BY count(*) DESC;
 
 
 --
@@ -1019,21 +1138,6 @@ ALTER SEQUENCE tags_id_seq OWNED BY tags.id;
 CREATE TABLE test_tsquery (
     txtkeyword text,
     txtsample text
-);
-
-
---
--- Name: versions; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE versions (
-    id integer NOT NULL,
-    node_id integer NOT NULL,
-    person_id integer NOT NULL,
-    description text NOT NULL,
-    contents text NOT NULL,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
 );
 
 
@@ -2014,6 +2118,20 @@ CREATE INDEX node_id_not_null ON logged_actions USING btree (node_id) WHERE (nod
 
 
 --
+-- Name: tagged_nodes_node_id_tag_id_person_id_idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX tagged_nodes_node_id_tag_id_person_id_idx ON tagged_nodes USING btree (node_id, tag_id, person_id);
+
+
+--
+-- Name: tags_lower_idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX tags_lower_idx ON tags USING btree (lower((name)::text));
+
+
+--
 -- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2021,17 +2139,30 @@ CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (v
 
 
 --
--- Name: versions_to_tsvector_idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: version_contents_idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX versions_to_tsvector_idx ON versions USING gin (to_tsvector('english'::regconfig, description));
+CREATE INDEX version_contents_idx ON versions USING gin (to_tsvector('english'::regconfig, contents)) WITH (fastupdate=off);
 
 
 --
--- Name: versions_to_tsvector_idx1; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: version_description_idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX versions_to_tsvector_idx1 ON versions USING gin (to_tsvector('english'::regconfig, contents));
+CREATE INDEX version_description_idx ON versions USING gin (to_tsvector('english'::regconfig, description));
+
+
+--
+-- Name: _RETURN; Type: RULE; Schema: public; Owner: -
+--
+
+CREATE RULE "_RETURN" AS
+    ON SELECT TO permissions_changed_log_view DO INSTEAD  SELECT count(*) AS count, 
+    "substring"(logged_actions.params, 'id"?:\s*"(\d+)'::text) AS id
+   FROM logged_actions
+  WHERE ((logged_actions.action = 'set_permissions'::text) AND (logged_actions.person_id <> 1))
+  GROUP BY logged_actions.id
+  ORDER BY "substring"(logged_actions.params, 'id"?:\s*"(\d+)'::text) DESC;
 
 
 --
@@ -2117,6 +2248,8 @@ ALTER TABLE ONLY tagged_nodes
 --
 -- PostgreSQL database dump complete
 --
+
+SET search_path TO "$user",public;
 
 INSERT INTO schema_migrations (version) VALUES ('1');
 
