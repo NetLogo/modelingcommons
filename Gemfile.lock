@@ -45,10 +45,12 @@ GEM
     bson_ext (1.9.2)
       bson (~> 1.9.2)
     builder (3.0.4)
-    capistrano (3.0.1)
-      i18n
-      rake (>= 10.0.0)
-      sshkit (>= 0.0.23)
+    capistrano (2.15.5)
+      highline
+      net-scp (>= 1.0.0)
+      net-sftp (>= 2.0.0)
+      net-ssh (>= 2.0.14)
+      net-ssh-gateway (>= 1.1.0)
     capybara (2.1.0)
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
@@ -119,6 +121,7 @@ GEM
       rspec (~> 2.14)
     haml (4.0.4)
       tilt
+    highline (1.6.20)
     hike (1.2.3)
     hoe (3.7.1)
       rake (>= 0.8, < 11.0)
@@ -152,7 +155,11 @@ GEM
     multi_test (0.0.2)
     net-scp (1.1.2)
       net-ssh (>= 2.6.5)
+    net-sftp (2.1.2)
+      net-ssh (>= 2.6.5)
     net-ssh (2.7.0)
+    net-ssh-gateway (1.2.0)
+      net-ssh (>= 2.6.5)
     newrelic_rpm (3.6.9.171)
     nokogiri (1.6.0)
       mini_portile (~> 0.5.0)
@@ -250,12 +257,6 @@ GEM
       multi_json (~> 1.0)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
-    sshkit (1.1.0)
-      net-scp
-      net-ssh
-      term-ansicolor
-    term-ansicolor (1.2.2)
-      tins (~> 0.8)
     textacular (3.1.0)
       activerecord (>= 3.0, < 4.1)
     therubyracer (0.12.0)
@@ -268,7 +269,6 @@ GEM
     thor (0.18.1)
     tilt (1.4.1)
     timers (1.1.0)
-    tins (0.13.1)
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
@@ -304,7 +304,7 @@ DEPENDENCIES
   binding_of_caller
   bson_ext
   builder
-  capistrano
+  capistrano (~> 2.15.5)
   coffee-rails
   compass-rails
   country_select
