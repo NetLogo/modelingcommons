@@ -50,6 +50,7 @@ class Person < ActiveRecord::Base
   # after_validation_on_update :encrypt_updated_password
 
   after_create :transform_nonmember_collaborations
+  after_save :tweet_person
 
   def node_versions
     versions
@@ -253,4 +254,10 @@ class Person < ActiveRecord::Base
       end
     end
   end
+
+  def tweet_person
+    Twitter.update("Welcome, #{fullname}, to the Modeling Commons, our #{ordinalize Person.count} user!")
+  end
+
+
 end
