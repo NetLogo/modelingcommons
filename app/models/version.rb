@@ -94,7 +94,7 @@ class Version < ActiveRecord::Base
 
   def tweet_version
     return unless node.world_visible?
-    Twitter.update("Added version #{node.versions.count} of model '#{name}': #{url}")
+    Twitter.update("Added version #{node.versions.count} of model '#{node.name}': #{node.url}")
   end
 
 
