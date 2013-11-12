@@ -256,7 +256,7 @@ class Person < ActiveRecord::Base
   end
 
   def tweet_person
-    Twitter.update("Welcome, #{fullname}, to the #NetLogo Modeling Commons, our #{ordinalize Person.count} user!")
+    Twitter.update("Welcome, #{fullname}, to the #NetLogo Modeling Commons, our #{ActiveSupport::Inflector::ordinalize(Person.count)} user!")
   end
 
 
