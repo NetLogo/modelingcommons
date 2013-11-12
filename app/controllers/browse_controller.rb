@@ -24,12 +24,8 @@ class BrowseController < ApplicationController
   def one_model
     session[:model_id] = @model.id
 
-    logger.warn "[one_model] params = '#{params.inspect}'"
-    if params[:embedded].present?
-      render 'one_model_embedded', :layout => 'application_nomargin'
-    else
-      render :layout => 'application_nomargin'
-    end
+    @embedded = params[:embedded].present?
+    render :layout => 'application_nomargin'
   end
 
   def one_node
