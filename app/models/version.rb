@@ -94,8 +94,11 @@ class Version < ActiveRecord::Base
 
   def tweet_version
     return unless node.world_visible?
-    Twitter.update("Added version #{node.versions.count} of #NetLogo model '#{node.name}': #{node.url}")
+    if node.versions.count == 1
+      Twitter.update("Added #NetLogo model '#{node.name}' at #{node.url}, our #{ActiveSupport::Inflector::ordinalize(Person.count)} model!")
+    else
+      Twitter.update("Added version #{node.versions.count} of #NetLogo model '#{node.name}': #{node.url}")
+    end
   end
-
 
 end
