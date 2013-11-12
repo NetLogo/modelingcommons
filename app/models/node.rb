@@ -42,6 +42,7 @@ class Node < ActiveRecord::Base
   scope :created_since, lambda { |since| { :conditions => ['created_at >= ? ', since] }}
   scope :updated_since, lambda { |since| { :conditions => ['updated_at >= ? ', since] }}
 
+  after_save :tweet_model
 
   # ------------------------------------------------------------
   # Grab children of various sorts
@@ -306,12 +307,16 @@ class Node < ActiveRecord::Base
     if world_visible?
       "public"
     elsif group.present? and group_visible?
-        "group-visible (to '#{group.name}')"
+      "group-visible (to '#{group.name}')"
     elsif group.blank? and group_visible?
-        "group-visible"
+      "group-visible"
     else
       "private"
     end
+  end
+
+  def url
+    "http://modelingcommons/browse/one_model/#{id}"
   end
 
   def visible_to_user?(person)
@@ -442,4 +447,9 @@ class Node < ActiveRecord::Base
     active_postings.select { |p| p.is_question? }
   end
 
+  def tweet_model
+    return unless world_visible?
+    description = (created_at == updated_at ? 'New' : 'Updated')
+    Twitter.update("#{description} model '#{name}', at '#{url}'")
+  end
 end

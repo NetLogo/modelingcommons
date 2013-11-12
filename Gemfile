@@ -32,6 +32,7 @@ gem 'validate_email'
 gem 'will_paginate', '~> 3.0.4'
 gem 'zippy'
 gem 'zip'
+gem 'twitter'
 
 group :test do 
   gem "cucumber"
