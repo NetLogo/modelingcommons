@@ -449,7 +449,10 @@ class Node < ActiveRecord::Base
 
   def tweet_model
     return unless world_visible?
-    description = (created_at == updated_at ? 'New' : 'Updated')
-    Twitter.update("#{description} model '#{name}', at '#{url}'")
+    if created_at == updated_at
+      Twitter.update("New model '#{name}', at #{url}.  Welcome!")
+    else
+      Twitter.update("Updated version #{versions.count} of model '#{name}', at '#{url}'")
+    end
   end
 end
