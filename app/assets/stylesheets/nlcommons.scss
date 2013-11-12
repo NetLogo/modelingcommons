@@ -1846,60 +1846,6 @@ tr.scaffold-row {
    font-style: italic;
 }
 
-/* 
- * Old (New?) Menu
- */
-/*
-div.main-menu-new {
-  width: 100%;
-  height: 35px;
-  margin-bottom: 5px;
-  background-color: red;
-  float:left;
-  
-}
-div.main-menu-new ul {
-  list-style-type: none;
-  padding: 0px;
-  margin: 0px;
-  float:left;
-  
-}
-div.main-menu-new ul li {
-  display: inline-block;
-  padding-left: 5px;
-  padding-right: 5px;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  line-height: 20px;
-  height: 20px;
-  vertical-align: middle;
-  float:left;
-  font-size: 16px;
-  @include sans-font();
-  font-weight: bold;
-  background-color: blue;
-}
-div.main-menu-new ul li.selected {
-  padding-bottom: 18px;
-}
-div.main-menu-new ul.left {
-  float:left;
-  
-}
-div.main-menu-new ul.left li {
-  margin-right: 1px;
-}
-div.main-menu-new ul.right li {
-  margin-left: 1px;
-}
-
-div.main-menu-new ul.right {
-  float:right;
-}
-div.main-menu-new ul li img {
-  height: 20px;
-  margin-right: 5px;
-  vertical-align: top;
-}
-*/
+#embed-code-instructions {
+   background-color: #8fb4df;
+};

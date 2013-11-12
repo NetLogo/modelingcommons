@@ -148,13 +148,16 @@
     </div>
     
     <div class="actions">
-      <%= link_to image_tag("download.png", :class => "inline_image", :alt => "Download the '#{@model.name}' model", :title => "Download the '#{@model.name}' model") + "Download this model", :controller => "browse", :action => "download_model", :id => @model.id %> 
+      <%= link_to image_tag("download.png", :class => "inline_image", :alt => "Download the '#{@model.name}' model", :title => "Download the '#{@model.name}' model") + "Download this model", :controller => "browse", :action => "download_model", :id => @model.id %> &bull;
+      <a id="toggle-embed-link" href="#">Embed this model</a>
+      <%= render :partial => 'browse/embed_code' %>
+      
 	      <% if @person %>
-		| 
+		&bull; 
 		<%= render :partial => 'recommend/recommendations', :locals => {:id => @model.id} %>
 		
 		<% if !@person.spam_warning(@model) %>
-		  | 
+		  &bull; 
 		  <%= link_to "Report as spam", :controller => :possible_spam, :action => :mark_as_spam, :id => @model.id %>
 		  <% if !@model.spam_warnings.empty? %>
 		    (<%= pluralize(@model.spam_warnings.length, "person") %> marked it as spam)
@@ -162,7 +165,7 @@
 		<% end %>
 	      <% end %>
 	      <% if @person and @model.people.include?(@person) %>
-		| 
+		&bull; 
 		<%= button_to "Delete this model", { controller: :upload, action: :destroy, id: @model.id }, {method: :delete, data: { confirm: "Are you REALLY sure you want to delete this model, including the history, attachments, and comments?\n\nDon't delete a model just because you have a newer version; instead, use the 'upload' tab to put a newer version online.  And if you want to hide the model, just change the permissions.", disable_with: "Deleting..." } }%>
 	      <% end %>
       </div>

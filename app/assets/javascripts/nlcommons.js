@@ -863,13 +863,27 @@ jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
 
 	$("#wants_help").click(function(e) {
 	    $.post('/nodes/change_wants_help',
-		  {
-		      id: $("#node_id").val(),
-		      wants_help: $("#wants_help").attr("checked")
-		  }
-		 )
+		   {
+		       id: $("#node_id").val(),
+		       wants_help: $("#wants_help").attr("checked")
+		   }
+		  )
 	}
-			     );
+			      );
+    };
+
+    var initializeEmbedCode = function() {
+	$("a#toggle-embed-link").click(function(e) {
+	    
+	    if ($("#embed-code-instructions").is( ':visible')) {
+		$("#toggle-embed-link").text('Hide embed instructions');
+	    }
+	    else {
+		$("#toggle-embed-link").text('Embed this model');
+	    };
+
+	    $("#embed-code-instructions").toggle();
+	})
     };
 
     var initializeTagCloud = function() {
@@ -1122,6 +1136,7 @@ jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
     	initializeIEPlaceholder();
     	initializeCollaboration();
     	initializeTagCloud();
+    	initializeEmbedCode();
     	initializeRecommendations();
     	initializeAlreadyRegisteredButton();
     	convertTo2ColumnLayout("#collaborator-list", ".collaborator");
