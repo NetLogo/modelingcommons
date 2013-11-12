@@ -17,6 +17,7 @@ class Posting < ActiveRecord::Base
 
   before_validation :strip_bad_tags
   after_save :notify_people
+  after_save :tweet_posting
 
   def was_answered?
     !!self.answered_at
@@ -49,6 +50,11 @@ class Posting < ActiveRecord::Base
         end
       end
     end
+  end
+
+  def tweet_posting
+    return unless node.world_visible?
+    Twitter.update("#{person.fullname} wrote about #NetLogo model #{node.name}, at #{node.url}")
   end
 
 end
