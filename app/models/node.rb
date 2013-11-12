@@ -42,8 +42,6 @@ class Node < ActiveRecord::Base
   scope :created_since, lambda { |since| { :conditions => ['created_at >= ? ', since] }}
   scope :updated_since, lambda { |since| { :conditions => ['updated_at >= ? ', since] }}
 
-  after_save :tweet_model
-
   # ------------------------------------------------------------
   # Grab children of various sorts
   # ------------------------------------------------------------
@@ -447,12 +445,4 @@ class Node < ActiveRecord::Base
     active_postings.select { |p| p.is_question? }
   end
 
-  def tweet_model
-    return unless world_visible?
-    if created_at == updated_at
-      Twitter.update("New model '#{name}' (ID #{id}): #{url}")
-    else
-      Twitter.update("Added version #{versions.count} of model '#{name}': #{url}")
-    end
-  end
 end

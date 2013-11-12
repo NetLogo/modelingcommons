@@ -30,6 +30,7 @@ class Version < ActiveRecord::Base
   after_save :update_node_modification_time
   after_save :notify_authors
   after_save :update_collaborators
+  after_save :tweet_version
 
   def update_node_modification_time
     if node
@@ -90,5 +91,11 @@ class Version < ActiveRecord::Base
   def self.text_search(query)
     Version.find_by_sql ["SELECT * FROM Versions WHERE (to_tsvector('english', contents)) @@ to_tsquery('english', ?)", query.gsub(/\s+/, ' | ')]
   end
+
+  def tweet_version
+    return unless node.world_visible?
+    Twitter.update("Added version #{node.versions.count} of model '#{name}': #{url}")
+  end
+
 
 end
