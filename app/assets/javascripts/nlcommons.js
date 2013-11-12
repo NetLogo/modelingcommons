@@ -876,10 +876,10 @@ jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
 	$("a#toggle-embed-link").click(function(e) {
 	    
 	    if ($("#embed-code-instructions").is( ':visible')) {
-		$("#toggle-embed-link").text('Hide embed instructions');
+		$("#toggle-embed-link").text('Embed this model');
 	    }
 	    else {
-		$("#toggle-embed-link").text('Embed this model');
+		$("#toggle-embed-link").text('Hide embed instructions');
 	    };
 
 	    $("#embed-code-instructions").toggle();
