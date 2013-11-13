@@ -314,7 +314,7 @@ class Node < ActiveRecord::Base
   end
 
   def url
-    "http://modelingcommons/browse/one_model/#{id}"
+    "http://modelingcommons.org/browse/one_model/#{id}"
   end
 
   def visible_to_user?(person)
