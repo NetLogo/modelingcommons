@@ -50,7 +50,7 @@ class Person < ActiveRecord::Base
   # after_validation_on_update :encrypt_updated_password
 
   after_create :transform_nonmember_collaborations
-  after_save :tweet_person
+  after_create :tweet_person
 
   def node_versions
     versions
