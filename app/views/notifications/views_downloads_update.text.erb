@@ -1,5 +1,9 @@
 Greetings, <%= @person.first_name %>, from the NetLogo Modeling Commons!
 
+    <p>Follow us on Twitter
+    as <a href="http://twitter.com/modelingcommons">@modelingcommons</a>,
+    for the latest updates.</p>
+
 We keep track of how often your models are viewed and downloaded, and wanted to share that information with you:
 
   <% @person.models.each do |model| %>
