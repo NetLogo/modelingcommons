@@ -16,8 +16,8 @@ class Posting < ActiveRecord::Base
   scope :created_since, lambda { |since| { :conditions => ['created_at >= ? ', since] }}
 
   before_validation :strip_bad_tags
-  after_save :notify_people
-  after_save :tweet_posting
+  after_create :notify_people
+  after_create :tweet_posting
 
   def was_answered?
     !!self.answered_at
@@ -54,7 +54,7 @@ class Posting < ActiveRecord::Base
 
   def tweet_posting
     return unless node.world_visible?
-    Twitter.update("#{person.fullname} wrote about #NetLogo model #{node.name}, at #{node.url}")
+    Twitter.update("#{person.fullname} added #{ActiveSupport::Inflector::ordinalize(node.postings.count)} post about #NetLogo model #{node.name}, at #{node.url}")
   end
 
 end
