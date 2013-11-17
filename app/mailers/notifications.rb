@@ -175,6 +175,12 @@ class Notifications < ActionMailer::Base
 
   def views_downloads_update(person)
     @person = person
+    @number_of_people = Person.count
+    @number_of_models = Node.count
+    @new_people_last_week = Person.where("created_at > now() - interval '1 week'").count
+    @new_models_last_week = Node.where("created_at > now() - interval '1 week'").count
+    @models_looking_for_help = Node.where("wants_help = 't'")
+
     mail(:to => @person.email_address,
          :bcc => NLCOMMONS_LIST,
          :subject => wrap_subject("#{person.first_name}, how many people have seen your models?"))

@@ -4,6 +4,24 @@
   viewed and downloaded. (Follow us on Twitter
   as <a href="http://twitter.com/modelingcommons">@modelingcommons</a>!)</p>
 
+<p>
+<% if @new_people_last_week > 0 %>
+<%= @new_people_last_week %> new users joined the Modeling
+  Commons last week, bringing us to a total of  <%= number_with_delimiter(@number_of_people) %>.
+<% end %>
+
+<% if @new_models_last_week > 0 %>
+  Users uploaded <%= @new_models_last_week %> new models, for a total
+  of <%= number_with_delimiter(@number_of_models) %>.
+<% end %>
+</p>
+
+<% if @models_looking_for_help.count > 0 %>
+<p><%= @models_looking_for_help.count %> models are looking for help
+  from the NetLogo community:
+  <%= raw @models_looking_for_help.sort_by {|m| m.name}.map {|m| link_to(m.name, m.url)}.to_sentence %>.</p>
+<% end %>
+
 <style>
   tr:nth-child(even) {
   background: #CCC;
