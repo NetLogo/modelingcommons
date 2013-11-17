@@ -428,12 +428,24 @@ class Node < ActiveRecord::Base
     LoggedAction.find_by_sql(["SELECT COUNT(DISTINCT ip_address) FROM Model_Views WHERE node_id = ?", id]).first.count.to_i
   end
 
+  def views_last_week
+    LoggedAction.find_by_sql(["SELECT COUNT(DISTINCT ip_address) FROM Model_Views WHERE logged_at > now() - interval '1 week' and node_id = ?", id]).first.count.to_i
+  end
+
   def runs
     LoggedAction.find_by_sql(["SELECT COUNT(DISTINCT ip_address) FROM Model_Runs WHERE node_id = ?", id]).first.count.to_i
   end
 
+  def runs_last_week
+    LoggedAction.find_by_sql(["SELECT COUNT(DISTINCT ip_address) FROM Model_Runs WHERE logged_at > now() - interval '1 week' and  node_id = ?", id]).first.count.to_i
+  end
+
   def downloads
     LoggedAction.find_by_sql(["SELECT COUNT(DISTINCT ip_address) FROM Model_Downloads WHERE node_id = ?", id]).first.count.to_i
+  end
+
+  def downloads_last_week
+    LoggedAction.find_by_sql(["SELECT COUNT(DISTINCT ip_address) FROM Model_Downloads WHERE logged_at > now() - interval '1 week' and node_id = ?", id]).first.count.to_i
   end
 
   def contains_any_of?(text, words)

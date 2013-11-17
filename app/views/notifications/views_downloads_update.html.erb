@@ -1,11 +1,8 @@
 <p>Greetings, <%= @person.first_name %>, from the  <a href="http://modelingcommons.org/">NetLogo Modeling Commons</a>!</p>
 
 <p>This is a weekly update, describing how often your models are
-  viewed and downloaded.</p>
-
-    <p>Follow us on Twitter
-    as <a href="http://twitter.com/modelingcommons">@modelingcommons</a>,
-    for the latest updates!</p>
+  viewed and downloaded. (Follow us on Twitter
+  as <a href="http://twitter.com/modelingcommons">@modelingcommons</a>!)</p>
 
 <style>
   tr:nth-child(even) {
@@ -41,10 +38,10 @@
     <tr>
       <td><%= link_to model.name, "http://modelingcommons.org/browse/one_model/#{model.id}" %></td>
       <td><%= model.permission_description %></td>
-      <td><%= model.views %></td>
-      <td><%= model.downloads %></td>
+      <td><%= model.views %> (<%= model.views_last_week %> last week)</td>
+      <td><%= model.downloads %> (<%= model.downloads_last_week %> last week)</td>
       <td><%= model.recommendations.count %></td>
-      <td><%= model.runs %></td>
+      <td><%= model.runs %> (<%= model.runs_last_week %> last week)</td>
       <td>
 	<span class="<%= (model.all_collaborators.count == 1) ? "highlight" : "" %>">
 	  <%= model.all_collaborators.count - 1 %>
