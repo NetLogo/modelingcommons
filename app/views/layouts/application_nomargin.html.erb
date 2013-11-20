@@ -23,7 +23,12 @@
 	      <% else -%>
 	      <%= @headline -%>
 	      <% end -%>
+	    <% if @embedded.present? %>
+	      &mdash; from the <%= link_to "Modeling Commons", "http://modelingcommons.org/", :target => '_blank' %>
+	    <% end %>
+
 	    </h1>
+
 	  </div>
 	  <%= yield :layout %>
 	</div>
