@@ -37,6 +37,17 @@ class Posting < ActiveRecord::Base
       :contents => body}
   end
 
+  def body_urlified
+    body_urlified = body.gsub /(https?:\/\/[-\/_.~%?='\w:]+\w)/ do
+      "<a target=\"_blank\" href=\"#{$1}\">#{$1}</a>"
+    end
+
+    # body_urlified = body.gsub(/(https?:\/\/[\w.\/_-]+[\w\/]+)/, "<a href='#{$1}' target='_blank'>#{$1}</a>")
+    logger.warn "[Posting#body_urlified] body input is '#{body}'"
+    logger.warn "[Posting#body_urlified] body output is '#{body_urlified}'"
+    body_urlified
+  end
+
   def notify_people
     Notifications.updated_discussion(node, person).deliver
   end

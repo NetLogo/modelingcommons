@@ -16,6 +16,7 @@ class TaggedNode < ActiveRecord::Base
   scope :created_since, lambda { |since| { :conditions => ['created_at >= ? ', since] }}
 
   after_save :notify_people
+  after_save :tweet_tagged_node
 
   def new_thing
     {:id => id,
@@ -32,6 +33,11 @@ class TaggedNode < ActiveRecord::Base
     notification_recipients = (node.people + tag.people).uniq
     logger.warn "Notification recipients for tagged node '#{self.inspect}' = '#{notification_recipients}'"
     Notifications.applied_tag(notification_recipients, tag, node).deliver
+  end
+
+  def tweet_tagged_node
+    return unless node.world_visible?
+    Twitter.update("#{person.name} tagged '#{node.name}', (#{node.url}), with '#{tag.name}' (#{tag.url}).")
   end
 
 end

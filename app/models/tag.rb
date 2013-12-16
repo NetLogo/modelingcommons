@@ -16,6 +16,10 @@ class Tag < ActiveRecord::Base
     name.gsub!(/[<>]/, ' ')
   end
 
+  def url
+    "http://modelingcommons.org/tags/one_tag/#{id}"
+  end
+  
   def people
     return self.nodes.map {|model| model.person}.uniq
   end
