@@ -37,7 +37,7 @@ class TaggedNode < ActiveRecord::Base
 
   def tweet_tagged_node
     return unless node.world_visible?
-    Twitter.update("#{person.fullname} tagged '#{node.name}', (#{node.url}), with '#{tag.name}' (#{tag.url}).")
+    Twitter.update("#{person.fullname} tagged '#{node.name}' (#{node.url}), with '#{tag.name}' (#{tag.url}).")
   end
 
 end
