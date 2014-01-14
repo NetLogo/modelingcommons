@@ -37,7 +37,11 @@ class TaggedNode < ActiveRecord::Base
 
   def tweet_tagged_node
     return unless node.world_visible?
-    Twitter.update("#{person.fullname} tagged #NetLogo model '#{node.name}' (#{node.url}) with '#{tag.name}' (#{tag.url}).")
+    message = "#{person.fullname} tagged #NetLogo model '#{node.name}' (#{node.url}) with '#{tag.name}' (#{tag.url})."
+    if message.size > 140
+      message = "#{person.first_name} tagged #NetLogo model '#{node.name}' (#{node.url}) with '#{tag.name}'."
+    end
+    Twitter.update(message)
   end
 
 end
