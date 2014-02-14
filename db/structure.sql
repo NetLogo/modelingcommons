@@ -471,10 +471,10 @@ CREATE VIEW hits_and_months_view AS
 
 
 --
--- Name: ip_address_locations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: ip_locations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE TABLE ip_address_locations (
+CREATE TABLE ip_locations (
     id integer NOT NULL,
     ip_address character varying(255),
     location text,
@@ -484,10 +484,10 @@ CREATE TABLE ip_address_locations (
 
 
 --
--- Name: ip_address_locations_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: ip_locations_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE ip_address_locations_id_seq
+CREATE SEQUENCE ip_locations_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -496,10 +496,10 @@ CREATE SEQUENCE ip_address_locations_id_seq
 
 
 --
--- Name: ip_address_locations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: ip_locations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE ip_address_locations_id_seq OWNED BY ip_address_locations.id;
+ALTER SEQUENCE ip_locations_id_seq OWNED BY ip_locations.id;
 
 
 --
@@ -1238,7 +1238,7 @@ ALTER TABLE ONLY groups ALTER COLUMN id SET DEFAULT nextval('groups_id_seq'::reg
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY ip_address_locations ALTER COLUMN id SET DEFAULT nextval('ip_address_locations_id_seq'::regclass);
+ALTER TABLE ONLY ip_locations ALTER COLUMN id SET DEFAULT nextval('ip_locations_id_seq'::regclass);
 
 
 --
@@ -1401,11 +1401,11 @@ ALTER TABLE ONLY groups
 
 
 --
--- Name: ip_address_locations_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: ip_locations_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY ip_address_locations
-    ADD CONSTRAINT ip_address_locations_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY ip_locations
+    ADD CONSTRAINT ip_locations_pkey PRIMARY KEY (id);
 
 
 --
@@ -1612,10 +1612,10 @@ CREATE INDEX index_email_recommendations_on_person_id ON email_recommendations U
 
 
 --
--- Name: index_ip_address_locations_on_ip_address; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_ip_locations_on_ip_address; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE UNIQUE INDEX index_ip_address_locations_on_ip_address ON ip_address_locations USING btree (ip_address);
+CREATE UNIQUE INDEX index_ip_locations_on_ip_address ON ip_locations USING btree (ip_address);
 
 
 --
