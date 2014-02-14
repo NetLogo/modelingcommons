@@ -191,7 +191,7 @@ CREATE TABLE nodes (
 --
 
 CREATE VIEW ccl_model_creations_per_month AS
- SELECT to_char(nodes.created_at, 'YY MM'::text) AS yearmonth, 
+ SELECT to_char(nodes.created_at, 'YY MM'::text) AS yearmonth,
     count(*) AS count
    FROM nodes
   WHERE (nodes.group_id = 2)
@@ -338,10 +338,10 @@ CREATE TABLE versions (
 --
 
 CREATE VIEW create_view_models_view AS
- SELECT p.id, 
+ SELECT p.id,
     ( SELECT min(v.created_at) AS min
            FROM versions v
-          WHERE (v.person_id = p.id)) AS earliest_version_creation, 
+          WHERE (v.person_id = p.id)) AS earliest_version_creation,
     ( SELECT min(l.logged_at) AS min
            FROM logged_actions l
           WHERE (((p.id = l.person_id) AND (l.controller = 'browse'::text)) AND (l.action = 'one_model'::text))) AS earliest_view_model
@@ -448,8 +448,8 @@ ALTER SEQUENCE groups_id_seq OWNED BY groups.id;
 --
 
 CREATE VIEW hits_and_days_view AS
- SELECT count(*) AS count, 
-    (logged_actions.logged_at)::date AS logged_at, 
+ SELECT count(*) AS count,
+    (logged_actions.logged_at)::date AS logged_at,
     date_part('dow'::text, (logged_actions.logged_at)::date) AS date_part
    FROM logged_actions
   WHERE (logged_actions.is_searchbot = false)
@@ -462,12 +462,44 @@ CREATE VIEW hits_and_days_view AS
 --
 
 CREATE VIEW hits_and_months_view AS
- SELECT count(*) AS count, 
+ SELECT count(*) AS count,
     ((date_part('year'::text, (logged_actions.logged_at)::date) || '-'::text) || date_part('month'::text, (logged_actions.logged_at)::date))
    FROM logged_actions
   WHERE (logged_actions.is_searchbot = false)
   GROUP BY ((date_part('year'::text, (logged_actions.logged_at)::date) || '-'::text) || date_part('month'::text, (logged_actions.logged_at)::date))
   ORDER BY ((date_part('year'::text, (logged_actions.logged_at)::date) || '-'::text) || date_part('month'::text, (logged_actions.logged_at)::date));
+
+
+--
+-- Name: ip_address_locations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE ip_address_locations (
+    id integer NOT NULL,
+    ip_address character varying(255),
+    location text,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: ip_address_locations_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE ip_address_locations_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: ip_address_locations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE ip_address_locations_id_seq OWNED BY ip_address_locations.id;
 
 
 --
@@ -670,7 +702,7 @@ ALTER SEQUENCE nodes_id_seq OWNED BY nodes.id;
 --
 
 CREATE VIEW non_ccl_model_creations_per_month AS
- SELECT to_char(nodes.created_at, 'YY MM'::text) AS yearmonth, 
+ SELECT to_char(nodes.created_at, 'YY MM'::text) AS yearmonth,
     count(*) AS count
    FROM nodes
   WHERE (nodes.group_id <> 2)
@@ -862,8 +894,8 @@ CREATE TABLE pg_ts_parser (
 --
 
 CREATE VIEW popular_pages_view AS
- SELECT count(*) AS count, 
-    logged_actions.controller, 
+ SELECT count(*) AS count,
+    logged_actions.controller,
     logged_actions.action
    FROM logged_actions
   WHERE (logged_actions.is_searchbot = false)
@@ -897,7 +929,7 @@ CREATE TABLE postings (
 --
 
 CREATE VIEW posting_count_view AS
- SELECT count(*) AS count, 
+ SELECT count(*) AS count,
     postings.node_id
    FROM postings
   WHERE (postings.deleted_at IS NULL)
@@ -1206,6 +1238,13 @@ ALTER TABLE ONLY groups ALTER COLUMN id SET DEFAULT nextval('groups_id_seq'::reg
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY ip_address_locations ALTER COLUMN id SET DEFAULT nextval('ip_address_locations_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY logged_actions ALTER COLUMN id SET DEFAULT nextval('logged_actions_id_seq'::regclass);
 
 
@@ -1359,6 +1398,14 @@ ALTER TABLE ONLY email_recommendations
 
 ALTER TABLE ONLY groups
     ADD CONSTRAINT groups_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: ip_address_locations_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY ip_address_locations
+    ADD CONSTRAINT ip_address_locations_pkey PRIMARY KEY (id);
 
 
 --
@@ -1562,6 +1609,13 @@ CREATE INDEX index_email_recommendations_on_node_id ON email_recommendations USI
 --
 
 CREATE INDEX index_email_recommendations_on_person_id ON email_recommendations USING btree (person_id);
+
+
+--
+-- Name: index_ip_address_locations_on_ip_address; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_ip_address_locations_on_ip_address ON ip_address_locations USING btree (ip_address);
 
 
 --
@@ -2157,7 +2211,7 @@ CREATE INDEX version_description_idx ON versions USING gin (to_tsvector('english
 --
 
 CREATE RULE "_RETURN" AS
-    ON SELECT TO permissions_changed_log_view DO INSTEAD  SELECT count(*) AS count, 
+    ON SELECT TO permissions_changed_log_view DO INSTEAD  SELECT count(*) AS count,
     "substring"(logged_actions.params, 'id"?:\s*"(\d+)'::text) AS id
    FROM logged_actions
   WHERE ((logged_actions.action = 'set_permissions'::text) AND (logged_actions.person_id <> 1))
@@ -2418,6 +2472,8 @@ INSERT INTO schema_migrations (version) VALUES ('20130708125917');
 INSERT INTO schema_migrations (version) VALUES ('20130708143024');
 
 INSERT INTO schema_migrations (version) VALUES ('20130709165843');
+
+INSERT INTO schema_migrations (version) VALUES ('20140214121511');
 
 INSERT INTO schema_migrations (version) VALUES ('21');
 
