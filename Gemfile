@@ -9,6 +9,9 @@ end
 source 'https://rubygems.org'
 gem "rails", "~> 3.2.13"
 
+gem 'geolocater'
+gem 'geocoder'
+
 gem "country_select"
 gem "newrelic_rpm" 
 gem 'BlueCloth', '~> 1.0.1'
