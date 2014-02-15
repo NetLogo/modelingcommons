@@ -19,10 +19,10 @@ namespace :nlcommons do
   task :get_ip_locations => :environment do 
 
     LoggedAction.select(:ip_address)
-      .where("ip_address NOT IN (SELECT ip_address FROM ip_locations)")
+      .where("is_searchbot = 'f' and ip_address NOT IN (SELECT ip_address FROM ip_locations)")
       .limit(10000)
       .map {|la| la.ip_address}
-      .each do |ip_address|
+      .uniq.each do |ip_address|
 
       STDERR.puts "Looking for: '#{ip_address}'"
       if IpLocation.exists?(ip_address: ip_address)
