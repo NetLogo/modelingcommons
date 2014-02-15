@@ -32,8 +32,12 @@ namespace :nlcommons do
       
       location = geocoder_decode(ip_address) || geolocater_decode(ip_address)
       IpLocation.create!(ip_address: ip_address,  location: location)
-      STDERR.puts "\tAdded location '#{location}' for address '#{ip_address}'"
 
+      begin
+        STDERR.puts "\tAdded location '#{location}' for address '#{ip_address}'"
+      rescue
+        STDERR.puts "\tAdded location (in Unicode) for address '#{ip_address}'"
+      end
     end
   end
 end
