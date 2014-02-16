@@ -20,7 +20,7 @@ namespace :nlcommons do
 
     LoggedAction.select(:ip_address)
       .where("is_searchbot = 'f' and ip_address NOT IN (SELECT ip_address FROM ip_locations)")
-      .limit(10000)
+      .limit(100000)
       .map {|la| la.ip_address}
       .uniq.each do |ip_address|
 
