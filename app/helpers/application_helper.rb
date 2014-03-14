@@ -8,7 +8,9 @@ module ApplicationHelper
     link_to_item_person = node.person
     original_node_author = node.versions.last.person
     this_user_did_it = true if original_node_author == @person
-    updated_or_created = (node.updated_at.to_i >= (node.created_at.to_i + 60) ? 'created' : 'updated')
+
+
+    updated_or_created = (node.updated_at.to_i >= (node.created_at.to_i + 60) ? 'updated' : 'created')
     link = url_for(:controller => "browse", :action => "one_model", :id => node.id)
     
     if !node.previews.nil? and !node.previews.empty?
