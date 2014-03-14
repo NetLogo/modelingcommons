@@ -18,7 +18,7 @@ module ApplicationHelper
     
     {
       :time => "#{time_since_update} ago", 
-      :action => "#{person_link(original_node_author)} #{updated_or_created} #{node.permission_description} model", 
+      :action => "#{person_link(link_to_item_person)} #{updated_or_created} #{node.permission_description} model", 
       :your_news => this_user_did_it,
       :image => image,
       :name => node.name,
