@@ -331,6 +331,54 @@ WITH  all_nodes_and_collaborators AS
      FROM Nodes N),
 
 
+-- Now we need to do something similar, but for each pair of users.
+-- How many interests are shared among our people?
+-- And is a shared set of interests likely to lead to collaboration?
+
+-- The end result will need to be an adjacency matrix, in which the
+-- rows and columns are the person IDs, and the cells contain the
+-- proportion of shared interests.
+
+
+CREATE OR REPLACE VIEW shared_interests_view 
+AS
+WITH 
+
+  people_by_people AS
+  (SELECT P1.id as person1_id, P2.id AS person2_id
+     FROM People P1, People P2
+    WHERE P1.id in (SELECT person_id FROM Collaborations)
+      AND P2.id in (SELECT person_id FROM Collaborations)
+ ORDER BY P1, P2),
+
+  pp_with_interests AS
+  (SELECT PP.person1_id, PI1.tag_ids as person1_interests,
+          PP.person2_id, PI2.tag_ids as person2_interests
+     FROM people_by_people PP, Person_Interests PI1, Person_Interests PI2
+    WHERE PP.person1_id = PI1.person_id
+      AND PP.person2_id = PI2.person_id),
+
+  pp_with_interest_overlap AS
+  (SELECT person1_id, person1_interests, 
+          array_length(person1_interests, 1) as person1_interests_length,
+          person2_id, person2_interests,
+          array_length(person2_interests, 1) as person2_interests_length,
+          (SELECT ARRAY(SELECT UNNEST(person1_interests)
+                        INTERSECT
+                        SELECT UNNEST(person2_interests))) as shared_interests
+     FROM pp_with_interests),
+
+  shared_interest_calculation AS
+  (SELECT person1_id, person1_interests, person1_interests_length,
+          person2_id, person2_interests, person2_interests_length,
+          array_length(shared_interests, 1) as shared_interests_length,
+          (array_length(shared_interests, 1)::float / person1_interests_length) as proportion_shared
+     FROM pp_with_interest_overlap)
+
+SELECT * FROM shared_interest_calculation
+ORDER BY person1_id, person2_id ;
+
+
 -- Get all models and people for models with two collaborators or more
 -- How long since they joined the Modeling Commons?
 
