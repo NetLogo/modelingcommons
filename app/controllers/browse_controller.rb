@@ -17,7 +17,7 @@ class BrowseController < ApplicationController
   end
 
   def list_recent_models
-    @models = Node.all(:order => "updated_at DESC", :limit => 100).select {|model| model.visible_to_user?(@person)}[0..19]
+    @models = Node.all(:order => "updated_at DESC", :limit => 200).select {|model| model.visible_to_user?(@person)}[0..100]
     render 'list_models' , :layout => 'application_nomargin'
   end
   

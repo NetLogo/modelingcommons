@@ -140,6 +140,7 @@ jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
 	$(".model_list_datatable").dataTable({
 	    'aaSorting': [ [0, 'asc']],
 	    "bAutoWidth": false,
+	    "iDisplayLength": 50,
 	    "aoColumns": [
 		{
 		    //Model
