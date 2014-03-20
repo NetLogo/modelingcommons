@@ -7,15 +7,15 @@ namespace :nlcommons do
 
     shared_interests = Hash.new { |h, k| h[k] = Hash.new(0) }
 
-    Node.find_by_sql("SELECT person1_id, person2_id, proportion_shared
+    Node.find_by_sql("SELECT person1_id, person2_id, jaccard_similarity
                         FROM shared_interests_view").each do |shared_result| 
 
       person1_id = shared_result.person1_id.to_i
       person2_id = shared_result.person2_id.to_i
-      proportion_shared = shared_result.proportion_shared.to_f
+      jaccard_similarity = shared_result.jaccard_similarity.to_f
 
-      shared_interests[person1_id][person2_id] = proportion_shared
-      shared_interests[person2_id][person1_id] = proportion_shared
+      shared_interests[person1_id][person2_id] = jaccard_similarity
+      shared_interests[person2_id][person1_id] = jaccard_similarity
     end
 
     person_ids = Person.order("id ASC").all.map {|p| p.id}

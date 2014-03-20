@@ -377,7 +377,7 @@ WITH
           interests_intersection, 
           array_length(interests_intersection, 1) as interests_intersection_length,
           interests_union, 
-          array_length(interests_intersection, 1) as interests_union_length
+          array_length(interests_union, 1) as interests_union_length
      FROM pp_with_interest_overlap),
 
   shared_interest_calculation AS
