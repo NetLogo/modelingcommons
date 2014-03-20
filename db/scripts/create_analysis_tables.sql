@@ -365,15 +365,28 @@ WITH
           array_length(person2_interests, 1) as person2_interests_length,
           (SELECT ARRAY(SELECT UNNEST(person1_interests)
                         INTERSECT
-                        SELECT UNNEST(person2_interests))) as shared_interests
+                        SELECT UNNEST(person2_interests))) as interests_intersection,
+          (SELECT ARRAY(SELECT UNNEST(person1_interests)
+                        UNION
+                        SELECT UNNEST(person2_interests))) as interests_union
      FROM pp_with_interests),
+
+  shared_interest_lengths AS
+  (SELECT person1_id, person1_interests, person1_interests_length,
+          person2_id, person2_interests, person2_interests_length,
+          interests_intersection, 
+          array_length(interests_intersection, 1) as interests_intersection_length,
+          interests_union, 
+          array_length(interests_intersection, 1) as interests_union_length
+     FROM pp_with_interest_overlap),
 
   shared_interest_calculation AS
   (SELECT person1_id, person1_interests, person1_interests_length,
           person2_id, person2_interests, person2_interests_length,
-          array_length(shared_interests, 1) as shared_interests_length,
-          (array_length(shared_interests, 1)::float / person1_interests_length) as proportion_shared
-     FROM pp_with_interest_overlap)
+          interests_intersection, interests_intersection_length,
+          interests_union, interests_union_length,
+          (interests_union_length::float / interests_intersection_length) as jaccard_similarity
+     FROM shared_interest_lengths)
 
 SELECT * FROM shared_interest_calculation
 ORDER BY person1_id, person2_id ;
