@@ -1,3 +1,10 @@
 <div>
+  <p>
+    Do you have questions or comments about this model? 
+    Ask them <a href="#browse_discuss">here</a>!
+    <%= link_to("(You'll first need to log in.)", :controller => :account, :action => :login) unless @person -%>
+  </p>
+  <hr />
+
   <p><%= raw @model.info_tab_html %></p>
 </div>
