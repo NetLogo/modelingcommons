@@ -4,7 +4,7 @@
 <% else %>
 <div class="comments_list">
   <% if @model.postings.empty? %>
-  Do you have questions or comments about this model?  Ask them here!
+  Please start the discussion about this model!
   <%= link_to("(You'll first need to log in.)", :controller => :account, :action => :login) unless @person -%>
 </p>
   <% else %>
