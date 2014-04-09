@@ -1,3 +1,6 @@
+BEGIN;
+
+DROP TABLE IF EXISTS model_collaborator_countries;
 CREATE TABLE model_collaborator_countries 
 AS SELECT N.id, 
           (SELECT array(SELECT DISTINCT array_to_string(regexp_matches(IP.location, 
@@ -8,13 +11,12 @@ AS SELECT N.id,
                                     AND LA.ip_address = IP.ip_address)) as countries,
           (SELECT array(SELECT C.person_id 
                           FROM Collaborations C 
-                         WHERE C.node_id = N.node_id)) as people
+                         WHERE C.node_id = N.id)) as people
 
      FROM nodes N ;
 
 
-BEGIN;
-DROP TABLE model_collaborator_declared_countries;
+DROP TABLE IF EXISTS model_collaborator_declared_countries;
 CREATE TABLE model_collaborator_declared_countries
 AS SELECT N.id as node_id,
           (SELECT array(SELECT DISTINCT COALESCE(country_name, 
@@ -36,10 +38,7 @@ AS SELECT N.id as node_id,
 
      FROM nodes N ;
 
-COMMIT;
-
-BEGIN;
-DROP TABLE model_viewer_declared_countries;
+DROP TABLE IF EXISTS model_viewer_declared_countries;
 CREATE TABLE model_viewer_declared_countries
 AS SELECT N.id as node_id,
           (SELECT COUNT(*) 
@@ -53,7 +52,6 @@ AS SELECT N.id as node_id,
                                     AND LA.ip_address = IP.ip_address
                                     AND IP.location IS NOT NULL)) as countries
     FROM Nodes N;
-COMMIT;
 
 CREATE OR REPLACE VIEW viewers_vs_collaborators_view AS
 SELECT VIEWERS.node_id,
@@ -71,9 +69,8 @@ SELECT VIEWERS.node_id,
    AND array_length(COLLABORATORS.people, 1) > 1;
 
 -- Discussing countries
-BEGIN;
-DROP TABLE IF EXISTS model_poster_declared_countries;
-DROP VIEW IF EXISTS posting_countries_and_people_view;
+
+DROP TABLE IF EXISTS model_poster_declared_countries CASCADE;
 CREATE TABLE model_poster_declared_countries
 AS SELECT N.id as node_id,
           N.group_id, N.visibility_id, N.changeability_id,
@@ -96,9 +93,8 @@ AS SELECT N.id as node_id,
                          WHERE PO.node_id = N.id)) as people
      FROM nodes N 
     WHERE N.id IN (SELECT node_id FROM Postings WHERE deleted_at IS NULL);
-COMMIT;
 
-CREATE VIEW posting_countries_and_people_view
+CREATE OR REPLACE VIEW posting_countries_and_people_view
 AS
   SELECT node_id, countries, people, group_id, 
          (SELECT short_form from Permission_Settings WHERE id = visibility_id) as read_permission,
@@ -108,9 +104,7 @@ AS
     FROM model_poster_declared_countries  
 ORDER BY number_of_countries;
 
-BEGIN;
-DROP TABLE IF EXISTS Person_Interests;
-
+DROP TABLE IF EXISTS Person_Interests CASCADE;
 CREATE TABLE Person_Interests AS
 SELECT P.id as person_id,
       (SELECT array(SELECT DISTINCT tn.tag_id 
@@ -125,7 +119,6 @@ SELECT P.id as person_id,
 
 ;
 DELETE FROM Person_Interests WHERE array_length(tag_ids, 1) IS NULL;
-COMMIT;
 
 -- Now I know what people's interests are, and I know if they're collaborators
 -- Now, for each model, we want all of the interests for all of the collaborators
@@ -165,7 +158,7 @@ SELECT *,
   FROM viewers_aggregate_tags_view ;
 
 
-CREATE VIEW viewer_and_collaborator_tag_summary_view
+CREATE OR REPLACE VIEW viewer_and_collaborator_tag_summary_view
 AS
 SELECT VTN.node_id, 
 
@@ -192,7 +185,7 @@ SELECT *,
  WHERE number_of_collaborators > 0 
    AND number_of_viewers > 0;
 
-CREATE VIEW multi_person_collaborations_view 
+CREATE OR REPLACE VIEW multi_person_collaborations_view 
       AS
   SELECT count(*) AS number_of_collaborators, 
         node_id from collaborations 
@@ -200,7 +193,7 @@ GROUP BY node_id
   HAVING count(*) > 1;
 
 
-CREATE VIEW models_per_collaborator_view
+CREATE OR REPLACE VIEW models_per_collaborator_view
     AS
 SELECT COUNT(*) as number_of_models, 
        node_id
@@ -252,6 +245,8 @@ SELECT * FROM collaborators_by_tag
 -- For each collaborator, get his or her interests (via views)
 -- Then we can calculate the proportion of collaborators who shared a tag
 
+CREATE OR REPLACE VIEW model_and_collaborators_and_interests
+AS
 WITH 
   all_nodes_and_collaborators AS
   (SELECT id as node_id, ARRAY(SELECT C.person_id
@@ -308,27 +303,27 @@ WITH
 SELECT * FROM final_summary 
     ;
 
--- Timing of collaborations
-WITH  all_nodes_and_collaborators AS
-  (SELECT id as node_id, ARRAY(SELECT C.person_id
-                                 FROM Collaborations C
-                                WHERE C.node_id = N.id) as collaborators
+-- -- Timing of collaborations
+-- WITH  all_nodes_and_collaborators AS
+--   (SELECT id as node_id, ARRAY(SELECT C.person_id
+--                                  FROM Collaborations C
+--                                 WHERE C.node_id = N.id) as collaborators
 
-     FROM Nodes N),
+--      FROM Nodes N),
 
-  multi_person_nodes_and_collaborators AS
-  (SELECT node_id, collaborators
-     FROM all_nodes_and_collaborators
-    WHERE array_length(collaborators, 1) > 1),
+--   multi_person_nodes_and_collaborators AS
+--   (SELECT node_id, collaborators
+--      FROM all_nodes_and_collaborators
+--     WHERE array_length(collaborators, 1) > 1),
 
 
 
-  all_nodes_and_collaborators AS
-  (SELECT id as node_id, ARRAY(SELECT C.person_id
-                                 FROM Collaborations C
-                                WHERE C.node_id = N.id) as collaborators
+--   all_nodes_and_collaborators AS
+--   (SELECT id as node_id, ARRAY(SELECT C.person_id
+--                                  FROM Collaborations C
+--                                 WHERE C.node_id = N.id) as collaborators
 
-     FROM Nodes N),
+--      FROM Nodes N),
 
 
 -- Now we need to do something similar, but for each pair of users.
@@ -395,6 +390,9 @@ ORDER BY person1_id, person2_id ;
 -- Get all models and people for models with two collaborators or more
 -- How long since they joined the Modeling Commons?
 
+
+CREATE OR REPLACE VIEW posters_to_ccl_nodes
+AS
 WITH non_ccl_nodes AS
     (SELECT id as node_id
        FROM Nodes
@@ -445,6 +443,8 @@ GROUP BY day_of_joining
 
 
 
+CREATE OR REPLACE VIEW posters_to_non_ccl_nodes
+AS
 WITH non_ccl_nodes AS
     (SELECT id as node_id, 
             created_at as node_created_at
@@ -463,6 +463,8 @@ ORDER BY node_id, posted_at
 
 
 -- Postings and people
+CREATE OR REPLACE VIEW postings_and_people
+AS
 WITH
   undeleted_postings AS
     (SELECT id as posting_id, person_id, node_id, created_at as posting_created_at, is_question
@@ -507,6 +509,8 @@ SELECT PP.posting_id, PP.person_id, PP.node_id, PP.posting_created_at,
 ;
 
 -- Did people post on their own models, or only on other people's models?
+CREATE OR REPLACE VIEW post_on_own_or_other_models_view
+AS
 WITH
   undeleted_postings AS
     (SELECT id as posting_id, person_id, node_id, created_at as posting_created_at, is_question
@@ -545,4 +549,6 @@ SELECT * from postings_and_collaboration_vs_posting
 
 -- Did they collaborate before they posted?  Or post before they collaborated?
 
-[local]/nlcommons_development=# select distinct  C.person_id, C.created_at as collaboration_created_at, P.created_at as posting_created_at, P.created_at - C.created_at from collaborations C, postings P where P.person_id = C.person_id and P.id = (SELECT id from postings where person_id = P.person_id order by created_at limit 1) order by person_id;
+-- [local]/nlcommons_development=# select distinct  C.person_id, C.created_at as collaboration_created_at, P.created_at as posting_created_at, P.created_at - C.created_at from collaborations C, postings P where P.person_id = C.person_id and P.id = (SELECT id from postings where person_id = P.person_id order by created_at limit 1) order by person_id;
+
+COMMIT;

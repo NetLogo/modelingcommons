@@ -5,13 +5,20 @@ namespace :nlcommons do
   desc 'Create an adjacency matrix for people/country overlap'
   task :person_model_adj_matrix => :environment do 
 
+    uri = Person.find_by_email_address('uri@northwestern.edu')
+
     non_ccl_output = [ ]
     output = [ ]
 
-    sorted_people = Person.all.sort_by {|p| p.id}
-    sorted_nodes = Node.all.sort_by {|n| n.id}
+    # Remove people who haven't contributed at least one model
+    sorted_people = Person.all
+    sorted_people = sorted_people.select {|p| !p.nodes.empty?}.sort_by {|p| p.id}
+    sorted_people = sorted_people.sort_by {|n| n.id}
 
-    # For each person, indicate whether they are an author or not
+    # Remove those nodes for whom Uri is the only author
+    uri = Person.find_by_email_address('uri@northwestern.edu')
+    sorted_nodes = Node.all
+    sorted_nodes = sorted_nodes.reject {|n| n.authors.size == 1 and n.authors.first == uri }
 
     sorted_people.each do |person|
       row = []

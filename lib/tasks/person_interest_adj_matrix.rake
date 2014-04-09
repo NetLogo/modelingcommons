@@ -25,7 +25,10 @@ namespace :nlcommons do
       shared_interests[person2_id][person1_id] = binary_jaccard_similarity
     end
 
-    person_ids = Person.order("id ASC").all.map {|p| p.id}
+    sorted_people = Person.all
+    sorted_people = sorted_people.select {|p| !p.nodes.empty?}.sort_by {|p| p.id}
+    sorted_people = sorted_people.sort_by {|n| n.id}
+    person_ids = sorted_people.map {|p| p.id}
 
     output = [ ]
 
