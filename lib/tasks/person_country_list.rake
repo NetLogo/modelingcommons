@@ -11,6 +11,7 @@ namespace :nlcommons do
     sorted_people = Person.all.sort_by {|p| p.id}
     sorted_countries = Person.select("country_name").all.map {|p| p.country_name.to_s}.uniq.sort
 
+    STDERR.puts "Creating country_names_codes CSV file"
     File.open('country_names_codes.csv', 'w') do |f|
       sorted_countries.each_with_index do |country_name, index|
         f.puts "#{country_name}\t#{index}"
@@ -18,17 +19,17 @@ namespace :nlcommons do
       end
     end
 
-    # # Header row
-    # row = [nil]
-    # sorted_people.each do |person|
-    #   row << person.id
-    # end
-    # output << row.join("\t")
-
-    # For each person, indicate whether there is a country overlap or no
+    # Give people without a country a dummy country ID
+    dummy_country_index = 1000
 
     sorted_people.each do |person|
-      output << [person.id, countries[person.country_name]].join("\t")
+      country_id = countries[person.country_name]
+      if country_id.nil?
+        country_id = dummy_country_index
+        dummy_country_index += 1
+      end
+
+      output << [person.id, country_id].join("\t")
     end
 
     output.each do |row|

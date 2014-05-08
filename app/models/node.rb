@@ -46,6 +46,15 @@ class Node < ActiveRecord::Base
   # Grab children of various sorts
   # ------------------------------------------------------------
 
+  def Node.sna_nodes
+    uri = Person.find_by_email_address('uri@northwestern.edu')
+
+    sna_nodes = Node.all.
+      reject {|n| n.authors.size == 1 and n.authors.first == uri }.
+      reject {|n| n.group_id == 2}.
+      sort_by {|n| n.id}
+  end
+
   def node_versions
     versions
   end

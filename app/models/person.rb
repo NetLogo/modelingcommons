@@ -52,6 +52,13 @@ class Person < ActiveRecord::Base
   after_create :transform_nonmember_collaborations
   after_create :tweet_person
 
+  def Person.sna_people
+    Person.all.
+      reject {|p| p.nodes.empty?}.
+      reject {|p| p.email_address == 'uri@northwestern.edu'}.
+      sort_by {|p| p.id}
+  end
+
   def node_versions
     versions
   end

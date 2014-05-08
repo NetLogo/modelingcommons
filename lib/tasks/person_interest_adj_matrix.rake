@@ -5,6 +5,8 @@ namespace :nlcommons do
   desc 'Create an adjacency matrix for people/subject overlap'
   task :person_interest_adj_matrix => :environment do 
 
+    uri = Person.find_by_email_address('uri@northwestern.edu')
+
     threshhold = 0.5
     shared_interests = Hash.new { |h, k| h[k] = Hash.new(0) }
 
@@ -13,35 +15,26 @@ namespace :nlcommons do
 
       person1_id = shared_result.person1_id.to_i
       person2_id = shared_result.person2_id.to_i
+
+      # Ignore Uri
+      next if person1_id == uri.id or person2_id == uri.id
+
       jaccard_similarity = shared_result.jaccard_similarity.to_f
 
-      if jaccard_similarity >= 0.5
-        binary_jaccard_similarity = 1
-      else
-        binary_jaccard_similarity = 0
-      end
+      binary_jaccard_similarity = (jaccard_similarity >= 0.5) ? 1 : 0
 
       shared_interests[person1_id][person2_id] = binary_jaccard_similarity
       shared_interests[person2_id][person1_id] = binary_jaccard_similarity
     end
 
-    sorted_people = Person.all
-    sorted_people = sorted_people.select {|p| !p.nodes.empty?}.sort_by {|p| p.id}
-    sorted_people = sorted_people.sort_by {|n| n.id}
-    person_ids = sorted_people.map {|p| p.id}
+    sna_people = Person.sna_people
 
     output = [ ]
 
-    # removed this row for bpnet
-    # first_row = [' '] + person_ids
-    # output << first_row.join("\t")
-
-    person_ids.each do |p1|
-      # removed this row for bpnet
-      # row = [p1]
+    sna_people.each do |p1|
       row = []
-      person_ids.each do |p2|
-        row << shared_interests[p1][p2]
+      sna_people.each do |p2|
+        row << shared_interests[p1.id][p2.id]
       end
       output << row.join("\t")
     end
