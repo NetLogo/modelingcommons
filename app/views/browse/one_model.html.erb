@@ -13,7 +13,7 @@
       <% end %>
       <div class="info_social_container">
 	<div class="seeking-collaborators">
-	  <% if @person and @model.author?(@person) %>
+	  <% if @person and (@model.author?(@person) or @person.administrator?) %>
 	    <input id="wants_help" name="wants_help" type="checkbox" 
 		   <%= @model.wants_help? ? 'checked' : '' %> />
 	    <label for="wants_help">Check this box to ask for new collaborators</label>
