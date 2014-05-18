@@ -1,5 +1,7 @@
 # Model for an individual node in our graph
 
+require 'bluecloth'
+
 class Node < ActiveRecord::Base
   attr_accessible :parent_id, :name, :updated_at, :group_id, :visibility_id, :changeability_id, :group, :visibility, :changeability, :wants_help
   acts_as_tree :order => "name"
