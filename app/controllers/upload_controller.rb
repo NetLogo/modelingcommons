@@ -184,6 +184,9 @@ class UploadController < ApplicationController
             existing_node.group_id = nil
             existing_node.visibility_id = PermissionSetting.anyone
             existing_node.changeability_id = PermissionSetting.owner
+
+            logger.warn "[UploadController#update_model] Person '#{@person.inspect}' was not a member of group '#{group.inspect}'.  So permissions were changed for existing group '#{existing_node.inspect}'."
+
           end
         end
 
