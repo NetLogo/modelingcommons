@@ -551,4 +551,69 @@ SELECT * from postings_and_collaboration_vs_posting
 
 -- [local]/nlcommons_development=# select distinct  C.person_id, C.created_at as collaboration_created_at, P.created_at as posting_created_at, P.created_at - C.created_at from collaborations C, postings P where P.person_id = C.person_id and P.id = (SELECT id from postings where person_id = P.person_id order by created_at limit 1) order by person_id;
 
+-- ------------------------------------------------------------
+-- Roles in collaborations
+-- ------------------------------------------------------------
+
+WITH 
+  member_collaboration_roles AS
+  (SELECT node_id, collaborator_type_id, 'member'::text as source
+     FROM collaborations
+    WHERE node_id NOT IN (SELECT id FROM Nodes WHERE group_id = 2)),
+
+  non_member_collaboration_roles AS
+  (SELECT node_id, collaborator_type_id, 'nonmember'::text as source
+     FROM non_member_collaborations
+    WHERE node_id NOT IN (SELECT id FROM Nodes WHERE group_id = 2)),
+
+  all_collaborations AS
+  (SELECT node_id, collaborator_type_id, source FROM member_collaboration_roles
+    UNION
+   SELECT node_id, collaborator_type_id, source FROM non_member_collaboration_roles),
+
+  collaboration_counts AS
+   (SELECT COUNT(*) as number_of_collaborators, node_id 
+      FROM all_collaborations
+  GROUP BY node_id
+    HAVING COUNT(*) > 1),
+
+  collaboration_stats AS
+  (SELECT CC.number_of_collaborators, CC.node_id, 
+	  (SELECT ARRAY(SELECT DISTINCT CT.name 
+			  FROM Collaborator_types CT, all_collaborations AC
+			 WHERE CT.id = AC.collaborator_type_id 
+			   AND AC.node_id = CC.node_id
+		      ORDER BY CT.name)) as collaborators
+     FROM collaboration_counts CC)
+
+  select count(*), collaborators
+  FROM collaboration_stats
+  GROUP BY collaborators
+;
+
+CREATE OR REPLACE VIEW authors_per_
+
+WITH authors_per_model AS
+
+  (SELECT MPCV.number_of_collaborators, MPCV.node_id,
+   (SELECT count(distinct person_id) 
+      FROM versions V 
+     WHERE V.node_id = MPCV.node_id) AS number_of_authors
+   FROM multi_person_collaborations_view MPCV)
+
+SELECT COUNT(*) FROM authors_per_model ;
+
+
+CREATE VIEW forked_nodes_view 
+AS SELECT N.id, N.name,
+     (select array (select distinct V.person_id from versions V where V.node_id = N.id)) as child_authors,
+      N.parent_id,
+     (select array (select distinct V.person_id from versions V where V.node_id = N.parent_id)) as parent_authors
+ FROM Nodes N
+ WHERE N.group_id <> 2
+ AND N.parent_id is not null;
+
 COMMIT;
+
+
+

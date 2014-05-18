@@ -14,7 +14,7 @@ namespace :nlcommons do
       row = []
 
       sna_nodes.each do |node|
-        row << (node.author?(person)) ? 1 : 0
+        row << (node.author?(person) ? '1' : '0')
       end
 
       output << row.join("\t") 

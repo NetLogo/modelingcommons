@@ -8,7 +8,7 @@ namespace :nlcommons do
     countries = { }
     output = [ ]
 
-    sorted_people = Person.all.sort_by {|p| p.id}
+    sorted_people = Person.sna_people
     sorted_countries = Person.select("country_name").all.map {|p| p.country_name.to_s}.uniq.sort
 
     STDERR.puts "Creating country_names_codes CSV file"

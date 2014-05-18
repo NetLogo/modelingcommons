@@ -2,7 +2,7 @@
 
 namespace :nlcommons do
 
-  desc 'Create an adjacency matrix for people/country overlap'
+  desc 'Create a table of people/country overlap'
   task :person_country_adj_matrix => :environment do 
 
     output = [ ]
@@ -16,10 +16,18 @@ namespace :nlcommons do
       end
     end
 
+    dummy_country_id = 1000
+
     sna_people.each do |person|
       row = []
       sna_countries.each do |country_name|
-        row << (person.country_name == country_name) ? 1 : 0
+
+        if country_name.nil? or country_name == ''
+          country_name = dummy_country_id
+          dummy_country_id += 1
+        end
+
+        row << ((person.country_name == country_name) ? 1 : 0)
       end
       output << row.join("\t")
     end
