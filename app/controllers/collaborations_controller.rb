@@ -20,7 +20,7 @@ class CollaborationsController < ApplicationController
       if CollaboratorType.find_by_id(params[:collaborator_type_id]).nil?
         message = "No such collaborator type"
         
-      elsif not @node.author?(@person)
+      elsif (not @node.author?(@person)) and (not @person.administrator?)
         message = 'You cannot set collaborators for this model'
         
       else
