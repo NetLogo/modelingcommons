@@ -25,7 +25,7 @@
           <div class="collaborators">
             <h3>
               <span id="collaborator_count"><%= pluralize(@model.all_collaborations.size, 'collaborator') %></span>
-              <% if @model.people.include?(@person) %>
+              <% if @model.people.include?(@person) or (@person and @person.administrator?) %>
 		<span class="smaller" id="add-collaborator"><a href="#">Add a collaborator</a></span>
               <% end %>
             </h3>
