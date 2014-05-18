@@ -172,6 +172,21 @@ class UploadController < ApplicationController
         name_of_new_child = params[:new_version][:name_of_new_child]
         name_of_new_child = "Child of #{existing_node.name}" if name_of_new_child.blank?
 
+        # If the existing node is in a group, then make sure that the
+        # user is a member of the group -- otherwise, it cannot be
+        # modified by the forker!  If this is the case, then change
+        # the permissions...
+
+        if existing_node.group_id
+          group = Group.find(existing_node.group_id)
+
+          if not group.people.member?(@person)
+            existing_node.group_id = nil
+            existing_node.visibility_id = PermissionSetting.anyone
+            existing_node.changeability_id = PermissionSetting.owner
+          end
+        end
+
         child_node = Node.create(:parent_id => existing_node.id,
                                  :name => name_of_new_child,
                                  :group_id => existing_node.group_id,
