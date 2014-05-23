@@ -29,7 +29,7 @@ class PermissionSetting < ActiveRecord::Base
   end
 
   def self.owner
-    find_by_short_form('o')
+    find_by_short_form('u')
   end
 
   def self.group

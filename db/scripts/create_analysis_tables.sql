@@ -16,19 +16,37 @@ AS SELECT N.id,
      FROM nodes N ;
 
 
+CREATE OR REPLACE VIEW modeler_countries_view
+AS
+SELECT DISTINCT P.country_name
+  FROM People P, Versions V
+ WHERE V.person_id = P.id
+   AND P.country_name IS NOT NULL
+   AND P.country_name <> ''
+;
+
+CREATE OR REPLACE VIEW models_with_multiple_collaborators_view
+AS
+ SELECT count(*), node_id
+   FROM collaborations
+  GROUP BY node_id
+ HAVING count(*) > 1;
+
+CREATE OR REPLACE VIEW modeler_countries_with_multiple_collaborators_view
+AS
+SELECT DISTINCT P.country_name
+  FROM People P, Versions V
+ WHERE V.person_id = P.id
+   AND P.country_name IS NOT NULL
+   AND P.country_name <> ''
+   AND V.node_id IN (SELECT node_id 
+                       FROM models_with_multiple_collaborators_view)
+;
+
 DROP TABLE IF EXISTS model_collaborator_declared_countries;
 CREATE TABLE model_collaborator_declared_countries
 AS SELECT N.id as node_id,
-          (SELECT array(SELECT DISTINCT COALESCE(country_name, 
-
-                                    (SELECT
-                                             array_to_string(regexp_matches(IP.location, 'country_name: ([\w ]+)'), '')
-                                        FROM logged_actions LA, ip_locations IP
-                                       WHERE IP.ip_address = LA.ip_address
-                                         AND IP.location IS NOT NULL
-                                         AND LA.person_id = P.id
-                                    ORDER BY LA.id
-                                       LIMIT 1))
+          (SELECT array(SELECT DISTINCT country_name
                                    FROM Collaborations C, People P
                                   WHERE N.id = C.node_id
                                     AND C.person_id = P.id)) as countries,
@@ -53,7 +71,7 @@ AS SELECT N.id as node_id,
                                     AND IP.location IS NOT NULL)) as countries
     FROM Nodes N;
 
-CREATE OR REPLACE VIEW viewers_vs_collaborators_view AS
+CREATE OR REPLACE VIEW viewers_vs_collaborators_countries_view AS
 SELECT VIEWERS.node_id,
        VIEWERS.people as number_of_viewers,
        array_length(COLLABORATORS.people, 1) as number_of_collaborators,
@@ -107,7 +125,7 @@ ORDER BY number_of_countries;
 DROP TABLE IF EXISTS Person_Interests CASCADE;
 CREATE TABLE Person_Interests AS
 SELECT P.id as person_id,
-      (SELECT array(SELECT DISTINCT tn.tag_id 
+      (SELECT array(SELECT tn.tag_id 
          FROM model_views mv, tagged_nodes tn
         WHERE tn.node_id = mv.node_id
           AND mv.person_id = P.id)) as tag_ids,
@@ -131,7 +149,7 @@ SELECT DISTINCT C.node_id,
          WHERE PI.person_id IN (SELECT C2.person_id FROM collaborations C2 WHERE C2.node_id = C.node_id)))) as tag_ids
   FROM Collaborations C
  WHERE C.node_id IN (SELECT node_id 
-                       FROM viewers_vs_collaborators_view
+                       FROM viewers_vs_collaborators_countries_view
                       WHERE number_of_collaborators > 1);
 
 CREATE OR REPLACE VIEW Collaborators_Tag_Numbers
@@ -148,7 +166,7 @@ SELECT DISTINCT MV.node_id,
          WHERE PI.person_id IN (SELECT MV2.person_id FROM Model_Views MV2 WHERE MV.node_id = MV2.node_id)))) as tag_ids
   FROM Model_Views MV
  WHERE MV.node_id IN (SELECT node_id 
-                       FROM viewers_vs_collaborators_view
+                       FROM viewers_vs_collaborators_countries_view
                       WHERE number_of_collaborators > 1);
 
 CREATE OR REPLACE VIEW Viewers_Tag_Numbers
@@ -178,6 +196,8 @@ SELECT VTN.node_id,
  WHERE CTN.node_id = VTN.node_id;
 
 
+CREATE OR REPLACE VIEW collaborator_to_viewer_tag_ratio_view
+AS
 SELECT *, 
        collaborator_tag_length / number_of_collaborators::float as tag_collaborator_ratio, 
        viewer_tag_length / number_of_viewers::float as tag_viewer_ratio
@@ -222,6 +242,8 @@ SELECT MPCV.node_id,
  WHERE VCTSV.node_id = MPCV.node_id
 ;
 
+CREATE OR REPLACE VIEW collaborators_nodes_and_tags_view 
+AS
 WITH
 separate_collaborators_nodes_and_tags AS
   (SELECT node_id, 
@@ -555,6 +577,35 @@ SELECT * from postings_and_collaboration_vs_posting
 -- Roles in collaborations
 -- ------------------------------------------------------------
 
+CREATE OR REPLACE VIEW member_collaboration_roles_view
+AS
+SELECT node_id, person_id, collaborator_type_id, 'member'::text as source
+  FROM collaborations
+;
+
+CREATE OR REPLACE VIEW non_member_collaboration_roles_view
+AS
+SELECT node_id, NULL AS person_id, collaborator_type_id, 'nonmember'::text as source
+  FROM non_member_collaborations
+;
+
+CREATE OR REPLACE VIEW all_collaborations_view
+AS
+SELECT node_id, collaborator_type_id, source FROM member_collaboration_roles_view
+UNION
+SELECT node_id, collaborator_type_id, source FROM non_member_collaboration_roles_view
+;
+
+CREATE OR REPLACE VIEW multi_person_all_collaborations_view 
+AS
+  SELECT count(*) AS number_of_collaborators, 
+        node_id 
+   from all_collaborations_view
+GROUP BY node_id 
+  HAVING count(*) > 1;
+
+CREATE OR REPLACE VIEW number_of_models_with_different_roles
+AS
 WITH 
   member_collaboration_roles AS
   (SELECT node_id, collaborator_type_id, 'member'::text as source
@@ -591,29 +642,11 @@ WITH
   GROUP BY collaborators
 ;
 
-CREATE OR REPLACE VIEW authors_per_
-
-WITH authors_per_model AS
-
-  (SELECT MPCV.number_of_collaborators, MPCV.node_id,
-   (SELECT count(distinct person_id) 
-      FROM versions V 
-     WHERE V.node_id = MPCV.node_id) AS number_of_authors
-   FROM multi_person_collaborations_view MPCV)
-
-SELECT COUNT(*) FROM authors_per_model ;
-
-
-CREATE VIEW forked_nodes_view 
-AS SELECT N.id, N.name,
-     (select array (select distinct V.person_id from versions V where V.node_id = N.id)) as child_authors,
-      N.parent_id,
-     (select array (select distinct V.person_id from versions V where V.node_id = N.parent_id)) as parent_authors
- FROM Nodes N
- WHERE N.group_id <> 2
- AND N.parent_id is not null;
+CREATE OR REPLACE VIEW modeler_country_number_distribution_view 
+AS 
+SELECT COUNT(*), number_of_collaborator_countries
+  FROM viewers_vs_collaborators_countries_view
+GROUP BY number_of_collaborator_countries
+ORDER BY COUNT(*);
 
 COMMIT;
-
-
-
