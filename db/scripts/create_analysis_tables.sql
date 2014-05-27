@@ -592,7 +592,7 @@ SELECT node_id, NULL AS person_id, collaborator_type_id, 'nonmember'::text as so
 CREATE OR REPLACE VIEW all_collaborations_view
 AS
 SELECT node_id, collaborator_type_id, source FROM member_collaboration_roles_view
-UNION
+UNION ALL
 SELECT node_id, collaborator_type_id, source FROM non_member_collaboration_roles_view
 ;
 

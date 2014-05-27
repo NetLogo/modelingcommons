@@ -21,7 +21,7 @@ namespace :nlcommons do
       tag_ids = one_person_interest['tag_ids'].split(',').map {|i| i.to_i}.sort
       node_ids = one_person_interest['node_ids'].split(',').map {|i| i.to_i}.sort
 
-      puts "[#{index}] Person ID '#{person_id}' - '#{person_id.class}', tag_ids '#{tag_ids.size}', node_ids '#{node_ids.size}'"
+      STDERR.puts "[#{index}] Person ID '#{person_id}' - '#{person_id.class}', tag_ids '#{tag_ids.size}', node_ids '#{node_ids.size}'"
 
       tag_counts = [ ]
 
@@ -38,11 +38,11 @@ namespace :nlcommons do
     individual_interests.each do |person1_id, person1_tag_ids|
       individual_interests.each do |person2_id, person2_tag_ids|
 
-        puts "Checking '#{person1_id.inspect}' and '#{person2_id.inspect}'"
+        STDERR.puts "Checking '#{person1_id.inspect}' and '#{person2_id.inspect}'"
 
         if person1_id == person2_id
           shared_interests[person1_id][person2_id] = 1
-          puts "\tPerson '#{person1_id}' with himself..."
+          STDERR.puts "\tPerson '#{person1_id}' with himself..."
         end
 
         # If we have already done this pair (person1_id / person2_id), then skip it
@@ -54,11 +54,11 @@ namespace :nlcommons do
                                                     SELECT node_id FROM Collaborations WHERE person_id = ?",                                                   person1_id,
                                                    person2_id]).map {|n| n.node_id.to_i}
 
-        puts "\tPerson '#{person1_id}' and '#{person2_id}' collaborated on: '#{collaboration_node_ids.inspect}'"
-        puts "\tPerson1 has '#{person1_tag_ids.size}' interests"
-        puts "\tPerson2 has '#{person2_tag_ids.size}' interests"
+        STDERR.puts "\tPerson '#{person1_id}' and '#{person2_id}' collaborated on: '#{collaboration_node_ids.inspect}'"
+        STDERR.puts "\tPerson1 has '#{person1_tag_ids.size}' interests"
+        STDERR.puts "\tPerson2 has '#{person2_tag_ids.size}' interests"
 
-        puts "\tRemoving tags from each of their collaborations"
+        STDERR.puts "\tRemoving tags from each of their collaborations"
         Node.find(collaboration_node_ids).each do |n|
 
           tag_counts = [ ]
@@ -70,27 +70,27 @@ namespace :nlcommons do
             "#{tag_id}-#{tag_counts[tag_id]}"
           end
 
-          puts "\t\tCollaboration tag ids for node '#{n.id}': '#{collaboration_tag_ids.inspect}'"
+          STDERR.puts "\t\tCollaboration tag ids for node '#{n.id}': '#{collaboration_tag_ids.inspect}'"
 
           person1_tag_ids = person1_tag_ids - collaboration_tag_ids
           person2_tag_ids = person2_tag_ids - collaboration_tag_ids
         end
 
-        puts "\tPerson1 now has '#{person1_tag_ids.size}' interests"
-        puts "\tPerson2 now has '#{person2_tag_ids.size}' interests"
+        STDERR.puts "\tPerson1 now has '#{person1_tag_ids.size}' interests"
+        STDERR.puts "\tPerson2 now has '#{person2_tag_ids.size}' interests"
 
         intersection = person1_tag_ids & person2_tag_ids
-        puts "\tIntersection has '#{intersection.size}' elements"
+        STDERR.puts "\tIntersection has '#{intersection.size}' elements"
         union = person1_tag_ids | person2_tag_ids
 
-        puts "\tUnion has '#{union.size}' elements"
+        STDERR.puts "\tUnion has '#{union.size}' elements"
 
         jaccard_similarity = (intersection.size.to_f / union.size)
         binary_jaccard_similarity = (jaccard_similarity >= threshhold) ? 1 : 0
         shared_interests[person1_id][person2_id] = binary_jaccard_similarity
         shared_interests[person2_id][person1_id] = binary_jaccard_similarity
 
-        puts "\tJaccard similarity for is '#{jaccard_similarity}', binary version is '#{binary_jaccard_similarity}'"
+        STDERR.puts "\tJaccard similarity for is '#{jaccard_similarity}', binary version is '#{binary_jaccard_similarity}'"
 
       end
     end
