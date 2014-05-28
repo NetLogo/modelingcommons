@@ -54,6 +54,7 @@ class Node < ActiveRecord::Base
     sna_nodes = Node.all.
       reject {|n| n.authors.size == 1 and n.authors.first == uri }.
       reject {|n| n.group_id == 2}.
+      reject {|n| n.created_at < 3.years.ago}.
       sort_by {|n| n.id}
   end
 
