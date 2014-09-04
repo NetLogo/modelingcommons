@@ -1,0 +1,46 @@
+Estimation
+Observed graph statistics:
+0.00	0.00	0.00	
+Phase1 simulation:
+Mean statistics:
+0.00	0.00	0.00	
+Degenerate ergm!
+Estimation
+Observed graph statistics:
+537.00	870.50	32.50	
+Phase1 simulation:
+Mean statistics:
+547.69	537.19	231.19	
+Phase2 estimation
+Subphase 1 started with a = 0.0100
+Parameters after subphase 1:
+-5.9288	0.1002	0.0357	
+Subphase 2 started with a = 0.0100
+Parameters after subphase 2:
+-5.9072	0.1069	-0.0144	
+Subphase 3 started with a = 0.0050
+Parameters after subphase 3:
+-5.8787	0.1086	-0.0465	
+Subphase 4 started with a = 0.0025
+Parameters after subphase 4:
+-5.8650	0.1132	-0.0623	
+Subphase 5 started with a = 0.0013
+Parameters after subphase 5:
+-5.8673	0.1162	-0.0765	
+Phase3 simulation
+Number of steps: 500 
+nNumber of iteration in steps: 16050 
+Mean statistics:
+538.8000	500.5700	263.9805	
+Estimation results
+NOTE: t-statistics = (observation - sample mean)/standard error
+NOTE: SACF (sample autocorrelation)
+Effects	Lambda	Parameter	Stderr	t-ratio	SACF
+XEdge	2.0000	-5.8673	0.097	-0.075	0.910	*
+XACA	2.0000	0.1162	0.036	7.701	0.871	
+XACB	2.0000	-0.0765	0.068	-8.316	0.880	
+
+Covariance matrix
+0.0095	-0.0021	-0.0045	
+-0.0021	0.0013	0.0000	
+-0.0045	0.0000	0.0046	

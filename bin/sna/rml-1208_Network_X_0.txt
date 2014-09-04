@@ -1,0 +1,1393 @@
+*vertices 842 333
+1 "" box ic Blue bc Black
+2 "" box ic Blue bc Black
+3 "" box ic Blue bc Black
+4 "" box ic Blue bc Black
+5 "" box ic Blue bc Black
+6 "" box ic Blue bc Black
+7 "" box ic Blue bc Black
+8 "" box ic Blue bc Black
+9 "" box ic Blue bc Black
+10 "" box ic Blue bc Black
+11 "" box ic Blue bc Black
+12 "" box ic Blue bc Black
+13 "" box ic Blue bc Black
+14 "" box ic Blue bc Black
+15 "" box ic Blue bc Black
+16 "" box ic Blue bc Black
+17 "" box ic Blue bc Black
+18 "" box ic Blue bc Black
+19 "" box ic Blue bc Black
+20 "" box ic Blue bc Black
+21 "" box ic Blue bc Black
+22 "" box ic Blue bc Black
+23 "" box ic Blue bc Black
+24 "" box ic Blue bc Black
+25 "" box ic Blue bc Black
+26 "" box ic Blue bc Black
+27 "" box ic Blue bc Black
+28 "" box ic Blue bc Black
+29 "" box ic Blue bc Black
+30 "" box ic Blue bc Black
+31 "" box ic Blue bc Black
+32 "" box ic Blue bc Black
+33 "" box ic Blue bc Black
+34 "" box ic Blue bc Black
+35 "" box ic Blue bc Black
+36 "" box ic Blue bc Black
+37 "" box ic Blue bc Black
+38 "" box ic Blue bc Black
+39 "" box ic Blue bc Black
+40 "" box ic Blue bc Black
+41 "" box ic Blue bc Black
+42 "" box ic Blue bc Black
+43 "" box ic Blue bc Black
+44 "" box ic Blue bc Black
+45 "" box ic Blue bc Black
+46 "" box ic Blue bc Black
+47 "" box ic Blue bc Black
+48 "" box ic Blue bc Black
+49 "" box ic Blue bc Black
+50 "" box ic Blue bc Black
+51 "" box ic Blue bc Black
+52 "" box ic Blue bc Black
+53 "" box ic Blue bc Black
+54 "" box ic Blue bc Black
+55 "" box ic Blue bc Black
+56 "" box ic Blue bc Black
+57 "" box ic Blue bc Black
+58 "" box ic Blue bc Black
+59 "" box ic Blue bc Black
+60 "" box ic Blue bc Black
+61 "" box ic Blue bc Black
+62 "" box ic Blue bc Black
+63 "" box ic Blue bc Black
+64 "" box ic Blue bc Black
+65 "" box ic Blue bc Black
+66 "" box ic Blue bc Black
+67 "" box ic Blue bc Black
+68 "" box ic Blue bc Black
+69 "" box ic Blue bc Black
+70 "" box ic Blue bc Black
+71 "" box ic Blue bc Black
+72 "" box ic Blue bc Black
+73 "" box ic Blue bc Black
+74 "" box ic Blue bc Black
+75 "" box ic Blue bc Black
+76 "" box ic Blue bc Black
+77 "" box ic Blue bc Black
+78 "" box ic Blue bc Black
+79 "" box ic Blue bc Black
+80 "" box ic Blue bc Black
+81 "" box ic Blue bc Black
+82 "" box ic Blue bc Black
+83 "" box ic Blue bc Black
+84 "" box ic Blue bc Black
+85 "" box ic Blue bc Black
+86 "" box ic Blue bc Black
+87 "" box ic Blue bc Black
+88 "" box ic Blue bc Black
+89 "" box ic Blue bc Black
+90 "" box ic Blue bc Black
+91 "" box ic Blue bc Black
+92 "" box ic Blue bc Black
+93 "" box ic Blue bc Black
+94 "" box ic Blue bc Black
+95 "" box ic Blue bc Black
+96 "" box ic Blue bc Black
+97 "" box ic Blue bc Black
+98 "" box ic Blue bc Black
+99 "" box ic Blue bc Black
+100 "" box ic Blue bc Black
+101 "" box ic Blue bc Black
+102 "" box ic Blue bc Black
+103 "" box ic Blue bc Black
+104 "" box ic Blue bc Black
+105 "" box ic Blue bc Black
+106 "" box ic Blue bc Black
+107 "" box ic Blue bc Black
+108 "" box ic Blue bc Black
+109 "" box ic Blue bc Black
+110 "" box ic Blue bc Black
+111 "" box ic Blue bc Black
+112 "" box ic Blue bc Black
+113 "" box ic Blue bc Black
+114 "" box ic Blue bc Black
+115 "" box ic Blue bc Black
+116 "" box ic Blue bc Black
+117 "" box ic Blue bc Black
+118 "" box ic Blue bc Black
+119 "" box ic Blue bc Black
+120 "" box ic Blue bc Black
+121 "" box ic Blue bc Black
+122 "" box ic Blue bc Black
+123 "" box ic Blue bc Black
+124 "" box ic Blue bc Black
+125 "" box ic Blue bc Black
+126 "" box ic Blue bc Black
+127 "" box ic Blue bc Black
+128 "" box ic Blue bc Black
+129 "" box ic Blue bc Black
+130 "" box ic Blue bc Black
+131 "" box ic Blue bc Black
+132 "" box ic Blue bc Black
+133 "" box ic Blue bc Black
+134 "" box ic Blue bc Black
+135 "" box ic Blue bc Black
+136 "" box ic Blue bc Black
+137 "" box ic Blue bc Black
+138 "" box ic Blue bc Black
+139 "" box ic Blue bc Black
+140 "" box ic Blue bc Black
+141 "" box ic Blue bc Black
+142 "" box ic Blue bc Black
+143 "" box ic Blue bc Black
+144 "" box ic Blue bc Black
+145 "" box ic Blue bc Black
+146 "" box ic Blue bc Black
+147 "" box ic Blue bc Black
+148 "" box ic Blue bc Black
+149 "" box ic Blue bc Black
+150 "" box ic Blue bc Black
+151 "" box ic Blue bc Black
+152 "" box ic Blue bc Black
+153 "" box ic Blue bc Black
+154 "" box ic Blue bc Black
+155 "" box ic Blue bc Black
+156 "" box ic Blue bc Black
+157 "" box ic Blue bc Black
+158 "" box ic Blue bc Black
+159 "" box ic Blue bc Black
+160 "" box ic Blue bc Black
+161 "" box ic Blue bc Black
+162 "" box ic Blue bc Black
+163 "" box ic Blue bc Black
+164 "" box ic Blue bc Black
+165 "" box ic Blue bc Black
+166 "" box ic Blue bc Black
+167 "" box ic Blue bc Black
+168 "" box ic Blue bc Black
+169 "" box ic Blue bc Black
+170 "" box ic Blue bc Black
+171 "" box ic Blue bc Black
+172 "" box ic Blue bc Black
+173 "" box ic Blue bc Black
+174 "" box ic Blue bc Black
+175 "" box ic Blue bc Black
+176 "" box ic Blue bc Black
+177 "" box ic Blue bc Black
+178 "" box ic Blue bc Black
+179 "" box ic Blue bc Black
+180 "" box ic Blue bc Black
+181 "" box ic Blue bc Black
+182 "" box ic Blue bc Black
+183 "" box ic Blue bc Black
+184 "" box ic Blue bc Black
+185 "" box ic Blue bc Black
+186 "" box ic Blue bc Black
+187 "" box ic Blue bc Black
+188 "" box ic Blue bc Black
+189 "" box ic Blue bc Black
+190 "" box ic Blue bc Black
+191 "" box ic Blue bc Black
+192 "" box ic Blue bc Black
+193 "" box ic Blue bc Black
+194 "" box ic Blue bc Black
+195 "" box ic Blue bc Black
+196 "" box ic Blue bc Black
+197 "" box ic Blue bc Black
+198 "" box ic Blue bc Black
+199 "" box ic Blue bc Black
+200 "" box ic Blue bc Black
+201 "" box ic Blue bc Black
+202 "" box ic Blue bc Black
+203 "" box ic Blue bc Black
+204 "" box ic Blue bc Black
+205 "" box ic Blue bc Black
+206 "" box ic Blue bc Black
+207 "" box ic Blue bc Black
+208 "" box ic Blue bc Black
+209 "" box ic Blue bc Black
+210 "" box ic Blue bc Black
+211 "" box ic Blue bc Black
+212 "" box ic Blue bc Black
+213 "" box ic Blue bc Black
+214 "" box ic Blue bc Black
+215 "" box ic Blue bc Black
+216 "" box ic Blue bc Black
+217 "" box ic Blue bc Black
+218 "" box ic Blue bc Black
+219 "" box ic Blue bc Black
+220 "" box ic Blue bc Black
+221 "" box ic Blue bc Black
+222 "" box ic Blue bc Black
+223 "" box ic Blue bc Black
+224 "" box ic Blue bc Black
+225 "" box ic Blue bc Black
+226 "" box ic Blue bc Black
+227 "" box ic Blue bc Black
+228 "" box ic Blue bc Black
+229 "" box ic Blue bc Black
+230 "" box ic Blue bc Black
+231 "" box ic Blue bc Black
+232 "" box ic Blue bc Black
+233 "" box ic Blue bc Black
+234 "" box ic Blue bc Black
+235 "" box ic Blue bc Black
+236 "" box ic Blue bc Black
+237 "" box ic Blue bc Black
+238 "" box ic Blue bc Black
+239 "" box ic Blue bc Black
+240 "" box ic Blue bc Black
+241 "" box ic Blue bc Black
+242 "" box ic Blue bc Black
+243 "" box ic Blue bc Black
+244 "" box ic Blue bc Black
+245 "" box ic Blue bc Black
+246 "" box ic Blue bc Black
+247 "" box ic Blue bc Black
+248 "" box ic Blue bc Black
+249 "" box ic Blue bc Black
+250 "" box ic Blue bc Black
+251 "" box ic Blue bc Black
+252 "" box ic Blue bc Black
+253 "" box ic Blue bc Black
+254 "" box ic Blue bc Black
+255 "" box ic Blue bc Black
+256 "" box ic Blue bc Black
+257 "" box ic Blue bc Black
+258 "" box ic Blue bc Black
+259 "" box ic Blue bc Black
+260 "" box ic Blue bc Black
+261 "" box ic Blue bc Black
+262 "" box ic Blue bc Black
+263 "" box ic Blue bc Black
+264 "" box ic Blue bc Black
+265 "" box ic Blue bc Black
+266 "" box ic Blue bc Black
+267 "" box ic Blue bc Black
+268 "" box ic Blue bc Black
+269 "" box ic Blue bc Black
+270 "" box ic Blue bc Black
+271 "" box ic Blue bc Black
+272 "" box ic Blue bc Black
+273 "" box ic Blue bc Black
+274 "" box ic Blue bc Black
+275 "" box ic Blue bc Black
+276 "" box ic Blue bc Black
+277 "" box ic Blue bc Black
+278 "" box ic Blue bc Black
+279 "" box ic Blue bc Black
+280 "" box ic Blue bc Black
+281 "" box ic Blue bc Black
+282 "" box ic Blue bc Black
+283 "" box ic Blue bc Black
+284 "" box ic Blue bc Black
+285 "" box ic Blue bc Black
+286 "" box ic Blue bc Black
+287 "" box ic Blue bc Black
+288 "" box ic Blue bc Black
+289 "" box ic Blue bc Black
+290 "" box ic Blue bc Black
+291 "" box ic Blue bc Black
+292 "" box ic Blue bc Black
+293 "" box ic Blue bc Black
+294 "" box ic Blue bc Black
+295 "" box ic Blue bc Black
+296 "" box ic Blue bc Black
+297 "" box ic Blue bc Black
+298 "" box ic Blue bc Black
+299 "" box ic Blue bc Black
+300 "" box ic Blue bc Black
+301 "" box ic Blue bc Black
+302 "" box ic Blue bc Black
+303 "" box ic Blue bc Black
+304 "" box ic Blue bc Black
+305 "" box ic Blue bc Black
+306 "" box ic Blue bc Black
+307 "" box ic Blue bc Black
+308 "" box ic Blue bc Black
+309 "" box ic Blue bc Black
+310 "" box ic Blue bc Black
+311 "" box ic Blue bc Black
+312 "" box ic Blue bc Black
+313 "" box ic Blue bc Black
+314 "" box ic Blue bc Black
+315 "" box ic Blue bc Black
+316 "" box ic Blue bc Black
+317 "" box ic Blue bc Black
+318 "" box ic Blue bc Black
+319 "" box ic Blue bc Black
+320 "" box ic Blue bc Black
+321 "" box ic Blue bc Black
+322 "" box ic Blue bc Black
+323 "" box ic Blue bc Black
+324 "" box ic Blue bc Black
+325 "" box ic Blue bc Black
+326 "" box ic Blue bc Black
+327 "" box ic Blue bc Black
+328 "" box ic Blue bc Black
+329 "" box ic Blue bc Black
+330 "" box ic Blue bc Black
+331 "" box ic Blue bc Black
+332 "" box ic Blue bc Black
+333 "" box ic Blue bc Black
+334 "" ellipse ic Red bc Black
+335 "" ellipse ic Red bc Black
+336 "" ellipse ic Red bc Black
+337 "" ellipse ic Red bc Black
+338 "" ellipse ic Red bc Black
+339 "" ellipse ic Red bc Black
+340 "" ellipse ic Red bc Black
+341 "" ellipse ic Red bc Black
+342 "" ellipse ic Red bc Black
+343 "" ellipse ic Red bc Black
+344 "" ellipse ic Red bc Black
+345 "" ellipse ic Red bc Black
+346 "" ellipse ic Red bc Black
+347 "" ellipse ic Red bc Black
+348 "" ellipse ic Red bc Black
+349 "" ellipse ic Red bc Black
+350 "" ellipse ic Red bc Black
+351 "" ellipse ic Red bc Black
+352 "" ellipse ic Red bc Black
+353 "" ellipse ic Red bc Black
+354 "" ellipse ic Red bc Black
+355 "" ellipse ic Red bc Black
+356 "" ellipse ic Red bc Black
+357 "" ellipse ic Red bc Black
+358 "" ellipse ic Red bc Black
+359 "" ellipse ic Red bc Black
+360 "" ellipse ic Red bc Black
+361 "" ellipse ic Red bc Black
+362 "" ellipse ic Red bc Black
+363 "" ellipse ic Red bc Black
+364 "" ellipse ic Red bc Black
+365 "" ellipse ic Red bc Black
+366 "" ellipse ic Red bc Black
+367 "" ellipse ic Red bc Black
+368 "" ellipse ic Red bc Black
+369 "" ellipse ic Red bc Black
+370 "" ellipse ic Red bc Black
+371 "" ellipse ic Red bc Black
+372 "" ellipse ic Red bc Black
+373 "" ellipse ic Red bc Black
+374 "" ellipse ic Red bc Black
+375 "" ellipse ic Red bc Black
+376 "" ellipse ic Red bc Black
+377 "" ellipse ic Red bc Black
+378 "" ellipse ic Red bc Black
+379 "" ellipse ic Red bc Black
+380 "" ellipse ic Red bc Black
+381 "" ellipse ic Red bc Black
+382 "" ellipse ic Red bc Black
+383 "" ellipse ic Red bc Black
+384 "" ellipse ic Red bc Black
+385 "" ellipse ic Red bc Black
+386 "" ellipse ic Red bc Black
+387 "" ellipse ic Red bc Black
+388 "" ellipse ic Red bc Black
+389 "" ellipse ic Red bc Black
+390 "" ellipse ic Red bc Black
+391 "" ellipse ic Red bc Black
+392 "" ellipse ic Red bc Black
+393 "" ellipse ic Red bc Black
+394 "" ellipse ic Red bc Black
+395 "" ellipse ic Red bc Black
+396 "" ellipse ic Red bc Black
+397 "" ellipse ic Red bc Black
+398 "" ellipse ic Red bc Black
+399 "" ellipse ic Red bc Black
+400 "" ellipse ic Red bc Black
+401 "" ellipse ic Red bc Black
+402 "" ellipse ic Red bc Black
+403 "" ellipse ic Red bc Black
+404 "" ellipse ic Red bc Black
+405 "" ellipse ic Red bc Black
+406 "" ellipse ic Red bc Black
+407 "" ellipse ic Red bc Black
+408 "" ellipse ic Red bc Black
+409 "" ellipse ic Red bc Black
+410 "" ellipse ic Red bc Black
+411 "" ellipse ic Red bc Black
+412 "" ellipse ic Red bc Black
+413 "" ellipse ic Red bc Black
+414 "" ellipse ic Red bc Black
+415 "" ellipse ic Red bc Black
+416 "" ellipse ic Red bc Black
+417 "" ellipse ic Red bc Black
+418 "" ellipse ic Red bc Black
+419 "" ellipse ic Red bc Black
+420 "" ellipse ic Red bc Black
+421 "" ellipse ic Red bc Black
+422 "" ellipse ic Red bc Black
+423 "" ellipse ic Red bc Black
+424 "" ellipse ic Red bc Black
+425 "" ellipse ic Red bc Black
+426 "" ellipse ic Red bc Black
+427 "" ellipse ic Red bc Black
+428 "" ellipse ic Red bc Black
+429 "" ellipse ic Red bc Black
+430 "" ellipse ic Red bc Black
+431 "" ellipse ic Red bc Black
+432 "" ellipse ic Red bc Black
+433 "" ellipse ic Red bc Black
+434 "" ellipse ic Red bc Black
+435 "" ellipse ic Red bc Black
+436 "" ellipse ic Red bc Black
+437 "" ellipse ic Red bc Black
+438 "" ellipse ic Red bc Black
+439 "" ellipse ic Red bc Black
+440 "" ellipse ic Red bc Black
+441 "" ellipse ic Red bc Black
+442 "" ellipse ic Red bc Black
+443 "" ellipse ic Red bc Black
+444 "" ellipse ic Red bc Black
+445 "" ellipse ic Red bc Black
+446 "" ellipse ic Red bc Black
+447 "" ellipse ic Red bc Black
+448 "" ellipse ic Red bc Black
+449 "" ellipse ic Red bc Black
+450 "" ellipse ic Red bc Black
+451 "" ellipse ic Red bc Black
+452 "" ellipse ic Red bc Black
+453 "" ellipse ic Red bc Black
+454 "" ellipse ic Red bc Black
+455 "" ellipse ic Red bc Black
+456 "" ellipse ic Red bc Black
+457 "" ellipse ic Red bc Black
+458 "" ellipse ic Red bc Black
+459 "" ellipse ic Red bc Black
+460 "" ellipse ic Red bc Black
+461 "" ellipse ic Red bc Black
+462 "" ellipse ic Red bc Black
+463 "" ellipse ic Red bc Black
+464 "" ellipse ic Red bc Black
+465 "" ellipse ic Red bc Black
+466 "" ellipse ic Red bc Black
+467 "" ellipse ic Red bc Black
+468 "" ellipse ic Red bc Black
+469 "" ellipse ic Red bc Black
+470 "" ellipse ic Red bc Black
+471 "" ellipse ic Red bc Black
+472 "" ellipse ic Red bc Black
+473 "" ellipse ic Red bc Black
+474 "" ellipse ic Red bc Black
+475 "" ellipse ic Red bc Black
+476 "" ellipse ic Red bc Black
+477 "" ellipse ic Red bc Black
+478 "" ellipse ic Red bc Black
+479 "" ellipse ic Red bc Black
+480 "" ellipse ic Red bc Black
+481 "" ellipse ic Red bc Black
+482 "" ellipse ic Red bc Black
+483 "" ellipse ic Red bc Black
+484 "" ellipse ic Red bc Black
+485 "" ellipse ic Red bc Black
+486 "" ellipse ic Red bc Black
+487 "" ellipse ic Red bc Black
+488 "" ellipse ic Red bc Black
+489 "" ellipse ic Red bc Black
+490 "" ellipse ic Red bc Black
+491 "" ellipse ic Red bc Black
+492 "" ellipse ic Red bc Black
+493 "" ellipse ic Red bc Black
+494 "" ellipse ic Red bc Black
+495 "" ellipse ic Red bc Black
+496 "" ellipse ic Red bc Black
+497 "" ellipse ic Red bc Black
+498 "" ellipse ic Red bc Black
+499 "" ellipse ic Red bc Black
+500 "" ellipse ic Red bc Black
+501 "" ellipse ic Red bc Black
+502 "" ellipse ic Red bc Black
+503 "" ellipse ic Red bc Black
+504 "" ellipse ic Red bc Black
+505 "" ellipse ic Red bc Black
+506 "" ellipse ic Red bc Black
+507 "" ellipse ic Red bc Black
+508 "" ellipse ic Red bc Black
+509 "" ellipse ic Red bc Black
+510 "" ellipse ic Red bc Black
+511 "" ellipse ic Red bc Black
+512 "" ellipse ic Red bc Black
+513 "" ellipse ic Red bc Black
+514 "" ellipse ic Red bc Black
+515 "" ellipse ic Red bc Black
+516 "" ellipse ic Red bc Black
+517 "" ellipse ic Red bc Black
+518 "" ellipse ic Red bc Black
+519 "" ellipse ic Red bc Black
+520 "" ellipse ic Red bc Black
+521 "" ellipse ic Red bc Black
+522 "" ellipse ic Red bc Black
+523 "" ellipse ic Red bc Black
+524 "" ellipse ic Red bc Black
+525 "" ellipse ic Red bc Black
+526 "" ellipse ic Red bc Black
+527 "" ellipse ic Red bc Black
+528 "" ellipse ic Red bc Black
+529 "" ellipse ic Red bc Black
+530 "" ellipse ic Red bc Black
+531 "" ellipse ic Red bc Black
+532 "" ellipse ic Red bc Black
+533 "" ellipse ic Red bc Black
+534 "" ellipse ic Red bc Black
+535 "" ellipse ic Red bc Black
+536 "" ellipse ic Red bc Black
+537 "" ellipse ic Red bc Black
+538 "" ellipse ic Red bc Black
+539 "" ellipse ic Red bc Black
+540 "" ellipse ic Red bc Black
+541 "" ellipse ic Red bc Black
+542 "" ellipse ic Red bc Black
+543 "" ellipse ic Red bc Black
+544 "" ellipse ic Red bc Black
+545 "" ellipse ic Red bc Black
+546 "" ellipse ic Red bc Black
+547 "" ellipse ic Red bc Black
+548 "" ellipse ic Red bc Black
+549 "" ellipse ic Red bc Black
+550 "" ellipse ic Red bc Black
+551 "" ellipse ic Red bc Black
+552 "" ellipse ic Red bc Black
+553 "" ellipse ic Red bc Black
+554 "" ellipse ic Red bc Black
+555 "" ellipse ic Red bc Black
+556 "" ellipse ic Red bc Black
+557 "" ellipse ic Red bc Black
+558 "" ellipse ic Red bc Black
+559 "" ellipse ic Red bc Black
+560 "" ellipse ic Red bc Black
+561 "" ellipse ic Red bc Black
+562 "" ellipse ic Red bc Black
+563 "" ellipse ic Red bc Black
+564 "" ellipse ic Red bc Black
+565 "" ellipse ic Red bc Black
+566 "" ellipse ic Red bc Black
+567 "" ellipse ic Red bc Black
+568 "" ellipse ic Red bc Black
+569 "" ellipse ic Red bc Black
+570 "" ellipse ic Red bc Black
+571 "" ellipse ic Red bc Black
+572 "" ellipse ic Red bc Black
+573 "" ellipse ic Red bc Black
+574 "" ellipse ic Red bc Black
+575 "" ellipse ic Red bc Black
+576 "" ellipse ic Red bc Black
+577 "" ellipse ic Red bc Black
+578 "" ellipse ic Red bc Black
+579 "" ellipse ic Red bc Black
+580 "" ellipse ic Red bc Black
+581 "" ellipse ic Red bc Black
+582 "" ellipse ic Red bc Black
+583 "" ellipse ic Red bc Black
+584 "" ellipse ic Red bc Black
+585 "" ellipse ic Red bc Black
+586 "" ellipse ic Red bc Black
+587 "" ellipse ic Red bc Black
+588 "" ellipse ic Red bc Black
+589 "" ellipse ic Red bc Black
+590 "" ellipse ic Red bc Black
+591 "" ellipse ic Red bc Black
+592 "" ellipse ic Red bc Black
+593 "" ellipse ic Red bc Black
+594 "" ellipse ic Red bc Black
+595 "" ellipse ic Red bc Black
+596 "" ellipse ic Red bc Black
+597 "" ellipse ic Red bc Black
+598 "" ellipse ic Red bc Black
+599 "" ellipse ic Red bc Black
+600 "" ellipse ic Red bc Black
+601 "" ellipse ic Red bc Black
+602 "" ellipse ic Red bc Black
+603 "" ellipse ic Red bc Black
+604 "" ellipse ic Red bc Black
+605 "" ellipse ic Red bc Black
+606 "" ellipse ic Red bc Black
+607 "" ellipse ic Red bc Black
+608 "" ellipse ic Red bc Black
+609 "" ellipse ic Red bc Black
+610 "" ellipse ic Red bc Black
+611 "" ellipse ic Red bc Black
+612 "" ellipse ic Red bc Black
+613 "" ellipse ic Red bc Black
+614 "" ellipse ic Red bc Black
+615 "" ellipse ic Red bc Black
+616 "" ellipse ic Red bc Black
+617 "" ellipse ic Red bc Black
+618 "" ellipse ic Red bc Black
+619 "" ellipse ic Red bc Black
+620 "" ellipse ic Red bc Black
+621 "" ellipse ic Red bc Black
+622 "" ellipse ic Red bc Black
+623 "" ellipse ic Red bc Black
+624 "" ellipse ic Red bc Black
+625 "" ellipse ic Red bc Black
+626 "" ellipse ic Red bc Black
+627 "" ellipse ic Red bc Black
+628 "" ellipse ic Red bc Black
+629 "" ellipse ic Red bc Black
+630 "" ellipse ic Red bc Black
+631 "" ellipse ic Red bc Black
+632 "" ellipse ic Red bc Black
+633 "" ellipse ic Red bc Black
+634 "" ellipse ic Red bc Black
+635 "" ellipse ic Red bc Black
+636 "" ellipse ic Red bc Black
+637 "" ellipse ic Red bc Black
+638 "" ellipse ic Red bc Black
+639 "" ellipse ic Red bc Black
+640 "" ellipse ic Red bc Black
+641 "" ellipse ic Red bc Black
+642 "" ellipse ic Red bc Black
+643 "" ellipse ic Red bc Black
+644 "" ellipse ic Red bc Black
+645 "" ellipse ic Red bc Black
+646 "" ellipse ic Red bc Black
+647 "" ellipse ic Red bc Black
+648 "" ellipse ic Red bc Black
+649 "" ellipse ic Red bc Black
+650 "" ellipse ic Red bc Black
+651 "" ellipse ic Red bc Black
+652 "" ellipse ic Red bc Black
+653 "" ellipse ic Red bc Black
+654 "" ellipse ic Red bc Black
+655 "" ellipse ic Red bc Black
+656 "" ellipse ic Red bc Black
+657 "" ellipse ic Red bc Black
+658 "" ellipse ic Red bc Black
+659 "" ellipse ic Red bc Black
+660 "" ellipse ic Red bc Black
+661 "" ellipse ic Red bc Black
+662 "" ellipse ic Red bc Black
+663 "" ellipse ic Red bc Black
+664 "" ellipse ic Red bc Black
+665 "" ellipse ic Red bc Black
+666 "" ellipse ic Red bc Black
+667 "" ellipse ic Red bc Black
+668 "" ellipse ic Red bc Black
+669 "" ellipse ic Red bc Black
+670 "" ellipse ic Red bc Black
+671 "" ellipse ic Red bc Black
+672 "" ellipse ic Red bc Black
+673 "" ellipse ic Red bc Black
+674 "" ellipse ic Red bc Black
+675 "" ellipse ic Red bc Black
+676 "" ellipse ic Red bc Black
+677 "" ellipse ic Red bc Black
+678 "" ellipse ic Red bc Black
+679 "" ellipse ic Red bc Black
+680 "" ellipse ic Red bc Black
+681 "" ellipse ic Red bc Black
+682 "" ellipse ic Red bc Black
+683 "" ellipse ic Red bc Black
+684 "" ellipse ic Red bc Black
+685 "" ellipse ic Red bc Black
+686 "" ellipse ic Red bc Black
+687 "" ellipse ic Red bc Black
+688 "" ellipse ic Red bc Black
+689 "" ellipse ic Red bc Black
+690 "" ellipse ic Red bc Black
+691 "" ellipse ic Red bc Black
+692 "" ellipse ic Red bc Black
+693 "" ellipse ic Red bc Black
+694 "" ellipse ic Red bc Black
+695 "" ellipse ic Red bc Black
+696 "" ellipse ic Red bc Black
+697 "" ellipse ic Red bc Black
+698 "" ellipse ic Red bc Black
+699 "" ellipse ic Red bc Black
+700 "" ellipse ic Red bc Black
+701 "" ellipse ic Red bc Black
+702 "" ellipse ic Red bc Black
+703 "" ellipse ic Red bc Black
+704 "" ellipse ic Red bc Black
+705 "" ellipse ic Red bc Black
+706 "" ellipse ic Red bc Black
+707 "" ellipse ic Red bc Black
+708 "" ellipse ic Red bc Black
+709 "" ellipse ic Red bc Black
+710 "" ellipse ic Red bc Black
+711 "" ellipse ic Red bc Black
+712 "" ellipse ic Red bc Black
+713 "" ellipse ic Red bc Black
+714 "" ellipse ic Red bc Black
+715 "" ellipse ic Red bc Black
+716 "" ellipse ic Red bc Black
+717 "" ellipse ic Red bc Black
+718 "" ellipse ic Red bc Black
+719 "" ellipse ic Red bc Black
+720 "" ellipse ic Red bc Black
+721 "" ellipse ic Red bc Black
+722 "" ellipse ic Red bc Black
+723 "" ellipse ic Red bc Black
+724 "" ellipse ic Red bc Black
+725 "" ellipse ic Red bc Black
+726 "" ellipse ic Red bc Black
+727 "" ellipse ic Red bc Black
+728 "" ellipse ic Red bc Black
+729 "" ellipse ic Red bc Black
+730 "" ellipse ic Red bc Black
+731 "" ellipse ic Red bc Black
+732 "" ellipse ic Red bc Black
+733 "" ellipse ic Red bc Black
+734 "" ellipse ic Red bc Black
+735 "" ellipse ic Red bc Black
+736 "" ellipse ic Red bc Black
+737 "" ellipse ic Red bc Black
+738 "" ellipse ic Red bc Black
+739 "" ellipse ic Red bc Black
+740 "" ellipse ic Red bc Black
+741 "" ellipse ic Red bc Black
+742 "" ellipse ic Red bc Black
+743 "" ellipse ic Red bc Black
+744 "" ellipse ic Red bc Black
+745 "" ellipse ic Red bc Black
+746 "" ellipse ic Red bc Black
+747 "" ellipse ic Red bc Black
+748 "" ellipse ic Red bc Black
+749 "" ellipse ic Red bc Black
+750 "" ellipse ic Red bc Black
+751 "" ellipse ic Red bc Black
+752 "" ellipse ic Red bc Black
+753 "" ellipse ic Red bc Black
+754 "" ellipse ic Red bc Black
+755 "" ellipse ic Red bc Black
+756 "" ellipse ic Red bc Black
+757 "" ellipse ic Red bc Black
+758 "" ellipse ic Red bc Black
+759 "" ellipse ic Red bc Black
+760 "" ellipse ic Red bc Black
+761 "" ellipse ic Red bc Black
+762 "" ellipse ic Red bc Black
+763 "" ellipse ic Red bc Black
+764 "" ellipse ic Red bc Black
+765 "" ellipse ic Red bc Black
+766 "" ellipse ic Red bc Black
+767 "" ellipse ic Red bc Black
+768 "" ellipse ic Red bc Black
+769 "" ellipse ic Red bc Black
+770 "" ellipse ic Red bc Black
+771 "" ellipse ic Red bc Black
+772 "" ellipse ic Red bc Black
+773 "" ellipse ic Red bc Black
+774 "" ellipse ic Red bc Black
+775 "" ellipse ic Red bc Black
+776 "" ellipse ic Red bc Black
+777 "" ellipse ic Red bc Black
+778 "" ellipse ic Red bc Black
+779 "" ellipse ic Red bc Black
+780 "" ellipse ic Red bc Black
+781 "" ellipse ic Red bc Black
+782 "" ellipse ic Red bc Black
+783 "" ellipse ic Red bc Black
+784 "" ellipse ic Red bc Black
+785 "" ellipse ic Red bc Black
+786 "" ellipse ic Red bc Black
+787 "" ellipse ic Red bc Black
+788 "" ellipse ic Red bc Black
+789 "" ellipse ic Red bc Black
+790 "" ellipse ic Red bc Black
+791 "" ellipse ic Red bc Black
+792 "" ellipse ic Red bc Black
+793 "" ellipse ic Red bc Black
+794 "" ellipse ic Red bc Black
+795 "" ellipse ic Red bc Black
+796 "" ellipse ic Red bc Black
+797 "" ellipse ic Red bc Black
+798 "" ellipse ic Red bc Black
+799 "" ellipse ic Red bc Black
+800 "" ellipse ic Red bc Black
+801 "" ellipse ic Red bc Black
+802 "" ellipse ic Red bc Black
+803 "" ellipse ic Red bc Black
+804 "" ellipse ic Red bc Black
+805 "" ellipse ic Red bc Black
+806 "" ellipse ic Red bc Black
+807 "" ellipse ic Red bc Black
+808 "" ellipse ic Red bc Black
+809 "" ellipse ic Red bc Black
+810 "" ellipse ic Red bc Black
+811 "" ellipse ic Red bc Black
+812 "" ellipse ic Red bc Black
+813 "" ellipse ic Red bc Black
+814 "" ellipse ic Red bc Black
+815 "" ellipse ic Red bc Black
+816 "" ellipse ic Red bc Black
+817 "" ellipse ic Red bc Black
+818 "" ellipse ic Red bc Black
+819 "" ellipse ic Red bc Black
+820 "" ellipse ic Red bc Black
+821 "" ellipse ic Red bc Black
+822 "" ellipse ic Red bc Black
+823 "" ellipse ic Red bc Black
+824 "" ellipse ic Red bc Black
+825 "" ellipse ic Red bc Black
+826 "" ellipse ic Red bc Black
+827 "" ellipse ic Red bc Black
+828 "" ellipse ic Red bc Black
+829 "" ellipse ic Red bc Black
+830 "" ellipse ic Red bc Black
+831 "" ellipse ic Red bc Black
+832 "" ellipse ic Red bc Black
+833 "" ellipse ic Red bc Black
+834 "" ellipse ic Red bc Black
+835 "" ellipse ic Red bc Black
+836 "" ellipse ic Red bc Black
+837 "" ellipse ic Red bc Black
+838 "" ellipse ic Red bc Black
+839 "" ellipse ic Red bc Black
+840 "" ellipse ic Red bc Black
+841 "" ellipse ic Red bc Black
+842 "" ellipse ic Red bc Black
+*edges
+3 447
+6 612
+6 613
+6 624
+6 629
+6 633
+11 533
+12 378
+12 380
+12 444
+12 445
+12 446
+12 527
+12 528
+12 589
+22 412
+31 378
+31 432
+31 435
+31 436
+31 437
+31 487
+31 526
+31 529
+44 365
+44 366
+44 367
+44 368
+44 369
+44 370
+44 371
+44 372
+44 373
+44 374
+44 375
+45 378
+62 379
+62 392
+62 393
+62 409
+62 460
+62 533
+65 363
+65 364
+65 376
+65 377
+65 381
+65 429
+65 452
+65 483
+65 533
+65 589
+65 609
+73 587
+73 596
+73 620
+73 654
+77 334
+82 335
+82 336
+82 340
+86 358
+87 353
+88 346
+90 355
+90 356
+93 337
+93 339
+93 345
+96 350
+97 341
+97 352
+98 344
+98 354
+99 359
+99 360
+105 338
+105 343
+105 357
+106 348
+106 349
+106 362
+107 342
+108 347
+112 351
+112 361
+112 411
+112 653
+115 414
+115 431
+115 443
+115 449
+115 450
+115 459
+115 462
+115 463
+115 464
+115 764
+116 497
+116 498
+116 499
+116 500
+116 509
+116 510
+116 512
+116 513
+117 378
+117 501
+117 502
+117 503
+118 383
+118 385
+118 386
+118 389
+118 407
+118 415
+118 416
+118 417
+118 419
+118 420
+118 421
+119 387
+119 388
+119 401
+119 402
+120 382
+120 386
+121 390
+121 408
+122 418
+123 391
+123 410
+124 384
+125 394
+125 395
+125 396
+125 397
+125 398
+125 399
+126 404
+127 400
+127 712
+128 403
+128 694
+129 712
+130 405
+130 406
+131 470
+132 413
+132 422
+132 424
+132 610
+132 731
+132 839
+133 440
+133 442
+133 484
+133 595
+133 719
+134 425
+135 422
+135 423
+135 610
+136 426
+137 427
+138 428
+138 722
+139 430
+140 727
+141 438
+142 434
+143 433
+143 439
+144 441
+145 442
+146 448
+146 472
+146 473
+146 474
+146 475
+146 530
+146 689
+147 451
+148 454
+149 521
+150 453
+150 465
+150 466
+150 467
+150 468
+150 824
+150 825
+150 826
+150 827
+151 455
+151 456
+151 457
+151 458
+152 461
+154 469
+155 539
+156 471
+157 476
+157 477
+157 478
+157 479
+157 480
+157 481
+157 482
+158 493
+158 494
+158 514
+159 496
+159 511
+159 533
+159 559
+159 560
+160 579
+161 489
+161 490
+161 505
+161 506
+162 495
+162 515
+163 490
+164 491
+164 492
+165 486
+165 508
+166 485
+166 504
+167 488
+167 507
+167 516
+170 517
+170 518
+171 519
+171 520
+171 525
+172 522
+172 523
+173 524
+174 532
+174 542
+174 562
+174 656
+175 531
+176 531
+177 564
+177 565
+177 591
+177 593
+177 642
+177 643
+177 649
+178 603
+178 604
+178 647
+179 574
+180 607
+180 751
+181 652
+181 667
+182 563
+182 668
+183 599
+183 665
+184 648
+184 670
+185 571
+185 572
+185 573
+185 582
+185 600
+186 570
+186 657
+187 674
+188 534
+189 588
+189 598
+189 623
+189 660
+190 586
+190 606
+190 627
+190 628
+190 641
+190 664
+191 605
+191 625
+191 637
+191 666
+192 638
+192 639
+192 663
+193 568
+193 636
+194 569
+195 576
+196 575
+197 609
+198 619
+198 655
+198 661
+199 601
+200 578
+201 567
+202 535
+203 536
+204 608
+205 566
+205 597
+205 618
+205 635
+205 659
+206 541
+206 543
+206 544
+206 545
+206 789
+207 537
+208 538
+209 577
+210 540
+211 547
+211 687
+212 546
+213 551
+213 773
+214 548
+214 550
+215 549
+216 552
+216 553
+216 554
+216 557
+216 558
+217 555
+218 556
+219 561
+220 580
+220 630
+220 662
+221 581
+222 583
+222 602
+222 622
+222 640
+222 669
+223 584
+224 585
+225 590
+225 592
+225 646
+226 594
+227 617
+227 645
+227 677
+228 644
+229 621
+229 672
+229 673
+229 675
+229 676
+230 631
+231 626
+232 624
+233 613
+233 629
+234 632
+235 611
+236 631
+237 614
+238 615
+239 616
+240 748
+240 786
+241 629
+242 634
+243 650
+244 651
+245 701
+245 705
+245 708
+245 713
+245 715
+245 736
+245 737
+245 738
+246 658
+247 679
+247 680
+247 690
+248 671
+249 678
+250 683
+250 686
+250 688
+250 697
+250 713
+251 681
+251 684
+252 682
+253 685
+253 835
+254 691
+255 692
+256 695
+257 693
+258 696
+258 716
+258 805
+258 806
+258 807
+258 837
+258 841
+259 711
+260 798
+260 799
+260 800
+261 698
+262 699
+263 699
+264 700
+265 702
+265 706
+266 703
+267 704
+267 793
+268 710
+268 714
+268 730
+268 815
+269 707
+270 709
+270 767
+271 711
+272 712
+273 740
+274 714
+275 717
+276 718
+278 720
+278 721
+278 732
+278 733
+278 734
+278 735
+279 723
+279 725
+280 724
+281 726
+282 728
+282 739
+283 729
+284 741
+285 742
+286 743
+287 745
+288 744
+288 746
+288 747
+288 749
+288 752
+289 750
+290 753
+291 788
+291 797
+291 809
+292 754
+293 755
+294 756
+294 757
+294 765
+294 768
+294 774
+294 836
+295 758
+296 759
+296 760
+297 763
+298 761
+299 762
+299 781
+300 766
+301 769
+302 770
+303 771
+303 772
+304 704
+304 793
+304 797
+304 801
+305 775
+305 787
+305 790
+305 791
+305 792
+306 776
+306 777
+307 778
+308 779
+309 780
+310 782
+310 783
+311 784
+312 785
+313 794
+313 796
+314 795
+315 796
+316 802
+316 803
+316 816
+316 817
+316 828
+316 829
+317 804
+318 808
+319 810
+319 811
+319 812
+319 813
+319 814
+319 820
+319 821
+319 822
+319 823
+319 833
+320 818
+321 819
+325 830
+326 831
+328 832
+329 834
+330 838
+331 840
+333 842
+
+Density	0.0032
+Degree Distribution(s)
+Mean degree A	1.6156
+Stddev A	2.0629
+Skewness A	2.2380
+Mean degree B	1.0570
+Stddev B	0.2921
+Skewness B	6.4234
+Clustering coefficent
+Global	0.0556

@@ -12,7 +12,7 @@ namespace :nlcommons do
     sorted_countries = Person.select("country_name").all.map {|p| p.country_name.to_s}.uniq.sort
 
     STDERR.puts "Creating country_names_codes CSV file"
-    File.open('country_names_codes.csv', 'w') do |f|
+    File.open(Rails.root + 'bin/sna/' + 'country_names_codes.csv', 'w') do |f|
       sorted_countries.each_with_index do |country_name, index|
         f.puts "#{country_name}\t#{index}"
         countries[country_name] = index

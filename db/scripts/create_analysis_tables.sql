@@ -649,4 +649,62 @@ SELECT COUNT(*), number_of_collaborator_countries
 GROUP BY number_of_collaborator_countries
 ORDER BY COUNT(*);
 
+
+WITH 
+    all_people_all_interests AS
+    (SELECT P1.person_id as person1_id,
+           P1.tag_ids as person1_interests,
+           P2.person_id as person2_id,
+           P2.tag_ids as person2_interests
+      FROM person_interests P1,
+           person_interests P2
+    WHERE  P1.person_id in (select person_id from collaborations)
+      AND  P2.person_id in (select person_id from collaborations)
+      AND  P1.person_id <> 1
+      AND  P2.person_id <> 1
+),
+  pp_with_interest_overlap AS
+  (SELECT person1_id, person1_interests, 
+          array_length(person1_interests, 1) as person1_interests_length,
+          person2_id, person2_interests,
+          array_length(person2_interests, 1) as person2_interests_length,
+          (SELECT ARRAY(SELECT UNNEST(person1_interests)
+                        INTERSECT
+                        SELECT UNNEST(person2_interests))) as interests_intersection,
+          (SELECT ARRAY(SELECT UNNEST(person1_interests)
+                        UNION
+                        SELECT UNNEST(person2_interests))) as interests_union
+     FROM all_people_all_interests),
+
+  shared_interest_lengths AS
+  (SELECT person1_id, person1_interests, person1_interests_length,
+          person2_id, person2_interests, person2_interests_length,
+          interests_intersection, 
+          array_length(interests_intersection, 1) as interests_intersection_length,
+          interests_union, 
+          array_length(interests_union, 1) as interests_union_length
+     FROM pp_with_interest_overlap),
+
+  shared_interest_calculation AS
+  (SELECT person1_id, person1_interests, person1_interests_length,
+          person2_id, person2_interests, person2_interests_length,
+          interests_intersection, interests_intersection_length,
+          interests_union, interests_union_length,
+          (interests_union_length::float / interests_intersection_length) as jaccard_similarity
+     FROM shared_interest_lengths),
+
+  final_similarity AS
+(select (interests_intersection_length::float / person1_interests_length) * 100 as person1_overlap,
+       (interests_intersection_length::float / person2_interests_length) * 100 as person2_overlap
+  from shared_interest_calculation )
+
+select avg(person1_overlap), avg(person2_overlap) from final_similarity where person1_overlap is not null 
+and person2_overlap is not null
+
+
+;
+
+
+
+
 COMMIT;

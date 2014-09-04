@@ -23,5 +23,22 @@ namespace :nlcommons do
     output.each do |row|
       puts row
     end
+
+    # Generate a "dummy Uri" file, as well
+    uri = Person.find_by_email_address('uri@northwestern.edu')
+    uri_attribute_filename = 'uri-attribute.txt'
+    File.open(Rails.root + 'bin/sna/' + uri_attribute_filename, 'w') do |f|
+      sna_people.each do |person|
+        if person == uri
+          f.puts '1'
+        else
+          f.puts '0'
+        end
+      end
+
+      sna_nodes.each do |node|
+        f.puts '0'
+      end
+    end
   end
 end
