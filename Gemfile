@@ -66,8 +66,8 @@ group :development, :test do
   gem 'watir-webdriver'
 end
 
-gem 'compass-rails'
-gem 'sass-rails'
+gem 'compass-rails', '~> 1.0.3'
+gem 'sass-rails', '~> 3.2.6'
 
 group :assets do 
   gem 'coffee-rails'

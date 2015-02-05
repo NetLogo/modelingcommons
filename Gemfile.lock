@@ -75,22 +75,12 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.9.0)
-    compass (1.0.3)
+    compass (0.12.7)
       chunky_png (~> 1.2)
-      compass-core (~> 1.0.2)
-      compass-import-once (~> 1.0.5)
-      rb-fsevent (>= 0.9.3)
-      rb-inotify (>= 0.9)
-      sass (>= 3.3.13, < 3.5)
-    compass-core (1.0.3)
-      multi_json (~> 1.0)
-      sass (>= 3.3.0, < 3.5)
-    compass-import-once (1.0.5)
-      sass (>= 3.2, < 3.5)
-    compass-rails (2.0.4)
-      compass (~> 1.0.0)
-      sass-rails (<= 5.0.1)
-      sprockets (< 2.13)
+      fssm (>= 0.2.7)
+      sass (~> 3.2.19)
+    compass-rails (1.0.3)
+      compass (>= 0.12.2, < 0.14)
     countries (0.9.3)
       currencies (~> 0.4.2)
     country_select (2.1.1)
@@ -125,6 +115,7 @@ GEM
       multipart-post (>= 1.2, < 3)
     ffi (1.9.6)
     formatador (0.2.5)
+    fssm (0.2.10)
     geocoder (1.2.7)
     geolocater (0.1.0)
       faraday
@@ -191,7 +182,7 @@ GEM
     newrelic_rpm (3.9.9.275)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
-    notiffany (0.0.3)
+    notiffany (0.0.4)
       nenv (~> 0.1)
       shellany (~> 0.0)
     paperclip (3.4.2)
@@ -263,9 +254,9 @@ GEM
       rspec-expectations (~> 3.2.0)
       rspec-mocks (~> 3.2.0)
       rspec-support (~> 3.2.0)
-    rspec-support (3.2.0)
+    rspec-support (3.2.1)
     rubyzip (1.1.7)
-    sass (3.4.11)
+    sass (3.2.19)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
       sass (>= 3.1.10)
@@ -349,7 +340,7 @@ DEPENDENCIES
   builder
   capistrano (~> 2.15.5)
   coffee-rails
-  compass-rails
+  compass-rails (~> 1.0.3)
   country_select
   cucumber
   cucumber-rails
@@ -378,7 +369,7 @@ DEPENDENCIES
   rmagick (~> 2.13.2)
   rspec
   rspec-rails
-  sass-rails
+  sass-rails (~> 3.2.6)
   shoulda
   simplecov
   simplecov-rcov-text
