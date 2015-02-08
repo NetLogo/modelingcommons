@@ -1,13 +1,13 @@
 <div>
-  <% if @model.node_versions.count == 1 %>
+  <% if @model.versions.count == 1 %>
 
   <p>There is only one version of this model, created
-    <%= distance_of_time_in_words(Time.now, @model.node_versions.first.created_at) %> ago
-    by <%= person_link(@model.node_versions.first.person) %>.</p>
+    <%= distance_of_time_in_words(Time.now, @model.versions.first.created_at) %> ago
+    by <%= person_link(@model.versions.first.person) %>.</p>
 
   <% else %>
 
-  <p>There are <%= pluralize(@model.node_versions.length, "version") -%> of this model.</p>
+  <p>There are <%= pluralize(@model.versions.length, "version") -%> of this model.</p>
 
   <%= form_tag :controller => :history, :action => :compare_versions, :id => @model.id do %>
 
@@ -26,7 +26,7 @@
       <% end %>
     </tr>
 
-    <% @model.node_versions.sort_by {|v| v.created_at}.reverse.each do |version| %>
+    <% @model.versions.sort_by {|v| v.created_at}.reverse.each do |version| %>
     <tr>
       <td><input type="radio" id="<%= "compare_1_#{version.id}" -%>" name="compare_1" value="<%= version.id -%>" /></td>
       <td><input type="radio" id="<%= "compare_2_#{version.id}" -%>" name="compare_2" value="<%= version.id -%>" /></td>

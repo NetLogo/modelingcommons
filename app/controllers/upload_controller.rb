@@ -260,7 +260,7 @@ class UploadController < ApplicationController
         attachment.destroy
       end
 
-      @model.node_versions.each do |nv|
+      @model.versions.each do |nv|
         nv.destroy
       end
 

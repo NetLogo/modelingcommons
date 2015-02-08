@@ -58,10 +58,6 @@ class Person < ActiveRecord::Base
       sort_by {|p| p.id}
   end
 
-  def node_versions
-    versions
-  end
-
   def models
     nodes
   end

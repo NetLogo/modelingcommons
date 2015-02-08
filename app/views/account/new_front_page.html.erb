@@ -1,52 +1,52 @@
 <% @title = "Recent Activity" %>
 <div class="activity">
-	<div id="custom_filters">
-		<label><input type="checkbox" id="post_show_you">Show only my activity</label>
-	</div>
-	<table id="post_table">
-		<% @events.each do |event| %>
-		<% if event[:type] == :model || event[:type] == :tag %>
+  <div id="custom_filters">
+    <label><input type="checkbox" id="post_show_you">Show only my activity</label>
+  </div>
+  <table id="post_table">
+    <% @events.each do |event| %>
+      <% if event[:type] == :model || event[:type] == :tag %>
+	
+	<tr>
+	  <td>
+	    <div class="post">
+	      <div class="main_image">
+		<a href="<%= url_for(:controller => "browse", :action => "one_model", :id => event[:model].id) -%>">
+		  <% if !event[:model].previews.nil? and !event[:model].previews.empty? %>
+		    <img src="<%= url_for :controller => :browse, :action => :display_preview, :id => event[:model].id %>" />
+		  <% end %>
+		</a>
+	      </div>
+	      <div class="post_content">
+		<div class="left-right">
+		  <div class="post_person left">
+		    <a href="<%= url_for(:controller => :account, :action => :mypage, :id => event[:actor].id) -%>"><img src="<%= event[:actor].avatar.url -%>"><%= event[:actor].fullname -%></a>
+		    <% if event[:type] == :model %>
+		      <% if event[:updated] %>
+			updated
+		      <% else %>
+			created
+		      <% end %>	
+		    <% elsif event[:type] == :tag %>
+		      tagged
+		    <% end %>
+		  </div>
+		  <div class="post_date right">
+		    <%= distance_of_time_in_words(Time.now, event[:model].updated_at) -%> ago
+		  </div>
+		</div>
 		
-			<tr>
-				<td>
-					<div class="post">
-						<div class="main_image">
-							<a href="<%= url_for(:controller => "browse", :action => "one_model", :id => event[:model].id) -%>">
-								<% if !event[:model].previews.nil? and !event[:model].previews.empty? %>
-								<img src="<%= url_for :controller => :browse, :action => :display_preview, :id => event[:model].id %>" />
-								<% end %>
-							</a>
-						</div>
-						<div class="post_content">
-							<div class="left-right">
-								<div class="post_person left">
-									<a href="<%= url_for(:controller => :account, :action => :mypage, :id => event[:actor].id) -%>"><img src="<%= event[:actor].avatar.url -%>"><%= event[:actor].fullname -%></a>
-									<% if event[:type] == :model %>
-										<% if event[:updated] %>
-										updated
-										<% else %>
-										created
-										<% end %>	
-									<% elsif event[:type] == :tag %>
-									tagged
-									<% end %>
-								</div>
-								<div class="post_date right">
-									<%= distance_of_time_in_words(Time.now, event[:model].updated_at) -%> ago
-								</div>
-							</div>
-							
-							<div class="post_model">
-								<a href="<%= url_for(:controller => "browse", :action => "one_model", :id => event[:model].id) -%>"><%= event[:model].name -%></a>
-							</div>
-							<div class="post_comment">
-								 <% if event[:type] == :tag %>
-								 as <a class="tag" href="<%= url_for(:controller => :tags, :action => :one_tag, :id => event[:tagged_node].tag.id) -%>"><%= event[:tagged_node].tag.name -%></a><% if event[:tagged_node].comment.length > 0 %> and commented: 	&quot<%= event[:tagged_node].comment -%>&quot<% end %>
-								 <% elsif event[:type] == :model %>
-								 
-								 	<% 
+		<div class="post_model">
+		  <a href="<%= url_for(:controller => "browse", :action => "one_model", :id => event[:model].id) -%>"><%= event[:model].name -%></a>
+		</div>
+		<div class="post_comment">
+		  <% if event[:type] == :tag %>
+		    as <a class="tag" href="<%= url_for(:controller => :tags, :action => :one_tag, :id => event[:tagged_node].tag.id) -%>"><%= event[:tagged_node].tag.name -%></a><% if event[:tagged_node].comment.length > 0 %> and commented: 	&quot<%= event[:tagged_node].comment -%>&quot<% end %>
+		  <% elsif event[:type] == :model %>
+		    
+		    <% 
 								 	if event[:updated]
-								 		versions = event[:model].node_versions
+								 		versions = event[:model].versions
 								 		if versions.length > 1
 								 			%>
 								 			 and commented: &quot<%= versions[0].description -%>&quot

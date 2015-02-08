@@ -12,7 +12,7 @@
 
   <%= form_tag :controller => :history, :action => :compare_versions, :id => node.id do %>
 
-  <% @model.node_versions.sort_by {|v| v.created_at}.each do |version| %>
+  <% @model.versions.sort_by {|v| v.created_at}.each do |version| %>
   <tr>
     <td><input type="radio" name="compare_1" value="<%= version.id -%>" /></td>
     <td><input type="radio" name="compare_2" value="<%= version.id -%>" /></td>

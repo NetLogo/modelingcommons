@@ -44,7 +44,7 @@ class Version < ActiveRecord::Base
     if node.nil?
       STDERR.puts "Version is looking for node_d '#{node_id}', but it does not exist"
     else
-      return unless node.node_versions.count > 1 
+      return unless node.versions.count > 1 
       return if node.people.uniq.count == 1 and node.people.first == person
 
       Notifications.modified_model(node, person).deliver
