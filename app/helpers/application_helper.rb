@@ -5,7 +5,7 @@ module ApplicationHelper
     
     now = Time.now
     time_since_update = distance_of_time_in_words(Time.now, node.updated_at)
-    link_to_item_person = node.versions.sort_by { |v| v.created_at }.reverse.first.person
+    link_to_item_person = node.current_version.person
     original_node_author = node.versions.last.person
     this_user_did_it = true if original_node_author == @person
 

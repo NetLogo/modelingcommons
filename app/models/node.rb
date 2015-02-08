@@ -59,7 +59,7 @@ class Node < ActiveRecord::Base
   end
 
   def current_version
-    versions.empty? ? nil : versions.sort_by { |v| v.created_at }.reverse.first
+    versions.all.empty? ? nil : versions.all.sort_by { |v| v.created_at }.reverse.first
   end
 
   # Create methods for the different attachment types

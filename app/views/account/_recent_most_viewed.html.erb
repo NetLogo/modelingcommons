@@ -15,8 +15,7 @@
      %>
 
     <% next if count.to_i.zero? %>
-    <% mv = model.versions %>
-    <% next if model.versions.empty? %>
+    <% next if model.versions.all.empty? %>
     <div class="news_post<% if your_news %> your_news<% end %>">
       <div class="news_image">
         <a href="<%= url_for(:controller => "browse", :action => "one_model", :id => model.id) %>">
