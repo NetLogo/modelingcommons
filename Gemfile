@@ -36,6 +36,7 @@ gem 'will_paginate', '~> 3.0.4'
 gem 'zippy'
 gem 'zip'
 gem 'twitter', '~> 4.8.0'
+gem 'minitest'
 
 group :test do 
   gem "cucumber"
