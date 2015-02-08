@@ -6,7 +6,7 @@
 
   <% if not @embedded %>
     <div class="model_info_top">
-      <% if @model.previews.nil? or @model.previews.all.empty? %>
+      <% if @model.previews.nil? or @model.previews.empty? %>
 	<div class="no_preview_image">No preview image</div>
       <% else %>
 	<%= model_image(@model)%>
