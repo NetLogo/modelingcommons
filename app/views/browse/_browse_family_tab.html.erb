@@ -5,18 +5,18 @@
   <p><b>Parent:</b> <%= link_to @model.parent.name, :controller => 'browse', :action => 'one_model', :anchor => 'related', :id => @model.parent.id  -%></p>
   <% end -%>
 
-  <% if @model.children.empty? -%>
+  <% if @model.children.all.empty? -%>
   <p>This model does not have any descendants.</p>
   <% else -%>
   <h3>Children:</h3>
   <ul>
-    <% @model.children.each do |child| -%>
+    <% @model.children.all.each do |child| -%>
     <li><%= link_to child.name, :controller => 'browse', :action => 'one_model', :anchor => 'related', :id => child.id  -%></li>
     <% end -%>
   </ul>
   <% end -%>
 
-<% if @model.parent or !@model.children.empty? %>
+<% if @model.parent or !@model.children.all.empty? %>
 <p><img src="/graph/graphviz/<%= @model.id -%>" alt="Graph of models related to '<%= @model.name -%>' " /></p>
 <% end %>
 </div>
