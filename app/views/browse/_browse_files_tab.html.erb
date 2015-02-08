@@ -1,7 +1,7 @@
 <div>
   <h2>Attached files</h2>
 
-  <% if @model.attachments.empty? -%>
+  <% if @model.attachments.all.empty? -%>
   <p>No files</p>
   <% else -%>
   <table id="file-table" class="simple_table">
@@ -24,7 +24,7 @@
     </thead>
 
     <tbody>
-      <% @model.attachments.sort_by {|f| f.filename.downcase}.each do |f| -%>
+      <% @model.attachments.all.sort_by {|f| f.filename.downcase}.each do |f| -%>
 
       <tr>
         <td><%= f.filename -%></td>
