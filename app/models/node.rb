@@ -91,6 +91,7 @@ class Node < ActiveRecord::Base
   end
 
   def person
+    v = versions
     current_version.person unless current_version.nil?
   end
 
