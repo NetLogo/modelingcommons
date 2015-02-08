@@ -37,6 +37,7 @@ gem 'zippy'
 gem 'zip'
 gem 'twitter', '~> 4.8.0'
 gem 'minitest'
+gem 'test-unit'
 
 group :test do 
   gem "cucumber"
