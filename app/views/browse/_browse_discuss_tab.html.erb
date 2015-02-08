@@ -3,12 +3,12 @@
 <p>Comments are disabled for private models.</p>
 <% else %>
 <div class="comments_list">
-  <% if @model.postings.empty? %>
+  <% if @model.postings.all.empty? %>
   Please start the discussion about this model!
   <%= link_to("(You'll first need to log in.)", :controller => :account, :action => :login) unless @person -%>
 </p>
   <% else %>
-  <%= render :partial => "discussion/one_posting", :collection => @model.postings.sort_by {|posting| posting.created_at}, :as => :posting -%>
+  <%= render :partial => "discussion/one_posting", :collection => @model.postings.all.sort_by {|posting| posting.created_at}, :as => :posting -%>
   <% end %>
 </div>
 
