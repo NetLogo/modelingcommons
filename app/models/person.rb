@@ -54,7 +54,7 @@ class Person < ActiveRecord::Base
 
   def Person.sna_people
     Person.all.
-      reject {|p| p.nodes.empty?}.
+      reject {|p| p.nodes.all.empty?}.
       sort_by {|p| p.id}
   end
 

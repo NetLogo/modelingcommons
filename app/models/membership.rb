@@ -26,7 +26,7 @@ class Membership < ActiveRecord::Base
   end
 
   def remove_group_if_empty
-    group.destroy if group.members.empty?
+    group.destroy if group.members.all.empty?
   end
 
 end

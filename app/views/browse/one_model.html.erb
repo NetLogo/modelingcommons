@@ -6,7 +6,7 @@
 
   <% if not @embedded %>
     <div class="model_info_top">
-      <% if @model.previews.nil? or @model.previews.empty? %>
+      <% if @model.previews.nil? or @model.previews.all.empty? %>
 	<div class="no_preview_image">No preview image</div>
       <% else %>
 	<%= model_image(@model)%>
@@ -69,7 +69,7 @@
           </div>
           
           <div class="family_info">
-            <% if !@model.projects.empty? %>
+            <% if !@model.projects.all.empty? %>
               Part of project '<%= project_link(@model.projects.first) %>'
             <% end %>
             
@@ -77,7 +77,7 @@
               Child of model <%= model_link(@model.parent) %>
             <% end %>
             
-            <% if not @model.children.empty? %>
+            <% if not @model.children.all.empty? %>
               Parent of <%= pluralize(@model.children.size, 'model') %>: <%= raw @model.children.map {|child| model_link(child) }.to_sentence %>
             <% end %>
           </div>
@@ -88,7 +88,7 @@
             <% model_changeability_letter = @model.changeability.short_form %>
             <% model_group_id = @model.group ? @model.group.id : 0 %>
             <% if @model.people.include?(@person) %>
-              <% if @person and !@person.groups.empty? %>
+              <% if @person and !@person.groups.all.empty? %>
 		<% @options_for_select = [['No group', nil]] %>
 		<% @person.groups.each {|g| @options_for_select << [g.name, g.id] } %>                
 		Model group <%= raw select_tag("group_id", options_for_select(@options_for_select, (@model.group ? @model.group.id : 0)), :id => "group_select") %>
@@ -97,7 +97,7 @@
               Visible to 
               <select name="read_permission" id="read_permission_select">
 		<option value="a" <% if model_visibility_letter ==  'a'%>selected="selected"<% end %>>everyone</option>
-		<% if @person and !@person.groups.empty? %>
+		<% if @person and !@person.groups.all.empty? %>
 		  <option value="g" <% if model_visibility_letter ==  'g'%>selected="selected"<% end %>>group members only</option>
 		<% end %>
 		<option value="u" <% if model_visibility_letter ==  'u'%>selected="selected"<% end %>>you only</option>
@@ -105,7 +105,7 @@
               | Changeable by
               <select name="write_permission" id="write_permission_select">
 		<option value="a" <% if model_changeability_letter ==  'a'%>selected="selected"<% end %>>everyone</option>
-		<% if @person and !@person.groups.empty? %>
+		<% if @person and !@person.groups.all.empty? %>
 		  <option value="g" <% if model_changeability_letter ==  'g'%>selected="selected"<% end %>>group members only</option>
 		<% end %>
 		<option value="u" <% if model_changeability_letter ==  'u'%>selected="selected"<% end %>>you only</option>
@@ -161,7 +161,7 @@
 		  <% if !@person.spam_warning(@model) %>
 		    &bull; 
 		    <%= link_to "Report as spam", :controller => :possible_spam, :action => :mark_as_spam, :id => @model.id %>
-		    <% if !@model.spam_warnings.empty? %>
+		    <% if !@model.spam_warnings.all.empty? %>
 		      (<%= pluralize(@model.spam_warnings.length, "person") %> marked it as spam)
 		    <% end %>
 		  <% end %>
