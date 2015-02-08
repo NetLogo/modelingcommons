@@ -63,7 +63,7 @@ class Node < ActiveRecord::Base
   end
 
   def current_version
-    logger.warn "[Node#current_version] node = #{self.inspect} "
+    v = versions
     versions.empty? ? nil : versions.sort_by { |v| v.created_at }.reverse.first
   end
 
