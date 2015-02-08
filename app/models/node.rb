@@ -63,7 +63,6 @@ class Node < ActiveRecord::Base
   end
 
   def current_version
-    v = versions
     versions.empty? ? nil : versions.sort_by { |v| v.created_at }.reverse.first
   end
 
@@ -91,7 +90,6 @@ class Node < ActiveRecord::Base
   end
 
   def person
-    v = versions
     current_version.person unless current_version.nil?
   end
 
