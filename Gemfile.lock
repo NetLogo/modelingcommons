@@ -388,5 +388,5 @@ DEPENDENCIES
   watir-webdriver
   will_paginate (~> 3.0.4)
   xray-rails
-  zip
-  zippy
+  zip (~> 2.0.2)
+  zippy (~> 0.2.1)
