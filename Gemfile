@@ -33,8 +33,11 @@ gem 'rmagick', '~> 2.13.2', :require => 'RMagick'
 gem 'textacular', '~> 3.0', require: 'textacular/rails'
 gem 'validate_email'
 gem 'will_paginate', '~> 3.0.4'
+
 gem 'zippy', '~> 0.2.1'
 gem 'zip', '~> 2.0.2'
+gem 'rubyzip', '~> 0.9.1'
+
 gem 'twitter', '~> 4.8.0'
 gem 'minitest'
 gem 'test-unit'
