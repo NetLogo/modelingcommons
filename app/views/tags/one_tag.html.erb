@@ -5,7 +5,7 @@
 <h2>Tag creation:</h2>
 <ul>
   <li>Tag created by <%= person_image(@tag.person) %><%= person_link(@tag.person) %> on <%= @tag.created_at %></li>
-  <% if @tag.tagged_nodes.empty? %>
+  <% if @tag.tagged_nodes.all.empty? %>
   <p>This tag has never been used.</p>
   <% else %>
   <li>First used <%= distance_of_time_in_words(Time.now, @tag.tagged_nodes.sort_by {|tm| tm.updated_at}[0].updated_at) -%> ago.</li>
@@ -14,7 +14,7 @@
 
 <h2>Models using this tag:</h2>
 <p><%= link_to "Download all models with this tag", :controller => :tags, :action => :download, :id => @tag.id %>
-  <% if @tag.nodes.empty? %>
+  <% if @tag.nodes.all.empty? %>
 <p>No models have been tagged with <%= @tag.name %>.</p>
 <% else %>
 <table>
@@ -29,7 +29,7 @@
 <% end %>
 
 <h2>Uses of this tag:</h2>
-<% if @tag.tagged_nodes.empty? %>
+<% if @tag.tagged_nodes.all.empty? %>
 <p>No models have ever been tagged with <%= @tag.name %>.</p>
 <% else %>
 <table>
@@ -47,7 +47,7 @@
 
 <h2>People who have used this tag:</h2>
 <ul>
-  <% if @tag.tagged_nodes.empty? %>
+  <% if @tag.tagged_nodes.all.empty? %>
   <p>No people have ever tagged models with <%= @tag.name %>.</p>
   <% else %>
   <% @tag.tagged_nodes.map {|tm| tm.person}.uniq.sort_by {|p| "#{p.last_name} #{p.first_name}" }.each do |person| %>
