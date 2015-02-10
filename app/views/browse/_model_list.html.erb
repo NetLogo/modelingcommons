@@ -45,10 +45,10 @@
 
       <td>
         <% start_time = Time.now -%>
-        <% if model.people.empty? %>
+        <% if model.people.all.empty? %>
         (No owners)
         <% else %>
-        <%= raw model.people.map {|p| person_link(p) }.to_sentence -%>
+        <%= raw model.people.all.map {|p| person_link(p) }.to_sentence -%>
         <% end %>
 
         <% @render_time[:tags] += Time.now - start_time -%>
