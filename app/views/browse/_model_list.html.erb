@@ -57,10 +57,10 @@
 
       <td>
         <% start_time = Time.now -%>
-        <% if model.tags.empty? %>
+        <% if model.tags.all.empty? %>
         (No tags)
         <% else %>
-        <%= raw model.tags.sort_by {|t| t.name}.map {|t| link_to t.name, :controller => :tags, :action => :one_tag, :id => t.id}.uniq.join(', ') %>
+        <%= raw model.tags.all.sort_by {|t| t.name}.map {|t| link_to t.name, :controller => :tags, :action => :one_tag, :id => t.id}.uniq.join(', ') %>
         <% end %>
         <% @render_time[:tags] += Time.now - start_time -%>
         <!-- Tags render time = <%= Time.now - start_time  -%> -->
