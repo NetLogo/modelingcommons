@@ -78,7 +78,7 @@
             <% end %>
             
             <% if not @model.children.all.empty? %>
-              Parent of <%= pluralize(@model.children.size, 'model') %>: <%= raw @model.children.map {|child| model_link(child) }.to_sentence %>
+              Parent of <%= pluralize(@model.children.all.size, 'model') %>: <%= raw @model.children.all.map {|child| model_link(child) }.to_sentence %>
             <% end %>
           </div>
           
