@@ -65,12 +65,11 @@ Nlcommons::Application.configure do
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
-  ActionMailer::Base.delivery_method = :smtp
+  ActionMailer::Base.delivery_method = :sendmail
   ActionMailer::Base.smtp_settings = {
-    :address => "localhost",
-    :port => 25,
-    :delivery_method => :smtp,
-    :domain => 'modelingcommons.org'
+    :address => 'localhost',
+    :domain => 'modelingcommons.org',
+    :port => 25
   }
 
 end
