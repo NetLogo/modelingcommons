@@ -1,9 +1,9 @@
 <% if @model %>
-    <% if @model.previews.nil? or @model.previews.empty? %>
-	    <div>
-	        No preview image
-	    </div>
-    <% else %>
-        <%= model_image(@model)%>
-    <% end %>
+  <% if @model.previews.nil? or @model.previews.all.empty? %>
+    <div>
+      No preview image
+    </div>
+  <% else %>
+    <%= model_image(@model)%>
+  <% end %>
 <% end %>

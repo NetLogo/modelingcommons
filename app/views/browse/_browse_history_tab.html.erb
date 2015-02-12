@@ -1,5 +1,5 @@
 <div>
-  <% if @model.versions.count == 1 %>
+  <% if @model.versions.all.count == 1 %>
 
   <p>There is only one version of this model, created
     <%= distance_of_time_in_words(Time.now, @model.versions.first.created_at) %> ago
@@ -7,7 +7,7 @@
 
   <% else %>
 
-  <p>There are <%= pluralize(@model.versions.length, "version") -%> of this model.</p>
+  <p>There are <%= pluralize(@model.versions.all.length, "version") -%> of this model.</p>
 
   <%= form_tag :controller => :history, :action => :compare_versions, :id => @model.id do %>
 

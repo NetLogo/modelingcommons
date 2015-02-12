@@ -21,7 +21,7 @@
     <% else -%>
     <h3>Children:</h3>
     <ul>
-      <% @model.children.each do |child| -%>
+      <% @model.children.all.each do |child| -%>
       <li><%= link_to child.name, :controller => 'browse', :action => 'one_model', :id => child.id  -%></li>
       <% end -%>
     </ul>
@@ -34,7 +34,7 @@
     <p>No files</p>
     <% else -%>
     <ul>
-      <% @model.files.sort_by {|f| f.name}.each do |f| -%>
+      <% @model.files.all.sort_by {|f| f.name}.each do |f| -%>
       <li><%= link_to f.filename, :controller => :browse, :action => :one_node, :id => f.id -%> (<%= f.content_type -%>)</li>
       <% end -%>
     </ul>

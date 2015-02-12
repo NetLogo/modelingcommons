@@ -3,7 +3,7 @@
   here!</b>
 
   <table id="discussion">
-  <%= render :partial => "discussion/one_posting", :collection => node.postings.sort_by {|posting| posting.created_at}, :as => :posting -%>
+  <%= render :partial => "discussion/one_posting", :collection => node.postings.all.sort_by {|posting| posting.created_at}, :as => :posting -%>
   </table>
 
   <hr />

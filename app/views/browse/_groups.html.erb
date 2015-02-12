@@ -8,11 +8,11 @@
 </div>
 
 <div id="your-groups-div" class="group-tab" style="display:none;">
-  <% if @person.memberships.length == 0 %>
+  <% if @person.memberships.all.length == 0 %>
   <p>You are not a member of any groups.</p>
   <% else %>
   <ul>
-    <% @person.memberships.each do |membership| %>
+    <% @person.memberships.all.each do |membership| %>
     <li><%= group_link(membership.group) %>
       (<%= link_to "leave", :controller => :membership, :action => :leave, :id => membership.id %>)
     </li>
@@ -32,14 +32,14 @@
 
 <div id="manage-groups-div" class="group-tab" style="display:none;">
   <h3>Groups you manage</h3>
-  <% if @person.memberships.length == 0 %>
+  <% if @person.memberships.all.length == 0 %>
   <p>You are not a member of any groups.</p>
   <% else %>
   <ul>
-    <% @person.administrated_groups.each do |group| %>
+    <% @person.administrated_groups.all.each do |group| %>
     <li><%= group_link(group) %></li>
     <ul>
-      <% group.memberships.each do |membership| %>
+      <% group.memberships.all.each do |membership| %>
       <li><%= membership.person.fullname -%>
         <% if membership.status == 'pending' %>
         (<%= link_to "approve", :controller => :membership, :action => :approve_membership, :id => membership.id %>)
@@ -68,7 +68,7 @@
   <% model_group_id = -1 %>
   <% end %>
 
-  <% if @person.memberships.length == 0 %>
+  <% if @person.memberships.all.length == 0 %>
   <p>You are not a member of any groups.</p>
   <% else %>
 

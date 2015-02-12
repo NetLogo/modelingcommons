@@ -20,7 +20,7 @@
           <td><label for="read_permission_a">Everyone can see this model.</label></td>
         </tr>
 
-        <% if @person and !@person.groups.empty? %>
+        <% if @person and !@person.groups.all.empty? %>
         <tr>
           <td><%= radio_button_tag 'read_permission', 'g', model_visibility_letter == 'g' %></td>
           <td><label for="read_permission_g">The model is only visible to group members.</label></td>
@@ -45,7 +45,7 @@
           <td><label for="write_permission_a">Everyone can modify this model.</label></td>
         </tr>
 
-        <% if @person and !@person.groups.empty? %>
+        <% if @person and !@person.groups.all.empty? %>
         <tr>
           <td><%= radio_button_tag 'write_permission', 'g', model_changeability_letter == 'g' %></td>
           <td><label for="write_permission_g">The model can only be modified by group members.</label></td>

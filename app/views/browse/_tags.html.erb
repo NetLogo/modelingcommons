@@ -3,7 +3,7 @@
 <% else -%>
 <p>Existing tags:</p>
 <table id="existing_tags">
-  <%= render :partial => "browse/add_tag", :collection => @model.tagged_nodes.sort_by {|tn| tn.updated_at}, :as => :tm -%>
+  <%= render :partial => "browse/add_tag", :collection => @model.tagged_nodes.all.sort_by {|tn| tn.updated_at}, :as => :tm -%>
 </table>
 <% end -%>
 
