@@ -12,7 +12,7 @@ gem "rails", "~> 3.2.21"
 gem 'geolocater'
 gem 'geocoder'
 
-gem "country_select"
+gem "country_select", '~> 1.2.0'
 gem "newrelic_rpm" 
 gem 'BlueCloth', '~> 1.0.1'
 gem 'GraphvizR', '~> 0.5.1'
