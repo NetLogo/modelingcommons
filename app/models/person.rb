@@ -258,8 +258,10 @@ class Person < ActiveRecord::Base
   end
 
   def tweet_person
-    Twitter.update("Welcome, #{fullname}, to the #NetLogo Modeling Commons, our #{ActiveSupport::Inflector::ordinalize(Person.count)} user!")
-  end
 
+    Twitter.update("Welcome, #{fullname}, to the #NetLogo Modeling Commons, our #{ActiveSupport::Inflector::ordinalize(Person.count)} user!")
+  rescue Twitter::Error::Forbidden => e
+    logger.warn "Ignoring Twitter error '#{e.inspect}' for now."
+  end
 
 end
