@@ -18,7 +18,7 @@ class Membership < ActiveRecord::Base
   scope :administrators, :conditions => { :is_administrator => true }
 
   def group_size
-    group.members.size
+    group.members.count
   end
 
   def group_empty?
