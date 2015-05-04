@@ -31,10 +31,8 @@
       	</div>
       </div>
     </div>
-    
-    
   </div>
-  <% if @project.nodes.empty? %>
+  <% if @project.nodes.count.zero? %>
   <p><i>No models in this project.</i></p>
   <% else %>
 
