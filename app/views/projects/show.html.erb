@@ -7,7 +7,7 @@
     <div id="preview_info">
       <div id="project_owner">
       	<div>
-      	  This project is owned by <%= person_link(@project.person) -%> and contains <%= pluralize(@project.nodes.size, "model") -%>
+      	  This project is owned by <%= person_link(@project.person) -%> and contains <%= pluralize(@project.nodes.count, "model") -%>
       	</div>
 	      <span class="project-download"></span>
       </div>
