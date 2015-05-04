@@ -10,7 +10,7 @@
 
 <h2>Models in the <%= @group.name %> group:</h2>
 
-<% if @group.models and (not @group.models.empty?) %>
+<% if @group.models and (not @group.models.count.zero?) %>
 <%= render :partial => "browse/model_list", :object => @group.models, :locals => {:title => 'Group'}  %>
 <% else %>
 <p>No models.</p>
