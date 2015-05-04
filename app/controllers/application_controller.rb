@@ -85,6 +85,8 @@ class ApplicationController < ActionController::Base
                          :node_id => node_id,
                          :is_searchbot => is_searchbot(browser_info) 
                          )
+  rescue Exception => e
+    logger.warn "Error logging: #{e.inspect}"
   end
 
   def is_searchbot(browser_info_string)
