@@ -47,7 +47,7 @@ class ProjectsController < ApplicationController
     project = Project.find(params[:project_id])
     model = Node.find(params[:model_id])
 
-    project.nodes << model
+    NodeProject.create!(node_id:model.id, project_id:project.id)
 
     if project.save
       flash[:notice] = "Added model '#{model.name}' to project '#{project.name}'"
