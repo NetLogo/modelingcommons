@@ -7,7 +7,7 @@
   <p>Sorry, but this model cannot be viewed as an applet.  You must <%= link_to "download it", :controller => :browse, :action => :download_model, :id => @model.id -%> and run it within NetLogo on your local computer.</p>
   <% else %>
   <!-- browse_applet_tab -->
-  <div id="model_click_to_load"  >
+  <div id="model_click_to_load" class="model_placeholder">
   	Click to Run Model
   </div>
   <div id="model_container" class="model_container">

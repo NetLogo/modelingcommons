@@ -1,0 +1,14 @@
+<div>
+
+  <% if @model.cannot_be_run_as_applet? and @person and !@person.administrator? %>
+  <p>Sorry, but this model cannot be run in NetLogo Web.  You must <%= link_to "download it", :controller => :browse, :action => :download_model, :id => @model.id -%> and run it within NetLogo on your local computer.</p>
+  <% else %>
+
+  <!-- browse_nlw_tab -->
+  <div id="model_click_to_load_nlw" class="model_placeholder nlw_model_container" data-model-url="//netlogoweb.org/web?url=<%= model_contents_url(:id => @model.id)  -%>&name=<%= @model.name -%>">
+    Click to Run Model
+  </div>
+
+  <% end %>
+
+</div>

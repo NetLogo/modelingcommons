@@ -60,6 +60,7 @@ class BrowseController < ApplicationController
   end
 
   def model_contents
+    headers['Access-Control-Allow-Origin'] = '*'
     @model = Node.find(params[:id]) if params[:id].present?
     send_data @model.contents
   end
