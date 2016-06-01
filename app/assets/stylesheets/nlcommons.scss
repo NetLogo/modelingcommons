@@ -738,7 +738,7 @@ $image-padding: 4px;
    font-weight: bold;
 }
 
-#model_click_to_load {
+.model_placeholder {
    background-color: hsl(0%, 0%, 85%);
    display: block;
    cursor: pointer;
@@ -750,6 +750,18 @@ $image-padding: 4px;
    line-height: 500px;
    
 }
+
+.nlw_model_container {
+  height: 800px;
+  line-height: 800px;
+  width: 100%;
+}
+
+.nlw_model_frame {
+  height: 100%;
+  width: 100%;
+}
+
 #model_applet {
    display: none;
 }

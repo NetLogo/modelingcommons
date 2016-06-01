@@ -525,7 +525,15 @@ jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
 	    
 	});
     };
-    
+
+	var initializeModelClickToLoadNLW = function() {
+	$("#model_click_to_load_nlw").click(function(e) {
+		var elem = e.srcElement;
+		elem.classList.remove('model_placeholder');
+		elem.innerHTML = "<iframe class='nlw_model_frame' src='" + elem.dataset.modelUrl + "'></iframe>";
+	});
+    };
+
     var initializeModelPermissionsChanger = function() {
 	var select_no_group_enable = function(enable) {
 	    if(enable) {
@@ -1129,6 +1137,7 @@ jQuery.fn.dataTableExt.oPagination.two_button_full_text = {
     	initializeSearchTabs();
     	initializeGroupInvitationPersonSelector();
     	initializeModelClickToLoad();
+    	initializeModelClickToLoadNLW();
     	initializeModelPermissionsChanger();
     	initializeHeaderLoginForm();
     	initializeNewCommentForm();
