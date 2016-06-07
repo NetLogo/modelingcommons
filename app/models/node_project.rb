@@ -3,6 +3,8 @@
 
 class NodeProject < ActiveRecord::Base
 
+  attr_accessible :node_id, :project_id
+
   belongs_to :node
   belongs_to :project
 
