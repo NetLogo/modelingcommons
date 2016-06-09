@@ -5,7 +5,6 @@
       <li class="tab"><a id="family-tab" href="#family-div">Family</a></li>
       <li class="tab"><a id="associated-files-tab" href="#associated-files-div">Files</a></li>
       <li class="tab"><a id="procedures-tab" href="#procedures-div">Code</a></li>
-      <li class="tab"><a id="applet-tab" href="#applet-div">Applet</a></li>
     </ul>
   </div>
 
@@ -48,10 +47,6 @@
 
   <div id="procedures-div" class="model-tab"  style="display:none;">
     <p><%= @model.procedures_tab_html -%></p>
-  </div>
-
-  <div id="applet-div" class="model-tab" style="display:none;">
-    <p><%= link_to "Launch applet", {:controller => :browse, :action => :one_applet, :id => @model.id}, {:popup => ["width=#{@model.dimensions[:width]}", "height=#{@model.dimensions[:height] + 150}"] }  -%></p>
   </div>
 
 </div>

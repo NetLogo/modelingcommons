@@ -8,7 +8,7 @@ class BrowseController < ApplicationController
   prepend_before_filter :get_model_from_id_param, :except => [:index, :list_models, :list_recent_models, :search, :news, :one_node, :view_random_model, :about, :model_contents, :extension, :pie, :fail]
 
   before_filter :require_login, :only => [:set_permissions]
-  before_filter :check_visibility_permissions, :only => [:one_model, :one_applet ]
+  before_filter :check_visibility_permissions, :only => [:one_model ]
 
   def list_models
     @models = Node.all(:order => "name ASC", :include => [:tags, :visibility, :changeability, :collaborators, :non_member_collaborators])
