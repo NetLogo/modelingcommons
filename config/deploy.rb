@@ -4,7 +4,7 @@ require "bundler/capistrano"
 set :application, "NetLogo Modeling Commons"
 
 default_run_options[:pty] = true
-set :repository,  "git@github.com:reuven/modelingcommons.git"
+set :repository,  "git@github.com:NetLogo/modelingcommons.git"
 set :scm, "git"
 set :scm_passphrase, "" #This is your custom users password
 set :user, "deploy"

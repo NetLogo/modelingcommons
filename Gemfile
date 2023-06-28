@@ -13,7 +13,7 @@ gem 'geolocater'
 gem 'geocoder'
 
 gem "country_select", '~> 1.2.0'
-gem "newrelic_rpm" 
+gem "newrelic_rpm"
 gem 'BlueCloth', '~> 1.0.1'
 gem 'GraphvizR', '~> 0.5.1'
 gem 'acts_as_tree'
@@ -29,7 +29,7 @@ gem 'pry-nav'
 gem 'pry-rails'
 gem 'pry-remote'
 gem 'rack'
-gem 'rmagick', '~> 2.13.2', :require => 'RMagick'
+gem 'rmagick', '~> 2.16.0', :require => 'RMagick'
 gem 'textacular', '~> 3.0', require: 'textacular/rails'
 gem 'validate_email'
 gem 'will_paginate', '~> 3.0.4'
@@ -42,7 +42,7 @@ gem 'twitter', '~> 4.8.0'
 gem 'minitest'
 gem 'test-unit'
 
-group :test do 
+group :test do
   gem "cucumber"
   gem "cucumber-rails", :require => false
   gem 'factory_girl_rails', "~> 4.0"
@@ -54,7 +54,7 @@ group :test do
   gem 'simplecov-rcov-text', :require => false
 end
 
-group :development do 
+group :development do
   gem 'xray-rails'
   gem 'thin'
   gem 'better_errors'
@@ -74,10 +74,10 @@ end
 gem 'compass-rails', '~> 1.0.3'
 gem 'sass-rails', '~> 3.2.6'
 
-group :assets do 
+group :assets do
   gem 'coffee-rails'
   gem 'haml'
-  gem 'jquery-rails'  
+  gem 'jquery-rails'
   gem 'therubyracer'
   gem 'uglifier'
 end

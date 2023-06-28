@@ -63,8 +63,8 @@ class Posting < ActiveRecord::Base
   end
 
   def tweet_posting
-    return unless node.world_visible?
-    Twitter.update("#{person.fullname} added #{ActiveSupport::Inflector::ordinalize(node.postings.count)} post about #NetLogo model #{node.name}, at #{node.url}")
+    # return unless node.world_visible?
+    # Twitter.update("#{person.fullname} added #{ActiveSupport::Inflector::ordinalize(node.postings.count)} post about #NetLogo model #{node.name}, at #{node.url}")
   end
 
 end

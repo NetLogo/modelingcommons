@@ -44,7 +44,7 @@ class Version < ActiveRecord::Base
     if node.nil?
       STDERR.puts "Version is looking for node_d '#{node_id}', but it does not exist"
     else
-      return unless node.versions.count > 1 
+      return unless node.versions.count > 1
       return if node.people.uniq.count == 1 and node.people.first == person
 
       Notifications.modified_model(node, person).deliver
@@ -59,7 +59,7 @@ class Version < ActiveRecord::Base
     else
 
       author_collaboration_id = CollaboratorType.find_by_name("Author").id
-      c = 
+      c =
         Collaboration.find_or_create_by_node_id_and_person_id_and_collaborator_type_id(node.id,
                                                                                        person.id,
                                                                                        author_collaboration_id)
@@ -93,12 +93,12 @@ class Version < ActiveRecord::Base
   end
 
   def tweet_version
-    return unless node.world_visible?
-    if node.versions.count == 1
-      Twitter.update("#{person.fullname} added #NetLogo model '#{node.name}' at #{node.url}, our #{ActiveSupport::Inflector::ordinalize(Node.count)} model!")
-    else
-      Twitter.update("#{person.fullname} added version #{node.versions.count} of #NetLogo model '#{node.name}': #{node.url}")
-    end
+    # return unless node.world_visible?
+    # if node.versions.count == 1
+    #   Twitter.update("#{person.fullname} added #NetLogo model '#{node.name}' at #{node.url}, our #{ActiveSupport::Inflector::ordinalize(Node.count)} model!")
+    # else
+    #   Twitter.update("#{person.fullname} added version #{node.versions.count} of #NetLogo model '#{node.name}': #{node.url}")
+    # end
   end
 
 end

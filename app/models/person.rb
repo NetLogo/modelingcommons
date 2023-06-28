@@ -171,7 +171,7 @@ class Person < ActiveRecord::Base
 
   def user_model_downloads
     user_downloads = LoggedAction.all(:conditions => { :controller => 'account', :action => 'download', :person_id => id}).map { |la| [la.logged_at, YAML.load(la.params)['id']]  }
-    
+
     downloaded_nodes = [ ]
 
     user_downloads.each do |download_event|
@@ -185,7 +185,7 @@ class Person < ActiveRecord::Base
 
   def project_model_downloads
     project_downloads = LoggedAction.all(:conditions => { :controller => 'project', :action => 'download', :person_id => id}).map { |la| [la.logged_at, YAML.load(la.params)['id']]  }
-    
+
     downloaded_nodes = [ ]
 
     project_downloads.each do |download_event|
@@ -199,7 +199,7 @@ class Person < ActiveRecord::Base
 
   def tag_model_downloads
     tag_downloads = LoggedAction.all(:conditions => { :controller => 'tags', :action => 'download', :person_id => id}).map { |la| [la.logged_at, YAML.load(la.params)['id']]  }
-    
+
     downloaded_nodes = [ ]
 
     tag_downloads.each do |download_event|
@@ -235,7 +235,7 @@ class Person < ActiveRecord::Base
   private
 
   def generate_salt_and_encrypt_password
-    return unless new_record? 
+    return unless new_record?
 
     timestamp = created_at || Time.now
     self.salt = Person.generate_salt(timestamp)
@@ -258,10 +258,9 @@ class Person < ActiveRecord::Base
   end
 
   def tweet_person
-
-    Twitter.update("Welcome, #{fullname}, to the #NetLogo Modeling Commons, our #{ActiveSupport::Inflector::ordinalize(Person.count)} user!")
-  rescue Twitter::Error::Forbidden => e
-    logger.warn "Ignoring Twitter error '#{e.inspect}' for now."
+    # Twitter.update("Welcome, #{fullname}, to the #NetLogo Modeling Commons, our #{ActiveSupport::Inflector::ordinalize(Person.count)} user!")
+  # rescue Twitter::Error::Forbidden => e
+    # logger.warn "Ignoring Twitter error '#{e.inspect}' for now."
   end
 
 end
