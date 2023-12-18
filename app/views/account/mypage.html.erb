@@ -1,6 +1,6 @@
 <% @meta_description = "Modeling Commons profile for #{@the_person.fullname}, who has contributed #{@the_person.models.count} NetLogo models, and tagged #{@the_person.tagged_nodes.count} models with #{@the_person.tags.count} tags." %>
 <div class="top_info">
-  
+
   <% if @person == @the_person %>
     <% @title = "Your personal page" %>
     <% @headline_avatar = @person.avatar.url(:thumb) %>
@@ -23,20 +23,24 @@
     <% end -%>
 
     <% if @the_person.url.present? -%>
-      <li>Home page: <%= link_to @the_person.url, @the_person.url, {}, :target => '_blank' -%></li>
+      # Removed linking for link spam December 2023
+      # <li>Home page: <%= link_to @the_person.url, @the_person.url, {}, :target => '_blank' -%></li>
+      <li>Home page: <%= @the_person.url %></li>
     <% end -%>
 
     <% if @the_person.biography.present? %>
-      <li><div id="biography"><%= raw @the_person.html_biography %></div></li>
+      # Removed linking for link spam December 2023
+      # <li><div id="biography"><%= raw @the_person.html_biography %></div></li>
+      <li><div id="biography"><%= @the_person.html_biography %></div></li>
     <% end %>
   </ul>
 
   <% if @the_person.nodes.present? %>
     <p>
       <%= link_to "View", :controller => :account, :action => :models, :id => @the_person.id %>
-      or 
+      or
       <%= link_to "download", :controller => :account, :action => :download, :id => @the_person.id %>
-      <%= @the_person == @person ? 'your' : @the_person.first_name + "'s" -%> 
+      <%= @the_person == @person ? 'your' : @the_person.first_name + "'s" -%>
       <%= pluralize(@the_person.models_visible_to(@person).size, 'model') %>
     </p>
   <% end %>
@@ -45,16 +49,16 @@
   <% if @person != @the_person %>
     <div id="person-atom-feed"><%= link_to image_tag("feed.png"), :controller => :account, :action => :follow, :id => @the_person.id, :format => :atom %> <%= link_to "Follow #{@the_person.first_name}'s activity in your feed reader", :controller => :account, :action => :follow, :id => @the_person.id, :format => :atom %></div>
   <% end %>
-  
+
 </div>
 
 <div id="left-news-box">
   <%= render :partial => "recent_model_activity", :locals => {} -%>
-  
+
   <%= render :partial => "recent_your_model_activity", :locals => {} -%>
 
   <%= render :partial => "recent_your_tag_activity", :locals => {} -%>
-  
+
   <%= render :partial => "model_help_requests", :locals => {} -%>
 
   <%= render :partial => "recent_requests_for_help", :locals => {} -%>
@@ -62,14 +66,12 @@
 
 <div id="right-news-box">
   <%= render :partial => "recent_most_viewed", :locals => {} -%>
-  
+
   <%= render :partial => "all_time_most_viewed", :locals => {} -%>
-  
+
   <%= render :partial => "recent_most_recommended", :locals => {} -%>
 
   <%= render :partial => "recent_most_downloaded", :locals => {} -%>
 
   <%= render :partial => "recent_most_popular_tags", :locals => {} -%>
 </div>
-
-
