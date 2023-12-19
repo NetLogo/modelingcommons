@@ -22,13 +22,13 @@
       <li>E-mail: <%= mail_to @the_person.email_address -%></li>
     <% end -%>
 
-    <% if @the_person.url.present? -%>
+    <% if @person and @the_person.url.present? -%>
       # Removed linking for link spam December 2023
       # <li>Home page: <%= link_to @the_person.url, @the_person.url, {}, :target => '_blank' -%></li>
       <li>Home page: <%= @the_person.url %></li>
     <% end -%>
 
-    <% if @the_person.biography.present? %>
+    <% if @person and @the_person.biography.present? %>
       # Removed linking for link spam December 2023
       # <li><div id="biography"><%= raw @the_person.html_biography %></div></li>
       <li><div id="biography"><%= @the_person.html_biography %></div></li>
