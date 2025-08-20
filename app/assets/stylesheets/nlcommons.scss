@@ -1585,6 +1585,12 @@ form.button_to div {
    display: inline;
 }
 
+pre.file-ext {
+  background-color: #e5e5e5;
+  display:          inline-block;
+  font-family:      monospace;
+}
+
 /* 
  * Legacy Styling
  * All of this should probably be updated
