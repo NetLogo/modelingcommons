@@ -155,41 +155,27 @@ class Node < ActiveRecord::Base
     current_version.info_tab || "Info tab is empty."
   end
 
-  def markup_info_tab
+  def markup_info_tab(text)
     logger.warn "[Node#markup_info_tab] Processing Info tab for model #{name}, ID #{id}"
-    text = info_tab
-
-    # Handle headlines
-    text.gsub! /([-_.?A-Z ]+)\n--+/ do
-      "<h3>#{$1}</h3>"
-    end
-
-    # Handle URLs
-    text.gsub! /(https?:\/\/[-\/_.~%?='\w:]+\w)/ do
-      "<a target=\"_blank\" href=\"#{$1}\">#{$1}</a>"
-    end
-
-    # Handle newlines
-    text.gsub!("\n", "</p>\n<p>")
+    textWithHeaders = text.gsub(/([-_.?A-Z ]+)\n--+/, '<h3>\1</h3>')
+    textWithURLs = textWithHeaders.gsub(/(https?:\/\/[-\/_.~%?='\w:]+\w)/, '<a target="_blank" href="\1">\1</a>')
+    textWithURLs.gsub("\n", "</p>\n<p>")
   end
 
-  def bluecloth_info_tab
+  def bluecloth_info_tab(text)
     logger.warn "[Node#bluecloth_info_tab] Processing Info tab for model #{name}, ID #{id}"
-    text = BlueCloth.new(info_tab).to_html
-
-    text.gsub! /(?<!")(https?:\/\/[-\/_.~%?='\w]+\w)/ do
-      "<a target=\"_blank\" href=\"#{$1}\">#{$1}</a>"
-    end
+    html = BlueCloth.new(info_tab).to_html
+    htmlWithAnchors = html.gsub(/(?<!")(https?:\/\/[-\/_.~%?='\w]+\w)/, '<a target="_blank" href="\1">\1</a>')
   rescue Exception => e
     logger.warn "[Node#bluecloth_info_tab] Exception: #{e.inspect}"
-    markup_info_tab
+    markup_info_tab(htmlWithAnchors)
   end
 
   def info_tab_html
-    if netlogo_version.to_i >= 5
-      bluecloth_info_tab
+    if netlogo_version.gsub(/^3D /, "").to_i >= 5
+      bluecloth_info_tab(info_tab)
     else
-      markup_info_tab
+      markup_info_tab(info_tab)
     end
   end
 
