@@ -27,11 +27,7 @@
     <td><label for="new_person_biography">Tell us about yourself (optional)</label></td>
     <td><%= form.text_area :biography, :rows => 5, :cols => 80 %></td>
   </tr>
-  <tr>
-    <td>Sex</td>
-    <td><%= form.radio_button :sex, 'f' -%><label for="new_person_sex_f">Female</label> <br />
-        <%= form.radio_button :sex, 'm' -%><label for="new_person_sex_m">Male</label></td>
-  </tr>
+  <%= form.hidden_field :sex, value: '?' %>
   <tr>
     <td>Country</td>
     <td>
