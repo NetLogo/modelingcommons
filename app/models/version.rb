@@ -1,8 +1,25 @@
+require 'nokogiri'
+
 class NetlogoModelFileValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, value)
-    if value.split(Version::SECTION_SEPARATOR).length < 8
-      record.errors[attribute] << 'Not a legal NetLogo model'
+
+    begin
+
+      doc = Nokogiri::XML(value) { |config| config.strict }
+
+      version = doc.at("/model")["version"]
+      isNL    = version.start_with?("NetLogo ")
+
+      info = doc.at("/model/info/text()")
+
+      procedures = doc.at("/model/code/text()")
+
+    rescue Nokogiri::XML::SyntaxError => e
+      if value.split(Version::SECTION_SEPARATOR).length < 8
+        record.errors[attribute] << 'Not a legal NetLogo model'
+      end
     end
+
   end
 end
 
@@ -63,15 +80,55 @@ class Version < ActiveRecord::Base
   end
 
   def procedures_tab
-    @procedures_tab ||= contents.split(SECTION_SEPARATOR)[0]
+
+    def extract_code
+      begin
+        doc = Nokogiri::XML(contents) { |config| config.strict }
+        return doc.at("/model/code").inner_html
+      rescue Nokogiri::XML::SyntaxError => e
+        return contents.split(SECTION_SEPARATOR)[0]
+      end
+    end
+
+    @procedures_tab ||= extract_code()
+
   end
 
   def info_tab
-    @info_tab ||= contents.split(SECTION_SEPARATOR)[2]
+
+    def extract_info
+      begin
+        doc = Nokogiri::XML(contents) { |config| config.strict }
+        return doc.at("/model/info").inner_html
+      rescue Nokogiri::XML::SyntaxError => e
+        return contents.split(SECTION_SEPARATOR)[2]
+      end
+    end
+
+    @info_tab ||= extract_info()
+
   end
 
   def netlogo_version
-    @netlogo_version ||= contents.split(SECTION_SEPARATOR)[4].gsub("\n", "").gsub("NetLogo ", "")
+
+    def extract_version
+
+      def extract(s)
+        return s.gsub("NetLogo ", "")
+      end
+
+      begin
+        doc     = Nokogiri::XML(contents) { |config| config.strict }
+        version = doc.at("/model")["version"]
+        return extract(version)
+      rescue Nokogiri::XML::SyntaxError => e
+        return extract(contents.split(SECTION_SEPARATOR)[4].gsub("\n", ""))
+      end
+
+    end
+
+    @netlogo_version ||= extract_version()
+
   end
 
   def new_thing
