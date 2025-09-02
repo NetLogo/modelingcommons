@@ -17,7 +17,7 @@ gem 'json', '~> 1.8.5'
 
 gem "country_select", '~> 1.2.0'
 gem "newrelic_rpm"
-gem 'BlueCloth', '~> 1.0.1'
+gem 'redcarpet', '3.6.1'
 gem 'GraphvizR', '~> 0.5.1'
 gem 'acts_as_tree'
 gem 'bson_ext'

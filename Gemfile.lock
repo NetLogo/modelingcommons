@@ -1,7 +1,6 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    BlueCloth (1.0.1)
     GraphvizR (0.5.1)
       hoe (>= 1.2.0)
     actionmailer (3.2.21)
@@ -230,6 +229,7 @@ GEM
       ffi (>= 0.5.0)
     rdoc (3.12.2)
       json (~> 1.4)
+    redcarpet (3.6.1)
     ref (1.0.5)
     rmagick (2.16.0)
     rspec (3.2.0)
@@ -330,7 +330,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  BlueCloth (~> 1.0.1)
   GraphvizR (~> 0.5.1)
   acts_as_tree
   awesome_print
@@ -368,6 +367,7 @@ DEPENDENCIES
   rack
   rails (~> 3.2.21)
   rb-fsevent
+  redcarpet (= 3.6.1)
   rmagick (~> 2.16.0)
   rspec
   rspec-rails

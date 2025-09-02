@@ -1,6 +1,6 @@
 # Model for an individual node in our graph
 
-require 'bluecloth'
+require 'redcarpet'
 
 class Node < ActiveRecord::Base
   attr_accessible :parent_id, :name, :updated_at, :group_id, :visibility_id, :changeability_id, :group, :visibility, :changeability, :wants_help
@@ -162,18 +162,15 @@ class Node < ActiveRecord::Base
     textWithURLs.gsub("\n", "</p>\n<p>")
   end
 
-  def bluecloth_info_tab(text)
-    logger.warn "[Node#bluecloth_info_tab] Processing Info tab for model #{name}, ID #{id}"
-    html = BlueCloth.new(info_tab).to_html
-    htmlWithAnchors = html.gsub(/(?<!")(https?:\/\/[-\/_.~%?='\w]+\w)/, '<a target="_blank" href="\1">\1</a>')
-  rescue Exception => e
-    logger.warn "[Node#bluecloth_info_tab] Exception: #{e.inspect}"
-    markup_info_tab(htmlWithAnchors)
+  def neo_markup_info_tab(text)
+    logger.warn "[Node#neo_markup_info_tab] Processing Info tab for model #{name}, ID #{id}"
+    parser = Redcarpet::Markdown.new(Redcarpet::Render::HTML, extensions = { autolink: true, fenced_code_blocks: true })
+    parser.render(text)
   end
 
   def info_tab_html
     if netlogo_version.gsub(/^3D /, "").to_i >= 5
-      bluecloth_info_tab(info_tab)
+      neo_markup_info_tab(info_tab)
     else
       markup_info_tab(info_tab)
     end
