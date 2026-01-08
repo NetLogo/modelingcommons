@@ -14,7 +14,7 @@ However, I don't recommend installing them proactively.  Probably only a small s
 
 Instructions here will assume that you're on Ubuntu.  I (Jason) did not have good luck with trying to make this thing install on Ubuntu 24.04, so I used 20.04, where I found success.  Note that you will probably need to install some additional libraries or programs, if going by these instructions, since they were cobbled together after the fact.  You can update this document with anything that was missed.
 
-First thing we have have to do, after getting our OS/VM set up is get some libraries set up.  To do that, run this in the terminal:
+First thing we have to do, after getting our OS/VM set up, is get some libraries set up.  To do that, run this in the terminal:
 
 ```sh
 sudo apt update
