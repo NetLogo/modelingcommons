@@ -25,8 +25,9 @@ class Person < ActiveRecord::Base
   has_attached_file :avatar,
   :styles => { :medium => "200x200>", :thumb => "40x40>" },
   :default_url => "/assets/default-person/:style/default-person.png",
-  :path => ":rails_root/public/system/:attachment/:id/:style/:filename",
-  :url => "/system/:attachment/:id/:style/:filename"
+  :path => ":rails_root/public/system/:attachment/:id/:style/avatar.:extension",
+  :url => "/system/:attachment/:id/:style/avatar.:extension",
+  :hash_secret => SALT_SECRET
 
   attr_protected :avatar_file_name, :avatar_content_type, :avatar_size
 
@@ -38,6 +39,11 @@ class Person < ActiveRecord::Base
   validates :registration_consent, :presence => { :message => "must be checked" }
   validates :password, :presence => true, :confirmation => true
   validates :email_address, :uniqueness => { :case_sensitive => false }
+
+  validates_attachment_content_type :avatar,
+    :content_type => ["image/jpeg", "image/png", "image/gif"]
+  validates_attachment_size :avatar, :less_than => 5.megabytes
+  validate :avatar_is_image
 
   validates_email :email_address, :level => 1
 
@@ -254,6 +260,16 @@ class Person < ActiveRecord::Base
           self.send("#{name}=".to_sym, attributes[name].gsub($1, "&amp;#{bad_word}"))
         end
       end
+    end
+  end
+
+  def avatar_is_image
+    return unless avatar && avatar.queued_for_write[:original]
+    begin
+      require 'RMagick' unless defined?(Magick)
+      Magick::Image.read(avatar.queued_for_write[:original].path).first
+    rescue
+      errors.add(:avatar, "must be a valid image")
     end
   end
 
