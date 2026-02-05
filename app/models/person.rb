@@ -40,7 +40,7 @@ class Person < ActiveRecord::Base
   validates :email_address, :uniqueness => { :case_sensitive => false }
 
   validates_attachment_content_type :avatar,
-    :content_type => ["image/jpeg", "image/png", "image/gif"]
+    :content_type => ["image/jpeg", "image/png", "image/gif", "image/jpg"]
   validates_attachment_size :avatar, :less_than => 5.megabytes
   validate :avatar_is_image
   before_post_process :normalize_avatar_filename
