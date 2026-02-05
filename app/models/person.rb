@@ -48,6 +48,7 @@ class Person < ActiveRecord::Base
 
   # after_validation_on_create :generate_salt_and_encrypt_password
   # after_validation_on_update :encrypt_updated_password
+  before_create :generate_salt_and_encrypt_password
 
   after_create :transform_nonmember_collaborations
   after_create :tweet_person
