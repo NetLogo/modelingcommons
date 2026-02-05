@@ -12,7 +12,6 @@ class Person < ActiveRecord::Base
   has_many :spam_warnings
   has_many :projects
   has_many :non_member_collaborations
-
   has_many :versions
   has_many :attachments
 
@@ -44,6 +43,7 @@ class Person < ActiveRecord::Base
     :content_type => ["image/jpeg", "image/png", "image/gif"]
   validates_attachment_size :avatar, :less_than => 5.megabytes
   validate :avatar_is_image
+  before_post_process :normalize_avatar_filename
 
   validates_email :email_address, :level => 1
 
@@ -271,6 +271,13 @@ class Person < ActiveRecord::Base
     rescue
       errors.add(:avatar, "must be a valid image")
     end
+  end
+
+  def normalize_avatar_filename
+    return unless avatar && avatar.queued_for_write[:original]
+    ext = File.extname(avatar.queued_for_write[:original].original_filename.to_s).downcase
+    ext = ".jpg" if ext.blank?
+    self.avatar_file_name = "avatar#{ext}"
   end
 
   def tweet_person
