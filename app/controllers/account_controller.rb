@@ -310,10 +310,10 @@ class AccountController < ApplicationController
     if params[:person][:password].blank?
       params[:person].delete(:password)
       params[:person].delete(:password_confirmation)
+    else
+      params[:person][:password] = Person.encrypted_password(@person.salt, params[:person][:password])    
+      params[:person][:password_confirmation] = Person.encrypted_password(@person.salt, params[:person][:password_confirmation])    
     end
-
-    params[:person][:password] = Person.encrypted_password(@person.salt, params[:person][:password])    
-    params[:person][:password_confirmation] = Person.encrypted_password(@person.salt, params[:person][:password_confirmation])    
 
     begin
       @person.update_attributes!(params[:person])
