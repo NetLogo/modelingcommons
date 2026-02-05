@@ -1,5 +1,16 @@
 # Modeling Commons
 
+## Local Development (Docker)
+Install Docker service and make sure it's running. Then run:
+```sh
+git clone <this_repo>
+cd modelingcommons
+docker compose build
+docker compose up
+```
+
+This will build the Docker image and start the web server. You can then access the Modeling Commons at `http://localhost:3000` with database at `localhost:5432` (user: `nlcommons`, password: `nlcommons`, database: `nlcommons_development`) and all necessary dependencies installed in the container.
+
 ## Optional Packages
 
 In getting the Modeling Commons working in a VM, I installed a ton of libraries, using the following command:

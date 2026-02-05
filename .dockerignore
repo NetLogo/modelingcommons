@@ -1,0 +1,7 @@
+.git
+log
+tmp
+node_modules
+vendor/bundle
+coverage
+*.log
