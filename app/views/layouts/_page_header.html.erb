@@ -1,4 +1,9 @@
 <% if @embedded.blank? %>
+<div style="clear: both; background-color: #ffe08a; border: 1px solid #d9a300; color: #4a3600; padding: 10px; margin-bottom: 10px; text-align: center; font-weight: bold;">
+  We're moving to a new Modeling Commons! Next week you can still browse and download everything here,
+  but uploading and editing will be turned off. The new site opens on Tuesday the 18th, and all of your
+  models, comments, and account details will be waiting for you there.
+</div>
 <div class="header">
   <div class="banner">
     <%= link_to raw("<h2>NetLogo</h2><div class='nlcommons-title'>Modeling Commons</div>"), :controller => :account, :action => :mypage %>
