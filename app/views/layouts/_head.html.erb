@@ -5,6 +5,48 @@
 <!-- defaults below here -->
 <%= javascript_include_tag 'application' %>
 
+<style>
+  .read-only-disabled { opacity: 0.5; pointer-events: none; text-decoration: line-through; }
+</style>
+<script>
+  (function() {
+    var patterns = $.map(<%= raw ApplicationController::BLOCKED_WRITES.to_json %>, function(pair) {
+      var parts = pair.split('/');
+      return new RegExp('/' + parts[0] + '/(\\d+/)?' + parts[1] + '(/|$|\\?)');
+    });
+
+    function blocked(url) {
+      for (var i = 0; i < patterns.length; i++) {
+        if (patterns[i].test(url)) { return true; }
+      }
+      return false;
+    }
+
+    function disable(element) {
+      element.addClass('read-only-disabled')
+             .attr('disabled', 'disabled')
+             .attr('title', <%= raw ApplicationController::READ_ONLY_MESSAGE.to_json %>);
+    }
+
+    $(function() {
+      $('form').each(function() {
+        if (!blocked($(this).attr('action') || '')) { return; }
+        $(this).removeAttr('data-remote').on('submit', function(event) {
+          event.preventDefault();
+          event.stopImmediatePropagation();
+          return false;
+        });
+        disable($(this).find('input[type=submit], input[type=image], button'));
+      });
+
+      $('a').each(function() {
+        if (!blocked($(this).attr('href') || '') && !$(this).attr('data-method')) { return; }
+        disable($(this).removeAttr('href').removeAttr('data-method').removeAttr('data-remote'));
+      });
+    });
+  })();
+</script>
+
 <link href='http://fonts.googleapis.com/css?family=Muli' rel='stylesheet' type='text/css'>
 <%= render :partial => "layouts/google_analytics" -%>
 

@@ -7,8 +7,48 @@ require 'diff/lcs/string'
 require 'graphviz_r'
 
 class ApplicationController < ActionController::Base
+  BLOCKED_WRITES = %w(
+    account/new account/create account/edit account/update
+    account/reset_password account/reset_password_action
+    admin/update_project_images
+    attachments/new attachments/edit attachments/create attachments/update attachments/destroy
+    browse/set_permissions browse/rename_model browse/rename_model_action
+    collaborations/create collaborations/destroy
+    collaborator_types/new collaborator_types/edit collaborator_types/create
+    collaborator_types/update collaborator_types/destroy
+    discussion/create discussion/delete discussion/undelete
+    discussion/mark_as_answered discussion/mark_as_unanswered
+    file/create file/delete
+    history/revert_model
+    membership/leave membership/make_administrator membership/remove_administrator
+    membership/approve_membership membership/create_group membership/confirm_group_membership
+    membership/invite_people membership/accept_invitation
+    nodes/change_wants_help
+    possible_spam/mark_as_spam
+    projects/new projects/create projects/add_model projects/remove_model
+    recommend/email_friend recommend/email_friend_action recommend/add_recommendation
+    tags/create tags/destroy
+    upload/new_model upload/create_model upload/replace_model upload/update_model upload/destroy
+    versions/new versions/edit versions/create versions/update versions/destroy
+  )
+
+  READ_ONLY_MESSAGE = "The Modeling Commons is read only while we move to the new site. You can still browse and download everything here."
+
   before_filter :get_person
   before_filter :log_one_action
+  before_filter :block_writes
+
+  def block_writes
+    return true unless BLOCKED_WRITES.include?("#{params[:controller]}/#{params[:action]}")
+
+    if request.format.json?
+      render :json => {:status => 'READ_ONLY', :message => READ_ONLY_MESSAGE}
+    else
+      flash[:notice] = READ_ONLY_MESSAGE
+      redirect_to :controller => :account, :action => :mypage
+    end
+    false
+  end
 
   def get_person
     person_id = session[:person_id]
